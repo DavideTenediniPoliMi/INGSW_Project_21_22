@@ -1,16 +1,24 @@
 package it.polimi.ingsw;
 
 public class StudentBag {
-    private StudentCounter students;
+    private StudentHolder students;
+    private static StudentBag instance;
 
-    public StudentBag() {
-        students = new StudentCounter();
+    private StudentBag() {
+        students = new StudentHolder();
         for(Color c: Color.values()) {
             students.addByColor(c, 24); // TODO make 24 a constant in Rules
         }
     }
 
-    public StudentCounter drawStudents() {
+    public static StudentBag getBag(){
+        if( instance == null){
+            instance = new StudentBag();
+        }
+        return instance;
+    }
+
+    public StudentHolder drawStudents() {
         // TODO
         return students;
     }

@@ -2,13 +2,13 @@ package it.polimi.ingsw;
 
 public class School {
     private int numTowers;
-    private final StudentCounter entrance;
-    private final StudentCounter diningRoom;
+    private final StudentHolder entrance;
+    private final StudentHolder diningRoom;
 
     public School(int numTowers){
         this.numTowers = numTowers;
-        this.entrance = new StudentCounter();   // from rules
-        this.diningRoom = new StudentCounter();
+        this.entrance = new StudentHolder();   // from rules
+        this.diningRoom = new StudentHolder();
     }
 
     public int getNumTowers() {
@@ -19,11 +19,11 @@ public class School {
         this.numTowers = numTowers;
     }
 
-    public StudentCounter getEntrance() {
+    public StudentHolder getEntrance() {
         return entrance;
     }
 
-    public StudentCounter getDiningRoom() {
+    public StudentHolder getDiningRoom() {
         return diningRoom;
     }
 }

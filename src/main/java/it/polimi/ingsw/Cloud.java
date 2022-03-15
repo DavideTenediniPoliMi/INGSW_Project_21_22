@@ -2,16 +2,16 @@ package it.polimi.ingsw;
 
 public class Cloud {
 
-    private final StudentCounter students;
+    private final StudentHolder students;
     private boolean available = true;
     private final int capacity;
 
     public Cloud(int capacity){
-        students = new StudentCounter();
+        students = new StudentHolder();
         this.capacity = capacity;
     }
 
-    public void collect(StudentCounter s){
+    public void collect(StudentHolder s){
         /*
         * TODO transferAll
         * */
@@ -25,7 +25,7 @@ public class Cloud {
         available = true;
     }
 
-    public StudentCounter getStudents(){
+    public StudentHolder getStudents(){
         return students;
     }
 

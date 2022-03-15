@@ -1,17 +1,17 @@
 package it.polimi.ingsw;
 
 public class Island {
-    private final StudentCounter students;
+    private final StudentHolder students;
     private int numTowers = 0;
     private TowerColor towerColor = null;
     private boolean motherNature;
 
     public Island(boolean motherNature) {
-        this.students = new StudentCounter();
+        this.students = new StudentHolder();
         this.motherNature = motherNature;
     }
 
-    public StudentCounter getStudents() {
+    public StudentHolder getStudents() {
         return students;
     }
 

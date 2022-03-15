@@ -1,9 +1,9 @@
 package it.polimi.ingsw;
 
-public class StudentCounter {
+public class StudentHolder {
     private int[] counters;
 
-    public StudentCounter() {
+    public StudentHolder() {
         this.counters = new int[Color.NUM_COLORS]; // already initialized to 0
     }
 
@@ -15,11 +15,11 @@ public class StudentCounter {
         counters[c.ordinal()] += numStudents;
     }
 
-    public void transferByColorTo(StudentCounter recipient, Color c, int numStudents) {
+    public void transferByColorTo(StudentHolder recipient, Color c, int numStudents) {
         // TODO
     }
 
-    public void transferAllTo(StudentCounter recipient) {
+    public void transferAllTo(StudentHolder recipient) {
         // TODO
     }
 }
