@@ -26,4 +26,20 @@ public class School {
     public StudentHolder getDiningRoom() {
         return diningRoom;
     }
+
+    public void addTowers(int numTowers){
+        this.numTowers += numTowers;
+    }
+
+    public void addTower(){
+        addTowers(1);
+    }
+
+    public void removeTowers(int numTowers){
+        this.numTowers -= numTowers;
+    }
+
+    public void removeTower(){
+        removeTowers(1);
+    }
 }
