@@ -4,7 +4,7 @@ public class StudentCounter {
     private int[] counters;
 
     public StudentCounter() {
-        this.counters = new int[5]; // already initialized to 0
+        this.counters = new int[Color.NUM_COLORS]; // already initialized to 0
     }
 
     public int getByColor(Color c) {

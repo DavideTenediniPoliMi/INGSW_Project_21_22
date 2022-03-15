@@ -5,5 +5,7 @@ public enum Color {
     GREEN,
     PINK,
     RED,
-    YELLOW
+    YELLOW;
+
+    public static final int NUM_COLORS = 5;
 }
