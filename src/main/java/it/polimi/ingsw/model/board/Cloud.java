@@ -1,4 +1,6 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model.board;
+
+import it.polimi.ingsw.model.helpers.StudentHolder;
 
 public class Cloud {
 

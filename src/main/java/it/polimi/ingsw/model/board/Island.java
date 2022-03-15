@@ -1,4 +1,7 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model.board;
+
+import it.polimi.ingsw.model.helpers.StudentHolder;
+import it.polimi.ingsw.model.enumerations.TowerColor;
 
 public class Island {
     private final StudentHolder students;

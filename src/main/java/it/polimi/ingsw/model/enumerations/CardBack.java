@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model.enumerations;
 
 public enum CardBack {
     CB_1,

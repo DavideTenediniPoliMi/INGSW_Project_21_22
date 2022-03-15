@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model.enumerations;
 
 public enum Card {
     CARD_1(1, 1),

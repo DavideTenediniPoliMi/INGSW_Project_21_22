@@ -1,4 +1,6 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model.helpers;
+
+import it.polimi.ingsw.model.enumerations.Color;
 
 public class StudentHolder {
     private int[] counters;
