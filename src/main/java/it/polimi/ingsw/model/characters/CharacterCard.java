@@ -1,4 +1,13 @@
 package it.polimi.ingsw.model.characters;
 
-public class CharacterCard {
+import it.polimi.ingsw.model.enumerations.EffectType;
+
+public abstract class CharacterCard {
+    EffectType effectType;
+
+    public CharacterCard(EffectType effectType) {
+        this.effectType = effectType;
+    }
+
+    public abstract void effect();
 }
