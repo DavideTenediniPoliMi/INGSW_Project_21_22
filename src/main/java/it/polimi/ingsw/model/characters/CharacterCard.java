@@ -11,5 +11,5 @@ public abstract class CharacterCard {
 
     public abstract void effect();
 
-    public abstract EffectType getEffectType() { return effectType; }
+    public EffectType getEffectType() { return effectType; }
 }

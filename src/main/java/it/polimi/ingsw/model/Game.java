@@ -21,6 +21,8 @@ public class Game {
 
     public void nextRound() {}
 
+    private void nextTurn () {}
+
     public void endGame() {}
 
     private void decidePlayingOrder() {}

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.player;
 
+import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.TowerColor;
@@ -67,4 +68,14 @@ public class Player {
     public CardBack getCardBack() {
         return cardBack;
     }
+
+    public void pickCard() {}
+
+    public void playTurn (int numTowers) {}
+
+    public void moveStudents (Board board) {}
+
+    public void moveMN (Board board) {}
+
+    public void pickCloud (Board board) {}
 }
