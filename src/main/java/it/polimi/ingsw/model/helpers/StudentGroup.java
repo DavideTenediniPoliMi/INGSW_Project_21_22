@@ -9,12 +9,17 @@ public class StudentGroup {
         this.students = new int[Color.NUM_COLORS]; // already initialized to 0
     }
 
+    public StudentGroup(Color c, int amount) {
+        this();
+        addByColor(c, amount);
+    }
+
     public int getByColor(Color c){
         return students[c.ordinal()];
     }
 
-    public void addByColor(Color c, int amt){
-        students[c.ordinal()] += amt;
+    public void addByColor(Color c, int amount){
+        students[c.ordinal()] += amount;
     }
 
     public void transferAllTo(StudentGroup recipient){
@@ -22,12 +27,12 @@ public class StudentGroup {
     }
 
     public void transferTo(StudentGroup recipient, StudentGroup toTransfer){
-        int amt;
+        int amount;
         for(Color c : Color.values()){
-            amt = toTransfer.getByColor(c);
-            if(this.getByColor(c) >= amt){
-                students[c.ordinal()] -= amt;
-                recipient.addByColor(c, amt);
+            amount = toTransfer.getByColor(c);
+            if(this.getByColor(c) >= amount){
+                students[c.ordinal()] -= amount;
+                recipient.addByColor(c, amount);
             }
         }
     }

@@ -28,8 +28,7 @@ public class ReturnToBagDecorator extends CharacterCardDecorator{
             int numAvailableStudents = targetSchool.getNumStudentsInDiningRoomByColor(c);
             int numStudentsToReturn = Math.min(NUM_STUDENTS_TO_RETURN, numAvailableStudents);
 
-            StudentGroup temp = new StudentGroup();
-            temp.addByColor(c, numStudentsToReturn);
+            StudentGroup temp = new StudentGroup(c, numStudentsToReturn);
 
             board.removeFromDiningRoomOf(player.getID(), temp);
             StudentBag.getBag().putBack(temp);

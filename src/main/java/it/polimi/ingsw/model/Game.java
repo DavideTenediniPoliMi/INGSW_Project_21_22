@@ -3,6 +3,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.*;
+import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
 import java.util.ArrayList;
@@ -41,41 +42,49 @@ public class Game {
         return result.orElse(null);
     }
 
-    public void addPlayer(int ID, String name, boolean TowerHolder, TowerColor teamColor, CardBack cardBack){
-
+    public void addPlayer(int ID, String name, TowerColor teamColor, CardBack cardBack, boolean towerHolder){
+        players.add(new Player(ID, name, teamColor, cardBack, towerHolder));
     }
 
-    public boolean isNameTaken(){
-        //TODO
-        return true;
+    public boolean isNameTaken(String name){
+        return players.stream().anyMatch(player -> player.getName().equals(name));
     }
 
-    public void placeMNAt(){
-
+    public void placeMNAt(int islandIndex){
+        board.placeMNAt(islandIndex);
     }
 
     public void moveMN(int steps){
-
+        board.moveMN(steps);
     }
 
-    public void addStudentToIsland(int index, Color c){
+    public void addStudentToIsland(int islandIndex, Color c){
+        StudentGroup temp = new StudentGroup(c, 1);
 
+        board.addStudentsToIsland(temp, islandIndex);
     }
 
     public void transferToIsland(int playerID, int islandIndex, Color c){
+        StudentGroup temp = new StudentGroup(c, 1);
 
+        board.removeFromEntranceOf(playerID, temp);
+        board.addStudentsToIsland(temp, islandIndex);
     }
 
     public void transferToDiningRoom(int playerID, Color c){
+        StudentGroup temp = new StudentGroup(c, 1);
 
+        board.removeFromEntranceOf(playerID, temp);
+        board.addToDiningRoomOf(playerID, temp);
     }
 
     public void collectFromCloud(int playerID, int cloudIndex){
-
+        StudentGroup temp = board.collectFromCloud(cloudIndex);
+        board.addToEntranceOf(playerID, temp);
     }
 
     public void giveProfessorTo(int playerID, Color c){
-
+        board.giveProfessorTo(playerID, c);
     }
 
     public void instantiateCharacterCard(int cardID){
@@ -83,27 +92,28 @@ public class Game {
     }
 
     public void giveCoinToPlayer(int playerID){
-
+        getPlayerByID(playerID).addCoin();
     }
 
-    public void buyCharacterCard(int cardID){
+    public void buyCharacterCard(int playerID, int cardID){
 
     }
 
     public void giveStudentsTo(int playerID, int amount){
-
+        StudentGroup temp = StudentBag.getBag().drawStudents(amount);
+        board.addToEntranceOf(playerID, temp);
     }
 
     public void refillClouds(int studentsAmount){
-
+        board.refillClouds(studentsAmount);
     }
 
     public void conquerIsland(int playerID, int islandIndex){
-
+        TowerColor teamColor = getPlayerByID(playerID).getTeamColor();
+        board.conquerIsland(teamColor, islandIndex);
     }
 
     public void addTowers(int playerID, int numTowers){
-
     }
 
     public void removeTowers(int playerID, int numTowers){
