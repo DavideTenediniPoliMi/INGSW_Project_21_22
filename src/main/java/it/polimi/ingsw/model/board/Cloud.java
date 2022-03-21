@@ -15,10 +15,20 @@ public class Cloud {
     }
 
     protected void refillCloud(StudentGroup students) {
-
+        students.transferAllTo(this.students);
+        setAvailableTo(true);
     }
 
     protected StudentGroup collectStudents() {
-        return new StudentGroup();
+        StudentGroup temp = new StudentGroup();
+        students.transferAllTo(temp);
+
+        setAvailableTo(false);
+
+        return temp;
+    }
+
+    private void setAvailableTo(boolean available) {
+        this.available = available;
     }
 }
