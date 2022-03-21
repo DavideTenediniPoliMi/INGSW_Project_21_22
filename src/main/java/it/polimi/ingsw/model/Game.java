@@ -32,6 +32,11 @@ public class Game {
         return new ArrayList<>(players);
     }
 
+    public Player getPlayerByID(int ID){
+        //TODO
+        return null;
+    }
+
     public void addPlayer(int ID, String name, boolean TowerHolder, TowerColor teamColor, CardBack cardBack){
 
     }

@@ -48,6 +48,10 @@ public class Board {
         islands.get(nextIslandIndex).setMotherNatureTo(true);
     }
 
+    public Island getIsland(int islandIndex){
+        return islands.get(islandIndex);
+    }
+
     public void addStudentsToIsland(StudentGroup students, int islandIndex) {
         islands.get(islandIndex).addStudents(students);
     }
@@ -94,5 +98,8 @@ public class Board {
 
     public void addToDiningRoomOf(int playerID, StudentGroup students) {
         getSchoolByPlayerID(playerID).addFromDiningRoom(students);
+    }
+    public ProfessorTracker getProfessorOwners() {
+        return professorOwners;
     }
 }

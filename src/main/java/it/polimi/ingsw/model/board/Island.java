@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.board;
 
+import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 
@@ -22,6 +23,10 @@ public class Island {
 
     public boolean isMotherNatureOnIsland() {
         return motherNature;
+    }
+
+    public int getNumOfStudents(Color c){
+        return students.getByColor(c);
     }
 
     protected void addStudents(StudentGroup students) {

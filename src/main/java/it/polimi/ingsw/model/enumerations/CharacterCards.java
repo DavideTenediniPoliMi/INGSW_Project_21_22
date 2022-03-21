@@ -39,7 +39,7 @@ public enum CharacterCards {
                 g = (GenericCard) cardClass.getConstructors()[0].newInstance(g, parameters);
             }
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            System.out.println("Unable to instantiate " + this);
+            System.out.println("Failed to instantiate " + this);
             e.printStackTrace();
         }
         return g;
