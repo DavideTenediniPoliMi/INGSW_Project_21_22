@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.School;
 import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CardBack;
@@ -26,5 +25,41 @@ public class Player {
         this.teamColor = teamColor;
         this.cardBack = cardBack;
         this.towerHolder = towerHolder;
+    }
+
+    protected void addCoin(){
+
+    }
+
+    protected void removeCoins(int amt){
+
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getNumCoins() {
+        return numCoins;
+    }
+
+    public Card getSelectedCard() {
+        return selectedCard;
+    }
+
+    public TowerColor getTeamColor() {
+        return teamColor;
+    }
+
+    public CardBack getCardBack() {
+        return cardBack;
+    }
+
+    public boolean isTowerHolder() {
+        return towerHolder;
     }
 }

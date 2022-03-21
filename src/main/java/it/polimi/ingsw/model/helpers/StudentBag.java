@@ -1,13 +1,12 @@
 package it.polimi.ingsw.model.helpers;
 
-import it.polimi.ingsw.model.enumerations.Color;
-
 public class StudentBag {
     private final StudentGroup students;
     private static StudentBag instance;
 
     private StudentBag() {
         students = new StudentGroup();
+        //TODO ADD ALL THE STUDENTS
     }
 
     public static StudentBag getBag(){
@@ -20,5 +19,9 @@ public class StudentBag {
     public StudentGroup drawStudents() {
         // TODO
         return students;
+    }
+
+    public void putBack(StudentGroup students){
+
     }
 }
