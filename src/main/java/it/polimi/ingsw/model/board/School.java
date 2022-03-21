@@ -1,16 +1,16 @@
-package it.polimi.ingsw.model.player;
+package it.polimi.ingsw.model.board;
 
-import it.polimi.ingsw.model.helpers.StudentHolder;
+import it.polimi.ingsw.model.helpers.StudentGroup;
 
 public class School {
     private int numTowers;
-    private final StudentHolder entrance;
-    private final StudentHolder diningRoom;
+    private final StudentGroup entrance;
+    private final StudentGroup diningRoom;
 
     public School(int numTowers){
         this.numTowers = numTowers;
-        this.entrance = new StudentHolder();   // from rules
-        this.diningRoom = new StudentHolder();
+        this.entrance = new StudentGroup();   // from rules
+        this.diningRoom = new StudentGroup();
     }
 
     public int getNumTowers() {
@@ -21,11 +21,11 @@ public class School {
         this.numTowers = numTowers;
     }
 
-    public StudentHolder getEntrance() {
+    public StudentGroup getEntrance() {
         return entrance;
     }
 
-    public StudentHolder getDiningRoom() {
+    public StudentGroup getDiningRoom() {
         return diningRoom;
     }
 

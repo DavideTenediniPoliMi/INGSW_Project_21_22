@@ -2,10 +2,10 @@ package it.polimi.ingsw.model.helpers;
 
 import it.polimi.ingsw.model.enumerations.Color;
 
-public class StudentHolder {
+public class StudentGroup {
     private int[] students;
 
-    public StudentHolder() {
+    public StudentGroup() {
         this.students = new int[Color.NUM_COLORS]; // already initialized to 0
     }
 
@@ -17,11 +17,11 @@ public class StudentHolder {
         students[c.ordinal()] += numStudents;
     }
 
-    public void transferByColorTo(StudentHolder recipient, Color c, int numStudents) {
+    public void transferByColorTo(StudentGroup recipient, Color c, int numStudents) {
         // TODO
     }
 
-    public void transferAllTo(StudentHolder recipient) {
+    public void transferAllTo(StudentGroup recipient) {
         // TODO
     }
 }

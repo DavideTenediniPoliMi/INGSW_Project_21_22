@@ -3,11 +3,11 @@ package it.polimi.ingsw.model.helpers;
 import it.polimi.ingsw.model.enumerations.Color;
 
 public class StudentBag {
-    private StudentHolder students;
+    private StudentGroup students;
     private static StudentBag instance;
 
     private StudentBag() {
-        students = new StudentHolder();
+        students = new StudentGroup();
         for(Color c: Color.values()) {
             students.addByColor(c, 24); // TODO make 24 a constant in Rules
         }
@@ -20,7 +20,7 @@ public class StudentBag {
         return instance;
     }
 
-    public StudentHolder drawStudents() {
+    public StudentGroup drawStudents() {
         // TODO
         return students;
     }

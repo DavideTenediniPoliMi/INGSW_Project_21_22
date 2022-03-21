@@ -1,6 +1,7 @@
-package it.polimi.ingsw.model.player;
+package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.board.Board;
+import it.polimi.ingsw.model.board.School;
 import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.TowerColor;

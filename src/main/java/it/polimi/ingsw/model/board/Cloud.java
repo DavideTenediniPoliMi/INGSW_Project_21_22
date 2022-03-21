@@ -1,19 +1,19 @@
 package it.polimi.ingsw.model.board;
 
-import it.polimi.ingsw.model.helpers.StudentHolder;
+import it.polimi.ingsw.model.helpers.StudentGroup;
 
 public class Cloud {
 
-    private final StudentHolder students;
+    private final StudentGroup students;
     private boolean available = true;
     private final int capacity;
 
     public Cloud(int capacity){
-        students = new StudentHolder();
+        students = new StudentGroup();
         this.capacity = capacity;
     }
 
-    public void collect(StudentHolder s){
+    public void collect(StudentGroup s){
         /*
         * TODO transferAll
         * */
@@ -27,7 +27,7 @@ public class Cloud {
         available = true;
     }
 
-    public StudentHolder getStudents(){
+    public StudentGroup getStudents(){
         return students;
     }
 
