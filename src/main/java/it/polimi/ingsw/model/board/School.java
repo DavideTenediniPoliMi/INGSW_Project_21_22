@@ -22,19 +22,21 @@ public class School {
     }
 
     protected void removeFromEntrance(StudentGroup students){
-
+        StudentGroup temp = new StudentGroup();
+        entrance.transferTo(temp, students);
     }
 
     protected void addToEntrance(StudentGroup students){
-
+        students.transferAllTo(entrance);
     }
 
     protected void removeFromDiningRoom(StudentGroup students){
-
+        StudentGroup temp = new StudentGroup();
+        diningRoom.transferTo(temp, students);
     }
 
     protected void addFromDiningRoom(StudentGroup students){
-
+        students.transferAllTo(diningRoom);
     }
 
     protected void takeTowers(int amount) {
