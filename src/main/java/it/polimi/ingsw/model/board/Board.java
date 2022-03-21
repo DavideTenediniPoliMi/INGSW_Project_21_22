@@ -104,7 +104,13 @@ public class Board {
         getSchoolByPlayerID(playerID).addFromDiningRoom(students);
     }
 
+    public void addTowersTo(int playerID, int amount) {
+        getSchoolByPlayerID(playerID).giveTowers(amount);
+    }
 
+    public void removeTowerFrom(int playerID, int amount) {
+        getSchoolByPlayerID(playerID).takeTowers(amount);
+    }
 
     public ProfessorTracker getProfessorOwners() {
         return professorOwners;

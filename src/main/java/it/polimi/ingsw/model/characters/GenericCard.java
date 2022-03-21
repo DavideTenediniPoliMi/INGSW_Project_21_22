@@ -9,5 +9,6 @@ public class GenericCard extends CharacterCard{
 
     public void activate() {
         setActive();
+        increaseCost();
     }
 }

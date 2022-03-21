@@ -21,11 +21,11 @@ public enum Card {
         this.RANGE = range;
     }
 
-    void use() {
+    public void use() {
         this.used = true;
     }
 
-    void reset() {
+    public void reset() {
         this.used = false;
     }
 }

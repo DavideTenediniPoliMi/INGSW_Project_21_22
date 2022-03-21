@@ -10,8 +10,8 @@ public class StudentGroupDecorator extends CharacterCardDecorator{
     private final int SWAP_CARD_STUDENTS = 6;
     private final int TRANSFER_CARD_STUDENTS = 4;
 
-    private StudentGroup students;
-    private boolean toIslands, toDiningRoom;
+    private final StudentGroup students;
+    private final boolean toIslands, toDiningRoom;
 
     public StudentGroupDecorator(GenericCard card, boolean toIslands, boolean toDiningRoom){
         super(card);
@@ -27,7 +27,7 @@ public class StudentGroupDecorator extends CharacterCardDecorator{
     }
 
     public void activate(){
-        this.setActive();
+        card.activate();
         if(toIslands){
             //TODO ask view
         }else if(toDiningRoom){

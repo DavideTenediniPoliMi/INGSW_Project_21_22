@@ -11,7 +11,7 @@ public class TiebreakerDecorator extends CharacterCardDecorator{
     }
 
     public void activate(){
-        this.setActive();
+        card.activate();
     }
 
     public void checkForColor(int playerID, Color color){

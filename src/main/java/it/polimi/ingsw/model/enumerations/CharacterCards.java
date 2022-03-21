@@ -30,6 +30,10 @@ public enum CharacterCards {
         this.parameters = parameters;
     }
 
+    public Class getCardClass() {
+        return cardClass;
+    }
+
     public CharacterCard instantiate(){
         GenericCard g = new GenericCard(cost, effectType);
         try {

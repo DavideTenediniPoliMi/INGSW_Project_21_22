@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    private int ID;
-    private String name;
+    private final int ID;
+    private final String name;
     private School school;
     private int numCoins = 0;
-    private List<Card> playableCards = new ArrayList<>();
+    private final List<Card> playableCards = new ArrayList<>();
     private Card selectedCard = null;
     private final TowerColor teamColor;
     private final CardBack cardBack;
@@ -61,5 +61,10 @@ public class Player {
 
     public boolean isTowerHolder() {
         return towerHolder;
+    }
+
+    protected void setSelectedCard(Card card) {
+        selectedCard = card;
+        playableCards.remove(card);
     }
 }

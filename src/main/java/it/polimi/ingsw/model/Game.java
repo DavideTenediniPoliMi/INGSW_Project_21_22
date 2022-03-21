@@ -88,19 +88,23 @@ public class Game {
     }
 
     public void instantiateCharacterCard(int cardID){
-
+        cards.add(CharacterCards.values()[cardID].instantiate());
     }
 
     public void giveCoinToPlayer(int playerID){
         getPlayerByID(playerID).addCoin();
     }
 
-    public void buyCharacterCard(int playerID, int cardID){
+    public void buyCharacterCard(int playerID, int cardIndex){
+        CharacterCard card = cards.get(cardIndex);
+        int cardCost = card.getCost();
 
+        getPlayerByID(playerID).removeCoins(cardCost);
+        board.putCoinsBack(cardCost - 1);
     }
 
     public void giveStudentsTo(int playerID, int amount){
-        StudentGroup temp = StudentBag.getBag().drawStudents(amount);
+        StudentGroup temp = drawStudents(amount);
         board.addToEntranceOf(playerID, temp);
     }
 
@@ -114,10 +118,11 @@ public class Game {
     }
 
     public void addTowers(int playerID, int numTowers){
+        board.addTowersTo(playerID, numTowers);
     }
 
     public void removeTowers(int playerID, int numTowers){
-
+        board.removeTowerFrom(playerID, numTowers);
     }
 
     public List<CharacterCard> getCharacterCardsByEffectType(EffectType effectType){
@@ -125,16 +130,11 @@ public class Game {
     }
 
     public void playCard(int playerID, Card selectedCard){
-
-    }
-
-    private void putCoinsBack(int amount){
-
+        getPlayerByID(playerID).setSelectedCard(selectedCard);
+        selectedCard.use();
     }
 
     private StudentGroup drawStudents(int amount){
-        StudentGroup temp = new StudentGroup();
-        //TODO
-        return temp;
+        return StudentBag.getBag().drawStudents(amount);
     }
 }

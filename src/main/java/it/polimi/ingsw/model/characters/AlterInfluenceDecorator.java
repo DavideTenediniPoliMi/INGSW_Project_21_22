@@ -13,7 +13,7 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator{
     private ArrayList<Integer>blockedIslands;
     private int toUnlock = -1;
 
-    private boolean isAddTwo, isIgnoreTowers, isIgnoreColor, isNoEntry = false;
+    private final boolean isAddTwo, isIgnoreTowers, isIgnoreColor, isNoEntry;
 
     public AlterInfluenceDecorator(GenericCard card, boolean isAddTwo, boolean isIgnoreTowers, boolean isIgnoreColor, boolean isNoEntry){
         super(card);
@@ -29,7 +29,7 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator{
     }
 
     public void activate(){
-        this.setActive();
+        card.activate();
 
         if(isIgnoreColor){
             //TODO ask view
