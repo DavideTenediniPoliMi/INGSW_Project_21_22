@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.enumerations.Color;
 import java.util.Random;
 
 public class StudentBag {
+    private final int NUM_STARTING_STUDENT_BY_COLOR = 24;
     private final StudentGroup students;
     private final Random r;
     private static StudentBag instance;
@@ -14,7 +15,7 @@ public class StudentBag {
         r = new Random();
 
         for(Color c : Color.values()){
-            students.addByColor(c, 24);
+            students.addByColor(c, NUM_STARTING_STUDENT_BY_COLOR);
         }
     }
 
@@ -26,7 +27,7 @@ public class StudentBag {
     }
 
     public StudentGroup drawStudents(int amt) {
-        int drawn = 0;
+        int drawn;
         Color color;
         StudentGroup tmp = new StudentGroup();
         for(int x = 0; x < amt; x += drawn){
