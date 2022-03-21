@@ -4,8 +4,8 @@ import it.polimi.ingsw.model.enumerations.Color;
 
 public class ReturnToBagDecorator extends CharacterCardDecorator{
 
-    public ReturnToBagDecorator(){
-
+    public ReturnToBagDecorator(CharacterCard card){
+        super(card);
     }
 
     public void activate(){

@@ -4,15 +4,21 @@ import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
 public class School {
-    private Player owner;
-    private final StudentGroup entrance;
-    private final StudentGroup diningRoom;
+    private final Player owner;
+    private final StudentGroup entrance = new StudentGroup();
+    private final StudentGroup diningRoom = new StudentGroup();
     private int numTowers;
 
-    public School(){
-        this.entrance = new StudentGroup();
-        this.diningRoom = new StudentGroup();
-        this.numTowers = 0;
+    public School(Player owner){
+        this.owner = owner;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
+
+    public int getNumTowers(){
+        return numTowers;
     }
 
     protected void removeFromEntrance(StudentGroup students){
@@ -31,10 +37,11 @@ public class School {
 
     }
 
-    protected void setOwner(Player owner){
-        this.owner = owner;
+    protected void takeTowers(int amount) {
+        numTowers -= amount;
     }
-    public int getNumTowers(){
-        return numTowers;
+
+    protected void giveTowers(int amount) {
+        numTowers += amount;
     }
 }

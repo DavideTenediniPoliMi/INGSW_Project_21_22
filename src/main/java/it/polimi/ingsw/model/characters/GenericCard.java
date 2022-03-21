@@ -1,4 +1,13 @@
 package it.polimi.ingsw.model.characters;
 
-public class GenericCard {
+import it.polimi.ingsw.model.enumerations.EffectType;
+
+public class GenericCard extends CharacterCard{
+    public GenericCard(int cost, EffectType effectType) {
+        super(cost, effectType);
+    }
+
+    public void activate() {
+        setActive();
+    }
 }

@@ -3,12 +3,13 @@ package it.polimi.ingsw.model.board;
 import it.polimi.ingsw.model.enumerations.Color;
 
 public class ProfessorTracker {
-    private int[] owners;
+    private final int[] owners;
 
     public ProfessorTracker() {
         this.owners = new int[Color.NUM_COLORS];
+
         for(int i = 0; i < Color.NUM_COLORS; i++) {
-            owners[i] = -1;
+            owners[i] = -1; // -1 indicates that the professor doesn't have an owner yet
         }
     }
 
@@ -16,7 +17,7 @@ public class ProfessorTracker {
         return owners[c.ordinal()];
     }
 
-    protected void setOwnerIDByColor(Color c, int studentID) {
-        owners[c.ordinal()] = studentID;
+    protected void setOwnerIDByColor(int playerID, Color c) {
+        owners[c.ordinal()] = playerID;
     }
 }

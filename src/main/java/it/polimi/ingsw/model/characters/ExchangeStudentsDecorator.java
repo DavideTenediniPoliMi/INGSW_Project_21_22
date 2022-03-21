@@ -4,8 +4,8 @@ import it.polimi.ingsw.model.helpers.StudentGroup;
 
 public class ExchangeStudentsDecorator extends CharacterCardDecorator{
 
-    public ExchangeStudentsDecorator(){
-
+    public ExchangeStudentsDecorator(CharacterCard card){
+        super(card);
     }
 
     public void activate(){
