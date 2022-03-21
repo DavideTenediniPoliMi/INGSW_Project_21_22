@@ -7,7 +7,7 @@ public class AddTwoStepsDecorator extends CharacterCardDecorator{
 
     @Override
     public void activate() {
-
+        card.activate();
     }
 
     public int getBoost() {
