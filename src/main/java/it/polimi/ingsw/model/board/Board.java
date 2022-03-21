@@ -9,6 +9,6 @@ public class Board {
     private ProfessorTracker professorOwners;
     private int numCoinsLeft;
 
-    public Board(int numPlayers, boolean isExpertModeActive) {
+    public Board() {
     }
 }
