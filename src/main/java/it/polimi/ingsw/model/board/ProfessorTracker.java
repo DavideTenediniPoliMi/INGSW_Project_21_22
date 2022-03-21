@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.helpers;
+package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.model.enumerations.Color;
 
@@ -16,7 +16,7 @@ public class ProfessorTracker {
         return owners[c.ordinal()];
     }
 
-    public void setOwnerIDByColor(Color c, int studentID) {
+    protected void setOwnerIDByColor(Color c, int studentID) {
         owners[c.ordinal()] = studentID;
     }
 }

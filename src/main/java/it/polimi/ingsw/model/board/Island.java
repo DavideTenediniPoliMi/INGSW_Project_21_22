@@ -14,31 +14,4 @@ public class Island {
         this.motherNature = motherNature;
     }
 
-    public StudentGroup getStudents() {
-        return students;
-    }
-
-    public int getNumTowers() {
-        return numTowers;
-    }
-
-    public void setNumTowers(int numTowers) {
-        this.numTowers = numTowers;
-    }
-
-    public TowerColor getTowerColor() {
-        return towerColor;
-    }
-
-    public void setTowerColor(TowerColor towerColor) {
-        this.towerColor = towerColor;
-    }
-
-    public boolean isMotherNature() {
-        return motherNature;
-    }
-
-    public void setMotherNature(boolean motherNature) {
-        this.motherNature = motherNature;
-    }
 }

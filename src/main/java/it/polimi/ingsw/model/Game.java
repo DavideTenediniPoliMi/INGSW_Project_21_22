@@ -8,21 +8,9 @@ import java.util.List;
 public class Game {
     private Board board;
     private final List<Player> players = new ArrayList<>();
+    //add cards
     private int numPlayersStillToAct;
 
-    public Game(int numPlayers, boolean expertModeActive) {
-        this.numPlayersStillToAct = numPlayers;
-        // TODO
+    public Game() {
     }
-
-    // TODO
-    public void startGame() {}
-
-    public void nextRound() {}
-
-    private void nextTurn () {}
-
-    public void endGame() {}
-
-    private void decidePlayingOrder() {}
 }
