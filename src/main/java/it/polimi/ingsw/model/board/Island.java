@@ -25,13 +25,15 @@ public class Island {
     }
 
     protected void addStudents(StudentGroup students) {
+        students.transferAllTo(this.students);
     }
 
     protected void addTower() {
-
+        numTowers += 1;
     }
 
     protected void conquerIsland(TowerColor teamColor) {
+        this.teamColor = teamColor;
     }
 
     protected void setMotherNatureTo(boolean motherNature) {
