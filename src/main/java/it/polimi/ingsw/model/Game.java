@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.helpers.StudentGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Game {
     private final Board board;
@@ -33,8 +34,11 @@ public class Game {
     }
 
     public Player getPlayerByID(int ID){
-        //TODO
-        return null;
+        Optional<Player> result = players.stream()
+                .filter((player) -> (player.getID() == ID))
+                .findAny();
+
+        return result.orElse(null);
     }
 
     public void addPlayer(int ID, String name, boolean TowerHolder, TowerColor teamColor, CardBack cardBack){

@@ -41,29 +41,31 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator{
     public int getAlteredInfluence(TowerColor team, int influenceScore, int islandIndex){
         int newScore = influenceScore;
 
-        if(isAddTwo && team.equals(teamColor)){
-            newScore += 2;
-        }
-        else if(isIgnoreTowers){
-            Island i = Game.getInstance().getBoard().getIsland(islandIndex);
-            if(i.getTeamColor().equals(team)){
-                newScore -= i.getNumTowers();
+        if(card.isActive()){
+            if(isAddTwo && team.equals(teamColor)){
+                newScore += 2;
             }
-        }
-        else if(isIgnoreColor){
-            int colorOwnerID = Game.getInstance().getBoard().getProfessorOwners().getOwnerIDByColor(selectedColor);
-
-            if(Game.getInstance().getPlayerByID(colorOwnerID).getTeamColor().equals(team)){
+            else if(isIgnoreTowers){
                 Island i = Game.getInstance().getBoard().getIsland(islandIndex);
-                newScore -= i.getNumOfStudents(selectedColor);
+                if(i.getTeamColor().equals(team)){
+                    newScore -= i.getNumTowers();
+                }
             }
-        }
-        else if(isNoEntry){
-            if(blockedIslands.contains(islandIndex)){
-                newScore = 0;
+            else if(isIgnoreColor){
+                int colorOwnerID = Game.getInstance().getBoard().getProfessorOwners().getOwnerIDByColor(selectedColor);
 
-                if(toUnlock == -1){
-                    toUnlock = islandIndex;
+                if(Game.getInstance().getPlayerByID(colorOwnerID).getTeamColor().equals(team)){
+                    Island i = Game.getInstance().getBoard().getIsland(islandIndex);
+                    newScore -= i.getNumOfStudents(selectedColor);
+                }
+            }
+            else if(isNoEntry){
+                if(blockedIslands.contains(islandIndex)){
+                    newScore = 0;
+
+                    if(toUnlock == -1){
+                        toUnlock = islandIndex;
+                    }
                 }
             }
         }

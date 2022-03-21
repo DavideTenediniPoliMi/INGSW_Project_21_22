@@ -56,6 +56,10 @@ public class Board {
         islands.get(islandIndex).addStudents(students);
     }
 
+    public void addStudentsToIsland(StudentGroup students, Island i){
+        i.addStudents(students);
+    }
+
     public StudentGroup collectFromCloud(int cloudIndex) {
         return clouds.get(cloudIndex).collectStudents();
     }

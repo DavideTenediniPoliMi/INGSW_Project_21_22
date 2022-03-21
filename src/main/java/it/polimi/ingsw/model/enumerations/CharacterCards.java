@@ -30,18 +30,18 @@ public enum CharacterCards {
         this.parameters = parameters;
     }
 
-    public GenericCard instantiate(){
+    public CharacterCard instantiate(){
         GenericCard g = new GenericCard(cost, effectType);
         try {
             if(parameters == null){
-                g = (GenericCard) cardClass.getConstructors()[0].newInstance(g);
+                return (CharacterCard) cardClass.getConstructors()[0].newInstance(g);
             } else {
-                g = (GenericCard) cardClass.getConstructors()[0].newInstance(g, parameters);
+                return (CharacterCard) cardClass.getConstructors()[0].newInstance(g, parameters);
             }
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             System.out.println("Failed to instantiate " + this);
             e.printStackTrace();
+            return null;
         }
-        return g;
     }
 }
