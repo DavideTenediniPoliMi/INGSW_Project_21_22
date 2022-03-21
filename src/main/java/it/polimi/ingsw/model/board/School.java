@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
 public class School {
@@ -15,6 +16,10 @@ public class School {
 
     public Player getOwner() {
         return owner;
+    }
+
+    public int getNumStudentsInDiningRoomByColor(Color c) {
+        return diningRoom.getByColor(c);
     }
 
     public int getNumTowers(){

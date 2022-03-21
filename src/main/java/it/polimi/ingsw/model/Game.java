@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    private Board board;
+    private final Board board;
     private final List<Player> players = new ArrayList<>();
-    private List<CharacterCard> cards = new ArrayList<>();
+    private final List<CharacterCard> cards = new ArrayList<>();
     private static Game instance;
 
     private Game() {
@@ -26,6 +26,10 @@ public class Game {
 
     public Board getBoard() {
         return board;
+    }
+
+    public List<Player> getPlayers() {
+        return new ArrayList<>(players);
     }
 
     public void addPlayer(int ID, String name, boolean TowerHolder, TowerColor teamColor, CardBack cardBack){

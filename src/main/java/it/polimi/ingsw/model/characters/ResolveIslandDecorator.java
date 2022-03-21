@@ -7,6 +7,6 @@ public class ResolveIslandDecorator extends CharacterCardDecorator{
     }
 
     public void activate(){
-
+        card.activate();
     }
 }

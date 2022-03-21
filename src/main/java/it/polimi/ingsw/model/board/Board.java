@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class Board {
-    private List<Island> islands = new ArrayList<>();
+    private final List<Island> islands = new ArrayList<>();
     private final List<Cloud> clouds = new ArrayList<>();
     private final List<School> schools = new ArrayList<>();
     private ProfessorTracker professorOwners;
@@ -20,7 +20,7 @@ public class Board {
     public Board() {
     }
 
-    private School getSchoolByPlayerID(final int playerID) {
+    public School getSchoolByPlayerID(final int playerID) {
         Optional<School> result = schools.stream()
                 .filter((school) -> (school.getOwner().getID() == playerID))
                 .findAny();

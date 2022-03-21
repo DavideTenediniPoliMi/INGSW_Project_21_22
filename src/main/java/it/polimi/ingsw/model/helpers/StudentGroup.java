@@ -3,7 +3,7 @@ package it.polimi.ingsw.model.helpers;
 import it.polimi.ingsw.model.enumerations.Color;
 
 public class StudentGroup {
-    private int[] students;
+    private final int[] students;
 
     public StudentGroup() {
         this.students = new int[Color.NUM_COLORS]; // already initialized to 0
@@ -14,7 +14,7 @@ public class StudentGroup {
     }
 
     public void addByColor(Color c, int amt){
-        students[c.ordinal()] += 1;
+        students[c.ordinal()] += amt;
     }
 
     public void transferAllTo(StudentGroup recipient){
