@@ -16,7 +16,7 @@ public class StudentBag {
         return instance;
     }
 
-    public StudentGroup drawStudents() {
+    public StudentGroup drawStudents(int amount) {
         // TODO
         return students;
     }
