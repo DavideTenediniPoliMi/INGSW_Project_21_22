@@ -27,6 +27,7 @@ public class StudentGroupDecorator extends CharacterCardDecorator{
     }
 
     public void activate(){
+        this.setActive();
         if(toIslands){
             //TODO ask view
         }else if(toDiningRoom){
@@ -43,6 +44,8 @@ public class StudentGroupDecorator extends CharacterCardDecorator{
                 Island i = (Island) destination;
                 students.transferTo(tmp, selectedStudents[0]);
                 Game.getInstance().getBoard().addStudentsToIsland(tmp, i);
+
+                refillStudents();
             }
             else if(destination instanceof School){
                 School s = (School) destination;
@@ -51,6 +54,8 @@ public class StudentGroupDecorator extends CharacterCardDecorator{
                     students.transferTo(tmp, selectedStudents[0]);
 
                     Game.getInstance().getBoard().addToDiningRoomOf(playerID, tmp);
+
+                    refillStudents();
                 }else{
                     if(selectedStudents.length > 1){
                         students.transferTo(tmp, selectedStudents[0]);
@@ -66,6 +71,6 @@ public class StudentGroupDecorator extends CharacterCardDecorator{
     }
 
     private void refillStudents(){
-
+        StudentBag.getBag().drawStudents(1).transferAllTo(students);
     }
 }
