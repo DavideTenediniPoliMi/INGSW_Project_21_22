@@ -28,11 +28,11 @@ public class Player {
     }
 
     protected void addCoin(){
-
+        this.numCoins += 1;
     }
 
     protected void removeCoins(int amt){
-
+        this.numCoins -= amt;
     }
 
     public int getID() {

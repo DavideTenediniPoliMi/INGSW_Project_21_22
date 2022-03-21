@@ -10,18 +10,26 @@ public class StudentGroup {
     }
 
     public int getByColor(Color c){
-        return -1;
+        return students[c.ordinal()];
     }
 
-    public void addByColor(Color c){
-
-    }
-
-    public void transferTo(StudentGroup recipient, StudentGroup toTransfer){
-
+    public void addByColor(Color c, int amt){
+        students[c.ordinal()] += 1;
     }
 
     public void transferAllTo(StudentGroup recipient){
-
+        transferTo(recipient, this);
     }
+
+    public void transferTo(StudentGroup recipient, StudentGroup toTransfer){
+        int amt;
+        for(Color c : Color.values()){
+            amt = toTransfer.getByColor(c);
+            if(this.getByColor(c) >= amt){
+                students[c.ordinal()] -= amt;
+                recipient.addByColor(c, amt);
+            }
+        }
+    }
+
 }
