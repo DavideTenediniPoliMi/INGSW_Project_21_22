@@ -14,7 +14,7 @@ public enum Card {
 
     public final int WEIGHT;
     public final int RANGE;
-    private boolean used = false;
+    private boolean used;
 
     Card(int weight, int range) {
         this.WEIGHT = weight;
