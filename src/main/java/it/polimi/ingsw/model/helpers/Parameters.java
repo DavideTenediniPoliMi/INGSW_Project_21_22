@@ -4,8 +4,8 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 
 public class Parameters {
-    private final StudentGroup origin = new StudentGroup();
-    private final StudentGroup destination = new StudentGroup();
+    private final StudentGroup fromOrigin = new StudentGroup();
+    private final StudentGroup fromDestination = new StudentGroup();
     private TowerColor teamColor;
     private TowerColor currentTeam;
     private Color selectedColor;
@@ -15,20 +15,20 @@ public class Parameters {
     public Parameters() {
     }
 
-    public StudentGroup getOrigin() {
-        return origin;
+    public StudentGroup getFromOrigin() {
+        return fromOrigin;
     }
 
-    public void setOrigin(StudentGroup origin){
-        origin.transferAllTo(this.origin);
+    public void setFromOrigin(StudentGroup fromOrigin){
+        fromOrigin.transferAllTo(this.fromOrigin);
     }
 
-    public StudentGroup getDestination() {
-        return destination;
+    public StudentGroup getFromDestination() {
+        return fromDestination;
     }
 
-    public void setDestination(){
-        destination.transferAllTo(this.destination);
+    public void setFromDestination(StudentGroup fromDestination){
+        fromDestination.transferAllTo(this.fromDestination);
     }
 
     public TowerColor getTeamColor() {
