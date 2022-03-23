@@ -4,18 +4,10 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 
-public class Island {
+public abstract class Island {
     private final StudentGroup students = new StudentGroup();
-    private int numTowers;
-    private TowerColor teamColor;
+    protected TowerColor teamColor;
     private boolean motherNature;
-
-    public Island() {
-    }
-
-    public int getNumTowers() {
-        return numTowers;
-    }
 
     public TowerColor getTeamColor() {
         return teamColor;
@@ -25,21 +17,17 @@ public class Island {
         return motherNature;
     }
 
-    public int getNumOfStudents(Color c){
+    public int getNumStudentsByColor(Color c){
         return students.getByColor(c);
     }
+
+    public abstract int getNumIslands();
 
     protected void addStudents(StudentGroup students) {
         students.transferAllTo(this.students);
     }
 
-    protected void addTower() {
-        numTowers += 1;
-    }
-
-    protected void conquerIsland(TowerColor teamColor) {
-        this.teamColor = teamColor;
-    }
+    protected abstract void conquerIsland(TowerColor teamColor);
 
     protected void setMotherNatureTo(boolean motherNature) {
         this.motherNature = motherNature;

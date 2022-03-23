@@ -48,7 +48,7 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator{
             else if(isIgnoreTowers){
                 Island i = Game.getInstance().getBoard().getIsland(islandIndex);
                 if(i.getTeamColor().equals(team)){
-                    newScore -= i.getNumTowers();
+                    //newScore -= i.getNumTowers();
                 }
             }
             else if(isIgnoreColor){
@@ -56,7 +56,7 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator{
 
                 if(Game.getInstance().getPlayerByID(colorOwnerID).getTeamColor().equals(team)){
                     Island i = Game.getInstance().getBoard().getIsland(islandIndex);
-                    newScore -= i.getNumOfStudents(selectedColor);
+                    newScore -= i.getNumStudentsByColor(selectedColor);
                 }
             }
             else if(isNoEntry){
