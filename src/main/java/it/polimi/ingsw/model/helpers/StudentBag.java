@@ -6,35 +6,39 @@ import java.util.Random;
 
 public class StudentBag {
     private final int NUM_STARTING_STUDENT_BY_COLOR = 24;
+
     private final StudentGroup students;
-    private final Random r;
+    private final Random rand;
 
     public StudentBag() {
         students = new StudentGroup();
-        r = new Random();
+        rand = new Random();
 
         for(Color c : Color.values()){
             students.addByColor(c, NUM_STARTING_STUDENT_BY_COLOR);
         }
     }
 
-    public StudentGroup drawStudents(int amt) {
-        int drawn;
-        Color color;
-        StudentGroup tmp = new StudentGroup();
-        for(int x = 0; x < amt; x += drawn){
-            color = Color.values()[r.nextInt(Color.NUM_COLORS)];
-            drawn = r.nextInt(Math.min(students.getByColor(color), amt-x)) + 1;
+    public StudentGroup drawStudents(int amount) {
+        int totDrawn = 0;
+        StudentGroup temp = new StudentGroup();
+        StudentGroup drawnStudents = new StudentGroup();
 
-            tmp.addByColor(color, drawn);
+        while(totDrawn < amount) {
+            Color chosenColor = Color.values()[rand.nextInt(Color.NUM_COLORS)];
+            int numMaxDrawable = Math.min(students.getByColor(chosenColor), amount - totDrawn);
+            int drawn = rand.nextInt(numMaxDrawable) + 1;
+
+            temp.addByColor(chosenColor, drawn);
+
+            totDrawn += drawn;
         }
 
-        StudentGroup drawnStudents = new StudentGroup();
-        students.transferTo(drawnStudents, tmp);
+        students.transferTo(drawnStudents, temp);
         return students;
     }
 
-    public void putBack(StudentGroup toAdd){
-        toAdd.transferAllTo(students);
+    public void putBack(StudentGroup toReturn){
+        toReturn.transferAllTo(students);
     }
 }

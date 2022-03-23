@@ -6,7 +6,7 @@ public class StudentGroup {
     private final int[] students;
 
     public StudentGroup() {
-        this.students = new int[Color.NUM_COLORS]; // already initialized to 0
+        this.students = new int[Color.NUM_COLORS];
     }
 
     public StudentGroup(Color c, int amount) {
@@ -14,23 +14,23 @@ public class StudentGroup {
         addByColor(c, amount);
     }
 
-    public int getByColor(Color c){
+    public int getByColor(Color c) {
         return students[c.ordinal()];
     }
 
-    public void addByColor(Color c, int amount){
+    public void addByColor(Color c, int amount) {
         students[c.ordinal()] += amount;
     }
 
-    public void transferAllTo(StudentGroup recipient){
+    public void transferAllTo(StudentGroup recipient) {
         transferTo(recipient, this);
     }
 
-    public void transferTo(StudentGroup recipient, StudentGroup toTransfer){
-        int amount;
-        for(Color c : Color.values()){
-            amount = toTransfer.getByColor(c);
-            if(this.getByColor(c) >= amount){
+    public void transferTo(StudentGroup recipient, StudentGroup toTransfer) {
+        for(Color c : Color.values()) {
+            int amount = toTransfer.getByColor(c);
+
+            if(getByColor(c) >= amount) {
                 students[c.ordinal()] -= amount;
                 recipient.addByColor(c, amount);
             }
