@@ -11,13 +11,14 @@ import java.util.List;
 import java.util.Optional;
 
 public class Game {
+    private static Game instance;
     private final Board board;
     private final List<Player> players = new ArrayList<>();
     private final List<CharacterCard> cards = new ArrayList<>();
-    private static Game instance;
 
     private Game() {
         this.board = new Board();
+        StudentBag.getBag();
     }
 
     public static Game getInstance(){
@@ -42,8 +43,13 @@ public class Game {
         return result.orElse(null);
     }
 
+    public void createClouds(int amount) {
+        board.createClouds(amount);
+    }
+
     public void addPlayer(int ID, String name, TowerColor teamColor, CardBack cardBack, boolean towerHolder){
         players.add(new Player(ID, name, teamColor, cardBack, towerHolder));
+
     }
 
     public boolean isNameTaken(String name){

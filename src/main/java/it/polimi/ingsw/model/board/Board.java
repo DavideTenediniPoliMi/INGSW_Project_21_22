@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.board;
 
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentBag;
@@ -10,13 +11,29 @@ import java.util.List;
 import java.util.Optional;
 
 public class Board {
+    private final int NUM_STARTING_ISLANDS = 12;
     private final List<Island> islands = new ArrayList<>();
     private final List<Cloud> clouds = new ArrayList<>();
     private final List<School> schools = new ArrayList<>();
-    private ProfessorTracker professorOwners;
+    private final ProfessorTracker professorOwners;
     private int numCoinsLeft;
 
     public Board() {
+        for(int i = 0; i < NUM_STARTING_ISLANDS; i++) {
+            islands.add(new SimpleIsland());
+        }
+
+        professorOwners = new ProfessorTracker();
+    }
+
+    public void createClouds(int amount) {
+        for(int i = 0; i < amount; i++) {
+            clouds.add(new Cloud());
+        }
+    }
+
+    public void addSchool(Player owner) {
+        schools.add(new School(owner));
     }
 
     public School getSchoolByPlayerID(final int playerID) {
@@ -49,6 +66,10 @@ public class Board {
 
     public Island getIsland(int islandIndex){
         return islands.get(islandIndex);
+    }
+
+    public int getNumCoinsLeft() {
+        return numCoinsLeft;
     }
 
     public void addStudentsToIsland(StudentGroup students, int islandIndex) {
