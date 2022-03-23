@@ -53,7 +53,7 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator {
         if(isAddTwo && currentTeam.equals(boostedTeam)) {
             delta += 2;
         }else if(isIgnoreTowers) {
-            Island island = Game.getInstance().getBoard().getIsland(islandIndex);
+            Island island = Game.getInstance().getBoard().getIslandAt(islandIndex);
 
             if(island.getTeamColor().equals(currentTeam)) {
                 delta -= island.getNumIslands();
@@ -71,7 +71,7 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator {
             Player professorOwner = game.getPlayerByID(professorOwnerID);
 
             if(professorOwner.getTeamColor().equals(currentTeam)) {
-                Island island = board.getIsland(islandIndex);
+                Island island = board.getIslandAt(islandIndex);
                 delta -= island.getNumStudentsByColor(selectedColor);
             }
         }

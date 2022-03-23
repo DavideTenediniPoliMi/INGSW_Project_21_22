@@ -6,9 +6,9 @@ import it.polimi.ingsw.model.helpers.StudentGroup;
 
 public class School {
     private final Player owner;
+    private int numTowers;
     private final StudentGroup entrance = new StudentGroup();
     private final StudentGroup diningRoom = new StudentGroup();
-    private int numTowers;
 
     public School(Player owner){
         this.owner = owner;
@@ -18,37 +18,37 @@ public class School {
         return owner;
     }
 
-    public int getNumStudentsInDiningRoomByColor(Color c) {
-        return diningRoom.getByColor(c);
-    }
-
     public int getNumTowers(){
         return numTowers;
     }
 
-    protected void removeFromEntrance(StudentGroup students){
+    protected void removeTowers(int amount) {
+        numTowers -= amount;
+    }
+
+    protected void addTowers(int amount) {
+        numTowers += amount;
+    }
+
+    public int getNumStudentsInDiningRoomByColor(Color c) {
+        return diningRoom.getByColor(c);
+    }
+
+    protected void removeFromEntrance(StudentGroup students) {
         StudentGroup temp = new StudentGroup();
         entrance.transferTo(temp, students);
     }
 
-    protected void addToEntrance(StudentGroup students){
+    protected void addToEntrance(StudentGroup students) {
         students.transferAllTo(entrance);
     }
 
-    protected void removeFromDiningRoom(StudentGroup students){
+    protected void removeFromDiningRoom(StudentGroup students) {
         StudentGroup temp = new StudentGroup();
         diningRoom.transferTo(temp, students);
     }
 
-    protected void addFromDiningRoom(StudentGroup students){
+    protected void addFromDiningRoom(StudentGroup students) {
         students.transferAllTo(diningRoom);
-    }
-
-    protected void takeTowers(int amount) {
-        numTowers -= amount;
-    }
-
-    protected void giveTowers(int amount) {
-        numTowers += amount;
     }
 }

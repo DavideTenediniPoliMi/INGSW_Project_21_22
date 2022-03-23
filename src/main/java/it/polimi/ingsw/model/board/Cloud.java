@@ -3,19 +3,22 @@ package it.polimi.ingsw.model.board;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
 public class Cloud {
-
     private final StudentGroup students = new StudentGroup();
     private boolean available = true;
 
-    public Cloud(){
+    public Cloud() {
+    }
+
+    private void setAvailableTo(boolean available) {
+        this.available = available;
     }
 
     public boolean isAvailable() {
         return available;
     }
 
-    protected void refillCloud(StudentGroup students) {
-        students.transferAllTo(this.students);
+    protected void refillCloud(StudentGroup toAdd) {
+        toAdd.transferAllTo(students);
         setAvailableTo(true);
     }
 
@@ -28,7 +31,4 @@ public class Cloud {
         return temp;
     }
 
-    private void setAvailableTo(boolean available) {
-        this.available = available;
-    }
 }
