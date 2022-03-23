@@ -142,12 +142,14 @@ public class Game {
     }
 
     public CharacterCard getActiveCard(){
-        return null; //TODO
+        Optional<CharacterCard> active = cards.stream().filter(CharacterCard::isActive).findAny();
+
+        return active.orElse(null);
     }
 
     public void buyCharacterCard(int playerID, int cardIndex){
-        //TODO check if implementation is correct
         CharacterCard card = cards.get(cardIndex);
+
         int cardCost = card.getCost();
 
         getPlayerByID(playerID).removeCoins(cardCost);
@@ -155,11 +157,17 @@ public class Game {
     }
 
     public void setCardParameters(Parameters params){
-        //TODO
+        CharacterCard c = getActiveCard();
+        if(c != null){
+            c.setParameters(params);
+        }
     }
 
     public void activateCard(){
-        //TODO
+        CharacterCard c = getActiveCard();
+        if(c != null){
+            c.activate();
+        }
     }
 
     private StudentGroup drawStudents(int amount){
