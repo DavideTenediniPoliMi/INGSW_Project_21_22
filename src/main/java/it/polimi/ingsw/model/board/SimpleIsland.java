@@ -4,16 +4,10 @@ import it.polimi.ingsw.model.enumerations.TowerColor;
 
 public class SimpleIsland extends Island {
     public SimpleIsland() {
-
     }
 
     @Override
     public int getNumIslands() {
         return 1;
-    }
-
-    @Override
-    protected void conquerIsland(TowerColor teamColor) {
-        this.teamColor = teamColor;
     }
 }

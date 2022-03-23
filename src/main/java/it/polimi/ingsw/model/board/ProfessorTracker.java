@@ -6,7 +6,7 @@ public class ProfessorTracker {
     private final int[] owners;
 
     public ProfessorTracker() {
-        this.owners = new int[Color.NUM_COLORS];
+        owners = new int[Color.NUM_COLORS];
 
         for(int i = 0; i < Color.NUM_COLORS; i++) {
             owners[i] = -1; // -1 indicates that the professor doesn't have an owner yet

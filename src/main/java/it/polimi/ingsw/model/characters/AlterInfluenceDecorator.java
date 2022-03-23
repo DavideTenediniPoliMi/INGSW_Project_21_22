@@ -63,6 +63,11 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator {
             Board board = game.getBoard();
 
             int professorOwnerID = board.getProfessorOwners().getOwnerIDByColor(selectedColor);
+
+            if(professorOwnerID == -1)  {
+                return 0; // will be handled by exceptions
+            }
+
             Player professorOwner = game.getPlayerByID(professorOwnerID);
 
             if(professorOwner.getTeamColor().equals(currentTeam)) {
