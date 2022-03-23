@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.board;
 
-import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentBag;
@@ -82,6 +81,16 @@ public class Board {
 
     public void conquerIsland(TowerColor teamColor, int islandIndex) {
         islands.get(islandIndex).conquerIsland(teamColor);
+    }
+
+    public void mergeIslands(int leftIslandIndex, int rightIslandIndex) {
+        Island leftIsland = islands.get(leftIslandIndex);
+        Island rightIsland = islands.get(rightIslandIndex);
+
+        Island temp = new MultiIsland(leftIsland, rightIsland);
+
+        islands.remove(rightIslandIndex);
+        islands.set(leftIslandIndex, temp);
     }
 
     public void takeCoin() {

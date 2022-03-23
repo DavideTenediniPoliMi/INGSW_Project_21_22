@@ -117,6 +117,10 @@ public class Game {
         board.conquerIsland(teamColor, islandIndex);
     }
 
+    public void mergeIslands(int leftIslandIndex, int rightIslandIndex) {
+        board.mergeIslands(leftIslandIndex, rightIslandIndex);
+    }
+
     public void addTowers(int playerID, int numTowers){
         board.addTowersTo(playerID, numTowers);
     }
