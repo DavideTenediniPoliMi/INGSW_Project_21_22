@@ -3,6 +3,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.*;
+import it.polimi.ingsw.model.helpers.Parameters;
 import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
@@ -101,14 +102,6 @@ public class Game {
         getPlayerByID(playerID).addCoin();
     }
 
-    public void buyCharacterCard(int playerID, int cardIndex){
-        CharacterCard card = cards.get(cardIndex);
-        int cardCost = card.getCost();
-
-        getPlayerByID(playerID).removeCoins(cardCost);
-        board.putCoinsBack(cardCost - 1);
-    }
-
     public void giveStudentsTo(int playerID, int amount){
         StudentGroup temp = drawStudents(amount);
         board.addToEntranceOf(playerID, temp);
@@ -142,6 +135,31 @@ public class Game {
     public void playCard(int playerID, Card selectedCard){
         getPlayerByID(playerID).setSelectedCard(selectedCard);
         selectedCard.use();
+    }
+
+    public void resetCards(){
+        //TODO
+    }
+
+    public CharacterCard getActiveCard(){
+        return null; //TODO
+    }
+
+    public void buyCharacterCard(int playerID, int cardIndex){
+        //TODO check if implementation is correct
+        CharacterCard card = cards.get(cardIndex);
+        int cardCost = card.getCost();
+
+        getPlayerByID(playerID).removeCoins(cardCost);
+        board.putCoinsBack(cardCost - 1);
+    }
+
+    public void setCardParameters(Parameters params){
+        //TODO
+    }
+
+    public void activateCard(){
+        //TODO
     }
 
     private StudentGroup drawStudents(int amount){

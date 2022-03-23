@@ -15,8 +15,9 @@ public class ReturnToBagDecorator extends CharacterCardDecorator{
         super(card);
     }
 
-    public void activate(){
+    public int activate(){
         card.activate();
+        return 0;
     }
 
     public void returnStudent(Color c){

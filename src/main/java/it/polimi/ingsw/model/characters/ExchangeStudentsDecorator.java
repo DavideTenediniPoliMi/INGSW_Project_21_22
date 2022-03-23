@@ -10,8 +10,9 @@ public class ExchangeStudentsDecorator extends CharacterCardDecorator{
         super(card);
     }
 
-    public void activate(){
+    public int activate(){
         card.activate();
+        return 0;
     }
 
     public void swap(int playerID, StudentGroup fromEntrance, StudentGroup fromDiningRoom){

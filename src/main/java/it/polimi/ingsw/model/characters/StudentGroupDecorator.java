@@ -26,15 +26,9 @@ public class StudentGroupDecorator extends CharacterCardDecorator{
         }
     }
 
-    public void activate(){
+    public int activate(){
         card.activate();
-        if(toIslands){
-            //TODO ask view
-        }else if(toDiningRoom){
-            //TODO ask view
-        }else{
-            //TODO ask view
-        }
+        return 0;
     }
 
     public void transferTo(Object destination, StudentGroup[] selectedStudents){

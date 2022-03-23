@@ -7,8 +7,9 @@ public class GenericCard extends CharacterCard{
         super(cost, effectType);
     }
 
-    public void activate() {
+    public int activate() {
         setActive();
         increaseCost();
+        return 0;
     }
 }

@@ -1,11 +1,13 @@
 package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.enumerations.EffectType;
+import it.polimi.ingsw.model.helpers.Parameters;
 
 public abstract class CharacterCard {
     private int cost;
     private boolean active;
     private final EffectType effectType;
+    private Parameters parameters;
 
     public CharacterCard(int cost, EffectType effectType) {
         this.cost = cost;
@@ -36,5 +38,9 @@ public abstract class CharacterCard {
         active = false;
     }
 
-    public abstract void activate();
+    public void setParameters(Parameters params){
+        this.parameters = params;
+    }
+
+    public abstract int activate();
 }

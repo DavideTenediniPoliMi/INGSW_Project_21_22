@@ -5,37 +5,25 @@ import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 
-import java.util.ArrayList;
-
 public class AlterInfluenceDecorator extends CharacterCardDecorator{
     private Color selectedColor;
     private TowerColor teamColor;
-    private ArrayList<Integer>blockedIslands;
     private int toUnlock = -1;
 
-    private final boolean isAddTwo, isIgnoreTowers, isIgnoreColor, isNoEntry;
+    private final boolean isAddTwo, isIgnoreTowers, isIgnoreColor;
 
-    public AlterInfluenceDecorator(GenericCard card, boolean isAddTwo, boolean isIgnoreTowers, boolean isIgnoreColor, boolean isNoEntry){
+    public AlterInfluenceDecorator(GenericCard card, boolean isAddTwo, boolean isIgnoreTowers, boolean isIgnoreColor){
         super(card);
 
         this.isAddTwo = isAddTwo;
         this.isIgnoreTowers = isIgnoreTowers;
         this.isIgnoreColor = isIgnoreColor;
-        this.isNoEntry = isNoEntry;
-
-        if(isNoEntry){
-            blockedIslands = new ArrayList<>();
-        }
     }
 
-    public void activate(){
+    public int activate(){
         card.activate();
 
-        if(isIgnoreColor){
-            //TODO ask view
-        }else if(isNoEntry){
-            //TODO ask view
-        }
+        return 0;
     }
 
     public int getAlteredInfluence(TowerColor team, int influenceScore, int islandIndex){
@@ -59,32 +47,13 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator{
                     newScore -= i.getNumStudentsByColor(selectedColor);
                 }
             }
-            else if(isNoEntry){
-                if(blockedIslands.contains(islandIndex)){
-                    newScore = 0;
-
-                    if(toUnlock == -1){
-                        toUnlock = islandIndex;
-                    }
-                }
-            }
         }
 
         return newScore;
     }
 
     public void clearEffect(){
-        if(!isNoEntry || blockedIslands.isEmpty()){
-            card.clearEffect();
-        }
-        if(toUnlock > -1){
-            unlockIsland(toUnlock);
-            toUnlock = -1;
-        }
-    }
-
-    public void blockIsland(int index){
-        this.blockedIslands.add(index);
+        card.clearEffect();
     }
 
     public void setColorToIgnore(Color c){
@@ -95,7 +64,4 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator{
         this.teamColor = team;
     }
 
-    private void unlockIsland(int islandIndex){
-        this.blockedIslands.remove((Object)islandIndex);
-    }
 }

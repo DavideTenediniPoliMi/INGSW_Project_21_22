@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.enumerations.EffectType;
+import it.polimi.ingsw.model.helpers.Parameters;
 
 public abstract class CharacterCardDecorator {
     protected CharacterCard card;
@@ -9,7 +10,7 @@ public abstract class CharacterCardDecorator {
         this.card = card;
     }
 
-    public abstract void activate();
+    public abstract int activate();
 
     public int getCost() {
         return card.getCost();
@@ -33,5 +34,9 @@ public abstract class CharacterCardDecorator {
 
     public void clearEffect() {
         card.clearEffect();
+    }
+
+    public void setParameters(Parameters params){
+        card.setParameters(params);
     }
 }
