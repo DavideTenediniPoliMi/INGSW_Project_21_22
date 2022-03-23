@@ -6,23 +6,30 @@ import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.School;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.Parameters;
-import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
-public class ReturnToBagDecorator extends CharacterCardDecorator{
+public class ReturnToBagDecorator extends CharacterCardDecorator {
     private final int NUM_STUDENTS_TO_RETURN = 3;
+
     private Color selectedColor;
 
-    public ReturnToBagDecorator(CharacterCard card){
+    public ReturnToBagDecorator(CharacterCard card) {
         super(card);
     }
 
-    public int activate(){
+    @Override
+    public void setParameters(Parameters params) {
+        selectedColor = params.getSelectedColor();
+    }
+
+    @Override
+    public int activate() {
         card.activate();
+
         Game game = Game.getInstance();
         Board board = game.getBoard();
 
-        for(Player player: game.getPlayers()){
+        for(Player player: game.getPlayers()) {
             School targetSchool = board.getSchoolByPlayerID(player.getID());
 
             int numAvailableStudents = targetSchool.getNumStudentsInDiningRoomByColor(selectedColor);
@@ -31,13 +38,9 @@ public class ReturnToBagDecorator extends CharacterCardDecorator{
             StudentGroup temp = new StudentGroup(selectedColor, numStudentsToReturn);
 
             board.removeFromDiningRoomOf(player.getID(), temp);
-            StudentBag.getBag().putBack(temp);
+            game.putStudentsBack(temp);
         }
-        return 0;
-    }
 
-    @Override
-    public void setParameters(Parameters params){
-        this.selectedColor = params.getSelectedColor();
+        return 0;
     }
 }

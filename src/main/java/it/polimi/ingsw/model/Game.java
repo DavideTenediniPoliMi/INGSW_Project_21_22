@@ -13,13 +13,12 @@ import java.util.Optional;
 
 public class Game {
     private static Game instance;
-    private final Board board;
+    private final Board board = new Board();
     private final List<Player> players = new ArrayList<>();
     private final List<CharacterCard> cards = new ArrayList<>();
+    private final StudentBag bag = new StudentBag();
 
     private Game() {
-        this.board = new Board();
-        StudentBag.getBag();
     }
 
     public static Game getInstance(){
@@ -68,14 +67,14 @@ public class Game {
     public void addStudentToIsland(int islandIndex, Color c){
         StudentGroup temp = new StudentGroup(c, 1);
 
-        board.addStudentsToIsland(temp, islandIndex);
+        board.addStudentsToIsland(islandIndex, temp);
     }
 
     public void transferToIsland(int playerID, int islandIndex, Color c){
         StudentGroup temp = new StudentGroup(c, 1);
 
         board.removeFromEntranceOf(playerID, temp);
-        board.addStudentsToIsland(temp, islandIndex);
+        board.addStudentsToIsland(islandIndex, temp);
     }
 
     public void transferToDiningRoom(int playerID, Color c){
@@ -163,14 +162,20 @@ public class Game {
         }
     }
 
-    public void activateCard(){
+    public int activateCard(){
         CharacterCard c = getActiveCard();
         if(c != null){
-            c.activate();
+            return c.activate();
         }
+
+        return 0;
     }
 
-    private StudentGroup drawStudents(int amount){
-        return StudentBag.getBag().drawStudents(amount);
+    public StudentGroup drawStudents(int amount){
+        return bag.drawStudents(amount);
+    }
+
+    public void putStudentsBack(StudentGroup students) {
+
     }
 }

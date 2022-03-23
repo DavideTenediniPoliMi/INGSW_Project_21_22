@@ -1,9 +1,9 @@
 package it.polimi.ingsw.model.board;
 
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
 import java.util.ArrayList;
@@ -72,7 +72,7 @@ public class Board {
         return numCoinsLeft;
     }
 
-    public void addStudentsToIsland(StudentGroup students, int islandIndex) {
+    public void addStudentsToIsland(int islandIndex, StudentGroup students) {
         islands.get(islandIndex).addStudents(students);
     }
 
@@ -93,9 +93,8 @@ public class Board {
     }
 
     public void refillClouds(int studentAmount) {
-        StudentBag bag = StudentBag.getBag();
         for(Cloud cloud: clouds) {
-            StudentGroup temp = bag.drawStudents(studentAmount);
+            StudentGroup temp = Game.getInstance().drawStudents(studentAmount);
             cloud.refillCloud(temp);
         }
     }

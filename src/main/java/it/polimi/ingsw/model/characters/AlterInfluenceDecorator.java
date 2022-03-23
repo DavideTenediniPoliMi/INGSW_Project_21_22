@@ -1,54 +1,26 @@
 package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.Parameters;
 
-public class AlterInfluenceDecorator extends CharacterCardDecorator{
+public class AlterInfluenceDecorator extends CharacterCardDecorator {
+    private TowerColor boostedTeam;
+    private TowerColor currentTeam;
     private Color selectedColor;
-    private TowerColor teamColor;
-
+    private int islandIndex;
     private final boolean isAddTwo, isIgnoreTowers, isIgnoreColor;
 
-    private TowerColor currentTeam;
-    private int islandIndex;
-
-    public AlterInfluenceDecorator(GenericCard card, boolean isAddTwo, boolean isIgnoreTowers, boolean isIgnoreColor){
+    public AlterInfluenceDecorator(GenericCard card, boolean isAddTwo, boolean isIgnoreTowers, boolean isIgnoreColor) {
         super(card);
 
         this.isAddTwo = isAddTwo;
         this.isIgnoreTowers = isIgnoreTowers;
         this.isIgnoreColor = isIgnoreColor;
-    }
-
-    public int activate(){
-        card.activate();
-        int delta = 0;
-
-        if(isAddTwo && currentTeam.equals(teamColor)){
-            delta += 2;
-        }else if(isIgnoreTowers){
-            Island i = Game.getInstance().getBoard().getIsland(islandIndex);
-
-            if(i.getTeamColor().equals(currentTeam)){
-                delta -= i.getNumIslands();
-            }
-        }else if(isIgnoreColor){
-            int colorOwnerID = Game.getInstance().getBoard().getProfessorOwners().getOwnerIDByColor(selectedColor);
-
-            if(Game.getInstance().getPlayerByID(colorOwnerID).getTeamColor().equals(currentTeam)){
-                Island i = Game.getInstance().getBoard().getIsland(islandIndex);
-                delta -= i.getNumStudentsByColor(selectedColor);
-            }
-        }
-
-        return delta;
-    }
-
-    public void clearEffect(){
-        card.clearEffect();
     }
 
     /*
@@ -59,27 +31,46 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator{
     * (For example when calculating scores for each team)
     * */
     @Override
-    public void setParameters(Parameters params){
-        if(isIgnoreTowers){
-            setCurrent(params); //Might set null params when first called (During first phase of player's turn)
-        }else if(isIgnoreColor){
-            if(params.getSelectedColor() == null){
-                setCurrent(params);
-            }else{
-                this.selectedColor = params.getSelectedColor();
+    public void setParameters(Parameters params) {
+        if(isIgnoreColor && params.getSelectedColor() != null) {
+            selectedColor = params.getSelectedColor();
+            return;
+        }else if(isAddTwo && params.getBoostedTeam() != null){
+            boostedTeam = params.getBoostedTeam();
+            return;
+        }
+
+        currentTeam = params.getCurrentTeam();
+        islandIndex = params.getIslandIndex();
+    }
+
+    @Override
+    public int activate() {
+        card.activate();
+
+        int delta = 0;
+
+        if(isAddTwo && currentTeam.equals(boostedTeam)) {
+            delta += 2;
+        }else if(isIgnoreTowers) {
+            Island island = Game.getInstance().getBoard().getIsland(islandIndex);
+
+            if(island.getTeamColor().equals(currentTeam)) {
+                delta -= island.getNumIslands();
             }
-        }else if(isAddTwo){
-            if(params.getTeamColor() == null){
-                setCurrent(params);
-            }else{
-                this.teamColor = params.getTeamColor();
+        }else if(isIgnoreColor) {
+            Game game = Game.getInstance();
+            Board board = game.getBoard();
+
+            int professorOwnerID = board.getProfessorOwners().getOwnerIDByColor(selectedColor);
+            Player professorOwner = game.getPlayerByID(professorOwnerID);
+
+            if(professorOwner.getTeamColor().equals(currentTeam)) {
+                Island island = board.getIsland(islandIndex);
+                delta -= island.getNumStudentsByColor(selectedColor);
             }
         }
-    }
 
-    private void setCurrent(Parameters params){
-        this.currentTeam = params.getCurrentTeam();
-        this.islandIndex = params.getIslandIndex();
+        return delta;
     }
-
 }

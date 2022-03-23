@@ -7,7 +7,6 @@ public abstract class CharacterCard {
     private int cost;
     private boolean active;
     private final EffectType effectType;
-    private Parameters parameters;
 
     public CharacterCard(int cost, EffectType effectType) {
         this.cost = cost;
@@ -18,29 +17,27 @@ public abstract class CharacterCard {
         return cost;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public EffectType getEffectType() {
-        return effectType;
-    }
-
     protected void increaseCost() {
         cost += 1;
+    }
+
+    public boolean isActive() {
+        return active;
     }
 
     protected void setActive() {
         active = true;
     }
 
+    public EffectType getEffectType() {
+        return effectType;
+    }
+
     public void clearEffect() {
         active = false;
     }
 
-    public void setParameters(Parameters params){
-        this.parameters = params;
-    }
+    public abstract void setParameters(Parameters params);
 
     public abstract int activate();
 }

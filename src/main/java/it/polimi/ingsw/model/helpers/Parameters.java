@@ -6,10 +6,10 @@ import it.polimi.ingsw.model.enumerations.TowerColor;
 public class Parameters {
     private final StudentGroup fromOrigin = new StudentGroup();
     private final StudentGroup fromDestination = new StudentGroup();
-    private TowerColor teamColor;
+    private TowerColor boostedTeam;
     private TowerColor currentTeam;
     private Color selectedColor;
-    private int playerIndex;
+    private int playerID;
     private int islandIndex;
 
     public Parameters() {
@@ -31,12 +31,12 @@ public class Parameters {
         fromDestination.transferAllTo(this.fromDestination);
     }
 
-    public TowerColor getTeamColor() {
-        return teamColor;
+    public TowerColor getBoostedTeam() {
+        return boostedTeam;
     }
 
-    public void setTeamColor(TowerColor teamColor) {
-        this.teamColor = teamColor;
+    public void setBoostedTeam(TowerColor boostedTeam) {
+        this.boostedTeam = boostedTeam;
     }
 
     public TowerColor getCurrentTeam() {
@@ -55,12 +55,12 @@ public class Parameters {
         this.selectedColor = selectedColor;
     }
 
-    public int getPlayerIndex() {
-        return playerIndex;
+    public int getPlayerID() {
+        return playerID;
     }
 
-    public void setPlayerIndex(int playerIndex) {
-        this.playerIndex = playerIndex;
+    public void setPlayerID(int playerID) {
+        this.playerID = playerID;
     }
 
     public int getIslandIndex() {

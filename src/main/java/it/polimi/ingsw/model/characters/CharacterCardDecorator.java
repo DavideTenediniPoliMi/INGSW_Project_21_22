@@ -10,33 +10,31 @@ public abstract class CharacterCardDecorator {
         this.card = card;
     }
 
-    public abstract int activate();
-
     public int getCost() {
         return card.getCost();
-    }
-
-    public boolean isActive() {
-        return card.isActive();
-    }
-
-    public EffectType getEffectType() {
-        return card.getEffectType();
     }
 
     protected void increaseCost() {
         card.increaseCost();
     }
 
+    public boolean isActive() {
+        return card.isActive();
+    }
+
     protected void setActive() {
         card.setActive();
+    }
+
+    public EffectType getEffectType() {
+        return card.getEffectType();
     }
 
     public void clearEffect() {
         card.clearEffect();
     }
 
-    public void setParameters(Parameters params){
-        card.setParameters(params);
-    }
+    public abstract int activate();
+
+    public abstract void setParameters(Parameters params);
 }

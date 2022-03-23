@@ -8,22 +8,14 @@ public class StudentBag {
     private final int NUM_STARTING_STUDENT_BY_COLOR = 24;
     private final StudentGroup students;
     private final Random r;
-    private static StudentBag instance;
 
-    private StudentBag() {
+    public StudentBag() {
         students = new StudentGroup();
         r = new Random();
 
         for(Color c : Color.values()){
             students.addByColor(c, NUM_STARTING_STUDENT_BY_COLOR);
         }
-    }
-
-    public static StudentBag getBag(){
-        if( instance == null){
-            instance = new StudentBag();
-        }
-        return instance;
     }
 
     public StudentGroup drawStudents(int amt) {
