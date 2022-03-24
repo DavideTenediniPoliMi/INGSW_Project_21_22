@@ -11,9 +11,6 @@ public class GenericCard extends CharacterCard {
     @Override
     public int activate() {
         setActive();
-
-        increaseCost();
-
         return 0;
     }
 

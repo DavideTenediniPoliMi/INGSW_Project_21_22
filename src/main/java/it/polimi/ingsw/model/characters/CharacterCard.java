@@ -17,7 +17,7 @@ public abstract class CharacterCard {
         return cost;
     }
 
-    protected void increaseCost() {
+    public void increaseCost() {
         cost += 1;
     }
 

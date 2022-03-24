@@ -38,7 +38,7 @@ public class StudentBag {
         return students;
     }
 
-    public void putBack(StudentGroup toReturn){
+    public void putStudentsBack(StudentGroup toReturn){
         toReturn.transferAllTo(students);
     }
 }

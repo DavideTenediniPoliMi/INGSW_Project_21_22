@@ -15,7 +15,7 @@ public class Game {
     private static Game instance;
     private final Board board = new Board();
     private final List<Player> players = new ArrayList<>();
-    private final List<CharacterCard> cards = new ArrayList<>();
+    private final List<CharacterCard> characterCards = new ArrayList<>();
     private final StudentBag bag = new StudentBag();
 
     private Game() {
@@ -27,34 +27,24 @@ public class Game {
         return instance;
     }
 
+    // BOARD
+
     public Board getBoard() {
         return board;
     }
 
-    public List<Player> getPlayers() {
-        return new ArrayList<>(players);
+    // ISLAND
+
+    public void conquerIsland(int islandIndex, int playerID){
+        TowerColor teamColor = getPlayerByID(playerID).getTeamColor();
+        board.conquerIsland(islandIndex, teamColor);
     }
 
-    public Player getPlayerByID(int ID){
-        Optional<Player> result = players.stream()
-                .filter((player) -> (player.getID() == ID))
-                .findAny();
-
-        return result.orElse(null);
+    public void mergeIslands(int leftIslandIndex, int rightIslandIndex) {
+        board.mergeIslands(leftIslandIndex, rightIslandIndex);
     }
 
-    public void createClouds(int amount) {
-        board.createClouds(amount);
-    }
-
-    public void addPlayer(int ID, String name, TowerColor teamColor, CardBack cardBack, boolean towerHolder){
-        players.add(new Player(ID, name, teamColor, cardBack, towerHolder));
-
-    }
-
-    public boolean isNameTaken(String name){
-        return players.stream().anyMatch(player -> player.getName().equals(name));
-    }
+    // MOTHER NATURE
 
     public void placeMNAt(int islandIndex){
         board.placeMNAt(islandIndex);
@@ -64,45 +54,14 @@ public class Game {
         board.moveMN(steps);
     }
 
-    public void addStudentToIsland(int islandIndex, Color c){
-        StudentGroup temp = new StudentGroup(c, 1);
+    // CLOUDS
 
-        board.addStudentsToIsland(islandIndex, temp);
+    public void createClouds(int amount) {
+        board.createClouds(amount);
     }
 
-    public void transferToIsland(int playerID, int islandIndex, Color c){
-        StudentGroup temp = new StudentGroup(c, 1);
-
-        board.removeFromEntranceOf(playerID, temp);
-        board.addStudentsToIsland(islandIndex, temp);
-    }
-
-    public void transferToDiningRoom(int playerID, Color c){
-        StudentGroup temp = new StudentGroup(c, 1);
-
-        board.removeFromEntranceOf(playerID, temp);
-        board.addToDiningRoomOf(playerID, temp);
-    }
-
-    public void collectFromCloud(int playerID, int cloudIndex){
+    public void collectFromCloud(int cloudIndex, int playerID){
         StudentGroup temp = board.collectFromCloud(cloudIndex);
-        board.addToEntranceOf(playerID, temp);
-    }
-
-    public void giveProfessorTo(int playerID, Color c){
-        board.giveProfessorTo(playerID, c);
-    }
-
-    public void instantiateCharacterCard(int cardID){
-        cards.add(CharacterCards.values()[cardID].instantiate());
-    }
-
-    public void giveCoinToPlayer(int playerID){
-        getPlayerByID(playerID).addCoin();
-    }
-
-    public void giveStudentsTo(int playerID, int amount){
-        StudentGroup temp = drawStudents(amount);
         board.addToEntranceOf(playerID, temp);
     }
 
@@ -110,72 +69,124 @@ public class Game {
         board.refillClouds(studentsAmount);
     }
 
-    public void conquerIsland(int playerID, int islandIndex){
-        TowerColor teamColor = getPlayerByID(playerID).getTeamColor();
-        board.conquerIsland(islandIndex, teamColor);
+    // SCHOOL
+
+    public void addInitialStudentToIsland(int islandIndex, Color c) {
+        StudentGroup temp = new StudentGroup(c, 1);
+
+        board.addStudentsToIsland(islandIndex, temp);
     }
 
-    public void mergeIslands(int leftIslandIndex, int rightIslandIndex) {
-        board.mergeIslands(leftIslandIndex, rightIslandIndex);
+    public void transferStudentToIsland(int islandIndex, Color c, int playerID) {
+        StudentGroup temp = new StudentGroup(c, 1);
+
+        board.removeFromEntranceOf(playerID, temp);
+        board.addStudentsToIsland(islandIndex, temp);
     }
 
-    public void addTowers(int playerID, int numTowers){
+    public void transferStudentToDiningRoom(int playerID, Color c) {
+        StudentGroup temp = new StudentGroup(c, 1);
+
+        board.removeFromEntranceOf(playerID, temp);
+        board.addToDiningRoomOf(playerID, temp);
+    }
+
+    public void addTowersTo(int playerID, int numTowers) {
         board.addTowersTo(playerID, numTowers);
     }
 
-    public void removeTowers(int playerID, int numTowers){
+    public void removeTowersFrom(int playerID, int numTowers) {
         board.removeTowerFrom(playerID, numTowers);
     }
 
-    public List<CharacterCard> getCharacterCardsByEffectType(EffectType effectType){
-        return this.cards;
+    // PROFESSOR OWNER
+
+    public void giveProfessorTo(int playerID, Color c){
+        board.giveProfessorTo(playerID, c);
     }
 
-    public void playCard(int playerID, Card selectedCard){
+    // PLAYER
+
+    public List<Player> getPlayers() {
+        return new ArrayList<>(players);
+    }
+
+    public Player getPlayerByID(int ID) {
+        Optional<Player> result = players.stream()
+                .filter((player) -> (player.getID() == ID))
+                .findAny();
+
+        return result.orElse(null);
+    }
+
+    public void addPlayer(int ID, String name, TowerColor teamColor, CardBack cardBack, boolean towerHolder) {
+        players.add(new Player(ID, name, teamColor, cardBack, towerHolder));
+
+    }
+
+    public boolean isNameTaken(String name) {
+        return players.stream().anyMatch(player -> player.getName().equals(name));
+    }
+
+    public void playCard(int playerID, Card selectedCard) {
         getPlayerByID(playerID).setSelectedCard(selectedCard);
         selectedCard.use();
     }
 
     public void resetCards(){
-        //TODO
+        for(Card card: Card.values()) {
+            card.reset();
+        }
     }
 
-    public CharacterCard getActiveCard(){
-        Optional<CharacterCard> active = cards.stream().filter(CharacterCard::isActive).findAny();
-
-        return active.orElse(null);
+    public void giveCoinToPlayer(int playerID) {
+        board.takeCoin();
+        getPlayerByID(playerID).addCoin();
     }
 
-    public void buyCharacterCard(int playerID, int cardIndex){
-        CharacterCard card = cards.get(cardIndex);
+    public void giveStudentsTo(int playerID, int amount) {
+        StudentGroup temp = drawStudents(amount);
+        board.addToEntranceOf(playerID, temp);
+    }
 
+    // CHARACTER CARD
+
+    public void instantiateCharacterCard(int cardID) {
+        characterCards.add(CharacterCards.values()[cardID].instantiate());
+    }
+
+    public CharacterCard getActiveCharacterCard() {
+        Optional<CharacterCard> active = characterCards.stream()
+                .filter(CharacterCard::isActive)
+                .findAny();
+
+        return active.orElse(null); // will be handled by an exception
+    }
+
+    public void buyCharacterCard(int playerID, int cardIndex) {
+        CharacterCard card = characterCards.get(cardIndex);
         int cardCost = card.getCost();
 
         getPlayerByID(playerID).removeCoins(cardCost);
         board.putCoinsBack(cardCost - 1);
+        card.increaseCost();
     }
 
     public void setCardParameters(Parameters params){
-        CharacterCard c = getActiveCard();
-        if(c != null){
-            c.setParameters(params);
-        }
+        getActiveCharacterCard().setParameters(params);
     }
 
-    public int activateCard(){
-        CharacterCard c = getActiveCard();
-        if(c != null){
-            return c.activate();
-        }
-
-        return 0;
+    public int activateCard() {
+        return getActiveCharacterCard().activate();
     }
 
-    public StudentGroup drawStudents(int amount){
+    // STUDENT BAG
+
+    public StudentGroup drawStudents(int amount) {
         return bag.drawStudents(amount);
     }
 
     public void putStudentsBack(StudentGroup students) {
-
+        bag.putStudentsBack(students);
     }
 }
