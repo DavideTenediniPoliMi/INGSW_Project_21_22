@@ -1,23 +1,21 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.board.School;
 import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Player {
     private final int ID;
     private final String name;
-    private int numCoins = 0;
-    private final List<Card> playableCards = new ArrayList<>();
-    private Card selectedCard;
     private final TowerColor teamColor;
     private final CardBack cardBack;
     private final boolean towerHolder;
+    private final List<Card> playableCards = new ArrayList<>();
+    private Card selectedCard;
+    private int numCoins;
 
     public Player(int ID, String name, TowerColor teamColor, CardBack cardBack, boolean towerHolder) {
         this.ID = ID;
@@ -25,15 +23,8 @@ public class Player {
         this.teamColor = teamColor;
         this.cardBack = cardBack;
         this.towerHolder = towerHolder;
+
         this.playableCards.addAll(List.of(Card.values()));
-    }
-
-    protected void addCoin(){
-        this.numCoins += 1;
-    }
-
-    protected void removeCoins(int amt){
-        this.numCoins -= amt;
     }
 
     public int getID() {
@@ -42,14 +33,6 @@ public class Player {
 
     public String getName() {
         return name;
-    }
-
-    public int getNumCoins() {
-        return numCoins;
-    }
-
-    public Card getSelectedCard() {
-        return selectedCard;
     }
 
     public TowerColor getTeamColor() {
@@ -64,8 +47,24 @@ public class Player {
         return towerHolder;
     }
 
+    public Card getSelectedCard() {
+        return selectedCard;
+    }
+
     protected void setSelectedCard(Card card) {
         selectedCard = card;
         playableCards.remove(card);
+    }
+
+    public int getNumCoins() {
+        return numCoins;
+    }
+
+    protected void addCoin(){
+        numCoins += 1;
+    }
+
+    protected void removeCoins(int amount){
+        numCoins -= amount;
     }
 }
