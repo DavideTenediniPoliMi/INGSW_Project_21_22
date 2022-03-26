@@ -3,6 +3,8 @@ package it.polimi.ingsw.model.enumerations;
 import it.polimi.ingsw.model.characters.*;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public enum CharacterCards {
     MOVE_TO_ISLAND(StudentGroupDecorator.class, EffectType.STUDENT_GROUP, 1, true, false),
@@ -23,19 +25,19 @@ public enum CharacterCards {
         this.cardClass = cardClass;
         this.effectType = effectType;
         this.cost = cost;
-        this.parameters = parameters;
+
+        GenericCard gc = new GenericCard(this.cost, this.effectType);
+        ArrayList<Object> fullParams = new ArrayList<>();
+        fullParams.add(gc);
+        fullParams.addAll(Arrays.asList(parameters));
+
+        this.parameters = fullParams.toArray();
     }
 
     public CharacterCard instantiate() {
-        GenericCard g = new GenericCard(cost, effectType);
-
         try {
-            if(parameters == null) {
-                return (CharacterCard) cardClass.getConstructors()[0].newInstance(g);
-            } else {
-                return (CharacterCard) cardClass.getConstructors()[0].newInstance(g, parameters);
-            }
-        } catch(InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            return (CharacterCard) cardClass.getConstructors()[0].newInstance(parameters);
+        } catch(InstantiationException | IllegalAccessException | InvocationTargetException | IllegalArgumentException e) {
             System.out.println("Failed to instantiate " + this);
             e.printStackTrace();
             return null;

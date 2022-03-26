@@ -3,10 +3,11 @@ package it.polimi.ingsw.model.characters;
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.model.helpers.Parameters;
 
-public abstract class CharacterCardDecorator {
+public abstract class CharacterCardDecorator extends CharacterCard{
     protected CharacterCard card;
 
     public CharacterCardDecorator(CharacterCard card) {
+        super(card.getCost(), card.getEffectType());
         this.card = card;
     }
 
@@ -14,7 +15,7 @@ public abstract class CharacterCardDecorator {
         return card.getCost();
     }
 
-    protected void increaseCost() {
+    public void increaseCost() {
         card.increaseCost();
     }
 
