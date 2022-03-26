@@ -35,7 +35,7 @@ public class StudentBag {
         }
 
         students.transferTo(drawnStudents, temp);
-        return students;
+        return drawnStudents;
     }
 
     public void putStudentsBack(StudentGroup toReturn){
