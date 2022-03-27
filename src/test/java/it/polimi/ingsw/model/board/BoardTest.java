@@ -16,6 +16,7 @@ public class BoardTest extends TestCase {
     }
 
     public void tearDown() {
+        Game.resetInstance();
         g = null;
         b = null;
     }

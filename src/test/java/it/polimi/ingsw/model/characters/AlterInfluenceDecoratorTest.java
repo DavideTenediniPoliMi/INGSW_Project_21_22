@@ -79,6 +79,7 @@ public class AlterInfluenceDecoratorTest extends TestCase {
 
     @After
     public void tearDown() throws Exception {
+        Game.resetInstance();
         game = null;
         board = null;
         c1 = c2 = c3 = c4 = c5 = null;

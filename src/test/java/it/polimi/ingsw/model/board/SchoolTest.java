@@ -28,6 +28,7 @@ public class SchoolTest extends TestCase {
     }
 
     public void tearDown() {
+        Game.resetInstance();
         g = null;
         b = null;
     }

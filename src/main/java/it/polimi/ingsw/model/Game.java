@@ -27,6 +27,10 @@ public class Game {
         return instance;
     }
 
+    public static void resetInstance(){
+        instance = null;
+    }
+
     // BOARD
 
     public Board getBoard() {

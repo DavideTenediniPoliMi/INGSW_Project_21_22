@@ -19,6 +19,7 @@ public class CloudTest extends TestCase {
     }
 
     public void tearDown() {
+        Game.resetInstance();
         g = null;
         b = null;
         c = null;
