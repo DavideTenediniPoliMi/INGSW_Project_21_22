@@ -34,6 +34,8 @@ public class School {
         return diningRoom.getByColor(c);
     }
 
+    public int getNumStudentsInEntranceByColor(Color c) { return entrance.getByColor(c); }
+
     protected void removeFromEntrance(StudentGroup students) {
         StudentGroup temp = new StudentGroup();
         entrance.transferTo(temp, students);

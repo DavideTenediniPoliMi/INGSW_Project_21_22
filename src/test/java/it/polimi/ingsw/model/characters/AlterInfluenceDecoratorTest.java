@@ -138,6 +138,15 @@ public class AlterInfluenceDecoratorTest extends TestCase {
     }
 
     @Test
+    public void testActivate_isIgnoreColor_professorOwner_sameTeam() {
+        c5.setParameters(p1);
+        int delta = c5.activate();
+        assertTrue(c5.isActive());
+        Island island = board.getIslandAt(p5.getIslandIndex());
+        assertEquals(0, delta);
+    }
+
+    @Test
     public void testActivate_isIgnoreColor_professorOwner_differentTeam() {
         int delta = c5.activate();
         assertTrue(c5.isActive());

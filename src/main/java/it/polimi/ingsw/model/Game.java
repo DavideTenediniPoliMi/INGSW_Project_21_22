@@ -121,7 +121,6 @@ public class Game {
 
     public void addPlayer(int ID, String name, TowerColor teamColor, CardBack cardBack, boolean towerHolder) {
         players.add(new Player(ID, name, teamColor, cardBack, towerHolder));
-
     }
 
     public boolean isNameTaken(String name) {
