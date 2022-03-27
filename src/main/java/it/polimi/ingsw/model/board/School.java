@@ -50,7 +50,7 @@ public class School {
         diningRoom.transferTo(temp, students);
     }
 
-    protected void addFromDiningRoom(StudentGroup students) {
+    protected void addToDiningRoom(StudentGroup students) {
         students.transferAllTo(diningRoom);
     }
 }

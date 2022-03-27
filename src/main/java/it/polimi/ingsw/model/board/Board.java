@@ -118,7 +118,7 @@ public class Board {
     }
 
     public void addToDiningRoomOf(int playerID, StudentGroup students) {
-        getSchoolByPlayerID(playerID).addFromDiningRoom(students);
+        getSchoolByPlayerID(playerID).addToDiningRoom(students);
     }
 
     public void addTowersTo(int playerID, int amount) {
