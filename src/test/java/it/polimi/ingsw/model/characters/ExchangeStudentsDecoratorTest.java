@@ -45,6 +45,10 @@ public class ExchangeStudentsDecoratorTest extends TestCase {
 
     @After
     public void tearDown() throws Exception {
+        game = null;
+        board = null;
+        c = null;
+        p1 = p2 = null;
         Game.resetInstance();
     }
 
