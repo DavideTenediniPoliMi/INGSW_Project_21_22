@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.Board;
+import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.Parameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
@@ -68,5 +69,9 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
         }
 
         return 0;
+    }
+
+    public int getStudentsByColor(Color color) {
+        return students.getByColor(color);
     }
 }
