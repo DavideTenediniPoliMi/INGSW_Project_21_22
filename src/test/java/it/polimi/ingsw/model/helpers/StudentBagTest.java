@@ -2,18 +2,26 @@ package it.polimi.ingsw.model.helpers;
 
 import it.polimi.ingsw.model.enumerations.Color;
 import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class StudentBagTest extends TestCase {
     private StudentBag studentBag;
 
+    @BeforeEach
     public void setUp() throws Exception {
         studentBag = new StudentBag();
     }
 
+    @AfterEach
     public void tearDown() throws Exception {
         studentBag = null;
     }
 
+    @Test
     public void testDrawStudents() {
         int numStudents = 1;
         StudentGroup studentGroup = studentBag.drawStudents(numStudents);
@@ -25,6 +33,7 @@ public class StudentBagTest extends TestCase {
         assertEquals(temp, numStudents);
     }
 
+    @Test
     public void testPutStudentsBack() {
         StudentGroup studentGroup = new StudentGroup(Color.BLUE, 1);
 

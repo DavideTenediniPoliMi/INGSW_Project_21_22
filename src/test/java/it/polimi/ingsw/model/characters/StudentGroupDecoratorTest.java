@@ -9,6 +9,11 @@ import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.Parameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class StudentGroupDecoratorTest extends TestCase {
     Game game;
@@ -17,6 +22,7 @@ public class StudentGroupDecoratorTest extends TestCase {
     Parameters p1, p2, p3;
     StudentGroup sg1, sg2, sg3, sg4;
 
+    @BeforeEach
     public void setUp() throws Exception {
         game = Game.getInstance();
         board = game.getBoard();
@@ -101,6 +107,7 @@ public class StudentGroupDecoratorTest extends TestCase {
         c3.setParameters(p3);
     }
 
+    @AfterEach
     public void tearDown() throws Exception {
         Game.resetInstance();
         board = null;
@@ -108,9 +115,11 @@ public class StudentGroupDecoratorTest extends TestCase {
         p1 = p2 = null;
     }
 
+    @Test
     public void testSetParameters() {
     }
 
+    @Test
     public void testActivate_isToIsland() {
         int studentsIslandBefore[] = new int[5];
         for(Color c : Color.values()) {
@@ -125,6 +134,7 @@ public class StudentGroupDecoratorTest extends TestCase {
         }
     }
 
+    @Test
     public void testActivate_isToDining() {
         int studentsDiningBefore[] = new int[5];
         for(Color c : Color.values()) {
@@ -139,6 +149,7 @@ public class StudentGroupDecoratorTest extends TestCase {
         }
     }
 
+    @Test
     public void testActivate_isToEntrance() {
         int studentsEntranceBefore[] = new int[5];
         int studentsCardBefore[] = new int[5];
