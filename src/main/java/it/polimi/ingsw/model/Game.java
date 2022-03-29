@@ -154,6 +154,10 @@ public class Game {
 
     // CHARACTER CARD
 
+    public List<CharacterCard> getCharacterCards() {
+        return characterCards;
+    }
+
     public void instantiateCharacterCard(int cardID) {
         characterCards.add(CharacterCards.values()[cardID].instantiate());
     }
@@ -173,6 +177,8 @@ public class Game {
         getPlayerByID(playerID).removeCoins(cardCost);
         board.putCoinsBack(cardCost - 1);
         card.increaseCost();
+
+        card.setActive();
     }
 
     public void setCardParameters(Parameters params){

@@ -28,4 +28,8 @@ public enum Card {
     public void reset() {
         this.used = false;
     }
+
+    public boolean isUsed() {
+        return used;
+    }
 }

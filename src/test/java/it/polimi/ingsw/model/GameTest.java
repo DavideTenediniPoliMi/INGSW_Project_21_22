@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.board.Board;
+import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
@@ -20,6 +22,9 @@ public class GameTest extends TestCase {
         g.addPlayer(1, "bruso", TowerColor.GREY, CardBack.CB_2, true);
 
         g.getPlayers().stream().forEach((p) -> g.getBoard().addSchool(p));
+
+        g.instantiateCharacterCard(5);
+        g.buyCharacterCard(0, 0);
     }
 
     public void tearDown() {
@@ -79,6 +84,7 @@ public class GameTest extends TestCase {
         assertEquals(before + 3, after);
     }
 
+    @Test
     public void testRefillClouds() {
         g.createClouds(1);
         g.collectFromCloud(0, 0);
@@ -86,12 +92,14 @@ public class GameTest extends TestCase {
         assertTrue(g.getBoard().getClouds().get(0).isAvailable());
     }
 
+    @Test
     public void testAddInitialStudentToIsland() {
         g.addInitialStudentToIsland(0, Color.GREEN);
 
         assertEquals(1, g.getBoard().getIslandAt(0).getNumStudentsByColor(Color.GREEN));
     }
 
+    @Test
     public void testTransferStudentToIsland() {
         g.getBoard().addToEntranceOf(0, new StudentGroup(Color.GREEN, 3));
         g.transferStudentToIsland(0, Color.GREEN, 0);
@@ -100,6 +108,7 @@ public class GameTest extends TestCase {
         assertEquals(1, g.getBoard().getIslandAt(0).getNumStudentsByColor(Color.GREEN));
     }
 
+    @Test
     public void testTransferStudentToDiningRoom() {
         g.getBoard().addToEntranceOf(0, new StudentGroup(Color.GREEN, 3));
         g.transferStudentToDiningRoom(0, Color.GREEN);
@@ -108,11 +117,13 @@ public class GameTest extends TestCase {
         assertEquals(1, g.getBoard().getSchoolByPlayerID(0).getNumStudentsInDiningRoomByColor(Color.GREEN));
     }
 
+    @Test
     public void testAddTowersTo() {
         g.addTowersTo(0, 8);
         assertEquals(8, g.getBoard().getSchoolByPlayerID(0).getNumTowers());
     }
 
+    @Test
     public void testRemoveTowersFrom() {
         g.addTowersTo(0, 8);
         assertEquals(8, g.getBoard().getSchoolByPlayerID(0).getNumTowers());
@@ -120,50 +131,80 @@ public class GameTest extends TestCase {
         assertEquals(3, g.getBoard().getSchoolByPlayerID(0).getNumTowers());
     }
 
+    @Test
     public void testGiveProfessorTo() {
         g.giveProfessorTo(0, Color.GREEN);
         assertEquals(0, g.getBoard().getProfessorOwners().getOwnerIDByColor(Color.GREEN));
     }
 
+    @Test
     public void testAddPlayer() {
         g.addPlayer(2, "trap", TowerColor.BLACK, CardBack.CB_3, true);
         assertEquals("trap", g.getPlayerByID(2).getName());
     }
 
+    @Test
     public void testIsNameTaken() {
         assertTrue(g.isNameTaken("ezio"));
     }
 
+    @Test
     public void testPlayCard() {
+        Card c = Card.CARD_1;
+        g.playCard(0, c);
+        assertTrue(c.isUsed());
     }
 
+    @Test
     public void testResetCards() {
+        g.resetCards();
+        for(Card c : Card.values()) {
+            assertFalse(c.isUsed());
+        }
     }
 
+    @Test
     public void testGiveCoinToPlayer() {
+        Board b = g.getBoard();
+        int coinsBefore = b.getNumCoinsLeft();
+        int coinsPlayerBefore = g.getPlayerByID(0).getNumCoins();
+
+        g.giveCoinToPlayer(0);
+
+        assertEquals(coinsBefore - 1, b.getNumCoinsLeft());
+        assertEquals(coinsPlayerBefore + 1, g.getPlayerByID(0).getNumCoins());
     }
 
-    public void testGiveStudentsTo() {
-    }
-
+    @Test
     public void testInstantiateCharacterCard() {
+        int numCardsBefore = g.getCharacterCards().size();
+        g.instantiateCharacterCard(4);
+        assertEquals(numCardsBefore + 1, g.getCharacterCards().size());
     }
 
+    @Test
     public void testGetActiveCharacterCard() {
+        assertTrue(g.getActiveCharacterCard().isActive());
     }
 
+    @Test
     public void testBuyCharacterCard() {
+        int coinsBoardBefore = g.getBoard().getNumCoinsLeft();
+        int coinsCardBefore = g.getActiveCharacterCard().getCost();
+
+        g.buyCharacterCard(0, 0);
+
+        assertEquals(coinsBoardBefore + coinsCardBefore - 1, g.getBoard().getNumCoinsLeft());
+        assertEquals(coinsCardBefore + 1, g.getActiveCharacterCard().getCost());
+        assertTrue(g.getActiveCharacterCard().isActive());
     }
 
+    @Test
     public void testSetCardParameters() {
     }
 
+    @Test
     public void testActivateCard() {
-    }
-
-    public void testDrawStudents() {
-    }
-
-    public void testPutStudentsBack() {
+        assertTrue(g.getActiveCharacterCard().isActive());
     }
 }
