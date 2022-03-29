@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -89,6 +90,10 @@ public class Board {
             StudentGroup temp = Game.getInstance().drawStudents(studentAmount);
             cloud.refillCloud(temp);
         }
+    }
+
+    public List<Cloud> getClouds(){
+        return clouds;
     }
 
     // SCHOOL
