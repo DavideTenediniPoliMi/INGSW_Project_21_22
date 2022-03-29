@@ -4,6 +4,11 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class CloudTest extends TestCase {
 
@@ -11,6 +16,7 @@ public class CloudTest extends TestCase {
     Board b;
     Cloud c;
 
+    @BeforeEach
     public void setUp() {
         g = Game.getInstance();
         b = g.getBoard();
@@ -18,6 +24,7 @@ public class CloudTest extends TestCase {
         b.createClouds(1);
     }
 
+    @AfterEach
     public void tearDown() {
         Game.resetInstance();
         g = null;
@@ -25,12 +32,14 @@ public class CloudTest extends TestCase {
         c = null;
     }
 
+    @Test
     public void testIsAvailable() {
         assertTrue(c.isAvailable());
         c.collectStudents();
         assertFalse(c.isAvailable());
     }
 
+    @Test
     public void testRefillCloud() {
         StudentGroup sg = new StudentGroup();
 
@@ -47,6 +56,7 @@ public class CloudTest extends TestCase {
         assertFalse(num == 0);
     }
 
+    @Test
     public void testCollectStudents() {
         b.refillClouds(3);
         StudentGroup sg = b.collectFromCloud(0);

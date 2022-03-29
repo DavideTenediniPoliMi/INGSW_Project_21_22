@@ -14,6 +14,8 @@ import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class ExchangeStudentsDecoratorTest extends TestCase {
     private Game game;
@@ -21,7 +23,7 @@ public class ExchangeStudentsDecoratorTest extends TestCase {
     private ExchangeStudentsDecorator c;
     private Parameters p1, p2;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         game = Game.getInstance();
         board = game.getBoard();
@@ -43,7 +45,7 @@ public class ExchangeStudentsDecoratorTest extends TestCase {
         c.setParameters(p1);
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         game = null;
         board = null;

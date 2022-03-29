@@ -5,12 +5,18 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class SimpleIslandTest extends TestCase {
 
     Game g;
     Board b;
 
+    @BeforeEach
     public void setUp(){
         g = Game.getInstance();
         b = g.getBoard();
@@ -18,12 +24,14 @@ public class SimpleIslandTest extends TestCase {
         b.placeMNAt(0);
     }
 
+    @AfterEach
     public void tearDown(){
         Game.resetInstance();
         g = null;
         b = null;
     }
 
+    @Test
     public void testAddStudents() {
         int numBefore = b.getIslandAt(0).getNumStudentsByColor(Color.GREEN);
 
@@ -33,6 +41,7 @@ public class SimpleIslandTest extends TestCase {
         assertEquals(numBefore + 3, b.getIslandAt(0).getNumStudentsByColor(Color.GREEN));
     }
 
+    @Test
     public void testConquer_sameTeam(){
         b.conquerIsland(0, TowerColor.BLACK);
         b.conquerIsland(0, TowerColor.BLACK);
@@ -40,6 +49,7 @@ public class SimpleIslandTest extends TestCase {
         assertEquals(TowerColor.BLACK, b.getIslandAt(0).getTeamColor());
     }
 
+    @Test
     public void testConquer_diffTeam(){
         b.conquerIsland(0, TowerColor.BLACK);
         assertEquals(TowerColor.BLACK, b.getIslandAt(0).getTeamColor());
@@ -48,6 +58,7 @@ public class SimpleIslandTest extends TestCase {
         assertEquals(TowerColor.WHITE, b.getIslandAt(0).getTeamColor());
     }
 
+    @Test
     public void testMoveMNTo(){
         assertTrue(b.getIslandAt(0).isMotherNatureOnIsland());
 

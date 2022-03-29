@@ -13,6 +13,8 @@ import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.sql.ParameterMetaData;
 
@@ -22,7 +24,7 @@ public class AlterInfluenceDecoratorTest extends TestCase {
     private AlterInfluenceDecorator c1, c2, c3, c4, c5;
     private Parameters p1, p2, p3, p4, p5;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         game = Game.getInstance();
         board = game.getBoard();
@@ -77,7 +79,7 @@ public class AlterInfluenceDecoratorTest extends TestCase {
         c5.setParameters(p5);
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         Game.resetInstance();
         game = null;

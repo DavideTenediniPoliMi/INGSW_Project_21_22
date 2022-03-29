@@ -9,6 +9,9 @@ import it.polimi.ingsw.model.helpers.StudentGroup;
 import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class ReturnToBagDecoratorTest extends TestCase {
     ReturnToBagDecorator c, c2, c3;
@@ -16,7 +19,7 @@ public class ReturnToBagDecoratorTest extends TestCase {
     Board board;
     Parameters p1, p2, p3;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         c = new ReturnToBagDecorator(new GenericCard(2, EffectType.RETURN_TO_BAG));
         c2 = new ReturnToBagDecorator(new GenericCard(2, EffectType.RETURN_TO_BAG));
@@ -46,7 +49,7 @@ public class ReturnToBagDecoratorTest extends TestCase {
         c3.setParameters(p3);
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         c = c2 = c3 = null;
         game = null;
@@ -55,9 +58,11 @@ public class ReturnToBagDecoratorTest extends TestCase {
         Game.resetInstance();
     }
 
+    @Test
     public void testSetParameters() {
     }
 
+    @Test
     public void testActivate_studentsAvailableGreaterThanMax() {
         StudentGroup sg = new StudentGroup(Color.PINK, 2);
         board.addToDiningRoomOf(0, sg);
@@ -77,6 +82,7 @@ public class ReturnToBagDecoratorTest extends TestCase {
         }
     }
 
+    @Test
     public void testActivate_studentsAvailableLowerThanMax() {
         StudentGroup sg3 = new StudentGroup(Color.RED, 2);
         board.addToDiningRoomOf(0, sg3);
@@ -97,6 +103,7 @@ public class ReturnToBagDecoratorTest extends TestCase {
         }
     }
 
+    @Test
     public void testActivate_noStudentsOfSelectedColor() {
         StudentGroup sg5 = new StudentGroup(Color.BLUE, 3);
         board.addToDiningRoomOf(0, sg5);
