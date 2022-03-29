@@ -25,7 +25,7 @@ public abstract class CharacterCard {
         return active;
     }
 
-    protected void setActive() {
+    public void setActive() {
         active = true;
     }
 

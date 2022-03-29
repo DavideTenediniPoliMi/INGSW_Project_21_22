@@ -23,7 +23,7 @@ public abstract class CharacterCardDecorator extends CharacterCard{
         return card.isActive();
     }
 
-    protected void setActive() {
+    public void setActive() {
         card.setActive();
     }
 
