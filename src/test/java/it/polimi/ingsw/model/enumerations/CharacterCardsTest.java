@@ -16,4 +16,8 @@ public class CharacterCardsTest extends TestCase {
         assertNotNull(rtb);
         assertEquals(rtb.getClass(), ReturnToBagDecorator.class);
     }
+
+    public void testInstantiate_error(){
+
+    }
 }
