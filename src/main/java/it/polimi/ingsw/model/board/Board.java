@@ -53,7 +53,7 @@ public class Board {
 
     // MOTHER NATURE
 
-    private int getMNPosition() {
+    public int getMNPosition() {
         Optional<Island> result = islands.stream()
                 .filter(Island::isMotherNatureOnIsland)
                 .findAny();
