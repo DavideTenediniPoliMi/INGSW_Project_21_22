@@ -39,8 +39,8 @@ public class Game {
 
     // ISLAND
 
-    public void conquerIsland(int islandIndex, TowerColor teamColor){
-        board.conquerIsland(islandIndex, teamColor);
+    public void conquerIsland(TowerColor teamColor){
+        board.conquerIsland(teamColor);
     }
 
     public void mergeIslands(int leftIslandIndex, int rightIslandIndex) {

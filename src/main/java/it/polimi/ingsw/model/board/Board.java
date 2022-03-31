@@ -6,7 +6,6 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,11 +32,16 @@ public class Board {
         return islands.get(islandIndex);
     }
 
+    public int getNumIslands() {
+        return islands.size();
+    }
+
     public void addStudentsToIsland(int islandIndex, StudentGroup students) {
         islands.get(islandIndex).addStudents(students);
     }
 
-    public void conquerIsland(int islandIndex, TowerColor teamColor) {
+    public void conquerIsland(TowerColor teamColor) {
+        int islandIndex = getMNPosition();
         islands.get(islandIndex).conquerIsland(teamColor);
     }
 
