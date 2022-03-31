@@ -39,8 +39,7 @@ public class Game {
 
     // ISLAND
 
-    public void conquerIsland(int islandIndex, int playerID){
-        TowerColor teamColor = getPlayerByID(playerID).getTeamColor();
+    public void conquerIsland(int islandIndex, TowerColor teamColor){
         board.conquerIsland(islandIndex, teamColor);
     }
 

@@ -29,7 +29,7 @@ public class AlterInfluenceDecoratorTest extends TestCase {
         game = Game.getInstance();
         board = game.getBoard();
         game.addPlayer(0, "mario", TowerColor.BLACK, CardBack.CB_1, true);
-        game.conquerIsland(0, 0);
+        game.conquerIsland(0, TowerColor.BLACK);
         game.giveProfessorTo(0, Color.BLUE);
 
         //addTwo
