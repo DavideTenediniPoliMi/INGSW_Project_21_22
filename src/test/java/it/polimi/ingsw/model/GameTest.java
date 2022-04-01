@@ -34,14 +34,14 @@ public class GameTest extends TestCase {
 
     @Test
     public void testConquerIsland() {
-        g.conquerIsland(0, 0);
+        g.conquerIsland(TowerColor.BLACK);
         assertEquals(g.getPlayerByID(0).getTeamColor(), g.getBoard().getIslandAt(0).getTeamColor());
     }
 
     @Test
     public void testMergeIslands() {
-        g.conquerIsland(0, 0);
-        g.conquerIsland(1, 0);
+        g.conquerIsland(TowerColor.BLACK);
+        g.conquerIsland(TowerColor.BLACK);
 
         g.mergeIslands(0, 1);
         assertEquals(g.getBoard().getIslandAt(0).getNumIslands(), 2);

@@ -5,8 +5,6 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import junit.framework.TestCase;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,18 +41,18 @@ public class SimpleIslandTest extends TestCase {
 
     @Test
     public void testConquer_sameTeam(){
-        b.conquerIsland(0, TowerColor.BLACK);
-        b.conquerIsland(0, TowerColor.BLACK);
+        b.conquerIsland(TowerColor.BLACK);
+        b.conquerIsland(TowerColor.BLACK);
 
         assertEquals(TowerColor.BLACK, b.getIslandAt(0).getTeamColor());
     }
 
     @Test
     public void testConquer_diffTeam(){
-        b.conquerIsland(0, TowerColor.BLACK);
+        b.conquerIsland(TowerColor.BLACK);
         assertEquals(TowerColor.BLACK, b.getIslandAt(0).getTeamColor());
 
-        b.conquerIsland(0, TowerColor.WHITE);
+        b.conquerIsland(TowerColor.WHITE);
         assertEquals(TowerColor.WHITE, b.getIslandAt(0).getTeamColor());
     }
 

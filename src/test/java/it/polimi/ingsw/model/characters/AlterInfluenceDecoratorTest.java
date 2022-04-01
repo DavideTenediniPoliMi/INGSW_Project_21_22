@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.enumerations.CardBack;
@@ -10,13 +9,9 @@ import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.Parameters;
 import junit.framework.TestCase;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-
-import java.sql.ParameterMetaData;
 
 public class AlterInfluenceDecoratorTest extends TestCase {
     private Game game;
@@ -29,7 +24,7 @@ public class AlterInfluenceDecoratorTest extends TestCase {
         game = Game.getInstance();
         board = game.getBoard();
         game.addPlayer(0, "mario", TowerColor.BLACK, CardBack.CB_1, true);
-        game.conquerIsland(0, 0);
+        game.conquerIsland(TowerColor.BLACK);
         game.giveProfessorTo(0, Color.BLUE);
 
         //addTwo

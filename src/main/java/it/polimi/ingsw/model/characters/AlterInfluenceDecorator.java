@@ -48,20 +48,20 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator {
     public int activate() {
         card.activate();
 
+        Game game = Game.getInstance();
+        Board board = game.getBoard();
+
         int delta = 0;
 
         if(isAddTwo && currentTeam.equals(boostedTeam)) {
             delta += 2;
         }else if(isIgnoreTowers) {
-            Island island = Game.getInstance().getBoard().getIslandAt(islandIndex);
+            Island island = board.getIslandAt(islandIndex);
 
             if(island.getTeamColor().equals(currentTeam)) {
                 delta -= island.getNumIslands();
             }
         }else if(isIgnoreColor) {
-            Game game = Game.getInstance();
-            Board board = game.getBoard();
-
             int professorOwnerID = board.getProfessorOwners().getOwnerIDByColor(selectedColor);
 
             if(professorOwnerID == -1)  {
