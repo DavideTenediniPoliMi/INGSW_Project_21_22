@@ -20,7 +20,7 @@ public class DiningRoomExpertController extends DiningRoomController{
         Game game = Game.getInstance();
         Board board = game.getBoard();
         int numStuds = board.getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(c);
-        if(numStuds % 3 == 0)
+        if(numStuds > 0 && numStuds % 3 == 0)
             game.giveCoinToPlayer(playerID);
     }
 }

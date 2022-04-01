@@ -18,8 +18,13 @@ public class DiningRoomController {
         Game game = Game.getInstance();
         Board board = game.getBoard();
 
-        int numStuds = board.getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(c);
         int professorOwnerID = board.getProfessorOwners().getOwnerIDByColor(c);
+        if(professorOwnerID == -1) {
+            game.giveProfessorTo(playerID, c);
+            return;
+        }
+
+        int numStuds = board.getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(c);
         int numStudsProfessor = board.getSchoolByPlayerID(professorOwnerID).getNumStudentsInDiningRoomByColor(c);
         if(numStuds > numStudsProfessor)
             game.giveProfessorTo(playerID, c);
