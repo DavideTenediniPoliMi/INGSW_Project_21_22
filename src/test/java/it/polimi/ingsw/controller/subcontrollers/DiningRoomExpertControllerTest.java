@@ -37,32 +37,33 @@ class DiningRoomExpertControllerTest {
 
     @Test
     void testManageDiningRoomOf_zeroStudents() {
-        dc.manageDiningRoomOf(0, Color.BLUE);
+        dc.manageDiningRoomOf(0, new StudentGroup());
         assertEquals(0, game.getPlayerByID(0).getNumCoins());
     }
     @Test
     void testManageDiningRoomOf_notEnoughStudentsForCoin() {
         StudentGroup sg = new StudentGroup(Color.BLUE, 1);
-        board.addToDiningRoomOf(0, sg);
-        dc.manageDiningRoomOf(0, Color.BLUE);
+        board.addToDiningRoomOf(0, sg.clone());
+        dc.manageDiningRoomOf(0, sg);
         assertEquals(0, game.getPlayerByID(0).getNumCoins());
     }
+
     @Test
     void testManageDiningRoomOf_giveCoin() {
         StudentGroup sg = new StudentGroup(Color.BLUE, 3);
-        board.addToDiningRoomOf(0, sg);
-        dc.manageDiningRoomOf(0, Color.BLUE);
+        board.addToDiningRoomOf(0, sg.clone());
+        dc.manageDiningRoomOf(0, sg);
         assertEquals(1, game.getPlayerByID(0).getNumCoins());
     }
     @Test
     void testManageDiningRoomOf_moreCoins() {
         StudentGroup sg = new StudentGroup(Color.BLUE, 3);
-        board.addToDiningRoomOf(0, sg);
-        dc.manageDiningRoomOf(0, Color.BLUE);
+        board.addToDiningRoomOf(0, sg.clone());
+        dc.manageDiningRoomOf(0, sg);
         assertEquals(1, game.getPlayerByID(0).getNumCoins());
         StudentGroup sg1 = new StudentGroup(Color.BLUE, 3);
-        board.addToDiningRoomOf(0, sg1);
-        dc.manageDiningRoomOf(0, Color.BLUE);
+        board.addToDiningRoomOf(0, sg1.clone());
+        dc.manageDiningRoomOf(0, sg1);
         assertEquals(2, game.getPlayerByID(0).getNumCoins());
     }
 }

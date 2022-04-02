@@ -16,6 +16,7 @@ class DiningRoomControllerTest {
     DiningRoomController dc;
     Game game;
     Board board;
+    StudentGroup sg0, sg1, sg2;
 
     @BeforeEach
     void setUp() {
@@ -31,9 +32,9 @@ class DiningRoomControllerTest {
         board.addSchool(game.getPlayerByID(1));
         board.addSchool(game.getPlayerByID(2));
 
-        StudentGroup sg0 = new StudentGroup(Color.BLUE, 1);
-        StudentGroup sg1 = new StudentGroup(Color.BLUE, 3);
-        StudentGroup sg2 = new StudentGroup(Color.BLUE, 2);
+        sg0 = new StudentGroup(Color.BLUE, 1);
+        sg1 = new StudentGroup(Color.BLUE, 3);
+        sg2 = new StudentGroup(Color.BLUE, 2);
 
         board.addToDiningRoomOf(0, sg0);
         board.addToDiningRoomOf(1, sg1);
@@ -50,23 +51,23 @@ class DiningRoomControllerTest {
 
     @Test
     void testManageDiningRoomOf_noProfessors() {
-        dc.manageDiningRoomOf(0, Color.BLUE);
+        dc.manageDiningRoomOf(0, sg0);
         assertEquals(0, board.getProfessorOwners().getOwnerIDByColor(Color.BLUE));
     }
 
     @Test
     void testManageDiningRoomOf_conquerProfessor() {
-        dc.manageDiningRoomOf(0, Color.BLUE);
+        dc.manageDiningRoomOf(0, sg0);
         assertEquals(0, board.getProfessorOwners().getOwnerIDByColor(Color.BLUE));
-        dc.manageDiningRoomOf(1, Color.BLUE);
+        dc.manageDiningRoomOf(1, sg1);
         assertEquals(1, board.getProfessorOwners().getOwnerIDByColor(Color.BLUE));
     }
 
     @Test
     void testManageDiningRoomOf_noConquerProfessor() {
-        dc.manageDiningRoomOf(1, Color.BLUE);
+        dc.manageDiningRoomOf(1, sg1);
         assertEquals(1, board.getProfessorOwners().getOwnerIDByColor(Color.BLUE));
-        dc.manageDiningRoomOf(2, Color.BLUE);
+        dc.manageDiningRoomOf(2, sg2);
         assertEquals(1, board.getProfessorOwners().getOwnerIDByColor(Color.BLUE));
     }
 

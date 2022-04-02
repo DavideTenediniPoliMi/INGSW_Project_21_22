@@ -2,7 +2,7 @@ package it.polimi.ingsw.model.helpers;
 
 import it.polimi.ingsw.model.enumerations.Color;
 
-public class StudentGroup {
+public class StudentGroup implements Cloneable{
     private final int[] students;
 
     public StudentGroup() {
@@ -37,4 +37,11 @@ public class StudentGroup {
         }
     }
 
+    public StudentGroup clone() {
+        StudentGroup temp = new StudentGroup();
+        for(Color c: Color.values()) {
+            temp.addByColor(c, this.getByColor(c));
+        }
+        return temp;
+    }
 }

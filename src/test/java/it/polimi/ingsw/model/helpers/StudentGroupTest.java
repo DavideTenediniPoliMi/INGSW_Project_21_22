@@ -49,6 +49,12 @@ public class StudentGroupTest extends TestCase {
 
         assertEquals(1, studentGroup1.getByColor(Color.BLUE));
         assertEquals(3, studentGroup.getByColor(Color.BLUE));
+    }
 
+    @Test
+    public void testClone() throws CloneNotSupportedException {
+        StudentGroup s = new StudentGroup(Color.BLUE, 1);
+        StudentGroup clone = (StudentGroup) s.clone();
+        assertEquals(1, clone.getByColor(Color.BLUE));
     }
 }
