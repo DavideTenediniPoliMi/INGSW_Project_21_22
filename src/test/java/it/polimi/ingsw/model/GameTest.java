@@ -6,12 +6,13 @@ import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
-import junit.framework.TestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 
-public class GameTest extends TestCase {
+public class GameTest {
 
     Game g;
 
@@ -21,7 +22,7 @@ public class GameTest extends TestCase {
         g.addPlayer(0, "ezio", TowerColor.WHITE, CardBack.CB_1, true);
         g.addPlayer(1, "bruso", TowerColor.GREY, CardBack.CB_2, true);
 
-        g.getPlayers().stream().forEach((p) -> g.getBoard().addSchool(p));
+        g.getPlayers().forEach((p) -> g.getBoard().addSchool(p));
 
         g.instantiateCharacterCard(5);
         g.buyCharacterCard(0, 0);

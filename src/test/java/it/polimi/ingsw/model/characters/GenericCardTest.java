@@ -1,14 +1,13 @@
 package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.enumerations.EffectType;
-import junit.framework.TestCase;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-public class GenericCardTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.*;
+
+public class GenericCardTest {
     GenericCard c;
 
     @BeforeEach

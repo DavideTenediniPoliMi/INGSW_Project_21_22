@@ -1,14 +1,13 @@
 package it.polimi.ingsw.model.helpers;
 
 import it.polimi.ingsw.model.enumerations.Color;
-import junit.framework.TestCase;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-public class StudentGroupTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.*;
+
+public class StudentGroupTest {
 
     StudentGroup studentGroup;
     StudentGroup studentGroup1;
@@ -52,9 +51,9 @@ public class StudentGroupTest extends TestCase {
     }
 
     @Test
-    public void testClone() throws CloneNotSupportedException {
+    public void testClone() {
         StudentGroup s = new StudentGroup(Color.BLUE, 1);
-        StudentGroup clone = (StudentGroup) s.clone();
+        StudentGroup clone = s.clone();
         assertEquals(1, clone.getByColor(Color.BLUE));
     }
 }

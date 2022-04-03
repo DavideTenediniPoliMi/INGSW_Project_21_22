@@ -6,14 +6,13 @@ import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.helpers.Parameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
-import junit.framework.TestCase;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-public class ReturnToBagDecoratorTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.*;
+
+public class ReturnToBagDecoratorTest {
     ReturnToBagDecorator c, c2, c3;
     Game game;
     Board board;
@@ -69,7 +68,7 @@ public class ReturnToBagDecoratorTest extends TestCase {
         StudentGroup sg2 = new StudentGroup(Color.PINK, 4);
         board.addToDiningRoomOf(1, sg2);
 
-        int numStudentsBefore[] = new int[2];
+        int[] numStudentsBefore = new int[2];
         for(Player pl : game.getPlayers()) {
             numStudentsBefore[pl.getID()] = board.getSchoolByPlayerID(pl.getID()).getNumStudentsInDiningRoomByColor(p1.getSelectedColor());
         }
@@ -90,7 +89,7 @@ public class ReturnToBagDecoratorTest extends TestCase {
         StudentGroup sg4 = new StudentGroup(Color.RED, 1);
         board.addToDiningRoomOf(1, sg4);
 
-        int numStudentsBefore[] = new int[2];
+        int[] numStudentsBefore = new int[2];
         for(Player pl : game.getPlayers()) {
             numStudentsBefore[pl.getID()] = board.getSchoolByPlayerID(pl.getID()).getNumStudentsInDiningRoomByColor(p2.getSelectedColor());
         }
@@ -111,7 +110,7 @@ public class ReturnToBagDecoratorTest extends TestCase {
         StudentGroup sg6 = new StudentGroup(Color.GREEN, 3);
         board.addToDiningRoomOf(1, sg6);
 
-        int numStudentsBefore[] = new int[2];
+        int[] numStudentsBefore = new int[2];
         for(Player pl : game.getPlayers()) {
             numStudentsBefore[pl.getID()] = board.getSchoolByPlayerID(pl.getID()).getNumStudentsInDiningRoomByColor(p3.getSelectedColor());
         }
