@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller.round;
 
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.TurnState;
 
 public class CloudStateController extends RoundStateController {
@@ -8,7 +9,7 @@ public class CloudStateController extends RoundStateController {
     }
 
     @Override
-    public void collectFromClouds() {
+    public void collectFromClouds(int cloudIndex) {
         // TODO
     }
 }

@@ -78,11 +78,11 @@ public class RoundStateController {
     public void transferStudentToDiningRoom(int playerID, Color c) {
         // EXCEPTION
     }
-    public void moveMN() {
+    public void moveMN(int steps) {
         // EXCEPTION
     }
 
-    public void collectFromClouds() {
+    public void collectFromClouds(int cloudIndex) {
         // EXCEPTION
     }
 }

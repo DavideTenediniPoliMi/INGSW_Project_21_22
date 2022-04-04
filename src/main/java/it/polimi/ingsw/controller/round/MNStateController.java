@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller.round;
 
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.TurnState;
 
 public class MNStateController extends CharacterCardPlayableStateController {
@@ -8,7 +9,7 @@ public class MNStateController extends CharacterCardPlayableStateController {
     }
 
     @Override
-    public void moveMN() {
+    public void moveMN(int steps) {
         // TODO
     }
 }
