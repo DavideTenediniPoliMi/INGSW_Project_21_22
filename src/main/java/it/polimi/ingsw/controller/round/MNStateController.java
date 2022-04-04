@@ -1,8 +1,10 @@
 package it.polimi.ingsw.controller.round;
 
-public class MNStateController extends RoundStateController {
+import it.polimi.ingsw.model.enumerations.TurnState;
+
+public class MNStateController extends CharacterCardPlayableStateController {
     public MNStateController(RoundStateController oldState) {
-        super(oldState);
+        super(oldState, TurnState.MOTHER_NATURE);
     }
 
     @Override

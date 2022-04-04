@@ -1,10 +1,11 @@
 package it.polimi.ingsw.controller.round;
 
+import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.model.helpers.Parameters;
 
 public class CharacterCardPlayableStateController extends RoundStateController {
-    public CharacterCardPlayableStateController(RoundStateController oldState) {
-        super(oldState);
+    public CharacterCardPlayableStateController(RoundStateController oldState, TurnState stateType) {
+        super(oldState, stateType);
     }
 
     @Override
