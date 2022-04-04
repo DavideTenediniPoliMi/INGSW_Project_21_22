@@ -47,6 +47,10 @@ public class Player {
         return towerHolder;
     }
 
+    public List<Card> getPlayableCards(){
+        return playableCards;
+    }
+
     public Card getSelectedCard() {
         return selectedCard;
     }
