@@ -114,6 +114,10 @@ public class Board {
         return result.orElse(null);
     }
 
+    public List<School> getSchools() {
+        return new ArrayList<>(schools);
+    }
+
     public void removeFromEntranceOf(int playerID, StudentGroup students) {
         getSchoolByPlayerID(playerID).removeFromEntrance(students);
     }
