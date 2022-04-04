@@ -39,6 +39,7 @@ public class GameController {
 
                 if(roundStateController.getNumPlayersStillToAct() == 0) {
                     roundStateController.definePlayOrder();
+                    Game.getInstance().resetCards();
                     setState(new PlanningStateController(roundStateController));
                 } else {
                     setState(new StudentsStateController(roundStateController));

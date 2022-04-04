@@ -78,7 +78,7 @@ public class RoundStateController {
         // EXCEPTION
     }
 
-    public void transferStudentToDiningRoom(int playerID, Color c) {
+    public void transferStudentToDiningRoom(Color c) {
         // EXCEPTION
     }
     public void moveMN(int steps) {

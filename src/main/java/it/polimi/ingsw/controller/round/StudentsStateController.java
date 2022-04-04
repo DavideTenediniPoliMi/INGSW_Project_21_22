@@ -1,9 +1,14 @@
 package it.polimi.ingsw.controller.round;
 
+import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.board.School;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TurnState;
 
 public class StudentsStateController extends CharacterCardPlayableStateController{
+    private final int NUM_MOVABLE_STUDENTS = 69;
+
     public StudentsStateController(RoundStateController oldState) {
         super(oldState, TurnState.STUDENTS);
         numMovedStudents = 0;
@@ -11,11 +16,46 @@ public class StudentsStateController extends CharacterCardPlayableStateControlle
 
     @Override
     public void transferStudentToIsland(int islandIndex, Color c) {
-        // TODO
+
+        if(islandIndex < 0 || islandIndex >= Game.getInstance().getBoard().getNumIslands()) {
+            //BAD PARAMETERS EXCEPTION
+        }else if(numMovedStudents >= NUM_MOVABLE_STUDENTS) {
+            //EXCEPTION
+        }
+
+        School playerSchool = Game.getInstance().getBoard().getSchoolByPlayerID(getCurrentPlayerID());
+
+        if(playerSchool.getNumStudentsInEntranceByColor(c) > 0){
+            Game.getInstance().transferStudentToIsland(islandIndex, c, getCurrentPlayerID());
+            numMovedStudents++;
+
+            if(numMovedStudents == NUM_MOVABLE_STUDENTS) {
+                //TODO nextPlayer();
+                numMovedStudents = 0;
+            }
+        }else {
+            //NOT ENOUGH STUDENTS EXCEPTION
+        }
     }
 
     @Override
-    public void transferStudentToDiningRoom(int playerID, Color c) {
-        // TODO
+    public void transferStudentToDiningRoom(Color c) {
+        if(numMovedStudents >= NUM_MOVABLE_STUDENTS) {
+            //EXCEPTION
+        }
+
+        School playerSchool = Game.getInstance().getBoard().getSchoolByPlayerID(getCurrentPlayerID());
+
+        if(playerSchool.getNumStudentsInEntranceByColor(c) > 0) {
+            Game.getInstance().transferStudentToDiningRoom(getCurrentPlayerID(), c);
+            numMovedStudents++;
+
+            if(numMovedStudents == NUM_MOVABLE_STUDENTS) {
+                //TODO nextPlayer();
+                numMovedStudents = 0;
+            }
+        }else {
+            //NOT ENOUGH STUDENTS EXCEPTION
+        }
     }
 }

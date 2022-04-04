@@ -22,7 +22,6 @@ public class PlanningStateController extends RoundStateController {
             playOrder.add(p.getID());
         }
         //TODO reset cards?
-        Game.getInstance().resetCards();
     }
 
     /*
@@ -36,12 +35,18 @@ public class PlanningStateController extends RoundStateController {
         *   - Check if player CAN play this card
         *   - Check if card was already played this round
         * */
+        if(cardIndex < 0 || cardIndex > 9) {
+            //BAD PARAMETERS EXCEPTION
+        }
+
         Player p = Game.getInstance().getPlayerByID(getCurrentPlayerID());
         Card card = Card.values()[cardIndex];
 
-        if(p.getPlayableCards().contains(card) && !card.isUsed()){
+        if(p.getPlayableCards().contains(card) && !card.isUsed()) {
             Game.getInstance().playCard(p.getID(), card);
             //TODO nextPlayer();
+        }else {
+            //CARD USED EXCEPTION
         }
     }
 }
