@@ -5,14 +5,13 @@ import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-import junit.framework.TestCase;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-public class ProfessorTrackerTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.*;
+
+public class ProfessorTrackerTest {
 
     Game g;
     Board b;

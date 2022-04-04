@@ -1,14 +1,13 @@
 package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.model.Game;
-import junit.framework.TestCase;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-public class BoardTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class BoardTest {
 
     Game g;
     Board b;

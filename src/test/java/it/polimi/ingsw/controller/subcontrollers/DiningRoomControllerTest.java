@@ -10,7 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DiningRoomControllerTest {
     DiningRoomController dc;
@@ -36,9 +36,9 @@ class DiningRoomControllerTest {
         sg1 = new StudentGroup(Color.BLUE, 3);
         sg2 = new StudentGroup(Color.BLUE, 2);
 
-        board.addToDiningRoomOf(0, sg0);
-        board.addToDiningRoomOf(1, sg1);
-        board.addToDiningRoomOf(2, sg2);
+        board.addToDiningRoomOf(0, sg0.clone());
+        board.addToDiningRoomOf(1, sg1.clone());
+        board.addToDiningRoomOf(2, sg2.clone());
 
     }
 

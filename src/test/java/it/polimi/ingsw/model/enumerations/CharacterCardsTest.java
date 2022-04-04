@@ -3,10 +3,11 @@ package it.polimi.ingsw.model.enumerations;
 import it.polimi.ingsw.model.characters.AlterInfluenceDecorator;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.characters.ReturnToBagDecorator;
-import junit.framework.TestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class CharacterCardsTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.*;
+
+public class CharacterCardsTest {
 
     @Test
     public void testInstantiate() {
@@ -17,9 +18,5 @@ public class CharacterCardsTest extends TestCase {
         CharacterCard rtb = CharacterCards.RETURN_TO_BAG.instantiate();
         assertNotNull(rtb);
         assertEquals(rtb.getClass(), ReturnToBagDecorator.class);
-    }
-
-    public void testInstantiate_error(){
-
     }
 }

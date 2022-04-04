@@ -10,14 +10,13 @@ import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.Parameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
-import junit.framework.TestCase;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-public class ExchangeStudentsDecoratorTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.*;
+
+public class ExchangeStudentsDecoratorTest {
     private Game game;
     private Board board;
     private ExchangeStudentsDecorator c;

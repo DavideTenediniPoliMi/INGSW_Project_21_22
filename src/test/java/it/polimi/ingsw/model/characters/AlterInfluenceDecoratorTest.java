@@ -8,12 +8,13 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.Parameters;
-import junit.framework.TestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-public class AlterInfluenceDecoratorTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.*;
+
+public class AlterInfluenceDecoratorTest {
     private Game game;
     private Board board;
     private AlterInfluenceDecorator c1, c2, c3, c4, c5;

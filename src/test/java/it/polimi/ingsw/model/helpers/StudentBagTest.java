@@ -1,12 +1,13 @@
 package it.polimi.ingsw.model.helpers;
 
 import it.polimi.ingsw.model.enumerations.Color;
-import junit.framework.TestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-public class StudentBagTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.*;
+
+public class StudentBagTest {
     private final int TOT_STUDENTS = 120;
     private StudentBag studentBag;
 

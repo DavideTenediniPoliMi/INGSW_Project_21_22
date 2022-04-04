@@ -4,12 +4,13 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
-import junit.framework.TestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-public class MultiIslandTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.*;
+
+public class MultiIslandTest {
 
     Game g;
     Board b;
