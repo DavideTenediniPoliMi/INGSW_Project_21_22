@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class StudentBag {
     private final int NUM_STARTING_STUDENT_BY_COLOR = 24;
-    private List<Color> availableColors = new ArrayList<>(Arrays.asList(Color.values().clone()));
+    private final List<Color> availableColors = new ArrayList<>(Arrays.asList(Color.values().clone()));
 
     private final StudentGroup students;
     private final Random rand;
@@ -25,6 +25,10 @@ public class StudentBag {
         for(Color c : Color.values()){
             students.addByColor(c, NUM_STARTING_STUDENT_BY_COLOR);
         }
+    }
+
+    public boolean isEmpty() {
+        return empty;
     }
 
     public StudentGroup drawStudents(int amount) {

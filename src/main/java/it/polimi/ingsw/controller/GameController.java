@@ -2,7 +2,10 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.controller.round.*;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.board.ProfessorTracker;
 import it.polimi.ingsw.model.board.School;
+import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 
 import java.util.ArrayList;
@@ -31,11 +34,11 @@ public class GameController {
                 }
                 break;
             case MOTHER_NATURE:
-                checkWinnerAfterMN();
+                checkEndConditionAfterMN();
                 setState(new CloudStateController(roundStateController));
                 break;
             case CLOUD:
-                checkWinnerAfterRound();
+                checkEndConditionAfterRound();
 
                 if(roundStateController.getNumPlayersStillToAct() == 0) {
                     roundStateController.definePlayOrder();
@@ -52,11 +55,11 @@ public class GameController {
         roundStateController = newState;
     }
 
-    private void checkWinnerAfterMN() {
+    private void checkEndConditionAfterMN() {
         Game game = Game.getInstance();
         List<School> schools = game.getBoard().getSchools();
 
-        // WIN CONDITION 1 : A PLAYER BUILDS ALL OF THEIR TOWERS
+        // END CONDITION 1 : A PLAYER BUILDS ALL OF THEIR TOWERS
         for(School school: schools) {
             if(school.getNumTowers() == 0 && school.getOwner().isTowerHolder()) {
                 declareWinner(school.getOwner().getTeamColor());
@@ -64,8 +67,24 @@ public class GameController {
             }
         }
 
-        // WIN CONDITION 2 : ONLY 3 GROUP OF ISLANDS REMAIN
+        // END CONDITION 2 : ONLY 3 GROUP OF ISLANDS REMAIN
         if(game.getBoard().getNumIslands() > 3) return;
+
+        checkWinner();
+    }
+
+    private void checkEndConditionAfterRound() {
+        Game game = Game.getInstance();
+
+        // END CONDITION 3 : PLAYERS HAVE NO MORE ASSISTANT CARDS
+        // END CONDITION 4 : THERE ARE NO MORE STUDENTS TO DRAW FROM THE BAG
+        if(!game.getPlayerByID(0).getPlayableCards().isEmpty() && !game.isStudentBagEmpty()) return;
+
+        checkWinner();
+    }
+
+    private void checkWinner() {
+        List<School> schools = Game.getInstance().getBoard().getSchools();
 
         List<School> schoolsWithLessTowers = new ArrayList<>();
         int minNumTowers = NUM_TOWERS;
@@ -117,12 +136,19 @@ public class GameController {
         declareWinner(teamColorsWithMoreProfessors.get(0));
     }
 
-    private void checkWinnerAfterRound() {
-        // TODO
-    }
-
     private int getNumProfessorsOf(TowerColor teamColor) {
-        return 0;
+        Game game = Game.getInstance();
+        ProfessorTracker professorOwners = game.getBoard().getProfessorOwners();
+        int numProfessors = 0;
+
+        for(Color c: Color.values()) {
+            int ownerID = professorOwners.getOwnerIDByColor(c);
+            Player owner = game.getPlayerByID(ownerID);
+
+            if(owner.getTeamColor() == teamColor) numProfessors++;
+        }
+
+        return numProfessors;
     }
 
     private void declareWinner(TowerColor teamColor) {

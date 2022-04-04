@@ -48,7 +48,7 @@ public class Player {
     }
 
     public List<Card> getPlayableCards(){
-        return playableCards;
+        return new ArrayList<>(playableCards);
     }
 
     public Card getSelectedCard() {

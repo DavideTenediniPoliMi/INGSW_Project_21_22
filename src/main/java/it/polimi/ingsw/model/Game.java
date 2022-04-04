@@ -197,4 +197,8 @@ public class Game {
     public void putStudentsBack(StudentGroup students) {
         bag.putStudentsBack(students);
     }
+
+    public boolean isStudentBagEmpty() {
+        return bag.isEmpty();
+    }
 }
