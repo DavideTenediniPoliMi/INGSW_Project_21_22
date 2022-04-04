@@ -26,6 +26,14 @@ public class RoundStateController {
         return stateType;
     }
 
+    public int getNumPlayersStillToAct() {
+        return playOrder.size();
+    }
+
+    public int getNumMovedStudents() {
+        return numMovedStudents;
+    }
+
     public RoundStateController(RoundStateController oldState, TurnState stateType) {
         this.playOrder = oldState.playOrder;
         this.characterCardController = oldState.characterCardController;

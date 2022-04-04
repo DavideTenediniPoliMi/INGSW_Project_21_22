@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.enumerations.TurnState;
 public class StudentsStateController extends CharacterCardPlayableStateController{
     public StudentsStateController(RoundStateController oldState) {
         super(oldState, TurnState.STUDENTS);
+        numMovedStudents = 0;
     }
 
     @Override
