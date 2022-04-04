@@ -28,8 +28,13 @@ public class GameController {
                 break;
             case CLOUD:
                 checkWinnerAfterRound();
-                roundStateController.definePlayOrder();
-                setState(new PlanningStateController(roundStateController));
+
+                if(roundStateController.getNumPlayersStillToAct() == 0) {
+                    roundStateController.definePlayOrder();
+                    setState(new PlanningStateController(roundStateController));
+                } else {
+                    setState(new StudentsStateController(roundStateController));
+                }
                 break;
         }
     }
