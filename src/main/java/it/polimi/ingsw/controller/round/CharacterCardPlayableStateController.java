@@ -10,16 +10,19 @@ public class CharacterCardPlayableStateController extends RoundStateController {
 
     @Override
     public void buyCharacterCard(int cardIndex) {
-        // TODO
+        if(cardIndex < 0 || cardIndex > 2) {
+            //BAD PARAMETERS EXCEPTION
+        }
+        characterCardController.buyCharacterCard(getCurrentPlayerID(), cardIndex);
     }
 
     @Override
     public void setCardParameters(Parameters params) {
-        // TODO
+        characterCardController.setCardParameters(params);
     }
 
     @Override
-    public void activateCard() {
-        // TODO
+    public int activateCard() {
+        return characterCardController.activateCard();
     }
 }

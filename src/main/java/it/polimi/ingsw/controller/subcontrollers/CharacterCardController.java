@@ -32,6 +32,8 @@ public class CharacterCardController {
         if(Game.getInstance().getActiveCharacterCard() != null){ //Separated so it's only checked once
             if(checkParameters(params) && !effectUsed){
                 Game.getInstance().setCardParameters(params);
+            }else {
+                //BAD PARAMETERS EXCEPTION
             }
         }
     }

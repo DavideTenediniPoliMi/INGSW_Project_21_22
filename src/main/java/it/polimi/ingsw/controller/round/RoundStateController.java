@@ -70,8 +70,9 @@ public class RoundStateController {
         // EXCEPTION
     }
 
-    public void activateCard() {
+    public int activateCard() {
         // EXCEPTION
+        return 0;
     }
 
     public void transferStudentToIsland(int islandIndex, Color c) {

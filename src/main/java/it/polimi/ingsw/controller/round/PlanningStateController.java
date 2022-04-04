@@ -21,7 +21,6 @@ public class PlanningStateController extends RoundStateController {
         for(Player p: players) {
             playOrder.add(p.getID());
         }
-        //TODO reset cards?
     }
 
     /*
