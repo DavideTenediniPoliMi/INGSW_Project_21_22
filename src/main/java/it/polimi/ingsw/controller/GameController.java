@@ -1,10 +1,18 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.controller.round.*;
+import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.board.School;
+import it.polimi.ingsw.model.enumerations.TowerColor;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class GameController {
     private RoundStateController roundStateController;
     private int NUM_MOVABLE_STUDENTS; // TODO define behaviour
+    private int NUM_TOWERS;
 
     public GameController() {
     }
@@ -44,14 +52,83 @@ public class GameController {
     }
 
     private void checkWinnerAfterMN() {
-        // TODO
+        Game game = Game.getInstance();
+        List<School> schools = game.getBoard().getSchools();
+
+        // WIN CONDITION 1 : A PLAYER BUILDS ALL OF THEIR TOWERS
+        for(School school: schools) {
+            if(school.getNumTowers() == 0 && school.getOwner().isTowerHolder()) {
+                declareWinner(school.getOwner().getTeamColor());
+                return;
+            }
+        }
+
+        // WIN CONDITION 2 : ONLY 3 GROUP OF ISLANDS REMAIN
+        if(game.getBoard().getNumIslands() > 3) return;
+
+        List<School> schoolsWithLessTowers = new ArrayList<>();
+        int minNumTowers = NUM_TOWERS;
+
+        for(School school: schools) {
+            if(!school.getOwner().isTowerHolder()) return;
+
+            int currentNumTowers = school.getNumTowers();
+
+            if(currentNumTowers < minNumTowers) {
+                minNumTowers = currentNumTowers;
+                schoolsWithLessTowers.clear();
+            }
+
+            if(currentNumTowers == minNumTowers) {
+                schoolsWithLessTowers.add(school);
+            }
+        }
+
+        if(schoolsWithLessTowers.size() == 1) {
+            declareWinner(schoolsWithLessTowers.get(0).getOwner().getTeamColor());
+            return;
+        }
+
+        List<TowerColor> teamColorsTying = schoolsWithLessTowers.stream()
+                .map((school -> school.getOwner().getTeamColor()))
+                .collect(Collectors.toList());
+        List<TowerColor> teamColorsWithMoreProfessors = new ArrayList<>();
+        int maxNumProfessors = 0;
+
+        for(TowerColor teamColor: teamColorsTying) {
+            int currentNumProfessors = getNumProfessorsOf(teamColor);
+
+            if(currentNumProfessors < maxNumProfessors) {
+                maxNumProfessors = currentNumProfessors;
+                teamColorsWithMoreProfessors.clear();
+            }
+
+            if(currentNumProfessors == maxNumProfessors) {
+                teamColorsWithMoreProfessors.add(teamColor);
+            }
+        }
+
+        if(teamColorsWithMoreProfessors.size() > 1) {
+            declareTie(teamColorsWithMoreProfessors);
+            return;
+        }
+
+        declareWinner(teamColorsWithMoreProfessors.get(0));
     }
 
     private void checkWinnerAfterRound() {
         // TODO
     }
 
-    private void declareWinner(int playerID) {
+    private int getNumProfessorsOf(TowerColor teamColor) {
+        return 0;
+    }
+
+    private void declareWinner(TowerColor teamColor) {
+        // TODO
+    }
+
+    private void declareTie(List<TowerColor> teamColors) {
         // TODO
     }
 }
