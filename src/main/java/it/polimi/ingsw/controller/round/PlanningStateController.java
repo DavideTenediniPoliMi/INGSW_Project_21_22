@@ -8,6 +8,11 @@ public class PlanningStateController extends RoundStateController {
     }
 
     @Override
+    public void definePlayOrder() {
+        // TODO define play order before the action phase (increasing card played weight)
+    }
+
+    @Override
     public void playCard(int cardIndex) {
         // TODO
     }

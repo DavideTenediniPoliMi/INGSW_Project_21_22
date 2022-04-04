@@ -13,8 +13,8 @@ public class GameController {
         switch(roundStateController.getStateType()) {
             case PLANNING:
                 if(roundStateController.getNumPlayersStillToAct() == 0) {
-                    setState(new StudentsStateController(roundStateController));
                     roundStateController.definePlayOrder();
+                    setState(new StudentsStateController(roundStateController));
                 }
                 break;
             case STUDENTS:
@@ -28,6 +28,7 @@ public class GameController {
                 break;
             case CLOUD:
                 checkWinnerAfterRound();
+                roundStateController.definePlayOrder();
                 setState(new PlanningStateController(roundStateController));
                 break;
         }

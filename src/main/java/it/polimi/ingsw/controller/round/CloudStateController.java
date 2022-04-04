@@ -9,6 +9,11 @@ public class CloudStateController extends RoundStateController {
     }
 
     @Override
+    public void definePlayOrder() {
+        // TODO define play order before the planning phase (clock-wise starting from the lowest card played weight)
+    }
+
+    @Override
     public void collectFromClouds(int cloudIndex) {
         // TODO
     }
