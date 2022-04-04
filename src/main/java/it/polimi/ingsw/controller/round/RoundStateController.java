@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.model.helpers.Parameters;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class RoundStateController {
@@ -20,6 +21,16 @@ public class RoundStateController {
     public RoundStateController(IslandController islandController, DiningRoomController diningRoomController) {
         this.islandController = islandController;
         this.diningRoomController = diningRoomController;
+        playOrder = new LinkedList<>();
+    }
+
+    public RoundStateController(RoundStateController oldState, TurnState stateType) {
+        this.playOrder = oldState.playOrder;
+        this.characterCardController = oldState.characterCardController;
+        this.islandController = oldState.islandController;
+        this.diningRoomController = oldState.diningRoomController;
+        this.numMovedStudents = oldState.numMovedStudents;
+        this.stateType = stateType;
     }
 
     public TurnState getStateType() {
@@ -34,14 +45,6 @@ public class RoundStateController {
         return numMovedStudents;
     }
 
-    public RoundStateController(RoundStateController oldState, TurnState stateType) {
-        this.playOrder = oldState.playOrder;
-        this.characterCardController = oldState.characterCardController;
-        this.islandController = oldState.islandController;
-        this.diningRoomController = oldState.diningRoomController;
-        this.numMovedStudents = oldState.numMovedStudents;
-        this.stateType = stateType;
-    }
 
     public void init() { // TODO change name
         // TODO decide first player order
