@@ -24,7 +24,16 @@ public class CloudStateController extends RoundStateController {
     }
 
     @Override
-    public void collectFromClouds(int cloudIndex) {
-        // TODO
+    public void collectFromCloud(int cloudIndex) {
+        Game game = Game.getInstance();
+        int currentPlayerID = getCurrentPlayerID();
+
+        if(currentPlayerID == -1) {
+            //EXCEPTION
+        } else if (!game.getBoard().getClouds().get(cloudIndex).isAvailable()){
+            //EXCEPTION
+        }
+
+        game.collectFromCloud(cloudIndex, currentPlayerID);
     }
 }

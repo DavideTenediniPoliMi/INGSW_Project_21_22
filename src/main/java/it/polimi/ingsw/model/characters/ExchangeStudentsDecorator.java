@@ -34,6 +34,6 @@ public class ExchangeStudentsDecorator extends CharacterCardDecorator {
         board.addToEntranceOf(playerID, fromDiningRoom);
         board.addToDiningRoomOf(playerID, fromEntrance);
 
-        return 0;
+        return -1;
     }
 }

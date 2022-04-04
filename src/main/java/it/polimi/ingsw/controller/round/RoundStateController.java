@@ -85,7 +85,7 @@ public class RoundStateController {
         // EXCEPTION
     }
 
-    public void collectFromClouds(int cloudIndex) {
+    public void collectFromCloud(int cloudIndex) {
         // EXCEPTION
     }
 }

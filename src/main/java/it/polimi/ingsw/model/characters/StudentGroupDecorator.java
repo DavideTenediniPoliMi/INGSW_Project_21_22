@@ -61,6 +61,7 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
             board.addToDiningRoomOf(playerID, fromCard);
 
             game.drawStudents(1).transferAllTo(students);
+            return -1;
         } else {
             board.removeFromEntranceOf(playerID, fromEntrance);
             board.addToEntranceOf(playerID, temp);

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller.round;
 
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.TurnState;
 
 public class MNStateController extends CharacterCardPlayableStateController {
@@ -10,6 +11,15 @@ public class MNStateController extends CharacterCardPlayableStateController {
 
     @Override
     public void moveMN(int steps) {
-        // TODO
+        Game game = Game.getInstance();
+        Player player = game.getPlayerByID(getCurrentPlayerID());
+
+        if(player.getID() == -1) {
+            //EXCEPTION
+        } else if (steps > player.getSelectedCard().RANGE) {
+            //EXCEPTION
+        }
+
+        islandController.moveMN(steps);
     }
 }
