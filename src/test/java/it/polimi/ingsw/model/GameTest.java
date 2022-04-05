@@ -6,6 +6,8 @@ import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,6 +18,7 @@ public class GameTest {
 
     Game g;
 
+    @BeforeEach
     public void setUp() {
         g = Game.getInstance();
 
@@ -26,8 +29,11 @@ public class GameTest {
 
         g.instantiateCharacterCard(5);
         g.buyCharacterCard(0, 0);
+
+        g.placeMNAt(0);
     }
 
+    @AfterEach
     public void tearDown() {
         Game.resetInstance();
         g = null;
@@ -35,7 +41,7 @@ public class GameTest {
 
     @Test
     public void testConquerIsland() {
-        g.conquerIsland(TowerColor.BLACK);
+        g.conquerIsland(g.getPlayerByID(0).getTeamColor());
         assertEquals(g.getPlayerByID(0).getTeamColor(), g.getBoard().getIslandAt(0).getTeamColor());
     }
 

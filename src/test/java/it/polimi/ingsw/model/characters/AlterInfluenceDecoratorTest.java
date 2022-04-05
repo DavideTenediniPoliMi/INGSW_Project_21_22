@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.Parameters;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,6 +26,7 @@ public class AlterInfluenceDecoratorTest {
         game = Game.getInstance();
         board = game.getBoard();
         game.addPlayer(0, "mario", TowerColor.BLACK, CardBack.CB_1, true);
+        game.placeMNAt(0);
         game.conquerIsland(TowerColor.BLACK);
         game.giveProfessorTo(0, Color.BLUE);
 
@@ -73,6 +75,7 @@ public class AlterInfluenceDecoratorTest {
         p5.setIslandIndex(0);
         p5.setCurrentTeam(TowerColor.WHITE);
         c5.setParameters(p5);
+
     }
 
     @AfterEach
@@ -99,6 +102,7 @@ public class AlterInfluenceDecoratorTest {
 
     @Test
     public void testActivate_isAddTwo_differentTeam() {
+
         c1.setParameters(p2);
         int delta = c1.activate();
         assertTrue(c1.isActive());

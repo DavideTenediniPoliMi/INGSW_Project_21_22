@@ -67,9 +67,6 @@ public class MultiIslandTest {
 
     @Test
     public void testConquer_diffTeam(){
-        b.conquerIsland(TowerColor.BLACK);
-        assertEquals(TowerColor.BLACK, b.getIslandAt(1).getTeamColor());
-
         b.conquerIsland(TowerColor.WHITE);
         assertEquals(TowerColor.WHITE, b.getIslandAt(0).getTeamColor());
     }
