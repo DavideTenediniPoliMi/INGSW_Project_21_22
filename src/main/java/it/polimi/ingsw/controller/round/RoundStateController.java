@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller.round;
 import it.polimi.ingsw.controller.subcontrollers.CharacterCardController;
 import it.polimi.ingsw.controller.subcontrollers.DiningRoomController;
 import it.polimi.ingsw.controller.subcontrollers.IslandController;
+import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.model.helpers.Parameters;
@@ -50,42 +51,42 @@ public class RoundStateController {
         // TODO decide first player order
     }
 
-    public void definePlayOrder() {
-        // EXCEPTION
-    }
-
     public int getCurrentPlayerID() {
         return (playOrder.peek() != null) ? playOrder.peek() : -1;
     }
 
-    public void playCard(int cardIndex) {
-        // EXCEPTION
+    public void definePlayOrder() throws IllegalActionException {
+        throw new IllegalActionException("definePlayOrder", stateType);
     }
 
-    public void buyCharacterCard(int cardIndex) {
-        // EXCEPTION
+    public void playCard(int cardIndex) throws IllegalActionException {
+        throw new IllegalActionException("playCard", stateType);
     }
 
-    public void setCardParameters(Parameters params) {
-        // EXCEPTION
+    public void buyCharacterCard(int cardIndex) throws IllegalActionException {
+        throw new IllegalActionException("buyCharacterCard", stateType);
     }
 
-    public void activateCard() {
-        // EXCEPTION
+    public void setCardParameters(Parameters params) throws IllegalActionException {
+        throw new IllegalActionException("setCardParameters", stateType);
     }
 
-    public void transferStudentToIsland(int islandIndex, Color c) {
-        // EXCEPTION
+    public void activateCard() throws IllegalActionException {
+        throw new IllegalActionException("activateCard", stateType);
     }
 
-    public void transferStudentToDiningRoom(Color c) {
-        // EXCEPTION
-    }
-    public void moveMN(int steps) {
-        // EXCEPTION
+    public void transferStudentToIsland(int islandIndex, Color c) throws IllegalActionException {
+        throw new IllegalActionException("transferStudentToIsland", stateType);
     }
 
-    public void collectFromCloud(int cloudIndex) {
-        // EXCEPTION
+    public void transferStudentToDiningRoom(Color c) throws IllegalActionException {
+        throw new IllegalActionException("transferStudentToDiningRoom", stateType);
+    }
+    public void moveMN(int steps) throws IllegalActionException {
+        throw new IllegalActionException("moveMN", stateType);
+    }
+
+    public void collectFromCloud(int cloudIndex) throws IllegalActionException {
+        throw new IllegalActionException("collectFromCloud", stateType);
     }
 }

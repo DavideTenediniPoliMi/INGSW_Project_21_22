@@ -31,7 +31,7 @@ public class DiningRoomController {
                 int numStudsProfessor = board.getSchoolByPlayerID(professorOwnerID).getNumStudentsInDiningRoomByColor(c);
                 if (numStuds > numStudsProfessor)
                     game.giveProfessorTo(playerID, c);
-            }
+            } //TODO Not enough students exception
         }
     }
 }

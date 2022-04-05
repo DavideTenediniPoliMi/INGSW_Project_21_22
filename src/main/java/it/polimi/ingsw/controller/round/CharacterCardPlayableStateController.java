@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller.round;
 
+import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.EffectType;
@@ -17,7 +18,7 @@ public class CharacterCardPlayableStateController extends RoundStateController {
     @Override
     public void buyCharacterCard(int cardIndex) {
         if(cardIndex < 0 || cardIndex > 2) {
-            //BAD PARAMETERS EXCEPTION
+            throw new BadParametersException("cardIndex is " + cardIndex + ", expected between 0 and 2");
         }
         characterCardController.buyCharacterCard(getCurrentPlayerID(), cardIndex);
         fromOrigin = null;

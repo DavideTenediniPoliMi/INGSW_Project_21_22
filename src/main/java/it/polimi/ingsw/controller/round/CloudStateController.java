@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller.round;
 
+import it.polimi.ingsw.exceptions.game.NullPlayerException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.TurnState;
@@ -29,7 +30,7 @@ public class CloudStateController extends RoundStateController {
         int currentPlayerID = getCurrentPlayerID();
 
         if(currentPlayerID == -1) {
-            //EXCEPTION
+            throw new NullPlayerException();
         } else if (!game.getBoard().getClouds().get(cloudIndex).isAvailable()){
             //EXCEPTION
         }

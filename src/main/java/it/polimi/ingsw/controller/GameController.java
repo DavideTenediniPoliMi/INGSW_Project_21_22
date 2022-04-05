@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.controller.round.*;
+import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.ProfessorTracker;
@@ -20,7 +21,7 @@ public class GameController {
     public GameController() {
     }
 
-    private void nextState() {
+    private void nextState() throws IllegalActionException {
         switch(roundStateController.getStateType()) {
             case PLANNING:
                 if(roundStateController.getNumPlayersStillToAct() == 0) {

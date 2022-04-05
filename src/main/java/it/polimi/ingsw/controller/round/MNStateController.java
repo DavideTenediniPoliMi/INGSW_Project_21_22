@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller.round;
 
+import it.polimi.ingsw.exceptions.game.NullPlayerException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.TurnState;
@@ -15,7 +16,7 @@ public class MNStateController extends CharacterCardPlayableStateController {
         Player player = game.getPlayerByID(getCurrentPlayerID());
 
         if(player.getID() == -1) {
-            //EXCEPTION
+            throw new NullPlayerException();
         } else if (steps > player.getSelectedCard().RANGE) {
             //EXCEPTION
         }

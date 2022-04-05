@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller.round;
 
+import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.Card;
@@ -35,7 +36,7 @@ public class PlanningStateController extends RoundStateController {
         *   - Check if card was already played this round
         * */
         if(cardIndex < 0 || cardIndex > 9) {
-            //BAD PARAMETERS EXCEPTION
+            throw new BadParametersException("cardIndex is " + cardIndex + ", expected between 0 and 9");
         }
 
         Player p = Game.getInstance().getPlayerByID(getCurrentPlayerID());

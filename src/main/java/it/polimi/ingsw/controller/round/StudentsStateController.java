@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller.round;
 
+import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.School;
@@ -18,7 +19,7 @@ public class StudentsStateController extends CharacterCardPlayableStateControlle
     public void transferStudentToIsland(int islandIndex, Color c) {
 
         if(islandIndex < 0 || islandIndex >= Game.getInstance().getBoard().getNumIslands()) {
-            //BAD PARAMETERS EXCEPTION
+            throw new BadParametersException("islandIndex is " + islandIndex + ", expected between 0 and " + Game.getInstance().getBoard().getNumIslands());
         }else if(numMovedStudents >= NUM_MOVABLE_STUDENTS) {
             //EXCEPTION
         }

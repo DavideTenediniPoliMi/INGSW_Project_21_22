@@ -1,5 +1,7 @@
 package it.polimi.ingsw.controller.subcontrollers;
 
+import it.polimi.ingsw.exceptions.game.BadParametersException;
+import it.polimi.ingsw.exceptions.game.NullPlayerException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.characters.CharacterCard;
@@ -24,16 +26,18 @@ public class CharacterCardController {
             if(player.getNumCoins() >= card.getCost()) {
                 effectUsed = false;
                 Game.getInstance().buyCharacterCard(playerID, cardIndex);
-            }
+            }//TODO throw notEnoughCoins
         }
     }
 
     public void setCardParameters(Parameters params) {
         if(Game.getInstance().getActiveCharacterCard() != null){ //Separated so it's only checked once
-            if(checkParameters(params) && !effectUsed){
-                Game.getInstance().setCardParameters(params);
-            }else {
-                //BAD PARAMETERS EXCEPTION
+            try{
+                if(checkParameters(params) && !effectUsed){
+                    Game.getInstance().setCardParameters(params);
+                }
+            } catch (BadParametersException | NullPlayerException exc) {
+                System.out.println("[EXCEPTION]" + exc);
             }
         }
     }
@@ -57,7 +61,7 @@ public class CharacterCardController {
     /*
     * Throws BadParametersException ?
     * */
-    private boolean checkParameters(Parameters params) {
+    private boolean checkParameters(Parameters params) throws BadParametersException, NullPlayerException {
         CharacterCard card = Game.getInstance().getActiveCharacterCard();
 
         switch (card.getEffectType()){
@@ -68,7 +72,8 @@ public class CharacterCardController {
                 if(selectedColor_infl != null && boostedTeam != null){
                     return true;
                 }
-                break;
+                throw new BadParametersException("ALTER_INFLUENCE card. selectedColor: " + selectedColor_infl
+                                                 + "boostedTeam: " + boostedTeam);
             case STUDENT_GROUP:
                 StudentGroup fromCard = params.getFromOrigin();
                 StudentGroup fromEntrance = params.getFromDestination();
@@ -78,14 +83,22 @@ public class CharacterCardController {
                 if(fromCard != null && fromEntrance != null && playerID >= 0 && islandIndex >= 0){
                     return true;
                 }
-                break;
+
+                if(playerID < 0){
+                    throw new NullPlayerException();
+                }
+
+                throw new BadParametersException("STUDENT_GROUP card. fromCard: " + fromCard
+                        + "fromEntrance: " + fromEntrance
+                        + "playerID: " + playerID
+                        + "islandIndex: " + islandIndex);
             case RETURN_TO_BAG:
                 Color selectedColor_bag = params.getSelectedColor();
 
                 if(selectedColor_bag != null){
                     return true;
                 }
-                break;
+                throw new BadParametersException("RETURN_TO_BAG card. selectedColor is null");
             case EXCHANGE_STUDENTS:
                 StudentGroup fromEntrance_ex = params.getFromOrigin();
                 StudentGroup fromDiningRoom = params.getFromDestination();
@@ -94,7 +107,14 @@ public class CharacterCardController {
                 if(fromEntrance_ex != null && fromDiningRoom != null && playerID_ex >= 0){
                     return true;
                 }
-                break;
+
+                if(playerID_ex < 0) {
+                    throw new NullPlayerException();
+                }
+
+                throw new BadParametersException("EXCHANGE_STUDENTS card. fromEntrance: " + fromEntrance_ex
+                                                 + "fromDiningRoom: " + fromDiningRoom
+                                                 + "playerID: " + playerID_ex);
             default:
                 break;
         }
