@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TurnState;
 
 public class StudentsStateController extends CharacterCardPlayableStateController{
-    private final int NUM_MOVABLE_STUDENTS = 69;
+    private final int NUM_MOVABLE_STUDENTS = 3; //TODO change
 
     public StudentsStateController(RoundStateController oldState) {
         super(oldState, TurnState.STUDENTS);
