@@ -5,9 +5,10 @@ import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.model.helpers.StudentGroup;
 
 public class CharacterCardPlayableStateController extends RoundStateController {
-    Parameters cardParams;
+    StudentGroup fromOrigin;
 
     public CharacterCardPlayableStateController(RoundStateController oldState, TurnState stateType) {
         super(oldState, stateType);
@@ -19,14 +20,18 @@ public class CharacterCardPlayableStateController extends RoundStateController {
             //BAD PARAMETERS EXCEPTION
         }
         characterCardController.buyCharacterCard(getCurrentPlayerID(), cardIndex);
-        cardParams = null;
+        fromOrigin = null;
     }
 
     @Override
     public void setCardParameters(Parameters params) {
         //TODO surround with try/catch
         characterCardController.setCardParameters(params);
-        cardParams = params;
+        CharacterCard card = Game.getInstance().getActiveCharacterCard();
+
+        if(card.getEffectType().equals(EffectType.EXCHANGE_STUDENTS) || card.getEffectType().equals(EffectType.STUDENT_GROUP)){
+            fromOrigin = params.getFromOrigin().clone();
+        }
     }
 
     @Override
@@ -36,7 +41,7 @@ public class CharacterCardPlayableStateController extends RoundStateController {
 
         if(card.getEffectType().equals(EffectType.EXCHANGE_STUDENTS) || card.getEffectType().equals(EffectType.STUDENT_GROUP)){
             if(res == -1){ //If card has altered someone's dining room
-                diningRoomController.manageDiningRoomOf(getCurrentPlayerID(), cardParams.getFromOrigin()); //COULD BE EMPTY, CLONE PARAMS IN CARD?
+                diningRoomController.manageDiningRoomOf(getCurrentPlayerID(), fromOrigin);
             }
         }
     }
