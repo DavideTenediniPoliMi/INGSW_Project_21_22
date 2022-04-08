@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.controller.round.*;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.ProfessorTracker;
 import it.polimi.ingsw.model.board.School;
@@ -17,20 +18,22 @@ public class GameController {
     private RoundStateController roundStateController;
     private int NUM_MOVABLE_STUDENTS; // TODO define behaviour
     private int NUM_TOWERS;
+    private final MatchInfo matchInfo;
 
     public GameController() {
+        matchInfo = MatchInfo.getInstance();
     }
 
     private void nextState() throws IllegalActionException {
-        switch(roundStateController.getStateType()) {
+        switch(matchInfo.getStateType()) {
             case PLANNING:
-                if(roundStateController.getNumPlayersStillToAct() == 0) {
+                if(matchInfo.getNumPlayersStillToAct() == 0) {
                     roundStateController.definePlayOrder();
                     setState(new StudentsStateController(roundStateController));
                 }
                 break;
             case STUDENTS:
-                if(roundStateController.getNumMovedStudents() == NUM_MOVABLE_STUDENTS) {
+                if(matchInfo.getNumMovedStudents() == NUM_MOVABLE_STUDENTS) {
                     setState(new MNStateController(roundStateController));
                 }
                 break;
@@ -41,7 +44,7 @@ public class GameController {
             case CLOUD:
                 checkEndConditionAfterRound();
 
-                if(roundStateController.getNumPlayersStillToAct() == 0) {
+                if(matchInfo.getNumPlayersStillToAct() == 0) {
                     roundStateController.definePlayOrder();
                     Game.getInstance().resetCards();
                     setState(new PlanningStateController(roundStateController));

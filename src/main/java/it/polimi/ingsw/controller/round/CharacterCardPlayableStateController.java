@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller.round;
 
 import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.model.enumerations.TurnState;
@@ -20,7 +21,7 @@ public class CharacterCardPlayableStateController extends RoundStateController {
         if(cardIndex < 0 || cardIndex > 2) {
             throw new BadParametersException("cardIndex is " + cardIndex + ", expected between 0 and 2");
         }
-        characterCardController.buyCharacterCard(getCurrentPlayerID(), cardIndex);
+        characterCardController.buyCharacterCard(MatchInfo.getInstance().getCurrentPlayerID(), cardIndex);
         fromOrigin = null;
     }
 
@@ -42,7 +43,7 @@ public class CharacterCardPlayableStateController extends RoundStateController {
 
         if(card.getEffectType().equals(EffectType.EXCHANGE_STUDENTS) || card.getEffectType().equals(EffectType.STUDENT_GROUP)){
             if(res == -1){ //If card has altered someone's dining room
-                diningRoomController.manageDiningRoomOf(getCurrentPlayerID(), fromOrigin);
+                diningRoomController.manageDiningRoomOf(MatchInfo.getInstance().getCurrentPlayerID(), fromOrigin);
             }
         }
     }

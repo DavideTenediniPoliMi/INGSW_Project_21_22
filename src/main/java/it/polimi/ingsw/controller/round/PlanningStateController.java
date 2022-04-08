@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller.round;
 
 import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.TurnState;
@@ -20,7 +21,7 @@ public class PlanningStateController extends RoundStateController {
         players.sort(Comparator.comparing(Player::getSelectedCard));
 
         for(Player p: players) {
-            playOrder.add(p.getID());
+            MatchInfo.getInstance().addPlayer(p.getID());
         }
     }
 
@@ -39,7 +40,7 @@ public class PlanningStateController extends RoundStateController {
             throw new BadParametersException("cardIndex is " + cardIndex + ", expected between 0 and 9");
         }
 
-        Player p = Game.getInstance().getPlayerByID(getCurrentPlayerID());
+        Player p = Game.getInstance().getPlayerByID(MatchInfo.getInstance().getCurrentPlayerID());
         Card card = Card.values()[cardIndex];
 
         if(p.getPlayableCards().contains(card) && !card.isUsed()) {

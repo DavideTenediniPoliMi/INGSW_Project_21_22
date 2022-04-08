@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller.round;
 
 import it.polimi.ingsw.exceptions.game.NullPlayerException;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.TurnState;
 
@@ -13,7 +14,7 @@ public class MNStateController extends CharacterCardPlayableStateController {
     @Override
     public void moveMN(int steps) {
         Game game = Game.getInstance();
-        Player player = game.getPlayerByID(getCurrentPlayerID());
+        Player player = game.getPlayerByID(MatchInfo.getInstance().getCurrentPlayerID());
 
         if(player.getID() == -1) {
             throw new NullPlayerException();
