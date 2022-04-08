@@ -16,8 +16,6 @@ import java.util.stream.Collectors;
 
 public class GameController {
     private RoundStateController roundStateController;
-    private int NUM_MOVABLE_STUDENTS; // TODO define behaviour
-    private int NUM_TOWERS;
     private final MatchInfo matchInfo;
 
     public GameController() {
@@ -33,7 +31,7 @@ public class GameController {
                 }
                 break;
             case STUDENTS:
-                if(matchInfo.getNumMovedStudents() == NUM_MOVABLE_STUDENTS) {
+                if(matchInfo.getNumMovedStudents() == matchInfo.getMaxMovableStudents()) {
                     setState(new MNStateController(roundStateController));
                 }
                 break;
@@ -91,7 +89,7 @@ public class GameController {
         List<School> schools = Game.getInstance().getBoard().getSchools();
 
         List<School> schoolsWithLessTowers = new ArrayList<>();
-        int minNumTowers = NUM_TOWERS;
+        int minNumTowers = matchInfo.getMaxTowers();
 
         for(School school: schools) {
             if(!school.getOwner().isTowerHolder()) return;

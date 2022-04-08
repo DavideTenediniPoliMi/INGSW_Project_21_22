@@ -50,6 +50,10 @@ public class MatchInfo {
         this.numPlayersConnected = numPlayersConnected;
     }
 
+    public int getMaxMovableStudents() { return (selectedNumPlayer % 2 == 0) ? 3 : 4 ;}
+
+    public int getMaxTowers() { return (selectedNumPlayer % 2 == 0) ? 8 : 6 ;}
+
     public TurnState getStateType() {
         return stateType;
     }
