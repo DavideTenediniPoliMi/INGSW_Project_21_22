@@ -4,9 +4,13 @@ import it.polimi.ingsw.model.helpers.StudentGroup;
 
 public class Cloud {
     private final StudentGroup students = new StudentGroup();
-    private boolean available = true;
+    private boolean available;
 
     public Cloud() {
+    }
+
+    public StudentGroup getStudents() {
+        return students;
     }
 
     private void setAvailableTo(boolean available) {
@@ -30,5 +34,4 @@ public class Cloud {
 
         return temp;
     }
-
 }

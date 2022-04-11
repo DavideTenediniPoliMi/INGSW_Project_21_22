@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.board;
 
-import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import org.junit.jupiter.api.Test;
@@ -10,62 +9,48 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CloudTest {
-
-    Game g;
-    Board b;
-    Cloud c;
+    Cloud cloud;
+    Cloud cloud1;
 
     @BeforeEach
     public void setUp() {
-        g = Game.getInstance();
-        b = g.getBoard();
-        c = new Cloud();
-        b.createClouds(1);
+        cloud = new Cloud();
+
+        cloud1 = new Cloud();
+        StudentGroup sg = new StudentGroup(Color.BLUE, 2);
+        sg.addByColor(Color.GREEN, 1);
+        cloud1.refillCloud(sg);
     }
 
     @AfterEach
     public void tearDown() {
-        Game.resetInstance();
-        g = null;
-        b = null;
-        c = null;
+        cloud = null;
+        cloud1 = null;
     }
 
     @Test
     public void testIsAvailable() {
-        assertTrue(c.isAvailable());
-        c.collectStudents();
-        assertFalse(c.isAvailable());
+        assertAll(
+                () -> assertTrue(cloud1.isAvailable()),
+                () -> assertFalse(cloud.isAvailable()));
     }
 
     @Test
     public void testRefillCloud() {
-        StudentGroup sg = new StudentGroup();
-
-        b.collectFromCloud(0);
-
-        b.refillClouds(3);
-
-        b.collectFromCloud(0).transferAllTo(sg);
-        int num = 0;
-        for(Color c: Color.values()){
-            num += sg.getByColor(c);
-        }
-
-        assertNotEquals(0, num);
+        assertAll(
+                () -> assertEquals(2, cloud1.getStudents().getByColor(Color.BLUE)),
+                () -> assertEquals(1, cloud1.getStudents().getByColor(Color.GREEN)));
     }
 
     @Test
     public void testCollectStudents() {
-        b.refillClouds(3);
-        StudentGroup sg = b.collectFromCloud(0);
+        StudentGroup sg = cloud1.collectStudents();
 
-        int num = 0;
-
-        for(Color c: Color.values()){
-            num += sg.getByColor(c);
-        }
-
-        assertEquals(num, 3);
+        assertAll(
+                () -> assertFalse(cloud.isAvailable()),
+                () -> assertEquals(2, sg.getByColor(Color.BLUE)),
+                () -> assertEquals(1, sg.getByColor(Color.GREEN)),
+                () -> assertEquals(0, cloud1.getStudents().getByColor(Color.BLUE)),
+                () -> assertEquals(0, cloud1.getStudents().getByColor(Color.GREEN)));
     }
 }
