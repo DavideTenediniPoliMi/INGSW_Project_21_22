@@ -23,7 +23,8 @@ public class StudentBagTest {
 
     @Test
     public void testDrawStudents() {
-        int numStudents = 1;
+        assertFalse(studentBag.isEmpty());
+        int numStudents = 3;
         StudentGroup studentGroup = studentBag.drawStudents(numStudents);
 
         int temp = 0;
@@ -55,6 +56,8 @@ public class StudentBagTest {
         }
         assertEquals(temp, TOT_STUDENTS);
 
+        assertTrue(studentBag.isEmpty());
+
         studentGroup = studentBag.drawStudents(1);
         temp = 0;
         for(Color c : Color.values()) {
@@ -75,6 +78,7 @@ public class StudentBagTest {
         assertEquals(temp, TOT_STUDENTS);
 
         studentBag.putStudentsBack(studentGroup);
+        assertFalse(studentBag.isEmpty());
 
         studentGroup = studentBag.drawStudents(10);
         temp = 0;

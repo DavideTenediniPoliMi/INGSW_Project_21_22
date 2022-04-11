@@ -9,16 +9,12 @@ import java.util.Random;
 
 public class StudentBag {
     private final List<Color> availableColors = new ArrayList<>(Arrays.asList(Color.values().clone()));
-
-    private final StudentGroup students;
-    private final Random rand;
+    private final StudentGroup students = new StudentGroup();
+    private final Random rand = new Random();
     private int studentsLeft;
     private boolean empty;
 
     public StudentBag(int numStudentsByColor) {
-        students = new StudentGroup();
-        rand = new Random();
-        empty = false;
         studentsLeft = Color.NUM_COLORS * numStudentsByColor;
 
         for(Color c : Color.values()){
