@@ -33,11 +33,6 @@ public class StudentsStateController extends CharacterCardPlayableStateControlle
         if(playerSchool.getNumStudentsInEntranceByColor(c) > 0){
             Game.getInstance().transferStudentToIsland(islandIndex, c, matchInfo.getCurrentPlayerID());
             matchInfo.studentWasMoved();
-
-            if(matchInfo.getNumMovedStudents() == NUM_MOVABLE_STUDENTS) {
-                //TODO nextPlayer();
-                matchInfo.resetNumMovedStudents();
-            }
         }else {
             throw new NotEnoughStudentsException(c);
         }
@@ -56,11 +51,6 @@ public class StudentsStateController extends CharacterCardPlayableStateControlle
         if(playerSchool.getNumStudentsInEntranceByColor(c) > 0) {
             Game.getInstance().transferStudentToDiningRoom(matchInfo.getCurrentPlayerID(), c);
             matchInfo.studentWasMoved();
-
-            if(matchInfo.getNumMovedStudents() == NUM_MOVABLE_STUDENTS) {
-                //TODO nextPlayer();
-                matchInfo.resetNumMovedStudents();
-            }
         }else {
             throw new NotEnoughStudentsException(c);
         }

@@ -25,6 +25,8 @@ public class GameController {
     private void nextState() throws IllegalActionException {
         switch(matchInfo.getStateType()) {
             case PLANNING:
+                matchInfo.removePlayer();
+
                 if(matchInfo.getNumPlayersStillToAct() == 0) {
                     roundStateController.definePlayOrder();
                     setState(new StudentsStateController(roundStateController));
@@ -41,6 +43,8 @@ public class GameController {
                 break;
             case CLOUD:
                 checkEndConditionAfterRound();
+
+                matchInfo.removePlayer();
 
                 if(matchInfo.getNumPlayersStillToAct() == 0) {
                     roundStateController.definePlayOrder();

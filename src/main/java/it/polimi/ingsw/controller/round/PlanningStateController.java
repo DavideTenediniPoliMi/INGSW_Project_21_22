@@ -46,7 +46,6 @@ public class PlanningStateController extends RoundStateController {
 
         if(p.getPlayableCards().contains(card) && !card.isUsed()) {
             Game.getInstance().playCard(p.getID(), card);
-            //TODO nextPlayer();
         }else {
             throw new CardUsedException(card);
         }
