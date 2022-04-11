@@ -3,7 +3,12 @@ package it.polimi.ingsw.controller.round;
 import it.polimi.ingsw.controller.subcontrollers.CharacterCardController;
 import it.polimi.ingsw.controller.subcontrollers.DiningRoomController;
 import it.polimi.ingsw.controller.subcontrollers.IslandController;
+import it.polimi.ingsw.exceptions.board.CloudUnavailableException;
+import it.polimi.ingsw.exceptions.board.MNOutOfRangeException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
+import it.polimi.ingsw.exceptions.player.CardUsedException;
+import it.polimi.ingsw.exceptions.students.NotEnoughStudentsException;
+import it.polimi.ingsw.exceptions.students.StudentTransferException;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TurnState;
@@ -36,7 +41,7 @@ public class RoundStateController {
         throw new IllegalActionException("definePlayOrder", MatchInfo.getInstance().getStateType());
     }
 
-    public void playCard(int cardIndex) throws IllegalActionException {
+    public void playCard(int cardIndex) throws IllegalActionException, CardUsedException {
         throw new IllegalActionException("playCard", MatchInfo.getInstance().getStateType());
     }
 
@@ -52,18 +57,18 @@ public class RoundStateController {
         throw new IllegalActionException("activateCard", MatchInfo.getInstance().getStateType());
     }
 
-    public void transferStudentToIsland(int islandIndex, Color c) throws IllegalActionException {
+    public void transferStudentToIsland(int islandIndex, Color c) throws IllegalActionException, StudentTransferException, NotEnoughStudentsException {
         throw new IllegalActionException("transferStudentToIsland", MatchInfo.getInstance().getStateType());
     }
 
-    public void transferStudentToDiningRoom(Color c) throws IllegalActionException {
+    public void transferStudentToDiningRoom(Color c) throws IllegalActionException, StudentTransferException, NotEnoughStudentsException {
         throw new IllegalActionException("transferStudentToDiningRoom", MatchInfo.getInstance().getStateType());
     }
-    public void moveMN(int steps) throws IllegalActionException {
+    public void moveMN(int steps) throws IllegalActionException, MNOutOfRangeException {
         throw new IllegalActionException("moveMN", MatchInfo.getInstance().getStateType());
     }
 
-    public void collectFromCloud(int cloudIndex) throws IllegalActionException {
+    public void collectFromCloud(int cloudIndex) throws IllegalActionException, CloudUnavailableException {
         throw new IllegalActionException("collectFromCloud", MatchInfo.getInstance().getStateType());
     }
 }

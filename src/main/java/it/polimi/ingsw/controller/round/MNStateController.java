@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller.round;
 
+import it.polimi.ingsw.exceptions.board.MNOutOfRangeException;
 import it.polimi.ingsw.exceptions.game.NullPlayerException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
@@ -12,14 +13,14 @@ public class MNStateController extends CharacterCardPlayableStateController {
     }
 
     @Override
-    public void moveMN(int steps) {
+    public void moveMN(int steps) throws MNOutOfRangeException {
         Game game = Game.getInstance();
         Player player = game.getPlayerByID(MatchInfo.getInstance().getCurrentPlayerID());
 
         if(player.getID() == -1) {
             throw new NullPlayerException();
         } else if (steps > player.getSelectedCard().RANGE) {
-            //EXCEPTION
+            throw new MNOutOfRangeException(steps, player.getSelectedCard().RANGE);
         }
 
         islandController.moveMN(steps);

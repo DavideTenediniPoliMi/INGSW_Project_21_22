@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller.round;
 
 import it.polimi.ingsw.exceptions.game.BadParametersException;
+import it.polimi.ingsw.exceptions.player.CardUsedException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
@@ -29,7 +30,7 @@ public class PlanningStateController extends RoundStateController {
     * Assuming the request is already verified at this point (Sender is currentPlayer)
     * */
     @Override
-    public void playCard(int cardIndex) {
+    public void playCard(int cardIndex) throws CardUsedException {
         /*
         * Checks
         *   - Check if player has already played?
@@ -47,7 +48,7 @@ public class PlanningStateController extends RoundStateController {
             Game.getInstance().playCard(p.getID(), card);
             //TODO nextPlayer();
         }else {
-            //CARD USED EXCEPTION
+            throw new CardUsedException(card);
         }
     }
 }

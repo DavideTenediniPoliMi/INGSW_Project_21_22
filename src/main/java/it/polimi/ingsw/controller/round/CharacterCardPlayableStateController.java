@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller.round;
 
 import it.polimi.ingsw.exceptions.game.BadParametersException;
+import it.polimi.ingsw.exceptions.player.NotEnoughCoinsException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.characters.CharacterCard;
@@ -21,13 +22,17 @@ public class CharacterCardPlayableStateController extends RoundStateController {
         if(cardIndex < 0 || cardIndex > 2) {
             throw new BadParametersException("cardIndex is " + cardIndex + ", expected between 0 and 2");
         }
-        characterCardController.buyCharacterCard(MatchInfo.getInstance().getCurrentPlayerID(), cardIndex);
+        try {
+            characterCardController.buyCharacterCard(MatchInfo.getInstance().getCurrentPlayerID(), cardIndex);
+        } catch(NotEnoughCoinsException e) {
+            e.printStackTrace();
+        }
+
         fromOrigin = null;
     }
 
     @Override
     public void setCardParameters(Parameters params) {
-        //TODO surround with try/catch
         characterCardController.setCardParameters(params);
         CharacterCard card = Game.getInstance().getActiveCharacterCard();
 

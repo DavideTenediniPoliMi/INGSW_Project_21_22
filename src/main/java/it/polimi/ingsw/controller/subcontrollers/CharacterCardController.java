@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller.subcontrollers;
 
 import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.exceptions.game.NullPlayerException;
+import it.polimi.ingsw.exceptions.player.NotEnoughCoinsException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.characters.CharacterCard;
@@ -18,7 +19,7 @@ public class CharacterCardController {
         effectUsed = false;
     }
 
-    public void buyCharacterCard(int playerID, int cardIndex) {
+    public void buyCharacterCard(int playerID, int cardIndex) throws NotEnoughCoinsException{
         if(Game.getInstance().getActiveCharacterCard() == null) {
             Player player = Game.getInstance().getPlayerByID(playerID);
             CharacterCard card = Game.getInstance().getCharacterCards().get(cardIndex);
@@ -26,7 +27,9 @@ public class CharacterCardController {
             if(player.getNumCoins() >= card.getCost()) {
                 effectUsed = false;
                 Game.getInstance().buyCharacterCard(playerID, cardIndex);
-            }//TODO throw notEnoughCoins
+            }else {
+                throw new NotEnoughCoinsException(player.getNumCoins(), card.getCost());
+            }
         }
     }
 
@@ -37,7 +40,7 @@ public class CharacterCardController {
                     Game.getInstance().setCardParameters(params);
                 }
             } catch (BadParametersException | NullPlayerException exc) {
-                System.out.println("[EXCEPTION]" + exc);
+                exc.printStackTrace();
             }
         }
     }

@@ -1,6 +1,8 @@
 package it.polimi.ingsw.controller.round;
 
 import it.polimi.ingsw.exceptions.game.BadParametersException;
+import it.polimi.ingsw.exceptions.students.NotEnoughStudentsException;
+import it.polimi.ingsw.exceptions.students.StudentTransferException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 
@@ -9,7 +11,7 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TurnState;
 
 public class StudentsStateController extends CharacterCardPlayableStateController{
-    private final int NUM_MOVABLE_STUDENTS = 3; //TODO change
+    private final int NUM_MOVABLE_STUDENTS = MatchInfo.getInstance().getMaxMovableStudents();
 
     public StudentsStateController(RoundStateController oldState) {
         super(oldState, TurnState.STUDENTS);
@@ -17,13 +19,13 @@ public class StudentsStateController extends CharacterCardPlayableStateControlle
     }
 
     @Override
-    public void transferStudentToIsland(int islandIndex, Color c) {
+    public void transferStudentToIsland(int islandIndex, Color c) throws StudentTransferException, NotEnoughStudentsException, BadParametersException {
         MatchInfo matchInfo = MatchInfo.getInstance();
 
         if(islandIndex < 0 || islandIndex >= Game.getInstance().getBoard().getNumIslands()) {
             throw new BadParametersException("islandIndex is " + islandIndex + ", expected between 0 and " + Game.getInstance().getBoard().getNumIslands());
         }else if(matchInfo.getNumMovedStudents() >= NUM_MOVABLE_STUDENTS) {
-            //EXCEPTION
+            throw new StudentTransferException("Player already moved " + NUM_MOVABLE_STUDENTS + " students!");
         }
 
         School playerSchool = Game.getInstance().getBoard().getSchoolByPlayerID(matchInfo.getCurrentPlayerID());
@@ -37,16 +39,16 @@ public class StudentsStateController extends CharacterCardPlayableStateControlle
                 matchInfo.resetNumMovedStudents();
             }
         }else {
-            //NOT ENOUGH STUDENTS EXCEPTION
+            throw new NotEnoughStudentsException(c);
         }
     }
 
     @Override
-    public void transferStudentToDiningRoom(Color c) {
+    public void transferStudentToDiningRoom(Color c) throws StudentTransferException, NotEnoughStudentsException {
         MatchInfo matchInfo = MatchInfo.getInstance();
 
         if(matchInfo.getNumMovedStudents() >= NUM_MOVABLE_STUDENTS) {
-            //EXCEPTION
+            throw new StudentTransferException("Player already moved " + NUM_MOVABLE_STUDENTS + " students!");
         }
 
         School playerSchool = Game.getInstance().getBoard().getSchoolByPlayerID(matchInfo.getCurrentPlayerID());
@@ -60,7 +62,7 @@ public class StudentsStateController extends CharacterCardPlayableStateControlle
                 matchInfo.resetNumMovedStudents();
             }
         }else {
-            //NOT ENOUGH STUDENTS EXCEPTION
+            throw new NotEnoughStudentsException(c);
         }
     }
 }

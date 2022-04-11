@@ -1,9 +1,11 @@
 package it.polimi.ingsw.controller.round;
 
+import it.polimi.ingsw.exceptions.board.CloudUnavailableException;
 import it.polimi.ingsw.exceptions.game.NullPlayerException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.board.Cloud;
 import it.polimi.ingsw.model.enumerations.TurnState;
 
 import java.util.Collections;
@@ -26,14 +28,14 @@ public class CloudStateController extends RoundStateController {
     }
 
     @Override
-    public void collectFromCloud(int cloudIndex) {
+    public void collectFromCloud(int cloudIndex) throws NullPlayerException, CloudUnavailableException {
         Game game = Game.getInstance();
         int currentPlayerID = MatchInfo.getInstance().getCurrentPlayerID();
 
         if(currentPlayerID == -1) {
             throw new NullPlayerException();
         } else if (!game.getBoard().getClouds().get(cloudIndex).isAvailable()){
-            //EXCEPTION
+            throw new CloudUnavailableException(cloudIndex);
         }
 
         game.collectFromCloud(cloudIndex, currentPlayerID);
