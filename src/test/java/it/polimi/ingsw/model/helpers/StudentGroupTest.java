@@ -26,19 +26,43 @@ public class StudentGroupTest {
     @Test
     public void testGetByColor() {
         assertEquals(4, studentGroup.getByColor(Color.BLUE));
+
+        for(Color c: Color.values()) {
+            if(c != Color.BLUE) {
+                assertEquals(0, studentGroup.getByColor(c));
+            }
+            assertEquals(0, studentGroup1.getByColor(c));
+        }
     }
 
     @Test
     public void testAddByColor() {
         studentGroup.addByColor(Color.BLUE, 1);
         assertEquals(5, studentGroup.getByColor(Color.BLUE));
+
+        for(Color c: Color.values()) {
+            if(c != Color.BLUE) {
+                assertEquals(0, studentGroup.getByColor(c));
+            }
+        }
     }
 
     @Test
-    public void testTransferAllTo() {
+    public void testTransferAllToSingleColor() {
         studentGroup.transferAllTo(studentGroup1);
         assertEquals(4, studentGroup1.getByColor(Color.BLUE));
         assertEquals(0, studentGroup.getByColor(Color.BLUE));
+    }
+
+    @Test
+    public void testTransferAllToMultipleColors() {
+        studentGroup.addByColor(Color.GREEN, 3);
+
+        studentGroup.transferAllTo(studentGroup1);
+
+        assertEquals(4, studentGroup1.getByColor(Color.BLUE));
+        assertEquals(3, studentGroup1.getByColor(Color.GREEN));
+        assertEquals(0, studentGroup.getByColor(Color.GREEN));
     }
 
     @Test
