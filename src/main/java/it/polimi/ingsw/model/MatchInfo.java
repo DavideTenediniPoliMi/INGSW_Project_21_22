@@ -1,8 +1,11 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.TurnState;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class MatchInfo {
@@ -11,11 +14,14 @@ public class MatchInfo {
     private boolean expertMode;
     private int numPlayersConnected;
     private TurnState stateType;
-    private final Queue<Integer> playOrder;
+    private final Queue<Integer> playOrder = new LinkedList<>();
     private int numMovedStudents;
+    private boolean gameOver;
+    private final List<TowerColor> winners = new ArrayList<>();
+    private boolean gameTied;
 
     private MatchInfo() {
-        playOrder = new LinkedList<>();
+
     }
 
     public static MatchInfo getInstance() {
@@ -92,5 +98,28 @@ public class MatchInfo {
 
     public int getCurrentPlayerID() {
         return (playOrder.peek() != null) ? playOrder.peek() : -1;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public boolean isGameTied() {
+        return gameTied;
+    }
+
+    public List<TowerColor> getWinners() {
+        return new ArrayList<>(winners);
+    }
+
+    public void declareWinner(TowerColor teamColor) {
+        gameOver = true;
+        winners.add(teamColor);
+    }
+
+    public void declareTie(List<TowerColor> teamColors) {
+        gameOver = true;
+        gameTied = true;
+        winners.addAll(teamColors);
     }
 }

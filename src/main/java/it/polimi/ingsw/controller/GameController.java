@@ -160,10 +160,10 @@ public class GameController {
     }
 
     private void declareWinner(TowerColor teamColor) {
-        // TODO
+        matchInfo.declareWinner(teamColor);
     }
 
     private void declareTie(List<TowerColor> teamColors) {
-        // TODO
+        matchInfo.declareTie(teamColors);
     }
 }
