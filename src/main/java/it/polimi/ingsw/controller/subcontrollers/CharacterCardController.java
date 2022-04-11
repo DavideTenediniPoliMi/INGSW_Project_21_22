@@ -61,9 +61,6 @@ public class CharacterCardController {
         return Game.getInstance().activateCard();
     }
 
-    /*
-    * Throws BadParametersException ?
-    * */
     private boolean checkParameters(Parameters params) throws BadParametersException, NullPlayerException {
         CharacterCard card = Game.getInstance().getActiveCharacterCard();
 
