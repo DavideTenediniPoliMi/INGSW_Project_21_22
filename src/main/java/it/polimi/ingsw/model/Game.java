@@ -12,11 +12,12 @@ import java.util.List;
 import java.util.Optional;
 
 public class Game {
+    private final int NUM_STARTING_STUDENTS_BY_COLOR = 24;
     private static Game instance;
     private final Board board = new Board();
     private final List<Player> players = new ArrayList<>();
     private final List<CharacterCard> characterCards = new ArrayList<>();
-    private final StudentBag bag = new StudentBag();
+    private final StudentBag bag = new StudentBag(NUM_STARTING_STUDENTS_BY_COLOR);
 
     private Game() {
     }
@@ -74,10 +75,8 @@ public class Game {
 
     // SCHOOL
 
-    public void addInitialStudentToIsland(int islandIndex, Color c) {
-        StudentGroup temp = new StudentGroup(c, 1);
-
-        board.addStudentsToIsland(islandIndex, temp);
+    public void addInitialStudentToIsland(int islandIndex, StudentGroup student) {
+        board.addStudentsToIsland(islandIndex, student);
     }
 
     public void transferStudentToIsland(int islandIndex, Color c, int playerID) {

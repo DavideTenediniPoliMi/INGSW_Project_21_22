@@ -101,7 +101,7 @@ public class GameTest {
 
     @Test
     public void testAddInitialStudentToIsland() {
-        g.addInitialStudentToIsland(0, Color.GREEN);
+        g.addInitialStudentToIsland(0, new StudentGroup(Color.GREEN, 1));
 
         assertEquals(1, g.getBoard().getIslandAt(0).getNumStudentsByColor(Color.GREEN));
     }

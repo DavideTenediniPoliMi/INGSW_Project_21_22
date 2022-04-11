@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Random;
 
 public class StudentBag {
-    private final int NUM_STARTING_STUDENT_BY_COLOR = 24;
     private final List<Color> availableColors = new ArrayList<>(Arrays.asList(Color.values().clone()));
 
     private final StudentGroup students;
@@ -16,14 +15,14 @@ public class StudentBag {
     private int studentsLeft;
     private boolean empty;
 
-    public StudentBag() {
+    public StudentBag(int numStudentsByColor) {
         students = new StudentGroup();
         rand = new Random();
         empty = false;
-        studentsLeft = Color.NUM_COLORS * NUM_STARTING_STUDENT_BY_COLOR;
+        studentsLeft = Color.NUM_COLORS * numStudentsByColor;
 
         for(Color c : Color.values()){
-            students.addByColor(c, NUM_STARTING_STUDENT_BY_COLOR);
+            students.addByColor(c, numStudentsByColor);
         }
     }
 
@@ -48,7 +47,7 @@ public class StudentBag {
         return drawnStudents;
     }
 
-    public boolean drawStudent(StudentGroup drawnStudents){
+    private boolean drawStudent(StudentGroup drawnStudents){
         if(!empty){
             Color chosenColor = availableColors.get(rand.nextInt(availableColors.size()));
 

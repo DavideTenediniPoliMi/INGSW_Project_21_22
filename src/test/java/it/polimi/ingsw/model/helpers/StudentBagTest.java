@@ -13,7 +13,7 @@ public class StudentBagTest {
 
     @BeforeEach
     public void setUp() throws Exception {
-        studentBag = new StudentBag();
+        studentBag = new StudentBag(24);
     }
 
     @AfterEach

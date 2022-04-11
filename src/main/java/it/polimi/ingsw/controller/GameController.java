@@ -7,19 +7,61 @@ import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.ProfessorTracker;
 import it.polimi.ingsw.model.board.School;
+import it.polimi.ingsw.model.enumerations.CharacterCards;
 import it.polimi.ingsw.model.enumerations.Color;
+import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.model.enumerations.TowerColor;
+import it.polimi.ingsw.model.helpers.StudentBag;
+import it.polimi.ingsw.model.helpers.StudentGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class GameController {
     private RoundStateController roundStateController;
+    private GameStatus status;
     private final MatchInfo matchInfo;
+    private final Game game;
 
     public GameController() {
         matchInfo = MatchInfo.getInstance();
+        game = Game.getInstance();
+        status = GameStatus.LOBBY;
+    }
+
+    private void createGame() {
+        /*
+         * Game, Board and Islands are already instantiated
+         * (1) Instantiate Schools
+         * (2) Bind schools
+         * (3) Add 10 students to Islands
+         * (4) Instantiate Clouds
+         * (5e) Instantiate CharacterCards
+         * (6e) Give out coins
+         **/
+        for(Player player : game.getPlayers()) {
+            game.getBoard().addSchool(player);
+            if(matchInfo.isExpertMode()) {
+                game.giveCoinToPlayer(player.getID());
+            }
+        }
+
+        StudentBag islandBag = new StudentBag(10);
+        for(int i = 0; i < 10; i++){
+            game.addInitialStudentToIsland(i, islandBag.drawStudents(1));
+        }
+
+        game.createClouds(game.getPlayers().size());
+
+        if(matchInfo.isExpertMode()) {
+            Random r = new Random();
+            for(int i = 0; i < 3; i++){
+                int cardID = r.nextInt(CharacterCards.values().length);
+                game.instantiateCharacterCard(cardID);
+            }
+        }
     }
 
     private void nextState() throws IllegalActionException {
