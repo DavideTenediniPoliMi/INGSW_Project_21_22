@@ -42,13 +42,14 @@ public class GameController {
                 setState(new CloudStateController(roundStateController));
                 break;
             case CLOUD:
-                checkEndConditionAfterRound();
-
                 matchInfo.removePlayer();
 
                 if(matchInfo.getNumPlayersStillToAct() == 0) {
                     roundStateController.definePlayOrder();
+
+                    checkEndConditionAfterRound();
                     Game.getInstance().resetCards();
+
                     setState(new PlanningStateController(roundStateController));
                 } else {
                     setState(new StudentsStateController(roundStateController));

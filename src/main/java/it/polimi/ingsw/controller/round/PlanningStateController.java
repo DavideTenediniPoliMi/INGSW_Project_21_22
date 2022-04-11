@@ -14,6 +14,7 @@ import java.util.List;
 public class PlanningStateController extends RoundStateController {
     public PlanningStateController(RoundStateController oldState) {
         super(oldState, TurnState.PLANNING);
+        Game.getInstance().refillClouds(MatchInfo.getInstance().getMaxMovableStudents());
     }
 
     @Override
