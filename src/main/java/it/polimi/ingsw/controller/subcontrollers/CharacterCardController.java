@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller.subcontrollers;
 
 import it.polimi.ingsw.exceptions.game.BadParametersException;
+import it.polimi.ingsw.exceptions.game.NullCharacterCardException;
 import it.polimi.ingsw.exceptions.game.NullPlayerException;
 import it.polimi.ingsw.exceptions.player.NotEnoughCoinsException;
 import it.polimi.ingsw.model.Game;
@@ -30,6 +31,8 @@ public class CharacterCardController {
             }else {
                 throw new NotEnoughCoinsException(player.getNumCoins(), card.getCost());
             }
+        }else {
+            throw new NullCharacterCardException();
         }
     }
 
@@ -42,6 +45,8 @@ public class CharacterCardController {
             } catch (BadParametersException | NullPlayerException exc) {
                 exc.printStackTrace();
             }
+        }else {
+            throw new NullCharacterCardException();
         }
     }
 
@@ -52,13 +57,21 @@ public class CharacterCardController {
         CharacterCard card = Game.getInstance().getActiveCharacterCard();
         if(card != null) {
             return card.getEffectType().equals(effectType);
+        }else {
+            throw new NullCharacterCardException();
         }
-        return false;
     }
 
     public int activateCard() {
         effectUsed = true;
         return Game.getInstance().activateCard();
+    }
+
+    public void clearEffects() {
+        CharacterCard card = Game.getInstance().getActiveCharacterCard();
+        if(card != null) {
+            card.clearEffect();
+        }
     }
 
     private boolean checkParameters(Parameters params) throws BadParametersException, NullPlayerException {

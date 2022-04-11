@@ -49,6 +49,7 @@ public class GameController {
 
                     checkEndConditionAfterRound();
                     Game.getInstance().resetCards();
+                    roundStateController.clearEffects();
 
                     setState(new PlanningStateController(roundStateController));
                 } else {

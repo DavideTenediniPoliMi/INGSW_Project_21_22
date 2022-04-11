@@ -37,6 +37,10 @@ public class RoundStateController {
         // TODO decide first player order
     }
 
+    public void clearEffects() {
+        characterCardController.clearEffects();
+    }
+
     public void definePlayOrder() throws IllegalActionException {
         throw new IllegalActionException("definePlayOrder", MatchInfo.getInstance().getStateType());
     }
