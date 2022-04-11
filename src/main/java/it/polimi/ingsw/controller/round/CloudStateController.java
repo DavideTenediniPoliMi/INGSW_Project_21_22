@@ -22,9 +22,7 @@ public class CloudStateController extends RoundStateController {
         List<Player> players = Game.getInstance().getPlayers();
 
         Player firstPlayerToAct = players.stream().min(Comparator.comparing(Player::getSelectedCard)).orElse(null);
-        int firstPlayerToActIndex = players.indexOf(firstPlayerToAct);
-
-        Collections.rotate(players, firstPlayerToActIndex * -1); // times -1 so that it rotates to the left
+        defineClockWiseOrder(players.indexOf(firstPlayerToAct));
     }
 
     @Override
