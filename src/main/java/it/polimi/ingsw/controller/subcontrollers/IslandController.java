@@ -28,12 +28,12 @@ public class IslandController {
     private TowerColor getMostInfluentialTeam() {
         TowerColor oldMostInfluential = getOldMostInfluentialTeam();
         TowerColor mostInfluentialTeam = null;
-        int maxInfluenceScore = -1;
+        int maxInfluenceScore = 0;
 
         for(TowerColor teamColor: TowerColor.values()) {
             int teamScore = getInfluenceOf(teamColor);
 
-            if(teamScore < maxInfluenceScore ||
+            if(teamScore > maxInfluenceScore ||
                     (teamScore == maxInfluenceScore && teamColor == oldMostInfluential)) { // in case of tie we keep the current team
                 mostInfluentialTeam = teamColor;
                 maxInfluenceScore = teamScore;
@@ -81,9 +81,9 @@ public class IslandController {
         int rightIslandIndex = (targetIslandIndex + 1) % board.getNumIslands();
         if(board.getIslandAt(rightIslandIndex).getTeamColor() == targetTeamColor) {
             game.mergeIslands(targetIslandIndex, rightIslandIndex);
+            targetIslandIndex = board.getMNPosition();
         }
 
-        targetIslandIndex = board.getMNPosition(); //could be different since there could have been a merge
         int leftIslandIndex = (targetIslandIndex > 0) ? targetIslandIndex - 1 : board.getNumIslands() - 1;
         if(board.getIslandAt(leftIslandIndex).getTeamColor() == targetTeamColor) {
             game.mergeIslands(leftIslandIndex, targetIslandIndex);
