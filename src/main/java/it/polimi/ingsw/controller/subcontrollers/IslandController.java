@@ -1,11 +1,15 @@
 package it.polimi.ingsw.controller.subcontrollers;
 
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.ProfessorTracker;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
+
+import java.util.List;
+import java.util.Optional;
 
 public class IslandController {
     public IslandController() {
@@ -20,6 +24,14 @@ public class IslandController {
         TowerColor newMostInfluentialTeam = getMostInfluentialTeam();
 
         if(oldMostInfluentialTeam == newMostInfluentialTeam) return;
+
+        int newOwnerTowerHolderID = getTowerHolderIDOf(newMostInfluentialTeam);
+        game.removeTowersFrom(newOwnerTowerHolderID, getNumTowersOnIsland());
+
+        if(oldMostInfluentialTeam != null) {
+            int oldOwnerTowerHolderID = getTowerHolderIDOf(oldMostInfluentialTeam);
+            game.addTowersTo(oldOwnerTowerHolderID, getNumTowersOnIsland());
+        }
 
         game.conquerIsland(newMostInfluentialTeam);
         mergeIslands();
@@ -96,5 +108,24 @@ public class IslandController {
         int newMNPosition = board.getMNPosition();
 
         return board.getIslandAt(newMNPosition).getTeamColor();
+    }
+
+    private int getNumTowersOnIsland() {
+        Game game = Game.getInstance();
+        Board board = game.getBoard();
+        int newMNPosition = board.getMNPosition();
+
+        return board.getIslandAt(newMNPosition).getNumIslands();
+    }
+
+    private int getTowerHolderIDOf(TowerColor teamColor) {
+        List<Player> players = Game.getInstance().getPlayers();
+
+        Optional<Player> result = players.stream()
+                .filter((player) -> (player.isTowerHolder() && player.getTeamColor() == teamColor))
+                .findAny();
+
+        if(result.isEmpty()) return -1;
+        return result.get().getID();
     }
 }
