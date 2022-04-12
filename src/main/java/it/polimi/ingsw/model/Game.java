@@ -299,7 +299,7 @@ public class Game {
 
     /**
      * Returns the instantiated Character Cards for this Game
-     * @return the list of instantiated CharacterCards
+     * @return list of instantiated CharacterCards
      */
     public List<CharacterCard> getCharacterCards() {
         return characterCards;
@@ -316,7 +316,7 @@ public class Game {
 
     /**
      * Gets the active CharacterCard. Returns <code>null</code> if no card is active during this Turn.
-     * @return the active <code>CharacterCard</code>
+     * @return active <code>CharacterCard</code>
      */
     public CharacterCard getActiveCharacterCard() {
         Optional<CharacterCard> active = characterCards.stream()
@@ -354,7 +354,7 @@ public class Game {
 
     /**
      * Activates the effect of the active <code>CharacterCard</code>.
-     * @return the result of the effect of the <code>CharacterCard</code>.
+     * @return result of the effect of the <code>CharacterCard</code>.
      */
     public int activateCard() {
         return getActiveCharacterCard().activate();
@@ -365,7 +365,7 @@ public class Game {
     /**
      * Draws the specified amount of students from the <code>StudentBag</code>.
      * @param amount the amount of students to draw.
-     * @return the StudentGroup containing the amount of students requested.
+     * @return StudentGroup containing the amount of students requested.
      */
     public StudentGroup drawStudents(int amount) {
         return bag.drawStudents(amount);
