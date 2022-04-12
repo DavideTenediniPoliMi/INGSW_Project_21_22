@@ -31,6 +31,7 @@ public class Game {
 
     /**
      * Returns existing Game, otherwise instantiates a new one.
+     *
      * @return Game instance
      */
     public static Game getInstance(){
@@ -50,6 +51,7 @@ public class Game {
 
     /**
      * Gets <code>Board</code> instance
+     *
      * @return <code>Board</code> instance
      * @see Board
      */
@@ -61,6 +63,7 @@ public class Game {
 
     /**
      * Conquers an <code>Island</code> for team <code>teamColor</code>
+     *
      * @param teamColor the color of the team conquering the island
      * @see TowerColor
      */
@@ -76,6 +79,7 @@ public class Game {
      * is the "Right" <code>Island</code>. Left/Right concepts are to be considered "clockwise", meaning the right
      * <code>Island</code> will always have index = leftIslandIndex + 1
      * </p>
+     *
      * @param leftIslandIndex the index of the <code>Island</code> to the left
      * @param rightIslandIndex the index of the <code>Island</code> to the right
      * @see it.polimi.ingsw.model.board.Island
@@ -90,6 +94,7 @@ public class Game {
 
     /**
      * Places Mother Nature at specified position. Only to be used when initializing the game
+     *
      * @param islandIndex the position to place Mother Nature at
      */
     public void placeMNAt(int islandIndex){
@@ -100,6 +105,7 @@ public class Game {
      * Moves Mother Nature the specified amount of steps. The steps will always be taken "clockwise", meaning +1 will
      * move Mother Nature to the <code>Island</code> on the right, and -1 to the <code>Island</code> on the left.
      * <code>steps</code> must be positive.
+     *
      * @param steps the amount of steps Mother Nature has to move
      */
     public void moveMN(int steps){
@@ -110,6 +116,7 @@ public class Game {
 
     /**
      * Creates the specified amount of clouds. Only to be used when initializing the Game
+     *
      * @param amount the number of clouds to create
      * @see it.polimi.ingsw.model.board.Cloud
      */
@@ -120,6 +127,7 @@ public class Game {
     /**
      * Moves students contained on specified cloud, to specified player. <code>cloudIndex</code> must refer to an
      * existing <code>Cloud</code>, <code>playerID</code> must refer to an existing <code>Player</code>.
+     *
      * @param cloudIndex the index of the <code>Cloud</code> to collect students from
      * @param playerID the ID of the <code>Player</code> collecting the students
      */
@@ -131,6 +139,7 @@ public class Game {
     /**
      * Refills all the clouds on the <code>Board</code> with <code>studentsAmount</code> amount of students and makes
      * them available again. To be called at the end of every round.
+     *
      * @param studentsAmount the amount of students for each <code>Cloud</code>
      */
     public void refillClouds(int studentsAmount){
@@ -142,6 +151,7 @@ public class Game {
     /**
      * Adds the specified student to the specified <code>Island</code>. Only to be used when initializing the Game. The
      * <code>StudentGroup</code> must contain only 1 student.
+     *
      * @param islandIndex the index of the recipient <code>Island</code>
      * @param student the student to add
      */
@@ -153,6 +163,7 @@ public class Game {
      * Transfers a student of the specified <code>Color</code> from the specified <code>Player</code>'s <code>School</code>
      * entrance to the specified <code>Island</code>. The player must have at least 1 student of the specified
      * <code>Color</code>.
+     *
      * @param islandIndex the index of the recipient <code>Island</code>
      * @param c the color of the student to transfer
      * @param playerID the ID of the <code>Player</code> requesting the transfer
@@ -168,6 +179,7 @@ public class Game {
     /**
      * Transfers a student of the specified <code>Color</code> from the specified <code>Player</code>'s <code>School</code>
      * entrance to the dining room. The player must have at least 1 student of the specified <code>Color</code>.
+     *
      * @param playerID the ID of the <code>Player</code> requesting the transfer
      * @param c the color of the student to transfer
      * @see Color
@@ -182,6 +194,7 @@ public class Game {
     /**
      * Adds the specified amount of towers to the specified <code>Player</code>. The <code>Player</code> must be
      * towerHolder
+     *
      * @param playerID the ID of the player. The towers are added to this player's <code>School</code>
      * @param numTowers the amount of towers to add
      */
@@ -192,6 +205,7 @@ public class Game {
     /**
      * Removes the specified amount of towers from the specified <code>Player</code>. The <code>Player</code> must be
      * towerHolder
+     *
      * @param playerID the ID of the player. The towers are remove from this player's <code>School</code>
      * @param numTowers the amount of towers to remove
      */
@@ -203,6 +217,7 @@ public class Game {
 
     /**
      * Gives the professor of the specified <code>Color</code> to the specified <code>Player</code>
+     *
      * @param playerID the ID of the new owner of the specified professor
      * @param c the color of the professor
      */
@@ -214,6 +229,7 @@ public class Game {
 
     /**
      * Returns the list of players in the Game.
+     *
      * @return the list of players
      */
     public List<Player> getPlayers() {
@@ -222,6 +238,7 @@ public class Game {
 
     /**
      * Returns the <code>Player</code> instance with specified ID. Returns <code>null</code> if no match is found
+     *
      * @param ID the ID of the player
      * @return the <code>Player</code> instance with specified ID
      */
@@ -235,6 +252,7 @@ public class Game {
 
     /**
      * Adds a new <code>Player</code> to the game with specified info. ID and name must be unique
+     *
      * @param ID the ID of the new <code>Player</code>
      * @param name the name of the new <code>Player</code>
      * @param teamColor the team color of the new <code>Player</code>
@@ -248,6 +266,7 @@ public class Game {
 
     /**
      * Returns whether the specified name is already taken
+     *
      * @param name the name to check
      * @return <code>true</code> if another <code>Player</code> already has that name
      */
@@ -257,6 +276,7 @@ public class Game {
 
     /**
      * Plays the specified (Assistant) <code>Card</code> for the specified <code>Player</code>
+     *
      * @param playerID the ID of the player playing the assistant card
      * @param selectedCard the card to play
      * @see Card
@@ -277,6 +297,7 @@ public class Game {
 
     /**
      * Takes a coin from the <code>Board</code> and adds it to the specified <code>Player</code>.
+     *
      * @param playerID the ID of the player receiving the coin.
      */
     public void giveCoinToPlayer(int playerID) {
@@ -287,6 +308,7 @@ public class Game {
     /**
      * Gives initial <code>amount</code> amount of students to the specified <code>Player</code>'s <code>School</code>.
      * Only to be used when initializing the Game. The students are directly randomly drawn from the <code>StudentBag</code>
+     *
      * @param playerID the ID of the player receiving the students
      * @param amount the amount of students to draw from the <code>StudentBag</code>
      */
@@ -299,6 +321,7 @@ public class Game {
 
     /**
      * Returns the instantiated Character Cards for this Game
+     *
      * @return list of instantiated CharacterCards
      */
     public List<CharacterCard> getCharacterCards() {
@@ -307,6 +330,7 @@ public class Game {
 
     /**
      * Instantiates a new CharacterCard with the specified ID. Only to be called when initializing the Game.
+     *
      * @param cardID the ID of the card to instantiate
      * @see CharacterCards
      */
@@ -316,6 +340,7 @@ public class Game {
 
     /**
      * Gets the active CharacterCard. Returns <code>null</code> if no card is active during this Turn.
+     *
      * @return active <code>CharacterCard</code>
      */
     public CharacterCard getActiveCharacterCard() {
@@ -330,6 +355,7 @@ public class Game {
      * Buys the specified <code>CharacterCard</code> for the specified <code>Player</code>. Removes the card's price
      * from the <code>Player</code>'s coins, then adds 1 coin to the card to increase its cost, and puts the other
      * coins back in the <code>Board</code>. Sets the card active.
+     *
      * @param playerID the ID of the <code>Player</code> buying the card.
      * @param cardIndex the Index of the <code>CharacterCard</code> to buy.
      */
@@ -346,6 +372,7 @@ public class Game {
 
     /**
      * Sets the specified <code>Parameters</code> to the active card. There must be an active <code>CharacterCard</code>.
+     *
      * @param params the <code>Parameters</code> to set to the active card.
      */
     public void setCardParameters(Parameters params){
@@ -354,6 +381,7 @@ public class Game {
 
     /**
      * Activates the effect of the active <code>CharacterCard</code>.
+     *
      * @return result of the effect of the <code>CharacterCard</code>.
      */
     public int activateCard() {
@@ -364,6 +392,7 @@ public class Game {
 
     /**
      * Draws the specified amount of students from the <code>StudentBag</code>.
+     *
      * @param amount the amount of students to draw.
      * @return StudentGroup containing the amount of students requested.
      */
@@ -373,6 +402,7 @@ public class Game {
 
     /**
      * Adds the specified <code>StudentGroup</code> back to the <code>StudentBag</code>.
+     *
      * @param students the students to put back in the <code>StudentBag</code>.
      */
     public void putStudentsBack(StudentGroup students) {
@@ -381,6 +411,7 @@ public class Game {
 
     /**
      * Checks whether the <code>StudentBag</code> is empty.
+     *
      * @return <code>true</code> if the <code>StudentBag</code> is empty.
      */
     public boolean isStudentBagEmpty() {

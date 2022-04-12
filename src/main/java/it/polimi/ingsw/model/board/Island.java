@@ -14,6 +14,7 @@ public abstract class Island {
 
     /**
      * Adds specified students to this <code>Island</code>
+     *
      * @param toAdd the <code>StudentGroup</code> to add
      */
     protected void addStudents(StudentGroup toAdd) {
@@ -22,6 +23,7 @@ public abstract class Island {
 
     /**
      * Returns the color of the last team that conquered this <code>Island</code>
+     *
      * @return <code>TowerColor</code> of the team that conquered this <code>Island</code>
      */
     public TowerColor getTeamColor() {
@@ -30,6 +32,7 @@ public abstract class Island {
 
     /**
      * Sets the color of the team that conquered this <code>Island</code>
+     *
      * @param teamColor the color of the team
      */
     private void setTeamColor(TowerColor teamColor) {
@@ -38,6 +41,7 @@ public abstract class Island {
 
     /**
      * Returns whether Mother Nature is on this <code>Island</code>
+     *
      * @return <code>true</code> if Mother Nature is on this <code>Island</code>
      */
     public boolean isMotherNatureOnIsland() {
@@ -46,6 +50,7 @@ public abstract class Island {
 
     /**
      * Sets whether Mother Nature is on this <code>Island</code>
+     *
      * @param motherNature the flag specifying if Mother Nature is on this <code>Island</code>
      */
     protected void setMotherNatureTo(boolean motherNature) {
@@ -54,6 +59,7 @@ public abstract class Island {
 
     /**
      * Returns the amount of students on this <code>Island</code> of the specified <code>Color</code>
+     *
      * @param c the <code>Color</code> of the students
      * @return Amount of students of speficied <code>Color</code>
      */
@@ -63,6 +69,7 @@ public abstract class Island {
 
     /**
      * Conquers this <code>Island</code> with the specified team color
+     *
      * @param teamColor the team conquering this <code>Island</code>
      */
     protected void conquerIsland(TowerColor teamColor) {
@@ -71,6 +78,7 @@ public abstract class Island {
 
     /**
      * Returns the amount of Islands (>1 if MultiIsland)
+     *
      * @return Amount of islands
      */
     public abstract int getNumIslands();

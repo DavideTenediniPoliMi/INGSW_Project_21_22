@@ -12,6 +12,7 @@ public class MultiIsland extends Island {
 
     /**
      * Sole constructor for MultiIsland, merges two generic islands
+     *
      * @param leftIsland the island on the left
      * @param rightIsland the island on the right
      */
@@ -25,6 +26,7 @@ public class MultiIsland extends Island {
 
     /**
      * Returns the number of students of the specified color both in this <code>Island</code> and its "children" islands
+     *
      * @param c the <code>Color</code> of the students
      * @return Amount of students of specified color in this Island
      */
@@ -37,6 +39,7 @@ public class MultiIsland extends Island {
 
     /**
      * Conquers this <code>Island</code> and its children
+     *
      * @param teamColor the team conquering this <code>Island</code>
      */
     @Override
@@ -49,6 +52,7 @@ public class MultiIsland extends Island {
 
     /**
      * Sets whether Mother Nature is on this <code>Island</code>
+     *
      * @param motherNature the flag specifying if Mother Nature is on this <code>Island</code>
      */
     @Override
@@ -61,6 +65,7 @@ public class MultiIsland extends Island {
 
     /**
      * Returns the amount of single islands contained in this <code>MultiIsland</code>
+     *
      * @return Amount of islands
      */
     @Override

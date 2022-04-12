@@ -22,6 +22,7 @@ public class Player {
 
     /**
      * Sole constructor to instantiate a new <code>Player</code>
+     *
      * @param ID the ID of the player
      * @param name the name of the player
      * @param teamColor the team of the player
@@ -40,6 +41,7 @@ public class Player {
 
     /**
      * Returns the ID of this <code>Player</code>
+     *
      * @return ID of this Player
      */
     public int getID() {
@@ -48,6 +50,7 @@ public class Player {
 
     /**
      * Returns the name of this <code>Player</code>
+     *
      * @return name of this Player
      */
     public String getName() {
@@ -56,6 +59,7 @@ public class Player {
 
     /**
      * Returns the team of this <code>Player</code>
+     *
      * @return team of this Player
      */
     public TowerColor getTeamColor() {
@@ -64,6 +68,7 @@ public class Player {
 
     /**
      * Returns the <code>CardBack</code> picked by this <code>Player</code>
+     *
      * @return CardBack of this Player
      */
     public CardBack getCardBack() {
@@ -72,6 +77,7 @@ public class Player {
 
     /**
      * Returns whether this <code>Player</code> holds towers in its <code>School</code>
+     *
      * @return <code>true</code> if this Player holds towers for its team
      */
     public boolean isTowerHolder() {
@@ -80,6 +86,7 @@ public class Player {
 
     /**
      * Returns the assistant cards this <code>Player</code> can still use.
+     *
      * @return list of cards available for use.
      */
     public List<Card> getPlayableCards(){
@@ -88,6 +95,7 @@ public class Player {
 
     /**
      * Returns the assistant card selected by this <code>Player</code>.
+     *
      * @return Assistant card selected for this turn.
      */
     public Card getSelectedCard() {
@@ -96,6 +104,7 @@ public class Player {
 
     /**
      * Sets the selected card to the one specified.
+     *
      * @param card the assistant card picked.
      */
     protected void setSelectedCard(Card card) {
@@ -105,6 +114,7 @@ public class Player {
 
     /**
      * Returns the amount of coins of this <code>Player</code>. 0 if game is not in expert mode
+     *
      * @return Amount of coins
      */
     public int getNumCoins() {
@@ -120,6 +130,7 @@ public class Player {
 
     /**
      * Removes the specified amount of coins from this <code>Player</code>
+     *
      * @param amount the amount of coins to remove
      */
     protected void removeCoins(int amount){

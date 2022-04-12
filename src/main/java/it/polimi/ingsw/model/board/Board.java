@@ -36,6 +36,7 @@ public class Board {
 
     /**
      * Gets the <code>Island</code> at the specified index.
+     *
      * @param islandIndex the index of the <code>Island</code> to fetch.
      * @return <code>Island</code> with specified index.
      */
@@ -45,6 +46,7 @@ public class Board {
 
     /**
      * Returns the list of islands.
+     *
      * @return list of <code>Island</code>.
      */
     protected List<Island> getIslands() {
@@ -53,6 +55,7 @@ public class Board {
 
     /**
      * Returns the amount of islands in this game.
+     *
      * @return Current amount of islands.
      */
     public int getNumIslands() {
@@ -61,6 +64,7 @@ public class Board {
 
     /**
      * Transfers specified students to specified island.
+     *
      * @param islandIndex the index of the recipient <code>Island</code>.
      * @param students the <code>StudentGroup</code> to transfer.
      */
@@ -70,6 +74,7 @@ public class Board {
 
     /**
      * Conquers the island where Mother Nature is currently on for the specified team.
+     *
      * @param teamColor the team conquering the <code>Island</code>.
      */
     public void conquerIsland(TowerColor teamColor) {
@@ -79,6 +84,7 @@ public class Board {
 
     /**
      * Merges two islands into one. Called by Game.
+     *
      * @param leftIslandIndex the index of the left <code>Island</code>.
      * @param rightIslandIndex the index of the right <code>Island</code>.
      */
@@ -99,6 +105,7 @@ public class Board {
 
     /**
      * Returns the index of the <code>Island</code> with Mother Nature on.
+     *
      * @return Index of the <code>Island</code> with Mother Nature.
      */
     public int getMNPosition() {
@@ -111,6 +118,7 @@ public class Board {
 
     /**
      * Places Mother Nature at the specified <code>Island</code>.
+     *
      * @param islandIndex the index of the <code>Island</code>.
      */
     public void placeMNAt(int islandIndex) {
@@ -119,6 +127,7 @@ public class Board {
 
     /**
      * Moves Mother Nature the specified amount of steps (clockwise). Called by Game.
+     *
      * @param steps the amount of steps to move.
      */
     public void moveMN(int steps) {
@@ -133,6 +142,7 @@ public class Board {
 
     /**
      * Creates the specified amount of clouds. Called by Game.
+     *
      * @param amount the amount of clouds to create.
      */
     public void createClouds(int amount) {
@@ -143,6 +153,7 @@ public class Board {
 
     /**
      * Collects students from the specified <code>Cloud</code>.
+     *
      * @param cloudIndex the index of the <code>Cloud</code>.
      * @return <code>StudentGroup</code> containing the students from the <code>Cloud</code>.
      */
@@ -152,6 +163,7 @@ public class Board {
 
     /**
      * Refills the clouds with the specified amount of students.
+     *
      * @param studentAmount the amount of students to fill each <code>Cloud</code> with.
      */
     public void refillClouds(int studentAmount) {
@@ -163,6 +175,7 @@ public class Board {
 
     /**
      * Returns the list of clouds.
+     *
      * @return List of <code>Cloud</code>.
      */
     public List<Cloud> getClouds(){
@@ -173,6 +186,7 @@ public class Board {
 
     /**
      * Adds a new <code>School</code> bound to the specified <code>Player</code>.
+     *
      * @param owner the owner of the new <code>School</code>.
      * @see School
      */
@@ -183,6 +197,7 @@ public class Board {
     /**
      * Returns the <code>School</code> bound to the <code>Player</code> with the specified ID. Returns null if no
      * matching <code>Player</code>.
+     *
      * @param playerID the ID of the owner of the <code>School</code>.
      * @return Specified player's <code>School</code>.
      */
@@ -196,6 +211,7 @@ public class Board {
 
     /**
      * Returns the schools.
+     *
      * @return List of <code>School</code> of this Game.
      */
     public List<School> getSchools() {
@@ -204,6 +220,7 @@ public class Board {
 
     /**
      * Removes specified students from specified <code>Player</code> ID's school entrance.
+     *
      * @param playerID the ID of the <code>Player</code>.
      * @param students the students to remove.
      */
@@ -213,6 +230,7 @@ public class Board {
 
     /**
      * Adds specified students to specified <code>Player</code> ID's school entrance.
+     *
      * @param playerID the ID of the <code>Player</code>.
      * @param students the students to add.
      */
@@ -222,6 +240,7 @@ public class Board {
 
     /**
      * Removes specified students from specified <code>Player</code> ID's school dining room.
+     *
      * @param playerID the ID of the <code>Player</code>.
      * @param students the students to remove.
      */
@@ -231,6 +250,7 @@ public class Board {
 
     /**
      * Adds specified students to specified <code>Player</code> ID's school dining room.
+     *
      * @param playerID the ID of the <code>Player</code>.
      * @param students the students to add.
      */
@@ -240,6 +260,7 @@ public class Board {
 
     /**
      * Adds specified amount of towers to specified <code>Player</code> ID's school.
+     *
      * @param playerID the ID of the <code>Player</code>.
      * @param amount the amount of towers to add.
      */
@@ -249,6 +270,7 @@ public class Board {
 
     /**
      * Removes specified amount of towers from specified <code>Player</code> ID's school.
+     *
      * @param playerID the ID of the <code>Player</code>.
      * @param amount the amount of towers to remove.
      */
@@ -260,6 +282,7 @@ public class Board {
 
     /**
      * Returns the array containing the IDs of the owners for each professor.
+     *
      * @return Array of owner IDs.
      */
     public ProfessorTracker getProfessorOwners() {
@@ -268,6 +291,7 @@ public class Board {
 
     /**
      * Gives the professor of specified <code>Color</code> to specified <code>Player</code>.
+     *
      * @param playerID the ID of the new professor owner.
      * @param c the <code>Color</code> of the professor.
      */
@@ -279,6 +303,7 @@ public class Board {
 
     /**
      * Returns the amount of coins left in this <code>Board</code>.
+     *
      * @return Amount of coins left.
      */
     public int getNumCoinsLeft() {
@@ -287,6 +312,7 @@ public class Board {
 
     /**
      * Puts the specified amount of coins back into this <code>Board</code>.
+     *
      * @param amount the amount of coins to put back.
      */
     public void putCoinsBack(int amount) {

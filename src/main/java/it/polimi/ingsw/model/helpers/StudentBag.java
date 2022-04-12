@@ -7,6 +7,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Class representing a bag of students. Used to implement random student drawing.
+ */
 public class StudentBag {
     private final List<Color> availableColors = new ArrayList<>(Arrays.asList(Color.values().clone()));
     private final StudentGroup students = new StudentGroup();
@@ -14,6 +17,12 @@ public class StudentBag {
     private int studentsLeft;
     private boolean empty;
 
+    /**
+     * Creates a <code>StudentBag</code> with the specified amount of students for each color. Parametrized constructor
+     * taking an amount of students by color.
+     *
+     * @param numStudentsByColor the amount of students to have for each color
+     */
     public StudentBag(int numStudentsByColor) {
         studentsLeft = Color.NUM_COLORS * numStudentsByColor;
 
@@ -22,10 +31,21 @@ public class StudentBag {
         }
     }
 
+    /**
+     * Returns whether this <code>StudentBag</code> is empty.
+     *
+     * @return <code>true</code> if this <code>StudentBag</code> is empty.
+     */
     public boolean isEmpty() {
         return empty;
     }
 
+    /**
+     * Draws randomly the amount of students specified from this <code>StudentBag</code>.
+     *
+     * @param amount the amount of students to draw
+     * @return A <code>StudentGroup</code> containing
+     */
     public StudentGroup drawStudents(int amount) {
         int totDrawn = 0;
         boolean bagEmptyFlag = false;
@@ -43,6 +63,13 @@ public class StudentBag {
         return drawnStudents;
     }
 
+    /**
+     * Randomly draws a single student from this <code>StudentBag</code>.
+     *
+     * @param drawnStudents the <code>StudentGroup</code> containing the students drawn so far
+     * @return <code>true</code> if the drawing was successful, <code>false</code> if this <code>StudentBag</code> is
+     * empty
+     */
     private boolean drawStudent(StudentGroup drawnStudents){
         if(!empty){
             Color chosenColor = availableColors.get(rand.nextInt(availableColors.size()));
@@ -63,6 +90,11 @@ public class StudentBag {
         return true;
     }
 
+    /**
+     * Puts the specified students back into this <code>StudentBag</code>.
+     *
+     * @param toReturn the students to return to this <code>StudentBag</code>
+     */
     public void putStudentsBack(StudentGroup toReturn){
         int num;
         for(Color c : Color.values()){

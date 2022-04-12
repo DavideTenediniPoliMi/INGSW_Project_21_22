@@ -32,6 +32,7 @@ public class MatchInfo {
 
     /**
      * Returns existing MatchInfo, otherwise instantiates a new one.
+     *
      * @return MatchInfo instance
      */
     public static MatchInfo getInstance() {
@@ -51,6 +52,7 @@ public class MatchInfo {
 
     /**
      * Returns the size of the game
+     *
      * @return the amount of players in the game
      */
     public int getSelectedNumPlayer() {
@@ -59,6 +61,7 @@ public class MatchInfo {
 
     /**
      * Sets the size of the game
+     *
      * @param selectedNumPlayer the amount of players
      */
     public void setSelectedNumPlayer(int selectedNumPlayer) {
@@ -67,6 +70,7 @@ public class MatchInfo {
 
     /**
      * Returns whether the game is in expert mode
+     *
      * @return <code>true</code> if expert mode is active
      */
     public boolean isExpertMode() {
@@ -75,6 +79,7 @@ public class MatchInfo {
 
     /**
      * Sets expert mode flag
+     *
      * @param expertMode the selected game mode
      */
     public void setExpertMode(boolean expertMode) {
@@ -83,6 +88,7 @@ public class MatchInfo {
 
     /**
      * Returns amount of players connected to the game
+     *
      * @return the amount of players connected
      */
     public int getNumPlayersConnected() {
@@ -91,6 +97,7 @@ public class MatchInfo {
 
     /**
      * Update number of players connected
+     *
      * @param numPlayersConnected the new amount of players connected
      */
     public void setNumPlayersConnected(int numPlayersConnected) {
@@ -99,18 +106,21 @@ public class MatchInfo {
 
     /**
      * Returns maximum amount of movable students in each turn
+     *
      * @return the amount of students a player can move during his turn
      */
     public int getMaxMovableStudents() { return (selectedNumPlayer % 2 == 0) ? 3 : 4 ;}
 
     /**
      * Returns maximum amount of towers
+     *
      * @return the maximum amount of towers in the school
      */
     public int getMaxTowers() { return (selectedNumPlayer % 2 == 0) ? 8 : 6 ;}
 
     /**
      * Returns current state of the game
+     *
      * @return current <code>TurnState</code>
      */
     public TurnState getStateType() {
@@ -119,6 +129,7 @@ public class MatchInfo {
 
     /**
      * Sets current state of the game
+     *
      * @param stateType the new <code>TurnState</code>
      */
     public void setStateType(TurnState stateType) {
@@ -127,6 +138,7 @@ public class MatchInfo {
 
     /**
      * Returns the order of play for this round. Queue with player IDs.
+     *
      * @return playing order
      */
     public Queue<Integer> getPlayOrder() {
@@ -143,6 +155,7 @@ public class MatchInfo {
 
     /**
      * Adds a player to the play order. To be called when deciding order of play
+     *
      * @param playerID the ID of the player to add next
      */
     public void addPlayer(int playerID) {
@@ -151,6 +164,7 @@ public class MatchInfo {
 
     /**
      * Returns amount of students moved so far
+     *
      * @return the amount of students moved during current player's turn
      */
     public int getNumMovedStudents() {
@@ -173,6 +187,7 @@ public class MatchInfo {
 
     /**
      * Returns the number of players who have yet to play the current planning/action phase
+     *
      * @return size of play order queue
      */
     public int getNumPlayersStillToAct() {
@@ -181,6 +196,7 @@ public class MatchInfo {
 
     /**
      * Gets current player (First of the playing order queue). Returns -1 if playing order queue is empty
+     *
      * @return current player ID
      */
     public int getCurrentPlayerID() {
@@ -189,6 +205,7 @@ public class MatchInfo {
 
     /**
      * Returns if game is over
+     *
      * @return <code>true</code> if game has ended
      */
     public boolean isGameOver() {
@@ -197,6 +214,7 @@ public class MatchInfo {
 
     /**
      * Returns whether the game has ended in a tie
+     *
      * @return <code>true</code> if two or more teams have tied
      */
     public boolean isGameTied() {
@@ -205,6 +223,7 @@ public class MatchInfo {
 
     /**
      * Returns game winner. If more teams have tied, returns a list of winning teams.
+     *
      * @return Winner of a game. List of teams if the game ended in a tie.
      */
     public List<TowerColor> getWinners() {
@@ -213,6 +232,7 @@ public class MatchInfo {
 
     /**
      * Declares a winner team for this game. Ends this game.
+     *
      * @param teamColor the winner team color
      */
     public void declareWinner(TowerColor teamColor) {
@@ -222,6 +242,7 @@ public class MatchInfo {
 
     /**
      * Declares a tie for this game between the specified team colors.
+     *
      * @param teamColors the teams who tied.
      */
     public void declareTie(List<TowerColor> teamColors) {

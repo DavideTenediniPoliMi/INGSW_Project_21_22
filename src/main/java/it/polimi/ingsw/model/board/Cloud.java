@@ -17,6 +17,7 @@ public class Cloud {
 
     /**
      * Returns the students contained in this <code>Cloud</code>
+     *
      * @return <code>StudentGroup</code> with the students contained in this <code>Cloud</code>
      */
     public StudentGroup getStudents() {
@@ -25,6 +26,7 @@ public class Cloud {
 
     /**
      * Sets the available flag for this <code>Cloud</code>
+     *
      * @param available the flag to set
      */
     private void setAvailableTo(boolean available) {
@@ -33,6 +35,7 @@ public class Cloud {
 
     /**
      * Returns whether students can be collected from this <code>Cloud</code>
+     *
      * @return Availability of this <code>Cloud</code>.
      */
     public boolean isAvailable() {
@@ -41,6 +44,7 @@ public class Cloud {
 
     /**
      * Refills this <code>Cloud</code> with the specified students and makes it available.
+     *
      * @param toAdd the students to add to this <code>Cloud</code>
      */
     protected void refillCloud(StudentGroup toAdd) {
@@ -50,6 +54,7 @@ public class Cloud {
 
     /**
      * Collects students contained in this <code>Cloud</code>.
+     *
      * @return <code>StudentGroup</code> containing this <code>Cloud</code>'s students.
      */
     protected StudentGroup collectStudents() {

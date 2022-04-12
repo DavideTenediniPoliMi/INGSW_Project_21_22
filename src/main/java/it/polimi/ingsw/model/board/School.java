@@ -15,6 +15,7 @@ public class School {
 
     /**
      * Sole constructor, binds this <code>School</code> to a <code>Player</code>
+     *
      * @param owner the owner of this <code>School</code>
      */
     public School(Player owner){
@@ -23,6 +24,7 @@ public class School {
 
     /**
      * Returns the owner of this <code>School</code>
+     *
      * @return Player owner of this <code>School</code>
      */
     public Player getOwner() {
@@ -31,6 +33,7 @@ public class School {
 
     /**
      * Returns the amount of towers in this <code>School</code>
+     *
      * @return Amount of towers in this <code>School</code>
      */
     public int getNumTowers(){
@@ -39,6 +42,7 @@ public class School {
 
     /**
      * Removes the specified amount of towers from this <code>School</code>
+     *
      * @param amount the amount of towers to remove
      */
     protected void removeTowers(int amount) {
@@ -47,6 +51,7 @@ public class School {
 
     /**
      * Adds the specified amount of towers to this <code>School</code>
+     *
      * @param amount the amount of towers to add
      */
     protected void addTowers(int amount) {
@@ -55,6 +60,7 @@ public class School {
 
     /**
      * Returns the amount of students of the specified <code>Color</code> in this <code>School</code>'s dining room
+     *
      * @param c the <code>Color</code> of the students
      * @return Amount of students of specified <code>Color</code>
      */
@@ -64,6 +70,7 @@ public class School {
 
     /**
      * Returns the amount of students of the specified <code>Color</code> in this <code>School</code>'s entrance
+     *
      * @param c the <code>Color</code> of the students
      * @return Amount of students of specified <code>Color</code>
      */
@@ -71,6 +78,7 @@ public class School {
 
     /**
      * Removes the specified students from the entrance of this <code>School</code>
+     *
      * @param students the <code>StudentGroup</code> to remove
      */
     protected void removeFromEntrance(StudentGroup students) {
@@ -80,6 +88,7 @@ public class School {
 
     /**
      * Adds the specified students to the entrance of this <code>School</code>
+     *
      * @param students the <code>StudentGroup</code> to add
      */
     protected void addToEntrance(StudentGroup students) {
@@ -88,6 +97,7 @@ public class School {
 
     /**
      * Removes the specified students from the dining room of this <code>School</code>
+     *
      * @param students the <code>StudentGroup</code> to remove
      */
     protected void removeFromDiningRoom(StudentGroup students) {
@@ -97,6 +107,7 @@ public class School {
 
     /**
      * Adds the specified students to the dining room of this <code>School</code>
+     *
      * @param students the <code>StudentGroup</code> to add
      */
     protected void addToDiningRoom(StudentGroup students) {

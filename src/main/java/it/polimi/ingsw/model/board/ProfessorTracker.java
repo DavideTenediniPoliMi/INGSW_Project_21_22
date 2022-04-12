@@ -21,6 +21,7 @@ public class ProfessorTracker implements Cloneable {
 
     /**
      * Returns the ID of the owner of the specified <code>Color</code>
+     *
      * @param c the <code>Color</code> to check
      * @return ID of the owner of the professor
      */
@@ -30,6 +31,7 @@ public class ProfessorTracker implements Cloneable {
 
     /**
      * Sets new owner ID for specified professor <code>Color</code>
+     *
      * @param playerID the ID of the new owner
      * @param c the <code>Color</code> of the professor
      */
