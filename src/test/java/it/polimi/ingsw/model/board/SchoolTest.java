@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.board;
 
-import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
@@ -13,86 +12,86 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SchoolTest {
-
-    Game g;
-    Board b;
+    Player p1;
+    Player p2;
+    School s1;
+    School s2;
 
     @BeforeEach
     public void setUp() {
-        g = Game.getInstance();
-        b = g.getBoard();
+        p1 = new Player(0, "Pippo", TowerColor.BLACK, CardBack.CB_1, true);
+        p2 = new Player(1, "Pluto", TowerColor.WHITE, CardBack.CB_2, true);
 
-        g.addPlayer(0, "mario", TowerColor.BLACK, CardBack.CB_1, true);
-        g.addPlayer(1, "luigi", TowerColor.WHITE, CardBack.CB_2, true);
+        s1 = new School(p1);
+        s2 = new School(p2);
 
-        for(Player p : g.getPlayers()){
-            b.addSchool(p);
-        }
-        b.addTowersTo(1, 1);
+        s1.addTowers(6);
 
+        StudentGroup sg1 = new StudentGroup(Color.GREEN, 3);
+        sg1.addByColor(Color.BLUE, 1);
+
+        s2.addToEntrance(sg1);
     }
 
     @AfterEach
     public void tearDown() {
-        Game.resetInstance();
-        g = null;
-        b = null;
+        s1 = s2 = null;
     }
 
     @Test
-    public void testGetOwner() {
-        assertEquals(b.getSchoolByPlayerID(0).getOwner(), g.getPlayerByID(0));
-        assertEquals(b.getSchoolByPlayerID(1).getOwner(), g.getPlayerByID(1));
+    public void getOwnerTest() {
+        assertAll(
+                () -> assertEquals(p1, s1.getOwner()),
+                () -> assertEquals(p2, s2.getOwner())
+        );
     }
 
     @Test
-    public void testGetNumTowers() {
-        assertEquals(0, b.getSchoolByPlayerID(0).getNumTowers());
+    public void removeTowersTest() {
+        s1.removeTowers(2);
+        s2.removeTowers(2);
+        assertAll(
+                () -> assertEquals(0, s2.getNumTowers()),
+                () -> assertEquals(4, s1.getNumTowers())
+        );
     }
 
     @Test
-    public void testRemoveTowers() {
-        int numTowersBefore = b.getSchoolByPlayerID(1).getNumTowers();
-        b.removeTowerFrom(1, 1);
-        assertEquals(numTowersBefore - 1, b.getSchoolByPlayerID(1).getNumTowers());
+    public void numTowersTest() {
+        assertAll(
+                () -> assertEquals(0, s2.getNumTowers()),
+                () -> assertEquals(6, s1.getNumTowers())
+        );
     }
 
     @Test
-    public void testAddTowers() {
-        b.addTowersTo(0, 1);
-        assertEquals(1, b.getSchoolByPlayerID(0).getNumTowers());
+    public void studentInEntranceTest() {
+        assertAll(
+                () -> assertEquals(3, s2.getNumStudentsInEntranceByColor(Color.GREEN)),
+                () -> assertEquals(1, s2.getNumStudentsInEntranceByColor(Color.BLUE))
+        );
+
+        s2.removeFromEntrance(new StudentGroup(Color.BLUE, 1));
+
+        assertEquals(0, s2.getNumStudentsInEntranceByColor(Color.BLUE));
     }
 
     @Test
-    public void testGetNumStudentsInDiningRoomByColor() {
-        int numBefore = b.getSchoolByPlayerID(0).getNumStudentsInDiningRoomByColor(Color.BLUE);
-        b.addToDiningRoomOf(0, new StudentGroup(Color.BLUE, 3));
-        assertEquals(numBefore + 3, b.getSchoolByPlayerID(0).getNumStudentsInDiningRoomByColor(Color.BLUE));
-    }
+    public void studentsInDiningRoomTest() {
+        for(Color c: Color.values()) {
+            assertEquals(0, s1.getNumStudentsInDiningRoomByColor(c));
+        }
+        StudentGroup sg = new StudentGroup(Color.BLUE, 2);
+        StudentGroup sg1 = new StudentGroup(Color.BLUE, 2);
 
-    @Test
-    public void testRemoveFromEntrance() {
-        b.addToEntranceOf(1, new StudentGroup(Color.GREEN, 3));
-        b.removeFromEntranceOf(1, new StudentGroup(Color.GREEN, 1));
-        assertEquals(2, b.getSchoolByPlayerID(1).getNumStudentsInEntranceByColor(Color.GREEN));
-    }
+        s1.addToDiningRoom(sg);
+        s2.addToDiningRoom(sg1);
 
-    @Test
-    public void testAddToEntrance() {
-        b.addToEntranceOf(1, new StudentGroup(Color.RED, 1));
-        assertEquals(1, b.getSchoolByPlayerID(1).getNumStudentsInEntranceByColor(Color.RED));
-    }
+        s2.removeFromDiningRoom(new StudentGroup(Color.BLUE, 1));
 
-    @Test
-    public void testRemoveFromDiningRoom() {
-        b.addToDiningRoomOf(0, new StudentGroup(Color.BLUE, 3));
-        b.removeFromDiningRoomOf(0, new StudentGroup(Color.BLUE, 1));
-        assertEquals(2, b.getSchoolByPlayerID(0).getNumStudentsInDiningRoomByColor(Color.BLUE));
-    }
-
-    @Test
-    public void testAddToDiningRoom() {
-        b.addToDiningRoomOf(0, new StudentGroup(Color.RED, 1));
-        assertEquals(1, b.getSchoolByPlayerID(0).getNumStudentsInDiningRoomByColor(Color.RED));
+        assertAll(
+                () -> assertEquals(2, s1.getNumStudentsInDiningRoomByColor(Color.BLUE)),
+                () -> assertEquals(1, s2.getNumStudentsInDiningRoomByColor(Color.BLUE))
+        );
     }
 }

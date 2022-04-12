@@ -31,6 +31,14 @@ public class MultiIsland extends Island {
     }
 
     @Override
+    protected void setMotherNatureTo(boolean motherNature) {
+        super.setMotherNatureTo(motherNature);
+
+        leftIsland.setMotherNatureTo(motherNature);
+        rightIsland.setMotherNatureTo(motherNature);
+    }
+
+    @Override
     public int getNumIslands() {
         return leftIsland.getNumIslands() + rightIsland.getNumIslands();
     }

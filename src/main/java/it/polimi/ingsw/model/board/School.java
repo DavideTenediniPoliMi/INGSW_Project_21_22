@@ -23,7 +23,7 @@ public class School {
     }
 
     protected void removeTowers(int amount) {
-        numTowers -= amount;
+        numTowers = Math.max(numTowers - amount, 0);
     }
 
     protected void addTowers(int amount) {

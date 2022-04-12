@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.board;
 
-import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
@@ -11,74 +10,56 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MultiIslandTest {
-
-    Game g;
-    Board b;
-
+    Island is;
     @BeforeEach
     public void setUp(){
-        g = Game.getInstance();
-        b = g.getBoard();
+        Island is1 = new SimpleIsland();
+        Island is2 = new SimpleIsland();
 
-        b.placeMNAt(0);
+        is1.conquerIsland(TowerColor.BLACK);
+        is2.conquerIsland(TowerColor.BLACK);
 
-        b.addStudentsToIsland(0, new StudentGroup(Color.GREEN, 1));
-        b.addStudentsToIsland(1, new StudentGroup(Color.YELLOW, 1));
+        is1.addStudents(new StudentGroup(Color.BLUE, 2));
+        is2.addStudents(new StudentGroup(Color.GREEN, 3));
 
-        b.conquerIsland(TowerColor.GREY);
-        b.placeMNAt(1);
-        b.conquerIsland(TowerColor.GREY);
-
-        b.mergeIslands(0, 1);
+        is = new MultiIsland(is1, is2);
     }
 
     @AfterEach
     public void tearDown(){
-        Game.resetInstance();
-        g = null;
-        b = null;
+        is = null;
     }
 
     @Test
-    public void testGetNumIslands() {
-        int numIslands = b.getIslandAt(0).getNumIslands();
-        b.conquerIsland(TowerColor.GREY);
-        b.mergeIslands(0, 1);
-        assertEquals(numIslands + 1, b.getIslandAt(0).getNumIslands());
+    public void motherNatureTest() {
+        assertTrue(is.isMotherNatureOnIsland());
+        is.setMotherNatureTo(false);
+        assertFalse(is.isMotherNatureOnIsland());
     }
 
     @Test
-    public void testAddStudents() {
-        int numStudentsBefore = b.getIslandAt(0).getNumStudentsByColor(Color.GREEN);
-
-        StudentGroup sg = new StudentGroup(Color.GREEN, 3);
-        b.addStudentsToIsland(0, sg);
-
-        assertEquals(numStudentsBefore + 3, b.getIslandAt(0).getNumStudentsByColor(Color.GREEN));
+    public void numStudentTest() {
+        assertAll(
+                () -> assertEquals(2, is.getNumStudentsByColor(Color.BLUE)),
+                () -> assertEquals(3, is.getNumStudentsByColor(Color.GREEN))
+        );
     }
 
     @Test
-    public void testConquer_sameTeam(){
-        b.conquerIsland(TowerColor.GREY);
-        b.mergeIslands(0, 1);
+    public void numIslandTest() {
+        assertEquals(2, is.getNumIslands());
 
-        assertEquals(TowerColor.GREY, b.getIslandAt(0).getTeamColor());
+        Island is1 = new SimpleIsland();
+        is1.conquerIsland(TowerColor.BLACK);
+        Island is2 = new MultiIsland(is, is1);
+
+        assertEquals(3, is2.getNumIslands());
     }
 
     @Test
-    public void testConquer_diffTeam(){
-        b.conquerIsland(TowerColor.WHITE);
-        assertEquals(TowerColor.WHITE, b.getIslandAt(0).getTeamColor());
+    public void towerColorTest() {
+        assertEquals(TowerColor.BLACK, is.getTeamColor());
+        is.conquerIsland(TowerColor.WHITE);
+        assertEquals(TowerColor.WHITE, is.getTeamColor());
     }
-
-    @Test
-    public void testMoveMNTo(){
-        assertTrue(b.getIslandAt(0).isMotherNatureOnIsland());
-
-        b.moveMN(1);
-
-        assertTrue(b.getIslandAt(1).isMotherNatureOnIsland());
-        assertFalse(b.getIslandAt(0).isMotherNatureOnIsland());
-    }
-
 }
