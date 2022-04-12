@@ -23,12 +23,21 @@ class PlayerTest {
     }
 
     @Test
+    public void testGetter() {
+        assertAll(
+                () -> assertEquals(CardBack.CB_1, player.getCardBack()),
+                () -> assertTrue(player.isTowerHolder())
+        );
+    }
+
+    @Test
     void setSelectedCard() {
         Card c = Card.CARD_1;
 
         assertNull(player.getSelectedCard());
         player.setSelectedCard(c);
         assertEquals(Card.CARD_1, player.getSelectedCard());
+        assertEquals(9, player.getPlayableCards().size());
     }
 
     @Test

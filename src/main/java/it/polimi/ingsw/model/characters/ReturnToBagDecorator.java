@@ -10,7 +10,6 @@ import it.polimi.ingsw.model.helpers.StudentGroup;
 
 public class ReturnToBagDecorator extends CharacterCardDecorator {
     private final int NUM_STUDENTS_TO_RETURN = 3;
-
     private Color selectedColor;
 
     public ReturnToBagDecorator(CharacterCard card) {

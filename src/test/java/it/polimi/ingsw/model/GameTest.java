@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
+import it.polimi.ingsw.model.helpers.Parameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,6 +49,7 @@ public class GameTest {
     @Test
     public void testMergeIslands() {
         g.conquerIsland(TowerColor.BLACK);
+        g.moveMN(1);
         g.conquerIsland(TowerColor.BLACK);
 
         g.mergeIslands(0, 1);
@@ -56,13 +58,11 @@ public class GameTest {
 
     @Test
     public void testPlaceMNAt() {
-        g.placeMNAt(0);
         assertTrue(g.getBoard().getIslandAt(0).isMotherNatureOnIsland());
     }
 
     @Test
     public void testMoveMN() {
-        g.placeMNAt(0);
         g.moveMN(2);
         assertFalse(g.getBoard().getIslandAt(0).isMotherNatureOnIsland());
         assertTrue(g.getBoard().getIslandAt(2).isMotherNatureOnIsland());
@@ -207,11 +207,18 @@ public class GameTest {
     }
 
     @Test
-    public void testSetCardParameters() {
+    public void testActivateCard() {
+        Parameters p = new Parameters();
+        p.setSelectedColor(Color.BLUE);
+
+        g.setCardParameters(p);
+        g.activateCard();
+        assertTrue(g.getActiveCharacterCard().isActive());
     }
 
     @Test
-    public void testActivateCard() {
-        assertTrue(g.getActiveCharacterCard().isActive());
+    public void testBagEmpty() {
+        StudentGroup sg = g.drawStudents(120);
+        assertTrue(g.isStudentBagEmpty());
     }
 }
