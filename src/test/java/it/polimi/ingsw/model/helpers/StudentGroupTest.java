@@ -77,7 +77,15 @@ public class StudentGroupTest {
     @Test
     public void testClone() {
         StudentGroup s = new StudentGroup(Color.BLUE, 1);
-        StudentGroup clone = s.clone();
+        StudentGroup clone = (StudentGroup) s.clone();
         assertEquals(1, clone.getByColor(Color.BLUE));
+    }
+
+    @Test
+    public void testEquals() {
+        StudentGroup s = new StudentGroup(Color.GREEN, 1);
+        assertEquals(s, s.clone());
+        assertNotEquals(s, new StudentGroup());
+        assertEquals(s.hashCode(), s.clone().hashCode());
     }
 }

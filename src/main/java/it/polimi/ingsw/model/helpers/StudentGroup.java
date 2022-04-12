@@ -2,6 +2,8 @@ package it.polimi.ingsw.model.helpers;
 
 import it.polimi.ingsw.model.enumerations.Color;
 
+import java.util.Arrays;
+
 public class StudentGroup implements Cloneable{
     private final int[] students;
 
@@ -37,11 +39,25 @@ public class StudentGroup implements Cloneable{
         }
     }
 
-    public StudentGroup clone() {
+    @Override
+    public Object clone() {
         StudentGroup temp = new StudentGroup();
-        for(Color c: Color.values()) {
-            temp.addByColor(c, this.getByColor(c));
-        }
+
+        System.arraycopy(students, 0, temp.students, 0, Color.NUM_COLORS);
+
         return temp;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StudentGroup that = (StudentGroup) o;
+        return Arrays.equals(students, that.students);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(students);
     }
 }

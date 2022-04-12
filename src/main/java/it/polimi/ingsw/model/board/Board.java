@@ -32,6 +32,10 @@ public class Board {
         return islands.get(islandIndex);
     }
 
+    protected List<Island> getIslands() {
+        return new ArrayList<>(islands);
+    }
+
     public int getNumIslands() {
         return islands.size();
     }
@@ -52,6 +56,9 @@ public class Board {
         Island temp = new MultiIsland(leftIsland, rightIsland);
 
         islands.remove(rightIslandIndex);
+
+        if(leftIslandIndex > rightIslandIndex) leftIslandIndex --;
+
         islands.set(leftIslandIndex, temp);
     }
 
@@ -97,7 +104,7 @@ public class Board {
     }
 
     public List<Cloud> getClouds(){
-        return clouds;
+        return new ArrayList<>(clouds);
     }
 
     // SCHOOL
@@ -145,7 +152,7 @@ public class Board {
     // PROFESSOR OWNER
 
     public ProfessorTracker getProfessorOwners() {
-        return professorOwners;
+        return (ProfessorTracker) professorOwners.clone();
     }
 
     public void giveProfessorTo(int playerID, Color c) {
@@ -163,6 +170,6 @@ public class Board {
     }
 
     public void takeCoin() {
-        numCoinsLeft --;
+        numCoinsLeft = Math.max(numCoinsLeft - 1, 0);
     }
 }

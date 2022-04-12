@@ -37,7 +37,7 @@ public class CharacterCardPlayableStateController extends RoundStateController {
         CharacterCard card = Game.getInstance().getActiveCharacterCard();
 
         if(card.getEffectType().equals(EffectType.EXCHANGE_STUDENTS) || card.getEffectType().equals(EffectType.STUDENT_GROUP)){
-            fromOrigin = params.getFromOrigin().clone();
+            fromOrigin = (StudentGroup) params.getFromOrigin().clone();
         }
     }
 

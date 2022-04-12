@@ -36,9 +36,9 @@ class DiningRoomControllerTest {
         sg1 = new StudentGroup(Color.BLUE, 3);
         sg2 = new StudentGroup(Color.BLUE, 2);
 
-        board.addToDiningRoomOf(0, sg0.clone());
-        board.addToDiningRoomOf(1, sg1.clone());
-        board.addToDiningRoomOf(2, sg2.clone());
+        board.addToDiningRoomOf(0, (StudentGroup) sg0.clone());
+        board.addToDiningRoomOf(1, (StudentGroup) sg1.clone());
+        board.addToDiningRoomOf(2, (StudentGroup) sg2.clone());
 
     }
 

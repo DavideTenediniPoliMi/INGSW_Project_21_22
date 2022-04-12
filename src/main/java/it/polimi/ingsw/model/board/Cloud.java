@@ -10,7 +10,7 @@ public class Cloud {
     }
 
     public StudentGroup getStudents() {
-        return students;
+        return (StudentGroup) students.clone();
     }
 
     private void setAvailableTo(boolean available) {
