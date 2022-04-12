@@ -43,6 +43,13 @@ public class MatchInfo {
     }
 
     /**
+     * Resets MatchInfo instance to null.
+     */
+    public static void resetInstance() {
+        instance = null;
+    }
+
+    /**
      * Returns the size of the game
      * @return the amount of players in the game
      */
@@ -135,7 +142,7 @@ public class MatchInfo {
     }
 
     /**
-     * Add a player to the play order. To be called when deciding order of play
+     * Adds a player to the play order. To be called when deciding order of play
      * @param playerID the ID of the player to add next
      */
     public void addPlayer(int playerID) {
@@ -165,7 +172,7 @@ public class MatchInfo {
     }
 
     /**
-     * Returns the amount of players who have yet to play the current planning/action phase
+     * Returns the number of players who have yet to play the current planning/action phase
      * @return size of play order queue
      */
     public int getNumPlayersStillToAct() {
