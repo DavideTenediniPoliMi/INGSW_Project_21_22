@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model.enumerations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class to hold every Assistant Card in the game.
  */
@@ -18,6 +21,7 @@ public enum Card {
     public final int WEIGHT;
     public final int RANGE;
     private boolean used;
+    private final List<Integer> useOrder;
 
     /**
      * Sole constructor to instantiate cards.
@@ -28,22 +32,26 @@ public enum Card {
     Card(int weight, int range) {
         this.WEIGHT = weight;
         this.RANGE = range;
+        useOrder = new ArrayList<>();
     }
 
     /**
      * Sets this card as used. This prevents other players from using the same card in the same turn.
+     * Also adds the player that used it to <code>useOrder</code>.
      */
-    public void use() {
-        this.used = true;
+    public void use(int playerID) {
+        used = true;
+        useOrder.add(playerID);
     }
 
     /**
      * Resets this card <code>used</code> field to <code>false<code/>. It's called
      * at the end of the round in order to allow every card to be picked in the
-     * planning phase.
+     * planning phase. Also resets <code>useOrder</code>.
      */
     public void reset() {
-        this.used = false;
+        used = false;
+        useOrder.clear();
     }
 
     /**
@@ -54,5 +62,14 @@ public enum Card {
      */
     public boolean isUsed() {
         return used;
+    }
+
+    /**
+     * Returns the <code>useOrder</code> of this card in this planning phase.
+     *
+     * @return the <code>useOrder</code> list.
+     */
+    public List<Integer> getUseOrder() {
+        return new ArrayList<>(useOrder);
     }
 }

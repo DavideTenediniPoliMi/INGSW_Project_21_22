@@ -159,7 +159,24 @@ public class GameTest {
     public void testPlayCard() {
         Card c = Card.CARD_1;
         g.playCard(0, c);
-        assertTrue(c.isUsed());
+
+        assertAll(
+                () -> assertTrue(c.isUsed()),
+                () -> assertEquals(0, c.getUseOrder().get(0))
+        );
+    }
+
+    @Test
+    public void testPlaySameCardTwice() {
+        Card c = Card.CARD_1;
+        g.playCard(0, c);
+        g.playCard(1, c);
+
+        assertAll(
+                () -> assertTrue(c.isUsed()),
+                () -> assertEquals(0, c.getUseOrder().get(0)),
+                () -> assertEquals(1, c.getUseOrder().get(1))
+        );
     }
 
     @Test
@@ -167,6 +184,7 @@ public class GameTest {
         g.resetCards();
         for(Card c : Card.values()) {
             assertFalse(c.isUsed());
+            assertEquals(0, c.getUseOrder().size());
         }
     }
 
@@ -218,7 +236,7 @@ public class GameTest {
 
     @Test
     public void testBagEmpty() {
-        StudentGroup sg = g.drawStudents(120);
+        g.drawStudents(120);
         assertTrue(g.isStudentBagEmpty());
     }
 }

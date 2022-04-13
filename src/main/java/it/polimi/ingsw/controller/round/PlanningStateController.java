@@ -20,7 +20,8 @@ public class PlanningStateController extends RoundStateController {
     @Override
     public void definePlayOrder() {
         List<Player> players = Game.getInstance().getPlayers();
-        players.sort(Comparator.comparing(Player::getSelectedCard));
+        players.sort(Comparator.comparing(Player::getSelectedCard)
+                .thenComparing(player -> player.getSelectedCard().getUseOrder().indexOf(player.getID())));
 
         for(Player p: players) {
             MatchInfo.getInstance().addPlayer(p.getID());
@@ -32,12 +33,6 @@ public class PlanningStateController extends RoundStateController {
     * */
     @Override
     public void playCard(int cardIndex) throws CardUsedException {
-        /*
-        * Checks
-        *   - Check if player has already played?
-        *   - Check if player CAN play this card
-        *   - Check if card was already played this round
-        * */
         if(cardIndex < 0 || cardIndex > 9) {
             throw new BadParametersException("cardIndex is " + cardIndex + ", expected between 0 and 9");
         }
@@ -45,7 +40,7 @@ public class PlanningStateController extends RoundStateController {
         Player p = Game.getInstance().getPlayerByID(MatchInfo.getInstance().getCurrentPlayerID());
         Card card = Card.values()[cardIndex];
 
-        if(p.getPlayableCards().contains(card) && !card.isUsed()) {
+        if(p.getPlayableCards().contains(card) && (!card.isUsed() || p.getPlayableCards().size() == 1)) {
             Game.getInstance().playCard(p.getID(), card);
         }else {
             throw new CardUsedException(card);

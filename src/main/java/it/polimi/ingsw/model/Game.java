@@ -45,6 +45,9 @@ public class Game {
      */
     public static void resetInstance(){
         instance = null;
+        for(Card c: Card.values()) {
+            c.reset();
+        }
     }
 
     // BOARD
@@ -283,7 +286,7 @@ public class Game {
      */
     public void playCard(int playerID, Card selectedCard) {
         getPlayerByID(playerID).setSelectedCard(selectedCard);
-        selectedCard.use();
+        selectedCard.use(playerID);
     }
 
     /**
