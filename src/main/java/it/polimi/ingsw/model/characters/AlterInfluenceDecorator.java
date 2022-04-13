@@ -8,6 +8,12 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.Parameters;
 
+/**
+ * Class to manage the behaviour of 3 <code>CharacterCard</code> responsible for
+ * altering the influence calculated on an <code>Island</code>. Specifically, the
+ * cards are <code>INFLUENCE_ADD_TWO</code>, <code>IGNORE_TOWERS</code> and
+ * <code>IGNORE_COLOR</code>.
+ */
 public class AlterInfluenceDecorator extends CharacterCardDecorator {
     private TowerColor boostedTeam;
     private TowerColor currentTeam;
@@ -15,6 +21,14 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator {
     private int islandIndex;
     private final boolean isAddTwo, isIgnoreTowers, isIgnoreColor;
 
+    /**
+     * Constructor that instantiates this card specifying which one of the 3 it is.
+     *
+     * @param card           the <code>GenericCard</code> used in the decoration process
+     * @param isAddTwo       the flag to indicate whether this card is a <code>INFLUENCE_ADD_TWO</code>
+     * @param isIgnoreTowers the flag to indicate whether this card is a <code>IGNORE_TOWERS</code>
+     * @param isIgnoreColor  the flag to indicate whether this card is a <code>IGNORE_COLOR</code>
+     */
     public AlterInfluenceDecorator(GenericCard card, boolean isAddTwo, boolean isIgnoreTowers, boolean isIgnoreColor) {
         super(card);
 
@@ -23,13 +37,14 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator {
         this.isIgnoreColor = isIgnoreColor;
     }
 
-    /*
-    * Sets parameters for the AlterInfluence Card
-    * If the card needs teamColor or selectedColor, those are set only the FIRST time setParameters is called
-    *
-    * Every other time params.getSelectedColor() || params.getTeamColor() NEED to return null
-    * (For example when calculating scores for each team)
-    * */
+    /**
+     * Sets necessary parameters for this card to be used. When this card is bought <code>setParameters<code/> must
+     * receive either a valid <code>selectedColor<code/> (if <code>isIgnoreColor == true<code/>) or a valid
+     * <code>boostedTeam<code/> (if <code>isAddTwo == true<code/>). The following calls for
+     * <code>setParameters<code/> must receive a valid <code>currentTeam<code/> and <code>islandIndex<code/>.
+     *
+     * @param params the <code>Parameters</code> to set in this card.
+     */
     @Override
     public void setParameters(Parameters params) {
         if(isIgnoreColor && params.getSelectedColor() != null) {
@@ -44,6 +59,12 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator {
         islandIndex = params.getIslandIndex();
     }
 
+    /**
+     * Computes the difference in influence score that this active card is applying.
+     *
+     * @return the influence score delta this active card imposing (pos(+) for <code>INFLUENCE_ADD_TWO</code>,
+     * neg(-) for <code>IGNORE_TOWERS</code> and <code>IGNORE_COLOR</code>)
+     */
     @Override
     public int activate() {
         card.activate();
