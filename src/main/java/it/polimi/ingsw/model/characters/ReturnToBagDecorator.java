@@ -8,14 +8,28 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.Parameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
+/**
+ * Class to manage the behaviour of 1 <code>CharacterCard</code>, <code>RETURN_TO_BAG</code>.
+ */
 public class ReturnToBagDecorator extends CharacterCardDecorator {
     private final int NUM_STUDENTS_TO_RETURN = 3;
     private Color selectedColor;
 
+    /**
+     * Constructor that instantiates this card.
+     *
+     * @param card the <code>GenericCard</code> used in the decoration process
+     */
     public ReturnToBagDecorator(CharacterCard card) {
         super(card);
     }
 
+    /**
+     * Sets necessary parameters for this card to be used. The field <code>selectedColor</code>
+     * must NOT be <code>null</code>.
+     *
+     * @param params the <code>Parameters</code> to set in this card.
+     */
     @Override
     public void setParameters(Parameters params) {
         selectedColor = params.getSelectedColor();

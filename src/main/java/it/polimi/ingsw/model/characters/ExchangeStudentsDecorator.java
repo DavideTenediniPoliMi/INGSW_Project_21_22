@@ -5,15 +5,29 @@ import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.helpers.Parameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
+/**
+ * Class to manage the behaviour of 1 <code>CharacterCard</code>, <code>EXCHANGE_STUDENTS</code>.
+ */
 public class ExchangeStudentsDecorator extends CharacterCardDecorator {
     private StudentGroup fromEntrance;
     private StudentGroup fromDiningRoom;
     private int playerID;
 
+    /**
+     * Constructor that instantiates this card.
+     *
+     * @param card the <code>GenericCard</code> used in the decoration process
+     */
     public ExchangeStudentsDecorator(CharacterCard card) {
         super(card);
     }
 
+    /**
+     * Sets necessary parameters for this card to be used. The fields <code>playerID</code>,
+     * <code>fromEntrance</code> and <code>fromDiningRoom</code> must NOT be <code>null</code>.
+     *
+     * @param params the <code>Parameters</code> to set in this card.
+     */
     @Override
     public void setParameters(Parameters params) {
         playerID = params.getPlayerID();
