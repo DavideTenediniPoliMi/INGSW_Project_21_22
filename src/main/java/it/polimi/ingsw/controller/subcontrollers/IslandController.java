@@ -11,10 +11,28 @@ import it.polimi.ingsw.model.enumerations.TowerColor;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Subcontroller to handle all actions relative to:
+ * <ul>
+ *     <li>Moving Mother Nature</li>
+ *     <li>Influence calc</li>
+ *     <li>Conquering Islands</li>
+ *     <li>Merging Islands</li>
+ * </ul>
+ */
 public class IslandController {
+    /**
+     * Sole constructor
+     */
     public IslandController() {
     }
 
+    /**
+     * Moves Mother Nature the specified amount of steps (clockwise). After moving proceeds to calculate the new owner
+     * of the <code>Island</code>.
+     *
+     * @param steps the amount of steps.
+     */
     public void moveMN(int steps) {
         Game game = Game.getInstance();
 
@@ -37,6 +55,12 @@ public class IslandController {
         mergeIslands();
     }
 
+    /**
+     * Returns the most influential <code>TowerColor</code> on the <code>Island</code> where Mother Nature is currently
+     * on.
+     *
+     * @return The color of the most influential team.
+     */
     private TowerColor getMostInfluentialTeam() {
         TowerColor oldMostInfluential = getOldMostInfluentialTeam();
         TowerColor mostInfluentialTeam = null;
@@ -55,6 +79,13 @@ public class IslandController {
         return mostInfluentialTeam;
     }
 
+    /**
+     * Returns the influence of the specified <code>TowerColor</code> on the <code>Island</code> where Mother Nature is
+     * currently on.
+     *
+     * @param teamColor the color of the team.
+     * @return The influence score of the team.
+     */
     protected int getInfluenceOf(TowerColor teamColor) {
         Game game = Game.getInstance();
         Board board = game.getBoard();
@@ -83,6 +114,10 @@ public class IslandController {
         return teamScore;
     }
 
+    /**
+     * Attempts to merge the <code>Island</code> where Mother Nature is currently on with the ones on the left and/or
+     * right.
+     */
     private void mergeIslands() {
         Game game = Game.getInstance();
         Board board = game.getBoard();
@@ -102,6 +137,11 @@ public class IslandController {
         }
     }
 
+    /**
+     * Returns the last most influential team on the <code>Island</code> where Mother Nature is currently on.
+     *
+     * @return <code>TowerColor</code> of the last most influential team.
+     */
     private TowerColor getOldMostInfluentialTeam() {
         Game game = Game.getInstance();
         Board board = game.getBoard();
@@ -110,6 +150,11 @@ public class IslandController {
         return board.getIslandAt(newMNPosition).getTeamColor();
     }
 
+    /**
+     * Returns the amount of towers on the <code>Island</code> where Mother Nature is currently on.
+     *
+     * @return Amount of towers.
+     */
     private int getNumTowersOnIsland() {
         Game game = Game.getInstance();
         Board board = game.getBoard();
@@ -118,6 +163,12 @@ public class IslandController {
         return board.getIslandAt(newMNPosition).getNumIslands();
     }
 
+    /**
+     * Returns the ID of the player who holds the towers for the specified <code>TowerColor</code>.
+     *
+     * @param teamColor the <code>TowerColor</code> of the team.
+     * @return Tower holder ID for the specified team.
+     */
     private int getTowerHolderIDOf(TowerColor teamColor) {
         List<Player> players = Game.getInstance().getPlayers();
 

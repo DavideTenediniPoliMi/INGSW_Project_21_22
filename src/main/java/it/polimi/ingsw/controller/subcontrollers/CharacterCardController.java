@@ -13,13 +13,26 @@ import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.Parameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
+/**
+ * Subcontroller handling all actions related to Character Card purchasing, setting, and activation.
+ */
 public class CharacterCardController {
     private boolean effectUsed;
 
+    /**
+     * Sole constructor.
+     */
     public CharacterCardController() {
         effectUsed = false;
     }
 
+    /**
+     * Buys the specified <code>CharacterCard</code> for the specified <code>Player</code>.
+     *
+     * @param playerID the ID of the <code>Player</code> buying the card.
+     * @param cardIndex the Index of the <code>CharacterCard</code> to buy.
+     * @throws NotEnoughCoinsException If the <code>Player</code> doesn't have enough coins to buy the specified card.
+     */
     public void buyCharacterCard(int playerID, int cardIndex) throws NotEnoughCoinsException{
         if(Game.getInstance().getActiveCharacterCard() == null) {
             Player player = Game.getInstance().getPlayerByID(playerID);
@@ -36,6 +49,11 @@ public class CharacterCardController {
         }
     }
 
+    /**
+     * Sets the specified <code>Parameters</code> for the active <code>CharacterCard</code>.
+     *
+     * @param params the <code>Parameters</code> to set.
+     */
     public void setCardParameters(Parameters params) {
         if(Game.getInstance().getActiveCharacterCard() != null){ //Separated so it's only checked once
             try{
@@ -50,9 +68,12 @@ public class CharacterCardController {
         }
     }
 
-    /*
-    * Returns false also if there is no active card, maybe change to exception?
-    * */
+    /**
+     * Returns whether the active <code>CharacterCard</code> is of the specified <code>EffectType</code>.
+     *
+     * @param effectType the <code>EffectType</code>.
+     * @return <code>true</code> if the active card is of the specified type.
+     */
     public boolean isActiveCardOfType(EffectType effectType) {
         CharacterCard card = Game.getInstance().getActiveCharacterCard();
         if(card != null) {
@@ -62,11 +83,19 @@ public class CharacterCardController {
         }
     }
 
+    /**
+     * Activates the effect of the active <code>CharacterCard</code>.
+     *
+     * @return The result of the effect of the <code>CharacterCard</code>.
+     */
     public int activateCard() {
         effectUsed = true;
         return Game.getInstance().activateCard();
     }
 
+    /**
+     * Clears the effects of the active <code>CharacterCard</code> if present.
+     */
     public void clearEffects() {
         CharacterCard card = Game.getInstance().getActiveCharacterCard();
         if(card != null) {
@@ -74,6 +103,14 @@ public class CharacterCardController {
         }
     }
 
+    /**
+     * Returns whether the specified <code>Parameters</code> suit the active <code>CharacterCard</code>.
+     *
+     * @param params the <code>Parameters</code> to check.
+     * @return <code>true</code> if the <code>Parameters</code> are correct.
+     * @throws BadParametersException If one or more parameter is missing.
+     * @throws NullPlayerException If the specified playerID is invalid.
+     */
     private boolean checkParameters(Parameters params) throws BadParametersException, NullPlayerException {
         CharacterCard card = Game.getInstance().getActiveCharacterCard();
 
