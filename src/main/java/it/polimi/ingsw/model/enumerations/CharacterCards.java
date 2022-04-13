@@ -6,6 +6,19 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Class representing 8 of the Character cards available in the game. These include:
+ * <ul>
+ *     <li>MOVE_TO_ISLAND: Move one student to an <code>Island</code>.</li>
+ *     <li>MOVE_TO_DINING_ROOM: Move one student to a <code>Player</code>'s dining room.</li>
+ *     <li>POOL_SWAP: Swap 3 students between a <code>Player</code>'s entrance and the card.</li>
+ *     <li>INFLUENCE_ADD_TWO: Gives +2 points when calculating influence.</li>
+ *     <li>IGNORE_TOWERS: Ignores a specified <code>TowerColor</code> when calculating influence.</li>
+ *     <li>IGNORE_COLOR: Ignores a specified <code>Color</code> when calculating influence.</li>
+ *     <li>EXCHANGE_STUDENTS: Swaps 2 students between a <code>Player</code>'s entrance and dining room</li>
+ *     <li>RETURN_TO_BAG: Returns 3 students of the specified <code>Color</code> from each <code>Player</code>'s dining room</li>
+ * </ul>
+ */
 public enum CharacterCards {
     MOVE_TO_ISLAND(StudentGroupDecorator.class, EffectType.STUDENT_GROUP, 1, true, false),
     MOVE_TO_DINING_ROOM(StudentGroupDecorator.class, EffectType.STUDENT_GROUP, 2, false, true),
@@ -21,6 +34,15 @@ public enum CharacterCards {
     private final int cost;
     private final Object[] parameters;
 
+    /**
+     * Sole constructor for a Character Card. Creates an entry specifying the information needed to instantiate this
+     * Character Card.
+     *
+     * @param cardClass the <code>Class</code> of this Character card.
+     * @param effectType the <code>EffectType</code> of this Character card.
+     * @param cost the cost to buy this Character card.
+     * @param parameters the various parameters to instantiate this Character card.
+     */
     CharacterCards(Class cardClass, EffectType effectType, int cost, Object...parameters) {
         this.cardClass = cardClass;
         this.effectType = effectType;
@@ -34,6 +56,11 @@ public enum CharacterCards {
         this.parameters = fullParams.toArray();
     }
 
+    /**
+     * Returns a new instance of this Character card.
+     *
+     * @return <code>CharacterCard</code> instance for this card.
+     */
     public CharacterCard instantiate() {
         try {
             return (CharacterCard) cardClass.getConstructors()[0].newInstance(parameters);
