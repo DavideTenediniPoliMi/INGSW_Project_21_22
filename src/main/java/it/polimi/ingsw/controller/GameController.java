@@ -12,7 +12,6 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentBag;
-import it.polimi.ingsw.model.helpers.StudentGroup;
 
 import java.util.ArrayList;
 import java.util.List;
