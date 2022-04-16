@@ -18,18 +18,33 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+/**
+ * Class representing the main controller. Handles:
+ * <ul>
+ *     <li>Lobby and Game creation</li>
+ *     <li>Round state management</li>
+ *     <li>End-Game checks</li>
+ *     <li>Winner declaration and game ending</li>
+ * </ul>
+ */
 public class GameController {
     private RoundStateController roundStateController;
     private GameStatus status;
     private final MatchInfo matchInfo;
     private final Game game;
 
+    /**
+     * Sole constructor for <code>GameController</code>.
+     */
     public GameController() {
         matchInfo = MatchInfo.getInstance();
         game = Game.getInstance();
         status = GameStatus.LOBBY;
     }
 
+    /**
+     * Creates a new Game with the players in the lobby.
+     */
     private void createGame() {
         /*
          * Game, Board and Islands are already instantiated
@@ -63,6 +78,11 @@ public class GameController {
         }
     }
 
+    /**
+     * Transitions the current round into its next state.
+     *
+     * @throws IllegalActionException If trying to define the new order of play in a wrong state.
+     */
     private void nextState() throws IllegalActionException {
         switch(matchInfo.getStateType()) {
             case PLANNING:
@@ -100,10 +120,18 @@ public class GameController {
         }
     }
 
+    /**
+     * Sets the new state for the current round.
+     *
+     * @param newState the new <code>RoundStateController</code>.
+     */
     private void setState(RoundStateController newState) {
         roundStateController = newState;
     }
 
+    /**
+     * Checks end-game conditions that apply after Mother Nature movement.
+     */
     private void checkEndConditionAfterMN() {
         Game game = Game.getInstance();
         List<School> schools = game.getBoard().getSchools();
@@ -122,6 +150,9 @@ public class GameController {
         checkWinner();
     }
 
+    /**
+     * Checks end-game conditions that apply after the end of a round.
+     */
     private void checkEndConditionAfterRound() {
         Game game = Game.getInstance();
 
@@ -132,6 +163,9 @@ public class GameController {
         checkWinner();
     }
 
+    /**
+     * Defines the game winner.
+     */
     private void checkWinner() {
         List<School> schools = Game.getInstance().getBoard().getSchools();
 
@@ -185,6 +219,12 @@ public class GameController {
         declareWinner(teamColorsWithMoreProfessors.get(0));
     }
 
+    /**
+     * Returns the amount of professors that the specified <code>TowerColor</code> has.
+     *
+     * @param teamColor the color of the team.
+     * @return The amount of professors.
+     */
     private int getNumProfessorsOf(TowerColor teamColor) {
         Game game = Game.getInstance();
         ProfessorTracker professorOwners = game.getBoard().getProfessorOwners();
@@ -200,10 +240,20 @@ public class GameController {
         return numProfessors;
     }
 
+    /**
+     * Sets the specified <code>TowerColor</code> as the winner.
+     *
+     * @param teamColor the winner of the game.
+     */
     private void declareWinner(TowerColor teamColor) {
         matchInfo.declareWinner(teamColor);
     }
 
+    /**
+     * Declares a tie between the specified <code>TowerColor</code>s.
+     *
+     * @param teamColors the list of teams that tied.
+     */
     private void declareTie(List<TowerColor> teamColors) {
         matchInfo.declareTie(teamColors);
     }
