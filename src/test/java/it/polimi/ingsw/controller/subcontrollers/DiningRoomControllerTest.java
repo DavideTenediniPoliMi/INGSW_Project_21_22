@@ -70,5 +70,4 @@ class DiningRoomControllerTest {
         dc.manageDiningRoomOf(2, sg2);
         assertEquals(1, board.getProfessorOwners().getOwnerIDByColor(Color.BLUE));
     }
-
 }
