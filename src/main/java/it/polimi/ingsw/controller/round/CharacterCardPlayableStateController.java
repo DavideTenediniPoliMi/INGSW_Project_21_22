@@ -10,9 +10,23 @@ import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.model.helpers.Parameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
+/**
+ * Class specific to the phases of the game in which CharacterCards are usable:
+ * <ul>
+ *     <li>MNState</li>
+ *     <li>StudentsState</li>
+ * </ul>
+ * Allows for <code>CharacterCard</code> purchasing and activation during these phases of a round.
+ */
 public class CharacterCardPlayableStateController extends RoundStateController {
     StudentGroup fromOrigin;
 
+    /**
+     * Sole constructor for <code>CharacterCardPlayableStateController</code>.
+     *
+     * @param oldState the old <code>RoundStateController</code> to transition from.
+     * @param stateType the current specific state of the round.
+     */
     public CharacterCardPlayableStateController(RoundStateController oldState, TurnState stateType) {
         super(oldState, stateType);
     }

@@ -10,9 +10,18 @@ import it.polimi.ingsw.model.board.School;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TurnState;
 
+/**
+ * Class specific to the Student transferring part of the action phase. Allows for student transfers and
+ * <code>CharacterCard</code>-related actions.
+ */
 public class StudentsStateController extends CharacterCardPlayableStateController{
     private final int NUM_MOVABLE_STUDENTS = MatchInfo.getInstance().getMaxMovableStudents();
 
+    /**
+     * Sole constructor for <code>StudentsStateController</code>.
+     *
+     * @param oldState the old <code>RoundStateController</code> to transition from.
+     */
     public StudentsStateController(RoundStateController oldState) {
         super(oldState, TurnState.STUDENTS);
         MatchInfo.getInstance().resetNumMovedStudents();

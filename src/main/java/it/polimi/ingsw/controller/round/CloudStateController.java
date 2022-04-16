@@ -12,11 +12,22 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Class specific to the end of the action phase of a round, allows for collecting students from <code>Clouds</code>.
+ */
 public class CloudStateController extends RoundStateController {
+    /**
+     * Sole constructor for <code>CloudStateController</code>.
+     *
+     * @param oldState the old <code>RoundStateController</code> to transition from.
+     */
     public CloudStateController(RoundStateController oldState) {
         super(oldState, TurnState.CLOUD);
     }
 
+    /**
+     * Defines the order in which the next Planning phase will play based on the last played Assistant cards.
+     */
     @Override
     public void definePlayOrder() {
         List<Player> players = Game.getInstance().getPlayers();
