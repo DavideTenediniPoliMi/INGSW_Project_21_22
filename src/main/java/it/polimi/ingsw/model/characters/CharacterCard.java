@@ -83,4 +83,6 @@ public abstract class CharacterCard {
      * @return The result of this card's effect.
      */
     public abstract int activate();
+
+    public abstract void reset();
 }

@@ -100,6 +100,8 @@ public class CharacterCardController {
         CharacterCard card = Game.getInstance().getActiveCharacterCard();
         if(card != null) {
             card.clearEffect();
+        }else {
+            throw new NullCharacterCardException();
         }
     }
 
@@ -123,7 +125,7 @@ public class CharacterCardController {
                     return true;
                 }
                 throw new BadParametersException("ALTER_INFLUENCE card. selectedColor: " + selectedColor_infl
-                                                 + "boostedTeam: " + boostedTeam);
+                                                 + " boostedTeam: " + boostedTeam);
             case STUDENT_GROUP:
                 StudentGroup fromCard = params.getFromOrigin();
                 StudentGroup fromEntrance = params.getFromDestination();
@@ -139,9 +141,9 @@ public class CharacterCardController {
                 }
 
                 throw new BadParametersException("STUDENT_GROUP card. fromCard: " + fromCard
-                        + "fromEntrance: " + fromEntrance
-                        + "playerID: " + playerID
-                        + "islandIndex: " + islandIndex);
+                        + " fromEntrance: " + fromEntrance
+                        + " playerID: " + playerID
+                        + " islandIndex: " + islandIndex);
             case RETURN_TO_BAG:
                 Color selectedColor_bag = params.getSelectedColor();
 
@@ -163,8 +165,8 @@ public class CharacterCardController {
                 }
 
                 throw new BadParametersException("EXCHANGE_STUDENTS card. fromEntrance: " + fromEntrance_ex
-                                                 + "fromDiningRoom: " + fromDiningRoom
-                                                 + "playerID: " + playerID_ex);
+                                                 + " fromDiningRoom: " + fromDiningRoom
+                                                 + " playerID: " + playerID_ex);
             default:
                 break;
         }

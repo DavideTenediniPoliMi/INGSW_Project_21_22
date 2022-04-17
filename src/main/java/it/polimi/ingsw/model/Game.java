@@ -44,10 +44,13 @@ public class Game {
      * Resets the current game instance
      */
     public static void resetInstance(){
-        instance = null;
         for(Card c: Card.values()) {
             c.reset();
         }
+        for (CharacterCard character : instance.characterCards) {
+            character.reset();
+        }
+        instance = null;
     }
 
     // BOARD
