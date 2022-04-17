@@ -6,16 +6,19 @@ import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.CardBack;
+import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.TurnState;
+import it.polimi.ingsw.model.helpers.Parameters;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-public class StudentStateControllerTest {
-    StudentsStateController controller;
+public class PlanningStateControllerTest {
+    PlanningStateController controller;
     Game game;
     MatchInfo matchInfo;
 
@@ -35,7 +38,7 @@ public class StudentStateControllerTest {
         matchInfo.addPlayer(1);
 
         RoundStateController oldState = new RoundStateController(new IslandController(), new DiningRoomController());
-        controller = new StudentsStateController(oldState);
+        controller = new PlanningStateController(oldState);
     }
 
     @AfterEach
@@ -49,10 +52,13 @@ public class StudentStateControllerTest {
     @Test
     public void testIllegalActions() {
         assertAll(
-                () -> assertThrowsExactly(IllegalActionException.class, () -> controller.definePlayOrder()),
-                () -> assertThrowsExactly(IllegalActionException.class, () -> controller.playCard(0)),
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.collectFromCloud(0)),
-                () -> assertThrowsExactly(IllegalActionException.class, () -> controller.moveMN(1))
+                () -> assertThrowsExactly(IllegalActionException.class, () -> controller.transferStudentToDiningRoom(Color.BLUE)),
+                () -> assertThrowsExactly(IllegalActionException.class, () -> controller.transferStudentToIsland(0,Color.BLUE)),
+                () -> assertThrowsExactly(IllegalActionException.class, () -> controller.moveMN(1)),
+                () -> assertThrowsExactly(IllegalActionException.class, () -> controller.buyCharacterCard(0)),
+                () -> assertThrowsExactly(IllegalActionException.class, () -> controller.setCardParameters(new Parameters())),
+                () -> assertThrowsExactly(IllegalActionException.class, () -> controller.activateCard())
         );
     }
 }
