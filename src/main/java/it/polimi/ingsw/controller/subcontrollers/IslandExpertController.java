@@ -39,7 +39,7 @@ public class IslandExpertController extends IslandController {
             Parameters params = new Parameters();
             params.setCurrentTeam(teamColor);
             params.setIslandIndex(targetIslandIndex);
-            characterCardController.setCardParameters(params);
+            game.getActiveCharacterCard().setParameters(params);
 
             adjustedScore += characterCardController.activateCard();
         }
