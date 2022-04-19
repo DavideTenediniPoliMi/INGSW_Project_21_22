@@ -62,7 +62,7 @@ public class GameController {
             }
         }
 
-        StudentBag islandBag = new StudentBag(10);
+        StudentBag islandBag = new StudentBag(2);
         for(int i = 0; i < 10; i++){
             game.addInitialStudentToIsland(i, islandBag.drawStudents(1));
         }
@@ -173,7 +173,7 @@ public class GameController {
         int minNumTowers = matchInfo.getMaxTowers();
 
         for(School school: schools) {
-            if(!school.getOwner().isTowerHolder()) return;
+            if(!school.getOwner().isTowerHolder()) continue;
 
             int currentNumTowers = school.getNumTowers();
 
@@ -201,7 +201,7 @@ public class GameController {
         for(TowerColor teamColor: teamColorsTying) {
             int currentNumProfessors = getNumProfessorsOf(teamColor);
 
-            if(currentNumProfessors < maxNumProfessors) {
+            if(currentNumProfessors > maxNumProfessors) {
                 maxNumProfessors = currentNumProfessors;
                 teamColorsWithMoreProfessors.clear();
             }
