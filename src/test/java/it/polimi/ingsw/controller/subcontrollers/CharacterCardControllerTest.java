@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller.subcontrollers;
 
 import it.polimi.ingsw.controller.round.CharacterCardPlayableStateController;
 import it.polimi.ingsw.controller.round.RoundStateController;
+import it.polimi.ingsw.exceptions.game.CharacterCardActivationException;
 import it.polimi.ingsw.exceptions.game.NullCharacterCardException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
@@ -37,16 +38,21 @@ class CharacterCardControllerTest {
     void tearDown() {
         Game.resetInstance();
         MatchInfo.resetInstance();
+        game = null;
+        matchInfo = null;
         rc = null;
         characacterCardController = null;
     }
 
     @Test
-    void buyCharacterCard_alreadyInstantiatedCard() {
+    void buyCharacterCard_alreadyBoughtCard() {
         game.instantiateCharacterCard(0);
         characacterCardController.buyCharacterCard(0);
+        System.out.println(game.getCharacterCards().get(0).getCost());
 
-        assertThrowsExactly(NullCharacterCardException.class, () -> characacterCardController.buyCharacterCard(0));
+        int coinsBefore = game.getPlayerByID(0).getNumCoins();
+        characacterCardController.buyCharacterCard(0);
+        assertEquals(coinsBefore, game.getPlayerByID(0).getNumCoins());
     }
 
     @Test

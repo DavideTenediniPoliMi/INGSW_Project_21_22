@@ -47,13 +47,7 @@ public enum CharacterCards {
         this.cardClass = cardClass;
         this.effectType = effectType;
         this.cost = cost;
-
-        GenericCard gc = new GenericCard(this.cost, this.effectType);
-        ArrayList<Object> fullParams = new ArrayList<>();
-        fullParams.add(gc);
-        fullParams.addAll(Arrays.asList(parameters));
-
-        this.parameters = fullParams.toArray();
+        this.parameters = parameters;
     }
 
     /**
@@ -62,8 +56,13 @@ public enum CharacterCards {
      * @return <code>CharacterCard</code> instance for this card.
      */
     public CharacterCard instantiate() {
+        GenericCard gc = new GenericCard(this.cost, this.effectType);
+        ArrayList<Object> fullParams = new ArrayList<>();
+        fullParams.add(gc);
+        fullParams.addAll(Arrays.asList(parameters));
+
         try {
-            return (CharacterCard) cardClass.getConstructors()[0].newInstance(parameters);
+            return (CharacterCard) cardClass.getConstructors()[0].newInstance(fullParams.toArray());
         } catch(InstantiationException | IllegalAccessException | InvocationTargetException | IllegalArgumentException e) {
             System.out.println("Failed to instantiate " + this);
             e.printStackTrace();
