@@ -47,9 +47,6 @@ public class Game {
         for(Card c: Card.values()) {
             c.reset();
         }
-        for (CharacterCard character : instance.characterCards) {
-            character.reset();
-        }
         instance = null;
     }
 

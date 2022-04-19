@@ -82,8 +82,4 @@ public abstract class CharacterCardDecorator extends CharacterCard{
      * @param params the <code>Parameters</code> to set in this card.
      */
     public abstract void setParameters(Parameters params);
-
-    public void reset() {
-        card = null;
-    }
 }

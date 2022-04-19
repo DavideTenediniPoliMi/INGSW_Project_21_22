@@ -23,9 +23,5 @@ public class GenericCard extends CharacterCard {
     }
 
     @Override
-    public void reset() {
-    }
-
-    @Override
     public void setParameters(Parameters params) {}
 }
