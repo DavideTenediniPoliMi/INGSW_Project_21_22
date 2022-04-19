@@ -1,14 +1,12 @@
 package it.polimi.ingsw.controller.subcontrollers;
 
 import it.polimi.ingsw.exceptions.game.BadParametersException;
-import it.polimi.ingsw.exceptions.game.CharacterCardActivationException;
 import it.polimi.ingsw.exceptions.game.NullCharacterCardException;
 import it.polimi.ingsw.exceptions.game.NullPlayerException;
 import it.polimi.ingsw.exceptions.player.NotEnoughCoinsException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.characters.CharacterCard;
-import it.polimi.ingsw.model.enumerations.CharacterCards;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
@@ -35,7 +33,7 @@ public class CharacterCardController {
      * @param cardIndex the Index of the <code>CharacterCard</code> to buy.
      * @throws NotEnoughCoinsException If the <code>Player</code> doesn't have enough coins to buy the specified card.
      */
-    public void buyCharacterCard(int playerID, int cardIndex) throws NotEnoughCoinsException, CharacterCardActivationException {
+    public void buyCharacterCard(int playerID, int cardIndex) throws NotEnoughCoinsException{
         if(Game.getInstance().getActiveCharacterCard() == null) {
             Player player = Game.getInstance().getPlayerByID(playerID);
             CharacterCard card = Game.getInstance().getCharacterCards().get(cardIndex);
@@ -47,8 +45,7 @@ public class CharacterCardController {
                 throw new NotEnoughCoinsException(player.getNumCoins(), card.getCost());
             }
         }else {
-            throw new CharacterCardActivationException(CharacterCards.values()[0].toString(),
-                    Game.getInstance().getActiveCharacterCard().toString());
+            throw new NullCharacterCardException();
         }
     }
 

@@ -2,8 +2,6 @@ package it.polimi.ingsw.controller.subcontrollers;
 
 import it.polimi.ingsw.controller.round.CharacterCardPlayableStateController;
 import it.polimi.ingsw.controller.round.RoundStateController;
-import it.polimi.ingsw.controller.round.StudentsStateController;
-import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.exceptions.game.NullCharacterCardException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
@@ -15,24 +13,22 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.xml.stream.events.StartDocument;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class CharacterCardControllerTest {
     RoundStateController rc;
-    CharacterCardPlayableStateController cardController;
-    Game g;
+    CharacterCardPlayableStateController characacterCardController;
+    Game game;
     MatchInfo matchInfo;
 
     @BeforeEach
     void setUp() {
         rc = new RoundStateController(new IslandController(), new DiningRoomController());
-        cardController = new CharacterCardPlayableStateController(rc,TurnState.STUDENTS);
+        characacterCardController = new CharacterCardPlayableStateController(rc,TurnState.STUDENTS);
 
-        g = Game.getInstance();
-        g.addPlayer(0, "lele", TowerColor.GREY, CardBack.CB_3, true);
-        g.giveCoinToPlayer(0);
+        game = Game.getInstance();
+        game.addPlayer(0, "lele", TowerColor.GREY, CardBack.CB_3, true);
+        game.giveCoinToPlayer(0);
         matchInfo = MatchInfo.getInstance();
         matchInfo.addPlayer(0);
     }
@@ -42,38 +38,38 @@ class CharacterCardControllerTest {
         Game.resetInstance();
         MatchInfo.resetInstance();
         rc = null;
-        cardController = null;
+        characacterCardController = null;
     }
 
     @Test
     void buyCharacterCard_alreadyInstantiatedCard() {
-        g.instantiateCharacterCard(0);
-        g.buyCharacterCard(0,0);
+        game.instantiateCharacterCard(0);
+        characacterCardController.buyCharacterCard(0);
 
-        assertThrowsExactly(NullCharacterCardException.class, () -> cardController.buyCharacterCard(0));
+        assertThrowsExactly(NullCharacterCardException.class, () -> characacterCardController.buyCharacterCard(0));
     }
 
     @Test
     void buyCharacterCard_notEnoughCoins() {
-        g.instantiateCharacterCard(1);
-        cardController.buyCharacterCard(0);
+        game.instantiateCharacterCard(1);
+        characacterCardController.buyCharacterCard(0);
     }
 
     @Test
     void buyCharacterCard_successfulBuy() {
-        g.instantiateCharacterCard(0);
-        assertDoesNotThrow(() -> cardController.buyCharacterCard(0));
+        game.instantiateCharacterCard(0);
+        assertDoesNotThrow(() -> characacterCardController.buyCharacterCard(0));
     }
 
     @Test
     void setCardParameters_activeCardIsNull() {
-        assertThrowsExactly(NullCharacterCardException.class, () -> cardController.setCardParameters(new Parameters()));
+        assertThrowsExactly(NullCharacterCardException.class, () -> characacterCardController.setCardParameters(new Parameters()));
     }
 
     @Test
     void setCardParameters_effectUsed() {
-        g.instantiateCharacterCard(0);
-        g.buyCharacterCard(0,0);
+        game.instantiateCharacterCard(0);
+        game.buyCharacterCard(0,0);
 
         Parameters params = new Parameters();
         params.setFromOrigin(new StudentGroup(Color.BLUE, 2));
@@ -81,121 +77,121 @@ class CharacterCardControllerTest {
         params.setIslandIndex(0);
 
 
-        assertDoesNotThrow(() -> cardController.setCardParameters(params));
+        assertDoesNotThrow(() -> characacterCardController.setCardParameters(params));
     }
 
     @Test
     void setCardParameters_checkParametersFail_StudentGroup_BadParameters() {
-        g.instantiateCharacterCard(0);
-        g.buyCharacterCard(0,0);
+        game.instantiateCharacterCard(0);
+        game.buyCharacterCard(0,0);
         Parameters params = new Parameters();
         params.setFromDestination(new StudentGroup(Color.GREEN, 2));
         params.setIslandIndex(0);
 
-        assertThrowsExactly(NullPointerException.class, () -> cardController.setCardParameters(params));
+        assertThrowsExactly(NullPointerException.class, () -> characacterCardController.setCardParameters(params));
     }
 
     @Test
     void setCardParameters_checkParametersFail_StudentGroup_NullPlayer() {
-        g.instantiateCharacterCard(0);
-        g.buyCharacterCard(0,0);
+        game.instantiateCharacterCard(0);
+        game.buyCharacterCard(0,0);
         Parameters params = new Parameters();
         params.setPlayerID(-1);
         params.setFromOrigin(new StudentGroup(Color.BLUE, 2));
         params.setFromDestination(new StudentGroup(Color.GREEN, 2));
         params.setIslandIndex(0);
 
-        assertDoesNotThrow(() -> cardController.setCardParameters(params));
+        assertDoesNotThrow(() -> characacterCardController.setCardParameters(params));
     }
 
     @Test
     void setCardParameters_checkParametersFail_AlterInfluence() {
-        g.instantiateCharacterCard(3);
-        g.giveCoinToPlayer(0);
-        g.giveCoinToPlayer(0);
-        g.buyCharacterCard(0,0);
+        game.instantiateCharacterCard(3);
+        game.giveCoinToPlayer(0);
+        game.giveCoinToPlayer(0);
+        game.buyCharacterCard(0,0);
         Parameters params = new Parameters();
         params.setSelectedColor(Color.PINK);
         params.setBoostedTeam(TowerColor.BLACK);
 
-        assertDoesNotThrow(() -> cardController.setCardParameters(params));
+        assertDoesNotThrow(() -> characacterCardController.setCardParameters(params));
     }
 
     @Test
     void setCardParameters_checkParametersFail_AlterInfluence_BadParameters() {
-        g.instantiateCharacterCard(3);
-        g.giveCoinToPlayer(0);
-        g.giveCoinToPlayer(0);
-        g.buyCharacterCard(0,0);
+        game.instantiateCharacterCard(3);
+        game.giveCoinToPlayer(0);
+        game.giveCoinToPlayer(0);
+        game.buyCharacterCard(0,0);
         Parameters params = new Parameters();
 
-        assertDoesNotThrow(() -> cardController.setCardParameters(params));
+        assertDoesNotThrow(() -> characacterCardController.setCardParameters(params));
     }
 
     @Test
     void setCardParameters_checkParametersFail_ReturnToBag() {
-        g.instantiateCharacterCard(7);
-        g.giveCoinToPlayer(0);
-        g.giveCoinToPlayer(0);
-        g.buyCharacterCard(0,0);
+        game.instantiateCharacterCard(7);
+        game.giveCoinToPlayer(0);
+        game.giveCoinToPlayer(0);
+        game.buyCharacterCard(0,0);
         Parameters params = new Parameters();
         params.setSelectedColor(Color.BLUE);
 
-        assertDoesNotThrow(() -> cardController.setCardParameters(params));
+        assertDoesNotThrow(() -> characacterCardController.setCardParameters(params));
     }
 
     @Test
     void setCardParameters_checkParametersFail_ReturnToBag_BadParameters() {
-        g.instantiateCharacterCard(7);
-        g.giveCoinToPlayer(0);
-        g.giveCoinToPlayer(0);
-        g.buyCharacterCard(0,0);
+        game.instantiateCharacterCard(7);
+        game.giveCoinToPlayer(0);
+        game.giveCoinToPlayer(0);
+        game.buyCharacterCard(0,0);
         Parameters params = new Parameters();
 
-        assertDoesNotThrow(() -> cardController.setCardParameters(params));
+        assertDoesNotThrow(() -> characacterCardController.setCardParameters(params));
     }
 
     @Test
     void setCardParameters_checkParametersFail_ExchangeStudents() {
-        g.instantiateCharacterCard(6);
-        g.giveCoinToPlayer(0);
-        g.giveCoinToPlayer(0);
-        g.buyCharacterCard(0,0);
+        game.instantiateCharacterCard(6);
+        game.giveCoinToPlayer(0);
+        game.giveCoinToPlayer(0);
+        game.buyCharacterCard(0,0);
         Parameters params = new Parameters();
         params.setFromOrigin(new StudentGroup(Color.BLUE, 2));
         params.setFromDestination(new StudentGroup(Color.GREEN, 2));
 
-        assertDoesNotThrow(() -> cardController.setCardParameters(params));
+        assertDoesNotThrow(() -> characacterCardController.setCardParameters(params));
     }
 
     @Test
     void setCardParameters_checkParametersFail_ExchangeStudents_BadParameters() {
-        g.instantiateCharacterCard(6);
-        g.giveCoinToPlayer(0);
-        g.giveCoinToPlayer(0);
-        g.buyCharacterCard(0,0);
+        game.instantiateCharacterCard(6);
+        game.giveCoinToPlayer(0);
+        game.giveCoinToPlayer(0);
+        game.buyCharacterCard(0,0);
         Parameters params = new Parameters();
 
-        assertThrowsExactly(NullPointerException.class, () -> cardController.setCardParameters(params));
+        assertThrowsExactly(NullPointerException.class, () -> characacterCardController.setCardParameters(params));
     }
 
     @Test
     void setCardParameters_checkParametersFail_ExchangeStudents_NullPlayer() {
-        g.instantiateCharacterCard(6);
-        g.giveCoinToPlayer(0);
-        g.giveCoinToPlayer(0);
-        g.buyCharacterCard(0,0);
+        game.instantiateCharacterCard(6);
+        game.giveCoinToPlayer(0);
+        game.giveCoinToPlayer(0);
+        game.buyCharacterCard(0,0);
         Parameters params = new Parameters();
         params.setPlayerID(-1);
         params.setFromOrigin(new StudentGroup(Color.BLUE, 2));
         params.setFromDestination(new StudentGroup(Color.GREEN, 2));
 
-        assertDoesNotThrow(() -> cardController.setCardParameters(params));
+        assertDoesNotThrow(() -> characacterCardController.setCardParameters(params));
     }
 
     @Test
     void setCardParameters_parametersSet() {
-        assertThrowsExactly(NullCharacterCardException.class, () -> cardController.setCardParameters(new Parameters()));
+        assertThrowsExactly(NullCharacterCardException.class, () -> characacterCardController.setCardParameters(new Parameters()));
     }
 
     @Test
@@ -207,8 +203,8 @@ class CharacterCardControllerTest {
 
     @Test
     void isActiveCardOfType_cardNotNull() {
-        g.instantiateCharacterCard(0);
-        g.buyCharacterCard(0,0);
+        game.instantiateCharacterCard(0);
+        game.buyCharacterCard(0,0);
         CharacterCardController characterCardController = new CharacterCardController();
 
         assertTrue(characterCardController.isActiveCardOfType(EffectType.STUDENT_GROUP));
@@ -216,30 +212,30 @@ class CharacterCardControllerTest {
 
     @Test
     void activateCard() {
-        g.instantiateCharacterCard(0);
-        g.buyCharacterCard(0,0);
+        game.instantiateCharacterCard(0);
+        game.buyCharacterCard(0,0);
         Parameters params = new Parameters();
         params.setFromOrigin(new StudentGroup(Color.BLUE, 2));
         params.setFromDestination(new StudentGroup(Color.GREEN, 2));
         params.setIslandIndex(0);
-        cardController.setCardParameters(params);
+        characacterCardController.setCardParameters(params);
 
-        assertDoesNotThrow(() -> cardController.activateCard());
+        assertDoesNotThrow(() -> characacterCardController.activateCard());
     }
 
     @Test
     void clearEffects_cardIsNull() {
-        assertThrowsExactly(NullCharacterCardException.class, () -> cardController.clearEffects());
+        assertThrowsExactly(NullCharacterCardException.class, () -> characacterCardController.clearEffects());
     }
 
     @Test
     void clearEffects_cardNotNull() {
-        g.instantiateCharacterCard(0);
-        g.buyCharacterCard(0,0);
-        CharacterCard card = g.getActiveCharacterCard();
+        game.instantiateCharacterCard(0);
+        game.buyCharacterCard(0,0);
+        CharacterCard card = game.getActiveCharacterCard();
 
         assertTrue(card.isActive());
-        cardController.clearEffects();
+        characacterCardController.clearEffects();
         assertFalse(card.isActive());
     }
 }

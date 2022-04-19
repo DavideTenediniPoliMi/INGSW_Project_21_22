@@ -1,7 +1,6 @@
 package it.polimi.ingsw.controller.round;
 
 import it.polimi.ingsw.exceptions.game.BadParametersException;
-import it.polimi.ingsw.exceptions.game.CharacterCardActivationException;
 import it.polimi.ingsw.exceptions.player.NotEnoughCoinsException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
@@ -39,7 +38,7 @@ public class CharacterCardPlayableStateController extends RoundStateController {
         }
         try {
             characterCardController.buyCharacterCard(MatchInfo.getInstance().getCurrentPlayerID(), cardIndex);
-        } catch(NotEnoughCoinsException | CharacterCardActivationException e) {
+        } catch(NotEnoughCoinsException e) {
             e.printStackTrace();
         }
 

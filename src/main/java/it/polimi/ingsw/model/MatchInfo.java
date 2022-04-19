@@ -154,7 +154,7 @@ public class MatchInfo {
     }
 
     /**
-     * Adds a player to the play order queue. To be called when deciding order of play
+     * Adds a player to the play order. To be called when deciding order of play
      *
      * @param playerID the ID of the player to add next
      */
