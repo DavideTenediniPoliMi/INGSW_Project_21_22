@@ -171,8 +171,7 @@ public class CharacterCardController {
                                                  + " fromDiningRoom: " + fromDiningRoom
                                                  + " playerID: " + playerID_ex);
             default:
-                break;
+                return false;
         }
-        return false;
     }
 }
