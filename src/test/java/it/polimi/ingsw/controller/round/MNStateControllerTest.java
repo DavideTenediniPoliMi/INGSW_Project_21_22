@@ -5,10 +5,7 @@ import it.polimi.ingsw.controller.subcontrollers.IslandController;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
-import it.polimi.ingsw.model.enumerations.CardBack;
-import it.polimi.ingsw.model.enumerations.Color;
-import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.model.enumerations.TurnState;
+import it.polimi.ingsw.model.enumerations.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,6 +42,14 @@ class MNStateControllerTest {
         MatchInfo.resetInstance();
         game = null;
         matchInfo = null;
+    }
+
+    @Test
+    public void testMoveMN_in_range() {
+        Game.getInstance().playCard(0, Card.CARD_3); //Can move 2 steps
+        Game.getInstance().playCard(1, Card.CARD_8); //Can move 4 steps
+
+
     }
 
     @Test
