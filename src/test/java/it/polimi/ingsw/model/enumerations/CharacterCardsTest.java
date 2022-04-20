@@ -20,22 +20,4 @@ public class CharacterCardsTest {
         assertNotNull(rtb);
         assertEquals(rtb.getClass(), ReturnToBagDecorator.class);
     }
-
-    @Test
-    public void testMultiInstantiate(){
-        Game g = Game.getInstance();
-        g.instantiateCharacterCard(0);
-        g.instantiateCharacterCard(0);
-        g.instantiateCharacterCard(0);
-
-        g.addPlayer(0, "s", TowerColor.BLACK, CardBack.CB_1, true);
-        g.giveCoinToPlayer(0);
-        g.giveCoinToPlayer(0);
-        g.giveCoinToPlayer(0);
-        g.giveCoinToPlayer(0);
-
-        g.buyCharacterCard(0, 0);
-        g.buyCharacterCard(0, 1);
-        g.buyCharacterCard(0, 2);
-    }
 }

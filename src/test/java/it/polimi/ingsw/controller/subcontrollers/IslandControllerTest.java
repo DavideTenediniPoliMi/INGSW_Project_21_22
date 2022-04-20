@@ -38,6 +38,8 @@ class IslandControllerTest {
     @AfterEach
     void tearDown() {
         Game.resetInstance();
+        game = null;
+        islandController = null;
     }
 
     @Test
