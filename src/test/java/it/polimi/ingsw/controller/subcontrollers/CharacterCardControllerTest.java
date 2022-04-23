@@ -205,7 +205,7 @@ class CharacterCardControllerTest {
     void isActiveCardOfType_cardIsNull() {
         CharacterCardController characterCardController = new CharacterCardController();
 
-        assertThrowsExactly(NullCharacterCardException.class, () -> characterCardController.isActiveCardOfType(EffectType.STUDENT_GROUP));
+        assertFalse(characterCardController.isActiveCardOfType(EffectType.STUDENT_GROUP));
     }
 
     @Test

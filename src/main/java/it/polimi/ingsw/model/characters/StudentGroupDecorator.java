@@ -55,7 +55,7 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
      */
     @Override
     public void setParameters(Parameters params) {
-        if(!students.contains(fromCard)) {
+        if(!students.contains(params.getFromOrigin())) {
             throw new NotEnoughStudentsException(Color.RED); //Default, change?
         }
         fromCard = params.getFromOrigin();
