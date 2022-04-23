@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class StudentStateControllerTest {
+public class StudentStateControllerExpertTest {
     StudentsStateController controller;
     Game game;
     MatchInfo matchInfo;
@@ -26,13 +26,12 @@ public class StudentStateControllerTest {
         game = Game.getInstance();
         game.addPlayer(0, "lollo", TowerColor.BLACK, CardBack.CB_1, true);
         game.addPlayer(1, "lello", TowerColor.WHITE, CardBack.CB_2, true);
-        game.addPlayer(2, "lillo", TowerColor.GREY, CardBack.CB_3, true);
 
         matchInfo = MatchInfo.getInstance();
-        matchInfo.setSelectedNumPlayer(3);
+        matchInfo.setSelectedNumPlayer(2);
         matchInfo.setStateType(TurnState.STUDENTS);
-        matchInfo.setExpertMode(false);
-        matchInfo.setNumPlayersConnected(3);
+        matchInfo.setExpertMode(true);
+        matchInfo.setNumPlayersConnected(2);
         matchInfo.addPlayer(0);
         matchInfo.addPlayer(1);
 
@@ -54,10 +53,7 @@ public class StudentStateControllerTest {
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.definePlayOrder()),
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.playCard(0)),
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.collectFromCloud(0)),
-                () -> assertThrowsExactly(IllegalActionException.class, () -> controller.moveMN(1)),
-                () -> assertThrowsExactly(ExpertModeDisabledException.class, () -> controller.buyCharacterCard(0)),
-                () -> assertThrowsExactly(ExpertModeDisabledException.class, () -> controller.setCardParameters(new Parameters())),
-                () -> assertThrowsExactly(ExpertModeDisabledException.class, () -> controller.activateCard())
+                () -> assertThrowsExactly(IllegalActionException.class, () -> controller.moveMN(1))
         );
     }
 }

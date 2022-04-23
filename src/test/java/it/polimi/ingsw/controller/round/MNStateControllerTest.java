@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller.round;
 
 import it.polimi.ingsw.controller.subcontrollers.DiningRoomController;
 import it.polimi.ingsw.controller.subcontrollers.IslandController;
+import it.polimi.ingsw.exceptions.game.ExpertModeDisabledException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
@@ -9,6 +10,7 @@ import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.TurnState;
+import it.polimi.ingsw.model.helpers.Parameters;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,7 +56,12 @@ class MNStateControllerTest {
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.playCard(0)),
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.collectFromCloud(0)),
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.transferStudentToDiningRoom(Color.BLUE)),
-                () -> assertThrowsExactly(IllegalActionException.class, () -> controller.transferStudentToIsland(0,Color.BLUE))
+                () -> assertThrowsExactly(IllegalActionException.class, () -> controller.transferStudentToIsland(0,Color.BLUE)),
+                () -> assertThrowsExactly(ExpertModeDisabledException.class, () -> controller.buyCharacterCard(0)),
+                () -> assertThrowsExactly(ExpertModeDisabledException.class, () -> controller.setCardParameters(new Parameters())),
+                () -> assertThrowsExactly(ExpertModeDisabledException.class, () -> controller.activateCard())
         );
     }
+
+
 }
