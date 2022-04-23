@@ -420,4 +420,11 @@ public class Game {
     public boolean isStudentBagEmpty() {
         return bag.isEmpty();
     }
+
+    //------------- DEBUGGING -------------------
+    private int steps = 0;
+
+    public void incrementSteps(){
+        steps += 1;
+    }
 }
