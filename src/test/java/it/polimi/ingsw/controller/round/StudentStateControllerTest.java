@@ -2,14 +2,20 @@ package it.polimi.ingsw.controller.round;
 
 import it.polimi.ingsw.controller.subcontrollers.DiningRoomController;
 import it.polimi.ingsw.controller.subcontrollers.IslandController;
+import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.exceptions.game.ExpertModeDisabledException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
+import it.polimi.ingsw.exceptions.students.NotEnoughStudentsException;
+import it.polimi.ingsw.exceptions.students.StudentTransferException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.enumerations.CardBack;
+import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.model.helpers.StudentGroup;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,14 +25,19 @@ import static org.junit.jupiter.api.Assertions.*;
 public class StudentStateControllerTest {
     StudentsStateController controller;
     Game game;
+    Board board;
     MatchInfo matchInfo;
 
     @BeforeEach
     void setUp() {
         game = Game.getInstance();
+        board = game.getBoard();
         game.addPlayer(0, "lollo", TowerColor.BLACK, CardBack.CB_1, true);
+        board.addSchool(game.getPlayerByID(0));
         game.addPlayer(1, "lello", TowerColor.WHITE, CardBack.CB_2, true);
+        board.addSchool(game.getPlayerByID(1));
         game.addPlayer(2, "lillo", TowerColor.GREY, CardBack.CB_3, true);
+        board.addSchool(game.getPlayerByID(2));
 
         matchInfo = MatchInfo.getInstance();
         matchInfo.setSelectedNumPlayer(3);
@@ -59,5 +70,73 @@ public class StudentStateControllerTest {
                 () -> assertThrowsExactly(ExpertModeDisabledException.class, () -> controller.setCardParameters(new Parameters())),
                 () -> assertThrowsExactly(ExpertModeDisabledException.class, () -> controller.activateCard())
         );
+    }
+
+    @Test
+    void transferStudentToIslandTest_islandIndexOutOfBound() {
+        game.giveStudentsTo(0, 2);
+        StudentGroup entrance = new StudentGroup();
+        for (Color c : Color.values()) {
+            entrance.addByColor(c, board.getSchoolByPlayerID(0).getNumStudentsInEntranceByColor(c));
+            if(entrance.getByColor(c) > 0) {
+                assertThrowsExactly(BadParametersException.class, () -> controller.transferStudentToIsland(-1, c));
+                assertThrowsExactly(BadParametersException.class, () -> controller.transferStudentToIsland(12, c));
+                return;
+            }
+        }
+    }
+
+    @Test
+    void transferStudentToIslandTest_movableStudentsExceed() {
+        board.addToEntranceOf(0, new StudentGroup(Color.BLUE, 5));
+        matchInfo.setSelectedNumPlayer(3);
+
+        for(int i=0; i < 4; i++) {
+            assertDoesNotThrow(() -> controller.transferStudentToIsland(0, Color.BLUE));
+        }
+        assertThrowsExactly(StudentTransferException.class, () -> controller.transferStudentToIsland(0, Color.BLUE));
+    }
+
+    @Test
+    void transferStudentToIslandTest_notEnoughStudents() {
+        board.addToEntranceOf(0, new StudentGroup(Color.BLUE, 1));
+        matchInfo.setSelectedNumPlayer(3);
+
+        assertDoesNotThrow(() -> controller.transferStudentToIsland(0, Color.BLUE));
+        assertThrowsExactly(NotEnoughStudentsException.class, () -> controller.transferStudentToIsland(0, Color.BLUE));
+    }
+
+    @Test
+    void transferStudentToIslandTest() {
+        board.addToEntranceOf(0, new StudentGroup(Color.BLUE, 1));
+        matchInfo.setSelectedNumPlayer(3);
+
+        int numStudentsMovedBefore = matchInfo.getNumMovedStudents();
+
+        assertAll(
+                () -> assertDoesNotThrow(() -> controller.transferStudentToIsland(0, Color.BLUE)),
+                () -> assertEquals(numStudentsMovedBefore+1, matchInfo.getNumMovedStudents()),
+                () -> assertEquals(1, board.getIslandAt(0).getNumStudentsByColor(Color.BLUE))
+        );
+    }
+
+    @Test
+    void transferStudentToDiningRoom() {
+        board.addToEntranceOf(0, new StudentGroup(Color.BLUE, 5));
+        matchInfo.setSelectedNumPlayer(3);
+
+        for(int i=0; i < 4; i++) {
+            assertDoesNotThrow(() -> controller.transferStudentToDiningRoom(Color.BLUE));
+        }
+        assertThrowsExactly(StudentTransferException.class, () -> controller.transferStudentToDiningRoom(Color.BLUE));
+    }
+
+    @Test
+    void transferStudentToDiningRoom_notEnoughStudents() {
+        board.addToEntranceOf(0, new StudentGroup(Color.BLUE, 1));
+        matchInfo.setSelectedNumPlayer(3);
+
+        assertDoesNotThrow(() -> controller.transferStudentToDiningRoom(Color.BLUE));
+        assertThrowsExactly(NotEnoughStudentsException.class, () -> controller.transferStudentToDiningRoom(Color.BLUE));
     }
 }
