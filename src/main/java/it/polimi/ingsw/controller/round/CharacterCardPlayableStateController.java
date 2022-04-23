@@ -24,7 +24,6 @@ import java.lang.reflect.Method;
  */
 public class CharacterCardPlayableStateController extends RoundStateController {
     StudentGroup fromOrigin;
-    boolean enabled;
 
     /**
      * Sole constructor for <code>CharacterCardPlayableStateController</code>.
@@ -34,12 +33,11 @@ public class CharacterCardPlayableStateController extends RoundStateController {
      */
     public CharacterCardPlayableStateController(RoundStateController oldState, TurnState stateType) {
         super(oldState, stateType);
-        enabled = MatchInfo.getInstance().isExpertMode();
     }
 
     @Override
     public void buyCharacterCard(int cardIndex) {
-        if(enabled) {
+        if(isEnabled()) {
             if(cardIndex < 0 || cardIndex > 2) {
                 throw new BadParametersException("cardIndex is " + cardIndex + ", expected between 0 and 2");
             }
@@ -57,7 +55,7 @@ public class CharacterCardPlayableStateController extends RoundStateController {
 
     @Override
     public void setCardParameters(Parameters params) {
-        if(enabled) {
+        if(isEnabled()) {
             characterCardController.setCardParameters(params);
             CharacterCard card = Game.getInstance().getActiveCharacterCard();
 
@@ -71,7 +69,7 @@ public class CharacterCardPlayableStateController extends RoundStateController {
 
     @Override
     public void activateCard() {
-        if(enabled) {
+        if(isEnabled()) {
             int res = characterCardController.activateCard();
             CharacterCard card = Game.getInstance().getActiveCharacterCard();
 
@@ -83,5 +81,9 @@ public class CharacterCardPlayableStateController extends RoundStateController {
         }else{
             throw new ExpertModeDisabledException();
         }
+    }
+
+    private boolean isEnabled() {
+        return MatchInfo.getInstance().isExpertMode();
     }
 }
