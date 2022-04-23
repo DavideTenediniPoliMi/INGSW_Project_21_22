@@ -56,7 +56,7 @@ public class GameController {
          * (6e) Give out coins
          **/
         for(Player player : game.getPlayers()) {
-            game.getBoard().addSchool(player);
+            game.addSchool(player.getID());
             if(matchInfo.isExpertMode()) {
                 game.giveCoinToPlayer(player.getID());
             }

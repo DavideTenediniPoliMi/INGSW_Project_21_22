@@ -26,7 +26,7 @@ public class GameTest {
         g.addPlayer(0, "ezio", TowerColor.WHITE, CardBack.CB_1, true);
         g.addPlayer(1, "bruso", TowerColor.GREY, CardBack.CB_2, true);
 
-        g.getPlayers().forEach((p) -> g.getBoard().addSchool(p));
+        g.getPlayers().forEach((p) -> g.addSchool(p.getID()));
 
         g.instantiateCharacterCard(5);
         g.buyCharacterCard(0, 0);

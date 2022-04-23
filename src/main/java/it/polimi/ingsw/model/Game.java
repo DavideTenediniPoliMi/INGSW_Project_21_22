@@ -152,6 +152,15 @@ public class Game {
     // SCHOOL
 
     /**
+     * Adds a new <code>School</code> bound to the specified <code>PlayerID</code>.
+     *
+     * @param playerID the ID of the player who will own the new <code>School</code>.
+     */
+    public void addSchool(int playerID) {
+        board.addSchool(getPlayerByID(playerID));
+    }
+
+    /**
      * Adds the specified student to the specified <code>Island</code>. Only to be used when initializing the Game. The
      * <code>StudentGroup</code> must contain only 1 student.
      *
