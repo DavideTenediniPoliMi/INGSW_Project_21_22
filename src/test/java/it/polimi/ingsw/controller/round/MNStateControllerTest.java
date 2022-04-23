@@ -2,14 +2,13 @@ package it.polimi.ingsw.controller.round;
 
 import it.polimi.ingsw.controller.subcontrollers.DiningRoomController;
 import it.polimi.ingsw.controller.subcontrollers.IslandController;
+import it.polimi.ingsw.exceptions.board.MNOutOfRangeException;
 import it.polimi.ingsw.exceptions.game.ExpertModeDisabledException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
+import it.polimi.ingsw.exceptions.game.NullPlayerException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
-import it.polimi.ingsw.model.enumerations.CardBack;
-import it.polimi.ingsw.model.enumerations.Color;
-import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.model.enumerations.TurnState;
+import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.helpers.Parameters;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,6 +27,7 @@ class MNStateControllerTest {
         game.addPlayer(0, "lollo", TowerColor.BLACK, CardBack.CB_1, true);
         game.addPlayer(1, "lello", TowerColor.WHITE, CardBack.CB_2, true);
         game.addPlayer(2, "lillo", TowerColor.GREY, CardBack.CB_3, true);
+        game.placeMNAt(0);
 
         matchInfo = MatchInfo.getInstance();
         matchInfo.setSelectedNumPlayer(3);
@@ -63,5 +63,23 @@ class MNStateControllerTest {
         );
     }
 
+    @Test
+    public void outOfRangTest() {
+        game.playCard(0, Card.CARD_1);
+        assertThrowsExactly(MNOutOfRangeException.class, () -> controller.moveMN(2));
+    }
 
+    @Test
+    public void nullPlayerTest() {
+        matchInfo.removePlayer();
+        matchInfo.removePlayer();
+        assertThrowsExactly(NullPlayerException.class, () -> controller.moveMN(2));
+    }
+
+    @Test
+    public void moveMNTest() throws MNOutOfRangeException {
+        game.playCard(0, Card.CARD_1);
+        controller.moveMN(1);
+        assertEquals(1, game.getBoard().getMNPosition());
+    }
 }

@@ -26,7 +26,7 @@ public class MNStateController extends CharacterCardPlayableStateController {
         Game game = Game.getInstance();
         Player player = game.getPlayerByID(MatchInfo.getInstance().getCurrentPlayerID());
 
-        if(player.getID() == -1) {
+        if(player == null) {
             throw new NullPlayerException();
         } else if (steps > player.getSelectedCard().RANGE) {
             throw new MNOutOfRangeException(steps, player.getSelectedCard().RANGE);

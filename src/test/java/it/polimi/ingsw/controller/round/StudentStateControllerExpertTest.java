@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller.round;
 
 import it.polimi.ingsw.controller.subcontrollers.DiningRoomController;
 import it.polimi.ingsw.controller.subcontrollers.IslandController;
+import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.exceptions.game.ExpertModeDisabledException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.model.Game;
@@ -55,5 +56,10 @@ public class StudentStateControllerExpertTest {
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.collectFromCloud(0)),
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.moveMN(1))
         );
+    }
+
+    @Test
+    public void testBuyCharacterCardBadParam() {
+        assertThrowsExactly(BadParametersException.class, () -> controller.buyCharacterCard(3));
     }
 }
