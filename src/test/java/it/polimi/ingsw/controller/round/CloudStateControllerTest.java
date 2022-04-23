@@ -5,10 +5,7 @@ import it.polimi.ingsw.controller.subcontrollers.IslandController;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
-import it.polimi.ingsw.model.enumerations.CardBack;
-import it.polimi.ingsw.model.enumerations.Color;
-import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.model.enumerations.TurnState;
+import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.helpers.Parameters;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CloudControllerTest {
+public class CloudStateControllerTest {
     CloudStateController controller;
     Game game;
     MatchInfo matchInfo;
@@ -59,5 +56,11 @@ public class CloudControllerTest {
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.setCardParameters(new Parameters())),
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.activateCard())
         );
+    }
+
+    @Test
+    void definePlayOrderTest() {
+        game.playCard(0, Card.CARD_2);
+        game.playCard(1, Card.CARD_1);
     }
 }
