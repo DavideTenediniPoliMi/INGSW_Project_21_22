@@ -51,6 +51,21 @@ public class StudentGroup implements Cloneable{
     }
 
     /**
+     * Returns whether the specified StudentGroup is contained in this <code>StudentGroup</code>
+     *
+     * @param students the <code>StudentGroup</code> to check.
+     * @return <code>true</code> if this <code>StudentGroup</code> contains the specified one.
+     */
+    public boolean contains(StudentGroup students) {
+        for(Color c : Color.values()) {
+            if(students.getByColor(c) > getByColor(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Transfer all the students in this <code>StudentGroup</code> into the specified recipient <code>StudentGroup</code>
      *
      * @param recipient the recipient <code>StudentGroup</code> of this transaction

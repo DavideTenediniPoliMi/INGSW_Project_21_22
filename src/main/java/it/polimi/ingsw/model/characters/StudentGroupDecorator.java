@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.characters;
 
+import it.polimi.ingsw.exceptions.students.NotEnoughStudentsException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.enumerations.Color;
@@ -54,6 +55,9 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
      */
     @Override
     public void setParameters(Parameters params) {
+        if(!students.contains(fromCard)) {
+            throw new NotEnoughStudentsException(Color.RED); //Default, change?
+        }
         fromCard = params.getFromOrigin();
 
         if(isToIsland) {

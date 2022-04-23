@@ -5,6 +5,7 @@ import it.polimi.ingsw.exceptions.game.CharacterCardActivationException;
 import it.polimi.ingsw.exceptions.game.NullCharacterCardException;
 import it.polimi.ingsw.exceptions.game.NullPlayerException;
 import it.polimi.ingsw.exceptions.player.NotEnoughCoinsException;
+import it.polimi.ingsw.exceptions.students.NotEnoughStudentsException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.characters.CharacterCard;
@@ -63,7 +64,7 @@ public class CharacterCardController {
                 if(checkParameters(params) && !effectUsed){
                     Game.getInstance().setCardParameters(params);
                 }
-            } catch (BadParametersException | NullPlayerException exc) {
+            } catch (BadParametersException | NullPlayerException | NotEnoughStudentsException exc) {
                 exc.printStackTrace();
             }
         }else {
@@ -82,9 +83,10 @@ public class CharacterCardController {
         if(card != null) {
             return card.getEffectType().equals(effectType);
         }else {
-            throw new NullCharacterCardException();
+            return false;
         }
     }
+
 
     /**
      * Activates the effect of the active <code>CharacterCard</code>.
