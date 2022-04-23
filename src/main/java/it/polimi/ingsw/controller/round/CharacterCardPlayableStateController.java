@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller.round;
 
 import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.exceptions.game.CharacterCardActivationException;
+import it.polimi.ingsw.exceptions.game.ExpertModeDisabledException;
 import it.polimi.ingsw.exceptions.player.NotEnoughCoinsException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
@@ -10,6 +11,8 @@ import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.model.helpers.Parameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
+
+import java.lang.reflect.Method;
 
 /**
  * Class specific to the phases of the game in which CharacterCards are usable:
@@ -21,6 +24,7 @@ import it.polimi.ingsw.model.helpers.StudentGroup;
  */
 public class CharacterCardPlayableStateController extends RoundStateController {
     StudentGroup fromOrigin;
+    boolean enabled;
 
     /**
      * Sole constructor for <code>CharacterCardPlayableStateController</code>.
@@ -30,41 +34,54 @@ public class CharacterCardPlayableStateController extends RoundStateController {
      */
     public CharacterCardPlayableStateController(RoundStateController oldState, TurnState stateType) {
         super(oldState, stateType);
+        enabled = MatchInfo.getInstance().isExpertMode();
     }
 
     @Override
     public void buyCharacterCard(int cardIndex) {
-        if(cardIndex < 0 || cardIndex > 2) {
-            throw new BadParametersException("cardIndex is " + cardIndex + ", expected between 0 and 2");
-        }
-        try {
-            characterCardController.buyCharacterCard(MatchInfo.getInstance().getCurrentPlayerID(), cardIndex);
-        } catch(NotEnoughCoinsException | CharacterCardActivationException e) {
-            e.printStackTrace();
-        }
+        if(enabled) {
+            if(cardIndex < 0 || cardIndex > 2) {
+                throw new BadParametersException("cardIndex is " + cardIndex + ", expected between 0 and 2");
+            }
+            try {
+                characterCardController.buyCharacterCard(MatchInfo.getInstance().getCurrentPlayerID(), cardIndex);
+            } catch(NotEnoughCoinsException | CharacterCardActivationException e) {
+                e.printStackTrace();
+            }
 
-        fromOrigin = null;
+            fromOrigin = null;
+        }else{
+            throw new ExpertModeDisabledException();
+        }
     }
 
     @Override
     public void setCardParameters(Parameters params) {
-        characterCardController.setCardParameters(params);
-        CharacterCard card = Game.getInstance().getActiveCharacterCard();
+        if(enabled) {
+            characterCardController.setCardParameters(params);
+            CharacterCard card = Game.getInstance().getActiveCharacterCard();
 
-        if(card.getEffectType().equals(EffectType.EXCHANGE_STUDENTS) || card.getEffectType().equals(EffectType.STUDENT_GROUP)){
-            fromOrigin = (StudentGroup) params.getFromOrigin().clone();
+            if(card.getEffectType().equals(EffectType.EXCHANGE_STUDENTS) || card.getEffectType().equals(EffectType.STUDENT_GROUP)){
+                fromOrigin = (StudentGroup) params.getFromOrigin().clone();
+            }
+        }else{
+            throw new ExpertModeDisabledException();
         }
     }
 
     @Override
     public void activateCard() {
-        int res = characterCardController.activateCard();
-        CharacterCard card = Game.getInstance().getActiveCharacterCard();
+        if(enabled) {
+            int res = characterCardController.activateCard();
+            CharacterCard card = Game.getInstance().getActiveCharacterCard();
 
-        if(card.getEffectType().equals(EffectType.EXCHANGE_STUDENTS) || card.getEffectType().equals(EffectType.STUDENT_GROUP)){
-            if(res == -1){ //If card has altered someone's dining room
-                diningRoomController.manageDiningRoomOf(MatchInfo.getInstance().getCurrentPlayerID(), fromOrigin);
+            if(card.getEffectType().equals(EffectType.EXCHANGE_STUDENTS) || card.getEffectType().equals(EffectType.STUDENT_GROUP)){
+                if(res == -1){ //If card has altered someone's dining room
+                    diningRoomController.manageDiningRoomOf(MatchInfo.getInstance().getCurrentPlayerID(), fromOrigin);
+                }
             }
+        }else{
+            throw new ExpertModeDisabledException();
         }
     }
 }

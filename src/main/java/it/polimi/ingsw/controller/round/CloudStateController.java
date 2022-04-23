@@ -13,7 +13,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Class specific to the end of the action phase of a round, allows for collecting students from <code>Clouds</code>.
+ * Class specific to the end of the action phase of a round, allows for students collection from <code>Clouds</code>.
  */
 public class CloudStateController extends RoundStateController {
     /**
