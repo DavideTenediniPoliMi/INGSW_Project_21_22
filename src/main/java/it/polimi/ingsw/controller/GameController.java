@@ -1,16 +1,16 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.controller.round.*;
+import it.polimi.ingsw.controller.subcontrollers.CharacterCardController;
+import it.polimi.ingsw.controller.subcontrollers.DiningRoomExpertController;
+import it.polimi.ingsw.controller.subcontrollers.IslandExpertController;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.ProfessorTracker;
 import it.polimi.ingsw.model.board.School;
-import it.polimi.ingsw.model.enumerations.CharacterCards;
-import it.polimi.ingsw.model.enumerations.Color;
-import it.polimi.ingsw.model.enumerations.GameStatus;
-import it.polimi.ingsw.model.enumerations.TowerColor;
+import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.helpers.StudentBag;
 
 import java.util.ArrayList;
@@ -54,9 +54,10 @@ public class GameController {
          * (4) Instantiate Clouds
          * (5e) Instantiate CharacterCards
          * (6e) Give out coins
-         **/
-        for(Player player : game.getPlayers()) {
+         **/for(Player player : game.getPlayers()) {
             game.addSchool(player.getID());
+            game.giveStudentsTo(player.getID(), matchInfo.getInitialNumStudents());
+            game.addTowersTo(player.getID(), matchInfo.getMaxTowers());
             if(matchInfo.isExpertMode()) {
                 game.giveCoinToPlayer(player.getID());
             }
@@ -76,6 +77,16 @@ public class GameController {
                 game.instantiateCharacterCard(cardID);
             }
         }
+
+        game.placeMNAt(new Random().nextInt(game.getBoard().getNumIslands()));
+
+        matchInfo.setStateType(TurnState.PLANNING);
+
+        roundStateController = new RoundStateController(new IslandExpertController(new CharacterCardController())
+                , new DiningRoomExpertController());
+        setState(new PlanningStateController(roundStateController));
+
+        roundStateController.defineFirstPlayOrder();
     }
 
     /**

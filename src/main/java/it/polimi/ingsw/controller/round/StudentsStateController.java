@@ -9,6 +9,7 @@ import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.board.School;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TurnState;
+import it.polimi.ingsw.model.helpers.StudentGroup;
 
 /**
  * Class specific to the Student transferring part of the action phase. Allows for student transfers and
