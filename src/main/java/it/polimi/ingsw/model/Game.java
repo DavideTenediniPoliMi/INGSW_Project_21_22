@@ -115,6 +115,7 @@ public class Game {
      */
     public void moveMN(int steps){
         board.moveMN(steps);
+        System.out.println("["+steps+"] moveMN");
     }
 
     // CLOUDS
@@ -139,7 +140,7 @@ public class Game {
     public void collectFromCloud(int cloudIndex, int playerID){
         StudentGroup temp = board.collectFromCloud(cloudIndex);
         board.addToEntranceOf(playerID, temp);
-        System.out.println("["+steps+"] collectFromcloud");
+        System.out.println("["+steps+"] collectFromCloud");
     }
 
     /**
