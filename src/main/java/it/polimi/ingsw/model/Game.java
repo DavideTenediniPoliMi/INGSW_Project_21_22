@@ -72,6 +72,7 @@ public class Game {
      */
     public void conquerIsland(TowerColor teamColor){
         board.conquerIsland(teamColor);
+        System.out.println("["+steps+"] conquerIsland");
     }
 
     /**
@@ -91,6 +92,7 @@ public class Game {
      */
     public void mergeIslands(int leftIslandIndex, int rightIslandIndex) {
         board.mergeIslands(leftIslandIndex, rightIslandIndex);
+        System.out.println("["+steps+"] mergeIslands");
     }
 
     // MOTHER NATURE
@@ -113,6 +115,7 @@ public class Game {
      */
     public void moveMN(int steps){
         board.moveMN(steps);
+        System.out.println("["+steps+"] moveMN");
     }
 
     // CLOUDS
@@ -137,6 +140,7 @@ public class Game {
     public void collectFromCloud(int cloudIndex, int playerID){
         StudentGroup temp = board.collectFromCloud(cloudIndex);
         board.addToEntranceOf(playerID, temp);
+        System.out.println("["+steps+"] collectFromCloud");
     }
 
     /**
@@ -147,6 +151,7 @@ public class Game {
      */
     public void refillClouds(int studentsAmount){
         board.refillClouds(studentsAmount);
+        System.out.println("["+steps+"] refillClouds");
     }
 
     // SCHOOL
@@ -186,6 +191,8 @@ public class Game {
 
         board.removeFromEntranceOf(playerID, temp);
         board.addStudentsToIsland(islandIndex, temp);
+
+        System.out.println("["+steps+"] transferStudentToIsland");
     }
 
     /**
@@ -201,6 +208,8 @@ public class Game {
 
         board.removeFromEntranceOf(playerID, temp);
         board.addToDiningRoomOf(playerID, temp);
+
+        System.out.println("["+steps+"] transferStudentToDiningRoom");
     }
 
     /**
@@ -235,6 +244,7 @@ public class Game {
      */
     public void giveProfessorTo(int playerID, Color c){
         board.giveProfessorTo(playerID, c);
+        System.out.println("["+steps+"] giveProfessorTo");
     }
 
     // PLAYER
@@ -274,6 +284,7 @@ public class Game {
      */
     public void addPlayer(int ID, String name, TowerColor teamColor, CardBack cardBack, boolean towerHolder) {
         players.add(new Player(ID, name, teamColor, cardBack, towerHolder));
+        System.out.println("["+steps+"] addPlayer");
     }
 
     /**
@@ -296,6 +307,7 @@ public class Game {
     public void playCard(int playerID, Card selectedCard) {
         getPlayerByID(playerID).setSelectedCard(selectedCard);
         selectedCard.use(playerID);
+        System.out.println("["+steps+"] playCard");
     }
 
     /**
@@ -305,6 +317,7 @@ public class Game {
         for(Card card: Card.values()) {
             card.reset();
         }
+        System.out.println("["+steps+"] resetCards");
     }
 
     /**
@@ -315,6 +328,7 @@ public class Game {
     public void giveCoinToPlayer(int playerID) {
         board.takeCoin();
         getPlayerByID(playerID).addCoin();
+        System.out.println("["+steps+"] giveCoinToPlayer");
     }
 
     /**
@@ -380,6 +394,7 @@ public class Game {
         card.increaseCost();
 
         card.setActive();
+        System.out.println("["+steps+"] buyCharacterCard");
     }
 
     /**
@@ -397,7 +412,9 @@ public class Game {
      * @return result of the effect of the <code>CharacterCard</code>.
      */
     public int activateCard() {
-        return getActiveCharacterCard().activate();
+        int temp = getActiveCharacterCard().activate();
+        System.out.println("["+steps+"] activateCard");
+        return temp;
     }
 
     // STUDENT BAG

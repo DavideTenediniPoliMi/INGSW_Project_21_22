@@ -59,6 +59,9 @@ public class StudentsStateController extends CharacterCardPlayableStateControlle
 
         if(playerSchool.getNumStudentsInEntranceByColor(c) > 0) {
             Game.getInstance().transferStudentToDiningRoom(matchInfo.getCurrentPlayerID(), c);
+
+            diningRoomController.manageDiningRoomOf(matchInfo.getCurrentPlayerID(), new StudentGroup(c, 1));
+
             matchInfo.studentWasMoved();
         }else {
             throw new NotEnoughStudentsException(c);
