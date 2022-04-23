@@ -39,7 +39,7 @@ public class CloudStateControllerTest {
 
     @AfterEach
     void tearDown() {
-        Game.getInstance();
+        Game.resetInstance();
         MatchInfo.resetInstance();
         game = null;
         matchInfo = null;

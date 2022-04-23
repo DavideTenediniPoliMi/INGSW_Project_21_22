@@ -41,7 +41,7 @@ public class StudentStateControllerExpertTest {
 
     @AfterEach
     void tearDown() {
-        Game.getInstance();
+        Game.resetInstance();
         MatchInfo.resetInstance();
         game = null;
         matchInfo = null;
