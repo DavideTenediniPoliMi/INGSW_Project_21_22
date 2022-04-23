@@ -105,8 +105,6 @@ public class CharacterCardController {
         CharacterCard card = Game.getInstance().getActiveCharacterCard();
         if(card != null) {
             card.clearEffect();
-        }else {
-            throw new NullCharacterCardException();
         }
     }
 
