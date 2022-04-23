@@ -48,6 +48,7 @@ public class RoundStateController {
         this.characterCardController = oldState.characterCardController;
         this.islandController = oldState.islandController;
         this.diningRoomController = oldState.diningRoomController;
+        MatchInfo.getInstance().setStateType(stateType);
     }
 
     /**

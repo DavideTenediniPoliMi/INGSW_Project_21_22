@@ -112,6 +112,14 @@ public class MatchInfo {
     public int getMaxMovableStudents() { return (selectedNumPlayer % 2 == 0) ? 3 : 4 ;}
 
     /**
+     * Returns the initial amount of students in each <code>Player<code/>'s <code>School</code>
+     *
+     * @return the initial amount of students in a <code>School</code>
+     */
+    public int getInitialNumStudents() { return (selectedNumPlayer % 2 == 0) ? 7 : 9 ;}
+
+
+    /**
      * Returns maximum amount of towers
      *
      * @return the maximum amount of towers in the school
