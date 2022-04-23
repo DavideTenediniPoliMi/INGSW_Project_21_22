@@ -7,12 +7,15 @@ import it.polimi.ingsw.exceptions.game.NullCharacterCardException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.characters.CharacterCard;
+import it.polimi.ingsw.model.characters.StudentGroupDecorator;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.helpers.Parameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -222,17 +225,23 @@ class CharacterCardControllerTest {
         game.instantiateCharacterCard(0);
         game.buyCharacterCard(0,0);
         Parameters params = new Parameters();
-        params.setFromOrigin(new StudentGroup(Color.BLUE, 2));
+        StudentGroup students = new StudentGroup();
+        int amt = 0;
+
+        for(Color c : Color.values()) {
+            StudentGroupDecorator sgd = (StudentGroupDecorator) game.getActiveCharacterCard();
+            if(sgd.getStudentsByColor(c) > 0) {
+                students.addByColor(c, 1);
+                amt++;
+            }
+        }
+
+        params.setFromOrigin(students);
         params.setFromDestination(new StudentGroup(Color.GREEN, 2));
         params.setIslandIndex(0);
         characterCardController.setCardParameters(params);
 
         assertDoesNotThrow(() -> characterCardController.activateCard());
-    }
-
-    @Test
-    void clearEffects_cardIsNull() {
-        assertThrowsExactly(NullCharacterCardException.class, () -> characterCardController.clearEffects());
     }
 
     @Test

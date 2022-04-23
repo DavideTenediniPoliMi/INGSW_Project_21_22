@@ -105,7 +105,7 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
      * @param color the <code>Color</code> of the students
      * @return the number of students of color <code>color</code>
      */
-    protected int getStudentsByColor(Color color) {
+    public int getStudentsByColor(Color color) {
         return students.getByColor(color);
     }
 }
