@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.network.parameters.CardParameters;
+import it.polimi.ingsw.network.parameters.ResponseParameters;
 
 /**
  * Class representing an abstract decorator for a generic <code>CharacterCard</code>. Used to implement different

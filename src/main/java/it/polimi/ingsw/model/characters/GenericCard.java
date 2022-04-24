@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.network.parameters.CardParameters;
+import it.polimi.ingsw.network.parameters.ResponseParameters;
 
 /**
  * Class representing a generic <code>CharacterCard</code>.
@@ -20,6 +21,15 @@ public class GenericCard extends CharacterCard {
     public int activate() {
         setActive();
         return 0;
+    }
+    /**
+     * Returns <code>null</code>.
+     *
+     * @return <code>null</code>
+     */
+    @Override
+    public ResponseParameters getResponseParameters() {
+        return null;
     }
 
     @Override
