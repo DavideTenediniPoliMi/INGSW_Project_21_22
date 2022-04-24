@@ -50,4 +50,6 @@ public class ExchangeStudentsDecorator extends CharacterCardDecorator {
 
         return -1;
     }
+
+    //NOTIFY SCHOOL
 }

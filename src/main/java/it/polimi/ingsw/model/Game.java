@@ -154,7 +154,7 @@ public class Game {
     public void collectFromCloud(int cloudIndex, int playerID){
         /**
          * Notify data:
-         * - cloud affected (board.getClouds.get)
+         * - clouds (board.getClouds)
          * - player's School (board.getSchoolByPlayerID)
          */
         StudentGroup temp = board.collectFromCloud(cloudIndex);
