@@ -108,4 +108,9 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
     public int getStudentsByColor(Color color) {
         return students.getByColor(color);
     }
+
+    // NOTIFY CHARACTER_CARDS ALWAYS
+    // isToIsland -> ISLANDS, BAG
+    // isToDiningRoom -> SCHOOL, BAG
+    // otherwise (swap with entrance) -> SCHOOL
 }

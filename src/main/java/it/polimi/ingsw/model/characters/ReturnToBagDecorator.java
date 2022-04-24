@@ -56,4 +56,6 @@ public class ReturnToBagDecorator extends CharacterCardDecorator {
 
         return 0;
     }
+
+    //NOTIFY SCHOOLS, BAG
 }
