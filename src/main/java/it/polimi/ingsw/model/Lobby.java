@@ -2,6 +2,7 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.TowerColor;
+import it.polimi.ingsw.network.parameters.SetupResponseParameters;
 
 import java.util.*;
 
@@ -11,8 +12,8 @@ import java.util.*;
  */
 public class Lobby {
     private static Lobby instance;
-    private List<Player> players;
-    private Map<Integer, Boolean> readyStatus;
+    private final List<Player> players;
+    private final Map<Integer, Boolean> readyStatus;
 
     /**
      * Sole constructor to avoid being instantiated more than once.
@@ -43,6 +44,9 @@ public class Lobby {
     public void addPlayer(int playerID, String name) {
         players.add(new Player(playerID, name));
         readyStatus.put(playerID, false);
+
+        SetupResponseParameters params = new SetupResponseParameters().setPlayer(getPlayerByID(playerID));
+        //NOTIFY
     }
 
     /**
@@ -55,6 +59,9 @@ public class Lobby {
         if(toRemove != null) {
             players.remove(toRemove);
         }
+
+        SetupResponseParameters params = new SetupResponseParameters().setPlayers(players);
+        //NOTIFY
     }
 
     /**
@@ -102,6 +109,9 @@ public class Lobby {
             p.setTeamColor(teamColor);
             p.setTowerHolder(isFirstOnTeam(playerID, teamColor));
         }
+
+        SetupResponseParameters params = new SetupResponseParameters().setPlayer(getPlayerByID(playerID));
+        //NOTIFY
     }
 
     /**
@@ -115,6 +125,9 @@ public class Lobby {
         if(p != null) {
             p.setCardBack(cardBack);
         }
+
+        SetupResponseParameters params = new SetupResponseParameters().setPlayer(getPlayerByID(playerID));
+        //NOTIFY
     }
 
     /**

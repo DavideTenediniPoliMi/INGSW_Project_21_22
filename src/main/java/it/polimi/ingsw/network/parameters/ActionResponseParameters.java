@@ -6,11 +6,10 @@ import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.ProfessorTracker;
 import it.polimi.ingsw.model.board.School;
 import it.polimi.ingsw.model.characters.CharacterCard;
-import it.polimi.ingsw.model.helpers.StudentBag;
 
 import java.util.List;
 
-public class ResponseParameters {
+public class ActionResponseParameters {
     private List<School> schools;
     private List<CharacterCard> characterCards;
     private List<Cloud> clouds;
@@ -25,12 +24,12 @@ public class ResponseParameters {
         return schools;
     }
 
-    public ResponseParameters setSchools(List<School> schools) {
+    public ActionResponseParameters setSchools(List<School> schools) {
         this.schools = schools;
         return this;
     }
 
-    public ResponseParameters addSchool(School school) {
+    public ActionResponseParameters addSchool(School school) {
         schools.add(school);
         return this;
     }
@@ -39,7 +38,7 @@ public class ResponseParameters {
         return characterCards;
     }
 
-    public ResponseParameters setCharacterCards(List<CharacterCard> characterCards) {
+    public ActionResponseParameters setCharacterCards(List<CharacterCard> characterCards) {
         this.characterCards = characterCards;
         return this;
     }
@@ -48,7 +47,7 @@ public class ResponseParameters {
         return clouds;
     }
 
-    public ResponseParameters setClouds(List<Cloud> clouds) {
+    public ActionResponseParameters setClouds(List<Cloud> clouds) {
         this.clouds = clouds;
         return this;
     }
@@ -57,7 +56,7 @@ public class ResponseParameters {
         return islands;
     }
 
-    public ResponseParameters setIslands(List<Island> islands) {
+    public ActionResponseParameters setIslands(List<Island> islands) {
         this.islands = islands;
         return this;
     }
@@ -66,7 +65,7 @@ public class ResponseParameters {
         return bagEmpty;
     }
 
-    public ResponseParameters setBagEmpty(boolean bagEmpty) {
+    public ActionResponseParameters setBagEmpty(boolean bagEmpty) {
         this.bagEmpty = bagEmpty;
         return this;
     }
@@ -75,7 +74,7 @@ public class ResponseParameters {
         return professors;
     }
 
-    public ResponseParameters setProfessors(ProfessorTracker professors) {
+    public ActionResponseParameters setProfessors(ProfessorTracker professors) {
         this.professors = professors;
         return this;
     }
@@ -84,7 +83,7 @@ public class ResponseParameters {
         return player;
     }
 
-    public ResponseParameters setPlayer(Player player) {
+    public ActionResponseParameters setPlayer(Player player) {
         this.player = player;
         return this;
     }
@@ -93,7 +92,7 @@ public class ResponseParameters {
         return coinsLeft;
     }
 
-    public ResponseParameters setCoinsLeft(int coinsLeft) {
+    public ActionResponseParameters setCoinsLeft(int coinsLeft) {
         this.coinsLeft = coinsLeft;
         return this;
     }
@@ -102,7 +101,7 @@ public class ResponseParameters {
         return sendCards;
     }
 
-    public ResponseParameters setSendCards(boolean sendCards) {
+    public ActionResponseParameters setSendCards(boolean sendCards) {
         this.sendCards = sendCards;
         return this;
     }

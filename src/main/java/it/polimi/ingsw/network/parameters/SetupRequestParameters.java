@@ -4,34 +4,34 @@ import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.SetupType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 
-public class SetupParameters {
+public class SetupRequestParameters {
     private SetupType setupType;
     private String name;
     private TowerColor towerColor;
     private CardBack cardBack;
     private boolean ready;
 
-    public SetupParameters setSetupType(SetupType setupType) {
+    public SetupRequestParameters setSetupType(SetupType setupType) {
         this.setupType = setupType;
         return this;
     }
 
-    public SetupParameters setName(String name) {
+    public SetupRequestParameters setName(String name) {
         this.name = name;
         return this;
     }
 
-    public SetupParameters setTowerColor(TowerColor towerColor) {
+    public SetupRequestParameters setTowerColor(TowerColor towerColor) {
         this.towerColor = towerColor;
         return this;
     }
 
-    public SetupParameters setCardBack(CardBack cardBack) {
+    public SetupRequestParameters setCardBack(CardBack cardBack) {
         this.cardBack = cardBack;
         return this;
     }
 
-    public SetupParameters setReady(boolean ready) {
+    public SetupRequestParameters setReady(boolean ready) {
         this.ready = ready;
         return this;
     }

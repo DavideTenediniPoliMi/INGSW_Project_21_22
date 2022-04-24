@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
-import it.polimi.ingsw.network.parameters.ResponseParameters;
+import it.polimi.ingsw.network.parameters.ActionResponseParameters;
 
 /**
  * Class to manage the behaviour of 3 <code>CharacterCard</code> which hold a <code>StudentGroup<code/>, and
@@ -80,20 +80,20 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
      * @return <code>ResponseParameters</code> for this <code>CharacterCard</code>.
      */
     @Override
-    public ResponseParameters getResponseParameters() {
+    public ActionResponseParameters getResponseParameters() {
         Game game = Game.getInstance();
         Board board = game.getBoard();
-        ResponseParameters responseParameters = new ResponseParameters();
+        ActionResponseParameters params = new ActionResponseParameters();
 
-        responseParameters.setCharacterCards(game.getCharacterCards());
+        params.setCharacterCards(game.getCharacterCards());
 
         if(isToIsland)
-            return responseParameters.setIslands(board.getIslands()).
+            return params.setIslands(board.getIslands()).
                     setBagEmpty(game.isStudentBagEmpty());
         if(isToDiningRoom)
-            return responseParameters.addSchool(board.getSchoolByPlayerID(playerID)).
+            return params.addSchool(board.getSchoolByPlayerID(playerID)).
                     setBagEmpty(game.isStudentBagEmpty());
-        return responseParameters.addSchool(board.getSchoolByPlayerID(playerID));
+        return params.addSchool(board.getSchoolByPlayerID(playerID));
     }
 
     @Override

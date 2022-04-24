@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.model.helpers.StudentGroup;
-import it.polimi.ingsw.network.parameters.ResponseParameters;
+import it.polimi.ingsw.network.parameters.ActionResponseParameters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +72,7 @@ public class Game {
      * @see TowerColor
      */
     public void conquerIsland(TowerColor teamColor){
-        ResponseParameters params = new ResponseParameters();
+        ActionResponseParameters params = new ActionResponseParameters();
         TowerColor oldOwnerColor = board.getIslandAt(board.getMNPosition()).getTeamColor();
         if(oldOwnerColor != null) {
             params.addSchool(board.getSchoolByPlayerID(getTowerHolderIDOf(oldOwnerColor)));
@@ -105,7 +105,7 @@ public class Game {
     public void mergeIslands(int leftIslandIndex, int rightIslandIndex) {
         board.mergeIslands(leftIslandIndex, rightIslandIndex);
 
-        ResponseParameters params = new ResponseParameters().setIslands(board.getIslands());
+        ActionResponseParameters params = new ActionResponseParameters().setIslands(board.getIslands());
         System.out.println("["+steps+"] mergeIslands");
     }
 
@@ -130,7 +130,7 @@ public class Game {
     public void moveMN(int steps){
         board.moveMN(steps);
 
-        ResponseParameters params = new ResponseParameters().setIslands(board.getIslands());
+        ActionResponseParameters params = new ActionResponseParameters().setIslands(board.getIslands());
         System.out.println("["+this.steps+"] moveMN");
     }
 
@@ -157,7 +157,7 @@ public class Game {
         StudentGroup temp = board.collectFromCloud(cloudIndex);
         board.addToEntranceOf(playerID, temp);
 
-        ResponseParameters params = new ResponseParameters()
+        ActionResponseParameters params = new ActionResponseParameters()
                 .setClouds(board.getClouds())
                 .addSchool(board.getSchoolByPlayerID(playerID));
         System.out.println("["+steps+"] collectFromCloud");
@@ -172,7 +172,7 @@ public class Game {
     public void refillClouds(int studentsAmount){
         board.refillClouds(studentsAmount);
 
-        ResponseParameters params = new ResponseParameters()
+        ActionResponseParameters params = new ActionResponseParameters()
                 .setClouds(board.getClouds())
                 .setBagEmpty(isStudentBagEmpty());
         System.out.println("["+steps+"] refillClouds");
@@ -217,7 +217,7 @@ public class Game {
         board.addStudentsToIsland(islandIndex, temp);
 
 
-        ResponseParameters params = new ResponseParameters()
+        ActionResponseParameters params = new ActionResponseParameters()
                 .setIslands(board.getIslands())
                 .addSchool(board.getSchoolByPlayerID(playerID));
         System.out.println("["+steps+"] transferStudentToIsland");
@@ -237,7 +237,7 @@ public class Game {
         board.removeFromEntranceOf(playerID, temp);
         board.addToDiningRoomOf(playerID, temp);
 
-        ResponseParameters params = new ResponseParameters().addSchool(board.getSchoolByPlayerID(playerID));
+        ActionResponseParameters params = new ActionResponseParameters().addSchool(board.getSchoolByPlayerID(playerID));
         System.out.println("["+steps+"] transferStudentToDiningRoom");
     }
 
@@ -274,7 +274,7 @@ public class Game {
     public void giveProfessorTo(int playerID, Color c){
         board.giveProfessorTo(playerID, c);
 
-        ResponseParameters params = new ResponseParameters().setProfessors(board.getProfessorOwners());
+        ActionResponseParameters params = new ActionResponseParameters().setProfessors(board.getProfessorOwners());
         System.out.println("["+steps+"] giveProfessorTo");
     }
 
@@ -341,7 +341,7 @@ public class Game {
         getPlayerByID(playerID).setSelectedCard(selectedCard);
         selectedCard.use(playerID);
 
-        ResponseParameters params = new ResponseParameters().setPlayer(getPlayerByID(playerID))
+        ActionResponseParameters params = new ActionResponseParameters().setPlayer(getPlayerByID(playerID))
                 .setSendCards(true);
         System.out.println("["+steps+"] playCard");
     }
@@ -354,7 +354,7 @@ public class Game {
             card.reset();
         }
 
-        ResponseParameters params = new ResponseParameters().setSendCards(true);
+        ActionResponseParameters params = new ActionResponseParameters().setSendCards(true);
         System.out.println("["+steps+"] resetCards");
     }
 
@@ -367,7 +367,7 @@ public class Game {
         board.takeCoin();
         getPlayerByID(playerID).addCoin();
 
-        ResponseParameters params = new ResponseParameters().setPlayer(getPlayerByID(playerID))
+        ActionResponseParameters params = new ActionResponseParameters().setPlayer(getPlayerByID(playerID))
                 .setCoinsLeft(board.getNumCoinsLeft());
         System.out.println("["+steps+"] giveCoinToPlayer");
     }
@@ -436,7 +436,7 @@ public class Game {
 
         card.setActive();
 
-        ResponseParameters params = new ResponseParameters().setCharacterCards(characterCards);
+        ActionResponseParameters params = new ActionResponseParameters().setCharacterCards(characterCards);
         System.out.println("["+steps+"] buyCharacterCard");
     }
 
@@ -457,7 +457,7 @@ public class Game {
     public int activateCard() {
         int temp = getActiveCharacterCard().activate();
 
-        ResponseParameters params = getActiveCharacterCard().getResponseParameters();
+        ActionResponseParameters params = getActiveCharacterCard().getResponseParameters();
         System.out.println("["+steps+"] activateCard");
         return temp;
     }

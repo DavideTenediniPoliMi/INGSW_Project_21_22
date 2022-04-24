@@ -9,7 +9,6 @@ import it.polimi.ingsw.exceptions.EriantysRuntimeException;
 import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.exceptions.game.NotCurrentPlayerException;
-import it.polimi.ingsw.exceptions.player.CardUsedException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
@@ -18,8 +17,7 @@ import it.polimi.ingsw.model.board.School;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.network.parameters.CardParameters;
-import it.polimi.ingsw.network.parameters.RequestParameters;
-import it.polimi.ingsw.network.parameters.SetupParameters;
+import it.polimi.ingsw.network.parameters.ActionRequestParameters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +55,7 @@ public class GameController {
      * @param playerID the ID of the <code>Player</code> requesting an action.
      * @param requestParams the parameters of the request.
      */
-    public synchronized void requestAction(int playerID, RequestParameters requestParams) throws EriantysException {
+    public synchronized void requestAction(int playerID, ActionRequestParameters requestParams) throws EriantysException {
         if(playerID != matchInfo.getCurrentPlayerID()){
             throw new NotCurrentPlayerException(playerID);
         }
@@ -69,7 +67,7 @@ public class GameController {
      *
      * @param requestParams the parameters of the requested action.
      */
-    private void forwardRequest(RequestParameters requestParams) throws EriantysException, EriantysRuntimeException {
+    private void forwardRequest(ActionRequestParameters requestParams) throws EriantysException, EriantysRuntimeException {
         int cardIndex, islandIndex, numSteps, cloudIndex;
         Color c;
         CardParameters cardParams;

@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
-import it.polimi.ingsw.network.parameters.ResponseParameters;
+import it.polimi.ingsw.network.parameters.ActionResponseParameters;
 
 /**
  * Class to manage the behaviour of 1 <code>CharacterCard</code>, <code>EXCHANGE_STUDENTS</code>.
@@ -43,11 +43,11 @@ public class ExchangeStudentsDecorator extends CharacterCardDecorator {
      * @return <code>ResponseParameters</code> for this <code>CharacterCard</code>.
      */
     @Override
-    public ResponseParameters getResponseParameters() {
+    public ActionResponseParameters getResponseParameters() {
         Game game = Game.getInstance();
-        ResponseParameters responseParameters = new ResponseParameters();
+        ActionResponseParameters params = new ActionResponseParameters();
 
-        return responseParameters.addSchool(game.getBoard()
+        return params.addSchool(game.getBoard()
                 .getSchoolByPlayerID(playerID));
     }
 

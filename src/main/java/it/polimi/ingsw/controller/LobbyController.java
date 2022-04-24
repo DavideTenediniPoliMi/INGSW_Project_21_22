@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.network.parameters.SetupParameters;
+import it.polimi.ingsw.network.parameters.SetupRequestParameters;
 
 /**
  * Class representing the controller for all pre-game (Lobby) actions. Handles:
@@ -19,8 +19,8 @@ import it.polimi.ingsw.network.parameters.SetupParameters;
  * </ul>
  */
 public class LobbyController {
-    private Lobby lobby;
-    private MatchInfo matchInfo;
+    private final Lobby lobby;
+    private final MatchInfo matchInfo;
 
     /**
      * Sole constructor for <code>LobbyController</code>.
@@ -36,7 +36,7 @@ public class LobbyController {
      * @param playerID the ID of the <code>Player</code> requesting a change in the <code>Lobby</code>.
      * @param setupParams the parameters of the request.
      */
-    public synchronized void requestSetup(int playerID, SetupParameters setupParams) throws EriantysException {
+    public synchronized void requestSetup(int playerID, SetupRequestParameters setupParams) throws EriantysException {
         switch (setupParams.getSetupType()) {
             case JOIN:
                 joinLobby(playerID, setupParams.getName());
