@@ -5,8 +5,10 @@ import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.School;
 import it.polimi.ingsw.model.enumerations.Color;
+import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
+import it.polimi.ingsw.network.parameters.ResponseParameters;
 
 /**
  * Class to manage the behaviour of 1 <code>CharacterCard</code>, <code>RETURN_TO_BAG</code>.
@@ -35,6 +37,20 @@ public class ReturnToBagDecorator extends CharacterCardDecorator {
         selectedColor = params.getSelectedColor();
     }
 
+    /**
+     * Returns <code>ResponseParameters</code> with the necessary parameters. Could contain more than one
+     * <code>School</code> and <code>StudentBag</code>.
+     *
+     * @return <code>ResponseParameters</code> for this <code>CharacterCard</code>.
+     */
+    @Override
+    public ResponseParameters getResponseParameters() {
+        Game game = Game.getInstance();
+        ResponseParameters responseParameters = new ResponseParameters();
+
+        return responseParameters.setSchools(game.getBoard().getSchools()).setBagEmpty(game.isStudentBagEmpty());
+    }
+
     @Override
     public int activate() {
         card.activate();
@@ -56,6 +72,4 @@ public class ReturnToBagDecorator extends CharacterCardDecorator {
 
         return 0;
     }
-
-    //NOTIFY SCHOOLS, BAG
 }
