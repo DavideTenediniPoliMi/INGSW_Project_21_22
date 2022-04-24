@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.player.NameTakenException;
+import it.polimi.ingsw.exceptions.lobby.NameTakenException;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 
@@ -40,14 +40,9 @@ public class Lobby {
      *
      * @param playerID the ID of the new <code>Player</code>.
      * @param name the Nickname of the new <code>Player</code>.
-     * @throws NameTakenException If the Nickname is already taken.
      */
-    public void addPlayer(int playerID, String name) throws NameTakenException {
-        if(!isNameTaken(name)) {
-            players.add(new Player(playerID, name));
-        }else{
-            throw new NameTakenException(name);
-        }
+    public void addPlayer(int playerID, String name) {
+        players.add(new Player(playerID, name));
     }
 
     /**
@@ -63,12 +58,31 @@ public class Lobby {
     }
 
     /**
+     * Returns whether the <code>Player</code> with the specified ID has already joined this <code>Lobby</code>.
+     *
+     * @param playerID the ID of the <code>Player</code>.
+     * @return <code>true</code> if a <code>Player</code> with the same ID is already in this <code>Lobby</code>.
+     */
+    public boolean hasJoined(int playerID) {
+        return getPlayerByID(playerID) != null;
+    }
+
+    /**
+     * Returns the list of players in the Game.
+     *
+     * @return the list of players
+     */
+    public List<Player> getPlayers() {
+        return new ArrayList<>(players);
+    }
+
+    /**
      * Returns the <code>Player</code> instance with specified ID. Returns <code>null</code> if no match is found
      *
      * @param ID the ID of the player
      * @return the <code>Player</code> instance with specified ID
      */
-    public Player getPlayerByID(int ID) {
+    private Player getPlayerByID(int ID) {
         Optional<Player> result = players.stream()
                 .filter((player) -> (player.getID() == ID))
                 .findAny();
@@ -109,7 +123,7 @@ public class Lobby {
      * @param name the name to check
      * @return <code>true</code> if another <code>Player</code> already has that name
      */
-    private boolean isNameTaken(String name) {
+    public boolean isNameTaken(String name) {
         return players.stream().anyMatch(player -> player.getName().equals(name));
     }
 
