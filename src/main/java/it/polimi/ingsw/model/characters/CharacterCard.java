@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.network.parameters.CardParameters;
+import it.polimi.ingsw.network.parameters.ResponseParameters;
 
 /**
  * Abstract class representing a generic Character Card.
@@ -83,4 +84,11 @@ public abstract class CharacterCard {
      * @return The result of this card's effect.
      */
     public abstract int activate();
+
+    /**
+     * Returns <code>ResponseParameters</code> for this <code>CharacterCard</code>.
+     *
+     * @return <code>ResponseParameters</code> for this <code>CharacterCard</code>.
+     */
+    public abstract ResponseParameters getResponseParameters();
 }

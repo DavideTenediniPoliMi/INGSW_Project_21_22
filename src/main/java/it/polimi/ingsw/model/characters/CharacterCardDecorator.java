@@ -83,11 +83,4 @@ public abstract class CharacterCardDecorator extends CharacterCard{
      * @param params the <code>Parameters</code> to set in this card.
      */
     public abstract void setParameters(CardParameters params);
-
-    /**
-     * Returns <code>ResponseParameters</code> for this decorated <code>CharacterCard</code>.
-     *
-     * @return <code>ResponseParameters</code> for this <code>CharacterCard</code>.
-     */
-    public abstract ResponseParameters getResponseParameters();
 }
