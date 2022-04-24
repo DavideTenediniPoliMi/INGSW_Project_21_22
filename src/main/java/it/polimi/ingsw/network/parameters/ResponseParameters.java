@@ -15,7 +15,7 @@ public class ResponseParameters {
     private List<CharacterCard> characterCards;
     private List<Cloud> clouds;
     private List<Island> islands;
-    private StudentBag bag;
+    private boolean bagEmpty;
     private ProfessorTracker professors;
     private Player player;
     private int coinsLeft;
@@ -62,12 +62,12 @@ public class ResponseParameters {
         return this;
     }
 
-    public StudentBag getBag() {
-        return bag;
+    public boolean isBagEmpty() {
+        return bagEmpty;
     }
 
-    public ResponseParameters setBag(StudentBag bag) {
-        this.bag = bag;
+    public ResponseParameters setBagEmpty(boolean bagEmpty) {
+        this.bagEmpty = bagEmpty;
         return this;
     }
 
