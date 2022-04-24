@@ -9,6 +9,7 @@ public class SetupParameters {
     private String name;
     private TowerColor towerColor;
     private CardBack cardBack;
+    private boolean ready;
 
     public SetupParameters setSetupType(SetupType setupType) {
         this.setupType = setupType;
@@ -30,6 +31,11 @@ public class SetupParameters {
         return this;
     }
 
+    public SetupParameters setReady(boolean ready) {
+        this.ready = ready;
+        return this;
+    }
+
     public SetupType getSetupType() {
         return setupType;
     }
@@ -44,5 +50,9 @@ public class SetupParameters {
 
     public CardBack getCardBack() {
         return cardBack;
+    }
+
+    public boolean isReady() {
+        return ready;
     }
 }
