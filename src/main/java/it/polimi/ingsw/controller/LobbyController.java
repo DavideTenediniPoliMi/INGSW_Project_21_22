@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.exceptions.EriantysException;
+import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.exceptions.lobby.*;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
@@ -46,6 +47,14 @@ public class LobbyController {
             case SEL_TOWERCOLOR:
                 setTowerColor(playerID, setupParams.getTowerColor());
                 break;
+            case READY_UP:
+                setReadyStatus(playerID, setupParams.isReady());
+                break;
+            case DISCONNECT:
+                removePlayer(playerID);
+                break;
+            default:
+                throw new BadParametersException("No such action: " + setupParams.getSetupType());
         }
     }
 
@@ -104,6 +113,35 @@ public class LobbyController {
         }
 
         lobby.selectTeam(playerID, towerColor);
+    }
+
+    /**
+     * Sets the specified ready status for the specified <code>Player</code>.
+     *
+     * @param playerID the ID of the <code>Player</code>.
+     * @param ready the flag specifying if the <code>Player</code> is ready.
+     * @throws NoSuchPlayerException If there is no <code>Player</code> with the specified ID in this <code>Lobby</code>.
+     */
+    private void setReadyStatus(int playerID, boolean ready) throws NoSuchPlayerException {
+        if(!lobby.hasJoined(playerID)) {
+            throw new NoSuchPlayerException(playerID);
+        }
+
+        lobby.setReadyStatus(playerID, ready);
+    }
+
+    /**
+     * Removes the specified <code>Player</code> from this <code>Lobby</code>.
+     *
+     * @param playerID the ID of the <code>Player</code>.
+     * @throws NoSuchPlayerException If there is no <code>Player</code> with the specified ID in this <code>Lobby</code>.
+     */
+    private void removePlayer(int playerID) throws NoSuchPlayerException {
+        if(!lobby.hasJoined(playerID)) {
+            throw new NoSuchPlayerException(playerID);
+        }
+
+        lobby.removePlayer(playerID);
     }
 
     /**

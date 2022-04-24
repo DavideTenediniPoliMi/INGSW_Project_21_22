@@ -7,5 +7,6 @@ public enum SetupType {
     JOIN,
     SEL_CARDBACK,
     SEL_TOWERCOLOR,
-    READY_UP
+    READY_UP,
+    DISCONNECT
 }
