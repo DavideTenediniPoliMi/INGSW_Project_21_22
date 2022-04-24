@@ -25,75 +25,85 @@ public class ResponseParameters {
         return schools;
     }
 
-    public void setSchools(List<School> schools) {
+    public ResponseParameters setSchools(List<School> schools) {
         this.schools = schools;
+        return this;
     }
 
-    public void addSchool(School school) {
+    public ResponseParameters addSchool(School school) {
         schools.add(school);
+        return this;
     }
 
     public List<CharacterCard> getCharacterCards() {
         return characterCards;
     }
 
-    public void setCharacterCards(List<CharacterCard> characterCards) {
+    public ResponseParameters setCharacterCards(List<CharacterCard> characterCards) {
         this.characterCards = characterCards;
+        return this;
     }
 
     public List<Cloud> getClouds() {
         return clouds;
     }
 
-    public void setClouds(List<Cloud> clouds) {
+    public ResponseParameters setClouds(List<Cloud> clouds) {
         this.clouds = clouds;
+        return this;
     }
 
     public List<Island> getIslands() {
         return islands;
     }
 
-    public void setIslands(List<Island> islands) {
+    public ResponseParameters setIslands(List<Island> islands) {
         this.islands = islands;
+        return this;
     }
 
     public StudentBag getBag() {
         return bag;
     }
 
-    public void setBag(StudentBag bag) {
+    public ResponseParameters setBag(StudentBag bag) {
         this.bag = bag;
+        return this;
     }
 
     public ProfessorTracker getProfessors() {
         return professors;
     }
 
-    public void setProfessors(ProfessorTracker professors) {
+    public ResponseParameters setProfessors(ProfessorTracker professors) {
         this.professors = professors;
+        return this;
     }
 
     public Player getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    public ResponseParameters setPlayer(Player player) {
         this.player = player;
+        return this;
     }
 
     public int getCoinsLeft() {
         return coinsLeft;
     }
 
-    public void setCoinsLeft(int coinsLeft) {
+    public ResponseParameters setCoinsLeft(int coinsLeft) {
         this.coinsLeft = coinsLeft;
+        return this;
     }
 
     public boolean shouldSendCards() {
         return sendCards;
     }
 
-    public void setSendCards(boolean sendCards) {
+    public ResponseParameters setSendCards(boolean sendCards) {
         this.sendCards = sendCards;
+        return this;
     }
 }
