@@ -29,6 +29,10 @@ public class ResponseParameters {
         this.schools = schools;
     }
 
+    public void addSchool(School school) {
+        schools.add(school);
+    }
+
     public List<CharacterCard> getCharacterCards() {
         return characterCards;
     }
