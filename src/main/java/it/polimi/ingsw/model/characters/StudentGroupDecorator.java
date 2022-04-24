@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
+import it.polimi.ingsw.network.parameters.ResponseParameters;
 
 /**
  * Class to manage the behaviour of 3 <code>CharacterCard</code> which hold a <code>StudentGroup<code/>, and
@@ -70,6 +71,31 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
         }
     }
 
+    /**
+     * Returns <code>ResponseParameters</code> with the necessary parameters. Could contain
+     * <code>CharacterCards</code> and if <code>CharacterCard</code> is MOVE_TO_ISLAND then <code>Islands</code> and
+     * <code>StudentBag</code>; if <code>CharacterCard</code> is MOVE_TO_DINING_ROOM then <code>School</code> and
+     * <code>StudentBag</code>; if <code>CharacterCard</code> is POOL_SWAP then <code>School</code>.
+     *
+     * @return <code>ResponseParameters</code> for this <code>CharacterCard</code>.
+     */
+    @Override
+    public ResponseParameters getResponseParameters() {
+        Game game = Game.getInstance();
+        Board board = game.getBoard();
+        ResponseParameters responseParameters = new ResponseParameters();
+
+        responseParameters.setCharacterCards(game.getCharacterCards());
+
+        if(isToIsland)
+            return responseParameters.setIslands(board.getIslands()).
+                    setBagEmpty(game.isStudentBagEmpty());
+        if(isToDiningRoom)
+            return responseParameters.addSchool(board.getSchoolByPlayerID(playerID)).
+                    setBagEmpty(game.isStudentBagEmpty());
+        return responseParameters.addSchool(board.getSchoolByPlayerID(playerID));
+    }
+
     @Override
     public int activate() {
         card.activate();
@@ -108,9 +134,4 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
     public int getStudentsByColor(Color color) {
         return students.getByColor(color);
     }
-
-    // NOTIFY CHARACTER_CARDS ALWAYS
-    // isToIsland -> ISLANDS, BAG
-    // isToDiningRoom -> SCHOOL, BAG
-    // otherwise (swap with entrance) -> SCHOOL
 }

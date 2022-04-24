@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
+import it.polimi.ingsw.network.parameters.ResponseParameters;
 
 /**
  * Class to manage the behaviour of 1 <code>CharacterCard</code>, <code>EXCHANGE_STUDENTS</code>.
@@ -36,6 +37,20 @@ public class ExchangeStudentsDecorator extends CharacterCardDecorator {
         fromDiningRoom = params.getFromDestination();
     }
 
+    /**
+     * Returns <code>ResponseParameters</code> with the necessary parameters. Could contain <code>School</code>.
+     *
+     * @return <code>ResponseParameters</code> for this <code>CharacterCard</code>.
+     */
+    @Override
+    public ResponseParameters getResponseParameters() {
+        Game game = Game.getInstance();
+        ResponseParameters responseParameters = new ResponseParameters();
+
+        return responseParameters.addSchool(game.getBoard()
+                .getSchoolByPlayerID(playerID));
+    }
+
     @Override
     public int activate() {
         card.activate();
@@ -50,6 +65,4 @@ public class ExchangeStudentsDecorator extends CharacterCardDecorator {
 
         return -1;
     }
-
-    //NOTIFY SCHOOL
 }
