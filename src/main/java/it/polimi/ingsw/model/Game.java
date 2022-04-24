@@ -103,11 +103,9 @@ public class Game {
      * @see it.polimi.ingsw.model.board.MultiIsland
      */
     public void mergeIslands(int leftIslandIndex, int rightIslandIndex) {
-        /**
-         * Notify data:
-         * - islands
-         */
         board.mergeIslands(leftIslandIndex, rightIslandIndex);
+
+        ResponseParameters params = new ResponseParameters().setIslands(board.getIslands());
         System.out.println("["+steps+"] mergeIslands");
     }
 
@@ -130,11 +128,9 @@ public class Game {
      * @param steps the amount of steps Mother Nature has to move
      */
     public void moveMN(int steps){
-        /**
-         * Notify data:
-         * - islands
-         */
         board.moveMN(steps);
+
+        ResponseParameters params = new ResponseParameters().setIslands(board.getIslands());
         System.out.println("["+this.steps+"] moveMN");
     }
 
@@ -158,13 +154,12 @@ public class Game {
      * @param playerID the ID of the <code>Player</code> collecting the students
      */
     public void collectFromCloud(int cloudIndex, int playerID){
-        /**
-         * Notify data:
-         * - clouds (board.getClouds)
-         * - player's School (board.getSchoolByPlayerID)
-         */
         StudentGroup temp = board.collectFromCloud(cloudIndex);
         board.addToEntranceOf(playerID, temp);
+
+        ResponseParameters params = new ResponseParameters()
+                .setClouds(board.getClouds())
+                .addSchool(board.getSchoolByPlayerID(playerID));
         System.out.println("["+steps+"] collectFromCloud");
     }
 
@@ -175,13 +170,11 @@ public class Game {
      * @param studentsAmount the amount of students for each <code>Cloud</code>
      */
     public void refillClouds(int studentsAmount){
-        /**
-         * Notify data:
-         * - clouds (board.getClouds)
-         * - bag
-         */
-
         board.refillClouds(studentsAmount);
+
+        ResponseParameters params = new ResponseParameters()
+                .setClouds(board.getClouds())
+                .setBagEmpty(isStudentBagEmpty());
         System.out.println("["+steps+"] refillClouds");
     }
 
@@ -218,16 +211,15 @@ public class Game {
      * @see Color
      */
     public void transferStudentToIsland(int islandIndex, Color c, int playerID) {
-        /**
-         * Notify data:
-         * - player's School (board.getSchoolByPlayerID)
-         * - islands
-         */
         StudentGroup temp = new StudentGroup(c, 1);
 
         board.removeFromEntranceOf(playerID, temp);
         board.addStudentsToIsland(islandIndex, temp);
 
+
+        ResponseParameters params = new ResponseParameters()
+                .setIslands(board.getIslands())
+                .addSchool(board.getSchoolByPlayerID(playerID));
         System.out.println("["+steps+"] transferStudentToIsland");
     }
 
@@ -240,15 +232,12 @@ public class Game {
      * @see Color
      */
     public void transferStudentToDiningRoom(int playerID, Color c) {
-        /**
-         * Notify data:
-         * - player's School (board.getSchoolByPLayerID)
-         */
         StudentGroup temp = new StudentGroup(c, 1);
 
         board.removeFromEntranceOf(playerID, temp);
         board.addToDiningRoomOf(playerID, temp);
 
+        ResponseParameters params = new ResponseParameters().addSchool(board.getSchoolByPlayerID(playerID));
         System.out.println("["+steps+"] transferStudentToDiningRoom");
     }
 
@@ -283,11 +272,9 @@ public class Game {
      * @param c the color of the professor
      */
     public void giveProfessorTo(int playerID, Color c){
-        /**
-         * Notify data:
-         * - professors
-         */
         board.giveProfessorTo(playerID, c);
+
+        ResponseParameters params = new ResponseParameters().setProfessors(board.getProfessorOwners());
         System.out.println("["+steps+"] giveProfessorTo");
     }
 
@@ -351,13 +338,11 @@ public class Game {
      * @see Card
      */
     public void playCard(int playerID, Card selectedCard) {
-        /**
-         * Notify data:
-         * - player getPlayerByID
-         * - cards (enum)
-         */
         getPlayerByID(playerID).setSelectedCard(selectedCard);
         selectedCard.use(playerID);
+
+        ResponseParameters params = new ResponseParameters().setPlayer(getPlayerByID(playerID))
+                .setSendCards(true);
         System.out.println("["+steps+"] playCard");
     }
 
@@ -365,13 +350,11 @@ public class Game {
      * Resets the cards used during a round, making them available for use again. Only to be called at the end of each round.
      */
     public void resetCards(){
-        /**
-         * Notify data:
-         * - cards (enum)
-         */
         for(Card card: Card.values()) {
             card.reset();
         }
+
+        ResponseParameters params = new ResponseParameters().setSendCards(true);
         System.out.println("["+steps+"] resetCards");
     }
 
@@ -381,13 +364,11 @@ public class Game {
      * @param playerID the ID of the player receiving the coin.
      */
     public void giveCoinToPlayer(int playerID) {
-        /**
-         * Notify data:
-         * - player getPlayerByID
-         * - coins (Coins.amount JSON)
-         */
         board.takeCoin();
         getPlayerByID(playerID).addCoin();
+
+        ResponseParameters params = new ResponseParameters().setPlayer(getPlayerByID(playerID))
+                .setCoinsLeft(board.getNumCoinsLeft());
         System.out.println("["+steps+"] giveCoinToPlayer");
     }
 
@@ -446,10 +427,6 @@ public class Game {
      * @param cardIndex the Index of the <code>CharacterCard</code> to buy.
      */
     public void buyCharacterCard(int playerID, int cardIndex) {
-        /**
-         * Notify data:
-         * - characterCards
-         */
         CharacterCard card = characterCards.get(cardIndex);
         int cardCost = card.getCost();
 
@@ -458,6 +435,8 @@ public class Game {
         card.increaseCost();
 
         card.setActive();
+
+        ResponseParameters params = new ResponseParameters().setCharacterCards(characterCards);
         System.out.println("["+steps+"] buyCharacterCard");
     }
 
@@ -476,11 +455,9 @@ public class Game {
      * @return result of the effect of the <code>CharacterCard</code>.
      */
     public int activateCard() {
-        /**
-         * Notify data:
-         * - things changed by the activation (card.getMessage??)
-         */
         int temp = getActiveCharacterCard().activate();
+
+        ResponseParameters params = getActiveCharacterCard().getResponseParameters();
         System.out.println("["+steps+"] activateCard");
         return temp;
     }
