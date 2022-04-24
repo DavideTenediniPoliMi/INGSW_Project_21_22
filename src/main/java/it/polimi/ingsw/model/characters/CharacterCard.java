@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.enumerations.EffectType;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 
 /**
  * Abstract class representing a generic Character Card.
@@ -75,7 +75,7 @@ public abstract class CharacterCard {
      *
      * @param params the <code>Parameters</code> to set in this card.
      */
-    public abstract void setParameters(Parameters params);
+    public abstract void setParameters(CardParameters params);
 
     /**
      * Activates this <code>CharacterCard</code>'s effect.

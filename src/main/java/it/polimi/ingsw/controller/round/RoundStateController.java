@@ -14,7 +14,7 @@ import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TurnState;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 
 import java.util.*;
 
@@ -108,7 +108,7 @@ public class RoundStateController {
      * @throws IllegalActionException If called during the wrong state.
      * @see CharacterCardPlayableStateController
      */
-    public void setCardParameters(Parameters params) throws IllegalActionException {
+    public void setCardParameters(CardParameters params) throws IllegalActionException {
         throw new IllegalActionException("setCardParameters", MatchInfo.getInstance().getStateType());
     }
 

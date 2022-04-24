@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 
 /**
  * Class to manage the behaviour of 3 <code>CharacterCard</code> responsible for
@@ -46,7 +46,7 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator {
      * @param params the <code>Parameters</code> to set in this card.
      */
     @Override
-    public void setParameters(Parameters params) {
+    public void setParameters(CardParameters params) {
         if(isIgnoreColor && params.getSelectedColor() != null) {
             selectedColor = params.getSelectedColor();
             return;

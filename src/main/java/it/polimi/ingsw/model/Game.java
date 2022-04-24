@@ -3,7 +3,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.*;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
@@ -402,7 +402,7 @@ public class Game {
      *
      * @param params the <code>Parameters</code> to set to the active card.
      */
-    public void setCardParameters(Parameters params){
+    public void setCardParameters(CardParameters params){
         getActiveCharacterCard().setParameters(params);
     }
 
@@ -449,8 +449,4 @@ public class Game {
 
     //------------- DEBUGGING -------------------
     private int steps = 0;
-
-    public void incrementSteps(){
-        steps += 1;
-    }
 }

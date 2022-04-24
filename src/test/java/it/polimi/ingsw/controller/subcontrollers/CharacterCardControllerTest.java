@@ -2,20 +2,17 @@ package it.polimi.ingsw.controller.subcontrollers;
 
 import it.polimi.ingsw.controller.round.CharacterCardPlayableStateController;
 import it.polimi.ingsw.controller.round.RoundStateController;
-import it.polimi.ingsw.exceptions.game.CharacterCardActivationException;
 import it.polimi.ingsw.exceptions.game.NullCharacterCardException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.characters.StudentGroupDecorator;
 import it.polimi.ingsw.model.enumerations.*;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -73,7 +70,7 @@ class CharacterCardControllerTest {
 
     @Test
     void setCardParameters_activeCardIsNull() {
-        assertThrowsExactly(NullCharacterCardException.class, () -> characterCardController.setCardParameters(new Parameters()));
+        assertThrowsExactly(NullCharacterCardException.class, () -> characterCardController.setCardParameters(new CardParameters()));
     }
 
     @Test
@@ -81,7 +78,7 @@ class CharacterCardControllerTest {
         game.instantiateCharacterCard(0);
         game.buyCharacterCard(0,0);
 
-        Parameters params = new Parameters();
+        CardParameters params = new CardParameters();
         params.setFromOrigin(new StudentGroup(Color.BLUE, 2));
         params.setFromDestination(new StudentGroup(Color.GREEN, 2));
         params.setIslandIndex(0);
@@ -94,7 +91,7 @@ class CharacterCardControllerTest {
     void setCardParameters_checkParametersFail_StudentGroup_BadParameters() {
         game.instantiateCharacterCard(0);
         game.buyCharacterCard(0,0);
-        Parameters params = new Parameters();
+        CardParameters params = new CardParameters();
         params.setFromDestination(new StudentGroup(Color.GREEN, 2));
         params.setIslandIndex(0);
 
@@ -105,7 +102,7 @@ class CharacterCardControllerTest {
     void setCardParameters_checkParametersFail_StudentGroup_NullPlayer() {
         game.instantiateCharacterCard(0);
         game.buyCharacterCard(0,0);
-        Parameters params = new Parameters();
+        CardParameters params = new CardParameters();
         params.setPlayerID(-1);
         params.setFromOrigin(new StudentGroup(Color.BLUE, 2));
         params.setFromDestination(new StudentGroup(Color.GREEN, 2));
@@ -120,7 +117,7 @@ class CharacterCardControllerTest {
         game.giveCoinToPlayer(0);
         game.giveCoinToPlayer(0);
         game.buyCharacterCard(0,0);
-        Parameters params = new Parameters();
+        CardParameters params = new CardParameters();
         params.setSelectedColor(Color.PINK);
         params.setBoostedTeam(TowerColor.BLACK);
 
@@ -133,7 +130,7 @@ class CharacterCardControllerTest {
         game.giveCoinToPlayer(0);
         game.giveCoinToPlayer(0);
         game.buyCharacterCard(0,0);
-        Parameters params = new Parameters();
+        CardParameters params = new CardParameters();
 
         assertDoesNotThrow(() -> characterCardController.setCardParameters(params));
     }
@@ -144,7 +141,7 @@ class CharacterCardControllerTest {
         game.giveCoinToPlayer(0);
         game.giveCoinToPlayer(0);
         game.buyCharacterCard(0,0);
-        Parameters params = new Parameters();
+        CardParameters params = new CardParameters();
         params.setSelectedColor(Color.BLUE);
 
         assertDoesNotThrow(() -> characterCardController.setCardParameters(params));
@@ -156,7 +153,7 @@ class CharacterCardControllerTest {
         game.giveCoinToPlayer(0);
         game.giveCoinToPlayer(0);
         game.buyCharacterCard(0,0);
-        Parameters params = new Parameters();
+        CardParameters params = new CardParameters();
 
         assertDoesNotThrow(() -> characterCardController.setCardParameters(params));
     }
@@ -167,7 +164,7 @@ class CharacterCardControllerTest {
         game.giveCoinToPlayer(0);
         game.giveCoinToPlayer(0);
         game.buyCharacterCard(0,0);
-        Parameters params = new Parameters();
+        CardParameters params = new CardParameters();
         params.setFromOrigin(new StudentGroup(Color.BLUE, 2));
         params.setFromDestination(new StudentGroup(Color.GREEN, 2));
 
@@ -180,7 +177,7 @@ class CharacterCardControllerTest {
         game.giveCoinToPlayer(0);
         game.giveCoinToPlayer(0);
         game.buyCharacterCard(0,0);
-        Parameters params = new Parameters();
+        CardParameters params = new CardParameters();
 
         assertThrowsExactly(NullPointerException.class, () -> characterCardController.setCardParameters(params));
     }
@@ -191,7 +188,7 @@ class CharacterCardControllerTest {
         game.giveCoinToPlayer(0);
         game.giveCoinToPlayer(0);
         game.buyCharacterCard(0,0);
-        Parameters params = new Parameters();
+        CardParameters params = new CardParameters();
         params.setPlayerID(-1);
         params.setFromOrigin(new StudentGroup(Color.BLUE, 2));
         params.setFromDestination(new StudentGroup(Color.GREEN, 2));
@@ -201,7 +198,7 @@ class CharacterCardControllerTest {
 
     @Test
     void setCardParameters_parametersSet() {
-        assertThrowsExactly(NullCharacterCardException.class, () -> characterCardController.setCardParameters(new Parameters()));
+        assertThrowsExactly(NullCharacterCardException.class, () -> characterCardController.setCardParameters(new CardParameters()));
     }
 
     @Test
@@ -224,7 +221,7 @@ class CharacterCardControllerTest {
     void activateCard() {
         game.instantiateCharacterCard(0);
         game.buyCharacterCard(0,0);
-        Parameters params = new Parameters();
+        CardParameters params = new CardParameters();
         StudentGroup students = new StudentGroup();
         int amt = 0;
 

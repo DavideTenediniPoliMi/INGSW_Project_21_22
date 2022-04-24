@@ -9,7 +9,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.*;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,7 +57,7 @@ public class PlanningStateControllerTest {
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.transferStudentToIsland(0,Color.BLUE)),
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.moveMN(1)),
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.buyCharacterCard(0)),
-                () -> assertThrowsExactly(IllegalActionException.class, () -> controller.setCardParameters(new Parameters())),
+                () -> assertThrowsExactly(IllegalActionException.class, () -> controller.setCardParameters(new CardParameters())),
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.activateCard())
         );
     }

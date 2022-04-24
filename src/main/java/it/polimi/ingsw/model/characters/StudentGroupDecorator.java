@@ -4,7 +4,7 @@ import it.polimi.ingsw.exceptions.students.NotEnoughStudentsException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.enumerations.Color;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
 /**
@@ -54,7 +54,7 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
      * @param params the <code>Parameters</code> to set in this card.
      */
     @Override
-    public void setParameters(Parameters params) {
+    public void setParameters(CardParameters params) {
         if(!students.contains(params.getFromOrigin())) {
             throw new NotEnoughStudentsException(Color.RED); //Default, change?
         }

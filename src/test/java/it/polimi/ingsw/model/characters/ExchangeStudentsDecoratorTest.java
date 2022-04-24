@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
@@ -20,7 +20,7 @@ public class ExchangeStudentsDecoratorTest {
     private Game game;
     private Board board;
     private ExchangeStudentsDecorator c;
-    private Parameters p1, p2;
+    private CardParameters p1, p2;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -38,7 +38,7 @@ public class ExchangeStudentsDecoratorTest {
 
         c = new ExchangeStudentsDecorator(new GenericCard(2, EffectType.EXCHANGE_STUDENTS));
 
-        p1 = new Parameters();
+        p1 = new CardParameters();
         p1.setFromOrigin(new StudentGroup(Color.BLUE,1));
         p1.setFromDestination(new StudentGroup(Color.GREEN,1));
         c.setParameters(p1);

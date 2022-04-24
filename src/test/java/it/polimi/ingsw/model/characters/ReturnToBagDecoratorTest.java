@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.enumerations.*;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
@@ -16,7 +16,7 @@ public class ReturnToBagDecoratorTest {
     ReturnToBagDecorator c, c2, c3;
     Game game;
     Board board;
-    Parameters p1, p2, p3;
+    CardParameters p1, p2, p3;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -33,17 +33,17 @@ public class ReturnToBagDecoratorTest {
         board.addSchool(game.getPlayerByID(1));
 
 
-        p1 = new Parameters();
+        p1 = new CardParameters();
         p1.setSelectedColor(Color.PINK);
         c.setParameters(p1);
 
 
-        p2 = new Parameters();
+        p2 = new CardParameters();
         p2.setSelectedColor(Color.RED);
         c2.setParameters(p2);
 
 
-        p3 = new Parameters();
+        p3 = new CardParameters();
         p3.setSelectedColor(Color.BLUE);
         c3.setParameters(p3);
     }

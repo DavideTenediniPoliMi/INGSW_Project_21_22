@@ -7,8 +7,7 @@ import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.model.helpers.Parameters;
-import org.junit.Before;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +18,7 @@ public class AlterInfluenceDecoratorTest {
     private Game game;
     private Board board;
     private AlterInfluenceDecorator c1, c2, c3, c4, c5;
-    private Parameters p1, p2, p3, p4, p5;
+    private CardParameters p1, p2, p3, p4, p5;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -33,7 +32,7 @@ public class AlterInfluenceDecoratorTest {
         //addTwo
         c1 = new AlterInfluenceDecorator(new GenericCard(1, EffectType.ALTER_INFLUENCE), true, false, false);
 
-        Parameters p0 = new Parameters();
+        CardParameters p0 = new CardParameters();
         p0.setBoostedTeam(TowerColor.BLACK);
         c1.setParameters(p0);
 
@@ -41,12 +40,12 @@ public class AlterInfluenceDecoratorTest {
         c2 = new AlterInfluenceDecorator(new GenericCard(1,EffectType.ALTER_INFLUENCE), false, true, false);
 
         //params same team
-        p1 = new Parameters();
+        p1 = new CardParameters();
         p1.setCurrentTeam(TowerColor.BLACK);
         p1.setIslandIndex(0);
 
         //params different team
-        p2 = new Parameters();
+        p2 = new CardParameters();
         p2.setCurrentTeam(TowerColor.WHITE);
         p2.setIslandIndex(0);
 
@@ -54,7 +53,7 @@ public class AlterInfluenceDecoratorTest {
 
         //selected color
         c3 = new AlterInfluenceDecorator(new GenericCard(1, EffectType.ALTER_INFLUENCE), false, false, true);
-        p3 = new Parameters();
+        p3 = new CardParameters();
         p3.setSelectedColor(Color.BLUE);
         p3.setIslandIndex(0);
         p3.setCurrentTeam(TowerColor.BLACK);
@@ -62,7 +61,7 @@ public class AlterInfluenceDecoratorTest {
 
         //not selected color
         c4 = new AlterInfluenceDecorator(new GenericCard(1, EffectType.ALTER_INFLUENCE), false, false, true);
-        p4 = new Parameters();
+        p4 = new CardParameters();
         p4.setSelectedColor(Color.GREEN);
         p4.setIslandIndex(0);
         p4.setCurrentTeam(TowerColor.BLACK);
@@ -70,7 +69,7 @@ public class AlterInfluenceDecoratorTest {
 
         //selected color but not current team
         c5 = new AlterInfluenceDecorator(new GenericCard(1, EffectType.ALTER_INFLUENCE), false, false, true);
-        p5 = new Parameters();
+        p5 = new CardParameters();
         p5.setSelectedColor(Color.BLUE);
         p5.setIslandIndex(0);
         p5.setCurrentTeam(TowerColor.WHITE);

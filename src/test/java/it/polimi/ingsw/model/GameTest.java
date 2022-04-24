@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -226,7 +226,7 @@ public class GameTest {
 
     @Test
     public void testActivateCard() {
-        Parameters p = new Parameters();
+        CardParameters p = new CardParameters();
         p.setSelectedColor(Color.BLUE);
 
         g.setCardParameters(p);

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.enumerations.EffectType;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 
 /**
  * Class representing a generic <code>CharacterCard</code>.
@@ -23,5 +23,5 @@ public class GenericCard extends CharacterCard {
     }
 
     @Override
-    public void setParameters(Parameters params) {}
+    public void setParameters(CardParameters params) {}
 }

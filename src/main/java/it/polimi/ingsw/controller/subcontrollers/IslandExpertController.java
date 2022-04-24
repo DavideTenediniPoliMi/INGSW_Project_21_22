@@ -1,10 +1,9 @@
 package it.polimi.ingsw.controller.subcontrollers;
 
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 
 /**
  * Subcontroller for influence computation in expert mode.
@@ -36,7 +35,7 @@ public class IslandExpertController extends IslandController {
         int adjustedScore = super.getInfluenceOf(teamColor);
 
         if(characterCardController.isActiveCardOfType(EffectType.ALTER_INFLUENCE)) {
-            Parameters params = new Parameters();
+            CardParameters params = new CardParameters();
             params.setCurrentTeam(teamColor);
             params.setIslandIndex(targetIslandIndex);
             game.getActiveCharacterCard().setParameters(params);

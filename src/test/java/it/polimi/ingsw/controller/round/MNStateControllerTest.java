@@ -9,7 +9,7 @@ import it.polimi.ingsw.exceptions.game.NullPlayerException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.*;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -58,7 +58,7 @@ class MNStateControllerTest {
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.transferStudentToDiningRoom(Color.BLUE)),
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.transferStudentToIsland(0,Color.BLUE)),
                 () -> assertThrowsExactly(ExpertModeDisabledException.class, () -> controller.buyCharacterCard(0)),
-                () -> assertThrowsExactly(ExpertModeDisabledException.class, () -> controller.setCardParameters(new Parameters())),
+                () -> assertThrowsExactly(ExpertModeDisabledException.class, () -> controller.setCardParameters(new CardParameters())),
                 () -> assertThrowsExactly(ExpertModeDisabledException.class, () -> controller.activateCard())
         );
     }

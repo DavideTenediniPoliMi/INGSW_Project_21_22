@@ -4,13 +4,12 @@ import it.polimi.ingsw.controller.subcontrollers.DiningRoomController;
 import it.polimi.ingsw.controller.subcontrollers.IslandController;
 import it.polimi.ingsw.exceptions.board.CloudUnavailableException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
-import it.polimi.ingsw.exceptions.game.NullCharacterCardException;
 import it.polimi.ingsw.exceptions.game.NullPlayerException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.enumerations.*;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,7 +57,7 @@ public class CloudStateControllerTest {
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.transferStudentToIsland(0,Color.BLUE)),
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.moveMN(1)),
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.buyCharacterCard(0)),
-                () -> assertThrowsExactly(IllegalActionException.class, () -> controller.setCardParameters(new Parameters())),
+                () -> assertThrowsExactly(IllegalActionException.class, () -> controller.setCardParameters(new CardParameters())),
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.activateCard())
         );
     }

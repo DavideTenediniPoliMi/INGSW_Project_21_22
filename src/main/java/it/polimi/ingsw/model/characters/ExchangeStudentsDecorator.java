@@ -2,7 +2,7 @@ package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.Board;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
 /**
@@ -29,7 +29,7 @@ public class ExchangeStudentsDecorator extends CharacterCardDecorator {
      * @param params the <code>Parameters</code> to set in this card.
      */
     @Override
-    public void setParameters(Parameters params) {
+    public void setParameters(CardParameters params) {
         playerID = params.getPlayerID();
 
         fromEntrance = params.getFromOrigin();

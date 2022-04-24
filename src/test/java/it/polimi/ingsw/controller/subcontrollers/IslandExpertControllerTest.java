@@ -3,10 +3,9 @@ package it.polimi.ingsw.controller.subcontrollers;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.enumerations.CardBack;
-import it.polimi.ingsw.model.enumerations.CharacterCards;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +28,7 @@ class IslandExpertControllerTest {
 
         game.instantiateCharacterCard(3);
 
-        Parameters params = new Parameters();
+        CardParameters params = new CardParameters();
         params.setBoostedTeam(TowerColor.BLACK);
 
         game.buyCharacterCard(0, 0);

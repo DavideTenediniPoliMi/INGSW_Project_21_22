@@ -7,7 +7,7 @@ import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.*;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -74,7 +74,7 @@ public class StudentStateControllerExpertTest {
         game.transferStudentToDiningRoom(0,Color.BLUE);
 
         controller.buyCharacterCard(0);
-        Parameters params = new Parameters();
+        CardParameters params = new CardParameters();
         params.setFromOrigin(new StudentGroup(Color.RED, 2));
         params.setFromDestination(new StudentGroup(Color.BLUE, 2));
         params.setPlayerID(0);

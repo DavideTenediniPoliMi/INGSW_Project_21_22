@@ -1,12 +1,13 @@
-package it.polimi.ingsw.model.helpers;
+package it.polimi.ingsw.network.parameters;
 
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
+import it.polimi.ingsw.model.helpers.StudentGroup;
 
 /**
  * Class used for generic parameter setting into different Character cards.
  */
-public class Parameters {
+public class CardParameters {
     private StudentGroup fromOrigin ;
     private StudentGroup fromDestination;
     private TowerColor boostedTeam;
@@ -18,7 +19,7 @@ public class Parameters {
     /**
      * Sole constructor
      */
-    public Parameters() {
+    public CardParameters() {
     }
 
     /**

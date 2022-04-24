@@ -14,7 +14,7 @@ import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.TurnState;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -67,7 +67,7 @@ public class StudentStateControllerTest {
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.collectFromCloud(0)),
                 () -> assertThrowsExactly(IllegalActionException.class, () -> controller.moveMN(1)),
                 () -> assertThrowsExactly(ExpertModeDisabledException.class, () -> controller.buyCharacterCard(0)),
-                () -> assertThrowsExactly(ExpertModeDisabledException.class, () -> controller.setCardParameters(new Parameters())),
+                () -> assertThrowsExactly(ExpertModeDisabledException.class, () -> controller.setCardParameters(new CardParameters())),
                 () -> assertThrowsExactly(ExpertModeDisabledException.class, () -> controller.activateCard())
         );
     }

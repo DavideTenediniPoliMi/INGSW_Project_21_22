@@ -13,7 +13,7 @@ import it.polimi.ingsw.model.enumerations.CharacterCards;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
 /**
@@ -58,7 +58,7 @@ public class CharacterCardController {
      *
      * @param params the <code>Parameters</code> to set.
      */
-    public void setCardParameters(Parameters params) {
+    public void setCardParameters(CardParameters params) {
         if(Game.getInstance().getActiveCharacterCard() != null){ //Separated so it's only checked once
             try{
                 if(checkParameters(params) && !effectUsed){
@@ -116,7 +116,7 @@ public class CharacterCardController {
      * @throws BadParametersException If one or more parameter is missing.
      * @throws NullPlayerException If the specified playerID is invalid.
      */
-    private boolean checkParameters(Parameters params) throws BadParametersException, NullPlayerException {
+    private boolean checkParameters(CardParameters params) throws BadParametersException, NullPlayerException {
         CharacterCard card = Game.getInstance().getActiveCharacterCard();
 
         switch (card.getEffectType()){

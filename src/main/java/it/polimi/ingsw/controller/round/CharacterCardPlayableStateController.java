@@ -9,10 +9,8 @@ import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.model.enumerations.TurnState;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
-
-import java.lang.reflect.Method;
 
 /**
  * Class specific to the phases of the game in which CharacterCards are usable:
@@ -54,7 +52,7 @@ public class CharacterCardPlayableStateController extends RoundStateController {
     }
 
     @Override
-    public void setCardParameters(Parameters params) {
+    public void setCardParameters(CardParameters params) {
         if(isEnabled()) {
             characterCardController.setCardParameters(params);
             CharacterCard card = Game.getInstance().getActiveCharacterCard();

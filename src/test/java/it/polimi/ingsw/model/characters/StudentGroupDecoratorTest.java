@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.model.helpers.Parameters;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
@@ -18,7 +18,7 @@ public class StudentGroupDecoratorTest {
     Game game;
     Board board;
     StudentGroupDecorator c1, c2, c3;
-    Parameters p1, p2, p3;
+    CardParameters p1, p2, p3;
     StudentGroup sg1, sg2, sg3, sg4;
 
     @BeforeEach
@@ -33,7 +33,7 @@ public class StudentGroupDecoratorTest {
 
         //toIsland
         sg1 = null;
-        p1 = new Parameters();
+        p1 = new CardParameters();
 
         StudentGroup cardStudents = new StudentGroup();
         for(Color c : Color.values()) {
@@ -55,7 +55,7 @@ public class StudentGroupDecoratorTest {
         board.addSchool(game.getPlayerByID(0));
 
         sg2 = null;
-        p2 = new Parameters();
+        p2 = new CardParameters();
 
         StudentGroup cardStudents2 = new StudentGroup();
         for(Color c : Color.values()) {
@@ -75,7 +75,7 @@ public class StudentGroupDecoratorTest {
         //toEntrance
 
         sg3 = null;
-        p3 = new Parameters();
+        p3 = new CardParameters();
 
         StudentGroup cardStudents3 = new StudentGroup();
         for(Color c : Color.values()) {

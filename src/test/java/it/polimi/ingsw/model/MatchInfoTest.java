@@ -68,6 +68,11 @@ class MatchInfoTest {
     }
 
     @Test
+    void getInitialNumStudents() {
+        assertEquals(9, matchInfo.getInitialNumStudents());
+    }
+
+    @Test
     void getStateType() {
         assertEquals(TurnState.PLANNING, matchInfo.getStateType());
     }
