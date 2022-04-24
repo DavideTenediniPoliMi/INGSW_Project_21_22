@@ -19,6 +19,7 @@ import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.network.parameters.RequestParameters;
+import it.polimi.ingsw.network.parameters.SetupParameters;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.exceptions.player;
+package it.polimi.ingsw.exceptions.lobby;
 
 import it.polimi.ingsw.exceptions.EriantysException;
 
