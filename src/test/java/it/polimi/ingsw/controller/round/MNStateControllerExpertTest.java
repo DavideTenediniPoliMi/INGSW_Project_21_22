@@ -6,6 +6,7 @@ import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
@@ -24,8 +25,8 @@ class MNStateControllerExpertTest {
     @BeforeEach
     void setUp() {
         game = Game.getInstance();
-        game.addPlayer(0, "lollo", TowerColor.BLACK, CardBack.CB_1, true);
-        game.addPlayer(1, "lello", TowerColor.WHITE, CardBack.CB_2, true);
+        game.addPlayer(new Player(0, "lollo", TowerColor.BLACK, CardBack.CB_1, true));
+        game.addPlayer(new Player(1, "lello", TowerColor.WHITE, CardBack.CB_2, true));
 
         matchInfo = MatchInfo.getInstance();
         matchInfo.setSelectedNumPlayer(2);

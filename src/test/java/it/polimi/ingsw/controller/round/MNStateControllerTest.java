@@ -8,6 +8,7 @@ import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.exceptions.game.NullPlayerException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import org.junit.jupiter.api.AfterEach;
@@ -24,9 +25,9 @@ class MNStateControllerTest {
     @BeforeEach
     void setUp() {
         game = Game.getInstance();
-        game.addPlayer(0, "lollo", TowerColor.BLACK, CardBack.CB_1, true);
-        game.addPlayer(1, "lello", TowerColor.WHITE, CardBack.CB_2, true);
-        game.addPlayer(2, "lillo", TowerColor.GREY, CardBack.CB_3, true);
+        game.addPlayer(new Player(0, "lollo", TowerColor.BLACK, CardBack.CB_1, true));
+        game.addPlayer(new Player(1, "lello", TowerColor.WHITE, CardBack.CB_2, true));
+        game.addPlayer(new Player(2, "lillo", TowerColor.GREY, CardBack.CB_3, true));
         game.placeMNAt(0);
 
         matchInfo = MatchInfo.getInstance();

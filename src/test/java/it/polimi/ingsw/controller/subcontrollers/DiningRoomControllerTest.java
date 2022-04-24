@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller.subcontrollers;
 
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
@@ -24,9 +25,9 @@ class DiningRoomControllerTest {
         game = Game.getInstance();
         board = game.getBoard();
 
-        game.addPlayer(0, "ezio", TowerColor.BLACK, CardBack.CB_1, true);
-        game.addPlayer(1, "enzo", TowerColor.WHITE, CardBack.CB_2, true);
-        game.addPlayer(2, "leve", TowerColor.GREY, CardBack.CB_3, true);
+        game.addPlayer(new Player(0, "ezio", TowerColor.BLACK, CardBack.CB_1, true));
+        game.addPlayer(new Player(1, "enzo", TowerColor.WHITE, CardBack.CB_2, true));
+        game.addPlayer(new Player(2, "leve", TowerColor.GREY, CardBack.CB_3, true));
 
         board.addSchool(game.getPlayerByID(0));
         board.addSchool(game.getPlayerByID(1));

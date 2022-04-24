@@ -71,6 +71,12 @@ public class Game {
      * @see TowerColor
      */
     public void conquerIsland(TowerColor teamColor){
+        /**
+         * Notify data:
+         * - [before conquerIsland] oldOwner's School (optional if not NULL) (team color -> getTowerHolderIDOf -> getSchoolByPlayerID)
+         * - new owner's School (team color -> getTowerHolderIDOf -> getSchoolByPlayerID)
+         * - islands
+         */
         board.conquerIsland(teamColor);
         System.out.println("["+steps+"] conquerIsland");
     }
@@ -91,6 +97,10 @@ public class Game {
      * @see it.polimi.ingsw.model.board.MultiIsland
      */
     public void mergeIslands(int leftIslandIndex, int rightIslandIndex) {
+        /**
+         * Notify data:
+         * - islands
+         */
         board.mergeIslands(leftIslandIndex, rightIslandIndex);
         System.out.println("["+steps+"] mergeIslands");
     }
@@ -114,6 +124,10 @@ public class Game {
      * @param steps the amount of steps Mother Nature has to move
      */
     public void moveMN(int steps){
+        /**
+         * Notify data:
+         * - islands
+         */
         board.moveMN(steps);
         System.out.println("["+steps+"] moveMN");
     }
@@ -138,6 +152,11 @@ public class Game {
      * @param playerID the ID of the <code>Player</code> collecting the students
      */
     public void collectFromCloud(int cloudIndex, int playerID){
+        /**
+         * Notify data:
+         * - cloud affected (board.getClouds.get)
+         * - player's School (board.getSchoolByPlayerID)
+         */
         StudentGroup temp = board.collectFromCloud(cloudIndex);
         board.addToEntranceOf(playerID, temp);
         System.out.println("["+steps+"] collectFromCloud");
@@ -150,6 +169,12 @@ public class Game {
      * @param studentsAmount the amount of students for each <code>Cloud</code>
      */
     public void refillClouds(int studentsAmount){
+        /**
+         * Notify data:
+         * - clouds (board.getClouds)
+         * - bag
+         */
+
         board.refillClouds(studentsAmount);
         System.out.println("["+steps+"] refillClouds");
     }
@@ -187,6 +212,11 @@ public class Game {
      * @see Color
      */
     public void transferStudentToIsland(int islandIndex, Color c, int playerID) {
+        /**
+         * Notify data:
+         * - player's School (board.getSchoolByPlayerID)
+         * - islands
+         */
         StudentGroup temp = new StudentGroup(c, 1);
 
         board.removeFromEntranceOf(playerID, temp);
@@ -204,6 +234,10 @@ public class Game {
      * @see Color
      */
     public void transferStudentToDiningRoom(int playerID, Color c) {
+        /**
+         * Notify data:
+         * - player's School (board.getSchoolByPLayerID)
+         */
         StudentGroup temp = new StudentGroup(c, 1);
 
         board.removeFromEntranceOf(playerID, temp);
@@ -243,6 +277,10 @@ public class Game {
      * @param c the color of the professor
      */
     public void giveProfessorTo(int playerID, Color c){
+        /**
+         * Notify data:
+         * - professors
+         */
         board.giveProfessorTo(playerID, c);
         System.out.println("["+steps+"] giveProfessorTo");
     }
@@ -273,28 +311,30 @@ public class Game {
     }
 
     /**
-     * Adds a new <code>Player</code> to the game with specified info. ID and name must be unique
+     * Returns the ID of the player who holds the towers for the specified <code>TowerColor</code>.
      *
-     * @param ID the ID of the new <code>Player</code>
-     * @param name the name of the new <code>Player</code>
-     * @param teamColor the team color of the new <code>Player</code>
-     * @param cardBack the card back picked by the new <code>Player</code>
-     * @param towerHolder the flag specifiying if the new <code>Player</code> will hold the team's towers
-     * @see Player
+     * @param teamColor the <code>TowerColor</code> of the team.
+     * @return Tower holder ID for the specified team.
      */
-    public void addPlayer(int ID, String name, TowerColor teamColor, CardBack cardBack, boolean towerHolder) {
-        players.add(new Player(ID, name, teamColor, cardBack, towerHolder));
-        System.out.println("["+steps+"] addPlayer");
+    public int getTowerHolderIDOf(TowerColor teamColor) {
+        List<Player> players = Game.getInstance().getPlayers();
+
+        Optional<Player> result = players.stream()
+                .filter((player) -> (player.isTowerHolder() && player.getTeamColor() == teamColor))
+                .findAny();
+
+        if(result.isEmpty()) return -1;
+        return result.get().getID();
     }
 
     /**
-     * Returns whether the specified name is already taken
+     * Adds a new <code>Player</code> to the game
      *
-     * @param name the name to check
-     * @return <code>true</code> if another <code>Player</code> already has that name
+     * @param player the player to be added to the game
+     * @see Player
      */
-    public boolean isNameTaken(String name) {
-        return players.stream().anyMatch(player -> player.getName().equals(name));
+    public void addPlayer(Player player) {
+        players.add(player);
     }
 
     /**
@@ -305,6 +345,11 @@ public class Game {
      * @see Card
      */
     public void playCard(int playerID, Card selectedCard) {
+        /**
+         * Notify data:
+         * - player getPlayerByID
+         * - cards (enum)
+         */
         getPlayerByID(playerID).setSelectedCard(selectedCard);
         selectedCard.use(playerID);
         System.out.println("["+steps+"] playCard");
@@ -314,6 +359,10 @@ public class Game {
      * Resets the cards used during a round, making them available for use again. Only to be called at the end of each round.
      */
     public void resetCards(){
+        /**
+         * Notify data:
+         * - cards (enum)
+         */
         for(Card card: Card.values()) {
             card.reset();
         }
@@ -326,6 +375,11 @@ public class Game {
      * @param playerID the ID of the player receiving the coin.
      */
     public void giveCoinToPlayer(int playerID) {
+        /**
+         * Notify data:
+         * - player getPlayerByID
+         * - coins (Coins.amount JSON)
+         */
         board.takeCoin();
         getPlayerByID(playerID).addCoin();
         System.out.println("["+steps+"] giveCoinToPlayer");
@@ -386,6 +440,10 @@ public class Game {
      * @param cardIndex the Index of the <code>CharacterCard</code> to buy.
      */
     public void buyCharacterCard(int playerID, int cardIndex) {
+        /**
+         * Notify data:
+         * - characterCards
+         */
         CharacterCard card = characterCards.get(cardIndex);
         int cardCost = card.getCost();
 
@@ -412,6 +470,10 @@ public class Game {
      * @return result of the effect of the <code>CharacterCard</code>.
      */
     public int activateCard() {
+        /**
+         * Notify data:
+         * - things changed by the activation (card.getMessage??)
+         */
         int temp = getActiveCharacterCard().activate();
         System.out.println("["+steps+"] activateCard");
         return temp;

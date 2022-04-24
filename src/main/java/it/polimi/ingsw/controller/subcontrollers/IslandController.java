@@ -43,7 +43,7 @@ public class IslandController {
 
         if(oldMostInfluentialTeam == newMostInfluentialTeam) return;
 
-        int newOwnerTowerHolderID = getTowerHolderIDOf(newMostInfluentialTeam);
+        int newOwnerTowerHolderID = game.getTowerHolderIDOf(newMostInfluentialTeam);
         game.removeTowersFrom(newOwnerTowerHolderID, getNumTowersOnIsland());
 
         if(oldMostInfluentialTeam != null) {
@@ -161,22 +161,5 @@ public class IslandController {
         int newMNPosition = board.getMNPosition();
 
         return board.getIslandAt(newMNPosition).getNumIslands();
-    }
-
-    /**
-     * Returns the ID of the player who holds the towers for the specified <code>TowerColor</code>.
-     *
-     * @param teamColor the <code>TowerColor</code> of the team.
-     * @return Tower holder ID for the specified team.
-     */
-    private int getTowerHolderIDOf(TowerColor teamColor) {
-        List<Player> players = Game.getInstance().getPlayers();
-
-        Optional<Player> result = players.stream()
-                .filter((player) -> (player.isTowerHolder() && player.getTeamColor() == teamColor))
-                .findAny();
-
-        if(result.isEmpty()) return -1;
-        return result.get().getID();
     }
 }

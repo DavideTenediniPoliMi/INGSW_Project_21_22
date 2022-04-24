@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller.subcontrollers;
 
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.enumerations.CardBack;
@@ -24,8 +25,8 @@ class IslandControllerTest {
         islandController = new IslandController();
         game = Game.getInstance();
         board = game.getBoard();
-        game.addPlayer(0, "luca", TowerColor.GREY, CardBack.CB_1, true);
-        game.addPlayer(1, "paolo", TowerColor.BLACK, CardBack.CB_2, true);
+        game.addPlayer(new Player(0, "luca", TowerColor.GREY, CardBack.CB_1, true));
+        game.addPlayer(new Player(1, "paolo", TowerColor.BLACK, CardBack.CB_2, true));
         board.addSchool(game.getPlayerByID(0));
         board.addSchool(game.getPlayerByID(1));
         game.placeMNAt(0);

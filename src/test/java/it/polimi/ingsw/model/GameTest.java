@@ -151,11 +151,6 @@ public class GameTest {
     }
 
     @Test
-    public void testIsNameTaken() {
-        assertTrue(g.isNameTaken("ezio"));
-    }
-
-    @Test
     public void testPlayCard() {
         Card c = Card.CARD_1;
         g.playCard(0, c);

@@ -5,6 +5,7 @@ import it.polimi.ingsw.controller.round.RoundStateController;
 import it.polimi.ingsw.exceptions.game.NullCharacterCardException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.characters.StudentGroupDecorator;
 import it.polimi.ingsw.model.enumerations.*;
@@ -28,7 +29,7 @@ class CharacterCardControllerTest {
         characterCardController = new CharacterCardPlayableStateController(rc,TurnState.STUDENTS);
 
         game = Game.getInstance();
-        game.addPlayer(0, "lele", TowerColor.GREY, CardBack.CB_3, true);
+        game.addPlayer(new Player(0, "lele", TowerColor.GREY, CardBack.CB_3, true));
         game.giveCoinToPlayer(0);
         matchInfo = MatchInfo.getInstance();
         matchInfo.setExpertMode(true);
