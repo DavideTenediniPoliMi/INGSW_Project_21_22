@@ -36,8 +36,9 @@ public class CardParameters {
      *
      * @param fromOrigin the origin <code>StudentGroup</code>
      */
-    public void setFromOrigin(StudentGroup fromOrigin){
+    public CardParameters setFromOrigin(StudentGroup fromOrigin){
         this.fromOrigin = fromOrigin;
+        return this;
     }
 
     /**
@@ -54,8 +55,9 @@ public class CardParameters {
      *
      * @param fromDestination the destination <code>StudentGroup</code>
      */
-    public void setFromDestination(StudentGroup fromDestination){
+    public CardParameters setFromDestination(StudentGroup fromDestination){
         this.fromDestination = fromDestination;
+        return this;
     }
 
     /**
@@ -72,8 +74,9 @@ public class CardParameters {
      *
      * @param boostedTeam the team to boost.
      */
-    public void setBoostedTeam(TowerColor boostedTeam) {
+    public CardParameters setBoostedTeam(TowerColor boostedTeam) {
         this.boostedTeam = boostedTeam;
+        return this;
     }
 
     /**
@@ -90,8 +93,9 @@ public class CardParameters {
      *
      * @param currentTeam the new current team
      */
-    public void setCurrentTeam(TowerColor currentTeam) {
+    public CardParameters setCurrentTeam(TowerColor currentTeam) {
         this.currentTeam = currentTeam;
+        return this;
     }
 
     /**
@@ -108,8 +112,9 @@ public class CardParameters {
      *
      * @param selectedColor the selected <code>Color</code> for the card.
      */
-    public void setSelectedColor(Color selectedColor) {
+    public CardParameters setSelectedColor(Color selectedColor) {
         this.selectedColor = selectedColor;
+        return this;
     }
 
     /**
@@ -126,8 +131,9 @@ public class CardParameters {
      *
      * @param playerID the ID of the player.
      */
-    public void setPlayerID(int playerID) {
+    public CardParameters setPlayerID(int playerID) {
         this.playerID = playerID;
+        return this;
     }
 
     /**
@@ -144,7 +150,8 @@ public class CardParameters {
      *
      * @param islandIndex the index of the <code>Island</code>
      */
-    public void setIslandIndex(int islandIndex) {
+    public CardParameters setIslandIndex(int islandIndex) {
         this.islandIndex = islandIndex;
+        return this;
     }
 }
