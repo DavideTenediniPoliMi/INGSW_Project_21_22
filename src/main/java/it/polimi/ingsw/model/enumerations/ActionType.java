@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model.enumerations;
 
+/**
+ * Enum class representing the different types of messages while a game is being played.
+ */
 public enum ActionType {
     PLAY_CARD,
     BUY_CHARACTER_CARD,

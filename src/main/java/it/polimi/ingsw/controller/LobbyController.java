@@ -9,20 +9,24 @@ import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.network.parameters.SetupParameters;
 
+/**
+ * Class representing the controller for all pre-game (Lobby) actions. Handles:
+ * <ul>
+ *     <li>Joining a game</li>
+ *     <li>Team selection</li>
+ *     <li>CardBack selection</li>
+ * </ul>
+ */
 public class LobbyController {
-    private static LobbyController instance;
     private Lobby lobby;
     private MatchInfo matchInfo;
 
-    private LobbyController() {
+    /**
+     * Sole constructor for <code>LobbyController</code>.
+     */
+    public LobbyController() {
         lobby = Lobby.getLobby();
         matchInfo = MatchInfo.getInstance();
-    }
-
-    public static LobbyController getLobbyController() {
-        if(instance == null)
-            instance = new LobbyController();
-        return instance;
     }
 
     /**
@@ -45,8 +49,19 @@ public class LobbyController {
         }
     }
 
-    private void joinLobby(int playerID, String name) throws DuplicateIDException, NameTakenException {
-        if(lobby.hasJoined(playerID)){
+    /**
+     * Adds a new <code>Player</code> with the specified ID and Nickname to the current <code>Lobby</code>.
+     *
+     * @param playerID the ID of the new <code>Player</code>.
+     * @param name the Nickname of the new <code>Player</code>.
+     * @throws GameFullException If the current <code>Lobby</code> is full.
+     * @throws DuplicateIDException If there is already another <code>Player</code> with the same ID.
+     * @throws NameTakenException If there is already another <code>Player</code> with the same Nickname.
+     */
+    private void joinLobby(int playerID, String name) throws DuplicateIDException, NameTakenException, GameFullException {
+        if(lobby.getPlayers().size() == matchInfo.getSelectedNumPlayer()) {
+            throw new GameFullException();
+        }else if(lobby.hasJoined(playerID)){
             throw new DuplicateIDException(playerID);
         } else if(lobby.isNameTaken(name)){
             throw new NameTakenException(name);
@@ -55,6 +70,14 @@ public class LobbyController {
         lobby.addPlayer(playerID, name);
     }
 
+    /**
+     * Selects the specified <code>CardBack</code> for the specified <code>Player</code>.
+     *
+     * @param playerID the ID of the <code>Player</code>.
+     * @param cardBack the <code>CardBack</code> selected.
+     * @throws NoSuchPlayerException If there is no <code>Player</code> with the specified ID in this <code>Lobby</code>.
+     * @throws CardBackTakenException If another <code>Player</code> has already selected the same <code>CardBack</code>.
+     */
     private void setCardBack(int playerID, CardBack cardBack) throws NoSuchPlayerException, CardBackTakenException {
         if(!lobby.hasJoined(playerID)) {
             throw new NoSuchPlayerException(playerID);
@@ -65,6 +88,14 @@ public class LobbyController {
         lobby.selectCardBack(playerID, cardBack);
     }
 
+    /**
+     * Selects the specified <code>TowerColor</code> for the specified <code>Player</code>.
+     *
+     * @param playerID the Id of the <code>Player</code>.
+     * @param towerColor the <code>TowerColor</code> selected.
+     * @throws NoSuchPlayerException If there is no <code>Player</code> with the specified ID in this <code>Lobby</code>.
+     * @throws TeamFullException If the team already has the maximum amount of members.
+     */
     private void setTowerColor(int playerID, TowerColor towerColor) throws NoSuchPlayerException, TeamFullException {
         if(!lobby.hasJoined(playerID)) {
             throw new NoSuchPlayerException(playerID);
@@ -75,6 +106,12 @@ public class LobbyController {
         lobby.selectTeam(playerID, towerColor);
     }
 
+    /**
+     * Returns whether the specified <code>CardBack</code> is already selected by a <code>Player</code>.
+     *
+     * @param cardBack the <code>CardBack</code>.
+     * @return <code>true</code> if a <code>Player</code> has already selected the specified <code>CardBack</code>.
+     */
     private boolean isCardBackSelected(CardBack cardBack) {
         for(Player player : lobby.getPlayers()) {
             if(player.getCardBack().equals(cardBack)) {
@@ -84,6 +121,12 @@ public class LobbyController {
         return false;
     }
 
+    /**
+     * Returns whether a <code>Player</code> can join the specified team.
+     *
+     * @param towerColor the <code>TowerColor</code> of the team.
+     * @return <code>true</code> if a <code>Player</code> can join.
+     */
     private boolean canJoin(TowerColor towerColor) {
         int members = 0;
 
