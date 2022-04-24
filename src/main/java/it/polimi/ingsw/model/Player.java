@@ -13,15 +13,15 @@ import java.util.List;
 public class Player {
     private final int ID;
     private final String name;
-    private final TowerColor teamColor;
-    private final CardBack cardBack;
-    private final boolean towerHolder;
+    private TowerColor teamColor;
+    private CardBack cardBack;
+    private boolean towerHolder;
     private final List<Card> playableCards = new ArrayList<>();
     private Card selectedCard;
     private int numCoins;
 
     /**
-     * Sole constructor to instantiate a new <code>Player</code>
+     * Constructor to instantiate a new <code>Player</code>
      *
      * @param ID the ID of the player
      * @param name the name of the player
@@ -37,6 +37,16 @@ public class Player {
         this.towerHolder = towerHolder;
 
         this.playableCards.addAll(List.of(Card.values()));
+    }
+
+    /**
+     * Constructor to instantiate a new <code>Player</code>, only to be used inside Lobbys.
+     *
+     * @param ID the ID of this <code>Player</code>.
+     * @param name the Nickname of this <code>Player</code>.
+     */
+    public Player(int ID, String name) {
+        this(ID, name, null, null, false);
     }
 
     /**
@@ -67,6 +77,15 @@ public class Player {
     }
 
     /**
+     * Assigns this <code>Player</code> to the specified Team.
+     *
+     * @param teamColor the color of the team.
+     */
+    public void setTeamColor(TowerColor teamColor) {
+        this.teamColor = teamColor;
+    }
+
+    /**
      * Returns the <code>CardBack</code> picked by this <code>Player</code>
      *
      * @return CardBack of this Player
@@ -76,12 +95,30 @@ public class Player {
     }
 
     /**
+     * Sets the selected <code>CardBack</code> for this <code>Player</code>.
+     *
+     * @param cardBack the Card Back selected.
+     */
+    public void setCardBack(CardBack cardBack) {
+        this.cardBack = cardBack;
+    }
+
+    /**
      * Returns whether this <code>Player</code> holds towers in its <code>School</code>
      *
      * @return <code>true</code> if this Player holds towers for its team
      */
     public boolean isTowerHolder() {
         return towerHolder;
+    }
+
+    /**
+     * Sets whether this <code>Player</code> is a tower holder.
+     *
+     * @param towerHolder the flag specifying if the player will hold towers in its school.
+     */
+    public void setTowerHolder(boolean towerHolder) {
+        this.towerHolder = towerHolder;
     }
 
     /**
