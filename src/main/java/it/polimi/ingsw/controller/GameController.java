@@ -4,7 +4,12 @@ import it.polimi.ingsw.controller.round.*;
 import it.polimi.ingsw.controller.subcontrollers.CharacterCardController;
 import it.polimi.ingsw.controller.subcontrollers.DiningRoomExpertController;
 import it.polimi.ingsw.controller.subcontrollers.IslandExpertController;
+import it.polimi.ingsw.exceptions.EriantysException;
+import it.polimi.ingsw.exceptions.EriantysRuntimeException;
+import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
+import it.polimi.ingsw.exceptions.game.NotCurrentPlayerException;
+import it.polimi.ingsw.exceptions.player.CardUsedException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
@@ -12,6 +17,8 @@ import it.polimi.ingsw.model.board.ProfessorTracker;
 import it.polimi.ingsw.model.board.School;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.helpers.StudentBag;
+import it.polimi.ingsw.network.parameters.CardParameters;
+import it.polimi.ingsw.network.parameters.RequestParameters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +47,95 @@ public class GameController {
         matchInfo = MatchInfo.getInstance();
         game = Game.getInstance();
         status = GameStatus.LOBBY;
+    }
+
+    /**
+     * Requests the specified action during this game. The request is automatically filtered if the <code>Player</code>
+     * is not the current <code>Player</code>.
+     *
+     * @param playerID the ID of the <code>Player</code> requesting an action.
+     * @param requestParams the parameters of the request.
+     */
+    public synchronized void requestAction(int playerID, RequestParameters requestParams) throws EriantysException {
+        if(playerID != matchInfo.getCurrentPlayerID()){
+            throw new NotCurrentPlayerException(playerID);
+        }
+        forwardRequest(requestParams);
+    }
+
+    /**
+     * Forwards the request further in the <code>RoundStateController</code>.
+     *
+     * @param requestParams the parameters of the requested action.
+     */
+    private void forwardRequest(RequestParameters requestParams) throws EriantysException, EriantysRuntimeException {
+        int cardIndex, islandIndex, numSteps, cloudIndex;
+        Color c;
+        CardParameters cardParams;
+        switch (requestParams.getActionType()){
+            case PLAY_CARD:
+                /*
+                 * index: The index of the Assistant Card to play
+                 */
+                cardIndex = requestParams.getIndex();
+                roundStateController.playCard(cardIndex);
+                break;
+            case TRANSFER_STUDENT_TO_ISLAND:
+                /*
+                 * index: The index of the recipient Island
+                 * color: The color of the student to move
+                 */
+                islandIndex = requestParams.getIndex();
+                c = requestParams.getColor();
+                roundStateController.transferStudentToIsland(islandIndex, c);
+                break;
+            case TRANSFER_STUDENT_TO_DINING_ROOM:
+                /*
+                 * color: The color of the student to move
+                 */
+                c = requestParams.getColor();
+                roundStateController.transferStudentToDiningRoom(c);
+                break;
+            case MOVE_MN:
+                /*
+                 * index: Number of steps of MN movement
+                 */
+                numSteps = requestParams.getIndex();
+                roundStateController.moveMN(numSteps);
+                break;
+            case COLLECT_FROM_CLOUD:
+                /*
+                 * index: Index of the cloud to collect from
+                 */
+                cloudIndex = requestParams.getIndex();
+                roundStateController.collectFromCloud(cloudIndex);
+                break;
+            case BUY_CHARACTER_CARD:
+                /*
+                 * index: Index of the CharacterCard to buy
+                 */
+                cardIndex = requestParams.getIndex();
+                roundStateController.buyCharacterCard(cardIndex);
+                break;
+            case SET_CARD_PARAMETERS:
+                /*
+                 * index: Index of the CharacterCard to set parameters to (Validation)
+                 * Parameters: CardParameters object containing the parameters to set
+                 */
+                cardIndex = requestParams.getIndex();
+                cardParams = requestParams.getCardParams();
+                if(game.getCharacterCards().indexOf(game.getActiveCharacterCard()) != cardIndex){
+                    throw new BadParametersException("Given ID does not match the active CharacterCard's ID");
+                }
+                roundStateController.setCardParameters(cardParams);
+                break;
+            case ACTIVATE_CARD:
+                roundStateController.activateCard();
+                break;
+            default:
+                throw new BadParametersException("No such action: " + requestParams.getActionType());
+        }
+        nextState();
     }
 
     /**
