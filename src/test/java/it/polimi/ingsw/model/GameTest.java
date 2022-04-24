@@ -23,8 +23,8 @@ public class GameTest {
     public void setUp() {
         g = Game.getInstance();
 
-        g.addPlayer(0, "ezio", TowerColor.WHITE, CardBack.CB_1, true);
-        g.addPlayer(1, "bruso", TowerColor.GREY, CardBack.CB_2, true);
+        g.addPlayer(new Player(0, "ezio", TowerColor.WHITE, CardBack.CB_1, true));
+        g.addPlayer(new Player(1, "bruso", TowerColor.GREY, CardBack.CB_2, true));
 
         g.getPlayers().forEach((p) -> g.addSchool(p.getID()));
 
@@ -146,7 +146,7 @@ public class GameTest {
 
     @Test
     public void testAddPlayer() {
-        g.addPlayer(2, "trap", TowerColor.BLACK, CardBack.CB_3, true);
+        g.addPlayer(new Player(2, "trap", TowerColor.BLACK, CardBack.CB_3, true));
         assertEquals("trap", g.getPlayerByID(2).getName());
     }
 

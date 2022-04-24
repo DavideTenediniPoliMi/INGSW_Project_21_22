@@ -47,7 +47,7 @@ public class IslandController {
         game.removeTowersFrom(newOwnerTowerHolderID, getNumTowersOnIsland());
 
         if(oldMostInfluentialTeam != null) {
-            int oldOwnerTowerHolderID = getTowerHolderIDOf(oldMostInfluentialTeam);
+            int oldOwnerTowerHolderID = game.getTowerHolderIDOf(oldMostInfluentialTeam);
             game.addTowersTo(oldOwnerTowerHolderID, getNumTowersOnIsland());
         }
 

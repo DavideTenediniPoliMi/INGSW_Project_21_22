@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.enumerations.CardBack;
@@ -24,7 +25,7 @@ public class AlterInfluenceDecoratorTest {
     public void setUp() throws Exception {
         game = Game.getInstance();
         board = game.getBoard();
-        game.addPlayer(0, "mario", TowerColor.BLACK, CardBack.CB_1, true);
+        game.addPlayer(new Player(0, "mario", TowerColor.BLACK, CardBack.CB_1, true));
         game.placeMNAt(0);
         game.conquerIsland(TowerColor.BLACK);
         game.giveProfessorTo(0, Color.BLUE);

@@ -28,7 +28,7 @@ public class ExchangeStudentsDecoratorTest {
         board = game.getBoard();
         Player player = new Player(0, "mario", TowerColor.BLACK, CardBack.CB_1, true);
 
-        game.addPlayer(0, "mario", TowerColor.BLACK, CardBack.CB_1, true);
+        game.addPlayer(new Player(0, "mario", TowerColor.BLACK, CardBack.CB_1, true));
         board.addSchool(player);
 
         StudentGroup entrance = new StudentGroup(Color.BLUE, 3);

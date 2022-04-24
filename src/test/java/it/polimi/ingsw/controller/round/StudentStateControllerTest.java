@@ -9,6 +9,7 @@ import it.polimi.ingsw.exceptions.students.NotEnoughStudentsException;
 import it.polimi.ingsw.exceptions.students.StudentTransferException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
@@ -32,11 +33,11 @@ public class StudentStateControllerTest {
     void setUp() {
         game = Game.getInstance();
         board = game.getBoard();
-        game.addPlayer(0, "lollo", TowerColor.BLACK, CardBack.CB_1, true);
+        game.addPlayer(new Player(0, "lollo", TowerColor.BLACK, CardBack.CB_1, true));
         board.addSchool(game.getPlayerByID(0));
-        game.addPlayer(1, "lello", TowerColor.WHITE, CardBack.CB_2, true);
+        game.addPlayer(new Player(1, "lello", TowerColor.WHITE, CardBack.CB_2, true));
         board.addSchool(game.getPlayerByID(1));
-        game.addPlayer(2, "lillo", TowerColor.GREY, CardBack.CB_3, true);
+        game.addPlayer(new Player(2, "lillo", TowerColor.GREY, CardBack.CB_3, true));
         board.addSchool(game.getPlayerByID(2));
 
         matchInfo = MatchInfo.getInstance();

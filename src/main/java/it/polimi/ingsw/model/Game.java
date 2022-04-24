@@ -129,7 +129,7 @@ public class Game {
          * - islands
          */
         board.moveMN(steps);
-        System.out.println("["+steps+"] moveMN");
+        System.out.println("["+this.steps+"] moveMN");
     }
 
     // CLOUDS
