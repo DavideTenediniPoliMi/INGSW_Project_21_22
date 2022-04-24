@@ -1,12 +1,9 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.lobby.NameTakenException;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Class representing a Lobby before a game of Eriantys. Allows for CardBack and Team selection and/or changes for each
@@ -15,6 +12,7 @@ import java.util.Optional;
 public class Lobby {
     private static Lobby instance;
     private List<Player> players;
+    private Map<Integer, Boolean> readyStatus;
 
     /**
      * Sole constructor to avoid being instantiated more than once.
@@ -22,6 +20,7 @@ public class Lobby {
      */
     private Lobby() {
         players = new ArrayList<>();
+        readyStatus = new HashMap<>();
     }
 
     /**
@@ -43,6 +42,7 @@ public class Lobby {
      */
     public void addPlayer(int playerID, String name) {
         players.add(new Player(playerID, name));
+        readyStatus.put(playerID, false);
     }
 
     /**
@@ -115,6 +115,26 @@ public class Lobby {
         if(p != null) {
             p.setCardBack(cardBack);
         }
+    }
+
+    /**
+     * Sets whether the specified <code>Player</code> is ready.
+     *
+     * @param playerID the ID of the <code>Player</code>.
+     * @param ready the flag specifying if the <code>Player</code> is ready.
+     */
+    public void setReadyStatus(int playerID, boolean ready) {
+        readyStatus.put(playerID, ready);
+    }
+
+    /**
+     * Returns whether the specified <code>Player</code> is ready.
+     *
+     * @param playerID the ID of the <code>Player</code>.
+     * @return <code>true</code> if the specified <code>Player</code> is ready.
+     */
+    public boolean isReady(int playerID) {
+        return readyStatus.get(playerID);
     }
 
     /**
