@@ -49,7 +49,7 @@ public class Board {
      *
      * @return list of <code>Island</code>.
      */
-    protected List<Island> getIslands() {
+    public List<Island> getIslands() {
         return new ArrayList<>(islands);
     }
 

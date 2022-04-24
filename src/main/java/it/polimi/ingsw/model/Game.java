@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.model.helpers.StudentGroup;
+import it.polimi.ingsw.network.parameters.ResponseParameters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,13 +72,18 @@ public class Game {
      * @see TowerColor
      */
     public void conquerIsland(TowerColor teamColor){
-        /**
-         * Notify data:
-         * - [before conquerIsland] oldOwner's School (optional if not NULL) (team color -> getTowerHolderIDOf -> getSchoolByPlayerID)
-         * - new owner's School (team color -> getTowerHolderIDOf -> getSchoolByPlayerID)
-         * - islands
-         */
+        ResponseParameters params = new ResponseParameters();
+        TowerColor oldOwnerColor = board.getIslandAt(board.getMNPosition()).getTeamColor();
+        if(oldOwnerColor != null) {
+            params.addSchool(board.getSchoolByPlayerID(getTowerHolderIDOf(oldOwnerColor)));
+        }
+
         board.conquerIsland(teamColor);
+
+        TowerColor newOwnerColor = board.getIslandAt(board.getMNPosition()).getTeamColor();
+        params.addSchool(board.getSchoolByPlayerID(getTowerHolderIDOf(newOwnerColor)))
+                .setIslands(board.getIslands());
+
         System.out.println("["+steps+"] conquerIsland");
     }
 
