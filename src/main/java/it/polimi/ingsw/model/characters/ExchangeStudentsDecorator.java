@@ -47,7 +47,8 @@ public class ExchangeStudentsDecorator extends CharacterCardDecorator {
         Game game = Game.getInstance();
         ResponseParameters responseParameters = new ResponseParameters();
 
-        return responseParameters.addSchool(game.getBoard().getSchoolByPlayerID(playerID));
+        return responseParameters.addSchool(game.getBoard()
+                .getSchoolByPlayerID(playerID));
     }
 
     @Override

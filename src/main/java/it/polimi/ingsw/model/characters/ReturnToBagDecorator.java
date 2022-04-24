@@ -48,7 +48,8 @@ public class ReturnToBagDecorator extends CharacterCardDecorator {
         Game game = Game.getInstance();
         ResponseParameters responseParameters = new ResponseParameters();
 
-        return responseParameters.setSchools(game.getBoard().getSchools()).setBagEmpty(game.isStudentBagEmpty());
+        return responseParameters.setSchools(game.getBoard().getSchools())
+                .setBagEmpty(game.isStudentBagEmpty());
     }
 
     @Override
