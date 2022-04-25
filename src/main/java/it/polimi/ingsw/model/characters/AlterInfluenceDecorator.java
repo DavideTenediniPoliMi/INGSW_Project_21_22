@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
+import it.polimi.ingsw.network.parameters.ActionResponseParameters;
 import it.polimi.ingsw.network.parameters.CardParameters;
 
 /**
@@ -99,4 +100,15 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator {
 
         return delta;
     }
+
+    /**
+     * Returns <code>null</code>.
+     *
+     * @return <code>null</code>.
+     */
+    @Override
+    public ActionResponseParameters getResponseParameters() {
+        return null;
+    }
+
 }

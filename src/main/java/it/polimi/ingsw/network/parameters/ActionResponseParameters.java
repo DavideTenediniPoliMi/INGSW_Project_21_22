@@ -7,10 +7,11 @@ import it.polimi.ingsw.model.board.ProfessorTracker;
 import it.polimi.ingsw.model.board.School;
 import it.polimi.ingsw.model.characters.CharacterCard;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ActionResponseParameters {
-    private List<School> schools;
+    private List<School> schools = new ArrayList<>();
     private List<CharacterCard> characterCards;
     private List<Cloud> clouds;
     private List<Island> islands;
