@@ -57,10 +57,13 @@ class LobbyTest {
         lobby.selectTeam(0, TowerColor.BLACK);
 
         lobby.addPlayer(1, "bar");
-        lobby.selectTeam(1, TowerColor.BLACK);
+        lobby.selectTeam(1, TowerColor.GREY);
 
-        assertFalse(lobby.getPlayerByID(1).isTowerHolder());
-        assertEquals(TowerColor.BLACK, lobby.getPlayerByID(1).getTeamColor());
+        lobby.addPlayer(2, "baz");
+        lobby.selectTeam(2, TowerColor.BLACK);
+
+        assertFalse(lobby.getPlayerByID(2).isTowerHolder());
+        assertEquals(TowerColor.BLACK, lobby.getPlayerByID(2).getTeamColor());
     }
 
     @Test
