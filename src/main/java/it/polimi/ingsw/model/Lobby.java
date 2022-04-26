@@ -36,6 +36,13 @@ public class Lobby {
     }
 
     /**
+     * Resets the current <code>Lobby</code> instance
+     */
+    public static void resetLobby() {
+        instance = null;
+    }
+
+    /**
      * Adds a new <code>Player</code> to this <code>Lobby</code>, with the specified ID and Nickname.
      *
      * @param playerID the ID of the new <code>Player</code>.
@@ -89,7 +96,7 @@ public class Lobby {
      * @param ID the ID of the player
      * @return the <code>Player</code> instance with specified ID
      */
-    private Player getPlayerByID(int ID) {
+    public Player getPlayerByID(int ID) {
         Optional<Player> result = players.stream()
                 .filter((player) -> (player.getID() == ID))
                 .findAny();
