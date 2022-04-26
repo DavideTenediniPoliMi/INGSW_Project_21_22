@@ -81,7 +81,7 @@ public class Player {
      *
      * @param teamColor the color of the team.
      */
-    public void setTeamColor(TowerColor teamColor) {
+    protected void setTeamColor(TowerColor teamColor) {
         this.teamColor = teamColor;
     }
 
@@ -99,7 +99,7 @@ public class Player {
      *
      * @param cardBack the Card Back selected.
      */
-    public void setCardBack(CardBack cardBack) {
+    protected void setCardBack(CardBack cardBack) {
         this.cardBack = cardBack;
     }
 
@@ -117,7 +117,7 @@ public class Player {
      *
      * @param towerHolder the flag specifying if the player will hold towers in its school.
      */
-    public void setTowerHolder(boolean towerHolder) {
+    protected void setTowerHolder(boolean towerHolder) {
         this.towerHolder = towerHolder;
     }
 

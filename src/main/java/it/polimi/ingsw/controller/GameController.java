@@ -10,6 +10,7 @@ import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.exceptions.game.NotCurrentPlayerException;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.ProfessorTracker;
@@ -38,6 +39,7 @@ public class GameController {
     private GameStatus status;
     private final MatchInfo matchInfo;
     private final Game game;
+    private final Lobby lobby;
 
     /**
      * Sole constructor for <code>GameController</code>.
@@ -45,6 +47,7 @@ public class GameController {
     public GameController() {
         matchInfo = MatchInfo.getInstance();
         game = Game.getInstance();
+        lobby = Lobby.getLobby();
         status = GameStatus.LOBBY;
     }
 
@@ -149,7 +152,9 @@ public class GameController {
          * (4) Instantiate Clouds
          * (5e) Instantiate CharacterCards
          * (6e) Give out coins
-         **/for(Player player : game.getPlayers()) {
+         **/
+        for(Player player : lobby.getPlayers()) {
+            game.addPlayer(player);
             game.addSchool(player.getID());
             game.giveStudentsTo(player.getID(), matchInfo.getInitialNumStudents());
             game.addTowersTo(player.getID(), matchInfo.getMaxTowers());
