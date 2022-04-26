@@ -40,4 +40,9 @@ public class GenericCardTest {
         c.increaseCost();
         assertEquals(2, c.getCost());
     }
+
+    @Test
+    void testActionResponseParameters() {
+        assertNull(c.getResponseParameters());
+    }
 }

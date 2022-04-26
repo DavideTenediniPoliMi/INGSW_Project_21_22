@@ -143,7 +143,7 @@ public class GameController {
     /**
      * Creates a new Game with the players in the lobby.
      */
-    private void createGame() {
+    public void createGame() {
         /*
          * Game, Board and Islands are already instantiated
          * (1) Instantiate Schools

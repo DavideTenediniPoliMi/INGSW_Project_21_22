@@ -88,4 +88,9 @@ public class StudentGroupTest {
         assertNotEquals(s, new StudentGroup());
         assertEquals(s.hashCode(), s.clone().hashCode());
     }
+
+    @Test
+    void testContains() {
+        assertFalse(studentGroup.contains(new StudentGroup(Color.RED, 1)));
+    }
 }
