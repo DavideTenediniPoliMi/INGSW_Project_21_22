@@ -58,7 +58,7 @@ public class GameController {
      * @param playerID the ID of the <code>Player</code> requesting an action.
      * @param requestParams the parameters of the request.
      */
-    public synchronized void requestAction(int playerID, ActionRequestParameters requestParams) throws EriantysException {
+    public synchronized void requestAction(int playerID, ActionRequestParameters requestParams) throws EriantysException, EriantysRuntimeException {
         if(playerID != matchInfo.getCurrentPlayerID()){
             throw new NotCurrentPlayerException(playerID);
         }
