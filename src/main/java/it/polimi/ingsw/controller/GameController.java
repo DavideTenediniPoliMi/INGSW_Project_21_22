@@ -58,7 +58,7 @@ public class GameController {
      * @param playerID the ID of the <code>Player</code> requesting an action.
      * @param requestParams the parameters of the request.
      */
-    public synchronized void requestAction(int playerID, ActionRequestParameters requestParams) throws EriantysException {
+    public synchronized void requestAction(int playerID, ActionRequestParameters requestParams) throws EriantysException, EriantysRuntimeException {
         if(playerID != matchInfo.getCurrentPlayerID()){
             throw new NotCurrentPlayerException(playerID);
         }
@@ -144,15 +144,6 @@ public class GameController {
      * Creates a new Game with the players in the lobby.
      */
     public void createGame() {
-        /*
-         * Game, Board and Islands are already instantiated
-         * (1) Instantiate Schools
-         * (2) Bind schools
-         * (3) Add 10 students to Islands
-         * (4) Instantiate Clouds
-         * (5e) Instantiate CharacterCards
-         * (6e) Give out coins
-         **/
         for(Player player : lobby.getPlayers()) {
             game.addPlayer(player);
             game.addSchool(player.getID());
