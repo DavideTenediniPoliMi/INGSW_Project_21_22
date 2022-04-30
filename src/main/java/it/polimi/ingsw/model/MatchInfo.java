@@ -35,7 +35,7 @@ public class MatchInfo {
      *
      * @return MatchInfo instance
      */
-    public static MatchInfo getInstance() {
+    public synchronized static MatchInfo getInstance() {
         if(instance == null) {
             instance = new MatchInfo();
         }
@@ -46,7 +46,7 @@ public class MatchInfo {
     /**
      * Resets MatchInfo instance to null.
      */
-    public static void resetInstance() {
+    public synchronized static void resetInstance() {
         instance = null;
     }
 
@@ -91,7 +91,7 @@ public class MatchInfo {
      *
      * @return the amount of players connected
      */
-    public int getNumPlayersConnected() {
+    public synchronized int getNumPlayersConnected() {
         return numPlayersConnected;
     }
 
@@ -100,7 +100,7 @@ public class MatchInfo {
      *
      * @param numPlayersConnected the new amount of players connected
      */
-    public void setNumPlayersConnected(int numPlayersConnected) {
+    public synchronized void setNumPlayersConnected(int numPlayersConnected) {
         this.numPlayersConnected = numPlayersConnected;
     }
 
@@ -131,7 +131,7 @@ public class MatchInfo {
      *
      * @return current <code>TurnState</code>
      */
-    public TurnState getStateType() {
+    public synchronized TurnState getStateType() {
         return stateType;
     }
 
@@ -140,7 +140,7 @@ public class MatchInfo {
      *
      * @param stateType the new <code>TurnState</code>
      */
-    public void setStateType(TurnState stateType) {
+    public synchronized void setStateType(TurnState stateType) {
         this.stateType = stateType;
     }
 
@@ -149,7 +149,7 @@ public class MatchInfo {
      *
      * @return playing order
      */
-    public Queue<Integer> getPlayOrder() {
+    public synchronized Queue<Integer> getPlayOrder() {
         return new LinkedList<>(playOrder);
     }
 
@@ -157,7 +157,7 @@ public class MatchInfo {
      * Removes a player from the play order. To be called after a <code>Player</code> has finished his planning/action
      * phase
      */
-    public void removePlayer() {
+    public synchronized void removePlayer() {
         playOrder.remove();
     }
 
@@ -166,7 +166,7 @@ public class MatchInfo {
      *
      * @param playerID the ID of the player to add next
      */
-    public void addPlayer(int playerID) {
+    public synchronized void addPlayer(int playerID) {
         playOrder.add(playerID);
     }
 
@@ -175,21 +175,21 @@ public class MatchInfo {
      *
      * @return the amount of students moved during current player's turn
      */
-    public int getNumMovedStudents() {
+    public synchronized int getNumMovedStudents() {
         return numMovedStudents;
     }
 
     /**
      * Resets amount of students moved. To be called after a player's action phase
      */
-    public void resetNumMovedStudents() {
+    public synchronized void resetNumMovedStudents() {
         numMovedStudents = 0;
     }
 
     /**
      * Increments students moved during current player's turn
      */
-    public void studentWasMoved() {
+    public synchronized void studentWasMoved() {
         numMovedStudents++;
     }
 
@@ -198,7 +198,7 @@ public class MatchInfo {
      *
      * @return size of play order queue
      */
-    public int getNumPlayersStillToAct() {
+    public synchronized int getNumPlayersStillToAct() {
         return playOrder.size();
     }
 
@@ -207,7 +207,7 @@ public class MatchInfo {
      *
      * @return current player ID
      */
-    public int getCurrentPlayerID() {
+    public synchronized int getCurrentPlayerID() {
         return (playOrder.peek() != null) ? playOrder.peek() : -1;
     }
 
@@ -216,7 +216,7 @@ public class MatchInfo {
      *
      * @return <code>true</code> if game has ended
      */
-    public boolean isGameOver() {
+    public synchronized boolean isGameOver() {
         return gameOver;
     }
 
@@ -225,7 +225,7 @@ public class MatchInfo {
      *
      * @return <code>true</code> if two or more teams have tied
      */
-    public boolean isGameTied() {
+    public synchronized boolean isGameTied() {
         return gameTied;
     }
 
@@ -234,7 +234,7 @@ public class MatchInfo {
      *
      * @return Winner of a game. List of teams if the game ended in a tie.
      */
-    public List<TowerColor> getWinners() {
+    public synchronized List<TowerColor> getWinners() {
         return new ArrayList<>(winners);
     }
 
@@ -243,7 +243,7 @@ public class MatchInfo {
      *
      * @param teamColor the winner team color
      */
-    public void declareWinner(TowerColor teamColor) {
+    public synchronized void declareWinner(TowerColor teamColor) {
         gameOver = true;
         winners.add(teamColor);
     }
@@ -253,7 +253,7 @@ public class MatchInfo {
      *
      * @param teamColors the teams who tied.
      */
-    public void declareTie(List<TowerColor> teamColors) {
+    public synchronized void declareTie(List<TowerColor> teamColors) {
         gameOver = true;
         gameTied = true;
         winners.addAll(teamColors);
