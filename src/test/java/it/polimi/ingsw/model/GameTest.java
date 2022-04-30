@@ -35,7 +35,7 @@ public class GameTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
         Game.resetInstance();
         g = null;
     }

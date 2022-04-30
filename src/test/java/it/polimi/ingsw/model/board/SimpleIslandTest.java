@@ -18,7 +18,7 @@ public class SimpleIslandTest {
     }
 
     @AfterEach
-    public void tearDown(){
+    void tearDown(){
         is = null;
     }
 

@@ -47,6 +47,7 @@ public class StudentStateControllerExpertTest {
     void tearDown() {
         Game.resetInstance();
         MatchInfo.resetInstance();
+        controller = null;
         game = null;
         matchInfo = null;
     }

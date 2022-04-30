@@ -48,6 +48,7 @@ class DiningRoomControllerTest {
         Game.resetInstance();
         dc = null;
         board = null;
+        sg0 = sg1 = sg2 = null;
     }
 
     @Test

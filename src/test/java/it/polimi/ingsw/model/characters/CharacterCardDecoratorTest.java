@@ -19,7 +19,7 @@ public class CharacterCardDecoratorTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
         c = null;
     }
 

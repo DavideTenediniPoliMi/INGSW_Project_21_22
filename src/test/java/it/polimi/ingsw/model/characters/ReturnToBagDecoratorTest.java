@@ -49,7 +49,7 @@ public class ReturnToBagDecoratorTest {
     }
 
     @AfterEach
-    public void tearDown() throws Exception {
+    void tearDown() {
         c = c2 = c3 = null;
         game = null;
         board = null;

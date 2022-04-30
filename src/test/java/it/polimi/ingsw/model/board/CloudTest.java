@@ -23,7 +23,7 @@ public class CloudTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
         cloud = null;
         cloud1 = null;
     }

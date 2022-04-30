@@ -16,7 +16,7 @@ public class GenericCardTest {
     }
 
     @AfterEach
-    public void tearDown() throws Exception {
+    void tearDown() {
         c = null;
     }
 

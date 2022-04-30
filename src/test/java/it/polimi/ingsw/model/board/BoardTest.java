@@ -31,7 +31,7 @@ public class BoardTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
         board = null;
     }
 

@@ -79,7 +79,7 @@ public class AlterInfluenceDecoratorTest {
     }
 
     @AfterEach
-    public void tearDown() throws Exception {
+    void tearDown() {
         Game.resetInstance();
         game = null;
         board = null;

@@ -34,7 +34,8 @@ public class SchoolTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
+        p1 = p2 = null;
         s1 = s2 = null;
     }
 

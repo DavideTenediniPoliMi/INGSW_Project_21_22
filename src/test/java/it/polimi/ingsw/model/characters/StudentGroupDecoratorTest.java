@@ -108,11 +108,12 @@ public class StudentGroupDecoratorTest {
     }
 
     @AfterEach
-    public void tearDown() throws Exception {
+    void tearDown() {
         Game.resetInstance();
         board = null;
-        c1 = c2 = null;
-        p1 = p2 = null;
+        c1 = c2 = c3 = null;
+        p1 = p2 = p3 = null;
+        sg1 = sg2 = sg3 = sg4 = null;
     }
 
     @Test

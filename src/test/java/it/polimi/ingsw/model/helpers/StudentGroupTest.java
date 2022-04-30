@@ -19,8 +19,8 @@ public class StudentGroupTest {
     }
 
     @AfterEach
-    public void tearDown(){
-        studentGroup = null;
+    void tearDown(){
+        studentGroup = studentGroup1 = null;
     }
 
     @Test

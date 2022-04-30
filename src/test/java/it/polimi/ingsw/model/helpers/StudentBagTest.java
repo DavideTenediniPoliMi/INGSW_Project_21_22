@@ -17,7 +17,7 @@ public class StudentBagTest {
     }
 
     @AfterEach
-    public void tearDown() throws Exception {
+    void tearDown() {
         studentBag = null;
     }
 

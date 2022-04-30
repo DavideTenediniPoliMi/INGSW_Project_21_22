@@ -26,7 +26,7 @@ public class MultiIslandTest {
     }
 
     @AfterEach
-    public void tearDown(){
+    void tearDown(){
         is = null;
     }
 

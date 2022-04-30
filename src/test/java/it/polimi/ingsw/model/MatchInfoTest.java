@@ -32,6 +32,7 @@ class MatchInfoTest {
     void tearDown() {
         MatchInfo.resetInstance();
         matchInfo = null;
+        gs = null;
     }
 
     @Test

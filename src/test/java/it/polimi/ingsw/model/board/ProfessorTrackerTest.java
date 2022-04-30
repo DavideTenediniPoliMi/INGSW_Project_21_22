@@ -16,7 +16,7 @@ public class ProfessorTrackerTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
         profOwner = null;
     }
 

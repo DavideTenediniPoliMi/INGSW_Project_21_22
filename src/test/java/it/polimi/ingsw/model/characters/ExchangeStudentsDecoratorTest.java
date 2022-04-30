@@ -20,7 +20,7 @@ public class ExchangeStudentsDecoratorTest {
     private Game game;
     private Board board;
     private ExchangeStudentsDecorator c;
-    private CardParameters p1, p2;
+    private CardParameters p1;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -45,11 +45,11 @@ public class ExchangeStudentsDecoratorTest {
     }
 
     @AfterEach
-    public void tearDown() throws Exception {
+    void tearDown() {
         game = null;
         board = null;
         c = null;
-        p1 = p2 = null;
+        p1 = null;
         Game.resetInstance();
     }
 
