@@ -100,9 +100,16 @@ public class GameController {
                 break;
             case MOVE_MN:
                 /*
-                 * index: Number of steps of MN movement
+                 * index: Index of the Island to move on
                  */
-                numSteps = requestParams.getIndex();
+                int destIndex = requestParams.getIndex();
+                int MNIndex = game.getBoard().getMNPosition();
+                int numIslands = game.getBoard().getNumIslands();
+                if(destIndex > MNIndex) {
+                    numSteps = destIndex - MNIndex;
+                } else {
+                    numSteps = numIslands + destIndex - MNIndex;
+                }
                 roundStateController.moveMN(numSteps);
                 break;
             case COLLECT_FROM_CLOUD:
@@ -143,15 +150,17 @@ public class GameController {
     /**
      * Creates a new Game with the players in the lobby.
      */
-    public void createGame() {
+    protected void createGame() {
         /*
          * Game, Board and Islands are already instantiated
-         * (1) Instantiate Schools
-         * (2) Bind schools
-         * (3) Add 10 students to Islands
-         * (4) Instantiate Clouds
-         * (5e) Instantiate CharacterCards
-         * (6e) Give out coins
+         * (1) Add players to Game
+         * (2) Instantiate Schools
+         * (3) Bind schools
+         * (4) Place MN
+         * (5) Add 10 students to Islands
+         * (6) Instantiate Clouds
+         * (7e) Instantiate CharacterCards
+         * (8e) Give out coins
          **/
         for(Player player : lobby.getPlayers()) {
             game.addPlayer(player);
@@ -163,22 +172,28 @@ public class GameController {
             }
         }
 
+        game.placeMNAt(new Random().nextInt(game.getBoard().getNumIslands()));
+        //MN position and students on islands with no MN and opposite to MN
         StudentBag islandBag = new StudentBag(2);
-        for(int i = 0; i < 10; i++){
-            game.addInitialStudentToIsland(i, islandBag.drawStudents(1));
+        int MNPosition = game.getBoard().getMNPosition();
+        for(int i = 0; i < 12; i++){
+            if(i != MNPosition && i != (MNPosition + 6) % game.getBoard().getNumIslands())
+                game.addInitialStudentToIsland(i, islandBag.drawStudents(1));
         }
 
         game.createClouds(game.getPlayers().size());
 
         if(matchInfo.isExpertMode()) {
+            List cardsID = new ArrayList();
             Random r = new Random();
             for(int i = 0; i < 3; i++){
                 int cardID = r.nextInt(CharacterCards.values().length);
+                while(cardsID.contains(cardID))
+                    cardID = r.nextInt((CharacterCards.values().length));
                 game.instantiateCharacterCard(cardID);
+                cardsID.add(cardID);
             }
         }
-
-        game.placeMNAt(new Random().nextInt(game.getBoard().getNumIslands()));
 
         matchInfo.setStateType(TurnState.PLANNING);
 
