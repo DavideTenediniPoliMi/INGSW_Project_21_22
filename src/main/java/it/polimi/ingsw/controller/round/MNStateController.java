@@ -5,6 +5,7 @@ import it.polimi.ingsw.exceptions.game.NullPlayerException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.enumerations.TurnState;
 
 /**
@@ -22,15 +23,28 @@ public class MNStateController extends CharacterCardPlayableStateController {
     }
 
     @Override
-    public void moveMN(int steps) throws MNOutOfRangeException {
+    public void moveMN(int destIndex) throws MNOutOfRangeException {
         Game game = Game.getInstance();
         Player player = game.getPlayerByID(MatchInfo.getInstance().getCurrentPlayerID());
 
         if(player == null) {
             throw new NullPlayerException();
-        } else if (steps > player.getSelectedCard().RANGE) {
+        }
+        // Calculate steps
+        Board board = Game.getInstance().getBoard();
+        int MNIndex = board.getMNPosition();
+        int numIslands = board.getNumIslands();
+        int steps;
+        if(destIndex > MNIndex) {
+            steps = destIndex - MNIndex;
+        }else {
+            steps = numIslands + destIndex - MNIndex;
+        }
+
+        if (steps > player.getSelectedCard().RANGE) {
             throw new MNOutOfRangeException(steps, player.getSelectedCard().RANGE);
         }
+
 
         islandController.moveMN(steps);
     }

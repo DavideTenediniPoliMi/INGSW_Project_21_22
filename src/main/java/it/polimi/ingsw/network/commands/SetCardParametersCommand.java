@@ -20,7 +20,6 @@ public class SetCardParametersCommand implements Command {
 
     @Override
     public void execute() throws IllegalActionException {
-        //TODO move this in CharacterCardController or sth
         Game game = Game.getInstance();
         if(game.getCharacterCards().indexOf(game.getActiveCharacterCard()) != cardIndex){
             throw new BadParametersException("Given ID does not match the active CharacterCard's ID");

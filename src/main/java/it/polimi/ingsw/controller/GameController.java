@@ -50,10 +50,10 @@ public class GameController {
     }
 
     /**
-     * Requests the specified action during this game. The request is automatically filtered if the <code>Player</code>
+     * Requests the specified command during this game. The request is automatically filtered if the <code>Player</code>
      * is not the current <code>Player</code>.
      *
-     * @param playerID the ID of the <code>Player</code> requesting an action.
+     * @param playerID the ID of the <code>Player</code> requesting a command.
      */
     public synchronized void requestCommand(int playerID, Command command) throws EriantysException, EriantysRuntimeException {
         if(playerID != matchInfo.getCurrentPlayerID()){
