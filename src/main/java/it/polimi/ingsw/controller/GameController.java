@@ -6,7 +6,6 @@ import it.polimi.ingsw.controller.subcontrollers.DiningRoomExpertController;
 import it.polimi.ingsw.controller.subcontrollers.IslandExpertController;
 import it.polimi.ingsw.exceptions.EriantysException;
 import it.polimi.ingsw.exceptions.EriantysRuntimeException;
-import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.exceptions.game.NotCurrentPlayerException;
 import it.polimi.ingsw.model.Game;
@@ -17,8 +16,7 @@ import it.polimi.ingsw.model.board.ProfessorTracker;
 import it.polimi.ingsw.model.board.School;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.helpers.StudentBag;
-import it.polimi.ingsw.network.parameters.CardParameters;
-import it.polimi.ingsw.network.parameters.ActionRequestParameters;
+import it.polimi.ingsw.network.commands.Command;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,112 +54,19 @@ public class GameController {
      * is not the current <code>Player</code>.
      *
      * @param playerID the ID of the <code>Player</code> requesting an action.
-     * @param requestParams the parameters of the request.
      */
-    public synchronized void requestAction(int playerID, ActionRequestParameters requestParams) throws EriantysException, EriantysRuntimeException {
+    public synchronized void requestCommand(int playerID, Command command) throws EriantysException, EriantysRuntimeException {
         if(playerID != matchInfo.getCurrentPlayerID()){
             throw new NotCurrentPlayerException(playerID);
         }
-        forwardRequest(requestParams);
-    }
-
-    /**
-     * Forwards the request further in the <code>RoundStateController</code>.
-     *
-     * @param requestParams the parameters of the requested action.
-     */
-    private void forwardRequest(ActionRequestParameters requestParams) throws EriantysException, EriantysRuntimeException {
-        int cardIndex, islandIndex, numSteps, cloudIndex;
-        Color c;
-        CardParameters cardParams;
-        switch (requestParams.getActionType()){
-            case PLAY_CARD:
-                /*
-                 * index: The index of the Assistant Card to play
-                 */
-                cardIndex = requestParams.getIndex();
-                roundStateController.playCard(cardIndex);
-                break;
-            case TRANSFER_STUDENT_TO_ISLAND:
-                /*
-                 * index: The index of the recipient Island
-                 * color: The color of the student to move
-                 */
-                islandIndex = requestParams.getIndex();
-                c = requestParams.getColor();
-                roundStateController.transferStudentToIsland(islandIndex, c);
-                break;
-            case TRANSFER_STUDENT_TO_DINING_ROOM:
-                /*
-                 * color: The color of the student to move
-                 */
-                c = requestParams.getColor();
-                roundStateController.transferStudentToDiningRoom(c);
-                break;
-            case MOVE_MN:
-                /*
-                 * index: Index of the Island to move on
-                 */
-                int destIndex = requestParams.getIndex();
-                int MNIndex = game.getBoard().getMNPosition();
-                int numIslands = game.getBoard().getNumIslands();
-                if(destIndex > MNIndex) {
-                    numSteps = destIndex - MNIndex;
-                } else {
-                    numSteps = numIslands + destIndex - MNIndex;
-                }
-                roundStateController.moveMN(numSteps);
-                break;
-            case COLLECT_FROM_CLOUD:
-                /*
-                 * index: Index of the cloud to collect from
-                 */
-                cloudIndex = requestParams.getIndex();
-                roundStateController.collectFromCloud(cloudIndex);
-                break;
-            case BUY_CHARACTER_CARD:
-                /*
-                 * index: Index of the CharacterCard to buy
-                 */
-                cardIndex = requestParams.getIndex();
-                roundStateController.buyCharacterCard(cardIndex);
-                break;
-            case SET_CARD_PARAMETERS:
-                /*
-                 * index: Index of the CharacterCard to set parameters to (Validation)
-                 * Parameters: CardParameters object containing the parameters to set
-                 */
-                cardIndex = requestParams.getIndex();
-                cardParams = requestParams.getCardParams();
-                if(game.getCharacterCards().indexOf(game.getActiveCharacterCard()) != cardIndex){
-                    throw new BadParametersException("Given ID does not match the active CharacterCard's ID");
-                }
-                roundStateController.setCardParameters(cardParams);
-                break;
-            case ACTIVATE_CARD:
-                roundStateController.activateCard();
-                break;
-            default:
-                throw new BadParametersException("No such action: " + requestParams.getActionType());
-        }
+        command.execute();
         nextState();
     }
 
     /**
      * Creates a new Game with the players in the lobby.
      */
-    protected void createGame() {
-        /*
-         * Game, Board and Islands are already instantiated
-         * (1) Add players to Game
-         * (2) Instantiate Schools
-         * (3) Bind schools
-         * (4) Place MN
-         * (5) Add 10 students to Islands
-         * (6) Instantiate Clouds
-         * (7e) Instantiate CharacterCards
-         * (8e) Give out coins
-         **/
+    public void createGame() {
         for(Player player : lobby.getPlayers()) {
             game.addPlayer(player);
             game.addSchool(player.getID());
@@ -184,7 +89,7 @@ public class GameController {
         game.createClouds(game.getPlayers().size());
 
         if(matchInfo.isExpertMode()) {
-            List cardsID = new ArrayList();
+            List<Integer> cardsID = new ArrayList<>();
             Random r = new Random();
             for(int i = 0; i < 3; i++){
                 int cardID = r.nextInt(CharacterCards.values().length);
@@ -382,5 +287,9 @@ public class GameController {
      */
     private void declareTie(List<TowerColor> teamColors) {
         matchInfo.declareTie(teamColors);
+    }
+
+    public RoundStateController getRoundStateController() {
+        return roundStateController;
     }
 }

@@ -4,7 +4,6 @@ import it.polimi.ingsw.exceptions.EriantysException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
-import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.ActionType;
 import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CardBack;
@@ -13,8 +12,6 @@ import it.polimi.ingsw.network.parameters.ActionRequestParameters;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.awt.event.MouseAdapter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -58,12 +55,12 @@ class GameControllerTest {
         ActionRequestParameters params = new ActionRequestParameters();
         params.setActionType(ActionType.PLAY_CARD)
                 .setIndex(0);
-        try {
-            gameController.requestAction(playerID, params);
+        /*try {
+            gameController.requestCommand(playerID, params);
         } catch (EriantysException e) {
             throw new RuntimeException(e);
         }
-        assertFalse(game.getPlayerByID(playerID).getPlayableCards().contains(Card.CARD_1));
+        assertFalse(game.getPlayerByID(playerID).getPlayableCards().contains(Card.CARD_1));*/
     }
     
 }
