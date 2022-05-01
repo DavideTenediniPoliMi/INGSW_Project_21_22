@@ -1,7 +1,7 @@
 package it.polimi.ingsw.network.parameters;
 
 import it.polimi.ingsw.model.enumerations.CardBack;
-import it.polimi.ingsw.model.enumerations.SetupType;
+import it.polimi.ingsw.network.enumerations.SetupType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 
 public class SetupRequestParameters {

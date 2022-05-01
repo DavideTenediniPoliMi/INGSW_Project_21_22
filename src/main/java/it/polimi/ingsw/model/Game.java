@@ -17,7 +17,7 @@ import java.util.Optional;
  * Singleton class to act as DAO for a game of Eriantys.
  * Contains all calls for each step of the game.
  */
-public class Game extends Observable { //TODO parametrization
+public class Game extends Observable<ActionResponseParameters> {
     private final int NUM_STARTING_STUDENTS_BY_COLOR = 24;
     private static Game instance;
     private final Board board = new Board();
@@ -85,7 +85,7 @@ public class Game extends Observable { //TODO parametrization
         params.addSchool(board.getSchoolByPlayerID(getTowerHolderIDOf(newOwnerColor)))
                 .setIslands(board.getIslands());
 
-        System.out.println("["+steps+"] conquerIsland");
+        notify(params);
     }
 
     /**
@@ -107,7 +107,7 @@ public class Game extends Observable { //TODO parametrization
         board.mergeIslands(leftIslandIndex, rightIslandIndex);
 
         ActionResponseParameters params = new ActionResponseParameters().setIslands(board.getIslands());
-        System.out.println("["+steps+"] mergeIslands");
+        notify(params);
     }
 
     // MOTHER NATURE
@@ -132,7 +132,7 @@ public class Game extends Observable { //TODO parametrization
         board.moveMN(steps);
 
         ActionResponseParameters params = new ActionResponseParameters().setIslands(board.getIslands());
-        System.out.println("["+this.steps+"] moveMN");
+        notify(params);
     }
 
     // CLOUDS
@@ -161,7 +161,7 @@ public class Game extends Observable { //TODO parametrization
         ActionResponseParameters params = new ActionResponseParameters()
                 .setClouds(board.getClouds())
                 .addSchool(board.getSchoolByPlayerID(playerID));
-        System.out.println("["+steps+"] collectFromCloud");
+        notify(params);
     }
 
     /**
@@ -176,7 +176,7 @@ public class Game extends Observable { //TODO parametrization
         ActionResponseParameters params = new ActionResponseParameters()
                 .setClouds(board.getClouds())
                 .setBagEmpty(isStudentBagEmpty());
-        System.out.println("["+steps+"] refillClouds");
+        notify(params);
     }
 
     // SCHOOL
@@ -221,7 +221,7 @@ public class Game extends Observable { //TODO parametrization
         ActionResponseParameters params = new ActionResponseParameters()
                 .setIslands(board.getIslands())
                 .addSchool(board.getSchoolByPlayerID(playerID));
-        System.out.println("["+steps+"] transferStudentToIsland");
+        notify(params);
     }
 
     /**
@@ -239,7 +239,7 @@ public class Game extends Observable { //TODO parametrization
         board.addToDiningRoomOf(playerID, temp);
 
         ActionResponseParameters params = new ActionResponseParameters().addSchool(board.getSchoolByPlayerID(playerID));
-        System.out.println("["+steps+"] transferStudentToDiningRoom");
+        notify(params);
     }
 
     /**
@@ -276,7 +276,7 @@ public class Game extends Observable { //TODO parametrization
         board.giveProfessorTo(playerID, c);
 
         ActionResponseParameters params = new ActionResponseParameters().setProfessors(board.getProfessorOwners());
-        System.out.println("["+steps+"] giveProfessorTo");
+        notify(params);
     }
 
     // PLAYER
@@ -344,7 +344,7 @@ public class Game extends Observable { //TODO parametrization
 
         ActionResponseParameters params = new ActionResponseParameters().setPlayer(getPlayerByID(playerID))
                 .setSendCards(true);
-        System.out.println("["+steps+"] playCard");
+        notify(params);
     }
 
     /**
@@ -356,7 +356,7 @@ public class Game extends Observable { //TODO parametrization
         }
 
         ActionResponseParameters params = new ActionResponseParameters().setSendCards(true);
-        System.out.println("["+steps+"] resetCards");
+        notify(params);
     }
 
     /**
@@ -370,7 +370,7 @@ public class Game extends Observable { //TODO parametrization
 
         ActionResponseParameters params = new ActionResponseParameters().setPlayer(getPlayerByID(playerID))
                 .setCoinsLeft(board.getNumCoinsLeft());
-        System.out.println("["+steps+"] giveCoinToPlayer");
+        notify(params);
     }
 
     /**
@@ -438,7 +438,7 @@ public class Game extends Observable { //TODO parametrization
         card.setActive();
 
         ActionResponseParameters params = new ActionResponseParameters().setCharacterCards(characterCards);
-        System.out.println("["+steps+"] buyCharacterCard");
+        notify(params);
     }
 
     /**
@@ -459,7 +459,7 @@ public class Game extends Observable { //TODO parametrization
         int temp = getActiveCharacterCard().activate();
 
         ActionResponseParameters params = getActiveCharacterCard().getResponseParameters();
-        System.out.println("["+steps+"] activateCard");
+        notify(params);
         return temp;
     }
 
@@ -492,7 +492,4 @@ public class Game extends Observable { //TODO parametrization
     public boolean isStudentBagEmpty() {
         return bag.isEmpty();
     }
-
-    //------------- DEBUGGING -------------------
-    private int steps = 0;
 }
