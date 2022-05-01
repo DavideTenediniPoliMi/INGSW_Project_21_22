@@ -84,4 +84,12 @@ class MNStateControllerTest {
         controller.moveMN(1);
         assertEquals(1, game.getBoard().getMNPosition());
     }
+
+    @Test
+    public void moveMNWrapIndexTest() throws MNOutOfRangeException {
+        game.moveMN(10);
+        game.playCard(0, Card.CARD_8);
+        controller.moveMN(2);
+        assertEquals(2, game.getBoard().getMNPosition());
+    }
 }
