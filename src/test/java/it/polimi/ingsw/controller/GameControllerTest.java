@@ -13,6 +13,7 @@ import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.Board;
+import it.polimi.ingsw.model.board.ProfessorTracker;
 import it.polimi.ingsw.model.characters.ReturnToBagDecorator;
 import it.polimi.ingsw.model.characters.StudentGroupDecorator;
 import it.polimi.ingsw.model.enumerations.*;
@@ -173,7 +174,7 @@ class GameControllerTest {
         gameController.requestCommand(playerID, command);
 
         assertAll(
-                () -> assertEquals(MNPositionBefore + 2, board.getMNPosition()),
+                () -> assertEquals((MNPositionBefore + 2) % board.getNumIslands(), board.getMNPosition()),
                 () -> assertFalse(board.getIslandAt(MNPositionBefore).isMotherNatureOnIsland())
         );
     }
@@ -613,8 +614,6 @@ class GameControllerTest {
         gameController.requestCommand(playerID, command);
 
         //SET PARAMETERS PHASE
-        ReturnToBagDecorator card2 = (ReturnToBagDecorator) game.getCharacterCards().get(2);
-
         cardParams = new CardParameters().setSelectedColor(Color.BLUE);
         command = new SetCardParametersCommand(2, cardParams, gameController);
 
@@ -637,5 +636,351 @@ class GameControllerTest {
                     .getNumStudentsInDiningRoomByColor(Color.BLUE));
             cont++;
         }
+    }
+
+    @Test
+    void checkWinnerForTowersTest() throws EriantysException {
+        //PLANNING PHASE 1
+        int playerID = matchInfo.getCurrentPlayerID();
+        Command command = new PlayCardCommand(4, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //PLANNING PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new PlayCardCommand(5, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //STUDENT PHASE 1
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToDiningCommand(Color.BLUE, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.BLUE, 3));
+
+        for(int i=0; i < 3; i++)
+            gameController.requestCommand(playerID, command);
+
+        //MN PHASE 1
+        int MNPositionBefore = board.getMNPosition();
+        command = new MoveMNCommand(MNPositionBefore + 2, gameController);
+
+        //checkEndConditionAfterMN
+        game.removeTowersFrom(playerID, 8);
+
+        gameController.requestCommand(playerID, command);
+
+        assertEquals(game.getPlayerByID(playerID).getTeamColor(), matchInfo.getWinners().get(0));
+    }
+
+    @Test
+    void checkWinnerForIslandTest() throws EriantysException {
+        //PLANNING PHASE 1
+        int playerID = matchInfo.getCurrentPlayerID();
+        Command command = new PlayCardCommand(4, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //PLANNING PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new PlayCardCommand(5, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //STUDENT PHASE 1
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToDiningCommand(Color.BLUE, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.BLUE, 3));
+
+        for(int i=0; i < 3; i++)
+            gameController.requestCommand(playerID, command);
+
+        //MN PHASE 1
+        //checkEndConditionAfterMN
+        game.removeTowersFrom(playerID, 1);
+        game.mergeIslands(0,1);
+        game.mergeIslands(0,1);
+        game.mergeIslands(0,1);
+        game.mergeIslands(0,1);
+        game.mergeIslands(0,1);
+        game.mergeIslands(0,1);
+        game.mergeIslands(0,1);
+        game.mergeIslands(0,1);
+        game.mergeIslands(0,1);
+        game.mergeIslands(0,1);
+
+        int MNPositionBefore = board.getMNPosition();
+        command = new MoveMNCommand(MNPositionBefore + 1, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        assertEquals(game.getPlayerByID(playerID).getTeamColor(), matchInfo.getWinners().get(0));
+    }
+
+    @Test
+    void checkWinnerForNoRemainingCards() throws EriantysException {
+        //PLANNING PHASE 1
+        int playerID = matchInfo.getCurrentPlayerID();
+        Command command = new PlayCardCommand(4, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //PLANNING PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new PlayCardCommand(5, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //STUDENT PHASE 1
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToDiningCommand(Color.BLUE, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.BLUE, 3));
+
+        for(int i=0; i < 3; i++)
+            gameController.requestCommand(playerID, command);
+
+        //MN PHASE 1
+        int MNPositionBefore = board.getMNPosition();
+        command = new MoveMNCommand(MNPositionBefore + 2, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //CLOUD PHASE 1
+        command = new CollectCloudCommand(0, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+
+        //STUDENT PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToDiningCommand(Color.RED, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.RED, 3));
+
+        for(int i=0; i < 3; i++)
+            gameController.requestCommand(playerID, command);
+
+        //MN PHASE 2
+        MNPositionBefore = board.getMNPosition();
+        command = new MoveMNCommand(MNPositionBefore + 2, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //CLOUD PHASE 2
+        for(Card c : Card.values()) {
+            game.playCard(0, c);
+        }
+        game.removeTowersFrom(0, 3);
+
+        command = new CollectCloudCommand(1, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        assertEquals(game.getPlayerByID(0).getTeamColor(), matchInfo.getWinners().get(0));
+    }
+
+    @Test
+    void checkWinnerForNoRemainingStudents() throws EriantysException {
+        //PLANNING PHASE 1
+        int playerID = matchInfo.getCurrentPlayerID();
+        Command command = new PlayCardCommand(4, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //PLANNING PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new PlayCardCommand(5, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //STUDENT PHASE 1
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToDiningCommand(Color.BLUE, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.BLUE, 3));
+
+        for(int i=0; i < 3; i++)
+            gameController.requestCommand(playerID, command);
+
+        //MN PHASE 1
+        int MNPositionBefore = board.getMNPosition();
+        command = new MoveMNCommand(MNPositionBefore + 2, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //CLOUD PHASE 1
+        command = new CollectCloudCommand(0, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+
+        //STUDENT PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToDiningCommand(Color.RED, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.RED, 3));
+
+        for(int i=0; i < 3; i++)
+            gameController.requestCommand(playerID, command);
+
+        //MN PHASE 2
+        MNPositionBefore = board.getMNPosition();
+        command = new MoveMNCommand(MNPositionBefore + 2, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //CLOUD PHASE 2
+        game.drawStudents(110);
+        game.removeTowersFrom(0, 3);
+
+        command = new CollectCloudCommand(1, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        assertEquals(game.getPlayerByID(0).getTeamColor(), matchInfo.getWinners().get(0));
+    }
+
+    @Test
+    void checkWinnerByProfessorsTest() throws EriantysException {
+        //PLANNING PHASE 1
+        int playerID = matchInfo.getCurrentPlayerID();
+        Command command = new PlayCardCommand(4, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //PLANNING PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new PlayCardCommand(5, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //STUDENT PHASE 1
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToDiningCommand(Color.BLUE, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.BLUE, 3));
+
+        for(int i=0; i < 3; i++)
+            gameController.requestCommand(playerID, command);
+
+        //MN PHASE 1
+        int MNPositionBefore = board.getMNPosition();
+        command = new MoveMNCommand(MNPositionBefore + 2, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //CLOUD PHASE 1
+        command = new CollectCloudCommand(0, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+
+        //STUDENT PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToDiningCommand(Color.RED, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.RED, 3));
+
+        for(int i=0; i < 3; i++)
+            gameController.requestCommand(playerID, command);
+
+        //MN PHASE 2
+        MNPositionBefore = board.getMNPosition();
+        command = new MoveMNCommand(MNPositionBefore + 2, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //CLOUD PHASE 2
+        game.drawStudents(110);
+        game.giveProfessorTo(0, Color.BLUE);
+        game.giveProfessorTo(0, Color.RED);
+        game.giveProfessorTo(0, Color.GREEN);
+
+        int numTowers = board.getSchoolByPlayerID(0).getNumTowers();
+        if(numTowers < 8)
+            game.addTowersTo(0, 8-numTowers);
+        numTowers = board.getSchoolByPlayerID(1).getNumTowers();
+        if(numTowers < 8)
+            game.addTowersTo(1, 8-numTowers);
+
+        command = new CollectCloudCommand(1, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        assertEquals(game.getPlayerByID(0).getTeamColor(), matchInfo.getWinners().get(0));
+    }
+
+    @Test
+    void checkTieWinTest() throws EriantysException {
+        //PLANNING PHASE 1
+        int playerID = matchInfo.getCurrentPlayerID();
+        Command command = new PlayCardCommand(4, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //PLANNING PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new PlayCardCommand(5, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //STUDENT PHASE 1
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToDiningCommand(Color.BLUE, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.BLUE, 3));
+
+        for(int i=0; i < 3; i++)
+            gameController.requestCommand(playerID, command);
+
+        //MN PHASE 1
+        int MNPositionBefore = board.getMNPosition();
+        command = new MoveMNCommand(MNPositionBefore + 2, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //CLOUD PHASE 1
+        command = new CollectCloudCommand(0, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+
+        //STUDENT PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToDiningCommand(Color.RED, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.RED, 3));
+
+        for(int i=0; i < 3; i++)
+            gameController.requestCommand(playerID, command);
+
+        //MN PHASE 2
+        MNPositionBefore = board.getMNPosition();
+        command = new MoveMNCommand(MNPositionBefore + 2, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //CLOUD PHASE 2
+        game.drawStudents(110);
+        ProfessorTracker professors = board.getProfessorOwners();
+        for(Color c : Color.values()) {
+            if (professors.getOwnerIDByColor(c) != -1)
+                game.giveProfessorTo(-1, c);
+        }
+
+        int numTowers = board.getSchoolByPlayerID(0).getNumTowers();
+        if(numTowers < 8)
+            game.addTowersTo(0, 8-numTowers);
+        numTowers = board.getSchoolByPlayerID(1).getNumTowers();
+        if(numTowers < 8)
+            game.addTowersTo(1, 8-numTowers);
+
+        command = new CollectCloudCommand(1, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        assertEquals(2, matchInfo.getWinners().size());
     }
 }

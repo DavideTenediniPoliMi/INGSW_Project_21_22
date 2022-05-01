@@ -276,7 +276,7 @@ public class GameController {
             int ownerID = professorOwners.getOwnerIDByColor(c);
             Player owner = game.getPlayerByID(ownerID);
 
-            if(owner.getTeamColor() == teamColor) numProfessors++;
+            if(owner != null && owner.getTeamColor() == teamColor) numProfessors++;
         }
 
         return numProfessors;
