@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.characters;
 import it.polimi.ingsw.exceptions.students.NotEnoughStudentsException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.Board;
+import it.polimi.ingsw.model.board.School;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
@@ -66,6 +67,14 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
         } else if(isToDiningRoom) {
             playerID = params.getPlayerID();
         } else {
+            School destination = Game.getInstance().getBoard().getSchoolByPlayerID(params.getPlayerID());
+            for(Color c: Color.values()) {
+                if(destination.getNumStudentsInEntranceByColor(c) < params.getFromDestination().getByColor(c)) {
+                    fromCard = null;
+                    throw new NotEnoughStudentsException(c);
+                }
+            }
+
             playerID = params.getPlayerID();
             fromEntrance = params.getFromDestination();
         }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.characters;
 
+import it.polimi.ingsw.exceptions.students.NotEnoughStudentsException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.Board;
@@ -167,5 +168,17 @@ public class StudentGroupDecoratorTest {
             assertEquals(numStudentCardAfter, studentsEntranceBefore[c.ordinal()]);
             assertEquals(numStudentEntranceAfter, studentsCardBefore[c.ordinal()]);
         }
+    }
+
+    @Test
+    public void testWrongStudentOriginParameter() {
+        p3.setFromOrigin(new StudentGroup(Color.GREEN, 5));
+        assertThrowsExactly(NotEnoughStudentsException.class, () -> c3.setParameters(p3));
+    }
+
+    @Test
+    public void testWrongStudentDestinationParameter() {
+        p3.setFromDestination(new StudentGroup(Color.GREEN, 3));
+        assertThrowsExactly(NotEnoughStudentsException.class, () -> c3.setParameters(p3));
     }
 }
