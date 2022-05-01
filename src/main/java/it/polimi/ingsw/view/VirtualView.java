@@ -9,8 +9,12 @@ import it.polimi.ingsw.model.Lobby;
 
 public class VirtualView extends Observable<String> {
 
-    public VirtualView() {
+    private final GameObserver gameObserver;
+    private final LobbyObserver lobbyObserver;
 
+    public VirtualView() {
+        gameObserver = new GameObserver();
+        lobbyObserver = new LobbyObserver();
     }
 
     class GameObserver implements Observer<ActionResponseParameters> {
