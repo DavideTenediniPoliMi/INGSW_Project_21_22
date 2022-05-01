@@ -1,7 +1,8 @@
 package it.polimi.ingsw.network.enumerations;
 
 /**
- * Enum class representing the different types of messages while a game is being played.
+ * Enum class representing the different types of messages. Each instance has a <code>boolean</code> representing
+ * if the <code>Command</code> has to be executed while in-game.
  */
 public enum CommandType {
     PLAY_CARD(true),

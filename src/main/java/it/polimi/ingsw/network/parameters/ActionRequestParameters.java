@@ -3,43 +3,90 @@ package it.polimi.ingsw.network.parameters;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.model.enumerations.Color;
 
+/**
+ * Class representing a request message from the client, with every information needed for any action during the game.
+ */
 public class ActionRequestParameters {
     private CommandType commandType;
     private int index;
     private Color color;
     private CardParameters cardParams;
 
-    public CommandType getActionType() {
+    /**
+     * Gets the <code>CommandType</code> of this message.
+     *
+     * @return the <code>CommandType</code>.
+     */
+    public CommandType getCommandType() {
         return commandType;
     }
 
-    public ActionRequestParameters setActionType(CommandType commandType) {
+    /**
+     * Sets the specified <code>CommandType</code> and returns this instance.
+     *
+     * @param commandType the <code>CommandType</code> of this message.
+     * @return this <code>ActionRequestParameters</code>
+     */
+    public ActionRequestParameters setCommandType(CommandType commandType) {
         this.commandType = commandType;
         return this;
     }
 
+    /**
+     * Gets the index of this message.
+     *
+     * @return the index
+     */
     public int getIndex() {
         return index;
     }
 
+    /**
+     * Sets the specified index and returns this instance.
+     *
+     * @param index the index for this message
+     * @return this <code>ActionRequestParameters</code>
+     */
     public ActionRequestParameters setIndex(int index) {
         this.index = index;
         return this;
     }
 
+    /**
+     * Gets the <code>Color</code> of this message.
+     *
+     * @return the <code>Color</code>
+     */
     public Color getColor() {
         return color;
     }
 
+    /**
+     * Sets the specified <code>Color</code> and returns this instance.
+     *
+     * @param color the <code>Color</code> of this message.
+     * @return this <code>ActionRequestParameters</code>
+     */
     public ActionRequestParameters setColor(Color color) {
         this.color = color;
         return this;
     }
 
+    /**
+     * Gets the <code>CardParameters</code> of this message.
+     *
+     * @return the <code>CardParameters</code>.
+     */
     public CardParameters getCardParams() {
         return cardParams;
     }
 
+    /**
+     * Sets the specified <code>CardParameters</code> and returns this instance.
+     *
+     * @param cardParams the <code>CardParameters</code> of this message.
+     * @return this <code>ActionRequestParameters</code>
+     */
     public ActionRequestParameters setCardParams(CardParameters cardParams) {
         this.cardParams = cardParams;
         return this;
