@@ -25,6 +25,7 @@ class MatchInfoTest {
         matchInfo.setExpertMode(true);
         matchInfo.setNumPlayersConnected(3);
         matchInfo.setStateType(TurnState.PLANNING);
+        matchInfo.setGameStatus(GameStatus.IN_GAME);
         gs = GameStatus.IN_GAME;
     }
 
@@ -38,6 +39,11 @@ class MatchInfoTest {
     @Test
     void getSelectedNumPlayer() {
         assertEquals(3, matchInfo.getSelectedNumPlayer());
+    }
+
+    @Test
+    void getGameStatus() {
+        assertEquals(GameStatus.IN_GAME, matchInfo.getGameStatus());
     }
 
     @Test
