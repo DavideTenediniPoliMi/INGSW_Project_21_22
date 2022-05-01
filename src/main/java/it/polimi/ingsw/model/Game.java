@@ -3,6 +3,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.*;
+import it.polimi.ingsw.network.observer.Observable;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.model.helpers.StudentGroup;
@@ -16,7 +17,7 @@ import java.util.Optional;
  * Singleton class to act as DAO for a game of Eriantys.
  * Contains all calls for each step of the game.
  */
-public class Game {
+public class Game extends Observable { //TODO parametrization
     private final int NUM_STARTING_STUDENTS_BY_COLOR = 24;
     private static Game instance;
     private final Board board = new Board();

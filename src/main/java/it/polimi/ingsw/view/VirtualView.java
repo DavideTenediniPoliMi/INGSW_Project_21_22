@@ -1,4 +1,11 @@
 package it.polimi.ingsw.view;
 
-public class VirtualView {
+import it.polimi.ingsw.network.observer.Observer;
+
+public class VirtualView implements Observer { //TODO parametrize
+
+    @Override
+    public void update(Object message) {
+        //TODO
+    }
 }
