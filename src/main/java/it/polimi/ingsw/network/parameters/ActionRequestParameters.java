@@ -1,20 +1,20 @@
 package it.polimi.ingsw.network.parameters;
 
-import it.polimi.ingsw.network.enumerations.ActionType;
+import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.model.enumerations.Color;
 
 public class ActionRequestParameters {
-    private ActionType actionType;
+    private CommandType commandType;
     private int index;
     private Color color;
     private CardParameters cardParams;
 
-    public ActionType getActionType() {
-        return actionType;
+    public CommandType getActionType() {
+        return commandType;
     }
 
-    public ActionRequestParameters setActionType(ActionType actionType) {
-        this.actionType = actionType;
+    public ActionRequestParameters setActionType(CommandType commandType) {
+        this.commandType = commandType;
         return this;
     }
 
