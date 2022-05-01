@@ -50,4 +50,6 @@ public class SetupResponseParameters {
         this.player = player;
         return this;
     }
+
+    //SERIALIZE PLAYERS WILL ADD READY STATUS
 }
