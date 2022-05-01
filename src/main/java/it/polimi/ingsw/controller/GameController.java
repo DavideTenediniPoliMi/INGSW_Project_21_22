@@ -85,7 +85,7 @@ public class GameController {
         }
 
         game.placeMNAt(new Random().nextInt(game.getBoard().getNumIslands()));
-        //MN position and students on islands with no MN and opposite to MN
+
         StudentBag islandBag = new StudentBag(2);
         int MNPosition = game.getBoard().getMNPosition();
         for(int i = 0; i < 12; i++){
@@ -152,12 +152,12 @@ public class GameController {
 
                     checkEndConditionAfterRound();
                     Game.getInstance().resetCards();
-                    roundStateController.clearEffects();
 
                     setState(new PlanningStateController(roundStateController));
                 } else {
                     setState(new StudentsStateController(roundStateController));
                 }
+                roundStateController.clearEffects();
                 break;
         }
     }
@@ -167,7 +167,7 @@ public class GameController {
      *
      * @param newState the new <code>RoundStateController</code>.
      */
-    private void setState(RoundStateController newState) {
+    protected void setState(RoundStateController newState) {
         roundStateController = newState;
     }
 

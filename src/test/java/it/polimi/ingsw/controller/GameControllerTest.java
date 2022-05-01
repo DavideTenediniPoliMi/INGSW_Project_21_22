@@ -1,23 +1,39 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.controller.round.PlanningStateController;
+import it.polimi.ingsw.controller.round.RoundStateController;
+import it.polimi.ingsw.controller.subcontrollers.CharacterCardController;
+import it.polimi.ingsw.controller.subcontrollers.DiningRoomExpertController;
+import it.polimi.ingsw.controller.subcontrollers.IslandExpertController;
 import it.polimi.ingsw.exceptions.EriantysException;
+import it.polimi.ingsw.exceptions.game.GameNotStartedException;
+import it.polimi.ingsw.exceptions.game.NotCurrentPlayerException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
-import it.polimi.ingsw.model.enumerations.ActionType;
-import it.polimi.ingsw.model.enumerations.Card;
-import it.polimi.ingsw.model.enumerations.CardBack;
-import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.network.parameters.ActionRequestParameters;
+import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.board.Board;
+import it.polimi.ingsw.model.characters.ReturnToBagDecorator;
+import it.polimi.ingsw.model.characters.StudentGroupDecorator;
+import it.polimi.ingsw.model.enumerations.*;
+import it.polimi.ingsw.model.helpers.StudentBag;
+import it.polimi.ingsw.model.helpers.StudentGroup;
+import it.polimi.ingsw.network.commands.*;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameControllerTest {
     GameController gameController;
     Game game;
+    Board board;
     Lobby lobby;
     MatchInfo matchInfo;
 
@@ -25,6 +41,7 @@ class GameControllerTest {
     void setUp() {
         gameController = new GameController();
         game = Game.getInstance();
+        board = game.getBoard();
         lobby = Lobby.getLobby();
         matchInfo = MatchInfo.getInstance();
 
@@ -47,20 +64,578 @@ class GameControllerTest {
         gameController = null;
         Game.resetInstance();
         MatchInfo.resetInstance();
+        Lobby.resetLobby();
     }
 
     @Test
-    void playCardTest() {
-        int playerID = matchInfo.getCurrentPlayerID();
-        ActionRequestParameters params = new ActionRequestParameters();
-        params.setActionType(ActionType.PLAY_CARD)
-                .setIndex(0);
-        /*try {
-            gameController.requestCommand(playerID, params);
-        } catch (EriantysException e) {
-            throw new RuntimeException(e);
-        }
-        assertFalse(game.getPlayerByID(playerID).getPlayableCards().contains(Card.CARD_1));*/
+    void gameNotStartedTest() {
+        matchInfo.setGameStatus(GameStatus.LOBBY);
+        Command command = new PlayCardCommand(0, gameController);
+        assertThrowsExactly(GameNotStartedException.class, () -> gameController.requestCommand(matchInfo.getCurrentPlayerID(), command));
     }
-    
+
+    @Test
+    void wrongPlayerTest() {
+        int wrongPlayerID = matchInfo.getCurrentPlayerID() == 0 ? 1 : 0;
+        Command command = new PlayCardCommand(0, gameController);
+
+        assertThrowsExactly(NotCurrentPlayerException.class, () -> gameController.requestCommand(wrongPlayerID, command));
+    }
+
+    @Test
+    void playCardTest() throws EriantysException {
+        int playerID = matchInfo.getCurrentPlayerID();
+        Command command = new PlayCardCommand(0, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        assertFalse(game.getPlayerByID(playerID).getPlayableCards().contains(Card.CARD_1));
+    }
+
+    @Test
+    void transferToIslandTest() throws EriantysException {
+        //PLANNING PHASE 1
+        int playerID = matchInfo.getCurrentPlayerID();
+        Command command = new PlayCardCommand(0, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //PLANNING PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new PlayCardCommand(1, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //STUDENT PHASE 1
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToIslandCommand(0, Color.BLUE, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.BLUE, 1));
+        int blueStudentsBefore = board.getIslandAt(0).getNumStudentsByColor(Color.BLUE);
+
+        gameController.requestCommand(playerID, command);
+
+        assertEquals(blueStudentsBefore + 1, board.getIslandAt(0).getNumStudentsByColor(Color.BLUE));
+    }
+
+    @Test
+    void transferToDiningTest() throws EriantysException {
+        //PLANNING PHASE 1
+        int playerID = matchInfo.getCurrentPlayerID();
+        Command command = new PlayCardCommand(0, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //PLANNING PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new PlayCardCommand(1, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //STUDENT PHASE 1
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToDiningCommand(Color.BLUE, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.BLUE, 1));
+
+        gameController.requestCommand(playerID, command);
+
+        assertEquals(1, board.getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(Color.BLUE));
+    }
+
+    @Test
+    void moveMNTest() throws EriantysException {
+        //PLANNING PHASE 1
+        int playerID = matchInfo.getCurrentPlayerID();
+        Command command = new PlayCardCommand(4, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //PLANNING PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new PlayCardCommand(5, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //STUDENT PHASE 1
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToDiningCommand(Color.BLUE, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.BLUE, 3));
+
+        for(int i=0; i < 3; i++)
+            gameController.requestCommand(playerID, command);
+
+        //MN PHASE 1
+        int MNPositionBefore = board.getMNPosition();
+        command = new MoveMNCommand(MNPositionBefore + 2, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        assertAll(
+                () -> assertEquals(MNPositionBefore + 2, board.getMNPosition()),
+                () -> assertFalse(board.getIslandAt(MNPositionBefore).isMotherNatureOnIsland())
+        );
+    }
+
+    @Test
+    void collectFromCloudTest() throws EriantysException {
+        //PLANNING PHASE 1
+        int playerID = matchInfo.getCurrentPlayerID();
+        Command command = new PlayCardCommand(4, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //PLANNING PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new PlayCardCommand(5, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //STUDENT PHASE 1
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToDiningCommand(Color.BLUE, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.BLUE, 3));
+
+        for(int i=0; i < 3; i++)
+            gameController.requestCommand(playerID, command);
+
+        //MN PHASE 1
+        int MNPositionBefore = board.getMNPosition();
+        command = new MoveMNCommand(MNPositionBefore + 2, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //CLOUD PHASE 1
+        StudentGroup cloudStudentsBefore = board.getClouds().get(0).getStudents();
+        StudentGroup entranceBefore = new StudentGroup();
+        for(Color c : Color.values()) {
+            entranceBefore.addByColor(c, board.getSchoolByPlayerID(playerID).getNumStudentsInEntranceByColor(c));
+        }
+
+        command = new CollectCloudCommand(0, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        for(Color c : Color.values()) {
+            int entranceColor = entranceBefore.getByColor(c);
+            int cloudColor = cloudStudentsBefore.getByColor(c);
+            int finalPlayerID = playerID;
+            assertAll(
+                    () -> assertEquals(0, board.getClouds().get(0).getStudents().getByColor(c)),
+                    () -> assertEquals(entranceColor + cloudColor, board.getSchoolByPlayerID(finalPlayerID).getNumStudentsInEntranceByColor(c))
+            );
+        }
+    }
+
+    @Test
+    void buyCharacterCardTest() throws EriantysException {
+        Game.resetInstance();
+        MatchInfo.resetInstance();
+        board = null;
+
+        gameController = new GameController();
+        game = Game.getInstance();
+        matchInfo = MatchInfo.getInstance();
+        board = game.getBoard();
+
+        matchInfo.setSelectedNumPlayer(2);
+        matchInfo.setNumPlayersConnected(2);
+        matchInfo.setExpertMode(true);
+
+        for(Player player : lobby.getPlayers()) {
+            game.addPlayer(player);
+            game.addSchool(player.getID());
+            game.giveStudentsTo(player.getID(), matchInfo.getInitialNumStudents());
+            game.addTowersTo(player.getID(), matchInfo.getMaxTowers());
+            if(matchInfo.isExpertMode()) {
+                game.giveCoinToPlayer(player.getID());
+            }
+        }
+
+        game.placeMNAt(new Random().nextInt(game.getBoard().getNumIslands()));
+
+        StudentBag islandBag = new StudentBag(2);
+        int MNPosition = game.getBoard().getMNPosition();
+        for(int i = 0; i < 12; i++){
+            if(i != MNPosition && i != (MNPosition + 6) % game.getBoard().getNumIslands())
+                game.addInitialStudentToIsland(i, islandBag.drawStudents(1));
+        }
+
+        game.createClouds(game.getPlayers().size());
+
+        if(matchInfo.isExpertMode()) {
+            game.instantiateCharacterCard(1);
+            game.instantiateCharacterCard(2);
+            game.instantiateCharacterCard(7);
+        }
+
+        matchInfo.setStateType(TurnState.PLANNING);
+
+        RoundStateController roundStateController = new RoundStateController(new IslandExpertController(new CharacterCardController())
+                , new DiningRoomExpertController());
+        gameController.setState(new PlanningStateController(roundStateController));
+
+        roundStateController.defineFirstPlayOrder();
+        matchInfo.setGameStatus(GameStatus.IN_GAME);
+
+        //PLANNING PHASE 1
+        int playerID = matchInfo.getCurrentPlayerID();
+        Command command = new PlayCardCommand(4, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //PLANNING PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new PlayCardCommand(5, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //STUDENT PHASE 1
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToDiningCommand(Color.BLUE, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.BLUE, 3));
+
+        for(int i=0; i < 3; i++)
+            gameController.requestCommand(playerID, command);
+
+        //BUY CHARACTER CARD PHASE
+        command = new BuyCharacterCardCommand(0, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        assertTrue(game.getCharacterCards().get(0).isActive());
+    }
+
+    @Test
+    void setCardParametersTest() throws EriantysException {
+        Game.resetInstance();
+        MatchInfo.resetInstance();
+        board = null;
+
+        gameController = new GameController();
+        game = Game.getInstance();
+        matchInfo = MatchInfo.getInstance();
+        board = game.getBoard();
+
+        matchInfo.setSelectedNumPlayer(2);
+        matchInfo.setNumPlayersConnected(2);
+        matchInfo.setExpertMode(true);
+
+        for(Player player : lobby.getPlayers()) {
+            game.addPlayer(player);
+            game.addSchool(player.getID());
+            game.giveStudentsTo(player.getID(), matchInfo.getInitialNumStudents());
+            game.addTowersTo(player.getID(), matchInfo.getMaxTowers());
+            if(matchInfo.isExpertMode()) {
+                game.giveCoinToPlayer(player.getID());
+            }
+        }
+
+        game.placeMNAt(new Random().nextInt(game.getBoard().getNumIslands()));
+
+        StudentBag islandBag = new StudentBag(2);
+        int MNPosition = game.getBoard().getMNPosition();
+        for(int i = 0; i < 12; i++){
+            if(i != MNPosition && i != (MNPosition + 6) % game.getBoard().getNumIslands())
+                game.addInitialStudentToIsland(i, islandBag.drawStudents(1));
+        }
+
+        game.createClouds(game.getPlayers().size());
+
+        if(matchInfo.isExpertMode()) {
+            game.instantiateCharacterCard(1);
+            game.instantiateCharacterCard(2);
+            game.instantiateCharacterCard(7);
+        }
+
+        matchInfo.setStateType(TurnState.PLANNING);
+
+        RoundStateController roundStateController = new RoundStateController(new IslandExpertController(new CharacterCardController())
+                , new DiningRoomExpertController());
+        gameController.setState(new PlanningStateController(roundStateController));
+
+        roundStateController.defineFirstPlayOrder();
+        matchInfo.setGameStatus(GameStatus.IN_GAME);
+
+        //PLANNING PHASE 1
+        int playerID = matchInfo.getCurrentPlayerID();
+        Command command = new PlayCardCommand(4, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //PLANNING PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new PlayCardCommand(5, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //STUDENT PHASE 1
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToDiningCommand(Color.BLUE, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.BLUE, 3));
+
+        for(int i=0; i < 3; i++)
+            gameController.requestCommand(playerID, command);
+
+        //BUY CHARACTER CARD PHASE
+        command = new BuyCharacterCardCommand(2, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //SET PARAMETERS PHASE
+        CardParameters cardParams = new CardParameters().setSelectedColor(Color.BLUE);
+        command = new SetCardParametersCommand(2, cardParams, gameController);
+
+        int finalPlayerID = playerID;
+        Command finalCommand = command;
+        assertDoesNotThrow(() -> gameController.requestCommand(finalPlayerID, finalCommand));
+    }
+
+    @Test
+    void activateCharacterCardTest() throws EriantysException {
+        Game.resetInstance();
+        MatchInfo.resetInstance();
+        board = null;
+
+        gameController = new GameController();
+        game = Game.getInstance();
+        matchInfo = MatchInfo.getInstance();
+        board = game.getBoard();
+
+        matchInfo.setSelectedNumPlayer(2);
+        matchInfo.setNumPlayersConnected(2);
+        matchInfo.setExpertMode(true);
+
+        for(Player player : lobby.getPlayers()) {
+            game.addPlayer(player);
+            game.addSchool(player.getID());
+            game.giveStudentsTo(player.getID(), matchInfo.getInitialNumStudents());
+            game.addTowersTo(player.getID(), matchInfo.getMaxTowers());
+            if(matchInfo.isExpertMode()) {
+                game.giveCoinToPlayer(player.getID());
+            }
+        }
+
+        game.placeMNAt(new Random().nextInt(game.getBoard().getNumIslands()));
+
+        StudentBag islandBag = new StudentBag(2);
+        int MNPosition = game.getBoard().getMNPosition();
+        for(int i = 0; i < 12; i++){
+            if(i != MNPosition && i != (MNPosition + 6) % game.getBoard().getNumIslands())
+                game.addInitialStudentToIsland(i, islandBag.drawStudents(1));
+        }
+
+        game.createClouds(game.getPlayers().size());
+
+        if(matchInfo.isExpertMode()) {
+            game.instantiateCharacterCard(1);
+            game.instantiateCharacterCard(2);
+            game.instantiateCharacterCard(7);
+        }
+
+        matchInfo.setStateType(TurnState.PLANNING);
+
+        RoundStateController roundStateController = new RoundStateController(new IslandExpertController(new CharacterCardController())
+                , new DiningRoomExpertController());
+        gameController.setState(new PlanningStateController(roundStateController));
+
+        roundStateController.defineFirstPlayOrder();
+        matchInfo.setGameStatus(GameStatus.IN_GAME);
+
+        game.giveCoinToPlayer(0);
+        game.giveCoinToPlayer(0);
+        game.giveCoinToPlayer(0);
+        game.giveCoinToPlayer(0);
+        game.giveCoinToPlayer(1);
+        game.giveCoinToPlayer(1);
+        game.giveCoinToPlayer(1);
+        game.giveCoinToPlayer(1);
+
+        //PLANNING PHASE 1
+        int playerID = matchInfo.getCurrentPlayerID();
+        Command command = new PlayCardCommand(4, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //PLANNING PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new PlayCardCommand(5, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //STUDENT PHASE 1
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToDiningCommand(Color.BLUE, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.BLUE, 3));
+
+        for(int i=0; i < 3; i++)
+            gameController.requestCommand(playerID, command);
+
+        //BUY CHARACTER CARD PHASE
+        command = new BuyCharacterCardCommand(0, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //SET PARAMETERS PHASE
+        StudentGroupDecorator card = (StudentGroupDecorator) game.getCharacterCards().get(0);
+        StudentGroup cardStudents = new StudentGroup();
+        for(Color c : Color.values()) {
+            cardStudents.addByColor(c, card.getStudentsByColor(c));
+        }
+        CardParameters cardParams = new CardParameters().setFromOrigin(cardStudents)
+                .setPlayerID(playerID)
+                .setFromDestination(new StudentGroup())
+                .setIslandIndex(0);
+        command = new SetCardParametersCommand(0, cardParams, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //ACTIVATE CARD
+        command = new ActivateCharacterCardCommand(gameController);
+        gameController.requestCommand(playerID, command);
+
+        //MN PHASE 1
+        int MNPositionBefore = board.getMNPosition();
+        command = new MoveMNCommand(MNPositionBefore + 2, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //CLOUD PHASE 1
+        command = new CollectCloudCommand(0, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+
+
+        //SECOND PLAYER TURN
+        //STUDENT PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToDiningCommand(Color.BLUE, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.BLUE, 3));
+
+        for(int i=0; i < 3; i++)
+            gameController.requestCommand(playerID, command);
+
+        //BUY CHARACTER CARD PHASE
+        command = new BuyCharacterCardCommand(1, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //SET PARAMETERS PHASE
+        card = (StudentGroupDecorator) game.getCharacterCards().get(1);
+        cardStudents = new StudentGroup();
+        StudentGroup entranceStudents = new StudentGroup();
+        for(Color c : Color.values()) {
+            cardStudents.addByColor(c, card.getStudentsByColor(c));
+            entranceStudents.addByColor(c, board.getSchoolByPlayerID(playerID).getNumStudentsInEntranceByColor(c));
+        }
+        StudentGroup fromOrigin = new StudentGroup();
+        int j = 0;
+        for(Color c : Color.values()) {
+            int studentsColor = cardStudents.getByColor(c);
+            for (int z = 0; z < studentsColor; z++) {
+                fromOrigin.addByColor(c, 1);
+                j++;
+            }
+
+            if(j>=2)
+                break;
+        }
+        StudentGroup fromDestination = new StudentGroup();
+        j = 0;
+        for(Color c : Color.values()) {
+            int studentsColor = entranceStudents.getByColor(c);
+            for (int z = 0; z < studentsColor; z++) {
+                fromDestination.addByColor(c, 1);
+                j++;
+            }
+            if(j>=2)
+                break;
+        }
+
+        cardParams = new CardParameters().setFromOrigin(fromOrigin)
+                .setPlayerID(playerID)
+                .setFromDestination(fromDestination)
+                .setIslandIndex(0);
+        command = new SetCardParametersCommand(1, cardParams, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //ACTIVATE CARD
+        command = new ActivateCharacterCardCommand(gameController);
+        gameController.requestCommand(playerID, command);
+
+        //MN PHASE 2
+        MNPositionBefore = board.getMNPosition();
+        command = new MoveMNCommand(MNPositionBefore + 2, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //CLOUD PHASE 2
+        command = new CollectCloudCommand(1, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+
+        //SECOND ROUND
+
+
+        //PLANNING PHASE 1
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new PlayCardCommand(9, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //PLANNING PHASE 2
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new PlayCardCommand(8, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //STUDENT PHASE 1
+        playerID = matchInfo.getCurrentPlayerID();
+        command = new TransferToDiningCommand(Color.BLUE, gameController);
+
+        board.addToEntranceOf(playerID, new StudentGroup(Color.BLUE, 3));
+
+        for(int i=0; i < 3; i++)
+            gameController.requestCommand(playerID, command);
+
+        //BUY CHARACTER CARD PHASE
+        command = new BuyCharacterCardCommand(2, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //SET PARAMETERS PHASE
+        ReturnToBagDecorator card2 = (ReturnToBagDecorator) game.getCharacterCards().get(2);
+
+        cardParams = new CardParameters().setSelectedColor(Color.BLUE);
+        command = new SetCardParametersCommand(2, cardParams, gameController);
+
+        gameController.requestCommand(playerID, command);
+
+        //ACTIVATE CARD
+        int[] blueStudentsBefore = new int[5];
+        int cont = 0;
+        for(Player p : game.getPlayers()) {
+            blueStudentsBefore[cont] = board.getSchoolByPlayerID(p.getID())
+                    .getNumStudentsInDiningRoomByColor(Color.BLUE);
+            cont++;
+        }
+        command = new ActivateCharacterCardCommand(gameController);
+        gameController.requestCommand(playerID, command);
+
+        cont = 0;
+        for(Player p : game.getPlayers()) {
+            assertEquals(Math.max(blueStudentsBefore[cont] - 3, 0), board.getSchoolByPlayerID(p.getID())
+                    .getNumStudentsInDiningRoomByColor(Color.BLUE));
+            cont++;
+        }
+    }
 }
