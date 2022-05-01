@@ -54,7 +54,7 @@ public class Lobby extends Observable<SetupResponseParameters> {
         readyStatus.put(playerID, false);
 
         SetupResponseParameters params = new SetupResponseParameters().setPlayer(getPlayerByID(playerID));
-        //NOTIFY
+        notify(params);
     }
 
     /**
@@ -69,7 +69,7 @@ public class Lobby extends Observable<SetupResponseParameters> {
         }
 
         SetupResponseParameters params = new SetupResponseParameters().setPlayers(players);
-        //NOTIFY
+        notify(params);
     }
 
     /**
@@ -119,7 +119,7 @@ public class Lobby extends Observable<SetupResponseParameters> {
         }
 
         SetupResponseParameters params = new SetupResponseParameters().setPlayer(getPlayerByID(playerID));
-        //NOTIFY
+        notify(params);
     }
 
     /**
@@ -135,7 +135,7 @@ public class Lobby extends Observable<SetupResponseParameters> {
         }
 
         SetupResponseParameters params = new SetupResponseParameters().setPlayer(getPlayerByID(playerID));
-        //NOTIFY
+        notify(params);
     }
 
     /**
