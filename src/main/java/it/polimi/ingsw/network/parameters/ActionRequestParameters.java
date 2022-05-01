@@ -12,7 +12,12 @@ public class ActionRequestParameters {
     private Color color;
     private CardParameters cardParams;
 
-    public CommandType getActionType() {
+    /**
+     * Gets the <code>CommandType</code> of this message.
+     *
+     * @return the <code>CommandType</code>.
+     */
+    public CommandType getCommandType() {
         return commandType;
     }
 
@@ -22,7 +27,7 @@ public class ActionRequestParameters {
      * @param commandType the <code>CommandType</code> of this message.
      * @return this <code>ActionRequestParameters</code>
      */
-    public ActionRequestParameters setActionType(CommandType commandType) {
+    public ActionRequestParameters setCommandType(CommandType commandType) {
         this.commandType = commandType;
         return this;
     }
