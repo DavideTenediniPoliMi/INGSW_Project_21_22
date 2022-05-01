@@ -137,7 +137,7 @@ public class LobbyController {
      */
     private boolean isCardBackSelected(CardBack cardBack) {
         for(Player player : lobby.getPlayers()) {
-            if(player.getCardBack().equals(cardBack)) {
+            if(cardBack.equals(player.getCardBack())) {
                 return true;
             }
         }
@@ -154,7 +154,7 @@ public class LobbyController {
         int members = 0;
 
         for(Player player : lobby.getPlayers()) {
-            if(player.getTeamColor().equals(towerColor)) {
+            if(towerColor.equals(player.getTeamColor())) {
                 if(matchInfo.getSelectedNumPlayer() == 4 && members == 0) {
                     members += 1;
                     continue;
