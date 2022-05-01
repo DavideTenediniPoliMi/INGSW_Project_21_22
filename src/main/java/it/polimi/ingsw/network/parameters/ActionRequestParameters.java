@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network.parameters;
 
-import it.polimi.ingsw.model.enumerations.ActionType;
+import it.polimi.ingsw.network.enumerations.ActionType;
 import it.polimi.ingsw.model.enumerations.Color;
 
 public class ActionRequestParameters {

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.enumerations;
+package it.polimi.ingsw.network.enumerations;
 
 /**
  * Enum class representing the different types of messages while the game is in Lobby status.
