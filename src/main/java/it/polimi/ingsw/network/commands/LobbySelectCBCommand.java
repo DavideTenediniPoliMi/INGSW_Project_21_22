@@ -5,6 +5,9 @@ import it.polimi.ingsw.exceptions.lobby.CardBackTakenException;
 import it.polimi.ingsw.exceptions.lobby.NoSuchPlayerException;
 import it.polimi.ingsw.model.enumerations.CardBack;
 
+/**
+ * Lobby Command class to request setting a <code>CardBack</code>.
+ */
 public class LobbySelectCBCommand implements Command {
 
     private final int playerID;

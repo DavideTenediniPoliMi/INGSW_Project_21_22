@@ -4,6 +4,9 @@ import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.exceptions.board.MNOutOfRangeException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
 
+/**
+ * Command class to request the movement of MN.
+ */
 public class MoveMNCommand implements Command {
     private final int destIndex;
     private final GameController gameController;

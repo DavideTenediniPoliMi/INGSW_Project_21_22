@@ -4,6 +4,9 @@ import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.exceptions.board.CloudUnavailableException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
 
+/**
+ * Command class to request the collection of students from a <code>Cloud</code>.
+ */
 public class CollectCloudCommand implements Command {
 
     private final int cloudIndex;

@@ -5,6 +5,9 @@ import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.exceptions.students.StudentTransferException;
 import it.polimi.ingsw.model.enumerations.Color;
 
+/**
+ * Command class to request a student transfer to the dining room.
+ */
 public class TransferToDiningCommand implements Command {
 
     private final Color color;

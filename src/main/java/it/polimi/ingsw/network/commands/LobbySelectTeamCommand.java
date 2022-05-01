@@ -5,6 +5,9 @@ import it.polimi.ingsw.exceptions.lobby.NoSuchPlayerException;
 import it.polimi.ingsw.exceptions.lobby.TeamFullException;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 
+/**
+ * Lobby Command class to request the selection of a team.
+ */
 public class LobbySelectTeamCommand implements Command {
 
     private final int playerID;

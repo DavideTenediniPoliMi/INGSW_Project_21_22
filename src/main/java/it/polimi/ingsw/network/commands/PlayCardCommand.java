@@ -4,6 +4,9 @@ import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.exceptions.player.CardUsedException;
 
+/**
+ * Command class to request playing an assistant <code>Card</code>.
+ */
 public class PlayCardCommand implements Command {
 
     private final int cardIndex;

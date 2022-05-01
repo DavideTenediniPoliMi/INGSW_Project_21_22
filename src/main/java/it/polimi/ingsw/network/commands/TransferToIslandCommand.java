@@ -5,6 +5,9 @@ import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.exceptions.students.StudentTransferException;
 import it.polimi.ingsw.model.enumerations.Color;
 
+/**
+ * Command class to request a student transfer to an <code>Island</code>.
+ */
 public class TransferToIslandCommand implements Command {
     private final int islandIndex;
     private final Color color;

@@ -5,6 +5,9 @@ import it.polimi.ingsw.exceptions.lobby.DuplicateIDException;
 import it.polimi.ingsw.exceptions.lobby.GameFullException;
 import it.polimi.ingsw.exceptions.lobby.NameTakenException;
 
+/**
+ * Lobby Command class to request joining a lobby.
+ */
 public class LobbyJoinCommand implements Command {
 
     private final int playerID;

@@ -3,6 +3,9 @@ package it.polimi.ingsw.network.commands;
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
 
+/**
+ * Command class to request the purchase of a <code>CharacterCard</code>.
+ */
 public class BuyCharacterCardCommand implements Command {
 
     private final int cardIndex;

@@ -6,6 +6,9 @@ import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.network.parameters.CardParameters;
 
+/**
+ * Command class to request setting <code>CardParameters</code> to the active <code>CharacterCard</code>.
+ */
 public class SetCardParametersCommand implements Command {
 
     private final int cardIndex;
