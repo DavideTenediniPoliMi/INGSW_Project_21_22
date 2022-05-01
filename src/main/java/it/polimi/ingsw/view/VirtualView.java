@@ -1,10 +1,13 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.network.observer.Observable;
 import it.polimi.ingsw.network.observer.Observer;
 import it.polimi.ingsw.network.parameters.ActionResponseParameters;
 import it.polimi.ingsw.network.parameters.SetupResponseParameters;
+import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Lobby;
 
-public class VirtualView {
+public class VirtualView extends Observable<String> {
 
     public VirtualView() {
 
@@ -13,7 +16,7 @@ public class VirtualView {
     class GameObserver implements Observer<ActionResponseParameters> {
 
         public GameObserver() {
-            //TODO attach to game
+            Game.getInstance().addObserver(this);
         }
 
         @Override
@@ -25,7 +28,7 @@ public class VirtualView {
     class LobbyObserver implements Observer<SetupResponseParameters> {
 
         public LobbyObserver() {
-            //TODO attach to lobby
+            Lobby.getLobby().addObserver(this);
         }
 
         @Override
