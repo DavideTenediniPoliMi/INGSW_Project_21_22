@@ -6,6 +6,7 @@ import it.polimi.ingsw.controller.subcontrollers.DiningRoomExpertController;
 import it.polimi.ingsw.controller.subcontrollers.IslandExpertController;
 import it.polimi.ingsw.exceptions.EriantysException;
 import it.polimi.ingsw.exceptions.EriantysRuntimeException;
+import it.polimi.ingsw.exceptions.game.GameNotStartedException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.exceptions.game.NotCurrentPlayerException;
 import it.polimi.ingsw.model.Game;
@@ -34,7 +35,6 @@ import java.util.stream.Collectors;
  */
 public class GameController {
     private RoundStateController roundStateController;
-    private GameStatus status;
     private final MatchInfo matchInfo;
     private final Game game;
     private final Lobby lobby;
@@ -46,7 +46,6 @@ public class GameController {
         matchInfo = MatchInfo.getInstance();
         game = Game.getInstance();
         lobby = Lobby.getLobby();
-        status = GameStatus.LOBBY;
     }
 
     /**
@@ -56,6 +55,9 @@ public class GameController {
      * @param playerID the ID of the <code>Player</code> requesting a command.
      */
     public synchronized void requestCommand(int playerID, Command command) throws EriantysException, EriantysRuntimeException {
+        if(!matchInfo.getGameStatus().equals(GameStatus.IN_GAME)){
+            throw new GameNotStartedException();
+        }
         if(playerID != matchInfo.getCurrentPlayerID()){
             throw new NotCurrentPlayerException(playerID);
         }
@@ -107,6 +109,7 @@ public class GameController {
         setState(new PlanningStateController(roundStateController));
 
         roundStateController.defineFirstPlayOrder();
+        matchInfo.setGameStatus(GameStatus.IN_GAME);
     }
 
     /**

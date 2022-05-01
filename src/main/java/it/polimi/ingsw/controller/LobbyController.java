@@ -1,14 +1,14 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.exceptions.EriantysException;
-import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.exceptions.lobby.*;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.CardBack;
+import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.network.parameters.SetupRequestParameters;
+import it.polimi.ingsw.network.commands.Command;
 
 /**
  * Class representing the controller for all pre-game (Lobby) actions. Handles:
@@ -28,34 +28,19 @@ public class LobbyController {
     public LobbyController() {
         lobby = Lobby.getLobby();
         matchInfo = MatchInfo.getInstance();
+        matchInfo.setGameStatus(GameStatus.LOBBY);
     }
 
     /**
-     * Requests the specified setup action in the current <code>Lobby</code>.
+     * Requests the specified command in the current <code>Lobby</code>.
      *
-     * @param playerID the ID of the <code>Player</code> requesting a change in the <code>Lobby</code>.
-     * @param setupParams the parameters of the request.
+     * @param command the requested <code>Command</code>.
      */
-    public synchronized void requestSetup(int playerID, SetupRequestParameters setupParams) throws EriantysException {
-        switch (setupParams.getSetupType()) {
-            case JOIN:
-                joinLobby(playerID, setupParams.getName());
-                break;
-            case SEL_CARDBACK:
-                setCardBack(playerID, setupParams.getCardBack());
-                break;
-            case SEL_TOWERCOLOR:
-                setTowerColor(playerID, setupParams.getTowerColor());
-                break;
-            case READY_UP:
-                setReadyStatus(playerID, setupParams.isReady());
-                break;
-            case DISCONNECT:
-                removePlayer(playerID);
-                break;
-            default:
-                throw new BadParametersException("No such action: " + setupParams.getSetupType());
+    public synchronized void requestCommand(Command command) throws EriantysException {
+        if(!matchInfo.getGameStatus().equals(GameStatus.LOBBY)) {
+            throw new GameStartedException();
         }
+        command.execute();
     }
 
     /**
@@ -67,7 +52,7 @@ public class LobbyController {
      * @throws DuplicateIDException If there is already another <code>Player</code> with the same ID.
      * @throws NameTakenException If there is already another <code>Player</code> with the same Nickname.
      */
-    private void joinLobby(int playerID, String name) throws DuplicateIDException, NameTakenException, GameFullException {
+    public void joinLobby(int playerID, String name) throws DuplicateIDException, NameTakenException, GameFullException {
         if(lobby.getPlayers().size() == matchInfo.getSelectedNumPlayer()) {
             throw new GameFullException();
         }else if(lobby.hasJoined(playerID)){
@@ -87,7 +72,7 @@ public class LobbyController {
      * @throws NoSuchPlayerException If there is no <code>Player</code> with the specified ID in this <code>Lobby</code>.
      * @throws CardBackTakenException If another <code>Player</code> has already selected the same <code>CardBack</code>.
      */
-    private void setCardBack(int playerID, CardBack cardBack) throws NoSuchPlayerException, CardBackTakenException {
+    public void setCardBack(int playerID, CardBack cardBack) throws NoSuchPlayerException, CardBackTakenException {
         if(!lobby.hasJoined(playerID)) {
             throw new NoSuchPlayerException(playerID);
         }else if(isCardBackSelected(cardBack)) {
@@ -105,7 +90,7 @@ public class LobbyController {
      * @throws NoSuchPlayerException If there is no <code>Player</code> with the specified ID in this <code>Lobby</code>.
      * @throws TeamFullException If the team already has the maximum amount of members.
      */
-    private void setTowerColor(int playerID, TowerColor towerColor) throws NoSuchPlayerException, TeamFullException {
+    public void setTowerColor(int playerID, TowerColor towerColor) throws NoSuchPlayerException, TeamFullException {
         if(!lobby.hasJoined(playerID)) {
             throw new NoSuchPlayerException(playerID);
         }else if(!canJoin(towerColor)) {
@@ -122,7 +107,7 @@ public class LobbyController {
      * @param ready the flag specifying if the <code>Player</code> is ready.
      * @throws NoSuchPlayerException If there is no <code>Player</code> with the specified ID in this <code>Lobby</code>.
      */
-    private void setReadyStatus(int playerID, boolean ready) throws NoSuchPlayerException {
+    public void setReadyStatus(int playerID, boolean ready) throws NoSuchPlayerException {
         if(!lobby.hasJoined(playerID)) {
             throw new NoSuchPlayerException(playerID);
         }
@@ -136,7 +121,7 @@ public class LobbyController {
      * @param playerID the ID of the <code>Player</code>.
      * @throws NoSuchPlayerException If there is no <code>Player</code> with the specified ID in this <code>Lobby</code>.
      */
-    private void removePlayer(int playerID) throws NoSuchPlayerException {
+    public void removePlayer(int playerID) throws NoSuchPlayerException {
         if(!lobby.hasJoined(playerID)) {
             throw new NoSuchPlayerException(playerID);
         }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.TurnState;
 
@@ -22,6 +23,7 @@ public class MatchInfo {
     private boolean gameOver;
     private final List<TowerColor> winners = new ArrayList<>();
     private boolean gameTied;
+    private GameStatus gameStatus;
 
     /**
      * Sole constructor to avoid being instantiated more than once. MatchInfo is a singleton <code>class</code>.
@@ -257,5 +259,24 @@ public class MatchInfo {
         gameOver = true;
         gameTied = true;
         winners.addAll(teamColors);
+    }
+
+    /**
+     * Returns the current <code>GameStatus</code> (Lobby/InGame/Resetting).
+     *
+     * @return Current <code>GameStatus</code>.
+     * @see GameStatus
+     */
+    public synchronized GameStatus getGameStatus() {
+        return gameStatus;
+    }
+
+    /**
+     * Sets the <code>GameStatus</code> to the specified one.
+     *
+     * @param gameStatus the new <code>GameStatus</code>.
+     */
+    public synchronized void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
     }
 }
