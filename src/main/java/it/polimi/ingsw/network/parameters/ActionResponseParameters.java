@@ -20,6 +20,7 @@ public class ActionResponseParameters {
     private Player player;
     private int coinsLeft;
     private boolean sendCards;
+    private boolean sendMatchInfo;
 
     public List<School> getSchools() {
         return schools;
@@ -104,6 +105,15 @@ public class ActionResponseParameters {
 
     public ActionResponseParameters setSendCards(boolean sendCards) {
         this.sendCards = sendCards;
+        return this;
+    }
+
+    public boolean shouldSendMatchInfo() {
+        return sendMatchInfo;
+    }
+
+    public ActionResponseParameters setSendMatchInfo(boolean sendMatchInfo) {
+        this.sendMatchInfo = sendMatchInfo;
         return this;
     }
 }
