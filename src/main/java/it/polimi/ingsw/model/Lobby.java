@@ -11,7 +11,7 @@ import java.util.*;
  * Class representing a Lobby before a game of Eriantys. Allows for CardBack and Team selection and/or changes for each
  * <code>Player</code>.
  */
-public class Lobby extends Observable { //TODO parametrization
+public class Lobby extends Observable<SetupResponseParameters> {
     private static Lobby instance;
     private final List<Player> players;
     private final Map<Integer, Boolean> readyStatus;
