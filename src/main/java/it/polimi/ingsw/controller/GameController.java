@@ -38,6 +38,7 @@ public class GameController {
     private final MatchInfo matchInfo;
     private final Game game;
     private final Lobby lobby;
+    private boolean movedMN = false;
 
     /**
      * Sole constructor for <code>GameController</code>.
@@ -46,6 +47,10 @@ public class GameController {
         matchInfo = MatchInfo.getInstance();
         game = Game.getInstance();
         lobby = Lobby.getLobby();
+    }
+
+    public void setMovedMN() {
+        movedMN = true;
     }
 
     /**
@@ -133,8 +138,11 @@ public class GameController {
                 }
                 break;
             case MOTHER_NATURE:
-                checkEndConditionAfterMN();
-                setState(new CloudStateController(roundStateController));
+                if(movedMN) {
+                    checkEndConditionAfterMN();
+                    setState(new CloudStateController(roundStateController));
+                    movedMN = false;
+                }
                 break;
             case CLOUD:
                 matchInfo.removePlayer();

@@ -15,5 +15,6 @@ public class MoveMNCommand implements Command {
     @Override
     public void execute() throws IllegalActionException, MNOutOfRangeException {
         gameController.getRoundStateController().moveMN(destIndex);
+        gameController.setMovedMN();
     }
 }
