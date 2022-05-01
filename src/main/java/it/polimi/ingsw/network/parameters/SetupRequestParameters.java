@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.enumerations.TowerColor;
 
 /**
  * Class representing a request message from the client, with every information needed for any action during the pre-game
- * Lobby.
+ * <code>Lobby</code>.
  */
 public class SetupRequestParameters {
     private CommandType commandType;
@@ -70,22 +70,47 @@ public class SetupRequestParameters {
         return this;
     }
 
+    /**
+     * Gets the <code>CommandType</code> of this message.
+     *
+     * @return the <code>CommandType</code>.
+     */
     public CommandType getCommandType() {
         return commandType;
     }
 
+    /**
+     * Gets the name of this message.
+     *
+     * @return the name.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the <code>TowerColor</code> of this message.
+     *
+     * @return the <code>TowerColor</code>.
+     */
     public TowerColor getTowerColor() {
         return towerColor;
     }
 
+    /**
+     * Gets the <code>CardBack</code> of this message.
+     *
+     * @return the <code>CardBack</code>.
+     */
     public CardBack getCardBack() {
         return cardBack;
     }
 
+    /**
+     * Gets the ready flag of this message.
+     *
+     * @return the ready flag.
+     */
     public boolean isReady() {
         return ready;
     }
