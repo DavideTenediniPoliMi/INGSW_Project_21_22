@@ -1,5 +1,8 @@
 package it.polimi.ingsw.network.parameters;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.Cloud;
@@ -262,11 +265,51 @@ public class ResponseParameters implements Serializable {
 
     @Override
     public JsonObject serialize() {
-        return null;
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
+
+        return jsonObject;
     }
 
     @Override
     public void deserialize(JsonObject jsonObject) {
 
+        if(jsonObject.has("schools")) {
+            schools = null;
+            JsonArray jsonArray = jsonObject.get("schools").getAsJsonArray();
+            for(JsonElement je : jsonArray) {
+                School s = new School(new Player(-1, ""));
+                s.deserialize(je.getAsJsonObject());
+                schools.add(s);
+            }
+        }
+        //TODO
+        //list of character cards
+
+        if(jsonObject.has("clouds")) {
+            clouds = null;
+            JsonArray jsonArray = jsonObject.get("clouds").getAsJsonArray();
+            for(JsonElement je : jsonArray) {
+                Cloud c = new Cloud();
+                c.deserialize(je.getAsJsonObject());
+                clouds.add(c);
+            }
+        }
+
+        //TODO
+        if(jsonObject.has("islands")) {
+            islands = null;
+            JsonArray jsonArray = jsonObject.get("islands").getAsJsonArray();
+            for(JsonElement je : jsonArray) {
+                //Islands abstract
+            }
+        }
+
+        bagEmpty = jsonObject.get("bagEmpty").getAsBoolean();
+        professors.deserialize(jsonObject.get("professors").getAsJsonObject());
+        player.deserialize(jsonObject.get("player").getAsJsonObject());
+        coinsLeft = jsonObject.get("coinsLeft").getAsInt();
+        sendCards = jsonObject.get("sendCards").getAsBoolean();
+        sendMatchInfo = jsonObject.get("sendMatchInfo").getAsBoolean();
     }
 }

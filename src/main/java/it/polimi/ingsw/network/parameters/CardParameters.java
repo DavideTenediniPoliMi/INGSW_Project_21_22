@@ -1,5 +1,6 @@
 package it.polimi.ingsw.network.parameters;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
@@ -159,11 +160,25 @@ public class CardParameters implements Serializable {
 
     @Override
     public JsonObject serialize() {
-        return null;
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
+
+        return jsonObject;
     }
 
     @Override
     public void deserialize(JsonObject jsonObject) {
-
+        if(jsonObject.has("fromOrigin"))
+            fromOrigin.deserialize(jsonObject.get("fromOrigin").getAsJsonObject());
+        if(jsonObject.has("fromDestination"))
+            fromDestination.deserialize(jsonObject.get("fromDestination").getAsJsonObject());
+        if(jsonObject.has("boostedTeam"))
+            boostedTeam = TowerColor.valueOf(jsonObject.get("boostedTeam").getAsString());
+        if(jsonObject.has("currentTeam"))
+            currentTeam = TowerColor.valueOf(jsonObject.get("currentTeam").getAsString());
+        if(jsonObject.has("selectedColor"))
+            selectedColor = Color.valueOf(jsonObject.get("selectedColor").getAsString());
+        playerID = jsonObject.get("playerID").getAsInt();
+        islandIndex = jsonObject.get("islandIndex").getAsInt();
     }
 }
