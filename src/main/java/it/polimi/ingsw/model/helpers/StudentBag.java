@@ -117,9 +117,12 @@ public class StudentBag implements Serializable {
     @Override
     public JsonObject serialize() {
         Gson gson = new Gson();
-        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
+        JsonObject jsonObject = new JsonObject();
 
-        jsonObject.remove("rand");
+        jsonObject.add("availableColors", gson.toJsonTree(availableColors));
+        jsonObject.add("students", students.serialize());
+        jsonObject.add("studentsLeft", new JsonPrimitive(studentsLeft));
+        jsonObject.add("empty", new JsonPrimitive(empty));
 
         return jsonObject;
     }

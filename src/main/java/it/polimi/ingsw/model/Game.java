@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.characters.CharacterCard;
@@ -497,11 +498,19 @@ public class Game extends Observable<ResponseParameters> implements Serializable
 
     @Override
     public JsonObject serialize() {
-        return null;
+        Gson gson = new Gson();
+        JsonObject jsonObject = new JsonObject();
+
+        jsonObject.add("board", board.serialize());
+        jsonObject.add("players", gson.toJsonTree(players));
+        jsonObject.add("characterCards", gson.toJsonTree(characterCards));
+        jsonObject.add("bag", bag.serialize());
+
+        return jsonObject;
     }
 
     @Override
     public void deserialize(JsonObject jsonObject) {
-
+        //TODO
     }
 }
