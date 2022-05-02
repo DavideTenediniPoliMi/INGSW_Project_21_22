@@ -204,7 +204,7 @@ public class Player implements Serializable {
         towerHolder = jsonObject.get("towerHolder").getAsBoolean();
 
         JsonArray jsonCards = jsonObject.get("playableCards").getAsJsonArray();
-        playableCards = null;
+        playableCards = new ArrayList<>();
         for(JsonElement jsonElement : jsonCards) {
             playableCards.add(Card.valueOf(jsonElement.getAsString()));
         }
