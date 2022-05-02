@@ -20,7 +20,6 @@ public class Client {
         Socket socket = new Socket(ip, port);
         System.out.println("Client: Connection established");
         DataInputStream socketIn = new DataInputStream(socket.getInputStream());
-        DataOutputStream socketOut = new DataOutputStream(socket.getOutputStream());
 
         try {
             int num = socketIn.readInt();
@@ -39,7 +38,6 @@ public class Client {
             System.out.println("Client: server disconnected");
         } finally {
             socketIn.close();
-            socketOut.close();
             socket.close();
         }
     }
