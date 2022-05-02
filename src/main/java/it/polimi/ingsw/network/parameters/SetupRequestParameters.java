@@ -1,14 +1,16 @@
 package it.polimi.ingsw.network.parameters;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
+import it.polimi.ingsw.utils.Serializable;
 
 /**
  * Class representing a request message from the client, with every information needed for any action during the pre-game
  * <code>Lobby</code>.
  */
-public class SetupRequestParameters {
+public class SetupRequestParameters implements Serializable {
     private CommandType commandType;
     private String name;
     private TowerColor towerColor;
@@ -113,5 +115,15 @@ public class SetupRequestParameters {
      */
     public boolean isReady() {
         return ready;
+    }
+
+    @Override
+    public JsonObject serialize() {
+        return null;
+    }
+
+    @Override
+    public void deserialize(String json) {
+
     }
 }

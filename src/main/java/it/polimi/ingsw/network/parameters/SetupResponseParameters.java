@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Class representing a response from the server after any action has been played during a pre-game <code>Lobby</code>.
  */
-public class SetupResponseParameters implements Serializable {
+public class SetupResponseParameters extends ResponseParameters {
     private List<Player> players;
     private Player player;
 

@@ -1,13 +1,15 @@
 package it.polimi.ingsw.network.parameters;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
+import it.polimi.ingsw.utils.Serializable;
 
 /**
  * Class used for generic parameter setting into different Character cards.
  */
-public class CardParameters {
+public class CardParameters implements Serializable {
     private StudentGroup fromOrigin ;
     private StudentGroup fromDestination;
     private TowerColor boostedTeam;
@@ -153,5 +155,15 @@ public class CardParameters {
     public CardParameters setIslandIndex(int islandIndex) {
         this.islandIndex = islandIndex;
         return this;
+    }
+
+    @Override
+    public JsonObject serialize() {
+        return null;
+    }
+
+    @Override
+    public void deserialize(String json) {
+
     }
 }

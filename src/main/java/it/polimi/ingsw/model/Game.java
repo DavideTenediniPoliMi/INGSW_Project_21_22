@@ -8,6 +8,7 @@ import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.network.parameters.ActionResponseParameters;
+import it.polimi.ingsw.network.parameters.ResponseParameters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.Optional;
  * Singleton class to act as DAO for a game of Eriantys.
  * Contains all calls for each step of the game.
  */
-public class Game extends Observable<ActionResponseParameters> {
+public class Game extends Observable<ResponseParameters> {
     private final int NUM_STARTING_STUDENTS_BY_COLOR = 24;
     private static Game instance;
     private final Board board = new Board();

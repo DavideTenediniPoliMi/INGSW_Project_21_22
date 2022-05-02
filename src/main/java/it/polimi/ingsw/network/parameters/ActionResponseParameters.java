@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Class representing a response from the server after any action has been played during a game.
  */
-public class ActionResponseParameters implements Serializable {
+public class ActionResponseParameters extends ResponseParameters {
     private List<School> schools = new ArrayList<>();
     private List<CharacterCard> characterCards;
     private List<Cloud> clouds;
