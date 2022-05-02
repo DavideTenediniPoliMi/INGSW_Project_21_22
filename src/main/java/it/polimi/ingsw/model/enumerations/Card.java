@@ -1,12 +1,16 @@
 package it.polimi.ingsw.model.enumerations;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import it.polimi.ingsw.utils.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Class to hold every Assistant Card in the game.
  */
-public enum Card {
+public enum Card implements Serializable {
     CARD_1(1, 1),
     CARD_2(2, 1),
     CARD_3(3, 2),
@@ -71,5 +75,30 @@ public enum Card {
      */
     public List<Integer> getUseOrder() {
         return new ArrayList<>(useOrder);
+    }
+
+    @Override
+    public JsonObject serialize() {
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
+
+        jsonObject.remove("WEIGHT");
+        jsonObject.remove("RANGE");
+
+        return jsonObject;
+    }
+
+    @Override
+    public void deserialize(JsonObject jsonObject) {
+        //TODO
+    }
+
+    public static JsonObject serializeAll() {
+        JsonObject jsonObject = new JsonObject();
+        for(Card card : Card.values()) {
+            jsonObject.add(card.name(), card.serialize());
+        }
+
+        return jsonObject;
     }
 }

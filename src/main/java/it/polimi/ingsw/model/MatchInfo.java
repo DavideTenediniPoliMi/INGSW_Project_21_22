@@ -1,10 +1,13 @@
 package it.polimi.ingsw.model;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.observer.Observable;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
+import it.polimi.ingsw.utils.Serializable;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -14,7 +17,7 @@ import java.util.Queue;
 /**
  * Class used to keep data about a game of Eriantys
  */
-public class MatchInfo extends Observable<ResponseParameters> {
+public class MatchInfo extends Observable<ResponseParameters> implements Serializable {
     private static MatchInfo instance;
     private int selectedNumPlayer;
     private boolean expertMode;
@@ -289,5 +292,19 @@ public class MatchInfo extends Observable<ResponseParameters> {
     public synchronized void setGameStatus(GameStatus gameStatus) {
         this.gameStatus = gameStatus;
         notify(new ResponseParameters().setSendMatchInfo(true));
+    }
+
+    @Override
+    public JsonObject serialize() {
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
+
+        jsonObject.remove("observers");
+        return jsonObject;
+    }
+
+    @Override
+    public void deserialize(JsonObject jsonObject) {
+        //TODO
     }
 }

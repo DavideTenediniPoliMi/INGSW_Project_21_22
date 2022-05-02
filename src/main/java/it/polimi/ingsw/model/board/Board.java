@@ -1,10 +1,13 @@
 package it.polimi.ingsw.model.board;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
+import it.polimi.ingsw.utils.Serializable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +16,7 @@ import java.util.Optional;
 /**
  * Class to hold data for every entity of a Game (Islands, Schools, Clouds, Professors).
  */
-public class Board {
+public class Board implements Serializable {
     private final int NUM_STARTING_ISLANDS = 12;
     private final int NUM_STARTING_COINS = 20;
 
@@ -324,5 +327,21 @@ public class Board {
      */
     public void takeCoin() {
         numCoinsLeft = Math.max(numCoinsLeft - 1, 0);
+    }
+
+    @Override
+    public JsonObject serialize() {
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
+
+        jsonObject.remove("NUM_STARTING_ISLANDS");
+        jsonObject.remove("NUM_STARTING_COINS");
+
+        return jsonObject;
+    }
+
+    @Override
+    public void deserialize(JsonObject jsonObject) {
+        //TODO
     }
 }
