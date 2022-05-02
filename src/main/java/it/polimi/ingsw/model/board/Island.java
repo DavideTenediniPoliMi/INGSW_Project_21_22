@@ -1,13 +1,15 @@
 package it.polimi.ingsw.model.board;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.model.enumerations.TowerColor;
+import it.polimi.ingsw.utils.Serializable;
 
 /**
  * Abstract class corresponding to the Island entity
  */
-public abstract class Island {
+public abstract class Island implements Serializable {
     private final StudentGroup students = new StudentGroup();
     private TowerColor teamColor;
     private boolean motherNature;
@@ -82,4 +84,11 @@ public abstract class Island {
      * @return Amount of islands
      */
     public abstract int getNumIslands();
+
+    @Override
+    public void deserialize(JsonObject jsonObject) {
+        students.deserialize(jsonObject.get("students").getAsJsonObject());
+        teamColor = TowerColor.valueOf(jsonObject.get("teamColor").getAsString());
+        motherNature = jsonObject.get("motherNature").getAsBoolean();
+    }
 }
