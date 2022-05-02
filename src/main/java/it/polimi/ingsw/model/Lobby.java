@@ -1,9 +1,15 @@
 package it.polimi.ingsw.model;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import it.polimi.ingsw.model.board.School;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.network.observer.Observable;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
+import it.polimi.ingsw.utils.Serializable;
 
 import java.util.*;
 
@@ -11,10 +17,10 @@ import java.util.*;
  * Class representing a Lobby before a game of Eriantys. Allows for CardBack and Team selection and/or changes for each
  * <code>Player</code>.
  */
-public class Lobby extends Observable<ResponseParameters> {
+public class Lobby extends Observable<ResponseParameters> implements Serializable {
     private static Lobby instance;
-    private final List<Player> players;
-    private final Map<Integer, Boolean> readyStatus;
+    private List<Player> players;
+    private Map<Integer, Boolean> readyStatus;
 
     /**
      * Sole constructor to avoid being instantiated more than once.
@@ -186,5 +192,32 @@ public class Lobby extends Observable<ResponseParameters> {
             }
         }
         return true;
+    }
+
+    @Override
+    public JsonObject serialize() {
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
+
+        return jsonObject;
+    }
+
+    @Override
+    public void deserialize(JsonObject jsonObject) {
+        instance.deserialize(jsonObject.get("instance").getAsJsonObject());
+
+        if(jsonObject.has("players")) {
+            players = null;
+            JsonArray jsonArray = jsonObject.get("players").getAsJsonArray();
+            for(JsonElement je : jsonArray) {
+                Player p = new Player(-1, "");
+                p.deserialize(je.getAsJsonObject());
+                players.add(p);
+            }
+        }
+
+        if(jsonObject.has("readyStatus")) {
+            readyStatus = new Gson().fromJson(jsonObject, HashMap.class);
+        }
     }
 }
