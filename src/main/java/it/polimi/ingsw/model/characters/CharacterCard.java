@@ -9,9 +9,9 @@ import it.polimi.ingsw.utils.Serializable;
  * Abstract class representing a generic Character Card.
  */
 public abstract class CharacterCard implements Serializable {
-    private int cost;
-    private boolean active;
-    private final EffectType effectType;
+    protected int cost;
+    protected boolean active;
+    protected EffectType effectType;
 
     /**
      * Sole constructor for a Character card. Specifies this card's cost and effect type.

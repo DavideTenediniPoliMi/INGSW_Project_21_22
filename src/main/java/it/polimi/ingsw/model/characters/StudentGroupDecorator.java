@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.characters;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.exceptions.students.NotEnoughStudentsException;
 import it.polimi.ingsw.model.Game;
@@ -24,7 +25,7 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
     private StudentGroup fromCard;
     private StudentGroup fromEntrance;
     private int islandIndex, playerID;
-    private final boolean isToIsland, isToDiningRoom;
+    private boolean isToIsland, isToDiningRoom;
 
     /**
      * Constructor that instantiates this card specifying which one of the 3 it is. If both the flags are
@@ -147,11 +148,21 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
 
     @Override
     public JsonObject serialize() {
-        return null;
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
+
+        return jsonObject;
     }
 
     @Override
     public void deserialize(JsonObject jsonObject) {
-
+        students.deserialize(jsonObject.get("students").getAsJsonObject());
+        fromCard.deserialize(jsonObject.get("fromCard").getAsJsonObject());
+        if(jsonObject.has("fromEntrance"))
+            fromEntrance.deserialize(jsonObject.get("fromEntrance").getAsJsonObject());
+        islandIndex = jsonObject.get("islandIndex").getAsInt();
+        playerID = jsonObject.get("playerID").getAsInt();
+        isToIsland = jsonObject.get("isToIsland").getAsBoolean();
+        isToDiningRoom = jsonObject.get("isToDiningRoom").getAsBoolean();
     }
 }

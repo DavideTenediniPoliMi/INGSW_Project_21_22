@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.characters;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.Board;
@@ -69,11 +70,15 @@ public class ExchangeStudentsDecorator extends CharacterCardDecorator {
 
     @Override
     public JsonObject serialize() {
-        return null;
+        JsonObject jsonObject = new JsonObject();
+
+        jsonObject.add("card", card.serialize());
+
+        return jsonObject;
     }
 
     @Override
     public void deserialize(JsonObject jsonObject) {
-
+        card.deserialize(jsonObject.get("card").getAsJsonObject());
     }
 }

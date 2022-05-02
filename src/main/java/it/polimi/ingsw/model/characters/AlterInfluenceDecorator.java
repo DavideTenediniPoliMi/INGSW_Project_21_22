@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.characters;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
@@ -21,7 +22,7 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator {
     private TowerColor currentTeam;
     private Color selectedColor;
     private int islandIndex;
-    private final boolean isAddTwo, isIgnoreTowers, isIgnoreColor;
+    private boolean isAddTwo, isIgnoreTowers, isIgnoreColor;
 
     /**
      * Constructor that instantiates this card specifying which one of the 3 it is.
@@ -114,11 +115,25 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator {
 
     @Override
     public JsonObject serialize() {
-        return null;
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
+
+        return jsonObject;
     }
 
     @Override
     public void deserialize(JsonObject jsonObject) {
+        if(jsonObject.has("boostedTeam"))
+            boostedTeam = TowerColor.valueOf(jsonObject.get("boostedTeam").getAsString());
+        if(jsonObject.has("currentTeam"))
+            currentTeam = TowerColor.valueOf(jsonObject.get("currentTeam").getAsString());
+        if(jsonObject.has("selectedColor"))
+            selectedColor = Color.valueOf(jsonObject.get("selectedColor").getAsString());
+        islandIndex = jsonObject.get("islandIndex").getAsInt();
+        isAddTwo = jsonObject.get("isAddTwo").getAsBoolean();
+        isIgnoreTowers = jsonObject.get("isIgnoreTowers").getAsBoolean();
+        isIgnoreColor = jsonObject.get("isIgnoreColor").getAsBoolean();
 
+        card.deserialize(jsonObject.get("card").getAsJsonObject());
     }
 }

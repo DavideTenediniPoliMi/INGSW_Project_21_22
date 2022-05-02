@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.characters;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
@@ -76,11 +77,17 @@ public class ReturnToBagDecorator extends CharacterCardDecorator {
 
     @Override
     public JsonObject serialize() {
-        return null;
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
+
+        return jsonObject;
     }
 
     @Override
     public void deserialize(JsonObject jsonObject) {
+        if(jsonObject.has("selectedColor"))
+            selectedColor = Color.valueOf(jsonObject.get("selectedColor").getAsString());
 
+        card.deserialize(jsonObject.get("card").getAsJsonObject());
     }
 }
