@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.characters;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.exceptions.students.NotEnoughStudentsException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.Board;
@@ -142,5 +143,15 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
      */
     public int getStudentsByColor(Color color) {
         return students.getByColor(color);
+    }
+
+    @Override
+    public JsonObject serialize() {
+        return null;
+    }
+
+    @Override
+    public void deserialize(JsonObject jsonObject) {
+
     }
 }

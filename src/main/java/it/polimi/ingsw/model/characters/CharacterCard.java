@@ -3,11 +3,12 @@ package it.polimi.ingsw.model.characters;
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.network.parameters.ActionResponseParameters;
+import it.polimi.ingsw.utils.Serializable;
 
 /**
  * Abstract class representing a generic Character Card.
  */
-public abstract class CharacterCard {
+public abstract class CharacterCard implements Serializable {
     private int cost;
     private boolean active;
     private final EffectType effectType;

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.characters;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.network.parameters.CardParameters;
@@ -64,5 +65,15 @@ public class ExchangeStudentsDecorator extends CharacterCardDecorator {
         board.addToDiningRoomOf(playerID, fromEntrance);
 
         return -1;
+    }
+
+    @Override
+    public JsonObject serialize() {
+        return null;
+    }
+
+    @Override
+    public void deserialize(JsonObject jsonObject) {
+
     }
 }

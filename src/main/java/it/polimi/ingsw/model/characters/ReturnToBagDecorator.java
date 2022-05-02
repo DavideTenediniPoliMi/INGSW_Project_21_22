@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.characters;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.Board;
@@ -71,5 +72,15 @@ public class ReturnToBagDecorator extends CharacterCardDecorator {
         }
 
         return 0;
+    }
+
+    @Override
+    public JsonObject serialize() {
+        return null;
+    }
+
+    @Override
+    public void deserialize(JsonObject jsonObject) {
+
     }
 }

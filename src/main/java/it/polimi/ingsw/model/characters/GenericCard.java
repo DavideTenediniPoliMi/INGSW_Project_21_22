@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.characters;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.network.parameters.ActionResponseParameters;
@@ -34,4 +35,14 @@ public class GenericCard extends CharacterCard {
 
     @Override
     public void setParameters(CardParameters params) {}
+
+    @Override
+    public JsonObject serialize() {
+        return null;
+    }
+
+    @Override
+    public void deserialize(JsonObject jsonObject) {
+
+    }
 }
