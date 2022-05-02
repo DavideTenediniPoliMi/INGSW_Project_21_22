@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.board;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 
@@ -71,5 +73,18 @@ public class MultiIsland extends Island {
     @Override
     public int getNumIslands() {
         return leftIsland.getNumIslands() + rightIsland.getNumIslands();
+    }
+
+    @Override
+    public JsonObject serialize() {
+        Gson gson = new Gson();
+        return gson.toJsonTree(this).getAsJsonObject();
+    }
+
+    @Override
+    public void deserialize(JsonObject jsonObject) {
+        leftIsland.deserialize(jsonObject.get("leftIsland").getAsJsonObject());
+        rightIsland.deserialize(jsonObject.get("rightIsland").getAsJsonObject());
+        super.deserialize(jsonObject);
     }
 }

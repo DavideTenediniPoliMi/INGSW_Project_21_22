@@ -1,11 +1,15 @@
 package it.polimi.ingsw.model.board;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.Color;
+import it.polimi.ingsw.utils.Serializable;
 
 /**
  * Class used to track the owners of the various professors.
  */
-public class ProfessorTracker implements Cloneable {
+public class ProfessorTracker implements Cloneable, Serializable {
     private final int[] owners;
 
     /**
@@ -46,5 +50,20 @@ public class ProfessorTracker implements Cloneable {
         System.arraycopy(owners, 0, temp.owners, 0, Color.NUM_COLORS);
 
         return temp;
+    }
+
+    @Override
+    public JsonObject serialize() {
+        Gson gson = new Gson();
+        return gson.toJsonTree(this).getAsJsonObject();
+    }
+
+    @Override
+    public void deserialize(JsonObject jsonObject) {
+        JsonArray studentsJson = jsonObject.getAsJsonArray("owners");
+
+        for(int c = 0; c < Color.NUM_COLORS; c++) {
+            owners[c] = studentsJson.get(c).getAsInt();
+        }
     }
 }
