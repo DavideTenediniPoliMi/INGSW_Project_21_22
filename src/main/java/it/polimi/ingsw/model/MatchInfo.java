@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.observer.Observable;
 import it.polimi.ingsw.network.parameters.ActionResponseParameters;
+import it.polimi.ingsw.network.parameters.ResponseParameters;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -14,7 +15,7 @@ import java.util.Queue;
 /**
  * Class used to keep data about a game of Eriantys
  */
-public class MatchInfo extends Observable<ActionResponseParameters> {
+public class MatchInfo extends Observable<ResponseParameters> {
     private static MatchInfo instance;
     private int selectedNumPlayer;
     private boolean expertMode;

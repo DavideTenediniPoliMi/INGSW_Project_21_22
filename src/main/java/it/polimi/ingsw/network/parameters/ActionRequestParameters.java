@@ -1,12 +1,14 @@
 package it.polimi.ingsw.network.parameters;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.model.enumerations.Color;
+import it.polimi.ingsw.utils.Serializable;
 
 /**
  * Class representing a request message from the client, with every information needed for any action during the game.
  */
-public class ActionRequestParameters {
+public class ActionRequestParameters implements Serializable {
     private CommandType commandType;
     private int index;
     private Color color;
@@ -90,5 +92,15 @@ public class ActionRequestParameters {
     public ActionRequestParameters setCardParams(CardParameters cardParams) {
         this.cardParams = cardParams;
         return this;
+    }
+
+    @Override
+    public JsonObject serialize() {
+        return null;
+    }
+
+    @Override
+    public void deserialize(String json) {
+
     }
 }

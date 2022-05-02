@@ -1,43 +1,33 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.network.observer.Observable;
-import it.polimi.ingsw.network.observer.Observer;
-import it.polimi.ingsw.network.parameters.ActionResponseParameters;
-import it.polimi.ingsw.network.parameters.SetupResponseParameters;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Lobby;
+import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.network.observer.Observable;
+import it.polimi.ingsw.network.observer.Observer;
+import it.polimi.ingsw.network.parameters.ResponseParameters;
 
-public class VirtualView extends Observable<String> {
-
-    private final GameObserver gameObserver;
-    private final LobbyObserver lobbyObserver;
-
+public class VirtualView extends Observable<String> implements Observer<ResponseParameters> {
     public VirtualView() {
-        gameObserver = new GameObserver();
-        lobbyObserver = new LobbyObserver();
+        Game.getInstance().addObserver(this);
+        MatchInfo.getInstance().addObserver(this);
+        Lobby.getLobby().addObserver(this);
     }
 
-    class GameObserver implements Observer<ActionResponseParameters> {
+    public void handleRequest(String message) {
 
-        public GameObserver() {
-            Game.getInstance().addObserver(this);
-        }
-
-        @Override
-        public void update(ActionResponseParameters message) {
-
-        }
     }
 
-    class LobbyObserver implements Observer<SetupResponseParameters> {
+    private void requestSetup() {
 
-        public LobbyObserver() {
-            Lobby.getLobby().addObserver(this);
-        }
+    }
 
-        @Override
-        public void update(SetupResponseParameters message) {
+    private void requestAction() {
 
-        }
+    }
+
+    @Override
+    public void update(ResponseParameters message) {
+        notify(message.serialize().toString());
     }
 }
