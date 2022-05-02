@@ -1,11 +1,14 @@
 package it.polimi.ingsw.model.board;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.helpers.StudentGroup;
+import it.polimi.ingsw.utils.Serializable;
 
 /**
  * Class corresponding to the Cloud entity in a Game
  */
-public class Cloud {
+public class Cloud implements Serializable {
     private final StudentGroup students = new StudentGroup();
     private boolean available;
 
@@ -64,5 +67,17 @@ public class Cloud {
         setAvailableTo(false);
 
         return temp;
+    }
+
+    @Override
+    public JsonObject serialize() {
+        Gson gson = new Gson();
+        return gson.toJsonTree(this).getAsJsonObject();
+    }
+
+    @Override
+    public void deserialize(JsonObject jsonObject) {
+        setAvailableTo(jsonObject.get("available").getAsBoolean());
+        students.deserialize(jsonObject.get("students").getAsJsonObject());
     }
 }

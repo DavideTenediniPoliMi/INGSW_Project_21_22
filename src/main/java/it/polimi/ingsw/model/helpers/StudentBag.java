@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model.helpers;
 
+import com.google.gson.*;
 import it.polimi.ingsw.model.enumerations.Color;
+import it.polimi.ingsw.utils.Serializable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +12,7 @@ import java.util.Random;
 /**
  * Class representing a bag of students. Used to implement random student drawing.
  */
-public class StudentBag {
+public class StudentBag implements Serializable {
     private final List<Color> availableColors = new ArrayList<>(Arrays.asList(Color.values().clone()));
     private final StudentGroup students = new StudentGroup();
     private final Random rand = new Random();
@@ -110,5 +112,29 @@ public class StudentBag {
         if(empty){
             empty = false;
         }
+    }
+
+    @Override
+    public JsonObject serialize() {
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
+
+        jsonObject.remove("rand");
+
+        return jsonObject;
+    }
+
+    @Override
+    public void deserialize(JsonObject jsonObject) {
+        availableColors.clear();
+        JsonArray colors = jsonObject.getAsJsonArray("availableColors");
+        for(JsonElement entry : colors) {
+            Color color = Color.valueOf(entry.getAsString());
+            availableColors.add(color);
+        }
+
+        students.deserialize(jsonObject.get("students").getAsJsonObject());
+        studentsLeft = jsonObject.get("studentsLeft").getAsInt();
+        empty = jsonObject.get("empty").getAsBoolean();
     }
 }
