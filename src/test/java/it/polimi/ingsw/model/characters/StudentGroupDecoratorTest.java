@@ -181,4 +181,16 @@ public class StudentGroupDecoratorTest {
         p3.setFromDestination(new StudentGroup(Color.GREEN, 3));
         assertThrowsExactly(NotEnoughStudentsException.class, () -> c3.setParameters(p3));
     }
+
+    @Test
+    void serializeTest() {
+        System.out.println(c1.serialize());
+    }
+
+    @Test
+    void deserializeTest() {
+        System.out.println(c1.serialize());
+        c2.deserialize(c1.serialize());
+        System.out.println(c2.serialize());
+    }
 }

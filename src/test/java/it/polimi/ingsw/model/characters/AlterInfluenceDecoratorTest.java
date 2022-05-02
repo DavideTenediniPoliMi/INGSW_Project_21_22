@@ -156,4 +156,16 @@ public class AlterInfluenceDecoratorTest {
         Island island = board.getIslandAt(p5.getIslandIndex());
         assertEquals(0, delta);
     }
+
+    @Test
+    void serializeTest() {
+        System.out.println(c1.serialize());
+    }
+
+    @Test
+    void deserializeTest() {
+        System.out.println(c1.serialize());
+        c2.deserialize(c1.serialize());
+        System.out.println(c2.serialize());
+    }
 }

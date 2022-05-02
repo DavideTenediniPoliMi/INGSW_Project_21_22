@@ -80,4 +80,17 @@ public class ExchangeStudentsDecoratorTest {
             }
         }
     }
+
+    @Test
+    void serializeTest() {
+        System.out.println(c.serialize());
+    }
+
+    @Test
+    void deserializeTest() {
+        System.out.println(c.serialize());
+        ExchangeStudentsDecorator c1 = new ExchangeStudentsDecorator(new GenericCard(3,EffectType.EXCHANGE_STUDENTS));
+        c1.deserialize(c.serialize());
+        System.out.println(c1.serialize());
+    }
 }

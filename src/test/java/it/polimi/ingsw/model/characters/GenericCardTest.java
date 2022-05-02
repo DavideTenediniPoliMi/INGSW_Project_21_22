@@ -45,4 +45,17 @@ public class GenericCardTest {
     void testActionResponseParameters() {
         assertNull(c.getResponseParameters());
     }
+
+    @Test
+    void serializeTest() {
+        System.out.println(c.serialize());
+    }
+
+    @Test
+    void deserializeTest() {
+        GenericCard c1 = new GenericCard(0, EffectType.STUDENT_GROUP);
+        System.out.println(c.serialize());
+        c1.deserialize(c.serialize());
+        System.out.println(c1.serialize());
+    }
 }

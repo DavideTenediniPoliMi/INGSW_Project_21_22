@@ -122,4 +122,16 @@ public class ReturnToBagDecoratorTest {
             assertEquals(Math.max(0, numStudentsBefore[pl.getID()]-3), numStud);
         }
     }
+
+    @Test
+    void serializeTest() {
+        System.out.println(c.serialize());
+    }
+
+    @Test
+    void deserializeTest() {
+        System.out.println(c.serialize());
+        c2.deserialize(c.serialize());
+        System.out.println(c2.serialize());
+    }
 }
