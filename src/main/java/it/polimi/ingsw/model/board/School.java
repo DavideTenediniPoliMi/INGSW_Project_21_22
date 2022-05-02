@@ -1,13 +1,16 @@
 package it.polimi.ingsw.model.board;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
+import it.polimi.ingsw.utils.Serializable;
 
 /**
  * Class representing the School entity in the game
  */
-public class School {
+public class School implements Serializable {
     private final Player owner;
     private int numTowers;
     private final StudentGroup entrance = new StudentGroup();
@@ -112,5 +115,20 @@ public class School {
      */
     protected void addToDiningRoom(StudentGroup students) {
         students.transferAllTo(diningRoom);
+    }
+
+    @Override
+    public JsonObject serialize() {
+        Gson gson = new Gson();
+
+        return gson.toJsonTree(this).getAsJsonObject();
+    }
+
+    @Override
+    public void deserialize(JsonObject jsonObject) {
+        owner.deserialize(jsonObject.get("owner").getAsJsonObject());
+        numTowers = jsonObject.get("numTowers").getAsInt();
+        entrance.deserialize(jsonObject.get("entrance").getAsJsonObject());
+        diningRoom.deserialize(jsonObject.get("diningRoom").getAsJsonObject());
     }
 }
