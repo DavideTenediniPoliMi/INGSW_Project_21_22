@@ -9,14 +9,19 @@ import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.network.parameters.RequestParameters;
 
+/**
+ * Class implementing the factory pattern for <code>Command</code> classes.
+ */
 public class CommandFactory {
 
     private final GameController gameController;
     private final LobbyController lobbyController;
+    private final int playerID;
 
-    public CommandFactory(LobbyController lobbyController, GameController gameController) {
+    public CommandFactory(int playerID, LobbyController lobbyController, GameController gameController) {
         this.gameController = gameController;
         this.lobbyController = lobbyController;
+        this.playerID = playerID;
     }
 
     public Command createCommand(RequestParameters params) throws BadParametersException {
@@ -29,6 +34,8 @@ public class CommandFactory {
             throw new BadParametersException("LobbyController is null");
         }else if(gameController == null) {
             throw new BadParametersException("GameController is null");
+        }else if(playerID < 0) {
+            throw new BadParametersException("Player ID is invalid (" + playerID + ")");
         }
 
         switch(params.getCommandType()) {
@@ -40,9 +47,8 @@ public class CommandFactory {
                  *  - PlayerID
                  *  - Name
                  */
-                int playerID = params.getIndex();
                 String name = params.getName();
-                if(playerID >= 0 && name != null && name.length() > 0) {
+                if(name != null && name.length() > 0) {
                     return new LobbyJoinCommand(playerID, name, lobbyController);
                 }
                 throw new BadParametersException("JOIN command - Given params:" +
@@ -53,9 +59,8 @@ public class CommandFactory {
                  *  - PlayerID
                  *  - TowerColor
                  */
-                playerID = params.getIndex();
                 TowerColor team = params.getTowerColor();
-                if(playerID >= 0 && team != null) {
+                if(team != null) {
                     return new LobbySelectTeamCommand(playerID, team, lobbyController);
                 }
                 throw new BadParametersException("SELECT TEAM command - Given params:" +
@@ -66,9 +71,8 @@ public class CommandFactory {
                  *  - PlayerID
                  *  - CardBack
                  */
-                playerID = params.getIndex();
                 CardBack cardBack = params.getCardBack();
-                if(playerID >= 0 && cardBack != null) {
+                if(cardBack != null) {
                     return new LobbySelectCBCommand(playerID, cardBack, lobbyController);
                 }
                 throw new BadParametersException("SELECT CARDBACK command - Given params:" +
@@ -79,13 +83,8 @@ public class CommandFactory {
                  *  - PlayerID
                  *  - Ready
                  */
-                playerID = params.getIndex();
                 boolean ready = params.isReady();
-                if(playerID >= 0) {
-                    return new LobbyReadyStatusCommand(playerID, ready, lobbyController);
-                }
-                throw new BadParametersException("READY STATUS command - Given params:" +
-                        " (playerID: " + playerID + ", Ready: " + ready + ")");
+                return new LobbyReadyStatusCommand(playerID, ready, lobbyController);
 
             /*
              * Game-related commands

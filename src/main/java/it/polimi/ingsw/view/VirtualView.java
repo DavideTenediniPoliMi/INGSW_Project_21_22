@@ -26,7 +26,7 @@ public class VirtualView extends Observable<String> implements Observer<Response
         Game.getInstance().addObserver(this);
         MatchInfo.getInstance().addObserver(this);
         Lobby.getLobby().addObserver(this);
-        commandFactory = new CommandFactory(lobbyController, gameController);
+        commandFactory = new CommandFactory(playerID, lobbyController, gameController);
     }
 
     public void handleRequest(String message) {
@@ -37,7 +37,7 @@ public class VirtualView extends Observable<String> implements Observer<Response
             if (params.getCommandType().isInGame) {
                 gameController.requestCommand(playerID, command);
             } else {
-                lobbyController.requestCommand(command); // TODO id?
+                lobbyController.requestCommand(command);
             }
         } catch (Exception e) {
             e.printStackTrace();
