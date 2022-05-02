@@ -1,8 +1,13 @@
 package it.polimi.ingsw.model;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.TowerColor;
+import it.polimi.ingsw.utils.Serializable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,13 +15,13 @@ import java.util.List;
 /**
  * Class holding every information about a Player
  */
-public class Player {
-    private final int ID;
-    private final String name;
+public class Player implements Serializable {
+    private int ID;
+    private String name;
     private TowerColor teamColor;
     private CardBack cardBack;
     private boolean towerHolder;
-    private final List<Card> playableCards = new ArrayList<>();
+    private List<Card> playableCards = new ArrayList<>();
     private Card selectedCard;
     private int numCoins;
 
@@ -172,5 +177,39 @@ public class Player {
      */
     protected void removeCoins(int amount){
         numCoins -= amount;
+    }
+
+    @Override
+    public JsonObject serialize() {
+        JsonObject jsonObject = new JsonObject();
+
+        jsonObject.add("ID", new JsonPrimitive(ID));
+        jsonObject.add("name", new JsonPrimitive(name));
+        jsonObject.add("teamColor", new JsonPrimitive(teamColor.toString()));
+        jsonObject.add("cardBack", new JsonPrimitive(cardBack.toString()));
+        jsonObject.add("towerHolder", new JsonPrimitive(towerHolder));
+        jsonObject.add("playableCards", new JsonPrimitive(playableCards.toString()));
+        jsonObject.add("selectedCard", new JsonPrimitive(selectedCard.toString()));
+        jsonObject.add("numCoins", new JsonPrimitive(numCoins));
+
+        return jsonObject;
+    }
+
+    @Override
+    public void deserialize(JsonObject jsonObject) {
+        ID = jsonObject.get("ID").getAsInt();
+        name = jsonObject.get("name").getAsString();
+        teamColor = TowerColor.valueOf(jsonObject.get("teamColor").getAsString());
+        cardBack = CardBack.valueOf(jsonObject.get("cardBack").getAsString());
+        towerHolder = jsonObject.get("towerHolder").getAsBoolean();
+
+        JsonArray jsonCards = jsonObject.get("playableCards").getAsJsonArray();
+        playableCards = null;
+        for(JsonElement jsonElement : jsonCards) {
+            playableCards.add(Card.valueOf(jsonElement.getAsString()));
+        }
+
+        selectedCard = Card.valueOf(jsonObject.get("selectedCard").getAsString());
+        numCoins = jsonObject.get("numCoins").getAsInt();
     }
 }
