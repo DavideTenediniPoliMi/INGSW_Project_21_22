@@ -27,7 +27,7 @@ public class VirtualView extends Observable<String> implements Observer<Response
     }
 
     @Override
-    public void update(ResponseParameters message) {
-        notify(message.serialize().toString());
+    public void update(ResponseParameters params) {
+        notify(params.getMessage());
     }
 }

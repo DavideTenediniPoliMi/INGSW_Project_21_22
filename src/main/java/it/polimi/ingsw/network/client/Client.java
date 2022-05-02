@@ -26,17 +26,17 @@ public class Client {
             int num = socketIn.readInt();
 
             while (num != -1) {
-                System.out.println("received message of length " + num);
-
                 String message = "";
                 for (int i = 0; i < num; i++) {
                     message += socketIn.readChar();
                 }
 
-                System.out.println("Message received : " + message);
+                System.out.println("Client: Message of length " + num + " received :\n" + message);
 
                 num = socketIn.readChar();
             }
+        } catch(IOException e){
+            System.out.println("Client: server disconnected");
         } finally {
             socketIn.close();
             socketOut.close();
