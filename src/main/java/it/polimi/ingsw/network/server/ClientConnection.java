@@ -7,9 +7,7 @@ import it.polimi.ingsw.view.VirtualView;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 public class ClientConnection implements Observer<String>, Runnable{
     private final Socket serverSocket;
@@ -18,6 +16,7 @@ public class ClientConnection implements Observer<String>, Runnable{
     private final VirtualView virtualView;
     private final DataOutputStream out;
     private final DataInputStream in;
+    private ScheduledFuture pingTask;
 
 
     public ClientConnection(Socket socket, LobbyController lobbyController, GameController gameController) throws IOException {
@@ -32,8 +31,10 @@ public class ClientConnection implements Observer<String>, Runnable{
         virtualView.addObserver(this);
 
         // PING
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(
+        ScheduledThreadPoolExecutor executor = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(1);
+        executor.setRemoveOnCancelPolicy(true);
+
+        pingTask = executor.scheduleAtFixedRate(
                 () -> send(""),
                 60, 5, TimeUnit.SECONDS);
     }
@@ -59,7 +60,8 @@ public class ClientConnection implements Observer<String>, Runnable{
                 length = in.readInt();
             }
         } catch (IOException e){
-            System.err.println(e.getMessage());
+            System.out.println("ClientConnection: client disconnected, stopping ping");
+            pingTask.cancel(false);
             // TODO disconnect
         }
     }
@@ -70,7 +72,7 @@ public class ClientConnection implements Observer<String>, Runnable{
     }
 
     public synchronized void send(String message) {
-        System.out.println("ClientConnection: sending message " + message + " of size " + message.length());
+        System.out.println("ClientConnection: sending message of size " + message.length() + ":\n" + message);
         try {
             out.writeInt(message.length());
 
@@ -80,7 +82,8 @@ public class ClientConnection implements Observer<String>, Runnable{
 
             out.flush();
         } catch(IOException e) {
-            System.err.println(e.getMessage());
+            System.out.println("ClientConnection: client disconnected, stopping ping");
+            pingTask.cancel(false);
             // TODO disconnect
         }
     }
