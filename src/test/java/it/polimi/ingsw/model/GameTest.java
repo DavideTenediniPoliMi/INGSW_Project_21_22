@@ -234,9 +234,4 @@ public class GameTest {
         g.drawStudents(120);
         assertTrue(g.isStudentBagEmpty());
     }
-
-    @Test
-    public void testSerialize() {
-        System.out.println(g.serialize());
-    }
 }
