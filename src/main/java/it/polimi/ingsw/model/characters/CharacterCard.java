@@ -2,7 +2,7 @@ package it.polimi.ingsw.model.characters;
 
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.network.parameters.CardParameters;
-import it.polimi.ingsw.network.parameters.ActionResponseParameters;
+import it.polimi.ingsw.network.parameters.ResponseParameters;
 import it.polimi.ingsw.utils.Serializable;
 
 /**
@@ -91,5 +91,5 @@ public abstract class CharacterCard implements Serializable {
      *
      * @return <code>ResponseParameters</code> for this <code>CharacterCard</code>.
      */
-    public abstract ActionResponseParameters getResponseParameters();
+    public abstract ResponseParameters getResponseParameters();
 }

@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.board.School;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
-import it.polimi.ingsw.network.parameters.ActionResponseParameters;
+import it.polimi.ingsw.network.parameters.ResponseParameters;
 
 /**
  * Class to manage the behaviour of 1 <code>CharacterCard</code>, <code>RETURN_TO_BAG</code>.
@@ -44,9 +44,9 @@ public class ReturnToBagDecorator extends CharacterCardDecorator {
      * @return <code>ResponseParameters</code> for this <code>CharacterCard</code>.
      */
     @Override
-    public ActionResponseParameters getResponseParameters() {
+    public ResponseParameters getResponseParameters() {
         Game game = Game.getInstance();
-        ActionResponseParameters params = new ActionResponseParameters();
+        ResponseParameters params = new ResponseParameters();
 
         return params.setSchools(game.getBoard().getSchools())
                 .setBagEmpty(game.isStudentBagEmpty());

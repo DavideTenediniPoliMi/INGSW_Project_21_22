@@ -4,7 +4,6 @@ import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.network.observer.Observable;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
-import it.polimi.ingsw.network.parameters.SetupResponseParameters;
 
 import java.util.*;
 
@@ -54,7 +53,7 @@ public class Lobby extends Observable<ResponseParameters> {
         players.add(new Player(playerID, name));
         readyStatus.put(playerID, false);
 
-        SetupResponseParameters params = new SetupResponseParameters().setPlayer(getPlayerByID(playerID));
+        ResponseParameters params = new ResponseParameters().setPlayer(getPlayerByID(playerID));
         notify(params);
     }
 
@@ -69,7 +68,7 @@ public class Lobby extends Observable<ResponseParameters> {
             players.remove(toRemove);
         }
 
-        SetupResponseParameters params = new SetupResponseParameters().setPlayers(players);
+        ResponseParameters params = new ResponseParameters().setPlayers(players);
         notify(params);
     }
 
@@ -119,7 +118,7 @@ public class Lobby extends Observable<ResponseParameters> {
             p.setTowerHolder(isFirstOnTeam(playerID, teamColor));
         }
 
-        SetupResponseParameters params = new SetupResponseParameters().setPlayer(getPlayerByID(playerID));
+        ResponseParameters params = new ResponseParameters().setPlayer(getPlayerByID(playerID));
         notify(params);
     }
 
@@ -135,7 +134,7 @@ public class Lobby extends Observable<ResponseParameters> {
             p.setCardBack(cardBack);
         }
 
-        SetupResponseParameters params = new SetupResponseParameters().setPlayer(getPlayerByID(playerID));
+        ResponseParameters params = new ResponseParameters().setPlayer(getPlayerByID(playerID));
         notify(params);
     }
 

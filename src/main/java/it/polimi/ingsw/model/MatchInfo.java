@@ -4,7 +4,6 @@ import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.observer.Observable;
-import it.polimi.ingsw.network.parameters.ActionResponseParameters;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
 
 import java.util.ArrayList;
@@ -107,7 +106,7 @@ public class MatchInfo extends Observable<ResponseParameters> {
      */
     public synchronized void setNumPlayersConnected(int numPlayersConnected) {
         this.numPlayersConnected = numPlayersConnected;
-        notify(new ActionResponseParameters().setSendMatchInfo(true));
+        notify(new ResponseParameters().setSendMatchInfo(true));
     }
 
     /**
@@ -148,7 +147,7 @@ public class MatchInfo extends Observable<ResponseParameters> {
      */
     public synchronized void setStateType(TurnState stateType) {
         this.stateType = stateType;
-        notify(new ActionResponseParameters().setSendMatchInfo(true));
+        notify(new ResponseParameters().setSendMatchInfo(true));
     }
 
     /**
@@ -166,7 +165,7 @@ public class MatchInfo extends Observable<ResponseParameters> {
      */
     public synchronized void removePlayer() {
         playOrder.remove();
-        notify(new ActionResponseParameters().setSendMatchInfo(true));
+        notify(new ResponseParameters().setSendMatchInfo(true));
     }
 
     /**
@@ -176,7 +175,7 @@ public class MatchInfo extends Observable<ResponseParameters> {
      */
     public synchronized void addPlayer(int playerID) {
         playOrder.add(playerID);
-        notify(new ActionResponseParameters().setSendMatchInfo(true));
+        notify(new ResponseParameters().setSendMatchInfo(true));
     }
 
     /**
@@ -193,7 +192,7 @@ public class MatchInfo extends Observable<ResponseParameters> {
      */
     public synchronized void resetNumMovedStudents() {
         numMovedStudents = 0;
-        notify(new ActionResponseParameters().setSendMatchInfo(true));
+        notify(new ResponseParameters().setSendMatchInfo(true));
     }
 
     /**
@@ -201,7 +200,7 @@ public class MatchInfo extends Observable<ResponseParameters> {
      */
     public synchronized void studentWasMoved() {
         numMovedStudents++;
-        notify(new ActionResponseParameters().setSendMatchInfo(true));
+        notify(new ResponseParameters().setSendMatchInfo(true));
     }
 
     /**
@@ -257,7 +256,7 @@ public class MatchInfo extends Observable<ResponseParameters> {
     public synchronized void declareWinner(TowerColor teamColor) {
         gameOver = true;
         winners.add(teamColor);
-        notify(new ActionResponseParameters().setSendMatchInfo(true));
+        notify(new ResponseParameters().setSendMatchInfo(true));
     }
 
     /**
@@ -269,7 +268,7 @@ public class MatchInfo extends Observable<ResponseParameters> {
         gameOver = true;
         gameTied = true;
         winners.addAll(teamColors);
-        notify(new ActionResponseParameters().setSendMatchInfo(true));
+        notify(new ResponseParameters().setSendMatchInfo(true));
     }
 
     /**
@@ -289,6 +288,6 @@ public class MatchInfo extends Observable<ResponseParameters> {
      */
     public synchronized void setGameStatus(GameStatus gameStatus) {
         this.gameStatus = gameStatus;
-        notify(new ActionResponseParameters().setSendMatchInfo(true));
+        notify(new ResponseParameters().setSendMatchInfo(true));
     }
 }

@@ -8,9 +8,8 @@ import it.polimi.ingsw.network.observer.Observable;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.model.helpers.StudentGroup;
-import it.polimi.ingsw.network.parameters.ActionResponseParameters;
-import it.polimi.ingsw.utils.Serializable;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
+import it.polimi.ingsw.utils.Serializable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +75,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
      * @see TowerColor
      */
     public void conquerIsland(TowerColor teamColor){
-        ActionResponseParameters params = new ActionResponseParameters();
+        ResponseParameters params = new ResponseParameters();
         TowerColor oldOwnerColor = board.getIslandAt(board.getMNPosition()).getTeamColor();
         if(oldOwnerColor != null) {
             params.addSchool(board.getSchoolByPlayerID(getTowerHolderIDOf(oldOwnerColor)));
@@ -109,7 +108,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
     public void mergeIslands(int leftIslandIndex, int rightIslandIndex) {
         board.mergeIslands(leftIslandIndex, rightIslandIndex);
 
-        ActionResponseParameters params = new ActionResponseParameters().setIslands(board.getIslands());
+        ResponseParameters params = new ResponseParameters().setIslands(board.getIslands());
         notify(params);
     }
 
@@ -134,7 +133,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
     public void moveMN(int steps){
         board.moveMN(steps);
 
-        ActionResponseParameters params = new ActionResponseParameters().setIslands(board.getIslands());
+        ResponseParameters params = new ResponseParameters().setIslands(board.getIslands());
         notify(params);
     }
 
@@ -161,7 +160,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         StudentGroup temp = board.collectFromCloud(cloudIndex);
         board.addToEntranceOf(playerID, temp);
 
-        ActionResponseParameters params = new ActionResponseParameters()
+        ResponseParameters params = new ResponseParameters()
                 .setClouds(board.getClouds())
                 .addSchool(board.getSchoolByPlayerID(playerID));
         notify(params);
@@ -176,7 +175,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
     public void refillClouds(int studentsAmount){
         board.refillClouds(studentsAmount);
 
-        ActionResponseParameters params = new ActionResponseParameters()
+        ResponseParameters params = new ResponseParameters()
                 .setClouds(board.getClouds())
                 .setBagEmpty(isStudentBagEmpty());
         notify(params);
@@ -221,7 +220,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         board.addStudentsToIsland(islandIndex, temp);
 
 
-        ActionResponseParameters params = new ActionResponseParameters()
+        ResponseParameters params = new ResponseParameters()
                 .setIslands(board.getIslands())
                 .addSchool(board.getSchoolByPlayerID(playerID));
         notify(params);
@@ -241,7 +240,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         board.removeFromEntranceOf(playerID, temp);
         board.addToDiningRoomOf(playerID, temp);
 
-        ActionResponseParameters params = new ActionResponseParameters().addSchool(board.getSchoolByPlayerID(playerID));
+        ResponseParameters params = new ResponseParameters().addSchool(board.getSchoolByPlayerID(playerID));
         notify(params);
     }
 
@@ -278,7 +277,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
     public void giveProfessorTo(int playerID, Color c){
         board.giveProfessorTo(playerID, c);
 
-        ActionResponseParameters params = new ActionResponseParameters().setProfessors(board.getProfessorOwners());
+        ResponseParameters params = new ResponseParameters().setProfessors(board.getProfessorOwners());
         notify(params);
     }
 
@@ -345,7 +344,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         getPlayerByID(playerID).setSelectedCard(selectedCard);
         selectedCard.use(playerID);
 
-        ActionResponseParameters params = new ActionResponseParameters().setPlayer(getPlayerByID(playerID))
+        ResponseParameters params = new ResponseParameters().setPlayer(getPlayerByID(playerID))
                 .setSendCards(true);
         notify(params);
     }
@@ -358,7 +357,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
             card.reset();
         }
 
-        ActionResponseParameters params = new ActionResponseParameters().setSendCards(true);
+        ResponseParameters params = new ResponseParameters().setSendCards(true);
         notify(params);
     }
 
@@ -371,7 +370,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         board.takeCoin();
         getPlayerByID(playerID).addCoin();
 
-        ActionResponseParameters params = new ActionResponseParameters().setPlayer(getPlayerByID(playerID))
+        ResponseParameters params = new ResponseParameters().setPlayer(getPlayerByID(playerID))
                 .setCoinsLeft(board.getNumCoinsLeft());
         notify(params);
     }
@@ -440,7 +439,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
 
         card.setActive();
 
-        ActionResponseParameters params = new ActionResponseParameters().setCharacterCards(characterCards);
+        ResponseParameters params = new ResponseParameters().setCharacterCards(characterCards);
         notify(params);
     }
 
@@ -461,7 +460,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
     public int activateCard() {
         int temp = getActiveCharacterCard().activate();
 
-        ActionResponseParameters params = getActiveCharacterCard().getResponseParameters();
+        ResponseParameters params = getActiveCharacterCard().getResponseParameters();
         notify(params);
         return temp;
     }
