@@ -59,7 +59,7 @@ public class SetupResponseParameters extends ResponseParameters {
     }
 
     @Override
-    public void deserialize(String json) {
+    public void deserialize(JsonObject jsonObject) {
 
     }
 

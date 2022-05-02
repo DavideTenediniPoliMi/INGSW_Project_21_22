@@ -244,7 +244,7 @@ public class ActionResponseParameters extends ResponseParameters {
     }
 
     @Override
-    public void deserialize(String json) {
+    public void deserialize(JsonObject jsonObject) {
 
     }
 }

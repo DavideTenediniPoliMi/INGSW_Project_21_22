@@ -100,7 +100,7 @@ public class ActionRequestParameters implements Serializable {
     }
 
     @Override
-    public void deserialize(String json) {
+    public void deserialize(JsonObject jsonObject) {
 
     }
 }
