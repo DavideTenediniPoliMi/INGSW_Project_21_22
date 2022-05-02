@@ -18,12 +18,26 @@ public class CommandFactory {
     private final LobbyController lobbyController;
     private final int playerID;
 
+    /**
+     * Sole constructor for <code>CommandFactory</code>.
+     *
+     * @param playerID the ID of the <code>Player</code> bound to this <code>CommandFactory</code>.
+     * @param lobbyController the <code>LobbyController</code> instance for this game.
+     * @param gameController the <code>GameController</code> instance for this game.
+     */
     public CommandFactory(int playerID, LobbyController lobbyController, GameController gameController) {
         this.gameController = gameController;
         this.lobbyController = lobbyController;
         this.playerID = playerID;
     }
 
+    /**
+     * Creates a <code>Command</code> from the specified <code>RequestParameters</code>.
+     *
+     * @param params the <code>RequestParameters</code> from a received message.
+     * @return a <code>Command</code> instance for the specified parameters.
+     * @throws BadParametersException if any parameter for the requested <code>Command</code> is invalid.
+     */
     public Command createCommand(RequestParameters params) throws BadParametersException {
         /*
          * General nullcheck before creating a new Command
