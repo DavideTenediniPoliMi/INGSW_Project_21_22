@@ -55,4 +55,17 @@ class PlayerTest {
         player.removeCoins(2);
         assertEquals(coinsBefore - amount, player.getNumCoins());
     }
+
+    @Test
+    void serializeTest() {
+        System.out.println(player.serialize().toString());
+    }
+
+    @Test
+    void deserializeTest() {
+        Player p = new Player(1, "ciao");
+        System.out.println(player.serialize());
+        p.deserialize(player.serialize());
+        System.out.println(p.serialize().toString());
+    }
 }

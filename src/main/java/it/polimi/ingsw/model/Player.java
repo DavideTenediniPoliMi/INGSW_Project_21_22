@@ -1,9 +1,6 @@
 package it.polimi.ingsw.model;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
+import com.google.gson.*;
 import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.TowerColor;
@@ -181,16 +178,8 @@ public class Player implements Serializable {
 
     @Override
     public JsonObject serialize() {
-        JsonObject jsonObject = new JsonObject();
-
-        jsonObject.add("ID", new JsonPrimitive(ID));
-        jsonObject.add("name", new JsonPrimitive(name));
-        jsonObject.add("teamColor", new JsonPrimitive(teamColor.toString()));
-        jsonObject.add("cardBack", new JsonPrimitive(cardBack.toString()));
-        jsonObject.add("towerHolder", new JsonPrimitive(towerHolder));
-        jsonObject.add("playableCards", new JsonPrimitive(playableCards.toString()));
-        jsonObject.add("selectedCard", new JsonPrimitive(selectedCard.toString()));
-        jsonObject.add("numCoins", new JsonPrimitive(numCoins));
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
 
         return jsonObject;
     }
@@ -209,7 +198,8 @@ public class Player implements Serializable {
             playableCards.add(Card.valueOf(jsonElement.getAsString()));
         }
 
-        selectedCard = Card.valueOf(jsonObject.get("selectedCard").getAsString());
+        if(jsonObject.has("selectedCard"))
+            selectedCard = Card.valueOf(jsonObject.get("selectedCard").getAsString());
         numCoins = jsonObject.get("numCoins").getAsInt();
     }
 }
