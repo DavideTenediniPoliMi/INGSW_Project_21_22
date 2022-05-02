@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class representing a response from the server after any action has been played during a game.
+ * Class representing a response from the server after any action
  */
 public class ResponseParameters implements Serializable {
     private List<School> schools = new ArrayList<>();

@@ -27,7 +27,7 @@ public class ClientConnection implements Observer<String>, Runnable{
         out = new DataOutputStream(socket.getOutputStream());
         in = new DataInputStream(socket.getInputStream());
 
-        virtualView = new VirtualView();
+        virtualView = new VirtualView(lobbyController, gameController);
         virtualView.addObserver(this);
 
         // PING

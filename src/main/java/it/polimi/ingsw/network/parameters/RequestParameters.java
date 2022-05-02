@@ -8,8 +8,7 @@ import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.utils.Serializable;
 
 /**
- * Class representing a request message from the client, with every information needed for any action during the pre-game
- * <code>Lobby</code>.
+ * Class representing a request message from the client, with every information needed for any action
  */
 public class RequestParameters implements Serializable {
     private CommandType commandType;
@@ -17,7 +16,6 @@ public class RequestParameters implements Serializable {
     private TowerColor towerColor;
     private CardBack cardBack;
     private boolean ready;
-
     private int index;
     private Color color;
     private CardParameters cardParams;
@@ -135,7 +133,7 @@ public class RequestParameters implements Serializable {
      * Sets the specified index and returns this instance.
      *
      * @param index the index for this message
-     * @return this <code>ActionRequestParameters</code>
+     * @return this <code>RequestParameters</code>
      */
     public RequestParameters setIndex(int index) {
         this.index = index;
@@ -155,7 +153,7 @@ public class RequestParameters implements Serializable {
      * Sets the specified <code>Color</code> and returns this instance.
      *
      * @param color the <code>Color</code> of this message.
-     * @return this <code>ActionRequestParameters</code>
+     * @return this <code>RequestParameters</code>
      */
     public RequestParameters setColor(Color color) {
         this.color = color;
@@ -175,7 +173,7 @@ public class RequestParameters implements Serializable {
      * Sets the specified <code>CardParameters</code> and returns this instance.
      *
      * @param cardParams the <code>CardParameters</code> of this message.
-     * @return this <code>ActionRequestParameters</code>
+     * @return this <code>RequestParameters</code>
      */
     public RequestParameters setCardParams(CardParameters cardParams) {
         this.cardParams = cardParams;
