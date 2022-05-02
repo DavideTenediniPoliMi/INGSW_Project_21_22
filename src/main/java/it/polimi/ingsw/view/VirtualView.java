@@ -25,7 +25,7 @@ public class VirtualView extends Observable<String> {
 
         @Override
         public void update(ActionResponseParameters message) {
-
+            sendMessage(message.serialize().toString());
         }
     }
 
@@ -37,7 +37,23 @@ public class VirtualView extends Observable<String> {
 
         @Override
         public void update(SetupResponseParameters message) {
-
+            sendMessage(message.serialize().toString());
         }
+    }
+
+    public void handleRequest(String message) {
+
+    }
+
+    private void requestSetup() {
+
+    }
+
+    private void requestAction() {
+
+    }
+
+    private void sendMessage(String message) {
+        notify(message);
     }
 }

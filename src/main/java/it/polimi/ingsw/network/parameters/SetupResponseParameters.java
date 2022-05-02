@@ -1,13 +1,15 @@
 package it.polimi.ingsw.network.parameters;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.utils.Serializable;
 
 import java.util.List;
 
 /**
  * Class representing a response from the server after any action has been played during a pre-game <code>Lobby</code>.
  */
-public class SetupResponseParameters {
+public class SetupResponseParameters implements Serializable {
     private List<Player> players;
     private Player player;
 
@@ -49,6 +51,16 @@ public class SetupResponseParameters {
     public SetupResponseParameters setPlayer(Player player) {
         this.player = player;
         return this;
+    }
+
+    @Override
+    public JsonObject serialize() {
+        return null;
+    }
+
+    @Override
+    public void deserialize(String json) {
+
     }
 
     //SERIALIZE PLAYERS WILL ADD READY STATUS
