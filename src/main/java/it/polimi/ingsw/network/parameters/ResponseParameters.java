@@ -332,9 +332,7 @@ public class ResponseParameters implements Serializable {
             characterCards = new ArrayList<>();
             JsonArray jsonArray = jsonObject.get("characterCards").getAsJsonArray();
             for(JsonElement je : jsonArray) {
-                String name = je.getAsJsonObject().get("name").toString();
-                name = name.replaceAll("\"|\"", "");
-                System.out.println(name);
+                String name = je.getAsJsonObject().get("name").getAsString();
                 CharacterCard c = CharacterCards.valueOf(name).instantiate();
                 c.deserialize(je.getAsJsonObject());
                 characterCards.add(c);
