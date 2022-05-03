@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model.board;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.Color;
@@ -331,17 +330,61 @@ public class Board implements Serializable {
 
     @Override
     public JsonObject serialize() {
-        Gson gson = new Gson();
-        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
+        JsonObject jsonObject = new JsonObject();
 
-        jsonObject.remove("NUM_STARTING_ISLANDS");
-        jsonObject.remove("NUM_STARTING_COINS");
+        JsonArray jsonIslands = new JsonArray();
+        for(Island island : islands) {
+            jsonIslands.add(island.serialize());
+        }
+        jsonObject.add("islands", jsonIslands);
+
+        JsonArray jsonClouds = new JsonArray();
+        for(Cloud cloud : clouds) {
+            jsonClouds.add(cloud.serialize());
+        }
+        jsonObject.add("clouds", jsonClouds);
+
+        JsonArray jsonSchools = new JsonArray();
+        for(School school : schools) {
+            jsonSchools.add(school.serialize());
+        }
+        jsonObject.add("schools", jsonSchools);
+
+        jsonObject.add("professorOwners", professorOwners.serialize());
+        jsonObject.add("numCoinsLeft", new JsonPrimitive(numCoinsLeft));
 
         return jsonObject;
     }
 
     @Override
     public void deserialize(JsonObject jsonObject) {
-        //TODO
+        islands.clear();
+        JsonArray jsonIslands = jsonObject.get("islands").getAsJsonArray();
+        for(JsonElement jsonIsland : jsonIslands) {
+            JsonObject islandObj = jsonIsland.getAsJsonObject();
+            Island island;
+
+            if(islandObj.has("leftIsland") && islandObj.has("rightIsland")) {
+                island = new MultiIsland(new SimpleIsland(), new SimpleIsland());
+            }else{
+                island = new SimpleIsland();
+            }
+
+            island.deserialize(islandObj);
+            islands.add(island);
+        }
+
+        JsonArray jsonClouds = jsonObject.get("clouds").getAsJsonArray();
+        for(int i = 0; i < clouds.size(); i++) {
+            clouds.get(i).deserialize(jsonClouds.get(i).getAsJsonObject());
+        }
+
+        JsonArray jsonSchools = jsonObject.get("schools").getAsJsonArray();
+        for(int i = 0; i < schools.size(); i++) {
+            schools.get(i).deserialize(jsonSchools.get(i).getAsJsonObject());
+        }
+
+        professorOwners.deserialize(jsonObject.get("professorOwners").getAsJsonObject());
+        numCoinsLeft = jsonObject.get("numCoinsLeft").getAsInt();
     }
 }
