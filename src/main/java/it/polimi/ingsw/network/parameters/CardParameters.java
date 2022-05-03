@@ -17,7 +17,7 @@ public class CardParameters implements Serializable {
     private TowerColor currentTeam;
     private Color selectedColor;
     private int playerID;
-    private int islandIndex;
+    private int islandIndex = -1;
 
     /**
      * Sole constructor
@@ -168,10 +168,14 @@ public class CardParameters implements Serializable {
 
     @Override
     public void deserialize(JsonObject jsonObject) {
-        if(jsonObject.has("fromOrigin"))
+        if(jsonObject.has("fromOrigin")) {
+            fromOrigin = new StudentGroup();
             fromOrigin.deserialize(jsonObject.get("fromOrigin").getAsJsonObject());
-        if(jsonObject.has("fromDestination"))
+        }
+        if(jsonObject.has("fromDestination")) {
+            fromDestination = new StudentGroup();
             fromDestination.deserialize(jsonObject.get("fromDestination").getAsJsonObject());
+        }
         if(jsonObject.has("boostedTeam"))
             boostedTeam = TowerColor.valueOf(jsonObject.get("boostedTeam").getAsString());
         if(jsonObject.has("currentTeam"))
