@@ -63,9 +63,4 @@ public class MultiIslandTest {
         is.conquerIsland(TowerColor.WHITE);
         assertEquals(TowerColor.WHITE, is.getTeamColor());
     }
-
-    @Test
-    public void testSerialize() {
-        System.out.println(is.serialize());
-    }
 }

@@ -9,8 +9,8 @@ import it.polimi.ingsw.model.enumerations.TowerColor;
  * Class representing multiple islands merged together.
  */
 public class MultiIsland extends Island {
-    private final Island leftIsland;
-    private final Island rightIsland;
+    private Island leftIsland;
+    private Island rightIsland;
 
     /**
      * Sole constructor for MultiIsland, merges two generic islands
@@ -83,6 +83,28 @@ public class MultiIsland extends Island {
 
     @Override
     public void deserialize(JsonObject jsonObject) {
+        JsonObject left = jsonObject.get("leftIsland").getAsJsonObject();
+        JsonObject right = jsonObject.get("rightIsland").getAsJsonObject();
 
+        if(isMulti(left)) {
+            Island i1 = new SimpleIsland();
+            Island i2 = new SimpleIsland();
+
+            leftIsland = new MultiIsland(i1, i2);
+        }
+
+        if(isMulti(right)) {
+            Island i1 = new SimpleIsland();
+            Island i2 = new SimpleIsland();
+
+            rightIsland = new MultiIsland(i1, i2);
+        }
+
+        leftIsland.deserialize(left);
+        rightIsland.deserialize(right);
+    }
+
+    private boolean isMulti(JsonObject island) {
+        return island.has("leftIsland") && island.has("rightIsland");
     }
 }
