@@ -56,7 +56,7 @@ public enum CharacterCards {
      * @return <code>CharacterCard</code> instance for this card.
      */
     public CharacterCard instantiate() {
-        GenericCard gc = new GenericCard(this.cost, this.effectType);
+        GenericCard gc = new GenericCard(this.name(), this.cost, this.effectType);
         ArrayList<Object> fullParams = new ArrayList<>();
         fullParams.add(gc);
         fullParams.addAll(Arrays.asList(parameters));

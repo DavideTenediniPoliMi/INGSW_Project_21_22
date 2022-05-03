@@ -10,8 +10,8 @@ import it.polimi.ingsw.network.parameters.ResponseParameters;
  * Class representing a generic <code>CharacterCard</code>.
  */
 public class GenericCard extends CharacterCard {
-    public GenericCard(int cost, EffectType effectType) {
-        super(cost, effectType);
+    public GenericCard(String name, int cost, EffectType effectType) {
+        super(name, cost, effectType);
     }
 
     /**

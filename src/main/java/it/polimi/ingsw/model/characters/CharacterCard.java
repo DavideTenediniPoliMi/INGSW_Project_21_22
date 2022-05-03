@@ -9,6 +9,7 @@ import it.polimi.ingsw.utils.Serializable;
  * Abstract class representing a generic Character Card.
  */
 public abstract class CharacterCard implements Serializable {
+    protected String name;
     protected int cost;
     protected boolean active;
     protected EffectType effectType;
@@ -19,7 +20,8 @@ public abstract class CharacterCard implements Serializable {
      * @param cost the cost to buy this <code>CharacterCard</code>.
      * @param effectType the <code>EffectType</code> of this <code>CharacterCard</code>.
      */
-    public CharacterCard(int cost, EffectType effectType) {
+    public CharacterCard(String name, int cost, EffectType effectType) {
+        this.name = name;
         this.cost = cost;
         this.effectType = effectType;
     }
