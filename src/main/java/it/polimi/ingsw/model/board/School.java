@@ -125,7 +125,8 @@ public class School implements Serializable {
 
         JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
         jsonObject.remove("owner");
-        jsonObject.add("ownerID", new JsonPrimitive(owner.getID()));
+        if(owner != null)
+            jsonObject.add("ownerID", new JsonPrimitive(owner.getID()));
 
         return jsonObject;
     }

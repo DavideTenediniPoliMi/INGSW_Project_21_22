@@ -4,12 +4,10 @@ import com.google.gson.*;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.board.Cloud;
-import it.polimi.ingsw.model.board.Island;
-import it.polimi.ingsw.model.board.ProfessorTracker;
-import it.polimi.ingsw.model.board.School;
+import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.Card;
+import it.polimi.ingsw.model.enumerations.CharacterCards;
 import it.polimi.ingsw.utils.Serializable;
 
 import java.util.ArrayList;
@@ -267,7 +265,7 @@ public class ResponseParameters implements Serializable {
     public JsonObject serialize() {
         JsonObject jsonObject = new JsonObject();
 
-        if(schools.size() > 0) {
+        if(schools != null &&  schools.size() > 0) {
             JsonArray jsonArray = new JsonArray();
             for(School s : schools) {
                 jsonArray.add(s.serialize());
@@ -275,7 +273,7 @@ public class ResponseParameters implements Serializable {
             jsonObject.add("schools", jsonArray);
         }
 
-        if(characterCards.size() > 0) {
+        if(characterCards != null &&  characterCards.size() > 0) {
             JsonArray jsonArray = new JsonArray();
             for(CharacterCard c : characterCards) {
                 jsonArray.add(c.serialize());
@@ -283,7 +281,7 @@ public class ResponseParameters implements Serializable {
             jsonObject.add("characterCards", jsonArray);
         }
 
-        if(clouds.size() > 0) {
+        if(clouds != null &&  clouds.size() > 0) {
             JsonArray jsonArray = new JsonArray();
             for(Cloud c : clouds) {
                 jsonArray.add(c.serialize());
@@ -291,7 +289,7 @@ public class ResponseParameters implements Serializable {
             jsonObject.add("clouds", jsonArray);
         }
 
-        if(islands.size() > 0) {
+        if(islands != null &&  islands.size() > 0) {
             JsonArray jsonArray = new JsonArray();
             for(Island i : islands) {
                 jsonArray.add(i.serialize());
@@ -302,8 +300,10 @@ public class ResponseParameters implements Serializable {
         if(bagEmpty)
             jsonObject.add("bagEmpty", new JsonPrimitive(bagEmpty));
 
-        jsonObject.add("professors", professors.serialize());
-        jsonObject.add("player", player.serialize());
+        if(professors != null)
+            jsonObject.add("professors", professors.serialize());
+        if(player != null)
+            jsonObject.add("player", player.serialize());
         jsonObject.add("coinsLeft", new JsonPrimitive(coinsLeft));
 
         if(sendCards)
@@ -319,7 +319,7 @@ public class ResponseParameters implements Serializable {
     public void deserialize(JsonObject jsonObject) {
 
         if(jsonObject.has("schools")) {
-            schools = null;
+            schools = new ArrayList<>();
             JsonArray jsonArray = jsonObject.get("schools").getAsJsonArray();
             for(JsonElement je : jsonArray) {
                 School s = new School(new Player(-1, ""));
@@ -327,21 +327,22 @@ public class ResponseParameters implements Serializable {
                 schools.add(s);
             }
         }
-        //TODO
-        //list of character cards
+
         if(jsonObject.has("characterCards")) {
-            characterCards = null;
+            characterCards = new ArrayList<>();
             JsonArray jsonArray = jsonObject.get("characterCards").getAsJsonArray();
             for(JsonElement je : jsonArray) {
-                je.getAsJsonObject().get("name").toString();
-                //instantiate con name
-                
+                String name = je.getAsJsonObject().get("name").toString();
+                name = name.replaceAll("\"|\"", "");
+                System.out.println(name);
+                CharacterCard c = CharacterCards.valueOf(name).instantiate();
+                c.deserialize(je.getAsJsonObject());
+                characterCards.add(c);
             }
         }
 
-
         if(jsonObject.has("clouds")) {
-            clouds = null;
+            clouds = new ArrayList<>();
             JsonArray jsonArray = jsonObject.get("clouds").getAsJsonArray();
             for(JsonElement je : jsonArray) {
                 Cloud c = new Cloud();
@@ -350,20 +351,28 @@ public class ResponseParameters implements Serializable {
             }
         }
 
-        //TODO
         if(jsonObject.has("islands")) {
-            islands = null;
+            islands = new ArrayList<>();
             JsonArray jsonArray = jsonObject.get("islands").getAsJsonArray();
             for(JsonElement je : jsonArray) {
-                //Islands abstract
+                if(je.isJsonArray()) {
+                    MultiIsland multiIsland = new MultiIsland(new SimpleIsland(), new SimpleIsland());
+                    multiIsland.deserialize(je.getAsJsonObject());
+                    islands.add(multiIsland);
+                }else {
+                    SimpleIsland simpleIsland= new SimpleIsland();
+                    simpleIsland.deserialize(je.getAsJsonObject());
+                    islands.add(simpleIsland);
+                }
             }
         }
 
-        bagEmpty = jsonObject.get("bagEmpty").getAsBoolean();
-        professors.deserialize(jsonObject.get("professors").getAsJsonObject());
-        player.deserialize(jsonObject.get("player").getAsJsonObject());
+        if(jsonObject.has("bagEmpty"))
+            bagEmpty = jsonObject.get("bagEmpty").getAsBoolean();
+        if(jsonObject.has("professors"))
+            professors.deserialize(jsonObject.get("professors").getAsJsonObject());
+        if(jsonObject.has("player"))
+            player.deserialize(jsonObject.get("player").getAsJsonObject());
         coinsLeft = jsonObject.get("coinsLeft").getAsInt();
-        sendCards = jsonObject.get("sendCards").getAsBoolean();
-        sendMatchInfo = jsonObject.get("sendMatchInfo").getAsBoolean();
     }
 }

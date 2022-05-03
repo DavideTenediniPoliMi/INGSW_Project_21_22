@@ -188,8 +188,10 @@ public class Player implements Serializable {
     public void deserialize(JsonObject jsonObject) {
         ID = jsonObject.get("ID").getAsInt();
         name = jsonObject.get("name").getAsString();
-        teamColor = TowerColor.valueOf(jsonObject.get("teamColor").getAsString());
-        cardBack = CardBack.valueOf(jsonObject.get("cardBack").getAsString());
+        if(jsonObject.has("teamColor"))
+            teamColor = TowerColor.valueOf(jsonObject.get("teamColor").getAsString());
+        if(jsonObject.has("teamColor"))
+            cardBack = CardBack.valueOf(jsonObject.get("cardBack").getAsString());
         towerHolder = jsonObject.get("towerHolder").getAsBoolean();
 
         JsonArray jsonCards = jsonObject.get("playableCards").getAsJsonArray();

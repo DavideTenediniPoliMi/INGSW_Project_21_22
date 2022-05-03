@@ -48,7 +48,6 @@ public class GenericCard extends CharacterCard {
     @Override
     public void deserialize(JsonObject jsonObject) {
         super.cost = jsonObject.get("cost").getAsInt();
-        super.effectType = EffectType.valueOf(jsonObject.get("effectType").getAsString());
         super.active = jsonObject.get("active").getAsBoolean();
     }
 }
