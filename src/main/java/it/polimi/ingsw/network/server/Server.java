@@ -2,6 +2,7 @@ package it.polimi.ingsw.network.server;
 
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.controller.LobbyController;
+import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.network.server.ClientConnection;
 
 import java.io.IOException;
@@ -18,6 +19,9 @@ public class Server {
     private final GameController gameController = new GameController();
 
     public Server() throws IOException {
+        // TEST
+        MatchInfo.getInstance().setSelectedNumPlayer(2);
+        MatchInfo.getInstance().setExpertMode(false);
     }
 
     public void run(){

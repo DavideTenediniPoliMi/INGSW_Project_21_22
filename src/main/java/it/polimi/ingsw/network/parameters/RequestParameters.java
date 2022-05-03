@@ -202,6 +202,6 @@ public class RequestParameters implements Serializable {
         index = jsonObject.get("index").getAsInt();
         if(jsonObject.has("color"))
             color = Color.valueOf(jsonObject.get("color").getAsString());
-        cardParams.deserialize(jsonObject.get("cardParams").getAsJsonObject());
+        //cardParams.deserialize(jsonObject.get("cardParams").getAsJsonObject());
     }
 }

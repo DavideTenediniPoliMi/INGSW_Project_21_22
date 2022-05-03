@@ -27,7 +27,7 @@ public class ClientConnection implements Observer<String>, Runnable{
         out = new DataOutputStream(socket.getOutputStream());
         in = new DataInputStream(socket.getInputStream());
 
-        virtualView = new VirtualView(lobbyController, gameController);
+        virtualView = new VirtualView(0, lobbyController, gameController);
         virtualView.addObserver(this);
 
         // PING
@@ -52,6 +52,7 @@ public class ClientConnection implements Observer<String>, Runnable{
                 for (int i = 0; i < length; i++) {
                     message += in.readChar();
                 }
+                System.out.println(message);
 
                 if(length > 0) {
                     virtualView.handleRequest(message);
@@ -76,7 +77,7 @@ public class ClientConnection implements Observer<String>, Runnable{
         try {
             out.writeInt(message.length());
 
-            if(message.equals("")) {
+            if(!message.equals("")) {
                 out.writeChars(message);
             }
 

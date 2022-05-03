@@ -15,13 +15,14 @@ import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
 
 public class VirtualView extends Observable<String> implements Observer<ResponseParameters> {
-    private final int playerID = 0;
+    private final int playerID;
     private final CommandFactory commandFactory;
     private final LobbyController lobbyController;
     private final GameController gameController;
-    public VirtualView(LobbyController lobbyController, GameController gameController) {
+    public VirtualView(int playerID, LobbyController lobbyController, GameController gameController) {
         this.lobbyController = lobbyController;
         this.gameController = gameController;
+        this.playerID = playerID;
 
         Game.getInstance().addObserver(this);
         MatchInfo.getInstance().addObserver(this);
