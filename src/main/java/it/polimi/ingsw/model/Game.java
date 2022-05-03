@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.characters.CharacterCard;
@@ -498,12 +500,22 @@ public class Game extends Observable<ResponseParameters> implements Serializable
 
     @Override
     public JsonObject serialize() {
-        Gson gson = new Gson();
         JsonObject jsonObject = new JsonObject();
 
         jsonObject.add("board", board.serialize());
-        jsonObject.add("players", gson.toJsonTree(players));
-        jsonObject.add("characterCards", gson.toJsonTree(characterCards));
+
+        JsonArray jsonPlayers = new JsonArray();
+        for(Player player : players) {
+            jsonPlayers.add(player.serialize());
+        }
+        jsonObject.add("players", jsonPlayers);
+
+        JsonArray jsonCards = new JsonArray();
+        for(CharacterCard card : characterCards) {
+            jsonCards.add(card.serialize());
+        }
+        jsonObject.add("characterCards", jsonCards);
+
         jsonObject.add("bag", bag.serialize());
 
         return jsonObject;
@@ -511,6 +523,20 @@ public class Game extends Observable<ResponseParameters> implements Serializable
 
     @Override
     public void deserialize(JsonObject jsonObject) {
-        //TODO
+        board.deserialize(jsonObject.get("board").getAsJsonObject());
+
+        JsonArray jsonPlayers = jsonObject.get("players").getAsJsonArray();
+        for(int i = 0; i < players.size(); i++) {
+            players.get(i).deserialize(jsonPlayers.get(i).getAsJsonObject());
+        }
+
+        if(MatchInfo.getInstance().isExpertMode()) {
+            JsonArray jsonCards = jsonObject.get("characterCards").getAsJsonArray();
+            for(int i = 0; i < characterCards.size(); i++) {
+                characterCards.get(i).deserialize(jsonCards.get(i).getAsJsonObject());
+            }
+        }
+
+        bag.deserialize(jsonObject.get("bag").getAsJsonObject());
     }
 }
