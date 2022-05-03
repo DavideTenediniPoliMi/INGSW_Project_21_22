@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.board;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
@@ -61,5 +62,10 @@ public class MultiIslandTest {
         assertEquals(TowerColor.BLACK, is.getTeamColor());
         is.conquerIsland(TowerColor.WHITE);
         assertEquals(TowerColor.WHITE, is.getTeamColor());
+    }
+
+    @Test
+    public void testSerialize() {
+        System.out.println(is.serialize());
     }
 }

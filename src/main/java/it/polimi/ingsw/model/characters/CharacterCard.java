@@ -27,6 +27,15 @@ public abstract class CharacterCard implements Serializable {
     }
 
     /**
+     * Returns the name of this <code>CharacterCard</code>
+     *
+     * @return name of this card
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * Returns the cost of this <code>CharacterCard</code>.
      *
      * @return Cost for this card

@@ -31,14 +31,14 @@ public class AlterInfluenceDecoratorTest {
         game.giveProfessorTo(0, Color.BLUE);
 
         //addTwo
-        c1 = new AlterInfluenceDecorator(new GenericCard(1, EffectType.ALTER_INFLUENCE), true, false, false);
+        c1 = new AlterInfluenceDecorator(new GenericCard("INFLUENCE_ADD_TWO", 1, EffectType.ALTER_INFLUENCE), true, false, false);
 
         CardParameters p0 = new CardParameters();
         p0.setBoostedTeam(TowerColor.BLACK);
         c1.setParameters(p0);
 
         //ignoreTowers
-        c2 = new AlterInfluenceDecorator(new GenericCard(1,EffectType.ALTER_INFLUENCE), false, true, false);
+        c2 = new AlterInfluenceDecorator(new GenericCard("IGNORE_TOWERS", 1,EffectType.ALTER_INFLUENCE), false, true, false);
 
         //params same team
         p1 = new CardParameters();
@@ -53,7 +53,7 @@ public class AlterInfluenceDecoratorTest {
         //ignoreColor
 
         //selected color
-        c3 = new AlterInfluenceDecorator(new GenericCard(1, EffectType.ALTER_INFLUENCE), false, false, true);
+        c3 = new AlterInfluenceDecorator(new GenericCard("IGNORE_COLOR", 1, EffectType.ALTER_INFLUENCE), false, false, true);
         p3 = new CardParameters();
         p3.setSelectedColor(Color.BLUE);
         p3.setIslandIndex(0);
@@ -61,7 +61,7 @@ public class AlterInfluenceDecoratorTest {
         c3.setParameters(p3);
 
         //not selected color
-        c4 = new AlterInfluenceDecorator(new GenericCard(1, EffectType.ALTER_INFLUENCE), false, false, true);
+        c4 = new AlterInfluenceDecorator(new GenericCard("IGNORE_COLOR" , 1, EffectType.ALTER_INFLUENCE), false, false, true);
         p4 = new CardParameters();
         p4.setSelectedColor(Color.GREEN);
         p4.setIslandIndex(0);
@@ -69,7 +69,7 @@ public class AlterInfluenceDecoratorTest {
         c4.setParameters(p4);
 
         //selected color but not current team
-        c5 = new AlterInfluenceDecorator(new GenericCard(1, EffectType.ALTER_INFLUENCE), false, false, true);
+        c5 = new AlterInfluenceDecorator(new GenericCard("IGNORE_COLOR", 1, EffectType.ALTER_INFLUENCE), false, false, true);
         p5 = new CardParameters();
         p5.setSelectedColor(Color.BLUE);
         p5.setIslandIndex(0);

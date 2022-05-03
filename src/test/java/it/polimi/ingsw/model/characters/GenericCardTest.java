@@ -12,7 +12,7 @@ public class GenericCardTest {
 
     @BeforeEach
     public void setUp() throws Exception {
-        c = new GenericCard(1, EffectType.RETURN_TO_BAG);
+        c = new GenericCard("Test", 1, EffectType.RETURN_TO_BAG);
     }
 
     @AfterEach
@@ -53,7 +53,7 @@ public class GenericCardTest {
 
     @Test
     void deserializeTest() {
-        GenericCard c1 = new GenericCard(0, EffectType.STUDENT_GROUP);
+        GenericCard c1 = new GenericCard("Test", 0, EffectType.STUDENT_GROUP);
         System.out.println(c.serialize());
         c1.deserialize(c.serialize());
         System.out.println(c1.serialize());

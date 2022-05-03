@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.board;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.Color;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;

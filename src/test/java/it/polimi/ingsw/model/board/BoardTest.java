@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.board;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;

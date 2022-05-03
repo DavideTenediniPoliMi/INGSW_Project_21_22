@@ -17,7 +17,7 @@ public abstract class CharacterCardDecorator extends CharacterCard{
      * @param card the <code>CharacterCard</code> to decorate.
      */
     public CharacterCardDecorator(CharacterCard card) {
-        super(card.getCost(), card.getEffectType());
+        super(card.getName(), card.getCost(), card.getEffectType());
         this.card = card;
     }
 

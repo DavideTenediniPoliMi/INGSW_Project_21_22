@@ -36,7 +36,7 @@ public class ExchangeStudentsDecoratorTest {
         board.addToEntranceOf(0, entrance);
         board.addToDiningRoomOf(0, dining);
 
-        c = new ExchangeStudentsDecorator(new GenericCard(2, EffectType.EXCHANGE_STUDENTS));
+        c = new ExchangeStudentsDecorator(new GenericCard("EXCHANGE_STUDENTS", 2, EffectType.EXCHANGE_STUDENTS));
 
         p1 = new CardParameters();
         p1.setFromOrigin(new StudentGroup(Color.BLUE,1));
@@ -89,7 +89,7 @@ public class ExchangeStudentsDecoratorTest {
     @Test
     void deserializeTest() {
         System.out.println(c.serialize());
-        ExchangeStudentsDecorator c1 = new ExchangeStudentsDecorator(new GenericCard(3,EffectType.EXCHANGE_STUDENTS));
+        ExchangeStudentsDecorator c1 = new ExchangeStudentsDecorator(new GenericCard("EXCHANGE_STUDENTS", 3,EffectType.EXCHANGE_STUDENTS));
         c1.deserialize(c.serialize());
         System.out.println(c1.serialize());
     }

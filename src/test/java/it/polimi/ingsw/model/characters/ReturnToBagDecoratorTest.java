@@ -20,9 +20,9 @@ public class ReturnToBagDecoratorTest {
 
     @BeforeEach
     public void setUp() throws Exception {
-        c = new ReturnToBagDecorator(new GenericCard(2, EffectType.RETURN_TO_BAG));
-        c2 = new ReturnToBagDecorator(new GenericCard(2, EffectType.RETURN_TO_BAG));
-        c3 = new ReturnToBagDecorator(new GenericCard(2, EffectType.RETURN_TO_BAG));
+        c = new ReturnToBagDecorator(new GenericCard("RETURN_TO_BAG", 2, EffectType.RETURN_TO_BAG));
+        c2 = new ReturnToBagDecorator(new GenericCard("RETURN_TO_BAG", 2, EffectType.RETURN_TO_BAG));
+        c3 = new ReturnToBagDecorator(new GenericCard("RETURN_TO_BAG", 2, EffectType.RETURN_TO_BAG));
 
 
         game = Game.getInstance();

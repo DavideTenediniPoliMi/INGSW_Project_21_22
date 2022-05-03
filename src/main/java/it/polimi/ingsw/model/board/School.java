@@ -2,6 +2,8 @@ package it.polimi.ingsw.model.board;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
@@ -11,7 +13,7 @@ import it.polimi.ingsw.utils.Serializable;
  * Class representing the School entity in the game
  */
 public class School implements Serializable {
-    private final Player owner;
+    private Player owner;
     private int numTowers;
     private final StudentGroup entrance = new StudentGroup();
     private final StudentGroup diningRoom = new StudentGroup();
@@ -121,12 +123,18 @@ public class School implements Serializable {
     public JsonObject serialize() {
         Gson gson = new Gson();
 
-        return gson.toJsonTree(this).getAsJsonObject();
+        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
+        jsonObject.remove("owner");
+        jsonObject.add("ownerID", new JsonPrimitive(owner.getID()));
+
+        return jsonObject;
     }
 
     @Override
     public void deserialize(JsonObject jsonObject) {
-        owner.deserialize(jsonObject.get("owner").getAsJsonObject());
+        int ownerID = jsonObject.get("ownerID").getAsInt();
+        owner = Game.getInstance().getPlayerByID(ownerID);
+
         numTowers = jsonObject.get("numTowers").getAsInt();
         entrance.deserialize(jsonObject.get("entrance").getAsJsonObject());
         diningRoom.deserialize(jsonObject.get("diningRoom").getAsJsonObject());
