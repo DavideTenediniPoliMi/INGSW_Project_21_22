@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model.enumerations;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 import it.polimi.ingsw.utils.Serializable;
 
 import java.util.ArrayList;
@@ -79,18 +78,33 @@ public enum Card implements Serializable {
 
     @Override
     public JsonObject serialize() {
-        Gson gson = new Gson();
-        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
+        JsonObject jsonObject = new JsonObject();
 
-        jsonObject.remove("WEIGHT");
-        jsonObject.remove("RANGE");
+        jsonObject.add("used", new JsonPrimitive(used));
+        JsonArray jsonUseOrder = new JsonArray();
+        for(Integer i : useOrder) {
+            jsonUseOrder.add(new JsonPrimitive(i));
+        }
+        jsonObject.add("useOrder", jsonUseOrder);
 
         return jsonObject;
     }
 
     @Override
     public void deserialize(JsonObject jsonObject) {
-        //TODO
+        used = jsonObject.get("used").getAsBoolean();
+        useOrder.clear();
+        JsonArray jsonUseOrder = jsonObject.get("useOrder").getAsJsonArray();
+        for(JsonElement player : jsonUseOrder) {
+            useOrder.add(player.getAsInt());
+        }
+    }
+
+    public static void deserializeAll(JsonObject jsonObject) {
+        for(Card card : values()) {
+            JsonObject cardObj = jsonObject.get(card.name()).getAsJsonObject();
+            card.deserialize(cardObj);
+        }
     }
 
     public static JsonObject serializeAll() {
