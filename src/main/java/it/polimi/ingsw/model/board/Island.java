@@ -10,7 +10,7 @@ import it.polimi.ingsw.utils.Serializable;
  * Abstract class corresponding to the Island entity
  */
 public abstract class Island implements Serializable {
-    private final StudentGroup students = new StudentGroup();
+    private StudentGroup students = new StudentGroup();
     private TowerColor teamColor;
     private boolean motherNature;
 
@@ -87,8 +87,11 @@ public abstract class Island implements Serializable {
 
     @Override
     public void deserialize(JsonObject jsonObject) {
+        if(students == null)
+            students = new StudentGroup();
         students.deserialize(jsonObject.get("students").getAsJsonObject());
-        teamColor = TowerColor.valueOf(jsonObject.get("teamColor").getAsString());
+        if(jsonObject.has("teamColor"))
+            teamColor = TowerColor.valueOf(jsonObject.get("teamColor").getAsString());
         motherNature = jsonObject.get("motherNature").getAsBoolean();
     }
 }
