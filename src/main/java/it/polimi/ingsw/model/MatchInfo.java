@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.model.enumerations.TowerColor;
@@ -305,6 +307,25 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
 
     @Override
     public void deserialize(JsonObject jsonObject) {
-        //TODO
+        selectedNumPlayer = jsonObject.get("selectedNumPlayer").getAsInt();
+        expertMode = jsonObject.get("expertMode").getAsBoolean();
+        //numPlayersConnected = 0;
+        stateType = TurnState.valueOf(jsonObject.get("stateType").getAsString());
+
+        JsonArray jsonPlayOrder = jsonObject.get("playOrder").getAsJsonArray();
+        for(JsonElement player : jsonPlayOrder) {
+            playOrder.add(player.getAsInt());
+        }
+
+        numMovedStudents = jsonObject.get("numMovedStudents").getAsInt();
+        gameOver = jsonObject.get("gameOver").getAsBoolean();
+
+        JsonArray jsonWinners = jsonObject.get("winners").getAsJsonArray();
+        for(JsonElement winner : jsonWinners) {
+            winners.add(TowerColor.valueOf(winner.getAsString()));
+        }
+
+        gameTied = jsonObject.get("gameTied").getAsBoolean();
+        gameStatus = GameStatus.valueOf(jsonObject.get("gameStatus").getAsString());
     }
 }
