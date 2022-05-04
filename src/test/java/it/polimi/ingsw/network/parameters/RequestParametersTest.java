@@ -35,4 +35,16 @@ class RequestParametersTest {
         rp1.deserialize(requestParameters.serialize());
         System.out.println(rp1.serialize().toString());
     }
+
+    @Test
+    void deserializeNull() {
+        requestParameters = new RequestParameters();;
+
+        RequestParameters rp1 = new RequestParameters().setName("albero").setCommandType(CommandType.JOIN);
+        System.out.println(rp1.serialize());
+        System.out.println(requestParameters.serialize());
+
+        rp1.deserialize(requestParameters.serialize());
+        System.out.println(rp1.serialize().toString());
+    }
 }

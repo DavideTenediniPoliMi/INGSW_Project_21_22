@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import org.junit.jupiter.api.AfterEach;
@@ -82,5 +83,26 @@ class LobbyTest {
     @Test
     void isNameTaken() {
         assertTrue(lobby.isNameTaken("foo"));
+    }
+
+    @Test
+    void serialize() {
+        System.out.println(lobby.serialize());
+    }
+
+    @Test
+    void deserialize() {
+        lobby.setReadyStatus(1, true);
+        JsonObject lobbyJson = lobby.serialize();
+        System.out.println(lobbyJson.toString());
+
+        Lobby.resetLobby();
+        Lobby lobby1 = Lobby.getLobby();
+        lobby1.setReadyStatus(1, true);
+        System.out.println(lobby1.serialize());
+
+        lobby1.deserialize(lobbyJson);
+
+        System.out.println(lobby1.serialize());
     }
 }

@@ -57,4 +57,15 @@ class ResponseParametersTest {
         rp1.deserialize(responseParameters.serialize());
         System.out.println(rp1.serialize().toString());
     }
+
+    @Test
+    void deserializeNull() {
+        responseParameters = new ResponseParameters();
+
+        ResponseParameters rp1 = new ResponseParameters().setPlayer(new Player(1, "marti"));
+        System.out.println(rp1.serialize());
+        System.out.println(responseParameters.serialize());
+        rp1.deserialize(responseParameters.serialize());
+        System.out.println(rp1.serialize().toString());
+    }
 }

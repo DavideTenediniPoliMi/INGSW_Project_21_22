@@ -17,7 +17,7 @@ public class RequestParameters implements Serializable {
     private TowerColor towerColor;
     private CardBack cardBack;
     private boolean ready;
-    private int index;
+    private int index = -1;
     private Color color;
     private CardParameters cardParams;
 
@@ -193,19 +193,43 @@ public class RequestParameters implements Serializable {
     public void deserialize(JsonObject jsonObject) {
         if(jsonObject.has("commandType"))
             commandType = CommandType.valueOf(jsonObject.get("commandType").getAsString());
-        name = jsonObject.get("name").getAsString();
+        else
+            commandType = null;
+
+        if(jsonObject.has("name"))
+            name = jsonObject.get("name").getAsString();
+        else
+            name = null;
+
         if(jsonObject.has("towerColor"))
             towerColor = TowerColor.valueOf(jsonObject.get("towerColor").getAsString());
+        else
+            towerColor = null;
+
         if(jsonObject.has("cardBack"))
             cardBack = CardBack.valueOf(jsonObject.get("cardBack").getAsString());
-        ready = jsonObject.get("ready").getAsBoolean();
-        index = jsonObject.get("index").getAsInt();
+        else
+            cardBack = null;
+
+        if(jsonObject.has("ready"))
+            ready = jsonObject.get("ready").getAsBoolean();
+        else
+            ready = false;
+
+        if(jsonObject.has("index"))
+            index = jsonObject.get("index").getAsInt();
+        else
+            index = -1;
+
         if(jsonObject.has("color"))
             color = Color.valueOf(jsonObject.get("color").getAsString());
+        else
+            color = null;
 
         if(jsonObject.has("cardParams")) {
             cardParams = new CardParameters();
             cardParams.deserialize(jsonObject.get("cardParams").getAsJsonObject());
-        }
+        }else
+            cardParams = null;
     }
 }

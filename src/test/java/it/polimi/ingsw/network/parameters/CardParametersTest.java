@@ -40,4 +40,15 @@ class CardParametersTest {
         cp1.deserialize(cardParameters.serialize());
         System.out.println(cp1.serialize().toString());
     }
+
+    @Test
+    void deserializeNull() {
+        cardParameters = new CardParameters();
+
+        CardParameters cp1 = new CardParameters().setPlayerID(1);
+        System.out.println(cp1.serialize());
+        System.out.println(cardParameters.serialize());
+        cp1.deserialize(cardParameters.serialize());
+        System.out.println(cp1.serialize().toString());
+    }
 }

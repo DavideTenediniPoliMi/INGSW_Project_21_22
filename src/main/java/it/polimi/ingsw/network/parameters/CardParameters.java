@@ -16,7 +16,7 @@ public class CardParameters implements Serializable {
     private TowerColor boostedTeam;
     private TowerColor currentTeam;
     private Color selectedColor;
-    private int playerID;
+    private int playerID = -1;
     private int islandIndex = -1;
 
     /**
@@ -171,17 +171,30 @@ public class CardParameters implements Serializable {
         if(jsonObject.has("fromOrigin")) {
             fromOrigin = new StudentGroup();
             fromOrigin.deserialize(jsonObject.get("fromOrigin").getAsJsonObject());
-        }
+        }else
+            fromOrigin = null;
+
         if(jsonObject.has("fromDestination")) {
             fromDestination = new StudentGroup();
             fromDestination.deserialize(jsonObject.get("fromDestination").getAsJsonObject());
-        }
+        }else
+            fromDestination = null;
+
         if(jsonObject.has("boostedTeam"))
             boostedTeam = TowerColor.valueOf(jsonObject.get("boostedTeam").getAsString());
+        else
+            boostedTeam = null;
+
         if(jsonObject.has("currentTeam"))
             currentTeam = TowerColor.valueOf(jsonObject.get("currentTeam").getAsString());
+        else
+            currentTeam = null;
+
         if(jsonObject.has("selectedColor"))
             selectedColor = Color.valueOf(jsonObject.get("selectedColor").getAsString());
+        else
+            selectedColor = null;
+
         playerID = jsonObject.get("playerID").getAsInt();
         islandIndex = jsonObject.get("islandIndex").getAsInt();
     }

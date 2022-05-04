@@ -198,26 +198,31 @@ public class Lobby extends Observable<ResponseParameters> implements Serializabl
     public JsonObject serialize() {
         Gson gson = new Gson();
         JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
+        jsonObject.remove("observers");
 
         return jsonObject;
     }
 
     @Override
     public void deserialize(JsonObject jsonObject) {
-        instance.deserialize(jsonObject.get("instance").getAsJsonObject());
-
         if(jsonObject.has("players")) {
-            players = null;
+            players = new ArrayList<>();
             JsonArray jsonArray = jsonObject.get("players").getAsJsonArray();
             for(JsonElement je : jsonArray) {
                 Player p = new Player(-1, "");
                 p.deserialize(je.getAsJsonObject());
                 players.add(p);
             }
-        }
+        } else
+            players = new ArrayList<>();
 
         if(jsonObject.has("readyStatus")) {
-            readyStatus = new Gson().fromJson(jsonObject, HashMap.class);
-        }
+            readyStatus = new HashMap<>();
+            JsonObject temp = jsonObject.get("readyStatus").getAsJsonObject();
+            for(Map.Entry element : temp.entrySet()) {
+                readyStatus.put(Integer.valueOf((String) element.getKey()), Boolean.valueOf(element.getValue().toString()));
+            }
+        } else
+            readyStatus = new HashMap<>();
     }
 }

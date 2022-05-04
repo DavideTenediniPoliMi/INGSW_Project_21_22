@@ -68,4 +68,13 @@ class PlayerTest {
         p.deserialize(player.serialize());
         System.out.println(p.serialize().toString());
     }
+
+    @Test
+    void deserializeNull() {
+        player = new Player(0, "nino");
+        Player p = new Player(1, "ciao");
+        System.out.println(player.serialize());
+        p.deserialize(player.serialize());
+        System.out.println(p.serialize().toString());
+    }
 }

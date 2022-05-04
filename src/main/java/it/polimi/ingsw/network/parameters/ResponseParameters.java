@@ -326,7 +326,8 @@ public class ResponseParameters implements Serializable {
                 s.deserialize(je.getAsJsonObject());
                 schools.add(s);
             }
-        }
+        }else
+            schools = new ArrayList<>();
 
         if(jsonObject.has("characterCards")) {
             characterCards = new ArrayList<>();
@@ -337,7 +338,8 @@ public class ResponseParameters implements Serializable {
                 c.deserialize(je.getAsJsonObject());
                 characterCards.add(c);
             }
-        }
+        }else
+            characterCards = null;
 
         if(jsonObject.has("clouds")) {
             clouds = new ArrayList<>();
@@ -347,7 +349,8 @@ public class ResponseParameters implements Serializable {
                 c.deserialize(je.getAsJsonObject());
                 clouds.add(c);
             }
-        }
+        }else
+            clouds = null;
 
         if(jsonObject.has("islands")) {
             islands = new ArrayList<>();
@@ -363,14 +366,22 @@ public class ResponseParameters implements Serializable {
                     islands.add(simpleIsland);
                 }
             }
-        }
+        }else
+            islands = null;
 
         if(jsonObject.has("bagEmpty"))
             bagEmpty = jsonObject.get("bagEmpty").getAsBoolean();
+        else
+            bagEmpty = false;
+
         if(jsonObject.has("professors"))
             professors.deserialize(jsonObject.get("professors").getAsJsonObject());
+        else
+            professors = null;
         if(jsonObject.has("player"))
             player.deserialize(jsonObject.get("player").getAsJsonObject());
+        else
+            player = null;
         coinsLeft = jsonObject.get("coinsLeft").getAsInt();
     }
 }
