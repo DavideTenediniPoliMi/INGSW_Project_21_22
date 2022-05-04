@@ -523,20 +523,28 @@ public class Game extends Observable<ResponseParameters> implements Serializable
 
     @Override
     public void deserialize(JsonObject jsonObject) {
-        board.deserialize(jsonObject.get("board").getAsJsonObject());
+        if(jsonObject.has("board"))
+            board.deserialize(jsonObject.get("board").getAsJsonObject());
 
-        JsonArray jsonPlayers = jsonObject.get("players").getAsJsonArray();
-        for(int i = 0; i < players.size(); i++) {
-            players.get(i).deserialize(jsonPlayers.get(i).getAsJsonObject());
-        }
-
-        if(MatchInfo.getInstance().isExpertMode()) {
-            JsonArray jsonCards = jsonObject.get("characterCards").getAsJsonArray();
-            for(int i = 0; i < characterCards.size(); i++) {
-                characterCards.get(i).deserialize(jsonCards.get(i).getAsJsonObject());
+        if(jsonObject.has("players")) {
+            JsonArray jsonPlayers = jsonObject.get("players").getAsJsonArray();
+            for (int i = 0; i < players.size(); i++) {
+                players.get(i).deserialize(jsonPlayers.get(i).getAsJsonObject());
             }
-        }
+        }else
+            players.clear();
 
-        bag.deserialize(jsonObject.get("bag").getAsJsonObject());
+        if(jsonObject.has("characterCards")) {
+            if(MatchInfo.getInstance().isExpertMode()) {
+                JsonArray jsonCards = jsonObject.get("characterCards").getAsJsonArray();
+                for (int i = 0; i < characterCards.size(); i++) {
+                    characterCards.get(i).deserialize(jsonCards.get(i).getAsJsonObject());
+                }
+            }
+        }else
+            characterCards.clear();
+
+        if(jsonObject.has("bag"))
+            bag.deserialize(jsonObject.get("bag").getAsJsonObject());
     }
 }

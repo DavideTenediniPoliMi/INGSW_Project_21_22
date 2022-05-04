@@ -92,6 +92,8 @@ public abstract class Island implements Serializable {
         students.deserialize(jsonObject.get("students").getAsJsonObject());
         if(jsonObject.has("teamColor"))
             teamColor = TowerColor.valueOf(jsonObject.get("teamColor").getAsString());
+        else
+            teamColor = null;
         motherNature = jsonObject.get("motherNature").getAsBoolean();
     }
 }

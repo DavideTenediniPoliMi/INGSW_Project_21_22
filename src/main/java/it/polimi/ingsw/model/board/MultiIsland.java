@@ -83,8 +83,12 @@ public class MultiIsland extends Island {
 
     @Override
     public void deserialize(JsonObject jsonObject) {
-        JsonObject left = jsonObject.get("leftIsland").getAsJsonObject();
-        JsonObject right = jsonObject.get("rightIsland").getAsJsonObject();
+        JsonObject left = new JsonObject();
+        JsonObject right = new JsonObject();
+        if(isMulti(jsonObject)) {
+            left = jsonObject.get("leftIsland").getAsJsonObject();
+            right = jsonObject.get("rightIsland").getAsJsonObject();
+        }
 
         if(isMulti(left)) {
             Island i1 = new SimpleIsland();

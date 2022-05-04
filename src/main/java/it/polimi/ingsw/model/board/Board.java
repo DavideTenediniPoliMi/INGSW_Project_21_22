@@ -22,7 +22,7 @@ public class Board implements Serializable {
     private final List<Island> islands = new ArrayList<>();
     private final List<Cloud> clouds = new ArrayList<>();
     private final List<School> schools = new ArrayList<>();
-    private final ProfessorTracker professorOwners = new ProfessorTracker();
+    private ProfessorTracker professorOwners = new ProfessorTracker();
     private int numCoinsLeft = NUM_STARTING_COINS;
 
     /**
@@ -359,32 +359,44 @@ public class Board implements Serializable {
     @Override
     public void deserialize(JsonObject jsonObject) {
         islands.clear();
-        JsonArray jsonIslands = jsonObject.get("islands").getAsJsonArray();
-        for(JsonElement jsonIsland : jsonIslands) {
-            JsonObject islandObj = jsonIsland.getAsJsonObject();
-            Island island;
 
-            if(islandObj.has("leftIsland") && islandObj.has("rightIsland")) {
-                island = new MultiIsland(new SimpleIsland(), new SimpleIsland());
-            }else{
-                island = new SimpleIsland();
+        if(jsonObject.has("islands")) {
+            JsonArray jsonIslands = jsonObject.get("islands").getAsJsonArray();
+            for (JsonElement jsonIsland : jsonIslands) {
+                JsonObject islandObj = jsonIsland.getAsJsonObject();
+                Island island;
+
+                if (islandObj.has("leftIsland") && islandObj.has("rightIsland")) {
+                    island = new MultiIsland(new SimpleIsland(), new SimpleIsland());
+                } else {
+                    island = new SimpleIsland();
+                }
+
+                island.deserialize(islandObj);
+                islands.add(island);
             }
-
-            island.deserialize(islandObj);
-            islands.add(island);
         }
 
-        JsonArray jsonClouds = jsonObject.get("clouds").getAsJsonArray();
-        for(int i = 0; i < clouds.size(); i++) {
-            clouds.get(i).deserialize(jsonClouds.get(i).getAsJsonObject());
-        }
+        if(jsonObject.has("clouds")) {
+            JsonArray jsonClouds = jsonObject.get("clouds").getAsJsonArray();
+            for (int i = 0; i < clouds.size(); i++) {
+                clouds.get(i).deserialize(jsonClouds.get(i).getAsJsonObject());
+            }
+        }else
+            clouds.clear();
 
-        JsonArray jsonSchools = jsonObject.get("schools").getAsJsonArray();
-        for(int i = 0; i < schools.size(); i++) {
-            schools.get(i).deserialize(jsonSchools.get(i).getAsJsonObject());
-        }
+        if(jsonObject.has("schools")) {
+            JsonArray jsonSchools = jsonObject.get("schools").getAsJsonArray();
+            for (int i = 0; i < schools.size(); i++) {
+                schools.get(i).deserialize(jsonSchools.get(i).getAsJsonObject());
+            }
+        }else
+            schools.clear();
 
-        professorOwners.deserialize(jsonObject.get("professorOwners").getAsJsonObject());
+        if(jsonObject.has("professorOwners"))
+            professorOwners.deserialize(jsonObject.get("professorOwners").getAsJsonObject());
+        else
+            professorOwners = new ProfessorTracker();
         numCoinsLeft = jsonObject.get("numCoinsLeft").getAsInt();
     }
 }

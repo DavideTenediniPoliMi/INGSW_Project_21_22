@@ -15,8 +15,8 @@ import it.polimi.ingsw.utils.Serializable;
 public class School implements Serializable {
     private Player owner;
     private int numTowers;
-    private final StudentGroup entrance = new StudentGroup();
-    private final StudentGroup diningRoom = new StudentGroup();
+    private StudentGroup entrance = new StudentGroup();
+    private StudentGroup diningRoom = new StudentGroup();
 
     /**
      * Sole constructor, binds this <code>School</code> to a <code>Player</code>
@@ -137,7 +137,15 @@ public class School implements Serializable {
         owner = Game.getInstance().getPlayerByID(ownerID);
 
         numTowers = jsonObject.get("numTowers").getAsInt();
-        entrance.deserialize(jsonObject.get("entrance").getAsJsonObject());
-        diningRoom.deserialize(jsonObject.get("diningRoom").getAsJsonObject());
+
+        if(jsonObject.has("entrance"))
+            entrance.deserialize(jsonObject.get("entrance").getAsJsonObject());
+        else
+            entrance = new StudentGroup();
+
+        if(jsonObject.has("diningRoom"))
+            diningRoom.deserialize(jsonObject.get("diningRoom").getAsJsonObject());
+        else
+            diningRoom = new StudentGroup();
     }
 }
