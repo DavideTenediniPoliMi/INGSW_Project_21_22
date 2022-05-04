@@ -39,6 +39,7 @@ public class ExchangeStudentsDecoratorTest {
         c = new ExchangeStudentsDecorator(new GenericCard("EXCHANGE_STUDENTS", 2, EffectType.EXCHANGE_STUDENTS));
 
         p1 = new CardParameters();
+        p1.setPlayerID(0);
         p1.setFromOrigin(new StudentGroup(Color.BLUE,1));
         p1.setFromDestination(new StudentGroup(Color.GREEN,1));
         c.setParameters(p1);

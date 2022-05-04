@@ -237,6 +237,7 @@ class CharacterCardControllerTest {
         params.setFromOrigin(students);
         params.setFromDestination(new StudentGroup(Color.GREEN, 2));
         params.setIslandIndex(0);
+        params.setPlayerID(0);
         characterCardController.setCardParameters(params);
 
         assertDoesNotThrow(() -> characterCardController.activateCard());
