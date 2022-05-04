@@ -14,7 +14,7 @@ import java.util.concurrent.Executors;
 public class Server {
     private static final int PORT = 12345;
     private final ServerSocket serverSocket = new ServerSocket(PORT);
-    private final ExecutorService executor = Executors.newFixedThreadPool(32);
+    private final ExecutorService executor = Executors.newFixedThreadPool(16);
     private final LobbyController lobbyController = new LobbyController();
     private final GameController gameController = new GameController();
 

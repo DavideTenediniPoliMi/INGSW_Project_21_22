@@ -17,6 +17,7 @@ public class ClientConnection implements Observer<String>, Runnable{
     private final DataOutputStream out;
     private final DataInputStream in;
     private ScheduledFuture pingTask;
+    private final ExecutorService executor = Executors.newFixedThreadPool(16);
 
 
     public ClientConnection(Socket socket, LobbyController lobbyController, GameController gameController) throws IOException {
@@ -54,8 +55,9 @@ public class ClientConnection implements Observer<String>, Runnable{
                 }
                 System.out.println(message);
 
+                String finalMessage = message;
                 if(length > 0) {
-                    virtualView.handleRequest(message);
+                    executor.submit(() -> virtualView.handleRequest(finalMessage));
                 }
 
                 length = in.readInt();
