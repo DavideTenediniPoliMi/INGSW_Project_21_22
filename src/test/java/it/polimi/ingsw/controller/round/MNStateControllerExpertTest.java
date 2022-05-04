@@ -29,9 +29,8 @@ class MNStateControllerExpertTest {
         game.addPlayer(new Player(1, "lello", TowerColor.WHITE, CardBack.CB_2, true));
 
         matchInfo = MatchInfo.getInstance();
-        matchInfo.setSelectedNumPlayer(2);
+        matchInfo.setUpGame(2,true);
         matchInfo.setStateType(TurnState.STUDENTS);
-        matchInfo.setExpertMode(true);
         matchInfo.setNumPlayersConnected(2);
         matchInfo.addPlayer(0);
         matchInfo.addPlayer(1);

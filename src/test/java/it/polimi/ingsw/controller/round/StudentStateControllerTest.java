@@ -41,9 +41,8 @@ public class StudentStateControllerTest {
         board.addSchool(game.getPlayerByID(2));
 
         matchInfo = MatchInfo.getInstance();
-        matchInfo.setSelectedNumPlayer(3);
+        matchInfo.setUpGame(3,false);
         matchInfo.setStateType(TurnState.STUDENTS);
-        matchInfo.setExpertMode(false);
         matchInfo.setNumPlayersConnected(3);
         matchInfo.addPlayer(0);
         matchInfo.addPlayer(1);
@@ -91,7 +90,7 @@ public class StudentStateControllerTest {
     @Test
     void transferStudentToIslandTest_movableStudentsExceed() {
         board.addToEntranceOf(0, new StudentGroup(Color.BLUE, 5));
-        matchInfo.setSelectedNumPlayer(3);
+        matchInfo.setUpGame(3,true);
 
         for(int i=0; i < 4; i++) {
             assertDoesNotThrow(() -> controller.transferStudentToIsland(0, Color.BLUE));
@@ -102,7 +101,7 @@ public class StudentStateControllerTest {
     @Test
     void transferStudentToIslandTest_notEnoughStudents() {
         board.addToEntranceOf(0, new StudentGroup(Color.BLUE, 1));
-        matchInfo.setSelectedNumPlayer(3);
+        matchInfo.setUpGame(3,true);
 
         assertDoesNotThrow(() -> controller.transferStudentToIsland(0, Color.BLUE));
         assertThrowsExactly(NotEnoughStudentsException.class, () -> controller.transferStudentToIsland(0, Color.BLUE));
@@ -111,7 +110,7 @@ public class StudentStateControllerTest {
     @Test
     void transferStudentToIslandTest() {
         board.addToEntranceOf(0, new StudentGroup(Color.BLUE, 1));
-        matchInfo.setSelectedNumPlayer(3);
+        matchInfo.setUpGame(3,true);
 
         int numStudentsMovedBefore = matchInfo.getNumMovedStudents();
 
@@ -125,7 +124,7 @@ public class StudentStateControllerTest {
     @Test
     void transferStudentToDiningRoom() {
         board.addToEntranceOf(0, new StudentGroup(Color.BLUE, 5));
-        matchInfo.setSelectedNumPlayer(3);
+        matchInfo.setUpGame(3,true);
 
         for(int i=0; i < 4; i++) {
             assertDoesNotThrow(() -> controller.transferStudentToDiningRoom(Color.BLUE));
@@ -136,7 +135,7 @@ public class StudentStateControllerTest {
     @Test
     void transferStudentToDiningRoom_notEnoughStudents() {
         board.addToEntranceOf(0, new StudentGroup(Color.BLUE, 1));
-        matchInfo.setSelectedNumPlayer(3);
+        matchInfo.setUpGame(3,true);
 
         assertDoesNotThrow(() -> controller.transferStudentToDiningRoom(Color.BLUE));
         assertThrowsExactly(NotEnoughStudentsException.class, () -> controller.transferStudentToDiningRoom(Color.BLUE));

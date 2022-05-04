@@ -53,9 +53,8 @@ class GameControllerTest {
         lobby.selectCardBack(0, CardBack.CB_1);
         lobby.selectCardBack(1, CardBack.CB_2);
 
-        matchInfo.setSelectedNumPlayer(2);
+        matchInfo.setUpGame(2,true);
         matchInfo.setNumPlayersConnected(2);
-        matchInfo.setExpertMode(true);
 
         gameController.createGame();
     }
@@ -241,9 +240,8 @@ class GameControllerTest {
         matchInfo = MatchInfo.getInstance();
         board = game.getBoard();
 
-        matchInfo.setSelectedNumPlayer(2);
+        matchInfo.setUpGame(2,true);
         matchInfo.setNumPlayersConnected(2);
-        matchInfo.setExpertMode(true);
 
         for(Player player : lobby.getPlayers()) {
             game.addPlayer(player);
@@ -321,9 +319,8 @@ class GameControllerTest {
         matchInfo = MatchInfo.getInstance();
         board = game.getBoard();
 
-        matchInfo.setSelectedNumPlayer(2);
+        matchInfo.setUpGame(2,true);
         matchInfo.setNumPlayersConnected(2);
-        matchInfo.setExpertMode(true);
 
         for(Player player : lobby.getPlayers()) {
             game.addPlayer(player);
@@ -407,9 +404,8 @@ class GameControllerTest {
         matchInfo = MatchInfo.getInstance();
         board = game.getBoard();
 
-        matchInfo.setSelectedNumPlayer(2);
+        matchInfo.setUpGame(2,true);
         matchInfo.setNumPlayersConnected(2);
-        matchInfo.setExpertMode(true);
 
         for(Player player : lobby.getPlayers()) {
             game.addPlayer(player);

@@ -27,8 +27,7 @@ class LobbyControllerTest {
         lobby = Lobby.getLobby();
         controller = new LobbyController();
 
-        info.setExpertMode(true);
-        info.setSelectedNumPlayer(2);
+        info.setUpGame(2,true);
 
         controller.requestCommand(new LobbyJoinCommand(0, "LOLLO", controller));
         controller.requestCommand(new LobbySelectCBCommand(0, CardBack.CB_1, controller));
@@ -108,7 +107,7 @@ class LobbyControllerTest {
 
     @Test
     public void testJoinSameColor() throws Exception{
-        info.setSelectedNumPlayer(4);
+        info.setUpGame(4,true);
         controller.requestCommand(new LobbyJoinCommand(1, "lello", controller));
         controller.requestCommand(new LobbySelectTeamCommand(1, TowerColor.BLACK, controller));
     }

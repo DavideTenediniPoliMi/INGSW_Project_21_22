@@ -31,9 +31,8 @@ class MNStateControllerTest {
         game.placeMNAt(0);
 
         matchInfo = MatchInfo.getInstance();
-        matchInfo.setSelectedNumPlayer(3);
+        matchInfo.setUpGame(3,false);
         matchInfo.setStateType(TurnState.STUDENTS);
-        matchInfo.setExpertMode(false);
         matchInfo.setNumPlayersConnected(3);
         matchInfo.addPlayer(0);
         matchInfo.addPlayer(1);

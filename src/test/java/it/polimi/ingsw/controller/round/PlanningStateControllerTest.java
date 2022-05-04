@@ -29,9 +29,8 @@ public class PlanningStateControllerTest {
         game.addPlayer(new Player(2, "lillo", TowerColor.GREY, CardBack.CB_3, true));
 
         matchInfo = MatchInfo.getInstance();
-        matchInfo.setSelectedNumPlayer(3);
+        matchInfo.setUpGame(3,true);
         matchInfo.setStateType(TurnState.STUDENTS);
-        matchInfo.setExpertMode(false);
         matchInfo.setNumPlayersConnected(3);
 
         matchInfo.addPlayer(0);

@@ -23,9 +23,6 @@ public class Server {
     private final List<VirtualView> virtualViews = new ArrayList<>();
 
     public Server() throws IOException {
-        // TEST
-        MatchInfo.getInstance().setSelectedNumPlayer(2);
-        MatchInfo.getInstance().setExpertMode(false);
     }
 
     public synchronized VirtualView getVVFor(String name) throws Exception {
@@ -39,7 +36,9 @@ public class Server {
             }
             throw new Exception(); // TODO make exception for "Player with that name is already connected"
         }
-        return new VirtualView(name, lobbyController, gameController);
+        VirtualView vv = new VirtualView(name, lobbyController, gameController);
+        virtualViews.add(vv);
+        return vv;
     }
 
     public void run(){

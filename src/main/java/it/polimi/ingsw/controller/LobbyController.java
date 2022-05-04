@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.exceptions.EriantysException;
+import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.exceptions.lobby.*;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
@@ -41,6 +42,17 @@ public class LobbyController {
             throw new GameStartedException();
         }
         command.execute();
+    }
+
+    public void createGame(int selectedNumPlayer, boolean expertMode) throws BadParametersException {
+        if(selectedNumPlayer < 0 || selectedNumPlayer > 4) {
+            throw new BadParametersException("Wrong player number selection");
+        }
+        if(matchInfo.getSelectedNumPlayer() != 0) {
+            matchInfo.setUpGame(matchInfo.getSelectedNumPlayer(), matchInfo.isExpertMode());
+            return;
+        }
+        matchInfo.setUpGame(selectedNumPlayer, expertMode);
     }
 
     /**

@@ -110,6 +110,7 @@ public class ClientConnection implements Observer<String>, Runnable{
 
         try {
             virtualView = server.getVVFor(jo.get("name").getAsString());
+            virtualView.addObserver(this);
             send(MatchInfo.getInstance().serialize().toString());
         } catch (Exception e) {
             send("Another player with the same name is connected");

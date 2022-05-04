@@ -64,7 +64,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
      *
      * @return the amount of players in the game
      */
-    public int getSelectedNumPlayer() {
+    public synchronized int getSelectedNumPlayer() {
         return selectedNumPlayer;
     }
 
@@ -73,7 +73,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
      *
      * @param selectedNumPlayer the amount of players
      */
-    public void setSelectedNumPlayer(int selectedNumPlayer) {
+    private void setSelectedNumPlayer(int selectedNumPlayer) {
         this.selectedNumPlayer = selectedNumPlayer;
     }
 
@@ -91,8 +91,20 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
      *
      * @param expertMode the selected game mode
      */
-    public void setExpertMode(boolean expertMode) {
+    private void setExpertMode(boolean expertMode) {
         this.expertMode = expertMode;
+    }
+
+    /**
+     * Sets the information needed to start a game.
+     *
+     * @param selectedNumPlayer the number of players that are allowed to play this game
+     * @param expertMode the selected game mode
+     */
+    public void setUpGame(int selectedNumPlayer, boolean expertMode) {
+        setSelectedNumPlayer(selectedNumPlayer);
+        setExpertMode(expertMode);
+        notify(new ResponseParameters().setSendMatchInfo(true));
     }
 
     /**

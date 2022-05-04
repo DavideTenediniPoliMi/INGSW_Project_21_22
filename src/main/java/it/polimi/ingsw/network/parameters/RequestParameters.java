@@ -20,6 +20,48 @@ public class RequestParameters implements Serializable {
     private int index = -1;
     private Color color;
     private CardParameters cardParams;
+    private boolean expertMode;
+    private int selectedNumPlayer;
+
+    /**
+     * Gets the mode of the game.
+     *
+     * @return the game mode.
+     */
+    public boolean isExpertMode() {
+        return expertMode;
+    }
+
+    /**
+     * Sets the specified game mode and returns this instance.
+     *
+     * @param expertMode the game mode selected.
+     * @return this <code>RequestParameters</code>
+     */
+    public RequestParameters setExpertMode(boolean expertMode) {
+        this.expertMode = expertMode;
+        return this;
+    }
+
+    /**
+     * Gets the numeber of player selected of this message.
+     *
+     * @return the number of players selected
+     */
+    public int getSelectedNumPlayer() {
+        return selectedNumPlayer;
+    }
+
+    /**
+     * Sets the specified number of players selected and returns this instance.
+     *
+     * @param selectedNumPlayer the amount of players that can play in this game
+     * @return this <code>RequestParameters</code>
+     */
+    public RequestParameters setSelectedNumPlayer(int selectedNumPlayer) {
+        this.selectedNumPlayer = selectedNumPlayer;
+        return this;
+    }
 
     /**
      * Sets the specified <code>CommandType</code> and returns this instance.
@@ -225,6 +267,16 @@ public class RequestParameters implements Serializable {
             color = Color.valueOf(jsonObject.get("color").getAsString());
         else
             color = null;
+
+        if(jsonObject.has("expertMode"))
+            expertMode = jsonObject.get("expertMode").getAsBoolean();
+        else
+            expertMode = false;
+
+        if(jsonObject.has("selectedNumPlayer"))
+            selectedNumPlayer = jsonObject.get("selectedNumPlayer").getAsInt();
+        else
+            selectedNumPlayer = -1;
 
         if(jsonObject.has("cardParams")) {
             cardParams = new CardParameters();

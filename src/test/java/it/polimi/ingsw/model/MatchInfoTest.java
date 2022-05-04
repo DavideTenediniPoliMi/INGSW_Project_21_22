@@ -21,8 +21,7 @@ class MatchInfoTest {
     @BeforeEach
     void setUp() {
         matchInfo = MatchInfo.getInstance();
-        matchInfo.setSelectedNumPlayer(3);
-        matchInfo.setExpertMode(true);
+        matchInfo.setUpGame(3,true);
         matchInfo.setNumPlayersConnected(3);
         matchInfo.setStateType(TurnState.PLANNING);
         matchInfo.setGameStatus(GameStatus.IN_GAME);
@@ -54,18 +53,18 @@ class MatchInfoTest {
     @Test
     void getMaxMovableStudents() {
         assertEquals(4, matchInfo.getMaxMovableStudents());
-        matchInfo.setSelectedNumPlayer(2);
+        matchInfo.setUpGame(2,true);
         assertEquals(3, matchInfo.getMaxMovableStudents());
-        matchInfo.setSelectedNumPlayer(4);
+        matchInfo.setUpGame(4,true);
         assertEquals(3, matchInfo.getMaxMovableStudents());
     }
 
     @Test
     void getMaxTowers() {
         assertEquals(6, matchInfo.getMaxTowers());
-        matchInfo.setSelectedNumPlayer(2);
+        matchInfo.setUpGame(2,true);
         assertEquals(8, matchInfo.getMaxTowers());
-        matchInfo.setSelectedNumPlayer(4);
+        matchInfo.setUpGame(4,true);
         assertEquals(8, matchInfo.getMaxTowers());
     }
 

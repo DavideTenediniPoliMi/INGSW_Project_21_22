@@ -56,6 +56,18 @@ public class CommandFactory {
             /*
              * Lobby-related commands
              */
+            case CREATE_GAME:
+                /* Params needed:
+                 *  - selectedNumPlayer
+                 *  - expertMode
+                 */
+                int selectedNumPlayer = params.getSelectedNumPlayer();
+                if(selectedNumPlayer > 0) {
+                    return new CreateGameCommand(selectedNumPlayer, params.isExpertMode(), lobbyController);
+                }
+                throw new BadParametersException("CREATE_GAME command - Given params:" +
+                        " (selectedNumPlayer: " + selectedNumPlayer + ")");
+
             case JOIN:
                 /* Params needed:
                  *  - PlayerID

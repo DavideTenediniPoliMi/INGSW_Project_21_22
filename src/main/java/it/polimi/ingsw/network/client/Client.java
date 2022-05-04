@@ -32,7 +32,9 @@ public class Client {
 
         //TEST PARAMS
         RequestParameters params = new RequestParameters().setCommandType(CommandType.HANDSHAKE).setName("Davide");
-        RequestParameters params2 = new RequestParameters().setCommandType(CommandType.JOIN).setName("Davide");
+        RequestParameters params2 = new RequestParameters().setCommandType(CommandType.CREATE_GAME)
+                .setExpertMode(false).setSelectedNumPlayer(2);
+        RequestParameters params3 = new RequestParameters().setCommandType(CommandType.JOIN);
 
         executor.scheduleAtFixedRate(
                 () -> send(params.serialize().toString()),
@@ -40,6 +42,9 @@ public class Client {
         executor.scheduleAtFixedRate(
                 () -> send(params2.serialize().toString()),
                 5, 100000, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(
+                () -> send(params3.serialize().toString()),
+                10, 100000, TimeUnit.SECONDS);
     }
 
     public void run() throws IOException {

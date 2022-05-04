@@ -32,7 +32,7 @@ class CharacterCardControllerTest {
         game.addPlayer(new Player(0, "lele", TowerColor.GREY, CardBack.CB_3, true));
         game.giveCoinToPlayer(0);
         matchInfo = MatchInfo.getInstance();
-        matchInfo.setExpertMode(true);
+        matchInfo.setUpGame(2,true);
         matchInfo.addPlayer(0);
     }
 
