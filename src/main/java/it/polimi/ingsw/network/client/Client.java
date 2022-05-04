@@ -28,14 +28,18 @@ public class Client {
         in = new DataInputStream(socket.getInputStream());
         out = new DataOutputStream(socket.getOutputStream());
 
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
 
         //TEST PARAMS
-        RequestParameters params = new RequestParameters().setCommandType(CommandType.JOIN).setName("Davide");
+        RequestParameters params = new RequestParameters().setCommandType(CommandType.HANDSHAKE).setName("Davide");
+        RequestParameters params2 = new RequestParameters().setCommandType(CommandType.JOIN).setName("Davide");
 
         executor.scheduleAtFixedRate(
                 () -> send(params.serialize().toString()),
                 0, 100000, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(
+                () -> send(params2.serialize().toString()),
+                5, 100000, TimeUnit.SECONDS);
     }
 
     public void run() throws IOException {

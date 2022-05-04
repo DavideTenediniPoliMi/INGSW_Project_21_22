@@ -1,7 +1,10 @@
 package it.polimi.ingsw.network.server;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.controller.LobbyController;
+import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.network.observer.Observer;
 import it.polimi.ingsw.view.VirtualView;
 
@@ -11,25 +14,21 @@ import java.util.concurrent.*;
 
 public class ClientConnection implements Observer<String>, Runnable{
     private final Socket serverSocket;
-    private final LobbyController lobbyController;
-    private final GameController gameController;
-    private final VirtualView virtualView;
+    private final Server server;
+    private VirtualView virtualView;
     private final DataOutputStream out;
     private final DataInputStream in;
     private ScheduledFuture pingTask;
     private final ExecutorService executor = Executors.newFixedThreadPool(16);
 
 
-    public ClientConnection(Socket socket, LobbyController lobbyController, GameController gameController) throws IOException {
+    public ClientConnection(Socket socket, Server server) throws IOException {
         this.serverSocket = socket;
-        this.lobbyController = lobbyController;
-        this.gameController = gameController;
+        this.server = server;
 
         out = new DataOutputStream(socket.getOutputStream());
         in = new DataInputStream(socket.getInputStream());
 
-        virtualView = new VirtualView(0, lobbyController, gameController);
-        virtualView.addObserver(this);
 
         // PING
         ScheduledThreadPoolExecutor executor = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(1);
@@ -56,8 +55,13 @@ public class ClientConnection implements Observer<String>, Runnable{
                 System.out.println(message);
 
                 String finalMessage = message;
+
                 if(length > 0) {
-                    executor.submit(() -> virtualView.handleRequest(finalMessage));
+                    if(virtualView == null) {
+                        handleHandshake(message);
+                    } else {
+                        executor.submit(() -> virtualView.handleRequest(finalMessage));
+                    }
                 }
 
                 length = in.readInt();
@@ -88,6 +92,27 @@ public class ClientConnection implements Observer<String>, Runnable{
             System.out.println("ClientConnection: client disconnected, stopping ping");
             pingTask.cancel(false);
             // TODO disconnect
+        }
+    }
+
+    public void handleHandshake(String message) { // TODO Proper error messages
+        JsonObject jo = JsonParser.parseString(message).getAsJsonObject();
+
+        if(!jo.has("commandType") || !jo.has("name")) {
+            send("Invalid params");
+            return;
+        }
+
+        if (!jo.get("commandType").getAsString().equals("HANDSHAKE")) {
+            send("Wrong command. Handshake expected");
+            return;
+        }
+
+        try {
+            virtualView = server.getVVFor(jo.get("name").getAsString());
+            send(MatchInfo.getInstance().serialize().toString());
+        } catch (Exception e) {
+            send("Another player with the same name is connected");
         }
     }
 }

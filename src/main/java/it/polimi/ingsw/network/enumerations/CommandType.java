@@ -5,6 +5,8 @@ package it.polimi.ingsw.network.enumerations;
  * if the <code>Command</code> has to be executed while in-game.
  */
 public enum CommandType {
+    HANDSHAKE(false),
+    CREATE_GAME(false),
     PLAY_CARD(true),
     BUY_CHARACTER_CARD(true),
     SET_CARD_PARAMETERS(true),

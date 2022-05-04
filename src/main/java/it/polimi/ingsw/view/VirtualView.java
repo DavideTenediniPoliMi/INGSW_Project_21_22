@@ -15,19 +15,29 @@ import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
 
 public class VirtualView extends Observable<String> implements Observer<ResponseParameters> {
-    private final int playerID;
-    private final CommandFactory commandFactory;
+    private final String name;
+    private boolean connected;
+    private int playerID;
+    private CommandFactory commandFactory;
     private final LobbyController lobbyController;
     private final GameController gameController;
-    public VirtualView(int playerID, LobbyController lobbyController, GameController gameController) {
+
+    public VirtualView(String name, LobbyController lobbyController, GameController gameController) {
         this.lobbyController = lobbyController;
         this.gameController = gameController;
-        this.playerID = playerID;
+        this.name = name;
 
         Game.getInstance().addObserver(this);
         MatchInfo.getInstance().addObserver(this);
         Lobby.getLobby().addObserver(this);
-        commandFactory = new CommandFactory(playerID, lobbyController, gameController);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isConnected() {
+        return connected;
     }
 
     public void handleRequest(String message) {
