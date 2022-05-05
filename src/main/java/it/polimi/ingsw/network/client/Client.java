@@ -6,12 +6,9 @@ import it.polimi.ingsw.network.parameters.RequestParameters;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class Client {
@@ -54,9 +51,9 @@ public class Client {
             int num = in.readInt();
 
             while (num != -1) {
-                String message = "";
+                StringBuilder message = new StringBuilder();
                 for (int i = 0; i < num; i++) {
-                    message += in.readChar();
+                    message.append(in.readChar());
                 }
 
                 System.out.println("Client: Message of length " + num + " received :\n" + message);

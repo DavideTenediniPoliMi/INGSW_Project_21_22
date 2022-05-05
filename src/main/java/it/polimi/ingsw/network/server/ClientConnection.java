@@ -20,6 +20,7 @@ public class ClientConnection implements Observer<String>, Runnable{
     private final DataInputStream in;
     private ScheduledFuture pingTask;
     private final ExecutorService executor = Executors.newFixedThreadPool(16);
+    private boolean connected, bound;
 
 
     public ClientConnection(Socket socket, Server server) throws IOException {
@@ -37,40 +38,24 @@ public class ClientConnection implements Observer<String>, Runnable{
         pingTask = executor.scheduleAtFixedRate(
                 () -> send(""),
                 60, 5, TimeUnit.SECONDS);
+
+        connected = true;
+        bound = false;
     }
 
     @Override
     public void run() {
         System.out.println("ClientConnection: starting and waiting for input");
-        try {
-            int length = in.readInt();
 
-            while (length != -1) {
-                System.out.println("received message of length " + length);
+        System.out.println("Waiting for handshake");
+        waitForHandshake();
 
-                String message = "";
-                for (int i = 0; i < length; i++) {
-                    message += in.readChar();
-                }
-                System.out.println(message);
-
-                String finalMessage = message;
-
-                if(length > 0) {
-                    if(virtualView == null) {
-                        handleHandshake(message);
-                    } else {
-                        executor.submit(() -> virtualView.handleRequest(finalMessage));
-                    }
-                }
-
-                length = in.readInt();
-            }
-        } catch (IOException e){
-            System.out.println("ClientConnection: client disconnected, stopping ping");
-            pingTask.cancel(false);
-            // TODO disconnect
+        while(connected) {
+            String received = readMessage();
+            executor.submit(() -> virtualView.handleRequest(received));
         }
+
+        System.out.println("Disconnected");
     }
 
     @Override
@@ -91,7 +76,39 @@ public class ClientConnection implements Observer<String>, Runnable{
         } catch(IOException e) {
             System.out.println("ClientConnection: client disconnected, stopping ping");
             pingTask.cancel(false);
+            connected = false;
             // TODO disconnect
+        }
+    }
+
+    private String readMessage() {
+        String finalMessage = "";
+        try {
+            int length = in.readInt();
+
+            if (length != -1) {
+                System.out.println("received message of length " + length);
+
+                StringBuilder message = new StringBuilder();
+                for (int i = 0; i < length; i++) {
+                    message.append(in.readChar());
+                }
+                System.out.println(message);
+
+                finalMessage = message.toString();
+            }
+        } catch (IOException e){
+            System.out.println("ClientConnection: client disconnected, stopping ping");
+            pingTask.cancel(false);
+            connected = false;
+            // TODO disconnect
+        }
+        return finalMessage;
+    }
+
+    private void waitForHandshake() {
+        while(connected && !bound) {
+            handleHandshake(readMessage());
         }
     }
 
@@ -112,8 +129,10 @@ public class ClientConnection implements Observer<String>, Runnable{
             virtualView = server.getVVFor(jo.get("name").getAsString());
             virtualView.addObserver(this);
             send(MatchInfo.getInstance().serialize().toString());
+            bound = true;
         } catch (Exception e) {
             send("Another player with the same name is connected");
         }
     }
+
 }
