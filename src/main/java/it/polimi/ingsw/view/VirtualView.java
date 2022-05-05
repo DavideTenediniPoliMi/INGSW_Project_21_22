@@ -20,7 +20,7 @@ public class VirtualView extends Observable<String> implements Observer<Response
     private final String name;
     private boolean connected;
     private int playerID;
-    private final CommandFactory commandFactory;
+    private CommandFactory commandFactory;
     private final LobbyController lobbyController;
     private final GameController gameController;
 
@@ -28,8 +28,6 @@ public class VirtualView extends Observable<String> implements Observer<Response
         this.lobbyController = lobbyController;
         this.gameController = gameController;
         this.name = name;
-
-        commandFactory = new CommandFactory(playerID, lobbyController, gameController);
 
         Game.getInstance().addObserver(this);
         MatchInfo.getInstance().addObserver(this);
