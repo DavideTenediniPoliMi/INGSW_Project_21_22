@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.controller.LobbyController;
+import it.polimi.ingsw.exceptions.lobby.PlayerAlreadyConnectedException;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.network.observer.Observer;
 import it.polimi.ingsw.view.VirtualView;
@@ -130,8 +131,8 @@ public class ClientConnection implements Observer<String>, Runnable{
             virtualView.addObserver(this);
             send(MatchInfo.getInstance().serialize().toString());
             bound = true;
-        } catch (Exception e) {
-            send("Another player with the same name is connected");
+        } catch (PlayerAlreadyConnectedException e) {
+            send(e.toString());
         }
     }
 

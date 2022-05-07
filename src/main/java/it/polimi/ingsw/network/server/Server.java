@@ -2,6 +2,7 @@ package it.polimi.ingsw.network.server;
 
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.controller.LobbyController;
+import it.polimi.ingsw.exceptions.lobby.PlayerAlreadyConnectedException;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.view.VirtualView;
 
@@ -25,7 +26,7 @@ public class Server {
     public Server() throws IOException {
     }
 
-    public synchronized VirtualView getVVFor(String name) throws Exception {
+    public synchronized VirtualView getVVFor(String name) throws PlayerAlreadyConnectedException {
         Optional<VirtualView> result = virtualViews.stream()
                 .filter((virtualView) -> (virtualView.getName().equals(name)))
                 .findAny();
@@ -34,7 +35,7 @@ public class Server {
             if(!result.get().isConnected()) {
                 return result.get();
             }
-            throw new Exception(); // TODO make exception for "Player with that name is already connected"
+            throw new PlayerAlreadyConnectedException(name);
         }
         VirtualView vv = new VirtualView(name, lobbyController, gameController);
         virtualViews.add(vv);
