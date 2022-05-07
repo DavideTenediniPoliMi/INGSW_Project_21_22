@@ -377,18 +377,24 @@ public class Board implements Serializable {
             }
         }
 
+        clouds.clear();
         if(jsonObject.has("clouds")) {
             JsonArray jsonClouds = jsonObject.get("clouds").getAsJsonArray();
-            for (int i = 0; i < clouds.size(); i++) {
-                clouds.get(i).deserialize(jsonClouds.get(i).getAsJsonObject());
+            for (JsonElement jsonCloud : jsonClouds) {
+                Cloud cloud = new Cloud();
+                cloud.deserialize(jsonCloud.getAsJsonObject());
+                clouds.add(cloud);
             }
         }else
             clouds.clear();
 
+        schools.clear();
         if(jsonObject.has("schools")) {
             JsonArray jsonSchools = jsonObject.get("schools").getAsJsonArray();
-            for (int i = 0; i < schools.size(); i++) {
-                schools.get(i).deserialize(jsonSchools.get(i).getAsJsonObject());
+            for (JsonElement jsonSchool : jsonSchools) {
+                School school = new School(new Player(-1, ""));
+                school.deserialize(jsonSchool.getAsJsonObject());
+                schools.add(school);
             }
         }else
             schools.clear();

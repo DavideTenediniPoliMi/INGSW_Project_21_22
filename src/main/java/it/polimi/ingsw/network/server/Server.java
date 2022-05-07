@@ -1,22 +1,33 @@
 package it.polimi.ingsw.network.server;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.controller.LobbyController;
 import it.polimi.ingsw.exceptions.lobby.PlayerAlreadyConnectedException;
+import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.view.VirtualView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
     private static final int PORT = 12345;
+    private static final String BACKUP_FILE = "BackupData.txt";
     private final ServerSocket serverSocket = new ServerSocket(PORT);
     private final ExecutorService executor = Executors.newFixedThreadPool(16);
     private final LobbyController lobbyController = new LobbyController();
@@ -24,6 +35,12 @@ public class Server {
     private final List<VirtualView> virtualViews = new ArrayList<>();
 
     public Server() throws IOException {
+        File file = new File(BACKUP_FILE);
+
+        if(file.exists()) {
+            readDataFromFile(file);
+            file.delete();
+        }
     }
 
     public synchronized VirtualView getVVFor(String name) throws PlayerAlreadyConnectedException {
@@ -55,6 +72,53 @@ public class Server {
             } catch (IOException e) {
                 System.out.println("Connection Error!");
             }
+        }
+    }
+
+    public void readDataFromFile(File file) {
+        MatchInfo matchInfo = MatchInfo.getInstance();
+        String line;
+
+        Scanner fileReader = null;
+        try {
+            fileReader = new Scanner(file);
+
+            line = fileReader.nextLine();
+            matchInfo.deserialize(JsonParser.parseString(line).getAsJsonObject());
+
+            line = fileReader.nextLine();
+            if(matchInfo.getGameStatus().equals(GameStatus.LOBBY))
+                Lobby.getLobby().deserialize(JsonParser.parseString(line).getAsJsonObject());
+            else
+                Game.getInstance().deserialize(JsonParser.parseString(line).getAsJsonObject());
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if(fileReader != null)
+                fileReader.close();
+        }
+    }
+
+    public void saveDataToFile() {
+        Lobby lobby = Lobby.getLobby();
+        Game game = Game.getInstance();
+        MatchInfo matchInfo = MatchInfo.getInstance();
+        try {
+            new File(BACKUP_FILE).createNewFile();
+
+            FileWriter fileWriter = new FileWriter(BACKUP_FILE);
+
+            fileWriter.write(matchInfo.serialize().toString());
+            fileWriter.write("\n");
+            if(matchInfo.getGameStatus().equals(GameStatus.LOBBY))
+                fileWriter.write(lobby.serialize().toString());
+            else if(matchInfo.getGameStatus().equals(GameStatus.IN_GAME))
+                fileWriter.write(game.serialize().toString());
+
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

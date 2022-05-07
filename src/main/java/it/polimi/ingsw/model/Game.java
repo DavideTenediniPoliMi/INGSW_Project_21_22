@@ -526,19 +526,26 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         if(jsonObject.has("board"))
             board.deserialize(jsonObject.get("board").getAsJsonObject());
 
+        players.clear();
         if(jsonObject.has("players")) {
             JsonArray jsonPlayers = jsonObject.get("players").getAsJsonArray();
-            for (int i = 0; i < players.size(); i++) {
-                players.get(i).deserialize(jsonPlayers.get(i).getAsJsonObject());
+            for (JsonElement jsonPlayer : jsonPlayers) {
+                Player player = new Player(-1, "");
+                player.deserialize(jsonPlayer.getAsJsonObject());
+                players.add(player);
             }
         }else
             players.clear();
 
+        characterCards.clear();
         if(jsonObject.has("characterCards")) {
             if(MatchInfo.getInstance().isExpertMode()) {
                 JsonArray jsonCards = jsonObject.get("characterCards").getAsJsonArray();
-                for (int i = 0; i < characterCards.size(); i++) {
-                    characterCards.get(i).deserialize(jsonCards.get(i).getAsJsonObject());
+                for (JsonElement jsonCard : jsonCards) {
+                    String name = jsonCard.getAsJsonObject().get("name").getAsString();
+                    CharacterCard c = CharacterCards.valueOf(name).instantiate();
+                    c.deserialize(jsonCard.getAsJsonObject());
+                    characterCards.add(c);
                 }
             }
         }else
