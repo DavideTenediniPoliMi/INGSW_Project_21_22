@@ -39,12 +39,16 @@ class ServerTest {
         game = Game.getInstance();
         matchInfo = MatchInfo.getInstance();
 
-        File file = new File("GameData.txt");
+        File file = new File("BackupData.txt");
         server.readDataFromFile(file);
         file.delete();
 
         System.out.println(matchInfo.serialize());
         System.out.println(game.serialize());
         System.out.println(lobby.serialize());
+
+        Game.resetInstance();
+        Lobby.resetLobby();
+        MatchInfo.resetInstance();
     }
 }
