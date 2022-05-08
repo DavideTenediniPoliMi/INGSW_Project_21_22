@@ -56,6 +56,7 @@ public class ClientConnection implements Observer<String>, Runnable{
             executor.submit(() -> virtualView.handleRequest(received));
         }
 
+        virtualView.disconnect();
         System.out.println("Disconnected");
     }
 
@@ -78,6 +79,7 @@ public class ClientConnection implements Observer<String>, Runnable{
             System.out.println("ClientConnection: client disconnected, stopping ping");
             pingTask.cancel(false);
             connected = false;
+            virtualView.disconnect();
             // TODO disconnect
         }
     }
@@ -102,6 +104,7 @@ public class ClientConnection implements Observer<String>, Runnable{
             System.out.println("ClientConnection: client disconnected, stopping ping");
             pingTask.cancel(false);
             connected = false;
+            virtualView.disconnect();
             // TODO disconnect
         }
         return finalMessage;

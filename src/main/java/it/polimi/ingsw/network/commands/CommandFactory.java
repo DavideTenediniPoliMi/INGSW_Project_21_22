@@ -191,6 +191,8 @@ public class CommandFactory {
                 }
                 throw new BadParametersException("COLLECT CLOUD command - Given params:" +
                         " (cloudIndex: " + cloudIndex + ")");
+            case SKIP_TURN:
+                return new SkipTurnCommand(playerID);
             case DISCONNECT:
                 return null;
             default:

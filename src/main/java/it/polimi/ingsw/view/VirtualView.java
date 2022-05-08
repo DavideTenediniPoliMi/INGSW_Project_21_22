@@ -89,7 +89,25 @@ public class VirtualView extends Observable<String> implements Observer<Response
 
     @Override
     public void update(ResponseParameters params) {
-        System.out.println(params.serialize().toString());
-        notify(params.serialize().toString());
+        if(connected) {
+            System.out.println(params.serialize().toString());
+            notify(params.serialize().toString());
+        } else if(params.shouldSendMatchInfo()) {
+            MatchInfo match = MatchInfo.getInstance();
+            if(match.getCurrentPlayerID() == playerID) {
+                String skipCommand = new RequestParameters().setCommandType(CommandType.SKIP_TURN).serialize().toString();
+                handleRequest(skipCommand);
+            }
+        }
+    }
+
+    @Override
+    public void addObserver(Observer<String> observer) {
+        super.addObserver(observer);
+        connected = true;
+    }
+
+    public void disconnect() {
+        connected = false;
     }
 }

@@ -15,6 +15,7 @@ public enum CommandType {
     TRANSFER_STUDENT_TO_DINING_ROOM(true),
     MOVE_MN(true),
     COLLECT_FROM_CLOUD(true),
+    SKIP_TURN(true),
     JOIN(false),
     SEL_CARDBACK(false),
     SEL_TOWERCOLOR(false),
