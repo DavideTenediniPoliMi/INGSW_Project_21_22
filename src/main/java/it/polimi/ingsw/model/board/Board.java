@@ -170,6 +170,8 @@ public class Board implements Serializable {
      */
     public void refillClouds(int studentAmount) {
         for(Cloud cloud: clouds) {
+            if(cloud.isAvailable()) continue;
+
             StudentGroup temp = Game.getInstance().drawStudents(studentAmount);
             cloud.refillCloud(temp);
         }
