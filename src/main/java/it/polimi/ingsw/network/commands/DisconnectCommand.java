@@ -22,7 +22,7 @@ public class DisconnectCommand implements Command {
     public void execute() throws EriantysException, EriantysRuntimeException {
         switch (MatchInfo.getInstance().getGameStatus()) {
             case LOBBY:
-                //TODO
+                lobbyController.removePlayer(playerID);
                 break;
             case IN_GAME:
                 gameController.handleDisconnection(playerID);

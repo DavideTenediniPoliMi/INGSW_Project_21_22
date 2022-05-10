@@ -8,6 +8,7 @@ import it.polimi.ingsw.exceptions.lobby.DuplicateIDException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.network.commands.Command;
 import it.polimi.ingsw.network.commands.CommandFactory;
 import it.polimi.ingsw.network.enumerations.CommandType;
@@ -126,7 +127,7 @@ public class VirtualView extends Observable<String> implements Observer<Response
 
     public void skipIfCurrent() {
         MatchInfo match = MatchInfo.getInstance();
-        if(match.getCurrentPlayerID() == playerID) {
+        if(match.getGameStatus().equals(GameStatus.IN_GAME) && match.getCurrentPlayerID() == playerID) {
             String skipCommand = new RequestParameters().setCommandType(CommandType.SKIP_TURN).serialize().toString();
             handleRequest(skipCommand);
         }

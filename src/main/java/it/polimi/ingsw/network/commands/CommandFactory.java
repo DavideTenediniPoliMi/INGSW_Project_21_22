@@ -196,7 +196,7 @@ public class CommandFactory {
             case DISCONNECT:
                 return new DisconnectCommand(playerID, lobbyController, gameController);
             case RECONNECT:
-                return new ReconnectCommand(playerID, lobbyController, gameController);
+                return new ReconnectCommand(playerID, gameController);
             default:
                 throw new BadParametersException("No such action: " + params.getCommandType());
         }

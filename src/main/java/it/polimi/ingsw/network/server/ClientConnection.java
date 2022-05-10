@@ -6,6 +6,7 @@ import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.controller.LobbyController;
 import it.polimi.ingsw.exceptions.lobby.PlayerAlreadyConnectedException;
 import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.network.observer.Observer;
 import it.polimi.ingsw.view.VirtualView;
 
@@ -75,11 +76,7 @@ public class ClientConnection implements Observer<String>, Runnable{
 
             out.flush();
         } catch(IOException e) {
-            System.out.println("ClientConnection: client disconnected, stopping ping");
-            pingTask.cancel(false);
-            connected = false;
-            virtualView.disconnect();
-            // TODO disconnect
+            disconnect();
         }
     }
 
@@ -100,11 +97,7 @@ public class ClientConnection implements Observer<String>, Runnable{
                 finalMessage = message.toString();
             }
         } catch (IOException e){
-            System.out.println("ClientConnection: client disconnected, stopping ping");
-            pingTask.cancel(false);
-            connected = false;
-            virtualView.disconnect();
-            // TODO disconnect
+            disconnect();
         }
         return finalMessage;
     }
@@ -135,6 +128,17 @@ public class ClientConnection implements Observer<String>, Runnable{
             bound = true;
         } catch (PlayerAlreadyConnectedException exc) {
             send(exc.toString());
+        }
+    }
+
+    private void disconnect() {
+        System.out.println("ClientConnection: client disconnected, stopping ping");
+        pingTask.cancel(false);
+        connected = false;
+        virtualView.disconnect();
+
+        if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.LOBBY)) {
+            server.removeVV(virtualView);
         }
     }
 

@@ -59,6 +59,10 @@ public class Server {
         return vv;
     }
 
+    public synchronized void removeVV(VirtualView virtualView) {
+        virtualViews.remove(virtualView);
+    }
+
     public void run(){
         System.out.println("Server: running");
         while(true){
@@ -79,24 +83,19 @@ public class Server {
         MatchInfo matchInfo = MatchInfo.getInstance();
         String line;
 
-        Scanner fileReader = null;
-        try {
-            fileReader = new Scanner(file);
+        try (Scanner fileReader = new Scanner(file)) {
 
             line = fileReader.nextLine();
             matchInfo.deserialize(JsonParser.parseString(line).getAsJsonObject());
 
             line = fileReader.nextLine();
-            if(matchInfo.getGameStatus().equals(GameStatus.LOBBY))
+            if (matchInfo.getGameStatus().equals(GameStatus.LOBBY))
                 Lobby.getLobby().deserialize(JsonParser.parseString(line).getAsJsonObject());
             else
                 Game.getInstance().deserialize(JsonParser.parseString(line).getAsJsonObject());
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } finally {
-            if(fileReader != null)
-                fileReader.close();
         }
     }
 
