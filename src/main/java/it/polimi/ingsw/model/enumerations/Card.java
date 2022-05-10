@@ -19,7 +19,8 @@ public enum Card implements Serializable {
     CARD_7(7, 4),
     CARD_8(8, 4),
     CARD_9(9, 5),
-    CARD_10(10, 5);
+    CARD_10(10, 5),
+    CARD_AFK(99, 0);
 
     public final int WEIGHT;
     public final int RANGE;
@@ -43,8 +44,10 @@ public enum Card implements Serializable {
      * Also adds the player that used it to <code>useOrder</code>.
      */
     public void use(int playerID) {
-        used = true;
         useOrder.add(playerID);
+        if(equals(CARD_AFK))
+            return;
+        used = true;
     }
 
     /**
@@ -110,6 +113,8 @@ public enum Card implements Serializable {
     public static JsonObject serializeAll() {
         JsonObject jsonObject = new JsonObject();
         for(Card card : Card.values()) {
+            if(card.equals(CARD_AFK))
+                continue;
             jsonObject.add(card.name(), card.serialize());
         }
 
