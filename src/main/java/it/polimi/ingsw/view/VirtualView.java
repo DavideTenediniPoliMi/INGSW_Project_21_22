@@ -92,18 +92,30 @@ public class VirtualView extends Observable<String> implements Observer<Response
         if(connected) {
             System.out.println(params.serialize().toString());
             notify(params.serialize().toString());
+        } else {
+            skipIfCurrent();
         }
-        skipIfCurrent();
     }
 
     @Override
     public void addObserver(Observer<String> observer) {
         super.addObserver(observer);
         connected = true;
+        if(commandFactory != null) {
+            // Player was connected
+            reconnect();
+        }
+    }
+
+    public void reconnect() {
+        String reconnectCommand = new RequestParameters().setCommandType(CommandType.RECONNECT).serialize().toString();
+        handleRequest(reconnectCommand);
     }
 
     public void disconnect() {
         connected = false;
+        String disconnectCommand = new RequestParameters().setCommandType(CommandType.DISCONNECT).serialize().toString();
+        handleRequest(disconnectCommand);
         skipIfCurrent();
     }
 

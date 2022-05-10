@@ -20,7 +20,8 @@ public enum CommandType {
     SEL_CARDBACK(false),
     SEL_TOWERCOLOR(false),
     READY_UP(false),
-    DISCONNECT(true);
+    DISCONNECT(true),
+    RECONNECT(true);
 
     CommandType(boolean isInGame) {
         this.isInGame = isInGame;

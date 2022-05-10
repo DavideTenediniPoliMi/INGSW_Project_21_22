@@ -194,7 +194,9 @@ public class CommandFactory {
             case SKIP_TURN:
                 return new SkipTurnCommand(playerID, gameController);
             case DISCONNECT:
-                return null;
+                return new DisconnectCommand(playerID, gameController);
+            case RECONNECT:
+                return new ReconnectCommand(playerID, gameController);
             default:
                 throw new BadParametersException("No such action: " + params.getCommandType());
         }
