@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller.round;
 
 import it.polimi.ingsw.exceptions.board.CloudUnavailableException;
+import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.exceptions.game.NullPlayerException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
@@ -48,5 +49,10 @@ public class CloudStateController extends RoundStateController {
         }
 
         game.collectFromCloud(cloudIndex, currentPlayerID);
+    }
+
+    @Override
+    public void skip() {
+        // Do nothing
     }
 }

@@ -39,6 +39,7 @@ public class Player implements Serializable {
         this.towerHolder = towerHolder;
 
         this.playableCards.addAll(List.of(Card.values()));
+        playableCards.remove(Card.CARD_AFK);
     }
 
     /**
@@ -148,6 +149,8 @@ public class Player implements Serializable {
      */
     protected void setSelectedCard(Card card) {
         selectedCard = card;
+        if(card.equals(Card.CARD_AFK))
+            return;
         playableCards.remove(card);
     }
 
@@ -179,9 +182,8 @@ public class Player implements Serializable {
     @Override
     public JsonObject serialize() {
         Gson gson = new Gson();
-        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
 
-        return jsonObject;
+        return gson.toJsonTree(this).getAsJsonObject();
     }
 
     @Override
