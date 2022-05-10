@@ -15,9 +15,9 @@ public class CLI {
             AnsiConsole.systemInstall();
             AnsiConsole.sysOut().println(ANSI_CLS);
             AnsiConsole.sysOut().println
-                    (ANSI_AT55 + ANSI_REVERSEON + "Hello world" + ANSI_NORMAL);
+                    (ANSI_HOME + ANSI_REVERSEON + "Hello world" + ANSI_NORMAL);
             AnsiConsole.sysOut().println
-                    (ANSI_HOME + ANSI_WHITEONBLUE + "Hello world" + ANSI_NORMAL);
+                    (ANSI_WHITEONBLUE + "Hello world" + ANSI_NORMAL);
             AnsiConsole.sysOut().print
                     (ANSI_BOLD + "Press a key..." + ANSI_NORMAL);
             try {System.in.read();}catch(Exception e){}
