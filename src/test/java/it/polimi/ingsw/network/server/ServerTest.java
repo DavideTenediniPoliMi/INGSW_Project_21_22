@@ -36,6 +36,7 @@ class ServerTest {
         Game.resetInstance();
         MatchInfo.resetInstance();
 
+        /*
         game = Game.getInstance();
         matchInfo = MatchInfo.getInstance();
 
@@ -50,5 +51,7 @@ class ServerTest {
         Game.resetInstance();
         Lobby.resetLobby();
         MatchInfo.resetInstance();
+
+         */
     }
 }

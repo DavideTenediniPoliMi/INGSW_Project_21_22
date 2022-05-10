@@ -75,7 +75,7 @@ public class Server {
         }
     }
 
-    public void readDataFromFile(File file) {
+    private void readDataFromFile(File file) {
         MatchInfo matchInfo = MatchInfo.getInstance();
         String line;
 
@@ -104,6 +104,8 @@ public class Server {
         Lobby lobby = Lobby.getLobby();
         Game game = Game.getInstance();
         MatchInfo matchInfo = MatchInfo.getInstance();
+        if(matchInfo.isGameOver())
+            return;
         try {
             new File(BACKUP_FILE).createNewFile();
 

@@ -322,7 +322,8 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
         selectedNumPlayer = jsonObject.get("selectedNumPlayer").getAsInt();
         expertMode = jsonObject.get("expertMode").getAsBoolean();
         //numPlayersConnected = 0;
-        stateType = TurnState.valueOf(jsonObject.get("stateType").getAsString());
+        if(jsonObject.has("stateType"))
+            stateType = TurnState.valueOf(jsonObject.get("stateType").getAsString());
 
         JsonArray jsonPlayOrder = jsonObject.get("playOrder").getAsJsonArray();
         for(JsonElement player : jsonPlayOrder) {
