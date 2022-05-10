@@ -337,6 +337,24 @@ public class Game extends Observable<ResponseParameters> implements Serializable
     }
 
     /**
+     * Sets the specified <code>Player</code>'s status to disconnected.
+     *
+     * @param playerID the ID of the <code>Player</code>.
+     */
+    public void disconnectPlayer(int playerID) {
+        getPlayerByID(playerID).disconnect();
+    }
+
+    /**
+     * Reconnects the specified <code>Player</code> to this <code>Game</code>.
+     *
+     * @param playerID the ID of the <code>Player</code>.
+     */
+    public void reconnectPlayer(int playerID) {
+        getPlayerByID(playerID).reconnect();
+    }
+
+    /**
      * Plays the specified (Assistant) <code>Card</code> for the specified <code>Player</code>
      *
      * @param playerID the ID of the player playing the assistant card
@@ -544,8 +562,10 @@ public class Game extends Observable<ResponseParameters> implements Serializable
                 for (JsonElement jsonCard : jsonCards) {
                     String name = jsonCard.getAsJsonObject().get("name").getAsString();
                     CharacterCard c = CharacterCards.valueOf(name).instantiate();
-                    c.deserialize(jsonCard.getAsJsonObject());
-                    characterCards.add(c);
+                    if(c != null) {
+                        c.deserialize(jsonCard.getAsJsonObject());
+                        characterCards.add(c);
+                    }
                 }
             }
         }else

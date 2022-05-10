@@ -56,7 +56,6 @@ public class ClientConnection implements Observer<String>, Runnable{
             executor.submit(() -> virtualView.handleRequest(received));
         }
 
-        virtualView.disconnect();
         System.out.println("Disconnected");
     }
 
@@ -117,25 +116,25 @@ public class ClientConnection implements Observer<String>, Runnable{
     }
 
     public void handleHandshake(String message) { // TODO Proper error messages
-        JsonObject jo = JsonParser.parseString(message).getAsJsonObject();
+        JsonObject jsonObject = JsonParser.parseString(message).getAsJsonObject();
 
-        if(!jo.has("commandType") || !jo.has("name")) {
+        if(!jsonObject.has("commandType") || !jsonObject.has("name")) {
             send("Invalid params");
             return;
         }
 
-        if (!jo.get("commandType").getAsString().equals("HANDSHAKE")) {
+        if (!jsonObject.get("commandType").getAsString().equals("HANDSHAKE")) {
             send("Wrong command. Handshake expected");
             return;
         }
 
         try {
-            virtualView = server.getVVFor(jo.get("name").getAsString());
+            virtualView = server.getVVFor(jsonObject.get("name").getAsString());
             virtualView.addObserver(this);
             send(MatchInfo.getInstance().serialize().toString());
             bound = true;
-        } catch (PlayerAlreadyConnectedException e) {
-            send(e.toString());
+        } catch (PlayerAlreadyConnectedException exc) {
+            send(exc.toString());
         }
     }
 

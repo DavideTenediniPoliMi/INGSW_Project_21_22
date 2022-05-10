@@ -7,6 +7,7 @@ import it.polimi.ingsw.controller.subcontrollers.IslandExpertController;
 import it.polimi.ingsw.exceptions.EriantysException;
 import it.polimi.ingsw.exceptions.EriantysRuntimeException;
 import it.polimi.ingsw.exceptions.game.GameNotStartedException;
+import it.polimi.ingsw.exceptions.game.GamePausedException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.exceptions.game.NotCurrentPlayerException;
 import it.polimi.ingsw.model.Game;
@@ -19,9 +20,7 @@ import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.network.commands.Command;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -34,10 +33,13 @@ import java.util.stream.Collectors;
  * </ul>
  */
 public class GameController {
+    private final int TIME_OUT = 1;
     private RoundStateController roundStateController;
     private final MatchInfo matchInfo;
     private final Game game;
     private final Lobby lobby;
+    private boolean paused;
+    private Timer timer;
 
     /**
      * Sole constructor for <code>GameController</code>.
@@ -46,6 +48,7 @@ public class GameController {
         matchInfo = MatchInfo.getInstance();
         game = Game.getInstance();
         lobby = Lobby.getLobby();
+        paused = false;
     }
 
     /**
@@ -60,6 +63,9 @@ public class GameController {
         }
         if(playerID != matchInfo.getCurrentPlayerID()){
             throw new NotCurrentPlayerException(playerID);
+        }
+        if(paused) {
+            throw new GamePausedException();
         }
         command.execute();
         nextState();
@@ -293,6 +299,41 @@ public class GameController {
      */
     private void declareTie(List<TowerColor> teamColors) {
         matchInfo.declareTie(teamColors);
+    }
+
+    public void handleReconnection(int playerID) {
+        game.reconnectPlayer(playerID);
+        matchInfo.setNumPlayersConnected(matchInfo.getNumPlayersConnected() + 1);
+
+        if(timer != null) {
+            // Cancel running timer
+            timer.cancel();
+            timer.purge();
+
+            timer = null;
+        }
+    }
+
+    public void handleDisconnection(int playerID) {
+        game.disconnectPlayer(playerID);
+        matchInfo.setNumPlayersConnected(matchInfo.getNumPlayersConnected() - 1);
+
+        if(matchInfo.getNumPlayersConnected() == 1) {
+            paused = true;
+
+            // Start timer
+            timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    forceDeclareWinner();
+                }
+            }, TIME_OUT * 60 * 1000); //Conversion to milliseconds
+        }
+    }
+
+    private void forceDeclareWinner() {
+        //TODO
     }
 
     public RoundStateController getRoundStateController() {

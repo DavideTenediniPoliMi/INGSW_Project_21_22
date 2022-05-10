@@ -21,6 +21,7 @@ public class Player implements Serializable {
     private List<Card> playableCards = new ArrayList<>();
     private Card selectedCard;
     private int numCoins;
+    private boolean connected;
 
     /**
      * Constructor to instantiate a new <code>Player</code>
@@ -40,6 +41,8 @@ public class Player implements Serializable {
 
         this.playableCards.addAll(List.of(Card.values()));
         playableCards.remove(Card.CARD_AFK);
+
+        connected = true;
     }
 
     /**
@@ -177,6 +180,14 @@ public class Player implements Serializable {
      */
     protected void removeCoins(int amount){
         numCoins -= amount;
+    }
+
+    protected void disconnect() {
+        connected = false;
+    }
+
+    protected void reconnect() {
+        connected = true;
     }
 
     @Override
