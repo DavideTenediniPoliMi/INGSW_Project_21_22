@@ -57,15 +57,14 @@ class PlayerTest {
     }
 
     @Test
-    void serializeTest() {
-        System.out.println(player.serialize().toString());
-    }
-
-    @Test
     void deserializeTest() {
         Player p = new Player(1, "ciao");
         System.out.println(player.serialize());
-        p.deserialize(player.serialize());
+        assertDoesNotThrow( () -> p.deserialize(player.serialize()));
+        p.setSelectedCard(Card.CARD_1);
+
+        Player p2 = new Player(3, "carlo");
+        assertDoesNotThrow( () -> p2.deserialize(p.serialize()));
         System.out.println(p.serialize().toString());
     }
 
@@ -74,7 +73,7 @@ class PlayerTest {
         player = new Player(0, "nino");
         Player p = new Player(1, "ciao");
         System.out.println(player.serialize());
-        p.deserialize(player.serialize());
+        assertDoesNotThrow(() -> p.deserialize(player.serialize()));
         System.out.println(p.serialize().toString());
     }
 }

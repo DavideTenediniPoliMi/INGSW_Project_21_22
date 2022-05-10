@@ -4,7 +4,12 @@ import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.GameStatus;
+import it.polimi.ingsw.model.enumerations.TowerColor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -13,19 +18,42 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ServerTest {
+    Server server;
+    Lobby lobby;
+    Game game;
+    GameController gameController;
+    MatchInfo matchInfo;
 
-    @Test
-    void test() throws IOException {
-        Server server = new Server();
-        GameController gameController = new GameController();
-        MatchInfo matchInfo = MatchInfo.getInstance();
-        Game game = Game.getInstance();
-        Lobby lobby = Lobby.getLobby();
 
+    @BeforeEach
+    void setUp() throws IOException {
+        server = new Server();
+        gameController = new GameController();
+        matchInfo = MatchInfo.getInstance();
+        lobby = Lobby.getLobby();
+    }
+
+    @AfterEach
+    void tearDown() {
+        Lobby.resetLobby();
+        Game.resetInstance();
+        MatchInfo.resetInstance();
+        server = null;
+        matchInfo = null;
+        gameController = null;
+        lobby = null;
+        game = null;
+    }
+
+    /*@Test
+    void test(){
+        //Game.resetInstance();
         lobby.addPlayer(0, "pippo");
         lobby.addPlayer(1, "topo");
         matchInfo.setUpGame(2, false);
         gameController.createGame();
+
+        game = Game.getInstance();
 
         System.out.println(matchInfo.serialize());
         System.out.println(game.serialize());
@@ -52,6 +80,6 @@ class ServerTest {
         Lobby.resetLobby();
         MatchInfo.resetInstance();
 
-         */
-    }
+
+    }*/
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.TurnState;
@@ -158,5 +159,26 @@ class MatchInfoTest {
         matchInfo.removePlayer();
         test.remove();
         assertEquals(test, matchInfo.getPlayOrder());
+    }
+
+    @Test
+    void deserializeTest() {
+        matchInfo.addPlayer(2);
+        matchInfo.addPlayer(1);
+        matchInfo.addPlayer(3);
+        matchInfo.declareWinner(TowerColor.BLACK);
+
+        JsonObject jsonObject = matchInfo.serialize();
+
+        MatchInfo.resetInstance();
+        matchInfo = MatchInfo.getInstance();
+
+        matchInfo.deserialize(jsonObject);
+
+        assertEquals(2, matchInfo.getCurrentPlayerID());
+        matchInfo.removePlayer();
+        assertEquals(1, matchInfo.getCurrentPlayerID());
+        matchInfo.removePlayer();
+        assertEquals(3, matchInfo.getCurrentPlayerID());
     }
 }

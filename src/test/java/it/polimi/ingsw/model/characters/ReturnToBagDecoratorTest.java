@@ -105,6 +105,7 @@ public class ReturnToBagDecoratorTest {
     @Test
     public void testActivate_noStudentsOfSelectedColor() {
         StudentGroup sg5 = new StudentGroup(Color.BLUE, 3);
+        System.out.println(board.serialize());
         board.addToDiningRoomOf(0, sg5);
 
         StudentGroup sg6 = new StudentGroup(Color.GREEN, 3);

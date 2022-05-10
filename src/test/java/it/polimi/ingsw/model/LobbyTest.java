@@ -105,4 +105,12 @@ class LobbyTest {
 
         System.out.println(lobby1.serialize());
     }
+
+    @Test
+    void deserializeEmpty() {
+        JsonObject jsonObject = new JsonObject();
+
+        lobby.deserialize(jsonObject);
+        assertTrue(lobby.getPlayers().isEmpty());
+    }
 }

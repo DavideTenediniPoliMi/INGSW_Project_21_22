@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CardBack;
@@ -233,5 +234,29 @@ public class GameTest {
     public void testBagEmpty() {
         g.drawStudents(120);
         assertTrue(g.isStudentBagEmpty());
+    }
+
+    @Test
+    public void serializeWithCardsTest(){
+        JsonObject jsonObject = g.serialize();
+
+        Game.resetInstance();
+        g = Game.getInstance();
+
+        MatchInfo.getInstance().setUpGame(2, true);
+
+        g.deserialize(jsonObject);
+        assertEquals("ezio", g.getPlayerByID(0).getName());
+        assertEquals("bruso", g.getPlayerByID(1).getName());
+
+        jsonObject.remove("players");
+        jsonObject.remove("characterCards");
+
+        Game.resetInstance();
+        g = Game.getInstance();
+
+        g.deserialize(jsonObject);
+        assertTrue(g.getPlayers().isEmpty());
+        assertTrue(g.getCharacterCards().isEmpty());
     }
 }
