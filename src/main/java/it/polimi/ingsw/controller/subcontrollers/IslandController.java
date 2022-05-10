@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller.subcontrollers;
 
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Island;
@@ -37,6 +38,8 @@ public class IslandController {
         Game game = Game.getInstance();
 
         game.moveMN(steps);
+
+        MatchInfo.getInstance().setMNMoved(true);
 
         TowerColor oldMostInfluentialTeam = getOldMostInfluentialTeam();
         TowerColor newMostInfluentialTeam = getMostInfluentialTeam();
