@@ -179,6 +179,10 @@ public class RoundStateController {
         throw new IllegalActionException("collectFromCloud", MatchInfo.getInstance().getStateType());
     }
 
+    public void skip() throws IllegalActionException {
+        throw new IllegalActionException("skip", MatchInfo.getInstance().getStateType());
+    }
+
     /**
      * Defines the new order of play as clockwise, starting from the specified index.
      *

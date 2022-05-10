@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller.round;
 
 import it.polimi.ingsw.exceptions.game.BadParametersException;
+import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.exceptions.students.NotEnoughStudentsException;
 import it.polimi.ingsw.exceptions.students.StudentTransferException;
 import it.polimi.ingsw.model.Game;
@@ -66,6 +67,23 @@ public class StudentsStateController extends CharacterCardPlayableStateControlle
             matchInfo.studentWasMoved();
         }else {
             throw new NotEnoughStudentsException(c);
+        }
+    }
+
+    @Override
+    public void skip() {
+        Game game = Game.getInstance();
+        MatchInfo matchInfo = MatchInfo.getInstance();
+        int studentsMoved = MatchInfo.getInstance().getNumMovedStudents();
+
+        if(studentsMoved > 0) {
+            StudentGroup students = game.drawStudents(studentsMoved);
+
+            game.getBoard().addToEntranceOf(matchInfo.getCurrentPlayerID(), students);
+        }
+
+        while(matchInfo.getNumMovedStudents() < 3) {
+            matchInfo.studentWasMoved();
         }
     }
 }

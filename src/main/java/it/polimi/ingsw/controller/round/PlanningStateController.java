@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller.round;
 
 import it.polimi.ingsw.exceptions.game.BadParametersException;
+import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.exceptions.player.CardUsedException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
@@ -54,5 +55,10 @@ public class PlanningStateController extends RoundStateController {
         }else {
             throw new CardUsedException(card);
         }
+    }
+
+    @Override
+    public void skip() {
+        Game.getInstance().playCard(MatchInfo.getInstance().getCurrentPlayerID(), Card.CARD_AFK);
     }
 }

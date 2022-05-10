@@ -1,40 +1,23 @@
 package it.polimi.ingsw.network.commands;
 
+import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.exceptions.EriantysException;
 import it.polimi.ingsw.exceptions.EriantysRuntimeException;
 import it.polimi.ingsw.model.MatchInfo;
 
 public class SkipTurnCommand implements Command {
-    int playerID;
+    final int playerID;
+    final GameController gameController;
     MatchInfo match;
 
-    public SkipTurnCommand(int playerID) {
+    public SkipTurnCommand(int playerID, GameController gameController) {
         this.playerID = playerID;
+        this.gameController = gameController;
         match = MatchInfo.getInstance();
     }
 
     @Override
     public void execute() throws EriantysException, EriantysRuntimeException {
-        while(match.getCurrentPlayerID() == playerID) {
-            skipTurn();
-        }
-    }
-
-    private void skipTurn() { //TODO not best approach
-        switch (match.getStateType()) {
-            case STUDENTS:
-                while(match.getNumMovedStudents() < match.getMaxMovableStudents()) {
-                    match.studentWasMoved();
-                }
-                break;
-            case PLANNING:
-                break;
-            case MOTHER_NATURE:
-                break;
-            case CLOUD:
-                break;
-            default:
-                break;
-        }
+        gameController.getRoundStateController().skip();
     }
 }

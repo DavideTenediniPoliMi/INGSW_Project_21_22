@@ -31,6 +31,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
     private final List<TowerColor> winners = new ArrayList<>();
     private boolean gameTied;
     private GameStatus gameStatus;
+    private boolean movedMN = false;
 
     /**
      * Sole constructor to avoid being instantiated more than once. MatchInfo is a singleton <code>class</code>.
@@ -306,6 +307,24 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
     public synchronized void setGameStatus(GameStatus gameStatus) {
         this.gameStatus = gameStatus;
         notify(new ResponseParameters().setSendMatchInfo(true));
+    }
+
+    /**
+     * Sets Mother Nature status to the specified flag.
+     *
+     * @param moved the flag specifying if Mother Nature has moved
+     */
+    public void setMNMoved(boolean moved) {
+        movedMN = moved;
+    }
+
+    /**
+     * Returns whether Mother Nature was moved during this Action phase.
+     *
+     * @return <code>true</code> if Mother Nature was moved.
+     */
+    public boolean hasMNMoved() {
+        return movedMN;
     }
 
     @Override
