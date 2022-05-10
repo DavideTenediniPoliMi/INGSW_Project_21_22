@@ -77,6 +77,11 @@ public class VirtualView extends Observable<String> implements Observer<Response
                 command = commandFactory.createCommand(params);
             }
 
+            if(params.getCommandType().isUrgent) {
+                command.execute();
+                return;
+            }
+
             if (params.getCommandType().isInGame) {
                 gameController.requestCommand(playerID, command);
             } else {
