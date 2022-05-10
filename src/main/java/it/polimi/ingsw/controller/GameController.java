@@ -311,6 +311,7 @@ public class GameController {
             timer.purge();
 
             timer = null;
+            paused = false;
         }
     }
 
