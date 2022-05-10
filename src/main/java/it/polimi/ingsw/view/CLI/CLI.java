@@ -5,23 +5,28 @@ import org.fusesource.jansi.AnsiConsole;
 public class CLI {
         public static final String ANSI_CLS = "\u001b[2J";
         public static final String ANSI_HOME = "\u001b[H";
-        public static final String ANSI_BOLD = "\u001b[1m";
-        public static final String ANSI_AT55 = "\u001b[10;10H";
-        public static final String ANSI_REVERSEON = "\u001b[7m";
-        public static final String ANSI_NORMAL = "\u001b[0m";
-        public static final String ANSI_WHITEONBLUE = "\u001b[37;44m";
+        public static final String RED_BACKGROUND_BRIGHT = "\033[0;101m";// RED
+        public static final String GREEN_BACKGROUND_BRIGHT = "\033[0;102m";// GREEN
+        public static final String RESET = "\033[0m";  // Text Reset
 
-        public static void main(String args[]){
+
+        public static void main(String[] args){
             AnsiConsole.systemInstall();
             AnsiConsole.sysOut().println(ANSI_CLS);
             AnsiConsole.sysOut().println
-                    (ANSI_HOME + ANSI_REVERSEON + "Hello world" + ANSI_NORMAL);
+                    (ANSI_HOME + "┌─────────┐");
             AnsiConsole.sysOut().println
-                    (ANSI_WHITEONBLUE + "Hello world" + ANSI_NORMAL);
-            AnsiConsole.sysOut().print
-                    (ANSI_BOLD + "Press a key..." + ANSI_NORMAL);
-            try {System.in.read();}catch(Exception e){}
-            AnsiConsole.sysOut().println(ANSI_CLS);
+                    ("│         │");
+            AnsiConsole.sysOut().println
+                    ("│         │");
+            AnsiConsole.sysOut().println
+                    ("│ " + RED_BACKGROUND_BRIGHT + " 6 " + RESET + " " + GREEN_BACKGROUND_BRIGHT + " 3 " + RESET + " │");
+            AnsiConsole.sysOut().println
+                    ("│         │");
+            AnsiConsole.sysOut().println
+                    ("│         │");
+            AnsiConsole.sysOut().println
+                    ("└─────────┘");
             AnsiConsole.systemInstall();
         }
 }
