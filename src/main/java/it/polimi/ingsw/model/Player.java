@@ -190,6 +190,10 @@ public class Player implements Serializable {
         connected = true;
     }
 
+    public boolean isConnected() {
+        return connected;
+    }
+
     @Override
     public JsonObject serialize() {
         Gson gson = new Gson();

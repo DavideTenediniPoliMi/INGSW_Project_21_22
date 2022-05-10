@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  * </ul>
  */
 public class GameController {
-    private final int TIME_OUT = 1;
+    private final int TIME_OUT = 1; // Game timeout in minutes
     private RoundStateController roundStateController;
     private final MatchInfo matchInfo;
     private final Game game;
@@ -333,7 +333,11 @@ public class GameController {
     }
 
     private void forceDeclareWinner() {
-        //TODO
+        Optional<Player> lastPlayer = game.getPlayers().stream()
+                .filter(Player::isConnected)
+                .findAny();
+
+        lastPlayer.ifPresent(player -> declareWinner(player.getTeamColor()));
     }
 
     public RoundStateController getRoundStateController() {
