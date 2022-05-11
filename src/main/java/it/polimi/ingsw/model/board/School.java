@@ -140,12 +140,8 @@ public class School implements Serializable {
 
         if(jsonObject.has("entrance"))
             entrance.deserialize(jsonObject.get("entrance").getAsJsonObject());
-        else
-            entrance = new StudentGroup();
 
         if(jsonObject.has("diningRoom"))
             diningRoom.deserialize(jsonObject.get("diningRoom").getAsJsonObject());
-        else
-            diningRoom = new StudentGroup();
     }
 }

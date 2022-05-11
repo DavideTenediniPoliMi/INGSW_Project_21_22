@@ -105,6 +105,8 @@ public enum Card implements Serializable {
 
     public static void deserializeAll(JsonObject jsonObject) {
         for(Card card : values()) {
+            if(card.equals(CARD_AFK))
+                continue;
             JsonObject cardObj = jsonObject.get(card.name()).getAsJsonObject();
             card.deserialize(cardObj);
         }

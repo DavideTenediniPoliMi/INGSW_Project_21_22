@@ -63,4 +63,50 @@ public class MultiIslandTest {
         is.conquerIsland(TowerColor.WHITE);
         assertEquals(TowerColor.WHITE, is.getTeamColor());
     }
+
+    @Test
+    public void serializeTest() {
+        Island i1 = new SimpleIsland();
+        i1.addStudents(new StudentGroup(Color.BLUE, 3));
+
+        Island i2 = new SimpleIsland();
+        i1.addStudents(new StudentGroup(Color.BLUE, 2));
+        i1.addStudents(new StudentGroup(Color.GREEN, 1));
+
+        Island i3 = new SimpleIsland();
+        i1.addStudents(new StudentGroup(Color.RED, 4));
+
+        Island i4 = new SimpleIsland();
+        i1.addStudents(new StudentGroup(Color.YELLOW, 1));
+
+        i1.conquerIsland(TowerColor.BLACK);
+        i2.conquerIsland(TowerColor.BLACK);
+        i3.conquerIsland(TowerColor.BLACK);
+        i4.conquerIsland(TowerColor.BLACK);
+
+        Island m1 = new MultiIsland(i1, i2);
+        Island m2 = new MultiIsland(i3, i4);
+
+        Island m3 = new MultiIsland(m1, m2);
+
+        JsonObject jsonObject = m3.serialize();
+
+        Island m4 = new MultiIsland(new SimpleIsland(), new SimpleIsland());
+        m4.deserialize(jsonObject);
+
+        assertEquals(m3.getNumIslands(), m4.getNumIslands());
+        assertEquals(m3.getTeamColor(), m4.getTeamColor());
+
+        for(Color color : Color.values()) {
+            assertEquals(m3.getNumStudentsByColor(color), m4.getNumStudentsByColor(color));
+        }
+
+        JsonObject jsonObject2 = i1.serialize();
+        Island noStudents = new SimpleIsland();
+        noStudents.deserialize(jsonObject2);
+
+        for(Color color : Color.values()) {
+            assertEquals(noStudents.getNumStudentsByColor(color), i1.getNumStudentsByColor(color));
+        }
+    }
 }

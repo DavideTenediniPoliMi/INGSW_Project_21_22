@@ -238,24 +238,31 @@ public class GameTest {
 
     @Test
     public void serializeWithCardsTest(){
-        JsonObject jsonObject = g.serialize();
+        g.playCard(0, Card.CARD_1);
+        g.playCard(1, Card.CARD_1);
+        JsonObject jsonGame = g.serialize();
+        JsonObject jsonCards = Card.serializeAll();
 
         Game.resetInstance();
+        for(Card card : Card.values()) {
+            card.reset();
+        }
         g = Game.getInstance();
 
         MatchInfo.getInstance().setUpGame(2, true);
 
-        g.deserialize(jsonObject);
+        g.deserialize(jsonGame);
+        Card.deserializeAll(jsonCards);
         assertEquals("ezio", g.getPlayerByID(0).getName());
         assertEquals("bruso", g.getPlayerByID(1).getName());
 
-        jsonObject.remove("players");
-        jsonObject.remove("characterCards");
+        jsonGame.remove("players");
+        jsonGame.remove("characterCards");
 
         Game.resetInstance();
         g = Game.getInstance();
 
-        g.deserialize(jsonObject);
+        g.deserialize(jsonGame);
         assertTrue(g.getPlayers().isEmpty());
         assertTrue(g.getCharacterCards().isEmpty());
     }

@@ -87,9 +87,9 @@ public abstract class Island implements Serializable {
 
     @Override
     public void deserialize(JsonObject jsonObject) {
-        if(students == null)
-            students = new StudentGroup();
-        students.deserialize(jsonObject.get("students").getAsJsonObject());
+        if(jsonObject.has("students"))
+            students.deserialize(jsonObject.get("students").getAsJsonObject());
+
         if(jsonObject.has("teamColor"))
             teamColor = TowerColor.valueOf(jsonObject.get("teamColor").getAsString());
         else

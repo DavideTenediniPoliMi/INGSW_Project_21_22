@@ -191,4 +191,34 @@ public class BoardTest {
 
         assertEquals(0, s.getNumStudentsInDiningRoomByColor(Color.GREEN));
     }
+
+    @Test
+    void serializeTest() {
+        board.conquerIsland(TowerColor.BLACK);
+        board.moveMN(1);
+        board.conquerIsland(TowerColor.BLACK);
+
+        board.mergeIslands(0, 1);
+
+        JsonObject jsonObject = board.serialize();
+
+        board = null;
+
+        board = new Board();
+        board.deserialize(jsonObject);
+
+        assertEquals(board.getIslandAt(0).getTeamColor(), TowerColor.BLACK);
+
+        jsonObject.remove("clouds");
+        jsonObject.remove("schools");
+        jsonObject.remove("professorOwners");
+
+        board = null;
+
+        board = new Board();
+        board.deserialize(jsonObject);
+
+        assertTrue(board.getClouds().isEmpty());
+        assertTrue(board.getSchools().isEmpty());
+    }
 }
