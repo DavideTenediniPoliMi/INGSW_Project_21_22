@@ -31,7 +31,7 @@ class LobbyControllerTest {
         controller.requestCommand(new LobbyJoinCommand(0, "LOLLO", controller));
         controller.requestCommand(new LobbySelectCBCommand(0, CardBack.CB_1, controller));
         controller.requestCommand(new LobbySelectTeamCommand(0, TowerColor.BLACK, controller));
-        controller.requestCommand(new LobbyReadyStatusCommand(0, true, controller));
+        controller.requestCommand(new LobbyReadyStatusCommand(0, true, controller, new GameController()));
     }
 
     @AfterEach
@@ -81,7 +81,7 @@ class LobbyControllerTest {
         assertAll(
                 () -> assertThrowsExactly(NoSuchPlayerException.class, () -> controller.requestCommand(new LobbySelectCBCommand(1, CardBack.CB_1, controller))),
                 () -> assertThrowsExactly(NoSuchPlayerException.class, () -> controller.requestCommand(new LobbySelectTeamCommand(1, TowerColor.BLACK, controller))),
-                () -> assertThrowsExactly(NoSuchPlayerException.class, () -> controller.requestCommand(new LobbyReadyStatusCommand(1, true, controller))),
+                () -> assertThrowsExactly(NoSuchPlayerException.class, () -> controller.requestCommand(new LobbyReadyStatusCommand(1, true, controller, new GameController()))),
                 () -> assertThrowsExactly(NoSuchPlayerException.class, () -> controller.requestCommand(new LobbySelectTeamCommand(1, TowerColor.BLACK, controller))),
                 () -> assertThrowsExactly(NoSuchPlayerException.class, () -> controller.removePlayer(1))
         );

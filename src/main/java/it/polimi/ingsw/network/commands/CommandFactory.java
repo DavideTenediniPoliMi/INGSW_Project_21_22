@@ -110,7 +110,7 @@ public class CommandFactory {
                  *  - Ready
                  */
                 boolean ready = params.isReady();
-                return new LobbyReadyStatusCommand(playerID, ready, lobbyController);
+                return new LobbyReadyStatusCommand(playerID, ready, lobbyController, gameController);
 
             /*
              * Game-related commands

@@ -193,7 +193,8 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
      */
     public synchronized void addPlayer(int playerID) {
         playOrder.add(playerID);
-        notifyMatchInfo();
+        if(playOrder.size() == selectedNumPlayer)
+            notifyMatchInfo();
     }
 
     /**

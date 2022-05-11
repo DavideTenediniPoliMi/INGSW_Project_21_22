@@ -134,16 +134,6 @@ public class LobbyController {
         lobby.setReadyStatus(playerID, ready);
     }
 
-    public void checkLobbyIsReady() {
-        List<Player> players = lobby.getPlayers();
-
-        for(Player player : players) {
-            if(!lobby.isReady(player.getID())) {
-                return;
-            }
-        }
-    }
-
     /**
      * Removes the specified <code>Player</code> from this <code>Lobby</code>.
      *

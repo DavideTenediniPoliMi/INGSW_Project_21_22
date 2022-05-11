@@ -165,6 +165,15 @@ public class Lobby extends Observable<ResponseParameters> implements Serializabl
     }
 
     /**
+     * Checks if every Player in this lobby is ready to play
+     *
+     * @return the flag indicating whether all the players are ready or not
+     */
+    public boolean checkLobbyIsReady() {
+        return readyStatus.containsValue(false);
+    }
+
+    /**
      * Returns whether the specified name is already taken
      *
      * @param name the name to check

@@ -69,10 +69,16 @@ public class GameController {
         nextState();
     }
 
+    public void tryCreatingGame() {
+        if(Lobby.getLobby().checkLobbyIsReady()) {
+            createGame();
+        }
+    }
+
     /**
      * Creates a new Game with the players in the lobby.
      */
-    public void createGame() {
+    protected void createGame() {
         for(Player player : lobby.getPlayers()) {
             game.addPlayer(player);
             game.addSchool(player.getID());
