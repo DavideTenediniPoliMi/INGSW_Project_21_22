@@ -51,7 +51,7 @@ public class VirtualView extends Observable<String> implements Observer<Response
             Command command;
 
             if(commandFactory == null) {
-                if(params.getCommandType() == CommandType.CREATE_GAME) {
+                if(params.getCommandType() == CommandType.CREATE_LOBBY) {
                     command = new CommandFactory(playerID, lobbyController, gameController).createCommand(params);
                 } else {
                     do {

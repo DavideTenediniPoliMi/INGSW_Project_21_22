@@ -127,15 +127,15 @@ class LobbyControllerTest {
 
         Command c1;
 
-        Command c1f = new CreateGameCommand(8, true, controller);
+        Command c1f = new CreateLobbyCommand(8, true, controller);
         assertThrowsExactly(BadParametersException.class, () -> controller.requestCommand(c1f));
 
-        c1 = new CreateGameCommand(3, true, controller);
+        c1 = new CreateLobbyCommand(3, true, controller);
         controller.requestCommand(c1);
         assertEquals(3, MatchInfo.getInstance().getSelectedNumPlayer());
         assertTrue(MatchInfo.getInstance().isExpertMode());
 
-        c1 = new CreateGameCommand(2, false, controller);
+        c1 = new CreateLobbyCommand(2, false, controller);
         controller.requestCommand(c1);
         assertEquals(3, MatchInfo.getInstance().getSelectedNumPlayer());
         assertTrue(MatchInfo.getInstance().isExpertMode());

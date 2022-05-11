@@ -29,7 +29,7 @@ public class Client {
 
         //TEST PARAMS
         RequestParameters params = new RequestParameters().setCommandType(CommandType.HANDSHAKE).setName("Davide");
-        RequestParameters params2 = new RequestParameters().setCommandType(CommandType.CREATE_GAME)
+        RequestParameters params2 = new RequestParameters().setCommandType(CommandType.CREATE_LOBBY)
                 .setExpertMode(false).setSelectedNumPlayer(2);
         RequestParameters params3 = new RequestParameters().setCommandType(CommandType.JOIN);
 

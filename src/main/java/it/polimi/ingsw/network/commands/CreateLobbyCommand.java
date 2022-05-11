@@ -4,12 +4,12 @@ import it.polimi.ingsw.controller.LobbyController;
 import it.polimi.ingsw.exceptions.EriantysException;
 import it.polimi.ingsw.exceptions.EriantysRuntimeException;
 
-public class CreateGameCommand implements Command {
+public class CreateLobbyCommand implements Command {
     private final int selectedNumPlayer;
     private final boolean expertMode;
     private final LobbyController lobbyController;
 
-    public CreateGameCommand(int selectedNumPlayer, boolean expertMode, LobbyController lobbyController) {
+    public CreateLobbyCommand(int selectedNumPlayer, boolean expertMode, LobbyController lobbyController) {
         this.selectedNumPlayer = selectedNumPlayer;
         this.expertMode = expertMode;
         this.lobbyController = lobbyController;
@@ -17,6 +17,6 @@ public class CreateGameCommand implements Command {
 
     @Override
     public void execute() throws EriantysException, EriantysRuntimeException {
-        lobbyController.createGame(selectedNumPlayer, expertMode);
+        lobbyController.createLobby(selectedNumPlayer, expertMode);
     }
 }

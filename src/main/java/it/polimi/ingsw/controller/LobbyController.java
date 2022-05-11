@@ -44,7 +44,7 @@ public class LobbyController {
         command.execute();
     }
 
-    public void createGame(int selectedNumPlayer, boolean expertMode) throws BadParametersException {
+    public void createLobby(int selectedNumPlayer, boolean expertMode) throws BadParametersException {
         if(selectedNumPlayer < 0 || selectedNumPlayer > 4) {
             throw new BadParametersException("Wrong player number selection");
         }

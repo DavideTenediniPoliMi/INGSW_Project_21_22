@@ -6,7 +6,7 @@ package it.polimi.ingsw.network.enumerations;
  */
 public enum CommandType {
     HANDSHAKE(false, true),
-    CREATE_GAME(false, true),
+    CREATE_LOBBY(false, true),
     PLAY_CARD(true, false),
     BUY_CHARACTER_CARD(true, false),
     SET_CARD_PARAMETERS(true, false),
