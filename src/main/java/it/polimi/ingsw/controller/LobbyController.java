@@ -119,9 +119,14 @@ public class LobbyController {
      * @param ready the flag specifying if the <code>Player</code> is ready.
      * @throws NoSuchPlayerException If there is no <code>Player</code> with the specified ID in this <code>Lobby</code>.
      */
-    public void setReadyStatus(int playerID, boolean ready) throws NoSuchPlayerException {
+    public void setReadyStatus(int playerID, boolean ready) throws NoSuchPlayerException, MissingInfoAboutPlayerException {
         if(!lobby.hasJoined(playerID)) {
             throw new NoSuchPlayerException(playerID);
+        }
+
+        Player player = lobby.getPlayerByID(playerID);
+        if(player.getTeamColor() == null || player.getCardBack() == null){
+            throw new MissingInfoAboutPlayerException(player);
         }
 
         lobby.setReadyStatus(playerID, ready);

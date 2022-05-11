@@ -1,6 +1,7 @@
 package it.polimi.ingsw.network.commands;
 
 import it.polimi.ingsw.controller.LobbyController;
+import it.polimi.ingsw.exceptions.lobby.MissingInfoAboutPlayerException;
 import it.polimi.ingsw.exceptions.lobby.NoSuchPlayerException;
 
 /**
@@ -19,7 +20,7 @@ public class LobbyReadyStatusCommand implements Command {
     }
 
     @Override
-    public void execute() throws NoSuchPlayerException {
+    public void execute() throws NoSuchPlayerException, MissingInfoAboutPlayerException {
         lobbyController.setReadyStatus(playerID, ready);
     }
 }
