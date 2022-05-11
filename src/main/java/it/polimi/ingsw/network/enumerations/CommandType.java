@@ -19,6 +19,8 @@ public enum CommandType {
     JOIN(false, false),
     SEL_CARDBACK(false, false),
     SEL_TOWERCOLOR(false, false),
+    UNSEL_CARDBACK(false, false),
+    UNSEL_TOWERCOLOR(false, false),
     READY_UP(false, false),
     DISCONNECT(true, true),
     RECONNECT(true, true);

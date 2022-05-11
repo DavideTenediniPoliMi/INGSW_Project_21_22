@@ -121,7 +121,11 @@ public class Lobby extends Observable<ResponseParameters> implements Serializabl
         Player p = getPlayerByID(playerID);
         if(p != null) {
             p.setTeamColor(teamColor);
-            p.setTowerHolder(isFirstOnTeam(playerID, teamColor));
+            if(teamColor == null) {
+                p.setTowerHolder(false);
+            } else {
+                p.setTowerHolder(isFirstOnTeam(playerID, teamColor));
+            }
         }
 
         ResponseParameters params = new ResponseParameters().setPlayer(getPlayerByID(playerID));

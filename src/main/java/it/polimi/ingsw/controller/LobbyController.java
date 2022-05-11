@@ -97,6 +97,20 @@ public class LobbyController {
     }
 
     /**
+     * Resets the CardBack for the specified Player
+     *
+     * @param playerID the ID of the Player
+     * @throws NoSuchPlayerException If there is Player with the specifided ID in this Lobby
+     */
+    public void resetCardBack(int playerID) throws NoSuchPlayerException {
+        if(!lobby.hasJoined(playerID)) {
+            throw new NoSuchPlayerException(playerID);
+        }
+
+        lobby.selectCardBack(playerID, null);
+    }
+
+    /**
      * Selects the specified <code>TowerColor</code> for the specified <code>Player</code>.
      *
      * @param playerID the Id of the <code>Player</code>.
@@ -112,6 +126,20 @@ public class LobbyController {
         }
 
         lobby.selectTeam(playerID, towerColor);
+    }
+
+    /**
+     * Resets the TowerColor for the specified Player
+     *
+     * @param playerID the ID of the Player
+     * @throws NoSuchPlayerException If there is Player with the specifided ID in this Lobby
+     */
+    public void resetTeamColor(int playerID) throws NoSuchPlayerException {
+        if(!lobby.hasJoined(playerID)) {
+            throw new NoSuchPlayerException(playerID);
+        }
+
+        lobby.selectTeam(playerID, null);
     }
 
     /**

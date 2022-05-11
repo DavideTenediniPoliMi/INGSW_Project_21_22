@@ -104,6 +104,17 @@ public class CommandFactory {
                 throw new BadParametersException("SELECT CARDBACK command - Given params:" +
                         " (playerID: " + playerID + ", CardBack: " + cardBack + ")");
 
+            case UNSEL_TOWERCOLOR:
+                /* Params needed:
+                 *  - PlayerID
+                 */
+                return new LobbyUnselectTeamCommand(playerID, lobbyController);
+            case UNSEL_CARDBACK:
+                /* Params needed:
+                 *  - PlayerID
+                 */
+                return new LobbyUnselectCBCommand(playerID, lobbyController);
+
             case READY_UP:
                 /* Params needed:
                  *  - PlayerID
