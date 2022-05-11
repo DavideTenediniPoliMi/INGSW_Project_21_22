@@ -11,6 +11,8 @@ import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.network.commands.Command;
 
+import java.util.List;
+
 /**
  * Class representing the controller for all pre-game (Lobby) actions. Handles:
  * <ul>
@@ -130,6 +132,16 @@ public class LobbyController {
         }
 
         lobby.setReadyStatus(playerID, ready);
+    }
+
+    public void checkLobbyIsReady() {
+        List<Player> players = lobby.getPlayers();
+
+        for(Player player : players) {
+            if(!lobby.isReady(player.getID())) {
+                return;
+            }
+        }
     }
 
     /**

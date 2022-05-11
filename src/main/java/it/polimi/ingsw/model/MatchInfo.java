@@ -124,7 +124,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
      */
     public synchronized void setNumPlayersConnected(int numPlayersConnected) {
         this.numPlayersConnected = numPlayersConnected;
-        notify(new ResponseParameters().setSendMatchInfo(true));
+        notifyMatchInfo();
     }
 
     /**
@@ -165,7 +165,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
      */
     public synchronized void setStateType(TurnState stateType) {
         this.stateType = stateType;
-        notify(new ResponseParameters().setSendMatchInfo(true));
+        notifyMatchInfo();
     }
 
     /**
@@ -183,7 +183,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
      */
     public synchronized void removePlayer() {
         playOrder.remove();
-        notify(new ResponseParameters().setSendMatchInfo(true));
+        notifyMatchInfo();
     }
 
     /**
@@ -193,7 +193,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
      */
     public synchronized void addPlayer(int playerID) {
         playOrder.add(playerID);
-        notify(new ResponseParameters().setSendMatchInfo(true));
+        notifyMatchInfo();
     }
 
     /**
@@ -210,7 +210,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
      */
     public synchronized void resetNumMovedStudents() {
         numMovedStudents = 0;
-        notify(new ResponseParameters().setSendMatchInfo(true));
+        notifyMatchInfo();
     }
 
     /**
@@ -218,7 +218,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
      */
     public synchronized void studentWasMoved() {
         numMovedStudents++;
-        notify(new ResponseParameters().setSendMatchInfo(true));
+        notifyMatchInfo();
     }
 
     /**
@@ -274,7 +274,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
     public synchronized void declareWinner(TowerColor teamColor) {
         gameOver = true;
         winners.add(teamColor);
-        notify(new ResponseParameters().setSendMatchInfo(true));
+        notifyMatchInfo();
     }
 
     /**
@@ -286,7 +286,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
         gameOver = true;
         gameTied = true;
         winners.addAll(teamColors);
-        notify(new ResponseParameters().setSendMatchInfo(true));
+        notifyMatchInfo();
     }
 
     /**
@@ -306,7 +306,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
      */
     public synchronized void setGameStatus(GameStatus gameStatus) {
         this.gameStatus = gameStatus;
-        notify(new ResponseParameters().setSendMatchInfo(true));
+        notifyMatchInfo();
     }
 
     /**
@@ -325,6 +325,12 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
      */
     public boolean hasMNMoved() {
         return movedMN;
+    }
+
+    private void notifyMatchInfo() {
+        if(gameStatus != GameStatus.IN_GAME) return;
+
+        notify(new ResponseParameters().setSendMatchInfo(true));
     }
 
     @Override

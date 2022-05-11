@@ -1,9 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.controller.round.*;
-import it.polimi.ingsw.controller.subcontrollers.CharacterCardController;
-import it.polimi.ingsw.controller.subcontrollers.DiningRoomExpertController;
-import it.polimi.ingsw.controller.subcontrollers.IslandExpertController;
+import it.polimi.ingsw.controller.subcontrollers.*;
 import it.polimi.ingsw.exceptions.EriantysException;
 import it.polimi.ingsw.exceptions.EriantysRuntimeException;
 import it.polimi.ingsw.exceptions.game.GameNotStartedException;
@@ -80,9 +78,6 @@ public class GameController {
             game.addSchool(player.getID());
             game.giveStudentsTo(player.getID(), matchInfo.getInitialNumStudents());
             game.addTowersTo(player.getID(), matchInfo.getMaxTowers());
-            if(matchInfo.isExpertMode()) {
-                game.giveCoinToPlayer(player.getID());
-            }
         }
 
         game.placeMNAt(new Random().nextInt(game.getBoard().getNumIslands()));
@@ -96,7 +91,14 @@ public class GameController {
 
         game.createClouds(game.getPlayers().size());
 
+        IslandController islandController;
+        DiningRoomController diningRoomController;
+
         if(matchInfo.isExpertMode()) {
+            game.giveInitialCoin();
+            islandController = new IslandExpertController(new CharacterCardController());
+            diningRoomController = new DiningRoomExpertController();
+
             List<Integer> cardsID = new ArrayList<>();
             Random r = new Random();
             for(int i = 0; i < 3; i++){
@@ -106,12 +108,12 @@ public class GameController {
                 game.instantiateCharacterCard(cardID);
                 cardsID.add(cardID);
             }
+        }else {
+            islandController = new IslandController();
+            diningRoomController = new DiningRoomController();
         }
 
-        matchInfo.setStateType(TurnState.PLANNING);
-
-        roundStateController = new RoundStateController(new IslandExpertController(new CharacterCardController())
-                , new DiningRoomExpertController());
+        roundStateController = new RoundStateController(islandController, diningRoomController);
         setState(new PlanningStateController(roundStateController));
 
         roundStateController.defineFirstPlayOrder();

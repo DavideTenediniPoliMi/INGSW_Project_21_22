@@ -397,6 +397,16 @@ public class Game extends Observable<ResponseParameters> implements Serializable
     }
 
     /**
+     * Gives 1 coin from the bunch to each player. It is called only during game setup.
+     */
+    public void giveInitialCoin() {
+        for(Player player: players) {
+            board.takeCoin();
+            player.addCoin();
+        }
+    }
+
+    /**
      * Gives initial <code>amount</code> amount of students to the specified <code>Player</code>'s <code>School</code>.
      * Only to be used when initializing the Game. The students are directly randomly drawn from the <code>StudentBag</code>
      *

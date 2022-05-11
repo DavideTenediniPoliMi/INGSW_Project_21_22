@@ -17,7 +17,6 @@ import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.ProfessorTracker;
-import it.polimi.ingsw.model.characters.ReturnToBagDecorator;
 import it.polimi.ingsw.model.characters.StudentGroupDecorator;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.helpers.StudentBag;
@@ -28,14 +27,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-import java.util.Timer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
