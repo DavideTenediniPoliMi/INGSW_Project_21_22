@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model.helpers;
 
 import it.polimi.ingsw.model.enumerations.Color;
+import it.polimi.ingsw.view.CLI.AnsiCodes;
+import org.fusesource.jansi.AnsiConsole;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -92,5 +94,14 @@ public class StudentGroupTest {
     @Test
     void testContains() {
         assertFalse(studentGroup.contains(new StudentGroup(Color.RED, 1)));
+    }
+
+    @Test
+    void testPrint() {
+        StudentGroup s = new StudentGroup();
+        s.addByColor(Color.BLUE, 3);
+        s.addByColor(Color.GREEN, 6);
+        s.addByColor(Color.RED, 1);
+        s.print();
     }
 }

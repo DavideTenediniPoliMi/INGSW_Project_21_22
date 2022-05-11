@@ -2,13 +2,16 @@ package it.polimi.ingsw.model.board;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
+import it.polimi.ingsw.utils.Printable;
 import it.polimi.ingsw.utils.Serializable;
+import it.polimi.ingsw.view.CLI.AnsiCodes;
 
 /**
  * Class corresponding to the Cloud entity in a Game
  */
-public class Cloud implements Serializable {
+public class Cloud implements Serializable, Printable {
     private final StudentGroup students = new StudentGroup();
     private boolean available;
 
@@ -79,5 +82,30 @@ public class Cloud implements Serializable {
     public void deserialize(JsonObject jsonObject) {
         setAvailableTo(jsonObject.get("available").getAsBoolean());
         students.deserialize(jsonObject.get("students").getAsJsonObject());
+    }
+
+    @Override
+    public String print() {
+        StringBuilder cloudString = new StringBuilder();
+
+        cloudString.append("┌");
+
+        int amt = 0;
+        for(Color color : Color.values()) {
+            if(students.getByColor(color) > 0) {
+                cloudString.append("────");
+                amt++;
+            }
+        }
+        cloudString.append("─");
+        cloudString.append("┐\n");
+        cloudString.append("│").append(students.print()).append("│\n");
+        cloudString.append("└");
+
+        cloudString.append("─".repeat(Math.max(0, amt * 4 + 1)));
+
+        cloudString.append("┘");
+
+        return cloudString.toString();
     }
 }
