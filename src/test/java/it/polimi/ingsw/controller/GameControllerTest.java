@@ -1149,7 +1149,7 @@ class GameControllerTest {
         gameController.requestCommand(1, c2);
 
         //PLAYER 2'S TURN
-        assertEquals(MNPositionBefore + 1, game.getBoard().getMNPosition());
+        assertEquals((MNPositionBefore + 1) % game.getBoard().getNumIslands(), game.getBoard().getMNPosition());
 
         //Finishing player 2's turn
         selected = getAvailable(2);
@@ -1317,7 +1317,7 @@ class GameControllerTest {
         gameController.requestCommand(1, c2);
 
         //PLAYER 2'S TURN
-        assertEquals((MNPositionBefore + 1 ) % 12, game.getBoard().getMNPosition());
+        assertEquals((MNPositionBefore + 1 ) % game.getBoard().getNumIslands(), game.getBoard().getMNPosition());
 
         //Finishing player 2's turn
         selected = getAvailable(2);
