@@ -3,6 +3,7 @@
 .idea/
 target/
 *.iml
+BackupData.txt
 
 # Log file
 *.log
