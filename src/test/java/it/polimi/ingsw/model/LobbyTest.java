@@ -113,4 +113,15 @@ class LobbyTest {
         lobby.deserialize(jsonObject);
         assertTrue(lobby.getPlayers().isEmpty());
     }
+
+    @Test
+    void resetTowerColorTest() {
+        lobby.selectTeam(0, TowerColor.BLACK);
+        lobby.selectTeam(0, null);
+
+        assertAll(
+                () -> assertNull(lobby.getPlayerByID(0).getTeamColor()),
+                () -> assertFalse(lobby.getPlayerByID(0).isTowerHolder())
+        );
+    }
 }

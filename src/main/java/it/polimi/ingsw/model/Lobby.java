@@ -72,6 +72,7 @@ public class Lobby extends Observable<ResponseParameters> implements Serializabl
         Player toRemove = getPlayerByID(playerID);
         if(toRemove != null) {
             players.remove(toRemove);
+            readyStatus.remove(playerID);
         }
 
         ResponseParameters params = new ResponseParameters().setPlayers(players);
@@ -174,7 +175,7 @@ public class Lobby extends Observable<ResponseParameters> implements Serializabl
      * @return the flag indicating whether all the players are ready or not
      */
     public boolean checkLobbyIsReady() {
-        return readyStatus.containsValue(false);
+        return players.stream().allMatch((p) -> isReady(p.getID())) && players.size() == MatchInfo.getInstance().getSelectedNumPlayer();
     }
 
     /**

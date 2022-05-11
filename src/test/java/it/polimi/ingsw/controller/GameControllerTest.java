@@ -54,11 +54,13 @@ class GameControllerTest {
         lobby.selectTeam(1, TowerColor.WHITE);
         lobby.selectCardBack(0, CardBack.CB_1);
         lobby.selectCardBack(1, CardBack.CB_2);
+        lobby.setReadyStatus(0, true);
+        lobby.setReadyStatus(1, true);
 
         matchInfo.setUpGame(2,true);
         matchInfo.setNumPlayersConnected(2);
 
-        gameController.createGame();
+        gameController.tryCreatingGame();
     }
 
     @AfterEach
@@ -1373,5 +1375,13 @@ class GameControllerTest {
             }
         }
         return selected;
+    }
+
+    @Test
+    public void createNonExpertGame() {
+        matchInfo.setUpGame(2, false);
+        gameController.tryCreatingGame();
+
+        assertEquals(GameStatus.IN_GAME, matchInfo.getGameStatus());
     }
 }

@@ -140,4 +140,34 @@ class LobbyControllerTest {
         assertEquals(3, MatchInfo.getInstance().getSelectedNumPlayer());
         assertTrue(MatchInfo.getInstance().isExpertMode());
     }
+
+    @Test
+    public void unsetCBTest() throws EriantysException{
+        controller.requestCommand(new LobbyUnselectCBCommand(0, controller));
+
+        assertNull(Lobby.getLobby().getPlayerByID(0).getCardBack());
+    }
+
+    @Test
+    public void unsetTeamTest() throws EriantysException{
+        controller.requestCommand(new LobbyUnselectTeamCommand(0, controller));
+
+        assertNull(Lobby.getLobby().getPlayerByID(0).getTeamColor());
+    }
+
+    @Test
+    public void unsetCBTestException() {
+        assertThrowsExactly(NoSuchPlayerException.class, () -> controller.requestCommand(new LobbyUnselectCBCommand(1, controller)));
+    }
+
+    @Test
+    public void unsetTeamTestException() {
+        assertThrowsExactly(NoSuchPlayerException.class, () -> controller.requestCommand(new LobbyUnselectTeamCommand(1, controller)));
+    }
+
+    @Test
+    public void readyExceptionTest() throws EriantysException{
+        controller.requestCommand(new LobbyUnselectTeamCommand(0, controller));
+        assertThrowsExactly(MissingInfoAboutPlayerException.class, () -> controller.requestCommand(new LobbyReadyStatusCommand(0, true, controller, new GameController())));
+    }
 }
