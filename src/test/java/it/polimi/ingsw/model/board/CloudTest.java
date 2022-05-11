@@ -3,6 +3,8 @@ package it.polimi.ingsw.model.board;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
+import it.polimi.ingsw.view.CLI.AnsiCodes;
+import org.fusesource.jansi.AnsiConsole;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -53,5 +55,21 @@ public class CloudTest {
                 () -> assertEquals(1, sg.getByColor(Color.GREEN)),
                 () -> assertEquals(0, cloud1.getStudents().getByColor(Color.BLUE)),
                 () -> assertEquals(0, cloud1.getStudents().getByColor(Color.GREEN)));
+    }
+
+    @Test
+    public void testPrint() {
+
+        cloud1.print();
+
+        /*AnsiConsole.systemInstall();
+        AnsiConsole.sysOut().println(cloud1.print());
+
+        StudentGroup sg = new StudentGroup(Color.PINK, 2);
+        sg.addByColor(Color.RED, 1);
+
+        cloud1.refillCloud(sg);
+        AnsiConsole.sysOut().println(cloud1.print());*/
+
     }
 }

@@ -4,14 +4,16 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.Color;
+import it.polimi.ingsw.utils.Printable;
 import it.polimi.ingsw.utils.Serializable;
+import it.polimi.ingsw.view.CLI.AnsiCodes;
 
 import java.util.Arrays;
 
 /**
  * Class representing a group (container) of students of the 5 colors
  */
-public class StudentGroup implements Cloneable, Serializable {
+public class StudentGroup implements Cloneable, Serializable, Printable {
     private final int[] students;
 
     /**
@@ -132,5 +134,18 @@ public class StudentGroup implements Cloneable, Serializable {
         for(int c = 0; c < Color.NUM_COLORS; c++) {
             students[c] = studentsJson.get(c).getAsInt();
         }
+    }
+
+    @Override
+    public String print() {
+        StringBuilder studentsString = new StringBuilder(" ");
+
+        for(Color color : Color.values()) {
+            if(students[color.ordinal()] > 0) {
+                studentsString.append(AnsiCodes.getColor(color)).append(" ").append(students[color.ordinal()]).append(" ").append(AnsiCodes.RESET).append(" ");
+            }
+        }
+
+        return studentsString.toString();
     }
 }
