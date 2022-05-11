@@ -1,15 +1,14 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.exceptions.EriantysException;
+import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.exceptions.lobby.*;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.network.commands.LobbyJoinCommand;
-import it.polimi.ingsw.network.commands.LobbyReadyStatusCommand;
-import it.polimi.ingsw.network.commands.LobbySelectCBCommand;
-import it.polimi.ingsw.network.commands.LobbySelectTeamCommand;
+import it.polimi.ingsw.network.commands.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,6 +38,7 @@ class LobbyControllerTest {
     void tearDown() {
         Lobby.resetLobby();
         MatchInfo.resetInstance();
+        controller = null;
     }
 
     @Test
@@ -116,5 +116,28 @@ class LobbyControllerTest {
     public void testFailedRequest() {
         info.setGameStatus(GameStatus.IN_GAME);
         assertThrowsExactly(GameStartedException.class, () -> controller.requestCommand(new LobbyJoinCommand(3, "lillo", controller)));
+    }
+
+    @Test
+    public void testLobbyCreation() throws EriantysException {
+        // Re-Creating the lobby
+        Lobby.resetLobby();
+        MatchInfo.resetInstance();
+        controller = new LobbyController();
+
+        Command c1;
+
+        Command c1f = new CreateGameCommand(8, true, controller);
+        assertThrowsExactly(BadParametersException.class, () -> controller.requestCommand(c1f));
+
+        c1 = new CreateGameCommand(3, true, controller);
+        controller.requestCommand(c1);
+        assertEquals(3, MatchInfo.getInstance().getSelectedNumPlayer());
+        assertTrue(MatchInfo.getInstance().isExpertMode());
+
+        c1 = new CreateGameCommand(2, false, controller);
+        controller.requestCommand(c1);
+        assertEquals(3, MatchInfo.getInstance().getSelectedNumPlayer());
+        assertTrue(MatchInfo.getInstance().isExpertMode());
     }
 }

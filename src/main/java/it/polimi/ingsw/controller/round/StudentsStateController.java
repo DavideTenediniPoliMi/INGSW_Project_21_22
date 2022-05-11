@@ -82,7 +82,7 @@ public class StudentsStateController extends CharacterCardPlayableStateControlle
             game.getBoard().addToEntranceOf(matchInfo.getCurrentPlayerID(), students);
         }
 
-        while(matchInfo.getNumMovedStudents() < 3) {
+        while(matchInfo.getNumMovedStudents() < matchInfo.getMaxMovableStudents()) {
             matchInfo.studentWasMoved();
         }
     }
