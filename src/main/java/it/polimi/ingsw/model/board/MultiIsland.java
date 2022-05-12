@@ -4,11 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
+import it.polimi.ingsw.utils.Printable;
 
 /**
  * Class representing multiple islands merged together.
  */
-public class MultiIsland extends Island {
+public class MultiIsland extends Island implements Printable<String[]> {
     private Island leftIsland;
     private Island rightIsland;
 
@@ -111,5 +112,14 @@ public class MultiIsland extends Island {
 
     private boolean isMulti(JsonObject island) {
         return island.has("leftIsland") && island.has("rightIsland");
+    }
+
+    @Override
+    public String[] print(boolean... params) {
+        StringBuilder islandBuilder = new StringBuilder();
+
+
+
+        return null;
     }
 }

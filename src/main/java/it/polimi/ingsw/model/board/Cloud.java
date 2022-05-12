@@ -11,7 +11,7 @@ import it.polimi.ingsw.view.CLI.AnsiCodes;
 /**
  * Class corresponding to the Cloud entity in a Game
  */
-public class Cloud implements Serializable, Printable {
+public class Cloud implements Serializable, Printable<String> {
     private final StudentGroup students = new StudentGroup();
     private boolean available;
 

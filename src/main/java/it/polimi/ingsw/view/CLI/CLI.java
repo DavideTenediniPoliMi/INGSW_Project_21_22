@@ -15,7 +15,7 @@ public class CLI {
             AnsiConsole.sysOut().println
                     ("│         │");
             AnsiConsole.sysOut().println
-                    ("│ " + AnsiCodes.YELLOW_BACKGROUND_BRIGHT + " 6 " + AnsiCodes.RESET + " " + AnsiCodes.PURPLE_BACKGROUND_BRIGHT + " 3 " + AnsiCodes.RESET + " │");
+                    ("│ " + AnsiCodes.BROWN_BACKGROUND + " 6 " + AnsiCodes.RESET + " " + AnsiCodes.GREEN_BACKGROUND_BRIGHT + AnsiCodes.BLACK_TEXT + " 3 " + AnsiCodes.RESET + " │");
             AnsiConsole.sysOut().println
                     ("│         │");
             AnsiConsole.sysOut().println

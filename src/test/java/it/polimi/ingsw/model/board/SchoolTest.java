@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
+import org.fusesource.jansi.AnsiConsole;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,8 +22,8 @@ public class SchoolTest {
 
     @BeforeEach
     public void setUp() {
-        p1 = new Player(0, "Pippo", TowerColor.BLACK, CardBack.CB_1, true);
-        p2 = new Player(1, "Pluto", TowerColor.GREY, CardBack.CB_2, true);
+        p1 = new Player(0, "Pippo", TowerColor.GREY, CardBack.CB_1, true);
+        p2 = new Player(1, "Pluto", TowerColor.WHITE, CardBack.CB_2, true);
 
         s1 = new School(p1);
         s2 = new School(p2);
@@ -119,7 +120,7 @@ public class SchoolTest {
         game.giveProfessorTo(1, Color.YELLOW);
         game.giveProfessorTo(1, Color.GREEN);
 
-        /*AnsiConsole.sysOut().println(s2.print());*/
-        s2.print();
+        /*AnsiConsole.sysOut().println(s2.print());
+        s2.print();*/
     }
 }

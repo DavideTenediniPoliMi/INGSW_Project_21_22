@@ -4,7 +4,10 @@ import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.model.enumerations.TowerColor;
+import it.polimi.ingsw.utils.Printable;
 import it.polimi.ingsw.utils.Serializable;
+import it.polimi.ingsw.view.CLI.AnsiCodes;
+import org.fusesource.jansi.AnsiColors;
 
 /**
  * Abstract class corresponding to the Island entity
@@ -95,5 +98,110 @@ public abstract class Island implements Serializable {
         else
             teamColor = null;
         motherNature = jsonObject.get("motherNature").getAsBoolean();
+    }
+
+    protected String printIsland(StudentGroup toPrint, boolean... params) {
+        if(params.length < 4) {
+            return "";
+        }
+        StringBuilder islandBuilder = new StringBuilder();
+
+        boolean bridge_N = params[0];
+        boolean bridge_E = params[1];
+        boolean bridge_S = params[2];
+        boolean bridge_W = params[3];
+
+        //width: 23 (For studentGroup)
+
+        islandBuilder.append("┌────────");
+        if(bridge_N) {
+            islandBuilder.append("┘   └");
+        } else {
+            islandBuilder.append("─────");
+        }
+        islandBuilder.append("────────┐\n");
+
+        //First row: Conqueror team info
+
+        if(bridge_W) {
+            islandBuilder.append("┘");
+        } else {
+            islandBuilder.append("│");
+        }
+
+        islandBuilder.append(AnsiCodes.LIGHT_GREEN_BACKGROUND).append(AnsiCodes.BLACK_TEXT).append("            Team: ").append(getTeamColor().print());
+
+        if(bridge_E) {
+            islandBuilder.append("└\n");
+        } else {
+            islandBuilder.append("│\n");
+        }
+
+        //Second row: Students info
+
+        if(bridge_W) {
+            islandBuilder.append(" ");
+        } else {
+            islandBuilder.append("│");
+        }
+
+        StudentGroup temp = (StudentGroup) students.clone();
+        if(toPrint != null) {
+            toPrint.transferAllTo(temp);
+        }
+
+        String studentsPure = temp.print(false);
+        for(AnsiCodes code : AnsiCodes.values()) {
+            studentsPure = studentsPure.replace(code.toString(), "");
+        }
+
+        islandBuilder.append(AnsiCodes.LIGHT_GREEN_BACKGROUND).append(temp.print(false))
+                    .append(AnsiCodes.LIGHT_GREEN_BACKGROUND)
+                    .append(" ".repeat(21 - studentsPure.length()))
+                    .append(AnsiCodes.RESET);
+
+        if(bridge_E) {
+            islandBuilder.append(" \n");
+        } else {
+            islandBuilder.append("│\n");
+        }
+
+        //Third row: Mother nature
+
+        if(bridge_W) {
+            islandBuilder.append("┐");
+        } else {
+            islandBuilder.append("│");
+        }
+
+        islandBuilder.append(AnsiCodes.LIGHT_GREEN_BACKGROUND).append(" ".repeat(9));
+
+        if(motherNature) {
+            islandBuilder.append(AnsiCodes.BROWN_BACKGROUND).append(" M ").append(AnsiCodes.RESET);
+        } else {
+            islandBuilder.append(" ".repeat(3));
+        }
+
+        islandBuilder.append(AnsiCodes.LIGHT_GREEN_BACKGROUND).append(" ".repeat(9))
+                    .append(AnsiCodes.RESET);
+
+        if(bridge_E) {
+            islandBuilder.append("┌\n");
+        } else {
+            islandBuilder.append("│\n");
+        }
+
+        //Fourth row: Closing the box
+
+        islandBuilder.append("└────────");
+
+        if(bridge_S) {
+            islandBuilder.append("┐   ┌");
+        } else {
+            islandBuilder.append("─────");
+        }
+        islandBuilder.append("────────┘\n");
+
+        return islandBuilder.toString();
     }
 }

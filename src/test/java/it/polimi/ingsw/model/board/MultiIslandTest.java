@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
+import org.fusesource.jansi.AnsiConsole;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -108,5 +109,27 @@ public class MultiIslandTest {
         for(Color color : Color.values()) {
             assertEquals(noStudents.getNumStudentsByColor(color), i1.getNumStudentsByColor(color));
         }
+    }
+
+    @Test
+    public void testPrint() {
+        SimpleIsland isld = new SimpleIsland();
+        isld.conquerIsland(TowerColor.GREY);
+        StudentGroup st = new StudentGroup(Color.BLUE, 4);
+        st.addByColor(Color.GREEN, 2);
+        st.addByColor(Color.RED, 1);
+        st.addByColor(Color.YELLOW, 9);
+
+        isld.addStudents(st);
+
+        isld.setMotherNatureTo(true);
+
+        isld.print(false, false, false, false);
+
+        /*AnsiConsole.systemInstall();
+        AnsiConsole.sysOut().println(isld.printIsland(null, false, false, false, false));
+        AnsiConsole.sysOut().println(isld.printIsland(null, false, true, false, false));
+        AnsiConsole.sysOut().println(isld.printIsland(null, true, false, false, false));
+        AnsiConsole.sysOut().println(isld.printIsland(null, false, false, true, false));*/
     }
 }

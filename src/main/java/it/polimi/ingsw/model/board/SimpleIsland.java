@@ -2,11 +2,12 @@ package it.polimi.ingsw.model.board;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.utils.Printable;
 
 /**
  * Class representing a single Island
  */
-public class SimpleIsland extends Island {
+public class SimpleIsland extends Island implements Printable<String> {
     /**
      * Sole constructor
      */
@@ -24,4 +25,8 @@ public class SimpleIsland extends Island {
         return gson.toJsonTree(this).getAsJsonObject();
     }
 
+    @Override
+    public String print(boolean... params) {
+        return printIsland(null, false, false, false, false);
+    }
 }

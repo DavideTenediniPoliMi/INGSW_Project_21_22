@@ -13,7 +13,7 @@ import java.util.Arrays;
 /**
  * Class representing a group (container) of students of the 5 colors
  */
-public class StudentGroup implements Cloneable, Serializable, Printable {
+public class StudentGroup implements Cloneable, Serializable, Printable<String> {
     private final int[] students;
 
     /**

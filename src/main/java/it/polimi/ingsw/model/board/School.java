@@ -15,7 +15,7 @@ import it.polimi.ingsw.view.CLI.AnsiCodes;
 /**
  * Class representing the School entity in the game
  */
-public class School implements Serializable, Printable {
+public class School implements Serializable, Printable<String> {
     private Player owner;
     private int numTowers;
     private StudentGroup entrance = new StudentGroup();

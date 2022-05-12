@@ -9,13 +9,16 @@ public enum AnsiCodes {
     PURPLE_BACKGROUND_BRIGHT("\033[0;105m"), // PURPLE
     RED_BACKGROUND_BRIGHT("\033[0;101m"),// RED
     //YELLOW_BACKGROUND_BRIGHT("\033[0;103m"),// YELLOW
-    YELLOW_BACKGROUND_BRIGHT("\033[43m"),// YELLOW
+    YELLOW_BACKGROUND_BRIGHT("\u001b[48;5;220m"),// YELLOW
+    //YELLOW_BACKGROUND_BRIGHT("\033[43m"),// YELLOW
+    BROWN_BACKGROUND("\u001b[48;5;130m"),
+    LIGHT_GREEN_BACKGROUND("\u001b[48;5;194m"),
     BLUE_TEXT("\033[1;94m"),
     GREEN_TEXT("\033[1;32m"),
     PURPLE_TEXT("\033[1;95m"),
     RED_TEXT("\033[1;91m"),
     YELLOW_TEXT("\033[1;33m"),
-    BLACK_TEXT("\033[0;30m"),
+    BLACK_TEXT("\033[1;90m"),
     WHITE_TEXT("\033[0;37m"),
     WHITE_BACKGROUND("\033[47m"),
     BLACK_BACKGROUND("\033[40m"),
@@ -32,7 +35,20 @@ public enum AnsiCodes {
     }
 
     public static String getBackgroundColor(Color color) {
-        return values()[color.ordinal()].toString();
+        switch (color) {
+            case BLUE:
+                return BLUE_BACKGROUND_BRIGHT.code;
+            case GREEN:
+                return GREEN_BACKGROUND_BRIGHT.code;
+            case RED:
+                return RED_BACKGROUND_BRIGHT.code;
+            case PINK:
+                return PURPLE_BACKGROUND_BRIGHT.code;
+            case YELLOW:
+                return YELLOW_BACKGROUND_BRIGHT.code + BLACK_TEXT.code;
+            default:
+                return RESET.code;
+        }
     }
 
     public static String getTextColor(Color color) {
@@ -57,7 +73,7 @@ public enum AnsiCodes {
             case BLACK:
                 return BLACK_BACKGROUND.code;
             case WHITE:
-                return WHITE_BACKGROUND.code;
+                return WHITE_BACKGROUND.code + BLACK_TEXT.code;
             case GREY:
                 return GRAY_BACKGROUND.code;
             default:

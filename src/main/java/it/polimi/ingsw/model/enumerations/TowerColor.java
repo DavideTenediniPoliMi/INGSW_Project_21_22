@@ -6,7 +6,7 @@ import it.polimi.ingsw.view.CLI.AnsiCodes;
 /**
  * Class to hold the different colors for towers in the game.
  */
-public enum TowerColor implements Printable {
+public enum TowerColor implements Printable<String> {
     BLACK,
     WHITE,
     GREY;
