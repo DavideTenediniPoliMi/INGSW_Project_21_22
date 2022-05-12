@@ -102,6 +102,6 @@ public class StudentGroupTest {
         s.addByColor(Color.BLUE, 3);
         s.addByColor(Color.GREEN, 6);
         s.addByColor(Color.RED, 1);
-        s.print();
+        s.print(false);
     }
 }

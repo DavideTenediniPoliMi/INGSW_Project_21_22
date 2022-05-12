@@ -1,7 +1,8 @@
 package it.polimi.ingsw.model.board;
 
-import com.google.gson.JsonObject;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
@@ -21,7 +22,7 @@ public class SchoolTest {
     @BeforeEach
     public void setUp() {
         p1 = new Player(0, "Pippo", TowerColor.BLACK, CardBack.CB_1, true);
-        p2 = new Player(1, "Pluto", TowerColor.WHITE, CardBack.CB_2, true);
+        p2 = new Player(1, "Pluto", TowerColor.GREY, CardBack.CB_2, true);
 
         s1 = new School(p1);
         s2 = new School(p2);
@@ -95,5 +96,30 @@ public class SchoolTest {
                 () -> assertEquals(2, s1.getNumStudentsInDiningRoomByColor(Color.BLUE)),
                 () -> assertEquals(1, s2.getNumStudentsInDiningRoomByColor(Color.BLUE))
         );
+    }
+
+    @Test
+    public void printTest() {
+        /*AnsiConsole.systemInstall();
+        AnsiConsole.sysOut().println(s1.print());*/
+        s1.print();
+        Game game = Game.getInstance();
+        game.addPlayer(p2);
+        game.playCard(1, Card.CARD_10);
+        StudentGroup s = new StudentGroup(Color.RED, 2);
+        s.addByColor(Color.BLUE, 3);
+        s.addByColor(Color.PINK, 2);
+        s2.addToEntrance(s);
+
+        StudentGroup s22 = new StudentGroup();
+        s22.addByColor(Color.YELLOW, 7);
+        s22.addByColor(Color.GREEN, 4);
+        s2.addToDiningRoom(s22);
+
+        game.giveProfessorTo(1, Color.YELLOW);
+        game.giveProfessorTo(1, Color.GREEN);
+
+        /*AnsiConsole.sysOut().println(s2.print());*/
+        s2.print();
     }
 }

@@ -1,5 +1,5 @@
 package it.polimi.ingsw.utils;
 
 public interface Printable {
-    String print();
+    String print(boolean...params);
 }

@@ -85,7 +85,7 @@ public class Cloud implements Serializable, Printable {
     }
 
     @Override
-    public String print() {
+    public String print(boolean...params) {
         StringBuilder cloudString = new StringBuilder();
 
         cloudString.append("┌");
@@ -99,7 +99,7 @@ public class Cloud implements Serializable, Printable {
         }
         cloudString.append("─");
         cloudString.append("┐\n");
-        cloudString.append("│").append(students.print()).append("│\n");
+        cloudString.append("│").append(students.print(false)).append("│\n");
         cloudString.append("└");
 
         cloudString.append("─".repeat(Math.max(0, amt * 4 + 1)));

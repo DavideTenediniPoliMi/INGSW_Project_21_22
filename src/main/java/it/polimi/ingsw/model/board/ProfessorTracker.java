@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.utils.Serializable;
+import it.polimi.ingsw.view.CLI.AnsiCodes;
 
 /**
  * Class used to track the owners of the various professors.
@@ -65,5 +66,18 @@ public class ProfessorTracker implements Cloneable, Serializable {
         for(int c = 0; c < Color.NUM_COLORS; c++) {
             owners[c] = studentsJson.get(c).getAsInt();
         }
+    }
+
+    public String printFor(int playerID) {
+        StringBuilder professorBuilder = new StringBuilder(" ");
+        for(Color color : Color.values()) {
+            if(playerID == getOwnerIDByColor(color)) {
+                professorBuilder.append(AnsiCodes.getBackgroundColor(color)).append(" P ").append(AnsiCodes.RESET).append(" ");
+            } else {
+                professorBuilder.append(AnsiCodes.getTextColor(color)).append(" P ").append(AnsiCodes.RESET).append(" ");
+            }
+        }
+
+        return professorBuilder.toString();
     }
 }

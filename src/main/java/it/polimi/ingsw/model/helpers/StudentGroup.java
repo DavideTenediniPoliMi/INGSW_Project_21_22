@@ -137,12 +137,19 @@ public class StudentGroup implements Cloneable, Serializable, Printable {
     }
 
     @Override
-    public String print() {
+    public String print(boolean...params) {
+        if(params.length < 1)
+            return "";
+        boolean printAll = params[0];
         StringBuilder studentsString = new StringBuilder(" ");
 
         for(Color color : Color.values()) {
-            if(students[color.ordinal()] > 0) {
-                studentsString.append(AnsiCodes.getColor(color)).append(" ").append(students[color.ordinal()]).append(" ").append(AnsiCodes.RESET).append(" ");
+            if(!printAll){
+                if(students[color.ordinal()] > 0) {
+                    studentsString.append(AnsiCodes.getBackgroundColor(color)).append(" ").append(students[color.ordinal()]).append(" ").append(AnsiCodes.RESET).append(" ");
+                }
+            } else {
+                studentsString.append(AnsiCodes.getBackgroundColor(color)).append(" ").append(students[color.ordinal()]).append(" ").append(AnsiCodes.RESET).append(" ");
             }
         }
 

@@ -5,14 +5,17 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
+import it.polimi.ingsw.utils.Printable;
 import it.polimi.ingsw.utils.Serializable;
+import it.polimi.ingsw.view.CLI.AnsiCodes;
 
 /**
  * Class representing the School entity in the game
  */
-public class School implements Serializable {
+public class School implements Serializable, Printable {
     private Player owner;
     private int numTowers;
     private StudentGroup entrance = new StudentGroup();
@@ -143,5 +146,49 @@ public class School implements Serializable {
 
         if(jsonObject.has("diningRoom"))
             diningRoom.deserialize(jsonObject.get("diningRoom").getAsJsonObject());
+    }
+
+    @Override
+    public String print(boolean...params) {
+        StringBuilder schoolString = new StringBuilder();
+        StringBuilder ownerName = new StringBuilder(owner.getName().substring(0, Math.min(owner.getName().length(), 15)));
+
+        ownerName.append(" ".repeat(15 - ownerName.length()));
+
+        Card card = owner.getSelectedCard();
+
+        schoolString.append("┌─────────────────────┐\n");
+        //TEAM section
+        schoolString.append("│ ").append(owner.getTeamColor().print()).append(" ").append(ownerName).append(" │\n");
+        //ASSISTANT CARD section
+        schoolString.append("│ Steps: ")
+                    .append(card == null ? "na" : card.RANGE + " ")
+                    .append(" Value: ")
+                    .append(card == null ? "na" : card.WEIGHT)
+                    .append(card == null ? "" : (card.WEIGHT < 10 ? " " : ""))
+                    .append(" │\n");
+        //ENTRANCE section
+        schoolString.append("├─Entrance:───────────┤\n");
+        StringBuilder entranceBuilder = new StringBuilder(entrance.print(false));
+        String pureEntrance = entrance.print(false);
+
+        for(AnsiCodes code : AnsiCodes.values()) {
+            pureEntrance = pureEntrance.replace(code.toString(), "");
+        }
+
+        entranceBuilder.append(" ".repeat(21 - pureEntrance.length()));
+
+        schoolString.append("│").append(entranceBuilder).append("│\n");
+        schoolString.append("├─────────────────────┤\n");
+        schoolString.append("├─Dining Room:────────┤\n");
+
+        schoolString.append("│").append(diningRoom.print(true)).append("│\n");
+        schoolString.append("│")
+                    .append(Game.getInstance().getBoard().getProfessorOwners().printFor(owner.getID()))
+                    .append("│\n");
+        schoolString.append("└─────────────────────┘\n");
+
+
+        return schoolString.toString();
     }
 }
