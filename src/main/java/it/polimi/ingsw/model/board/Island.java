@@ -12,7 +12,7 @@ import org.fusesource.jansi.AnsiColors;
 /**
  * Abstract class corresponding to the Island entity
  */
-public abstract class Island implements Serializable {
+public abstract class Island implements Serializable, Printable<String[]> {
     private final StudentGroup students = new StudentGroup();
     private TowerColor teamColor;
     private boolean motherNature;
@@ -117,9 +117,10 @@ public abstract class Island implements Serializable {
         motherNature = jsonObject.get("motherNature").getAsBoolean();
     }
 
-    protected String printIsland(StudentGroup toPrint, boolean... params) {
+    @Override
+    public String[] print(boolean... params) {
         if(params.length < 4) {
-            return "";
+            return new String[]{};
         }
         StringBuilder islandBuilder = new StringBuilder();
 
@@ -162,17 +163,12 @@ public abstract class Island implements Serializable {
             islandBuilder.append("│");
         }
 
-        StudentGroup temp = (StudentGroup) students.clone();
-        if(toPrint != null) {
-            toPrint.transferAllTo(temp);
-        }
-
-        String studentsPure = temp.print(false);
+        String studentsPure = students.print(false);
         for(AnsiCodes code : AnsiCodes.values()) {
             studentsPure = studentsPure.replace(code.toString(), "");
         }
 
-        islandBuilder.append(temp.print(false))
+        islandBuilder.append(students.print(false))
                     .append(" ".repeat(21 - studentsPure.length()))
                     .append(AnsiCodes.RESET);
 
@@ -218,14 +214,6 @@ public abstract class Island implements Serializable {
         }
         islandBuilder.append("────────┘\n");
 
-        return islandBuilder.toString();
-    }
-
-    public String[] print(StudentGroup toAdd, boolean... params) {
-        if(params.length < 4) {
-            return new String[]{printIsland(toAdd, false, false, false, false)};
-        } else {
-            return new String[]{printIsland(toAdd, params)};
-        }
+        return new String[]{islandBuilder.toString()};
     }
 }

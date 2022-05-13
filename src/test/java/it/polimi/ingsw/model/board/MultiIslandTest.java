@@ -127,7 +127,7 @@ public class MultiIslandTest {
 
         isld.setMotherNatureTo(true);
 
-        isld.print(null, false, false, false, false);
+        isld.print(false, false, false, false);
 
         /*AnsiConsole.systemInstall();
         AnsiConsole.sysOut().println(isld.printIsland(null, false, false, false, false));
@@ -167,7 +167,7 @@ public class MultiIslandTest {
 
         //AnsiConsole.systemInstall();
         for(Island is : game.getBoard().getIslands()) {
-            List<String> strIs = List.of(is.print(null, false, false, false, false));
+            List<String> strIs = List.of(is.print(false, false, false, false));
             //AnsiConsole.sysOut().println(strIs);
         }
     }
