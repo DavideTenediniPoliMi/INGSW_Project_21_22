@@ -152,7 +152,7 @@ class GameControllerTest {
         assertEquals(1, board.getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(Color.BLUE));
     }
 
-    @RepeatedTest(10000)
+    @Test
     void moveMNTest() throws EriantysException {
         //PLANNING PHASE 1
         int playerID = matchInfo.getCurrentPlayerID();
@@ -171,6 +171,10 @@ class GameControllerTest {
         command = new TransferToDiningCommand(Color.BLUE, gameController);
 
         board.addToEntranceOf(playerID, new StudentGroup(Color.BLUE, 3));
+
+        for(Player player : game.getPlayers()) {
+            System.out.println("Player: " + player.getName());
+        }
 
         for(int i=0; i < 3; i++)
             gameController.requestCommand(playerID, command);
