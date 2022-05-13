@@ -25,6 +25,7 @@ import it.polimi.ingsw.network.commands.*;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
@@ -66,6 +67,10 @@ class GameControllerTest {
     @AfterEach
     void tearDown() {
         gameController = null;
+        game = null;
+        board = null;
+        lobby = null;
+        matchInfo = null;
         Game.resetInstance();
         MatchInfo.resetInstance();
         Lobby.resetLobby();
@@ -147,7 +152,7 @@ class GameControllerTest {
         assertEquals(1, board.getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(Color.BLUE));
     }
 
-    @Test
+    @RepeatedTest(10000)
     void moveMNTest() throws EriantysException {
         //PLANNING PHASE 1
         int playerID = matchInfo.getCurrentPlayerID();
