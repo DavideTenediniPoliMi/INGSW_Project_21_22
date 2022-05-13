@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -26,9 +25,9 @@ public class Game extends Observable<ResponseParameters> implements Serializable
     private final int NUM_STARTING_STUDENTS_BY_COLOR = 24;
     private static Game instance;
     private final Board board = new Board();
-    private final List<Player> players = new ArrayList<>();
-    private final List<CharacterCard> characterCards = new ArrayList<>();
-    private final StudentBag bag = new StudentBag(NUM_STARTING_STUDENTS_BY_COLOR);
+    private List<Player> players = new ArrayList<>();
+    private List<CharacterCard> characterCards = new ArrayList<>();
+    private StudentBag bag = new StudentBag(NUM_STARTING_STUDENTS_BY_COLOR);
 
     /**
      * Sole constructor to avoid being instantiated more than once. Game is a singleton <code>class</code>.
@@ -336,6 +335,10 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         players.add(player);
     }
 
+    public void setPlayers(List<Player> players) {
+        this.players = new ArrayList<>(players);
+    }
+
     /**
      * Sets the specified <code>Player</code>'s status to disconnected.
      *
@@ -496,6 +499,10 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         return temp;
     }
 
+    public void setCharacterCards(List<CharacterCard> characterCards) {
+        this.characterCards = new ArrayList<>(characterCards);
+    }
+
     // STUDENT BAG
 
     /**
@@ -524,6 +531,10 @@ public class Game extends Observable<ResponseParameters> implements Serializable
      */
     public boolean isStudentBagEmpty() {
         return bag.isEmpty();
+    }
+
+    public void setStudentBag(StudentBag bag) {
+        this.bag = bag;
     }
 
     @Override

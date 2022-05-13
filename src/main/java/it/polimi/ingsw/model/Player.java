@@ -219,6 +219,8 @@ public class Player implements Serializable {
 
         if(jsonObject.has("selectedCard"))
             selectedCard = Card.valueOf(jsonObject.get("selectedCard").getAsString());
+
+        connected = jsonObject.get("connected").getAsBoolean();
         numCoins = jsonObject.get("numCoins").getAsInt();
     }
 }

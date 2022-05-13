@@ -19,9 +19,9 @@ public class Board implements Serializable {
     private final int NUM_STARTING_ISLANDS = 12;
     private final int NUM_STARTING_COINS = 20;
 
-    private final List<Island> islands = new ArrayList<>();
-    private final List<Cloud> clouds = new ArrayList<>();
-    private final List<School> schools = new ArrayList<>();
+    private List<Island> islands = new ArrayList<>();
+    private List<Cloud> clouds = new ArrayList<>();
+    private List<School> schools = new ArrayList<>();
     private ProfessorTracker professorOwners = new ProfessorTracker();
     private int numCoinsLeft = NUM_STARTING_COINS;
 
@@ -53,6 +53,10 @@ public class Board implements Serializable {
      */
     public List<Island> getIslands() {
         return new ArrayList<>(islands);
+    }
+
+    public void setIslands(List<Island> islands) {
+        this.islands = new ArrayList<>(islands);
     }
 
     /**
@@ -165,6 +169,10 @@ public class Board implements Serializable {
         }
     }
 
+    public void setClouds(List<Cloud> clouds) {
+        this.clouds = new ArrayList<>(clouds);
+    }
+
     /**
      * Collects students from the specified <code>Cloud</code>.
      *
@@ -232,6 +240,10 @@ public class Board implements Serializable {
      */
     public List<School> getSchools() {
         return new ArrayList<>(schools);
+    }
+
+    public void setSchools(List<School> schools) {
+        this.schools = new ArrayList<>(schools);
     }
 
     /**
@@ -305,6 +317,10 @@ public class Board implements Serializable {
         return (ProfessorTracker) professorOwners.clone();
     }
 
+    public void setProfessorOwners(ProfessorTracker professorOwners) {
+        this.professorOwners = professorOwners;
+    }
+
     /**
      * Gives the professor of specified <code>Color</code> to specified <code>Player</code>.
      *
@@ -340,6 +356,10 @@ public class Board implements Serializable {
      */
     public void takeCoin() {
         numCoinsLeft = Math.max(numCoinsLeft - 1, 0);
+    }
+
+    public void setNumCoinsLeft(int num) {
+        this.numCoinsLeft = num;
     }
 
     @Override

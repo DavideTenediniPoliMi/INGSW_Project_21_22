@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CharacterCards;
+import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.utils.Serializable;
 
 import java.util.ArrayList;
@@ -24,10 +25,9 @@ public class ResponseParameters implements Serializable {
     private boolean bagEmpty;
     private ProfessorTracker professors;
     private Player player;
-    private int coinsLeft;
+    private int coinsLeft = -1;
     private boolean sendCards;
     private boolean sendMatchInfo;
-
     private List<Player> players;
 
     /**
@@ -302,9 +302,21 @@ public class ResponseParameters implements Serializable {
 
         if(professors != null)
             jsonObject.add("professors", professors.serialize());
+
         if(player != null)
             jsonObject.add("player", player.serialize());
-        jsonObject.add("coinsLeft", new JsonPrimitive(coinsLeft));
+
+        if(players != null && players.size() > 0) {
+            JsonArray jsonArray = new JsonArray();
+            for(Player p : players) {
+                jsonArray.add(p.serialize());
+            }
+            jsonObject.add("players", jsonArray);
+        }
+
+        if(coinsLeft != -1) {
+            jsonObject.add("coinsLeft", new JsonPrimitive(coinsLeft));
+        }
 
         if(sendCards)
             jsonObject.add("cards", Card.serializeAll());
@@ -317,71 +329,110 @@ public class ResponseParameters implements Serializable {
 
     @Override
     public void deserialize(JsonObject jsonObject) {
+        Game game = Game.getInstance();
 
-        if(jsonObject.has("schools")) {
+        if (jsonObject.has("schools")) {
             schools = new ArrayList<>();
             JsonArray jsonArray = jsonObject.get("schools").getAsJsonArray();
-            for(JsonElement je : jsonArray) {
-                School s = new School(new Player(-1, ""));
-                s.deserialize(je.getAsJsonObject());
-                schools.add(s);
-            }
-        }else
-            schools = new ArrayList<>();
 
-        if(jsonObject.has("characterCards")) {
+            if(jsonArray.size() == MatchInfo.getInstance().getSelectedNumPlayer()) {
+                for (JsonElement je : jsonArray) {
+                    School s = new School(new Player(-1, ""));
+                    s.deserialize(je.getAsJsonObject());
+                    schools.add(s);
+                }
+                game.getBoard().setSchools(schools);
+            } else {
+                for (JsonElement je : jsonArray) {
+                    School s = game.getBoard().getSchoolByPlayerID(je.getAsJsonObject().get("ownerID").getAsInt());
+                    if(s != null) {
+                        s.deserialize(je.getAsJsonObject());
+                        schools.add(s);
+                    }
+                }
+            }
+        }
+
+        if (jsonObject.has("characterCards")) {
             characterCards = new ArrayList<>();
             JsonArray jsonArray = jsonObject.get("characterCards").getAsJsonArray();
-            for(JsonElement je : jsonArray) {
+            for (JsonElement je : jsonArray) {
                 String name = je.getAsJsonObject().get("name").getAsString();
                 CharacterCard c = CharacterCards.valueOf(name).instantiate();
                 c.deserialize(je.getAsJsonObject());
                 characterCards.add(c);
             }
-        }else
-            characterCards = null;
+            game.setCharacterCards(characterCards);
+        }
 
-        if(jsonObject.has("clouds")) {
+        if (jsonObject.has("clouds")) {
             clouds = new ArrayList<>();
             JsonArray jsonArray = jsonObject.get("clouds").getAsJsonArray();
-            for(JsonElement je : jsonArray) {
+            for (JsonElement je : jsonArray) {
                 Cloud c = new Cloud();
                 c.deserialize(je.getAsJsonObject());
                 clouds.add(c);
             }
-        }else
-            clouds = null;
+            game.getBoard().setClouds(clouds);
+        }
 
-        if(jsonObject.has("islands")) {
+        if (jsonObject.has("islands")) {
             islands = new ArrayList<>();
             JsonArray jsonArray = jsonObject.get("islands").getAsJsonArray();
-            for(JsonElement je : jsonArray) {
-                if(je.isJsonArray()) {
+            for (JsonElement je : jsonArray) {
+                if (je.isJsonArray()) {
                     MultiIsland multiIsland = new MultiIsland(new SimpleIsland(), new SimpleIsland());
                     multiIsland.deserialize(je.getAsJsonObject());
                     islands.add(multiIsland);
-                }else {
-                    SimpleIsland simpleIsland= new SimpleIsland();
+                } else {
+                    SimpleIsland simpleIsland = new SimpleIsland();
                     simpleIsland.deserialize(je.getAsJsonObject());
                     islands.add(simpleIsland);
                 }
             }
-        }else
-            islands = null;
+            game.getBoard().setIslands(islands);
+        }
 
-        if(jsonObject.has("bagEmpty"))
+        if (jsonObject.has("bagEmpty")) {
             bagEmpty = jsonObject.get("bagEmpty").getAsBoolean();
-        else
-            bagEmpty = false;
+            if(bagEmpty)
+                game.setStudentBag(new StudentBag(0));
+        }
 
-        if(jsonObject.has("professors"))
+        if (jsonObject.has("professors")) {
             professors.deserialize(jsonObject.get("professors").getAsJsonObject());
-        else
-            professors = null;
-        if(jsonObject.has("player"))
+            game.getBoard().setProfessorOwners(professors);
+        }
+
+        if (jsonObject.has("players")) {
+            players = new ArrayList<>();
+            JsonArray jsonArray = jsonObject.get("players").getAsJsonArray();
+            for (JsonElement je : jsonArray) {
+                Player p = new Player(0, "");
+                p.deserialize(je.getAsJsonObject());
+                players.add(p);
+            }
+            game.setPlayers(players);
+        }
+
+        if (jsonObject.has("player")) {
             player.deserialize(jsonObject.get("player").getAsJsonObject());
-        else
-            player = null;
-        coinsLeft = jsonObject.get("coinsLeft").getAsInt();
+            Player modelPlayer = game.getPlayerByID(player.getID());
+
+            if(modelPlayer != null) {
+                modelPlayer.deserialize(jsonObject.getAsJsonObject("player"));
+            }
+        }
+
+        if(jsonObject.has("coinsLeft")) {
+            coinsLeft = jsonObject.get("coinsLeft").getAsInt();
+            game.getBoard().setNumCoinsLeft(coinsLeft);
+        }
+
+        if(jsonObject.has("cards"))
+            Card.deserializeAll(jsonObject.getAsJsonObject("cards"));
+
+        if(jsonObject.has("matchInfo"))
+            MatchInfo.getInstance().deserialize(jsonObject.getAsJsonObject("matchInfo"));
     }
 }

@@ -26,6 +26,10 @@ public class StudentBag implements Serializable {
      * @param numStudentsByColor the amount of students to have for each color
      */
     public StudentBag(int numStudentsByColor) {
+        if(numStudentsByColor == 0) {
+            availableColors.clear();
+        }
+
         studentsLeft = Color.NUM_COLORS * numStudentsByColor;
 
         for(Color c : Color.values()){
