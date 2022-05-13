@@ -33,8 +33,8 @@ public class StudentsStateController extends CharacterCardPlayableStateControlle
     public void transferStudentToIsland(int islandIndex, Color c) throws StudentTransferException, NotEnoughStudentsException, BadParametersException {
         MatchInfo matchInfo = MatchInfo.getInstance();
 
-        if(islandIndex < 0 || islandIndex >= Game.getInstance().getBoard().getNumIslands()) {
-            throw new BadParametersException("islandIndex is " + islandIndex + ", expected between 0 and " + Game.getInstance().getBoard().getNumIslands());
+        if(islandIndex < 0 || islandIndex >= 12) {
+            throw new BadParametersException("islandIndex is " + islandIndex + ", expected between 0 and 11");
         }else if(matchInfo.getNumMovedStudents() >= NUM_MOVABLE_STUDENTS) {
             throw new StudentTransferException("Player already moved " + NUM_MOVABLE_STUDENTS + " students!");
         }

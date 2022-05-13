@@ -72,13 +72,22 @@ public class MultiIsland extends Island {
     }
 
     /**
-     * Returns the amount of single islands contained in this <code>MultiIsland</code>
+     * Returns the amount of simple islands contained in this <code>MultiIsland</code>
      *
      * @return Amount of islands
      */
     @Override
     public int getNumIslands() {
         return leftIsland.getNumIslands() + rightIsland.getNumIslands();
+    }
+
+    @Override
+    public Island getIslandOfRelativeIndex(int index) {
+        if(leftIsland.getNumIslands() < index) {
+            return leftIsland.getIslandOfRelativeIndex(index);
+        }
+
+        return rightIsland.getIslandOfRelativeIndex(index - leftIsland.getNumIslands());
     }
 
     @Override

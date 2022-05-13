@@ -13,7 +13,7 @@ import org.fusesource.jansi.AnsiColors;
  * Abstract class corresponding to the Island entity
  */
 public abstract class Island implements Serializable {
-    private StudentGroup students = new StudentGroup();
+    private final StudentGroup students = new StudentGroup();
     private TowerColor teamColor;
     private boolean motherNature;
 
@@ -88,9 +88,22 @@ public abstract class Island implements Serializable {
      */
     public abstract int getNumIslands();
 
+    /**
+     * Returns the StudentGroup inside this Island
+     *
+     * @return the students inside this Island
+     */
     public StudentGroup getStudents() {
         return (StudentGroup) students.clone();
     }
+
+    /**
+     * Return the island with a specific internal relative index
+     *
+     * @param index the relative index of the requested island
+     * @return the index-th island inside this island
+     */
+    public abstract Island getIslandOfRelativeIndex(int index);
 
     @Override
     public void deserialize(JsonObject jsonObject) {

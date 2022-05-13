@@ -71,7 +71,19 @@ public class Board implements Serializable {
      * @param students the <code>StudentGroup</code> to transfer.
      */
     public void addStudentsToIsland(int islandIndex, StudentGroup students) {
-        islands.get(islandIndex).addStudents(students);
+        getIslandOfAbsoluteIndex(islandIndex).addStudents(students);
+    }
+
+    private Island getIslandOfAbsoluteIndex(int islandIndex) {
+        int runningIndex = 0;
+        int fixedIndex = 0;
+
+        while(getIslandAt(fixedIndex).getNumIslands() + runningIndex <= islandIndex){
+            runningIndex += getIslandAt(fixedIndex).getNumIslands();
+            fixedIndex++;
+        }
+
+        return getIslandAt(fixedIndex).getIslandOfRelativeIndex(islandIndex - runningIndex);
     }
 
     /**
