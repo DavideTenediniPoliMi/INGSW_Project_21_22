@@ -7,7 +7,7 @@ import it.polimi.ingsw.utils.Printable;
 /**
  * Class representing a single Island
  */
-public class SimpleIsland extends Island implements Printable<String> {
+public class SimpleIsland extends Island {
     /**
      * Sole constructor
      */
@@ -25,8 +25,4 @@ public class SimpleIsland extends Island implements Printable<String> {
         return gson.toJsonTree(this).getAsJsonObject();
     }
 
-    @Override
-    public String print(boolean... params) {
-        return printIsland(null, false, false, false, false);
-    }
 }

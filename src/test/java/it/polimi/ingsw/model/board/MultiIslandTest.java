@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.board;
 
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
@@ -8,6 +9,8 @@ import org.fusesource.jansi.AnsiConsole;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -124,12 +127,48 @@ public class MultiIslandTest {
 
         isld.setMotherNatureTo(true);
 
-        isld.print(false, false, false, false);
+        isld.print(null, false, false, false, false);
 
         /*AnsiConsole.systemInstall();
         AnsiConsole.sysOut().println(isld.printIsland(null, false, false, false, false));
         AnsiConsole.sysOut().println(isld.printIsland(null, false, true, false, false));
         AnsiConsole.sysOut().println(isld.printIsland(null, true, false, false, false));
         AnsiConsole.sysOut().println(isld.printIsland(null, false, false, true, false));*/
+    }
+
+    @Test
+    public void testPrintMulti() {
+        Game game = Game.getInstance();
+
+        game.placeMNAt(0);
+        for(int i = 0; i < 12; i++) {
+            game.conquerIsland(TowerColor.WHITE);
+            game.addInitialStudentToIsland(i, game.drawStudents(5));
+            game.moveMN(1);
+        }
+
+        game.moveMN(1);
+        game.conquerIsland(TowerColor.GREY);
+        game.moveMN(1);
+        game.conquerIsland(TowerColor.GREY);
+        game.mergeIslands(1, 2);
+        game.moveMN(1);
+        game.conquerIsland(TowerColor.GREY);
+        game.mergeIslands(1, 2);
+
+        game.addInitialStudentToIsland(1, new StudentGroup(Color.BLUE, 5));
+
+        game.moveMN(5);
+        game.conquerIsland(TowerColor.BLACK);
+        game.moveMN(1);
+        game.conquerIsland(TowerColor.BLACK);
+        game.mergeIslands(6, 7);
+        game.addInitialStudentToIsland(6, new StudentGroup(Color.RED, 5));
+
+        //AnsiConsole.systemInstall();
+        for(Island is : game.getBoard().getIslands()) {
+            List<String> strIs = List.of(is.print(null, false, false, false, false));
+            //AnsiConsole.sysOut().println(strIs);
+        }
     }
 }

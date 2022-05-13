@@ -2,14 +2,19 @@ package it.polimi.ingsw.model.board;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
+import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.utils.Printable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class representing multiple islands merged together.
  */
-public class MultiIsland extends Island implements Printable<String[]> {
+public class MultiIsland extends Island {
     private Island leftIsland;
     private Island rightIsland;
 
@@ -115,11 +120,80 @@ public class MultiIsland extends Island implements Printable<String[]> {
     }
 
     @Override
-    public String[] print(boolean... params) {
-        StringBuilder islandBuilder = new StringBuilder();
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Island)) {
+            return false;
+        }
+        Island is = (Island) obj;
 
+        boolean equalsLft = leftIsland.equals(is);
+        boolean equalsRgt = rightIsland.equals(is);
 
+        return equalsLft || equalsRgt || (this == is);
+    }
 
-        return null;
+    @Override
+    public String[] print(StudentGroup toAdd, boolean... params) {
+        List<String> islandBuilder = new ArrayList<>();
+        int leftRealIndex = 0;
+        Board board = Game.getInstance().getBoard();
+
+        for(int i = 0; i < board.getNumIslands(); i++) {
+            if(board.getIslandAt(i).equals(this)) {
+                break;
+            }
+            leftRealIndex += board.getIslandAt(i).getNumIslands();
+        }
+
+        if(toAdd == null)
+            toAdd = new StudentGroup();
+
+        getStudents().transferAllTo(toAdd); //All of these are clones! only for printing purposes
+        islandBuilder.addAll(List.of(leftIsland.print(toAdd, calculateOpenings(leftRealIndex, true, params))));
+
+        int rightRealIndex = leftRealIndex + leftIsland.getNumIslands();
+        islandBuilder.addAll(List.of(rightIsland.print(new StudentGroup(), calculateOpenings(rightRealIndex, false, params))));
+
+        return islandBuilder.toArray(new String[0]);
+    }
+
+    private boolean[] calculateOpenings(int realIndex, boolean isLeft, boolean...params) {
+        if(0 <= realIndex && realIndex < 4) {
+            //Upper row
+            if(isLeft) {
+                return new boolean[]{
+                        params[0], //N
+                        true,      //E
+                        params[2], //S
+                        params[3]  //W
+                };
+            } else {
+                return new boolean[]{
+                        params[0],
+                        params[1],
+                        params[2],
+                        true
+                };
+            }
+        } else if(4 <= realIndex && realIndex < 6) {
+            //Mid-right
+            if(isLeft) {
+                return new boolean[]{
+                        params[0],
+                        params[1],
+                        true,
+                        params[3]
+                };
+            } else {
+                return new boolean[]{
+                        true,
+                        params[1],
+                        params[2],
+                        params[3]
+                };
+            }
+        } else {
+            return calculateOpenings(realIndex - 6, !isLeft, params);
+        }
     }
 }

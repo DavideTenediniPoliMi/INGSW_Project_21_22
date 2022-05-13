@@ -88,6 +88,10 @@ public abstract class Island implements Serializable {
      */
     public abstract int getNumIslands();
 
+    public StudentGroup getStudents() {
+        return (StudentGroup) students.clone();
+    }
+
     @Override
     public void deserialize(JsonObject jsonObject) {
         if(jsonObject.has("students"))
@@ -129,7 +133,7 @@ public abstract class Island implements Serializable {
             islandBuilder.append("│");
         }
 
-        islandBuilder.append(AnsiCodes.LIGHT_GREEN_BACKGROUND).append(AnsiCodes.BLACK_TEXT).append("            Team: ").append(getTeamColor().print());
+        islandBuilder.append(AnsiCodes.BLACK_TEXT).append("            Team: ").append(getTeamColor().print());
 
         if(bridge_E) {
             islandBuilder.append("└\n");
@@ -155,8 +159,7 @@ public abstract class Island implements Serializable {
             studentsPure = studentsPure.replace(code.toString(), "");
         }
 
-        islandBuilder.append(AnsiCodes.LIGHT_GREEN_BACKGROUND).append(temp.print(false))
-                    .append(AnsiCodes.LIGHT_GREEN_BACKGROUND)
+        islandBuilder.append(temp.print(false))
                     .append(" ".repeat(21 - studentsPure.length()))
                     .append(AnsiCodes.RESET);
 
@@ -174,7 +177,7 @@ public abstract class Island implements Serializable {
             islandBuilder.append("│");
         }
 
-        islandBuilder.append(AnsiCodes.LIGHT_GREEN_BACKGROUND).append(" ".repeat(9));
+        islandBuilder.append(" ".repeat(9));
 
         if(motherNature) {
             islandBuilder.append(AnsiCodes.BROWN_BACKGROUND).append(" M ").append(AnsiCodes.RESET);
@@ -182,7 +185,7 @@ public abstract class Island implements Serializable {
             islandBuilder.append(" ".repeat(3));
         }
 
-        islandBuilder.append(AnsiCodes.LIGHT_GREEN_BACKGROUND).append(" ".repeat(9))
+        islandBuilder.append(" ".repeat(9))
                     .append(AnsiCodes.RESET);
 
         if(bridge_E) {
@@ -203,5 +206,13 @@ public abstract class Island implements Serializable {
         islandBuilder.append("────────┘\n");
 
         return islandBuilder.toString();
+    }
+
+    public String[] print(StudentGroup toAdd, boolean... params) {
+        if(params.length < 4) {
+            return new String[]{printIsland(toAdd, false, false, false, false)};
+        } else {
+            return new String[]{printIsland(toAdd, params)};
+        }
     }
 }
