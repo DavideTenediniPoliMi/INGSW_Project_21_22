@@ -28,6 +28,7 @@ public class StudentBag implements Serializable {
     public StudentBag(int numStudentsByColor) {
         if(numStudentsByColor == 0) {
             availableColors.clear();
+            empty = true;
         }
 
         studentsLeft = Color.NUM_COLORS * numStudentsByColor;

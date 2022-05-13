@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -190,6 +191,20 @@ public class BoardTest {
         board.removeFromDiningRoomOf(0, new StudentGroup(Color.GREEN, 1));
 
         assertEquals(0, s.getNumStudentsInDiningRoomByColor(Color.GREEN));
+    }
+
+    @Test
+    public void testSetters() {
+        board.setNumCoinsLeft(0);
+        assertEquals(0, board.getNumCoinsLeft());
+        board.setProfessorOwners(new ProfessorTracker());
+        assertEquals(-1, board.getProfessorOwners().getOwnerIDByColor(Color.BLUE));
+        board.setClouds(new ArrayList<>());
+        assertTrue(board.getClouds().isEmpty());
+        board.setIslands(new ArrayList<>());
+        assertTrue(board.getIslands().isEmpty());
+        board.setSchools(new ArrayList<>());
+        assertTrue(board.getSchools().isEmpty());
     }
 
     @Test

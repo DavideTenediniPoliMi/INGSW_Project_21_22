@@ -2,10 +2,12 @@ package it.polimi.ingsw.model;
 
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.board.Board;
+import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
+import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import org.junit.jupiter.api.AfterEach;
@@ -14,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GameTest {
@@ -234,6 +237,16 @@ public class GameTest {
     public void testBagEmpty() {
         g.drawStudents(120);
         assertTrue(g.isStudentBagEmpty());
+    }
+
+    @Test
+    public void testSetters() {
+        g.setStudentBag(new StudentBag(0));
+        assertTrue(g.isStudentBagEmpty());
+        g.setCharacterCards(new ArrayList<>());
+        assertTrue(g.getCharacterCards().isEmpty());
+        g.setPlayers(new ArrayList<>());
+        assertTrue(g.getPlayers().isEmpty());
     }
 
     @Test
