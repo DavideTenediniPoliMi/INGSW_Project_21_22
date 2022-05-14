@@ -79,6 +79,10 @@ public class Lobby extends Observable<ResponseParameters> implements Serializabl
         notify(params);
     }
 
+    public void setPlayers(List<Player> players) {
+        this.players = new ArrayList<>(players);
+    }
+
     /**
      * Returns whether the <code>Player</code> with the specified ID has already joined this <code>Lobby</code>.
      *

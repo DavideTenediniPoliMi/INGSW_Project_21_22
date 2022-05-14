@@ -3,6 +3,7 @@ package it.polimi.ingsw.model;
 import com.google.gson.*;
 import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CardBack;
+import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.utils.Serializable;
 
@@ -198,7 +199,13 @@ public class Player implements Serializable {
     public JsonObject serialize() {
         Gson gson = new Gson();
 
-        return gson.toJsonTree(this).getAsJsonObject();
+        JsonObject jo =  gson.toJsonTree(this).getAsJsonObject();
+
+        if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.LOBBY)) {
+            jo.add("ready", new JsonPrimitive(Lobby.getLobby().isReady(ID)));
+        }
+
+        return jo;
     }
 
     @Override
@@ -222,5 +229,9 @@ public class Player implements Serializable {
 
         connected = jsonObject.get("connected").getAsBoolean();
         numCoins = jsonObject.get("numCoins").getAsInt();
+
+        if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.LOBBY) & jsonObject.has("ready")) {
+            Lobby.getLobby().setReadyStatus(ID, jsonObject.get("ready").getAsBoolean());
+        }
     }
 }

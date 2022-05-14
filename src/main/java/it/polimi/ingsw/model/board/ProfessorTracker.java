@@ -5,7 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.utils.Serializable;
-import it.polimi.ingsw.view.CLI.AnsiCodes;
+import it.polimi.ingsw.view.cli.AnsiCodes;
 
 /**
  * Class used to track the owners of the various professors.

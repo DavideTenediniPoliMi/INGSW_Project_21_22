@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.utils.Printable;
 import it.polimi.ingsw.utils.Serializable;
-import it.polimi.ingsw.view.CLI.AnsiCodes;
+import it.polimi.ingsw.view.cli.AnsiCodes;
 
 import java.util.Arrays;
 

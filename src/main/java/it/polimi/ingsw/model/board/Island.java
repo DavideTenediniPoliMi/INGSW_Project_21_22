@@ -6,8 +6,7 @@ import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.utils.Printable;
 import it.polimi.ingsw.utils.Serializable;
-import it.polimi.ingsw.view.CLI.AnsiCodes;
-import org.fusesource.jansi.AnsiColors;
+import it.polimi.ingsw.view.cli.AnsiCodes;
 
 import java.util.ArrayList;
 import java.util.List;
