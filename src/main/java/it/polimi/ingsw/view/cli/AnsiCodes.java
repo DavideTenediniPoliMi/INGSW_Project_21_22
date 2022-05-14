@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.CLI;
+package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;

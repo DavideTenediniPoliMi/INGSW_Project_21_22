@@ -1,8 +1,6 @@
 package it.polimi.ingsw.model.helpers;
 
 import it.polimi.ingsw.model.enumerations.Color;
-import it.polimi.ingsw.view.CLI.AnsiCodes;
-import org.fusesource.jansi.AnsiConsole;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

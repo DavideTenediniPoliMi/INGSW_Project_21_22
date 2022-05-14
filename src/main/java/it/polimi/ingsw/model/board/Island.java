@@ -6,8 +6,7 @@ import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.utils.Printable;
 import it.polimi.ingsw.utils.Serializable;
-import it.polimi.ingsw.view.CLI.AnsiCodes;
-import org.fusesource.jansi.AnsiColors;
+import it.polimi.ingsw.view.cli.AnsiCodes;
 
 /**
  * Abstract class corresponding to the Island entity

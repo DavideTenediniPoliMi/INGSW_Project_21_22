@@ -10,7 +10,7 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.utils.Printable;
 import it.polimi.ingsw.utils.Serializable;
-import it.polimi.ingsw.view.CLI.AnsiCodes;
+import it.polimi.ingsw.view.cli.AnsiCodes;
 
 /**
  * Class representing the School entity in the game
@@ -18,8 +18,8 @@ import it.polimi.ingsw.view.CLI.AnsiCodes;
 public class School implements Serializable, Printable<String> {
     private Player owner;
     private int numTowers;
-    private StudentGroup entrance = new StudentGroup();
-    private StudentGroup diningRoom = new StudentGroup();
+    private final StudentGroup entrance = new StudentGroup();
+    private final StudentGroup diningRoom = new StudentGroup();
 
     /**
      * Sole constructor, binds this <code>School</code> to a <code>Player</code>
