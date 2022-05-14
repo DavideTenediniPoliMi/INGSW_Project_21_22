@@ -9,6 +9,9 @@ import it.polimi.ingsw.utils.Serializable;
 import it.polimi.ingsw.view.CLI.AnsiCodes;
 import org.fusesource.jansi.AnsiColors;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Abstract class corresponding to the Island entity
  */
@@ -123,6 +126,7 @@ public abstract class Island implements Serializable, Printable<String[]> {
             return new String[]{};
         }
         StringBuilder islandBuilder = new StringBuilder();
+        List<String> islandString = new ArrayList<>();
 
         boolean bridge_N = params[0];
         boolean bridge_E = params[1];
@@ -137,7 +141,9 @@ public abstract class Island implements Serializable, Printable<String[]> {
         } else {
             islandBuilder.append("─────");
         }
-        islandBuilder.append("────────┐\n");
+        islandBuilder.append("────────┐");
+        islandString.add(islandBuilder.toString());
+        islandBuilder.setLength(0);
 
         //First row: Conqueror team info
 
@@ -147,13 +153,15 @@ public abstract class Island implements Serializable, Printable<String[]> {
             islandBuilder.append("│");
         }
 
-        islandBuilder.append(AnsiCodes.BLACK_TEXT).append("            Team: ").append(getTeamColor().print());
+        islandBuilder.append(AnsiCodes.BLACK_TEXT).append("            Team: ").append(getTeamColor() == null ? "   " : getTeamColor().print());
 
         if(bridge_E) {
-            islandBuilder.append("└\n");
+            islandBuilder.append("└");
         } else {
-            islandBuilder.append("│\n");
+            islandBuilder.append("│");
         }
+        islandString.add(islandBuilder.toString());
+        islandBuilder.setLength(0);
 
         //Second row: Students info
 
@@ -173,10 +181,12 @@ public abstract class Island implements Serializable, Printable<String[]> {
                     .append(AnsiCodes.RESET);
 
         if(bridge_E) {
-            islandBuilder.append(" \n");
+            islandBuilder.append(" ");
         } else {
-            islandBuilder.append("│\n");
+            islandBuilder.append("│");
         }
+        islandString.add(islandBuilder.toString());
+        islandBuilder.setLength(0);
 
         //Third row: Mother nature
 
@@ -198,10 +208,12 @@ public abstract class Island implements Serializable, Printable<String[]> {
                     .append(AnsiCodes.RESET);
 
         if(bridge_E) {
-            islandBuilder.append("┌\n");
+            islandBuilder.append("┌");
         } else {
-            islandBuilder.append("│\n");
+            islandBuilder.append("│");
         }
+        islandString.add(islandBuilder.toString());
+        islandBuilder.setLength(0);
 
         //Fourth row: Closing the box
 
@@ -212,8 +224,10 @@ public abstract class Island implements Serializable, Printable<String[]> {
         } else {
             islandBuilder.append("─────");
         }
-        islandBuilder.append("────────┘\n");
+        islandBuilder.append("────────┘");
+        islandString.add(islandBuilder.toString());
+        islandBuilder.setLength(0);
 
-        return new String[]{islandBuilder.toString()};
+        return islandString.toArray(new String[0]);
     }
 }

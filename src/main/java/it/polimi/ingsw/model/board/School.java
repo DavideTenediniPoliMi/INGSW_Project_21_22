@@ -12,10 +12,13 @@ import it.polimi.ingsw.utils.Printable;
 import it.polimi.ingsw.utils.Serializable;
 import it.polimi.ingsw.view.CLI.AnsiCodes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class representing the School entity in the game
  */
-public class School implements Serializable, Printable<String> {
+public class School implements Serializable, Printable<String[]> {
     private Player owner;
     private int numTowers;
     private StudentGroup entrance = new StudentGroup();
@@ -149,26 +152,39 @@ public class School implements Serializable, Printable<String> {
     }
 
     @Override
-    public String print(boolean...params) {
-        StringBuilder schoolString = new StringBuilder();
+    public String[] print(boolean...params) {
+        StringBuilder schoolBuilder = new StringBuilder();
+        List<String> schoolString = new ArrayList<>();
         StringBuilder ownerName = new StringBuilder(owner.getName().substring(0, Math.min(owner.getName().length(), 15)));
 
         ownerName.append(" ".repeat(15 - ownerName.length()));
 
         Card card = owner.getSelectedCard();
 
-        schoolString.append("┌─────────────────────┐\n");
+        schoolBuilder.append("┌─────────────────────┐");
+        schoolString.add(schoolBuilder.toString());
+        schoolBuilder.setLength(0);
+
         //TEAM section
-        schoolString.append("│ ").append(owner.getTeamColor().print()).append(" ").append(ownerName).append(" │\n");
+        schoolBuilder.append("│ ").append(owner.getTeamColor().print()).append(" ").append(ownerName).append(" │");
+        schoolString.add(schoolBuilder.toString());
+        schoolBuilder.setLength(0);
+
         //ASSISTANT CARD section
-        schoolString.append("│ Steps: ")
+        schoolBuilder.append("│ Steps: ")
                     .append(card == null ? "na" : card.RANGE + " ")
                     .append(" Value: ")
                     .append(card == null ? "na" : card.WEIGHT)
                     .append(card == null ? "" : (card.WEIGHT < 10 ? " " : ""))
-                    .append(" │\n");
+                    .append(" │");
+        schoolString.add(schoolBuilder.toString());
+        schoolBuilder.setLength(0);
+
         //ENTRANCE section
-        schoolString.append("├─Entrance:───────────┤\n");
+        schoolBuilder.append("├─Entrance:───────────┤");
+        schoolString.add(schoolBuilder.toString());
+        schoolBuilder.setLength(0);
+
         StringBuilder entranceBuilder = new StringBuilder(entrance.print(false));
         String pureEntrance = entrance.print(false);
 
@@ -178,17 +194,33 @@ public class School implements Serializable, Printable<String> {
 
         entranceBuilder.append(" ".repeat(21 - pureEntrance.length()));
 
-        schoolString.append("│").append(entranceBuilder).append("│\n");
-        schoolString.append("├─────────────────────┤\n");
-        schoolString.append("├─Dining Room:────────┤\n");
+        schoolBuilder.append("│").append(entranceBuilder).append("│");
+        schoolString.add(schoolBuilder.toString());
+        schoolBuilder.setLength(0);
 
-        schoolString.append("│").append(diningRoom.print(true)).append("│\n");
-        schoolString.append("│")
+        schoolBuilder.append("├─────────────────────┤");
+        schoolString.add(schoolBuilder.toString());
+        schoolBuilder.setLength(0);
+
+        schoolBuilder.append("├─Dining Room:────────┤");
+        schoolString.add(schoolBuilder.toString());
+        schoolBuilder.setLength(0);
+
+        schoolBuilder.append("│").append(diningRoom.print(true)).append("│");
+        schoolString.add(schoolBuilder.toString());
+        schoolBuilder.setLength(0);
+
+        schoolBuilder.append("│")
                     .append(Game.getInstance().getBoard().getProfessorOwners().printFor(owner.getID()))
-                    .append("│\n");
-        schoolString.append("└─────────────────────┘\n");
+                    .append("│");
+        schoolString.add(schoolBuilder.toString());
+        schoolBuilder.setLength(0);
+
+        schoolBuilder.append("└─────────────────────┘");
+        schoolString.add(schoolBuilder.toString());
+        schoolBuilder.setLength(0);
 
 
-        return schoolString.toString();
+        return schoolString.toArray(new String[0]);
     }
 }

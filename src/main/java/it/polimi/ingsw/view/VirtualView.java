@@ -4,6 +4,7 @@ import com.google.gson.JsonParser;
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.controller.LobbyController;
 import it.polimi.ingsw.exceptions.EriantysException;
+import it.polimi.ingsw.exceptions.EriantysRuntimeException;
 import it.polimi.ingsw.exceptions.lobby.DuplicateIDException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Lobby;
@@ -88,8 +89,8 @@ public class VirtualView extends Observable<String> implements Observer<Response
             } else {
                 lobbyController.requestCommand(command);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (EriantysException | EriantysRuntimeException e) {
+            update(new ResponseParameters().setError(e.getMessage()));
         }
     }
 
