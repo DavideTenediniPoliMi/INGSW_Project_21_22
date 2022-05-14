@@ -5,8 +5,11 @@ import it.polimi.ingsw.controller.subcontrollers.DiningRoomController;
 import it.polimi.ingsw.controller.subcontrollers.IslandController;
 import it.polimi.ingsw.exceptions.board.CloudUnavailableException;
 import it.polimi.ingsw.exceptions.board.MNOutOfRangeException;
+import it.polimi.ingsw.exceptions.game.CharacterCardActivationException;
+import it.polimi.ingsw.exceptions.game.ExpertModeDisabledException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.exceptions.player.CardUsedException;
+import it.polimi.ingsw.exceptions.player.NotEnoughCoinsException;
 import it.polimi.ingsw.exceptions.students.NotEnoughStudentsException;
 import it.polimi.ingsw.exceptions.students.StudentTransferException;
 import it.polimi.ingsw.model.Game;
@@ -97,7 +100,7 @@ public class RoundStateController {
      * @throws IllegalActionException If called during the wrong state.
      * @see CharacterCardPlayableStateController
      */
-    public void buyCharacterCard(int cardIndex) throws IllegalActionException {
+    public void buyCharacterCard(int cardIndex) throws IllegalActionException, NotEnoughCoinsException, CharacterCardActivationException, ExpertModeDisabledException {
         throw new IllegalActionException("buyCharacterCard", MatchInfo.getInstance().getStateType());
     }
 
@@ -108,7 +111,7 @@ public class RoundStateController {
      * @throws IllegalActionException If called during the wrong state.
      * @see CharacterCardPlayableStateController
      */
-    public void setCardParameters(CardParameters params) throws IllegalActionException {
+    public void setCardParameters(CardParameters params) throws IllegalActionException, ExpertModeDisabledException {
         throw new IllegalActionException("setCardParameters", MatchInfo.getInstance().getStateType());
     }
 
@@ -118,7 +121,7 @@ public class RoundStateController {
      * @throws IllegalActionException If called during the wrong state.
      * @see CharacterCardPlayableStateController
      */
-    public void activateCard() throws IllegalActionException {
+    public void activateCard() throws IllegalActionException, ExpertModeDisabledException {
         throw new IllegalActionException("activateCard", MatchInfo.getInstance().getStateType());
     }
 

@@ -2,7 +2,11 @@ package it.polimi.ingsw.controller.subcontrollers;
 
 import it.polimi.ingsw.controller.round.CharacterCardPlayableStateController;
 import it.polimi.ingsw.controller.round.RoundStateController;
+import it.polimi.ingsw.exceptions.game.BadParametersException;
+import it.polimi.ingsw.exceptions.game.CharacterCardActivationException;
 import it.polimi.ingsw.exceptions.game.NullCharacterCardException;
+import it.polimi.ingsw.exceptions.game.NullPlayerException;
+import it.polimi.ingsw.exceptions.player.NotEnoughCoinsException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
@@ -47,20 +51,20 @@ class CharacterCardControllerTest {
     }
 
     @Test
-    void buyCharacterCard_alreadyBoughtCard() {
+    void buyCharacterCard_alreadyBoughtCard() throws NotEnoughCoinsException, CharacterCardActivationException {
         game.instantiateCharacterCard(0);
         characterCardController.buyCharacterCard(0);
         System.out.println(game.getCharacterCards().get(0).getCost());
 
         int coinsBefore = game.getPlayerByID(0).getNumCoins();
-        characterCardController.buyCharacterCard(0);
+        assertThrowsExactly(CharacterCardActivationException.class, () -> characterCardController.buyCharacterCard(0));
         assertEquals(coinsBefore, game.getPlayerByID(0).getNumCoins());
     }
 
     @Test
     void buyCharacterCard_notEnoughCoins() {
         game.instantiateCharacterCard(1);
-        characterCardController.buyCharacterCard(0);
+        assertThrowsExactly(NotEnoughCoinsException.class, () -> characterCardController.buyCharacterCard(0));
     }
 
     @Test
@@ -85,7 +89,7 @@ class CharacterCardControllerTest {
         params.setIslandIndex(0);
 
 
-        assertDoesNotThrow(() -> characterCardController.setCardParameters(params));
+        assertThrowsExactly(NullPlayerException.class, () -> characterCardController.setCardParameters(params));
     }
 
     @Test
@@ -96,7 +100,7 @@ class CharacterCardControllerTest {
         params.setFromDestination(new StudentGroup(Color.GREEN, 2));
         params.setIslandIndex(0);
 
-        assertThrowsExactly(NullPointerException.class, () -> characterCardController.setCardParameters(params));
+        assertThrowsExactly(NullPlayerException.class, () -> characterCardController.setCardParameters(params));
     }
 
     @Test
@@ -109,7 +113,7 @@ class CharacterCardControllerTest {
         params.setFromDestination(new StudentGroup(Color.GREEN, 2));
         params.setIslandIndex(0);
 
-        assertDoesNotThrow(() -> characterCardController.setCardParameters(params));
+        assertThrowsExactly(NullPlayerException.class, () -> characterCardController.setCardParameters(params));
     }
 
     @Test
@@ -133,7 +137,7 @@ class CharacterCardControllerTest {
         game.buyCharacterCard(0,0);
         CardParameters params = new CardParameters();
 
-        assertDoesNotThrow(() -> characterCardController.setCardParameters(params));
+        assertThrowsExactly(BadParametersException.class, () -> characterCardController.setCardParameters(params));
     }
 
     @Test
@@ -156,7 +160,7 @@ class CharacterCardControllerTest {
         game.buyCharacterCard(0,0);
         CardParameters params = new CardParameters();
 
-        assertDoesNotThrow(() -> characterCardController.setCardParameters(params));
+        assertThrowsExactly(BadParametersException.class, () -> characterCardController.setCardParameters(params));
     }
 
     @Test
@@ -169,7 +173,7 @@ class CharacterCardControllerTest {
         params.setFromOrigin(new StudentGroup(Color.BLUE, 2));
         params.setFromDestination(new StudentGroup(Color.GREEN, 2));
 
-        assertDoesNotThrow(() -> characterCardController.setCardParameters(params));
+        assertThrowsExactly(NullPlayerException.class, () -> characterCardController.setCardParameters(params));
     }
 
     @Test
@@ -180,7 +184,7 @@ class CharacterCardControllerTest {
         game.buyCharacterCard(0,0);
         CardParameters params = new CardParameters();
 
-        assertThrowsExactly(NullPointerException.class, () -> characterCardController.setCardParameters(params));
+        assertThrowsExactly(NullPlayerException.class, () -> characterCardController.setCardParameters(params));
     }
 
     @Test
@@ -194,7 +198,7 @@ class CharacterCardControllerTest {
         params.setFromOrigin(new StudentGroup(Color.BLUE, 2));
         params.setFromDestination(new StudentGroup(Color.GREEN, 2));
 
-        assertDoesNotThrow(() -> characterCardController.setCardParameters(params));
+        assertThrowsExactly(NullPlayerException.class, () -> characterCardController.setCardParameters(params));
     }
 
     @Test

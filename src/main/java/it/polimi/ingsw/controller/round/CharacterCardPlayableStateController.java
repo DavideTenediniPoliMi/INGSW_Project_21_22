@@ -3,7 +3,9 @@ package it.polimi.ingsw.controller.round;
 import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.exceptions.game.CharacterCardActivationException;
 import it.polimi.ingsw.exceptions.game.ExpertModeDisabledException;
+import it.polimi.ingsw.exceptions.game.NullPlayerException;
 import it.polimi.ingsw.exceptions.player.NotEnoughCoinsException;
+import it.polimi.ingsw.exceptions.students.NotEnoughStudentsException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.characters.CharacterCard;
@@ -34,16 +36,13 @@ public class CharacterCardPlayableStateController extends RoundStateController {
     }
 
     @Override
-    public void buyCharacterCard(int cardIndex) {
+    public void buyCharacterCard(int cardIndex) throws NotEnoughCoinsException, CharacterCardActivationException, ExpertModeDisabledException{
         if(isEnabled()) {
             if(cardIndex < 0 || cardIndex > 2) {
                 throw new BadParametersException("cardIndex is " + cardIndex + ", expected between 0 and 2");
             }
-            try {
-                characterCardController.buyCharacterCard(MatchInfo.getInstance().getCurrentPlayerID(), cardIndex);
-            } catch(NotEnoughCoinsException | CharacterCardActivationException e) {
-                e.printStackTrace();
-            }
+
+            characterCardController.buyCharacterCard(MatchInfo.getInstance().getCurrentPlayerID(), cardIndex);
 
             fromOrigin = null;
         }else{
@@ -52,7 +51,7 @@ public class CharacterCardPlayableStateController extends RoundStateController {
     }
 
     @Override
-    public void setCardParameters(CardParameters params) {
+    public void setCardParameters(CardParameters params) throws BadParametersException, NullPlayerException, NotEnoughStudentsException, ExpertModeDisabledException {
         if(isEnabled()) {
             characterCardController.setCardParameters(params);
             CharacterCard card = Game.getInstance().getActiveCharacterCard();
@@ -66,7 +65,7 @@ public class CharacterCardPlayableStateController extends RoundStateController {
     }
 
     @Override
-    public void activateCard() {
+    public void activateCard() throws ExpertModeDisabledException {
         if(isEnabled()) {
             int res = characterCardController.activateCard();
             CharacterCard card = Game.getInstance().getActiveCharacterCard();

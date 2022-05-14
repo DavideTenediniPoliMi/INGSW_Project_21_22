@@ -3,7 +3,9 @@ package it.polimi.ingsw.controller.round;
 import it.polimi.ingsw.controller.subcontrollers.DiningRoomController;
 import it.polimi.ingsw.controller.subcontrollers.IslandController;
 import it.polimi.ingsw.exceptions.game.BadParametersException;
+import it.polimi.ingsw.exceptions.game.CharacterCardActivationException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
+import it.polimi.ingsw.exceptions.player.NotEnoughCoinsException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
@@ -67,7 +69,7 @@ public class StudentStateControllerExpertTest {
     }
 
     @Test
-    public void activateTest() {
+    public void activateTest() throws NotEnoughCoinsException, CharacterCardActivationException {
         Game game = Game.getInstance();
         game.getBoard().addToEntranceOf(0, new StudentGroup(Color.BLUE, 2));
         game.getBoard().addToEntranceOf(0, new StudentGroup(Color.RED, 2));

@@ -58,14 +58,10 @@ public class CharacterCardController {
      *
      * @param params the <code>Parameters</code> to set.
      */
-    public void setCardParameters(CardParameters params) {
+    public void setCardParameters(CardParameters params) throws BadParametersException, NullPlayerException, NotEnoughStudentsException {
         if(Game.getInstance().getActiveCharacterCard() != null){ //Separated so it's only checked once
-            try{
-                if(checkParameters(params) && !effectUsed){
-                    Game.getInstance().setCardParameters(params);
-                }
-            } catch (BadParametersException | NullPlayerException | NotEnoughStudentsException exc) {
-                exc.printStackTrace();
+            if(checkParameters(params) && !effectUsed){
+                Game.getInstance().setCardParameters(params);
             }
         }else {
             throw new NullCharacterCardException();
