@@ -99,10 +99,10 @@ public class SchoolTest {
         );
     }
 
-    @Test
+    /*@Test
     public void printTest() {
         /*AnsiConsole.systemInstall();
-        AnsiConsole.sysOut().println(s1.print());*/
+        AnsiConsole.sysOut().println(s1.print());
         s1.print();
         Game game = Game.getInstance();
         game.addPlayer(p2);
@@ -120,7 +120,7 @@ public class SchoolTest {
         game.giveProfessorTo(1, Color.YELLOW);
         game.giveProfessorTo(1, Color.GREEN);
 
-        /*AnsiConsole.sysOut().println(s2.print());
-        s2.print();*/
-    }
+        AnsiConsole.sysOut().println(s2.print());
+        s2.print();
+    }*/
 }

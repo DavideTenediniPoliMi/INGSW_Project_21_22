@@ -136,7 +136,7 @@ public class MultiIslandTest {
         AnsiConsole.sysOut().println(isld.printIsland(null, false, false, true, false));*/
     }
 
-    @Test
+    /*@Test
     public void testPrintMulti() {
         Game game = Game.getInstance();
 
@@ -170,5 +170,5 @@ public class MultiIslandTest {
             List<String> strIs = List.of(is.print(false, false, false, false));
             //AnsiConsole.sysOut().println(strIs);
         }
-    }
+    }*/
 }
