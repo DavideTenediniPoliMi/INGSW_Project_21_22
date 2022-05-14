@@ -7,7 +7,7 @@ import it.polimi.ingsw.network.parameters.CardParameters;
  * Class representing an abstract decorator for a generic <code>CharacterCard</code>. Used to implement different
  * effects to apply to the generic interface of a <code>CharacterCard</code>.
  */
-public abstract class CharacterCardDecorator extends CharacterCard{
+public abstract class CharacterCardDecorator extends CharacterCard {
     protected CharacterCard card;
 
     /**
@@ -82,4 +82,9 @@ public abstract class CharacterCardDecorator extends CharacterCard{
      * @param params the <code>Parameters</code> to set in this card.
      */
     public abstract void setParameters(CardParameters params);
+
+    @Override
+    public String[] print(boolean... params) {
+        return card.print(params);
+    }
 }

@@ -20,18 +20,19 @@ import java.util.Arrays;
  * </ul>
  */
 public enum CharacterCards {
-    MOVE_TO_ISLAND(StudentGroupDecorator.class, EffectType.STUDENT_GROUP, 1, true, false),
-    MOVE_TO_DINING_ROOM(StudentGroupDecorator.class, EffectType.STUDENT_GROUP, 2, false, true),
-    POOL_SWAP(StudentGroupDecorator.class, EffectType.STUDENT_GROUP, 1, false, false),
-    INFLUENCE_ADD_TWO(AlterInfluenceDecorator.class, EffectType.ALTER_INFLUENCE, 2, true, false, false),
-    IGNORE_TOWERS(AlterInfluenceDecorator.class, EffectType.ALTER_INFLUENCE, 3, false, true, false),
-    IGNORE_COLOR(AlterInfluenceDecorator.class, EffectType.ALTER_INFLUENCE, 3, false, false, true),
-    EXCHANGE_STUDENTS(ExchangeStudentsDecorator.class, EffectType.EXCHANGE_STUDENTS, 1),
-    RETURN_TO_BAG(ReturnToBagDecorator.class, EffectType.RETURN_TO_BAG, 3);
+    MOVE_TO_ISLAND(StudentGroupDecorator.class, EffectType.STUDENT_GROUP, 1, new String[]{"MOVE TO", "ISLAND"}, true, false),
+    MOVE_TO_DINING_ROOM(StudentGroupDecorator.class, EffectType.STUDENT_GROUP, 2, new String[]{"MOVE TO", "DINING"}, false, true),
+    POOL_SWAP(StudentGroupDecorator.class, EffectType.STUDENT_GROUP, 1, new String[]{"POOL", "SWAP"}, false, false),
+    INFLUENCE_ADD_TWO(AlterInfluenceDecorator.class, EffectType.ALTER_INFLUENCE, 2, new String[]{"INFLUENCE", "ADD TWO"}, true, false, false),
+    IGNORE_TOWERS(AlterInfluenceDecorator.class, EffectType.ALTER_INFLUENCE, 3, new String[]{"IGNORE", "TOWERS"}, false, true, false),
+    IGNORE_COLOR(AlterInfluenceDecorator.class, EffectType.ALTER_INFLUENCE, 3, new String[]{"IGNORE", "COLOR"}, false, false, true),
+    EXCHANGE_STUDENTS(ExchangeStudentsDecorator.class, EffectType.EXCHANGE_STUDENTS, 1, new String[]{"EXCHANGE", "STUDENTS"}),
+    RETURN_TO_BAG(ReturnToBagDecorator.class, EffectType.RETURN_TO_BAG, 3, new String[]{"RETURN", "TO BAG"});
 
     private final Class cardClass;
     private final EffectType effectType;
     private final int cost;
+    private final String[] printableName;
     private final Object[] parameters;
 
     /**
@@ -43,10 +44,11 @@ public enum CharacterCards {
      * @param cost the cost to buy this Character card.
      * @param parameters the various parameters to instantiate this Character card.
      */
-    CharacterCards(Class cardClass, EffectType effectType, int cost, Object...parameters) {
+    CharacterCards(Class cardClass, EffectType effectType, int cost, String[] printableName, Object...parameters) {
         this.cardClass = cardClass;
         this.effectType = effectType;
         this.cost = cost;
+        this.printableName = printableName;
         this.parameters = parameters;
     }
 
@@ -68,5 +70,14 @@ public enum CharacterCards {
             e.printStackTrace();
             return null;
         }
+    }
+
+    /**
+     * Returns the printable name for this Character Card, formatted for the CLI.
+     *
+     * @return the printable name.
+     */
+    public String[] getPrintableName() {
+        return printableName.clone();
     }
 }

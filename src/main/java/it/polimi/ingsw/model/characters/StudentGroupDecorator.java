@@ -10,6 +10,9 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
+import it.polimi.ingsw.view.cli.AnsiCodes;
+
+import java.util.List;
 
 /**
  * Class to manage the behaviour of 3 <code>CharacterCard</code> which hold a <code>StudentGroup<code/>, and
@@ -164,5 +167,36 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
         playerID = jsonObject.get("playerID").getAsInt();
         isToIsland = jsonObject.get("isToIsland").getAsBoolean();
         isToDiningRoom = jsonObject.get("isToDiningRoom").getAsBoolean();
+    }
+
+    @Override
+    public String[] print(boolean... params) {
+        List<String> cardString = new java.util.ArrayList<>(List.of(super.print(params)));
+        StringBuilder cardBuilder = new StringBuilder();
+
+        cardString.remove(cardString.size() - 1);
+
+        // SNS SNS SNS SNS SNS
+        StringBuilder studentsString = new StringBuilder(students.print(false));
+        int trueLen = 0;
+        for(Color color : Color.values()) {
+            int index = studentsString.indexOf(AnsiCodes.getBackgroundColor(color));
+            if(index != -1) {
+                int lSpace = index + AnsiCodes.getBackgroundColor(color).length();
+                studentsString.deleteCharAt(lSpace);
+                studentsString.deleteCharAt(lSpace + 1);
+                trueLen += 2;
+            }
+        }
+
+        cardBuilder.append("│").append(studentsString).append(" ".repeat(10 - trueLen)).append("│");
+        cardString.add(cardBuilder.toString());
+        cardBuilder.setLength(0);
+
+        cardBuilder.append("└───────────┘");
+        cardString.add(cardBuilder.toString());
+        cardBuilder.setLength(0);
+
+        return cardString.toArray(new String[0]);
     }
 }

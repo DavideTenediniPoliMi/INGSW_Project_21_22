@@ -1,14 +1,20 @@
 package it.polimi.ingsw.model.characters;
 
+import it.polimi.ingsw.model.enumerations.CharacterCards;
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
+import it.polimi.ingsw.utils.Printable;
 import it.polimi.ingsw.utils.Serializable;
+import it.polimi.ingsw.view.cli.AnsiCodes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Abstract class representing a generic Character Card.
  */
-public abstract class CharacterCard implements Serializable {
+public abstract class CharacterCard implements Serializable, Printable<String[]> {
     protected String name;
     protected int cost;
     protected boolean active;
@@ -103,4 +109,37 @@ public abstract class CharacterCard implements Serializable {
      * @return <code>ResponseParameters</code> for this <code>CharacterCard</code>.
      */
     public abstract ResponseParameters getResponseParameters();
+
+    @Override
+    public String[] print(boolean... params) {
+        StringBuilder cardBuilder = new StringBuilder();
+        List<String> cardString = new ArrayList<>();
+
+        cardBuilder.append("┌───────────┐");
+        cardString.add(cardBuilder.toString());
+        cardBuilder.setLength(0);
+
+        cardBuilder.append("│ ").append(active ? AnsiCodes.GREEN_BACKGROUND_BRIGHT : AnsiCodes.RED_BACKGROUND_BRIGHT)
+                    .append(" A ").append(AnsiCodes.RESET)
+                    .append(" ".repeat(4))
+                    .append(cost).append(AnsiCodes.COIN)
+                    .append(" │");
+        cardString.add(cardBuilder.toString());
+        cardBuilder.setLength(0);
+
+        String[] printableName = CharacterCards.valueOf(name).getPrintableName();
+        cardBuilder.append("│ ").append(printableName[0]).append(" ".repeat(9 - printableName[0].length())).append(" │");
+        cardString.add(cardBuilder.toString());
+        cardBuilder.setLength(0);
+
+        cardBuilder.append("│ ").append(printableName[1]).append(" ".repeat(9 - printableName[1].length())).append(" │");
+        cardString.add(cardBuilder.toString());
+        cardBuilder.setLength(0);
+
+        cardBuilder.append("└───────────┘");
+        cardString.add(cardBuilder.toString());
+        cardBuilder.setLength(0);
+
+        return cardString.toArray(new String[0]);
+    }
 }
