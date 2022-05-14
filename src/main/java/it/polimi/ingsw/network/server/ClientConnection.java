@@ -2,11 +2,10 @@ package it.polimi.ingsw.network.server;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import it.polimi.ingsw.controller.GameController;
-import it.polimi.ingsw.controller.LobbyController;
 import it.polimi.ingsw.exceptions.lobby.PlayerAlreadyConnectedException;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.GameStatus;
+import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.observer.Observer;
 import it.polimi.ingsw.view.VirtualView;
 
@@ -14,34 +13,15 @@ import java.io.*;
 import java.net.Socket;
 import java.util.concurrent.*;
 
-public class ClientConnection implements Observer<String>, Runnable{
-    private final Socket serverSocket;
+public class ClientConnection extends Connection implements Observer<String> {
     private final Server server;
     private VirtualView virtualView;
-    private final DataOutputStream out;
-    private final DataInputStream in;
-    private ScheduledFuture pingTask;
-    private final ExecutorService executor = Executors.newFixedThreadPool(16);
-    private boolean connected, bound;
-
+    private boolean bound;
 
     public ClientConnection(Socket socket, Server server) throws IOException {
-        this.serverSocket = socket;
+        super(socket);
         this.server = server;
 
-        out = new DataOutputStream(socket.getOutputStream());
-        in = new DataInputStream(socket.getInputStream());
-
-
-        // PING
-        ScheduledThreadPoolExecutor executor = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(1);
-        executor.setRemoveOnCancelPolicy(true);
-
-        pingTask = executor.scheduleAtFixedRate(
-                () -> send(""),
-                60, 5, TimeUnit.SECONDS);
-
-        connected = true;
         bound = false;
     }
 
@@ -63,43 +43,6 @@ public class ClientConnection implements Observer<String>, Runnable{
     @Override
     public void update(String message) {
         send(message);
-    }
-
-    public synchronized void send(String message) {
-        System.out.println("ClientConnection: sending message of size " + message.length() + ":\n" + message);
-        try {
-            out.writeInt(message.length());
-
-            if(!message.equals("")) {
-                out.writeChars(message);
-            }
-
-            out.flush();
-        } catch(IOException e) {
-            disconnect();
-        }
-    }
-
-    private String readMessage() {
-        String finalMessage = "";
-        try {
-            int length = in.readInt();
-
-            if (length != -1) {
-                System.out.println("received message of length " + length);
-
-                StringBuilder message = new StringBuilder();
-                for (int i = 0; i < length; i++) {
-                    message.append(in.readChar());
-                }
-                System.out.println(message);
-
-                finalMessage = message.toString();
-            }
-        } catch (IOException e){
-            disconnect();
-        }
-        return finalMessage;
     }
 
     private void waitForHandshake() {
@@ -131,15 +74,13 @@ public class ClientConnection implements Observer<String>, Runnable{
         }
     }
 
-    private void disconnect() {
-        System.out.println("ClientConnection: client disconnected, stopping ping");
-        pingTask.cancel(false);
-        connected = false;
+    @Override
+    public void disconnect() {
+        super.disconnect();
         virtualView.disconnect();
 
         if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.LOBBY)) {
             server.removeVV(virtualView);
         }
     }
-
 }

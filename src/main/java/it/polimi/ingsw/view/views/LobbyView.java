@@ -8,9 +8,10 @@ import it.polimi.ingsw.view.cli.AnsiCodes;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
-public class LobbyView implements View {
+public class LobbyView extends View {
     MatchInfo matchInfo;
     Lobby lobby;
+
     public LobbyView() {
         matchInfo = MatchInfo.getInstance();
         lobby = Lobby.getLobby();
@@ -68,5 +69,15 @@ public class LobbyView implements View {
 
     private String printChoosingStatus() {
         return AnsiCodes.BLACK_TEXT + "choosing..." + AnsiCodes.RESET;
+    }
+
+    @Override
+    public String printCLIPrompt() {
+        return null;
+    }
+
+    @Override
+    public String manageCLIInput(String input) {
+        return null;
     }
 }
