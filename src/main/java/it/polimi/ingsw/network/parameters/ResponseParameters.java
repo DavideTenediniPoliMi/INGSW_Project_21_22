@@ -31,6 +31,7 @@ public class ResponseParameters implements Serializable {
     private boolean sendCards;
     private boolean sendMatchInfo;
     private List<Player> players;
+    private String error;
 
     /**
      * Gets the list of schools.
@@ -263,6 +264,26 @@ public class ResponseParameters implements Serializable {
         return this;
     }
 
+    /**
+     * Gets the error message of this <code>ResponseParameters</code>.
+     *
+     * @return the error message.
+     */
+    public String getError() {
+        return error;
+    }
+
+    /**
+     * Sets the specified error message and returns this instance.
+     *
+     * @param error the error message.
+     * @return this <code>ResponseParameters</code>.
+     */
+    public ResponseParameters setError(String error) {
+        this.error = error;
+        return this;
+    }
+
     @Override
     public JsonObject serialize() {
         JsonObject jsonObject = new JsonObject();
@@ -325,6 +346,9 @@ public class ResponseParameters implements Serializable {
 
         if(sendMatchInfo)
             jsonObject.add("matchInfo", MatchInfo.getInstance().serialize());
+
+        if(error != null && error.length() > 0)
+            jsonObject.add("error", new JsonPrimitive(error));
 
         return jsonObject;
     }
@@ -445,5 +469,8 @@ public class ResponseParameters implements Serializable {
                 modelPlayer.deserialize(jsonObject.getAsJsonObject("player"));
             }
         }
+
+        if(jsonObject.has("error"))
+            error = jsonObject.getAsJsonObject("error").getAsString();
     }
 }
