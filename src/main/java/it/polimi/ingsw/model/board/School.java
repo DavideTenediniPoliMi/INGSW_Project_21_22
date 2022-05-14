@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.Color;
@@ -155,9 +156,11 @@ public class School implements Serializable, Printable<String[]> {
     public String[] print(boolean...params) {
         StringBuilder schoolBuilder = new StringBuilder();
         List<String> schoolString = new ArrayList<>();
-        StringBuilder ownerName = new StringBuilder(owner.getName().substring(0, Math.min(owner.getName().length(), 15)));
+        int nameTrim = (MatchInfo.getInstance().isExpertMode() ? 13 : 15);
 
-        ownerName.append(" ".repeat(15 - ownerName.length()));
+        StringBuilder ownerName = new StringBuilder(owner.getName().substring(0, Math.min(owner.getName().length(), nameTrim)));
+
+        ownerName.append(" ".repeat(nameTrim - ownerName.length()));
 
         Card card = owner.getSelectedCard();
 
@@ -166,7 +169,12 @@ public class School implements Serializable, Printable<String[]> {
         schoolBuilder.setLength(0);
 
         //TEAM section
-        schoolBuilder.append("│ ").append(owner.getTeamColor().print()).append(" ").append(ownerName).append(" │");
+        schoolBuilder.append("│ ").append(owner.getTeamColor().print()).append(" ").append(ownerName);
+
+        if(MatchInfo.getInstance().isExpertMode())
+            schoolBuilder.append(owner.getNumCoins()).append(AnsiCodes.COIN);
+
+        schoolBuilder.append(" │");
         schoolString.add(schoolBuilder.toString());
         schoolBuilder.setLength(0);
 

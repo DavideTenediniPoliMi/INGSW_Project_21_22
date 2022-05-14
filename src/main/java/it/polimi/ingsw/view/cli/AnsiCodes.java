@@ -26,7 +26,8 @@ public enum AnsiCodes {
     CLS("\u001b[2J"),
     HOME("\u001b[H"),
     RESET("\033[0m"),  // Text Reset
-    REVERSED("\u001b[7m");
+    REVERSED("\u001b[7m"),
+    COIN("\u25ce");
 
     final String code;
 
