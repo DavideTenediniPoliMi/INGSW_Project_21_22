@@ -2,12 +2,14 @@ package it.polimi.ingsw.network.parameters;
 
 import com.google.gson.*;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CharacterCards;
+import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.utils.Serializable;
 
@@ -404,26 +406,6 @@ public class ResponseParameters implements Serializable {
             game.getBoard().setProfessorOwners(professors);
         }
 
-        if (jsonObject.has("players")) {
-            players = new ArrayList<>();
-            JsonArray jsonArray = jsonObject.get("players").getAsJsonArray();
-            for (JsonElement je : jsonArray) {
-                Player p = new Player(0, "");
-                p.deserialize(je.getAsJsonObject());
-                players.add(p);
-            }
-            game.setPlayers(players);
-        }
-
-        if (jsonObject.has("player")) {
-            player.deserialize(jsonObject.get("player").getAsJsonObject());
-            Player modelPlayer = game.getPlayerByID(player.getID());
-
-            if(modelPlayer != null) {
-                modelPlayer.deserialize(jsonObject.getAsJsonObject("player"));
-            }
-        }
-
         if(jsonObject.has("coinsLeft")) {
             coinsLeft = jsonObject.get("coinsLeft").getAsInt();
             game.getBoard().setNumCoinsLeft(coinsLeft);
@@ -434,5 +416,34 @@ public class ResponseParameters implements Serializable {
 
         if(jsonObject.has("matchInfo"))
             MatchInfo.getInstance().deserialize(jsonObject.getAsJsonObject("matchInfo"));
+
+        if (jsonObject.has("players")) {
+            players = new ArrayList<>();
+            JsonArray jsonArray = jsonObject.get("players").getAsJsonArray();
+            for (JsonElement je : jsonArray) {
+                Player p = new Player(0, "");
+                p.deserialize(je.getAsJsonObject());
+                players.add(p);
+            }
+            if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.IN_GAME)) {
+                game.setPlayers(players);
+            } else {
+                Lobby.getLobby().setPlayers(players);
+            }
+        }
+
+        if (jsonObject.has("player")) {
+            player.deserialize(jsonObject.get("player").getAsJsonObject());
+            Player modelPlayer;
+            if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.IN_GAME)) {
+                modelPlayer = game.getPlayerByID(player.getID());
+            } else {
+                modelPlayer = Lobby.getLobby().getPlayerByID(player.getID());
+            }
+
+            if(modelPlayer != null) {
+                modelPlayer.deserialize(jsonObject.getAsJsonObject("player"));
+            }
+        }
     }
 }
