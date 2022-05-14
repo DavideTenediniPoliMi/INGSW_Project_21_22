@@ -201,7 +201,7 @@ public class Player implements Serializable {
 
         JsonObject jo =  gson.toJsonTree(this).getAsJsonObject();
 
-        if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.LOBBY)) {
+        if(GameStatus.LOBBY.equals(MatchInfo.getInstance().getGameStatus())) {
             jo.add("ready", new JsonPrimitive(Lobby.getLobby().isReady(ID)));
         }
 
@@ -230,7 +230,7 @@ public class Player implements Serializable {
         connected = jsonObject.get("connected").getAsBoolean();
         numCoins = jsonObject.get("numCoins").getAsInt();
 
-        if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.LOBBY) & jsonObject.has("ready")) {
+        if(GameStatus.LOBBY.equals(MatchInfo.getInstance().getGameStatus()) & jsonObject.has("ready")) {
             Lobby.getLobby().setReadyStatus(ID, jsonObject.get("ready").getAsBoolean());
         }
     }

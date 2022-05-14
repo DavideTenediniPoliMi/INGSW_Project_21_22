@@ -449,7 +449,7 @@ public class ResponseParameters implements Serializable {
                 p.deserialize(je.getAsJsonObject());
                 players.add(p);
             }
-            if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.IN_GAME)) {
+            if(GameStatus.IN_GAME.equals(MatchInfo.getInstance().getGameStatus())) {
                 game.setPlayers(players);
             } else {
                 Lobby.getLobby().setPlayers(players);
@@ -459,7 +459,7 @@ public class ResponseParameters implements Serializable {
         if (jsonObject.has("player")) {
             player.deserialize(jsonObject.get("player").getAsJsonObject());
             Player modelPlayer;
-            if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.IN_GAME)) {
+            if(GameStatus.IN_GAME.equals(MatchInfo.getInstance().getGameStatus())) {
                 modelPlayer = game.getPlayerByID(player.getID());
             } else {
                 modelPlayer = Lobby.getLobby().getPlayerByID(player.getID());
