@@ -1,15 +1,15 @@
-package it.polimi.ingsw.view.views;
+package it.polimi.ingsw.view.viewStates;
 
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.view.cli.AnsiCodes;
 
-public class LobbyView extends View {
+public class LobbyViewState extends ViewState {
     MatchInfo matchInfo;
     Lobby lobby;
 
-    public LobbyView() {
+    public LobbyViewState() {
         matchInfo = MatchInfo.getInstance();
         lobby = Lobby.getLobby();
     }

@@ -1,6 +1,6 @@
-package it.polimi.ingsw.view.views;
+package it.polimi.ingsw.view.viewStates;
 
-public class GameView extends View {
+public class GameViewState extends ViewState {
     @Override
     public String print(boolean... params) {
         return null;

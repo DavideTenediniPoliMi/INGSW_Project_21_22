@@ -1,9 +1,9 @@
-package it.polimi.ingsw.view.views;
+package it.polimi.ingsw.view.viewStates;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoLobbyView extends LobbyView {
+public class NoLobbyViewState extends LobbyViewState {
     private int lobbySize;
     private boolean expertMode;
     private boolean creating;

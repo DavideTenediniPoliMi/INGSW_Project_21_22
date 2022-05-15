@@ -26,6 +26,15 @@ public class Observable<T> {
     }
 
     /**
+     * Return all the <Code>Observer<Code/> attached to this <Code>Object<Code/>
+     *
+     * @return the list of observers
+     */
+    public List<Observer<T>> getObservers() {
+        return new ArrayList<>(observers);
+    }
+
+    /**
      * Removes the specified <code>Observer</code> from the ones attached to this class.
      *
      * @param observer the <code>Observer</code> to remove.

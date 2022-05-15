@@ -7,12 +7,13 @@ import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.observer.Observer;
+import it.polimi.ingsw.network.parameters.ResponseParameters;
 import it.polimi.ingsw.view.VirtualView;
 
 import java.io.*;
 import java.net.Socket;
 
-public class ClientConnection extends Connection implements Observer<String> {
+public class ClientConnection extends Connection {
     private final Server server;
     private VirtualView virtualView;
     private boolean bound;
@@ -37,11 +38,6 @@ public class ClientConnection extends Connection implements Observer<String> {
         }
 
         System.out.println("Disconnected");
-    }
-
-    @Override
-    public void update(String message) {
-        sendMessage(message);
     }
 
     private void waitForHandshake() {
@@ -70,7 +66,7 @@ public class ClientConnection extends Connection implements Observer<String> {
         try {
             virtualView = server.getVVFor(jsonObject.get("name").getAsString());
             virtualView.addObserver(this);
-            sendMessage(MatchInfo.getInstance().serialize().toString());
+            sendMessage(new ResponseParameters().setSendMatchInfo(true).serialize().toString());
             bound = true;
         } catch (PlayerAlreadyConnectedException exc) {
             sendMessage(exc.toString());

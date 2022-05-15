@@ -1,12 +1,14 @@
 package it.polimi.ingsw.network;
 
+import it.polimi.ingsw.network.observer.Observer;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.*;
 
-public abstract class Connection implements Runnable{
+public abstract class Connection implements Runnable, Observer<String> {
     private final Socket socket;
     private final DataOutputStream out;
     private final DataInputStream in;
@@ -66,6 +68,11 @@ public abstract class Connection implements Runnable{
         }
 
         return "";
+    }
+
+    @Override
+    public void update(String message) {
+        sendMessage(message);
     }
 
     public void disconnect() {
