@@ -16,6 +16,6 @@ public class ServerConnection extends Connection {
 
     @Override
     public void run() {
-
+        System.out.println("TEST");
     }
 }

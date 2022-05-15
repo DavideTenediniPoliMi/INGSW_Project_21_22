@@ -11,7 +11,6 @@ import it.polimi.ingsw.view.VirtualView;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.concurrent.*;
 
 public class ClientConnection extends Connection implements Observer<String> {
     private final Server server;
@@ -20,20 +19,20 @@ public class ClientConnection extends Connection implements Observer<String> {
 
     public ClientConnection(Socket socket, Server server) throws IOException {
         super(socket);
-        this.server = server;
 
-        bound = false;
+        this.server = server;
     }
 
     @Override
     public void run() {
-        System.out.println("ClientConnection: starting and waiting for input");
-
         System.out.println("Waiting for handshake");
         waitForHandshake();
 
         while(connected) {
-            String received = readMessage();
+            String received = receiveMessage();
+
+            if(received.equals("")) continue;
+
             executor.submit(() -> virtualView.handleRequest(received));
         }
 
@@ -42,12 +41,16 @@ public class ClientConnection extends Connection implements Observer<String> {
 
     @Override
     public void update(String message) {
-        send(message);
+        sendMessage(message);
     }
 
     private void waitForHandshake() {
         while(connected && !bound) {
-            handleHandshake(readMessage());
+            String received = receiveMessage();
+
+            if(received.equals("")) continue;
+
+            handleHandshake(received);
         }
     }
 
@@ -55,22 +58,22 @@ public class ClientConnection extends Connection implements Observer<String> {
         JsonObject jsonObject = JsonParser.parseString(message).getAsJsonObject();
 
         if(!jsonObject.has("commandType") || !jsonObject.has("name")) {
-            send("Invalid params");
+            sendMessage("Invalid params");
             return;
         }
 
         if (!jsonObject.get("commandType").getAsString().equals("HANDSHAKE")) {
-            send("Wrong command. Handshake expected");
+            sendMessage("Wrong command. Handshake expected");
             return;
         }
 
         try {
             virtualView = server.getVVFor(jsonObject.get("name").getAsString());
             virtualView.addObserver(this);
-            send(MatchInfo.getInstance().serialize().toString());
+            sendMessage(MatchInfo.getInstance().serialize().toString());
             bound = true;
         } catch (PlayerAlreadyConnectedException exc) {
-            send(exc.toString());
+            sendMessage(exc.toString());
         }
     }
 

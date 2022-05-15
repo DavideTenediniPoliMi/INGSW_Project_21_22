@@ -3,10 +3,7 @@ package it.polimi.ingsw.view.views;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.view.View;
 import it.polimi.ingsw.view.cli.AnsiCodes;
-import org.fusesource.jansi.Ansi;
-import org.fusesource.jansi.AnsiConsole;
 
 public class LobbyView extends View {
     MatchInfo matchInfo;

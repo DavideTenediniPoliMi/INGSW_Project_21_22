@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.view.View;
+import it.polimi.ingsw.view.views.View;
 import it.polimi.ingsw.view.views.LobbyView;
 import org.fusesource.jansi.AnsiConsole;
 

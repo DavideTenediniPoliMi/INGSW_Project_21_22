@@ -25,13 +25,13 @@ public abstract class Connection implements Runnable{
         executor.setRemoveOnCancelPolicy(true);
 
         pingTask = executor.scheduleAtFixedRate(
-                () -> send(""),
+                () -> sendMessage(""),
                 60, 5, TimeUnit.SECONDS);
 
         connected = true;
     }
 
-    public synchronized void send(String message) {
+    public synchronized void sendMessage(String message) {
         System.out.println("Sending message of size " + message.length() + ":\n" + message);
         try {
             out.writeInt(message.length());
@@ -46,8 +46,7 @@ public abstract class Connection implements Runnable{
         }
     }
 
-    public String readMessage() {
-        String finalMessage = "";
+    public String receiveMessage() {
         try {
             int length = in.readInt();
 
@@ -60,17 +59,19 @@ public abstract class Connection implements Runnable{
                 }
                 System.out.println(message);
 
-                finalMessage = message.toString();
+                return message.toString();
             }
         } catch (IOException e){
             disconnect();
         }
-        return finalMessage;
+
+        return "";
     }
 
     public void disconnect() {
         System.out.println("Connection lost, stopping ping");
         pingTask.cancel(false);
+
         connected = false;
     }
 }
