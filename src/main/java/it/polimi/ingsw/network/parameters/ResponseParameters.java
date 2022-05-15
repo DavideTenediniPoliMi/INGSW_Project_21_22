@@ -30,6 +30,7 @@ public class ResponseParameters implements Serializable {
     private int coinsLeft = -1;
     private boolean sendCards;
     private boolean sendMatchInfo;
+    private boolean sendGame;
     private List<Player> players;
     private String error;
 
@@ -245,6 +246,26 @@ public class ResponseParameters implements Serializable {
     }
 
     /**
+     * Gets the flag specifying if this message should send information about the Game.
+     *
+     * @return whether this <code>ResponseParameters</code> should send information about the Game.
+     */
+    public boolean shouldSetGame() {
+        return sendGame;
+    }
+
+    /**
+     * Sets whether this message should send information about this Game and returns this instance.
+     *
+     * @param sendGame the flag specifying if the VirtualView should send info about this Game.
+     * @return this <code>ResponseParameters</code>.
+     */
+    public ResponseParameters setSendGame(boolean sendGame) {
+        this.sendGame = sendGame;
+        return this;
+    }
+
+    /**
      * Gets the list of players of this <code>ResponseParameters</code>.
      *
      * @return the list of players.
@@ -347,6 +368,9 @@ public class ResponseParameters implements Serializable {
         if(sendMatchInfo)
             jsonObject.add("matchInfo", MatchInfo.getInstance().serialize());
 
+        if(sendGame)
+            jsonObject.add("game", Game.getInstance().serialize());
+
         if(error != null && error.length() > 0)
             jsonObject.add("error", new JsonPrimitive(error));
 
@@ -440,6 +464,9 @@ public class ResponseParameters implements Serializable {
 
         if(jsonObject.has("matchInfo"))
             MatchInfo.getInstance().deserialize(jsonObject.getAsJsonObject("matchInfo"));
+
+        if(jsonObject.has("game"))
+            Game.getInstance().deserialize(jsonObject.getAsJsonObject("game"));
 
         if (jsonObject.has("players")) {
             players = new ArrayList<>();

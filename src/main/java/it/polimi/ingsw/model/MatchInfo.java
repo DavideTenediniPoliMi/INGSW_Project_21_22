@@ -307,7 +307,10 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
      */
     public synchronized void setGameStatus(GameStatus gameStatus) {
         this.gameStatus = gameStatus;
-        notifyMatchInfo();
+        if(gameStatus == GameStatus.IN_GAME)
+            notify(new ResponseParameters().setSendGame(true).setSendMatchInfo(true));
+        else
+            notifyMatchInfo();
     }
 
     /**
