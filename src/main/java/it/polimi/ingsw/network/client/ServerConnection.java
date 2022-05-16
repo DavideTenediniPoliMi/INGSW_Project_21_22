@@ -141,9 +141,9 @@ public class ServerConnection extends Connection {
             executor.submit( () -> {
                JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
                synchronized (cli) {
-                   if(MatchInfo.getInstance().getCurrentPlayerID() == cli.getPlayerID()) {
-                       boolean reqInteraction = cli.nextState(jsonObject);
+                   boolean reqInteraction = cli.nextState(jsonObject);
 
+                   if(MatchInfo.getInstance().getCurrentPlayerID() == cli.getPlayerID()) {
                        new ResponseParameters().deserialize(jsonObject);
 
                        if(reqInteraction) {
