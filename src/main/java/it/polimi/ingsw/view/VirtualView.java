@@ -70,7 +70,8 @@ public class VirtualView extends Observable<String> implements Observer<Response
                             return;
                         } catch(DuplicateIDException e) {
                             System.out.println("Trying again!");
-                        } catch(EriantysException e) {
+                        } catch(EriantysException | EriantysRuntimeException e) {
+                            update(new ResponseParameters().setError(e.getMessage()));
                             return;
                         }
                     } while (true);

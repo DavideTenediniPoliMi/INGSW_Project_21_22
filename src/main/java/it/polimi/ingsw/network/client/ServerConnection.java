@@ -1,16 +1,17 @@
 package it.polimi.ingsw.network.client;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
 import it.polimi.ingsw.view.cli.CLI;
-import it.polimi.ingsw.view.viewStates.GameViewState;
-import it.polimi.ingsw.view.viewStates.HandshakeViewState;
-import it.polimi.ingsw.view.viewStates.ViewState;
+import it.polimi.ingsw.view.viewStates.*;
 import org.fusesource.jansi.AnsiConsole;
 
 import java.io.IOException;
@@ -35,10 +36,8 @@ public class ServerConnection extends Connection {
     @Override
     public void run() {
         // THIS FIRST INTERACTION IS THE HANDSHAKE (name)
-        boolean valid = false;
-
-        while(!valid) {
-            cli.handleInteraction();
+        while(true) {
+            cli.handleHandshake();
 
             String response = receiveMessage();
 
@@ -46,7 +45,7 @@ public class ServerConnection extends Connection {
 
             if (!jo.has("error")) {
                 new ResponseParameters().deserialize(jo);
-                valid = true;
+                break;
             }
 
             AnsiConsole.sysOut().println(jo.get("error"));
@@ -59,8 +58,47 @@ public class ServerConnection extends Connection {
      * LOOP CHE CONTINUA A LEGGERE E FA LA DESERIALIZE SU UN THREAD SEPARATO
      * ALTRO THREAD CONTINUA A FARE IL LOOP DELLA VIEW FINO A CHE NON SEI READY,
      * A QUEL PUNTO STAMPI OGNI NOTIFY
+     *
+     * Check se la lobby esiste già o no, quando joini checka finchè non ti arriva un messaggio con il tuo nome tra i player
      */
     private void lobbySequence() {
+        if(MatchInfo.getInstance().getSelectedNumPlayer() == 0) {
+            //Begin lobby creation sequence
+            cli.setViewState(new NoLobbyViewState(cli.getViewState()));
+            while(true) {
+                String received = receiveMessage();
+                JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
+
+                if(!jsonObject.has("error")) {
+                    break;
+                }
+            }
+        }
+
+        //Force connection to lobby
+        RequestParameters requestParameters = new RequestParameters()
+                .setCommandType(CommandType.JOIN);
+        update(requestParameters.serialize().toString());
+        boolean joined = false;
+        while(!joined) {
+            String received = receiveMessage();
+            JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
+            if(jsonObject.has("players")) {
+                JsonArray players = jsonObject.get("players").getAsJsonArray();
+                for(JsonElement player : players) {
+                    if(player.getAsJsonObject().get("name").getAsString().equalsIgnoreCase(cli.getName())) {
+                        joined = true;
+                        cli.setPlayerID(player.getAsJsonObject().get("id").getAsInt());
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Begin lobby loop
+        cli.setViewState(new LobbyViewState(cli.getViewState()));
+        cli.handleInteraction();
+
         while(!inGame) {
             String response = receiveMessage();
 
