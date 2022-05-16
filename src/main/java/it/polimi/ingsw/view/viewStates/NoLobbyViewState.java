@@ -1,7 +1,5 @@
 package it.polimi.ingsw.view.viewStates;
 
-import it.polimi.ingsw.model.Lobby;
-import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
 
@@ -25,32 +23,37 @@ public class NoLobbyViewState extends LobbyViewState {
     }
 
     @Override
-    public String printCLIPrompt() {
+    public void printCLIPrompt() {
         if(!creating) {
-            return "Press ENTER to start creating a lobby!";
+            appendBuffer("Press ENTER to start creating a lobby!");
         }
 
         if(lobbySize == 0) {
-            return "What do you want the lobby size to be ? [2,3,4]";
+            appendBuffer("What do you want the lobby size to be ? [2,3,4]");
         }
 
-        return "Do you want the game to be in expert mode? [Y/N]";
+        appendBuffer("Do you want the game to be in expert mode? [Y/N]");
     }
 
     @Override
     public String manageCLIInput(String input) {
+        String error;
+
         if(!creating) {
             creating = true;
             if(!input.equals("")) {
-                return "I said ENTER, but whatever let's keep going!";
+                error = "I said ENTER, but whatever let's keep going!";
+                appendBuffer(error);
+                return error;
             }
             return "";
         }
 
         if(lobbySize == 0) {
-            String error = checkInteger(input, validNumbers);
+            error = checkInteger(input, validNumbers);
 
             if(!error.equals("")) {
+                appendBuffer(error);
                 return error;
             }
 

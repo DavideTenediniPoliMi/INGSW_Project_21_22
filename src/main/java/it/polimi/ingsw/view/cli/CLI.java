@@ -123,7 +123,7 @@ public class CLI {
 
      public void handleInteraction() {
           do {
-               AnsiConsole.sysOut().println(viewState.print() + viewState.printCLIPrompt());
+               AnsiConsole.sysOut().println(viewState.print() + viewState.getBuffer());
 
                String error = viewState.manageCLIInput(scanner.nextLine());
 

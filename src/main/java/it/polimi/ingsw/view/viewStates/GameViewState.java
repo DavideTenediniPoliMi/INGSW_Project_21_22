@@ -11,8 +11,7 @@ public class GameViewState extends ViewState {
     }
 
     @Override
-    public String printCLIPrompt() {
-        return null;
+    public void printCLIPrompt() {
     }
 
     @Override

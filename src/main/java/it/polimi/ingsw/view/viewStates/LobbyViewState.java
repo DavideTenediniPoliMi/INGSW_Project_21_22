@@ -71,8 +71,7 @@ public class LobbyViewState extends ViewState {
     }
 
     @Override
-    public String printCLIPrompt() {
-        return null;
+    public void printCLIPrompt() {
     }
 
     @Override

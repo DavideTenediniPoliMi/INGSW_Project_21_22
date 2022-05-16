@@ -2,7 +2,6 @@ package it.polimi.ingsw.view.viewStates;
 
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
-import org.fusesource.jansi.AnsiConsole;
 
 public class HandshakeViewState extends ViewState {
     public HandshakeViewState(ViewState oldViewState) {
@@ -10,12 +9,14 @@ public class HandshakeViewState extends ViewState {
     }
 
     @Override
-    public String printCLIPrompt() {
-        return "Insert your name :";
+    public void printCLIPrompt() {
+        appendBuffer("Insert your name :");
     }
 
     @Override
     public String manageCLIInput(String input) {
+        appendBuffer(input);
+
         RequestParameters handshake = new RequestParameters()
                 .setCommandType(CommandType.HANDSHAKE)
                 .setName(input);
