@@ -151,7 +151,7 @@ public class ServerConnection extends Connection {
                            cli.handleInteraction(); //Handle interaction in new view
                        }
                    } else {
-                       //CLI.updateCLI
+                       cli.displayState();
                    }
                }
             });

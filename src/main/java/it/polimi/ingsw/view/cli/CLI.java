@@ -145,6 +145,7 @@ public class CLI {
 
      public void handleInteraction() {
           do {
+               viewState.printCLIPrompt();
                AnsiConsole.sysOut().println(viewState.print() + viewState.getBuffer());
 
                String error = viewState.manageCLIInput(scanner.nextLine());
@@ -152,6 +153,11 @@ public class CLI {
                if (error != null)
                     AnsiConsole.sysOut().println(error);
           } while(!viewState.isInteractionComplete());
+     }
+
+     public void displayState() {
+          viewState.printCLIPrompt();
+          AnsiConsole.sysOut().println(viewState.print() + viewState.getBuffer());
      }
 
      public void handleHandshake() {
