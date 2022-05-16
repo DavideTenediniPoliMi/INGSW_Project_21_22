@@ -16,7 +16,6 @@ import org.fusesource.jansi.AnsiConsole;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class ServerConnection extends Connection {
     private final Client client;
