@@ -7,9 +7,7 @@ import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.network.client.ServerConnection;
-import it.polimi.ingsw.view.viewStates.ExpertViewState;
-import it.polimi.ingsw.view.viewStates.StudentViewState;
-import it.polimi.ingsw.view.viewStates.ViewState;
+import it.polimi.ingsw.view.viewStates.*;
 import org.fusesource.jansi.AnsiConsole;
 
 import java.io.IOException;
@@ -38,25 +36,75 @@ public class CLI {
 
           jo = jo.get("matchInfo").getAsJsonObject();
 
+          if(!isPlayerTurn(jo))
+               return true;
+
           switch(matchInfo.getStateType()) {
                case PLANNING:
-                    if(!checkIfSameState(jo, TurnState.PLANNING)) {
-                         setViewState(new ExpertViewState(new StudentViewState(viewState)));
+                    if(!areSameState(jo, TurnState.PLANNING)) {
+                         resetTurnState(jo);
+                         return true;
                     }
 
+                    return false;
+               case STUDENTS:
+                    if(!areSameState(jo, TurnState.STUDENTS)) {
+                         resetTurnState(jo);
+                         return true;
+                    }
+               case MOTHER_NATURE:
+                    if(!areSameState(jo, TurnState.MOTHER_NATURE)) {
+                         resetTurnState(jo);
+                         return true;
+                    }
+               case CLOUD:
+                    if(!areSameState(jo, TurnState.CLOUD)) {
+                         resetTurnState(jo);
+                         return true;
+                    }
+
+                    return true;
+               default:
+                    return false;
+          }
+     }
+
+     public boolean isPlayerTurn(JsonObject jo) {
+          if(jo.get("playOrder").getAsJsonArray().size() == 0 ||
+                  jo.get("playOrder").getAsJsonArray().get(0).getAsInt() != playerID) {
+               setViewState(new GameViewState(viewState));
+               return false;
+          }
+          return true;
+     }
+
+     private void resetTurnState(JsonObject jo) {
+          switch(getTurnState(jo)) {
+               case PLANNING:
+                    setViewState(new PlanningViewState(viewState));
                     break;
                case STUDENTS:
+                    setViewState(new ExpertViewState(new StudentViewState(viewState)));
+                    break;
                case MOTHER_NATURE:
+                    setViewState(new ExpertViewState(new MNViewState(viewState)));
+                    break;
                case CLOUD:
-                    return true;
+                    setViewState(new CloudViewState(viewState));
+                    break;
+               default:
+                    setViewState(new GameViewState(viewState));
           }
-
-          return false;
      }
 
-     private boolean checkIfSameState(JsonObject jo, TurnState state) {
-          return jo.get("stateType").getAsString().equals(state.toString());
+     private boolean areSameState(JsonObject jo, TurnState state) {
+          return getTurnState(jo).equals(state);
      }
+
+     private TurnState getTurnState(JsonObject jo) {
+          return TurnState.valueOf(jo.get("stateType").getAsString());
+     }
+
      public void handleInteraction() {
           do {
                AnsiConsole.sysOut().println(viewState.print() + viewState.printCLIPrompt());
