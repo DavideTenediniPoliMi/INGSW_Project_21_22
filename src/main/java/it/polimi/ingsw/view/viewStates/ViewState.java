@@ -20,7 +20,7 @@ public class ViewState extends Observable<String> implements Printable<String> {
         return buffer;
     }
 
-    protected void appendBuffer(String s) {
+    public void appendBuffer(String s) {
         buffer += "\n" + s;
     }
 

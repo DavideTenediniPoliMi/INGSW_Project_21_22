@@ -32,6 +32,12 @@ public class CLI {
      public boolean nextState(JsonObject jo) {
           MatchInfo matchInfo = MatchInfo.getInstance();
 
+          if(jo.has("error")) {
+               AnsiConsole.sysOut().println(jo.get("error").getAsString());
+               viewState.appendBuffer(jo.get("error").getAsString());
+               return true;
+          }
+
           if(!jo.has("matchInfo")) {
                return checkForCharacterCards(jo);
           }
@@ -134,6 +140,7 @@ public class CLI {
                     AnsiConsole.sysOut().println(error);
           } while(!viewState.isInteractionComplete());
      }
+
 
      public static Connection handleBinding(Client client) {
           do {
