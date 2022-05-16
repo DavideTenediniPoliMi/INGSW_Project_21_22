@@ -110,7 +110,7 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator {
      */
     @Override
     public ResponseParameters getResponseParameters() {
-        return null;
+        return new ResponseParameters();
     }
 
     @Override
