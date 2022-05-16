@@ -9,7 +9,9 @@ public class LobbyViewState extends ViewState {
     MatchInfo matchInfo;
     Lobby lobby;
 
-    public LobbyViewState() {
+    public LobbyViewState(ViewState oldViewState) {
+        super(oldViewState);
+
         matchInfo = MatchInfo.getInstance();
         lobby = Lobby.getLobby();
     }

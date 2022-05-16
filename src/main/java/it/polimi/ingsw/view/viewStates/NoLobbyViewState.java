@@ -1,5 +1,7 @@
 package it.polimi.ingsw.view.viewStates;
 
+import it.polimi.ingsw.model.Lobby;
+import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
 
@@ -7,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NoLobbyViewState extends LobbyViewState {
+    public NoLobbyViewState(ViewState oldViewState) {
+        super(oldViewState);
+    }
+
     private boolean creating;
     private int lobbySize;
     private boolean expertMode;

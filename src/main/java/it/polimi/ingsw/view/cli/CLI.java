@@ -3,9 +3,12 @@ package it.polimi.ingsw.view.cli;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.network.client.ServerConnection;
+import it.polimi.ingsw.view.viewStates.ExpertViewState;
+import it.polimi.ingsw.view.viewStates.StudentViewState;
 import it.polimi.ingsw.view.viewStates.ViewState;
 import org.fusesource.jansi.AnsiConsole;
 
@@ -15,6 +18,7 @@ import java.util.Scanner;
 
 public class CLI {
      private ViewState viewState;
+     private int playerID;
      private static final Scanner scanner = new Scanner(System.in);
 
      public CLI(ViewState viewState) {
@@ -29,8 +33,18 @@ public class CLI {
           MatchInfo matchInfo = MatchInfo.getInstance();
           Game game = Game.getInstance();
 
+          if(!jo.has("matchInfo"))
+               return false;
+
+          jo = jo.get("matchInfo").getAsJsonObject();
+
           switch(matchInfo.getStateType()) {
                case PLANNING:
+                    if(!checkIfSameState(jo, TurnState.PLANNING)) {
+                         setViewState(new ExpertViewState(new StudentViewState(viewState)));
+                    }
+
+                    break;
                case STUDENTS:
                case MOTHER_NATURE:
                case CLOUD:
@@ -40,6 +54,9 @@ public class CLI {
           return false;
      }
 
+     private boolean checkIfSameState(JsonObject jo, TurnState state) {
+          return jo.get("stateType").getAsString().equals(state.toString());
+     }
      public void handleInteraction() {
           do {
                AnsiConsole.sysOut().println(viewState.print() + viewState.printCLIPrompt());
