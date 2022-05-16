@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
+import it.polimi.ingsw.utils.Printable;
 import it.polimi.ingsw.utils.Serializable;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.Optional;
 /**
  * Class to hold data for every entity of a Game (Islands, Schools, Clouds, Professors).
  */
-public class Board implements Serializable {
+public class Board implements Serializable, Printable<List<String>> {
     private final int NUM_STARTING_ISLANDS = 12;
     private final int NUM_STARTING_COINS = 20;
 
@@ -438,5 +439,10 @@ public class Board implements Serializable {
         else
             professorOwners = new ProfessorTracker();
         numCoinsLeft = jsonObject.get("numCoinsLeft").getAsInt();
+    }
+
+    @Override
+    public List<String> print(boolean... params) {
+        return null;
     }
 }

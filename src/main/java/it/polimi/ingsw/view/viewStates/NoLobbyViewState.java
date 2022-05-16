@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.viewStates;
 
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
+import it.polimi.ingsw.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class NoLobbyViewState extends LobbyViewState {
         }
 
         if(lobbySize == 0) {
-            error = checkInteger(input, validNumbers);
+            error = StringUtils.checkInteger(input, validNumbers);
 
             if(!error.equals("")) {
                 appendBuffer(error);
@@ -80,15 +81,5 @@ public class NoLobbyViewState extends LobbyViewState {
         return "That was not a valid choice! Try again!";
     }
 
-    public String checkInteger(String input, List<Integer> validInputs) {
-        try {
-            int temp = Integer.parseInt(input);
-            if(!validInputs.contains(temp)) {
-                return "That is a number, but not a valid one! Try again!";
-            }
-            return "";
-        } catch(NumberFormatException e) {
-            return "That is not a number! Try again!";
-        }
-    }
+
 }

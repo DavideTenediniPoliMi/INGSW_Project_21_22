@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Abstract class corresponding to the Island entity
  */
-public abstract class Island implements Serializable, Printable<String[]> {
+public abstract class Island implements Serializable, Printable<List<String>> {
     private final StudentGroup students = new StudentGroup();
     private TowerColor teamColor;
     private boolean motherNature;
@@ -120,9 +120,9 @@ public abstract class Island implements Serializable, Printable<String[]> {
     }
 
     @Override
-    public String[] print(boolean... params) {
+    public List<String> print(boolean... params) {
         if(params.length < 4) {
-            return new String[]{};
+            return new ArrayList<>();
         }
         StringBuilder islandBuilder = new StringBuilder();
         List<String> islandString = new ArrayList<>();
@@ -227,6 +227,6 @@ public abstract class Island implements Serializable, Printable<String[]> {
         islandString.add(islandBuilder.toString());
         islandBuilder.setLength(0);
 
-        return islandString.toArray(new String[0]);
+        return islandString;
     }
 }

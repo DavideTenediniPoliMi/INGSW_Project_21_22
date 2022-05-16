@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Class representing the School entity in the game
  */
-public class School implements Serializable, Printable<String[]> {
+public class School implements Serializable, Printable<List<String>> {
     private Player owner;
     private int numTowers;
     private final StudentGroup entrance = new StudentGroup();
@@ -153,7 +153,7 @@ public class School implements Serializable, Printable<String[]> {
     }
 
     @Override
-    public String[] print(boolean...params) {
+    public List<String> print(boolean...params) {
         StringBuilder schoolBuilder = new StringBuilder();
         List<String> schoolString = new ArrayList<>();
         int nameTrim = (MatchInfo.getInstance().isExpertMode() ? 13 : 15);
@@ -229,6 +229,6 @@ public class School implements Serializable, Printable<String[]> {
         schoolBuilder.setLength(0);
 
 
-        return schoolString.toArray(new String[0]);
+        return schoolString;
     }
 }

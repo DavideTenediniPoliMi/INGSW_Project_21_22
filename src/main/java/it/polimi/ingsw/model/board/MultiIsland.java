@@ -142,7 +142,7 @@ public class MultiIsland extends Island {
     }
 
     @Override
-    public String[] print(boolean... params) {
+    public List<String> print(boolean... params) {
         List<String> islandBuilder = new ArrayList<>();
         int leftRealIndex = 0;
         Board board = Game.getInstance().getBoard();
@@ -154,12 +154,12 @@ public class MultiIsland extends Island {
             leftRealIndex += board.getIslandAt(i).getNumIslands();
         }
 
-        islandBuilder.addAll(List.of(leftIsland.print(calculateOpenings(leftRealIndex, true, params))));
+        islandBuilder.addAll(leftIsland.print(calculateOpenings(leftRealIndex, true, params)));
 
         int rightRealIndex = leftRealIndex + leftIsland.getNumIslands();
-        islandBuilder.addAll(List.of(rightIsland.print(calculateOpenings(rightRealIndex, false, params))));
+        islandBuilder.addAll(rightIsland.print(calculateOpenings(rightRealIndex, false, params)));
 
-        return islandBuilder.toArray(new String[0]);
+        return islandBuilder;
     }
 
     private boolean[] calculateOpenings(int realIndex, boolean isLeft, boolean...params) {

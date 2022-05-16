@@ -7,10 +7,13 @@ import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.utils.Printable;
 import it.polimi.ingsw.utils.Serializable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class corresponding to the Cloud entity in a Game
  */
-public class Cloud implements Serializable, Printable<String> {
+public class Cloud implements Serializable, Printable<List<String>> {
     private final StudentGroup students = new StudentGroup();
     private boolean available;
 
@@ -84,27 +87,36 @@ public class Cloud implements Serializable, Printable<String> {
     }
 
     @Override
-    public String print(boolean...params) {
-        StringBuilder cloudString = new StringBuilder();
+    public List<String> print(boolean...params) {
+        StringBuilder cloudBuilder = new StringBuilder();
+        List<String> cloudString = new ArrayList<>();
 
-        cloudString.append("┌");
+        cloudBuilder.append("┌");
 
         int amt = 0;
         for(Color color : Color.values()) {
             if(students.getByColor(color) > 0) {
-                cloudString.append("────");
+                cloudBuilder.append("────");
                 amt++;
             }
         }
-        cloudString.append("─");
-        cloudString.append("┐\n");
-        cloudString.append("│").append(students.print(false)).append("│\n");
-        cloudString.append("└");
+        cloudBuilder.append("─");
+        cloudBuilder.append("┐");
+        cloudString.add(cloudBuilder.toString());
+        cloudBuilder.setLength(0);
 
-        cloudString.append("─".repeat(Math.max(0, amt * 4 + 1)));
+        cloudBuilder.append("│").append(students.print(false)).append("│");
+        cloudString.add(cloudBuilder.toString());
+        cloudBuilder.setLength(0);
 
-        cloudString.append("┘");
+        cloudBuilder.append("└");
 
-        return cloudString.toString();
+        cloudBuilder.append("─".repeat(Math.max(0, amt * 4 + 1)));
+
+        cloudBuilder.append("┘");
+        cloudString.add(cloudBuilder.toString());
+        cloudBuilder.setLength(0);
+
+        return cloudString;
     }
 }
