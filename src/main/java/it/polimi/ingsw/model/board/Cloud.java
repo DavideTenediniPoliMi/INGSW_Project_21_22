@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.board;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.utils.Printable;
@@ -91,15 +92,8 @@ public class Cloud implements Serializable, Printable<List<String>> {
         StringBuilder cloudBuilder = new StringBuilder();
         List<String> cloudString = new ArrayList<>();
 
-        cloudBuilder.append("┌");
+        cloudBuilder.append("┌").append("────".repeat(MatchInfo.getInstance().getMaxMovableStudents()));
 
-        int amt = 0;
-        for(Color color : Color.values()) {
-            if(students.getByColor(color) > 0) {
-                cloudBuilder.append("────");
-                amt++;
-            }
-        }
         cloudBuilder.append("─");
         cloudBuilder.append("┐");
         cloudString.add(cloudBuilder.toString());
@@ -111,7 +105,8 @@ public class Cloud implements Serializable, Printable<List<String>> {
 
         cloudBuilder.append("└");
 
-        cloudBuilder.append("─".repeat(Math.max(0, amt * 4 + 1)));
+        cloudBuilder.append("────".repeat(MatchInfo.getInstance().getMaxMovableStudents()));
+        cloudBuilder.append("─");
 
         cloudBuilder.append("┘");
         cloudString.add(cloudBuilder.toString());
