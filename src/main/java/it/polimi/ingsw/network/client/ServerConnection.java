@@ -99,6 +99,8 @@ public class ServerConnection extends Connection {
         cli.setViewState(new LobbyViewState(cli.getViewState()));
         cli.handleInteraction();
 
+        JsonObject firstGameJson;
+
         while(!inGame) {
             String response = receiveMessage();
 
@@ -109,6 +111,7 @@ public class ServerConnection extends Connection {
                     if(matchInfoJson.get("gameStatus").getAsString().equalsIgnoreCase("IN_GAME")) {
                         synchronized (cli) {
                             inGame = true;
+                            cli.nextState(jsonObject);
                             new ResponseParameters().deserialize(jsonObject);
                         }
                         return;
@@ -130,7 +133,8 @@ public class ServerConnection extends Connection {
      * ALTRIMENTI CONTINUI A LEGGERE
      */
     private void gameSequence() {
-        cli.setViewState(new GameViewState(cli.getViewState()));
+
+        cli.handleInteraction();
 
         while(inGame) {
             String response = receiveMessage();
@@ -138,10 +142,16 @@ public class ServerConnection extends Connection {
             executor.submit( () -> {
                JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
                synchronized (cli) {
-                   boolean reqInteraction = cli.nextState(jsonObject);
+                   if(MatchInfo.getInstance().getCurrentPlayerID() == cli.getPlayerID()) {
+                       boolean reqInteraction = cli.nextState(jsonObject);
 
-                   if(reqInteraction) {
-                       cli.handleInteraction(); //Handle interaction in new view
+                       new ResponseParameters().deserialize(jsonObject);
+
+                       if(reqInteraction) {
+                           cli.handleInteraction(); //Handle interaction in new view
+                       }
+                   } else {
+                       //CLI.updateCLI
                    }
                }
             });

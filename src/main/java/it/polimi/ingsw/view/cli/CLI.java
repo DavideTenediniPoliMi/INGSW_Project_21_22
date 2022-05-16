@@ -38,6 +38,10 @@ public class CLI {
           this.playerID = playerID;
      }
 
+     public int getPlayerID() {
+          return playerID;
+     }
+
      public boolean nextState(JsonObject jo) {
           MatchInfo matchInfo = MatchInfo.getInstance();
 
