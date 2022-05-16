@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view.cli;
 
 import com.google.gson.JsonObject;
-import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.Connection;
@@ -29,10 +28,10 @@ public class CLI {
 
      public boolean nextState(JsonObject jo) {
           MatchInfo matchInfo = MatchInfo.getInstance();
-          Game game = Game.getInstance();
 
-          if(!jo.has("matchInfo"))
-               return false;
+          if(!jo.has("matchInfo")) {
+               return checkForCharacterCards(jo);
+          }
 
           jo = jo.get("matchInfo").getAsJsonObject();
 
@@ -41,35 +40,52 @@ public class CLI {
 
           switch(matchInfo.getStateType()) {
                case PLANNING:
-                    if(!areSameState(jo, TurnState.PLANNING)) {
+                    if(areDifferentStates(jo, TurnState.PLANNING)) {
                          resetTurnState(jo);
                          return true;
                     }
 
                     return false;
                case STUDENTS:
-                    if(!areSameState(jo, TurnState.STUDENTS)) {
-                         resetTurnState(jo);
-                         return true;
-                    }
-               case MOTHER_NATURE:
-                    if(!areSameState(jo, TurnState.MOTHER_NATURE)) {
-                         resetTurnState(jo);
-                         return true;
-                    }
-               case CLOUD:
-                    if(!areSameState(jo, TurnState.CLOUD)) {
+                    if(areDifferentStates(jo, TurnState.STUDENTS)) {
                          resetTurnState(jo);
                          return true;
                     }
 
-                    return true;
+                    if(matchInfo.getNumMovedStudents() != jo.get("numMovedStudents").getAsInt()) {
+                         setViewState(new ExpertViewState(new StudentViewState(viewState)));
+                         return true;
+                    }
+
+                    return false;
+               case MOTHER_NATURE:
+                    if(areDifferentStates(jo, TurnState.MOTHER_NATURE)) {
+                         resetTurnState(jo);
+                         return true;
+                    }
+
+                    return false;
+               case CLOUD:
+                    if(areDifferentStates(jo, TurnState.CLOUD)) {
+                         resetTurnState(jo);
+                         return true;
+                    }
+
+                    return false;
                default:
                     return false;
           }
      }
 
-     public boolean isPlayerTurn(JsonObject jo) {
+     private boolean checkForCharacterCards(JsonObject jo) {
+          MatchInfo matchInfo = MatchInfo.getInstance();
+          return jo.has("characterCards") &&
+                  matchInfo.getCurrentPlayerID() == playerID &&
+                  !matchInfo.getStateType().equals(TurnState.PLANNING) &&
+                  !matchInfo.getStateType().equals(TurnState.CLOUD);
+     }
+
+     private boolean isPlayerTurn(JsonObject jo) {
           if(jo.get("playOrder").getAsJsonArray().size() == 0 ||
                   jo.get("playOrder").getAsJsonArray().get(0).getAsInt() != playerID) {
                setViewState(new GameViewState(viewState));
@@ -97,8 +113,8 @@ public class CLI {
           }
      }
 
-     private boolean areSameState(JsonObject jo, TurnState state) {
-          return getTurnState(jo).equals(state);
+     private boolean areDifferentStates(JsonObject jo, TurnState state) {
+          return !getTurnState(jo).equals(state);
      }
 
      private TurnState getTurnState(JsonObject jo) {
