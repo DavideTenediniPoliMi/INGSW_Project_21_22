@@ -1,13 +1,17 @@
 package it.polimi.ingsw.view.viewStates;
 
+import it.polimi.ingsw.network.enumerations.CommandType;
+import it.polimi.ingsw.network.parameters.RequestParameters;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class NoLobbyViewState extends LobbyViewState {
+    private boolean creating;
     private int lobbySize;
     private boolean expertMode;
-    private boolean creating;
     private final List<Integer> validNumbers = new ArrayList<>(List.of(2,3,4));
+    private final List<String> validCharacters = new ArrayList<>(List.of("Y", "y", "N", "n"));
 
     @Override
     public String print(boolean... params) {
@@ -48,13 +52,19 @@ public class NoLobbyViewState extends LobbyViewState {
             return "";
         }
 
-        if(input.equals("Y") || input.equals("y")) {
-            expertMode = true;
-            return "";
-        }
+        if(validCharacters.contains(input)) {
+            if(input.equalsIgnoreCase("Y"))
+                expertMode = true;
 
-        if(input.equals("N") || input.equals("n")) {
-            expertMode = false;
+            notify(
+                    new RequestParameters()
+                            .setCommandType(CommandType.CREATE_LOBBY)
+                            .setExpertMode(expertMode)
+                            .setSelectedNumPlayer(lobbySize)
+                            .serialize().toString()
+            );
+
+            setInteractionComplete(true);
             return "";
         }
 

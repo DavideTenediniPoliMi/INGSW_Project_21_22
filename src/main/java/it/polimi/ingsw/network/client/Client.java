@@ -24,10 +24,15 @@ public class Client {
         // THIS SHOULD BE IN A LOOP AND IN A IF TO SEE IF IT SHOULD BE EITHER CLI OR GUI
         AnsiConsole.systemInstall();
 
+        AnsiConsole.sysOut().print(AnsiCodes.CLS + "" + AnsiCodes.HOME);
+        AnsiConsole.sysOut().println("Welcome to Eriantys!");
+
         Connection connection = CLI.handleBinding(this);
 
         if(connection != null)
             connection.run();
+
+        AnsiConsole.sysOut().println("Thanks for playing Eriantys!");
 
         AnsiConsole.systemUninstall();
     }

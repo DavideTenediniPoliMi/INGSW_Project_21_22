@@ -18,16 +18,24 @@ public class CLI {
           this.viewState = viewState;
      }
 
-     public void setView(ViewState viewState) {
+     public void setViewState(ViewState viewState) {
           this.viewState = viewState;
      }
 
-     public static Connection handleBinding(Client client) {
-          AnsiConsole.sysOut().print(AnsiCodes.CLS + "" + AnsiCodes.HOME);
-          AnsiConsole.sysOut().println("Welcome to Eriantys!");
-
+     public void handleInteraction() {
           do {
-               AnsiConsole.sysOut().println("Insert the IP address of the server : (Type X to close the game)");
+               AnsiConsole.sysOut().println(viewState.print() + viewState.printCLIPrompt());
+
+               String error = viewState.manageCLIInput(scanner.nextLine());
+
+               if (error != null)
+                    AnsiConsole.sysOut().println(error);
+          } while(!viewState.isInteractionComplete());
+     }
+
+     public static Connection handleBinding(Client client) {
+          do {
+               AnsiConsole.sysOut().println("Insert the IP address of the server : (or Press X to close the game)");
                String ip = scanner.nextLine();
 
                if(ip.equals("X")) break;
@@ -38,10 +46,10 @@ public class CLI {
 
                try {
                     return new ServerConnection(new Socket(ip, port), client);
-               } catch(IOException e) {
+               } catch(IOException | SecurityException | IllegalArgumentException e) {
                     AnsiConsole.sysOut().println("The combination IP/Port didn't work! Try again!");
                } catch(Exception e) {
-                    AnsiConsole.sysOut().println("Something went wrong! Try again!");
+                    AnsiConsole.sysOut().println("Something went wrong! Try again!" + e.getMessage());
                }
           } while(true);
 
