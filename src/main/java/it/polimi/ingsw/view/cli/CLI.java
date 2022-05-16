@@ -16,6 +16,7 @@ import java.util.Scanner;
 public class CLI {
      private ViewState viewState;
      private int playerID;
+     private String name;
      private static final Scanner scanner = new Scanner(System.in);
 
      public CLI(ViewState viewState) {
@@ -27,6 +28,14 @@ public class CLI {
      }
      public ViewState getViewState() {
           return viewState;
+     }
+
+     public String getName() {
+          return name;
+     }
+
+     public void setPlayerID(int playerID) {
+          this.playerID = playerID;
      }
 
      public boolean nextState(JsonObject jo) {
@@ -135,6 +144,19 @@ public class CLI {
                AnsiConsole.sysOut().println(viewState.print() + viewState.getBuffer());
 
                String error = viewState.manageCLIInput(scanner.nextLine());
+
+               if (error != null)
+                    AnsiConsole.sysOut().println(error);
+          } while(!viewState.isInteractionComplete());
+     }
+
+     public void handleHandshake() {
+          do {
+               AnsiConsole.sysOut().println(viewState.print() + viewState.getBuffer());
+
+               name = scanner.nextLine();
+
+               String error = viewState.manageCLIInput(name);
 
                if (error != null)
                     AnsiConsole.sysOut().println(error);
