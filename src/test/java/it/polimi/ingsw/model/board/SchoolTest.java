@@ -101,7 +101,7 @@ public class SchoolTest {
 
     /*@Test
     public void printTest() {
-        /*AnsiConsole.systemInstall();
+        AnsiConsole.systemInstall();
         AnsiConsole.sysOut().println(s1.print());
         s1.print();
         Game game = Game.getInstance();
