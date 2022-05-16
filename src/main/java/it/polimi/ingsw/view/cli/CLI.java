@@ -22,8 +22,11 @@ public class CLI {
           this.viewState = viewState;
      }
 
-     private void setViewState(ViewState viewState) {
+     public void setViewState(ViewState viewState) {
           this.viewState = viewState;
+     }
+     public ViewState getViewState() {
+          return viewState;
      }
 
      public boolean nextState(JsonObject jo) {
