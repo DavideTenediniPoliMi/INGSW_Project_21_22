@@ -25,9 +25,9 @@ class DiningRoomControllerTest {
         game = Game.getInstance();
         board = game.getBoard();
 
-        game.addPlayer(new Player(0, "ezio", TowerColor.BLACK, CardBack.CB_1, true));
-        game.addPlayer(new Player(1, "enzo", TowerColor.WHITE, CardBack.CB_2, true));
-        game.addPlayer(new Player(2, "leve", TowerColor.GREY, CardBack.CB_3, true));
+        game.addPlayer(new Player(0, "ezio", TowerColor.BLACK, CardBack.WIZARD_1, true));
+        game.addPlayer(new Player(1, "enzo", TowerColor.WHITE, CardBack.WIZARD_2, true));
+        game.addPlayer(new Player(2, "leve", TowerColor.GREY, CardBack.WIZARD_3, true));
 
         board.addSchool(game.getPlayerByID(0));
         board.addSchool(game.getPlayerByID(1));

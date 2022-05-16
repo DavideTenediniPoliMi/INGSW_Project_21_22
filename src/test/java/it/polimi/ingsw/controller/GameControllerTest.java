@@ -25,7 +25,6 @@ import it.polimi.ingsw.network.commands.*;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
@@ -53,8 +52,8 @@ class GameControllerTest {
         lobby.addPlayer(1, "b");
         lobby.selectTeam(0, TowerColor.BLACK);
         lobby.selectTeam(1, TowerColor.WHITE);
-        lobby.selectCardBack(0, CardBack.CB_1);
-        lobby.selectCardBack(1, CardBack.CB_2);
+        lobby.selectCardBack(0, CardBack.WIZARD_1);
+        lobby.selectCardBack(1, CardBack.WIZARD_2);
         lobby.setReadyStatus(0, true);
         lobby.setReadyStatus(1, true);
 
@@ -1089,9 +1088,9 @@ class GameControllerTest {
         lobby.selectTeam(0, TowerColor.BLACK);
         lobby.selectTeam(1, TowerColor.WHITE);
         lobby.selectTeam(2, TowerColor.GREY);
-        lobby.selectCardBack(0, CardBack.CB_1);
-        lobby.selectCardBack(1, CardBack.CB_2);
-        lobby.selectCardBack(2, CardBack.CB_3);
+        lobby.selectCardBack(0, CardBack.WIZARD_1);
+        lobby.selectCardBack(1, CardBack.WIZARD_2);
+        lobby.selectCardBack(2, CardBack.WIZARD_3);
 
         matchInfo.setUpGame(3,true);
         matchInfo.setNumPlayersConnected(3);
@@ -1228,9 +1227,9 @@ class GameControllerTest {
         lobby.selectTeam(0, TowerColor.BLACK);
         lobby.selectTeam(1, TowerColor.WHITE);
         lobby.selectTeam(2, TowerColor.GREY);
-        lobby.selectCardBack(0, CardBack.CB_1);
-        lobby.selectCardBack(1, CardBack.CB_2);
-        lobby.selectCardBack(2, CardBack.CB_3);
+        lobby.selectCardBack(0, CardBack.WIZARD_1);
+        lobby.selectCardBack(1, CardBack.WIZARD_2);
+        lobby.selectCardBack(2, CardBack.WIZARD_3);
 
         matchInfo.setUpGame(3,true);
         matchInfo.setNumPlayersConnected(3);

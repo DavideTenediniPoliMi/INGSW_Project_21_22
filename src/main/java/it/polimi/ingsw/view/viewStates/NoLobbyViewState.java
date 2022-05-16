@@ -11,7 +11,6 @@ public class NoLobbyViewState extends LobbyViewState {
     public NoLobbyViewState(ViewState oldViewState) {
         super(oldViewState);
     }
-
     private boolean creating;
     private int lobbySize;
     private boolean expertMode;
@@ -27,10 +26,12 @@ public class NoLobbyViewState extends LobbyViewState {
     public void printCLIPrompt() {
         if(!creating) {
             appendBuffer("Press ENTER to start creating a lobby!");
+            return;
         }
 
         if(lobbySize == 0) {
             appendBuffer("What do you want the lobby size to be ? [2,3,4]");
+            return;
         }
 
         appendBuffer("Do you want the game to be in expert mode? [Y/N]");
@@ -38,6 +39,7 @@ public class NoLobbyViewState extends LobbyViewState {
 
     @Override
     public String manageCLIInput(String input) {
+        appendBuffer(input);
         String error;
 
         if(!creating) {
@@ -80,6 +82,4 @@ public class NoLobbyViewState extends LobbyViewState {
 
         return "That was not a valid choice! Try again!";
     }
-
-
 }

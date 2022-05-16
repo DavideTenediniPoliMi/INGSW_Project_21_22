@@ -8,7 +8,6 @@ import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
-import org.hamcrest.core.Is;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,8 +24,8 @@ class IslandControllerTest {
         islandController = new IslandController();
         game = Game.getInstance();
         board = game.getBoard();
-        game.addPlayer(new Player(0, "luca", TowerColor.GREY, CardBack.CB_1, true));
-        game.addPlayer(new Player(1, "paolo", TowerColor.BLACK, CardBack.CB_2, true));
+        game.addPlayer(new Player(0, "luca", TowerColor.GREY, CardBack.WIZARD_1, true));
+        game.addPlayer(new Player(1, "paolo", TowerColor.BLACK, CardBack.WIZARD_2, true));
         board.addSchool(game.getPlayerByID(0));
         board.addSchool(game.getPlayerByID(1));
         game.placeMNAt(0);

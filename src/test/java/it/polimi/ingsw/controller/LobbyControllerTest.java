@@ -29,7 +29,7 @@ class LobbyControllerTest {
         info.setUpGame(2,true);
 
         controller.requestCommand(new LobbyJoinCommand(0, "LOLLO", controller));
-        controller.requestCommand(new LobbySelectCBCommand(0, CardBack.CB_1, controller));
+        controller.requestCommand(new LobbySelectCBCommand(0, CardBack.WIZARD_1, controller));
         controller.requestCommand(new LobbySelectTeamCommand(0, TowerColor.BLACK, controller));
         controller.requestCommand(new LobbyReadyStatusCommand(0, true, controller, new GameController()));
     }
@@ -48,7 +48,7 @@ class LobbyControllerTest {
 
     @Test
     public void testSelectCB() {
-        assertEquals(CardBack.CB_1, lobby.getPlayerByID(0).getCardBack());
+        assertEquals(CardBack.WIZARD_1, lobby.getPlayerByID(0).getCardBack());
     }
 
     @Test
@@ -79,7 +79,7 @@ class LobbyControllerTest {
     @Test
     public void testInvalidPlayer() {
         assertAll(
-                () -> assertThrowsExactly(NoSuchPlayerException.class, () -> controller.requestCommand(new LobbySelectCBCommand(1, CardBack.CB_1, controller))),
+                () -> assertThrowsExactly(NoSuchPlayerException.class, () -> controller.requestCommand(new LobbySelectCBCommand(1, CardBack.WIZARD_1, controller))),
                 () -> assertThrowsExactly(NoSuchPlayerException.class, () -> controller.requestCommand(new LobbySelectTeamCommand(1, TowerColor.BLACK, controller))),
                 () -> assertThrowsExactly(NoSuchPlayerException.class, () -> controller.requestCommand(new LobbyReadyStatusCommand(1, true, controller, new GameController()))),
                 () -> assertThrowsExactly(NoSuchPlayerException.class, () -> controller.requestCommand(new LobbySelectTeamCommand(1, TowerColor.BLACK, controller))),
@@ -90,7 +90,7 @@ class LobbyControllerTest {
     @Test
     public void testDuplicateCB() throws Exception{
         controller.requestCommand(new LobbyJoinCommand(1, "Lello", controller));
-        assertThrowsExactly(CardBackTakenException.class, () -> controller.requestCommand(new LobbySelectCBCommand(1, CardBack.CB_1, controller)));
+        assertThrowsExactly(CardBackTakenException.class, () -> controller.requestCommand(new LobbySelectCBCommand(1, CardBack.WIZARD_1, controller)));
     }
 
     @Test

@@ -3,7 +3,6 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-import org.fusesource.jansi.AnsiConsole;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,7 @@ class PlayerTest {
 
     @BeforeEach
     void setUp() {
-        player = new Player(0, "mario", TowerColor.BLACK, CardBack.CB_1, true);
+        player = new Player(0, "mario", TowerColor.BLACK, CardBack.WIZARD_1, true);
     }
 
     @AfterEach
@@ -26,7 +25,7 @@ class PlayerTest {
     @Test
     public void testGetter() {
         assertAll(
-                () -> assertEquals(CardBack.CB_1, player.getCardBack()),
+                () -> assertEquals(CardBack.WIZARD_1, player.getCardBack()),
                 () -> assertTrue(player.isTowerHolder())
         );
     }

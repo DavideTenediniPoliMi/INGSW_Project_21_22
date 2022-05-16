@@ -24,7 +24,7 @@ class DiningRoomExpertControllerTest {
         game = Game.getInstance();
         board = game.getBoard();
 
-        game.addPlayer(new Player(0, "ezio", TowerColor.BLACK, CardBack.CB_1, true));
+        game.addPlayer(new Player(0, "ezio", TowerColor.BLACK, CardBack.WIZARD_1, true));
 
         board.addSchool(game.getPlayerByID(0));
     }

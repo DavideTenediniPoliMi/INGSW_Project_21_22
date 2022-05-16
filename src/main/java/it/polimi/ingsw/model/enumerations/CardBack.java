@@ -4,8 +4,8 @@ package it.polimi.ingsw.model.enumerations;
  * Class representing the 4 different types of card backs
  */
 public enum CardBack {
-    CB_1,
-    CB_2,
-    CB_3,
-    CB_4
+    WIZARD_1,
+    WIZARD_2,
+    WIZARD_3,
+    WIZARD_4
 }

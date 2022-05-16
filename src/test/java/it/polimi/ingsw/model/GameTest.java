@@ -2,8 +2,6 @@ package it.polimi.ingsw.model;
 
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.board.Board;
-import it.polimi.ingsw.model.board.Island;
-import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
@@ -11,7 +9,6 @@ import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentGroup;
-import org.fusesource.jansi.AnsiConsole;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,8 +26,8 @@ public class GameTest {
     public void setUp() {
         g = Game.getInstance();
 
-        g.addPlayer(new Player(0, "ezio", TowerColor.WHITE, CardBack.CB_1, true));
-        g.addPlayer(new Player(1, "bruso", TowerColor.GREY, CardBack.CB_2, true));
+        g.addPlayer(new Player(0, "ezio", TowerColor.WHITE, CardBack.WIZARD_1, true));
+        g.addPlayer(new Player(1, "bruso", TowerColor.GREY, CardBack.WIZARD_2, true));
 
         g.getPlayers().forEach((p) -> g.addSchool(p.getID()));
 
@@ -152,7 +149,7 @@ public class GameTest {
 
     @Test
     public void testAddPlayer() {
-        g.addPlayer(new Player(2, "trap", TowerColor.BLACK, CardBack.CB_3, true));
+        g.addPlayer(new Player(2, "trap", TowerColor.BLACK, CardBack.WIZARD_3, true));
         assertEquals("trap", g.getPlayerByID(2).getName());
     }
 

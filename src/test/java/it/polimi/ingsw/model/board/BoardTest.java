@@ -26,7 +26,7 @@ public class BoardTest {
         board.createClouds(2);
         board.refillClouds(3);
 
-        Player p = new Player(0, "Pippo", TowerColor.BLACK, CardBack.CB_1, true);
+        Player p = new Player(0, "Pippo", TowerColor.BLACK, CardBack.WIZARD_1, true);
         board.addSchool(p);
 
         board.addToEntranceOf(0, new StudentGroup(Color.GREEN, 2));

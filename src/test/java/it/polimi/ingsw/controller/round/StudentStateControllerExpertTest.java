@@ -26,10 +26,10 @@ public class StudentStateControllerExpertTest {
     @BeforeEach
     void setUp() {
         game = Game.getInstance();
-        game.addPlayer(new Player(0, "lollo", TowerColor.BLACK, CardBack.CB_1, true));
+        game.addPlayer(new Player(0, "lollo", TowerColor.BLACK, CardBack.WIZARD_1, true));
         game.giveCoinToPlayer(0);
         game.getBoard().addSchool(game.getPlayerByID(0));
-        game.addPlayer(new Player(1, "lello", TowerColor.WHITE, CardBack.CB_2, true));
+        game.addPlayer(new Player(1, "lello", TowerColor.WHITE, CardBack.WIZARD_2, true));
 
         game.instantiateCharacterCard(CharacterCards.EXCHANGE_STUDENTS.ordinal());
 
