@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view.viewStates;
 
-import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
@@ -17,11 +16,12 @@ import java.util.stream.Stream;
 
 public class SelectLobbyViewState extends LobbyViewState {
     private final Lobby lobby = Lobby.getLobby();
-    private final MatchInfo matchInfo = MatchInfo.getInstance();
     private List<String> validCardBacks = new ArrayList<>();
     private List<String> validTeams = new ArrayList<>();
     private final List<Integer> validNumbers = new ArrayList<>(List.of(0,1,2));
     private boolean isLastActionSetCardBack;
+    private CardBack cardBack;
+    private TowerColor team;
 
 
     public SelectLobbyViewState(ViewState oldViewState) {
@@ -35,9 +35,7 @@ public class SelectLobbyViewState extends LobbyViewState {
 
     @Override
     public void printCLIPrompt() {
-        int playerID = matchInfo.getCurrentPlayerID();
-
-        if(lobby.getPlayerByID(playerID).getCardBack() == null) {
+        if(cardBack == null) {
             //it finds card backs already picked
             List<String> pickedCardBacks = new ArrayList<>();
             for(Player p : lobby.getPlayers()) {
@@ -52,7 +50,7 @@ public class SelectLobbyViewState extends LobbyViewState {
         }
 
 
-        if(lobby.getPlayerByID(playerID).getTeamColor() == null) {
+        if(team == null) {
             //it finds teams already picked
             List<String> pickedTeams = new ArrayList<>();
             for(Player p : lobby.getPlayers()) {
@@ -78,10 +76,11 @@ public class SelectLobbyViewState extends LobbyViewState {
         String error;
 
         if(validCardBacks.contains(input)) {
+            cardBack = CardBack.valueOf(input);
             notify(
                     new RequestParameters()
                             .setCommandType(CommandType.SEL_CARDBACK)
-                            .setCardBack(CardBack.valueOf(input))
+                            .setCardBack(cardBack)
                             .serialize().toString()
             );
             isLastActionSetCardBack = true;
@@ -90,11 +89,12 @@ public class SelectLobbyViewState extends LobbyViewState {
         }
 
         if(validTeams.contains(input)) {
+            team = TowerColor.valueOf(input);
             input = input.substring(0,1).toUpperCase() + input.substring(1).toLowerCase();
             notify(
                     new RequestParameters()
                             .setCommandType(CommandType.SEL_TOWERCOLOR)
-                            .setTowerColor(TowerColor.valueOf(input))
+                            .setTowerColor(team)
                             .serialize().toString()
             );
             isLastActionSetCardBack = false;
@@ -102,8 +102,7 @@ public class SelectLobbyViewState extends LobbyViewState {
             return "";
         }
 
-        Player player = lobby.getPlayerByID(matchInfo.getCurrentPlayerID());
-        if(player.getTeamColor() != null && player.getCardBack() != null) {
+        if(cardBack != null && team != null) {
             error = StringUtils.checkInteger(input, validNumbers);
             if (!error.equals("")) {
                 appendBuffer(error);
@@ -145,10 +144,9 @@ public class SelectLobbyViewState extends LobbyViewState {
 
     @Override
     public void resetInteraction() {
-        int playerID = matchInfo.getCurrentPlayerID();
         if(isLastActionSetCardBack)
-            lobby.selectCardBack(playerID, null);
+            cardBack = null;
         else
-            lobby.selectTeam(playerID, null);
+            team = null;
     }
 }
