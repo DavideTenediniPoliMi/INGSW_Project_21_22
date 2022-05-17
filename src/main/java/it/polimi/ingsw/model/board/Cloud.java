@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.utils.Printable;
 import it.polimi.ingsw.utils.Serializable;
+import it.polimi.ingsw.view.cli.AnsiCodes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,7 +100,15 @@ public class Cloud implements Serializable, Printable<List<String>> {
         cloudString.add(cloudBuilder.toString());
         cloudBuilder.setLength(0);
 
-        cloudBuilder.append("│").append(students.print(false)).append("│");
+        String pureStudents = students.print(false);
+
+        for(AnsiCodes code : AnsiCodes.values()) {
+            pureStudents = pureStudents.replace(code.toString(), "");
+        }
+
+        cloudBuilder.append("│").append(students.print(false))
+                    .append(" ".repeat(MatchInfo.getInstance().getMaxMovableStudents()*4 - pureStudents.length()))
+                    .append(" │");
         cloudString.add(cloudBuilder.toString());
         cloudBuilder.setLength(0);
 

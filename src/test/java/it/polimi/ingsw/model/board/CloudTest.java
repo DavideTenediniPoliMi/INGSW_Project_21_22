@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.board;
 
+import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import org.fusesource.jansi.AnsiConsole;
@@ -59,6 +60,7 @@ public class CloudTest {
 
     /*@Test
     public void testPrint() {
+        MatchInfo.getInstance().setUpGame(3, true);
 
         cloud1.print();
 
