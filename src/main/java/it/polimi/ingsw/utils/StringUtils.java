@@ -4,8 +4,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StringUtils {
-    public static List<String> insertAfter(List<String> before, List<String> after) {
-        return new ArrayList<>();
+    public static List<String> insertAfter(List<String> before, List<String> after, int starting, int spaces) {
+        //ALWAYS ASSUME THAT EVERY ROW OF BEFORE HAS THE SAME LENGTH (SAME FOR AFTER)
+        List<String> result = new ArrayList<>();
+        int lengthBefore = before.get(0).length();
+
+        for(int i = 0; i < before.size(); i++) {
+            StringBuilder stringBuilder = new StringBuilder(before.get(i));
+
+            stringBuilder.append(" ".repeat(spaces));
+
+            if(i < starting || i >= starting + after.size()) {
+                stringBuilder.append(" ".repeat(after.get(0).length()));
+            } else {
+                stringBuilder.append(after.get(i - starting));
+            }
+
+            result.add(stringBuilder.toString());
+        }
+
+        if(starting + after.size() > before.size()) {
+            for (int i = before.size(); i < starting + after.size(); i++) {
+                result.add(" ".repeat(lengthBefore + spaces) + after.get(i - starting));
+            }
+        }
+
+        return result;
+    }
+
+    public static String listToString(List<String> list) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(String s: list) {
+            stringBuilder.append(s + "\n");
+        }
+
+        return stringBuilder.toString();
     }
 
     public static String checkInteger(String input, List<Integer> validInputs) {
