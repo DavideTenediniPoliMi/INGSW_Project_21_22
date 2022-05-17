@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.characters;
 
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.CharacterCards;
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.network.parameters.CardParameters;
@@ -119,10 +120,12 @@ public abstract class CharacterCard implements Serializable, Printable<List<Stri
         cardString.add(cardBuilder.toString());
         cardBuilder.setLength(0);
 
-        cardBuilder.append("│ ").append(active ? AnsiCodes.GREEN_BACKGROUND_BRIGHT : AnsiCodes.RED_BACKGROUND_BRIGHT)
+        cardBuilder.append("│").append(Game.getInstance().getIndexOfCharacterCard(this))
+                    .append(" ")
+                    .append(active ? AnsiCodes.GREEN_BACKGROUND_BRIGHT : AnsiCodes.RED_BACKGROUND_BRIGHT)
                     .append(" A ").append(AnsiCodes.RESET)
-                    .append(" ".repeat(4))
-                    .append(cost).append("©")
+                    .append(" ".repeat(2))
+                    .append(cost).append(" ").append("©")
                     .append(" │");
         cardString.add(cardBuilder.toString());
         cardBuilder.setLength(0);

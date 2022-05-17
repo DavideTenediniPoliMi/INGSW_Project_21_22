@@ -475,6 +475,15 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         return active.orElse(null); // will be handled by an exception
     }
 
+    public int getIndexOfCharacterCard(CharacterCard characterCard) {
+        for(int i = 0; i < 3; i++) {
+            if(characterCards.get(i).getName().equals(characterCard.getName()))
+                return i;
+        }
+
+        return -1;
+    }
+
     /**
      * Buys the specified <code>CharacterCard</code> for the specified <code>Player</code>. Removes the card's price
      * from the <code>Player</code>'s coins, then adds 1 coin to the card to increase its cost, and puts the other

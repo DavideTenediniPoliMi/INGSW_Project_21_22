@@ -156,7 +156,7 @@ public class School implements Serializable, Printable<List<String>> {
     public List<String> print(boolean...params) {
         StringBuilder schoolBuilder = new StringBuilder();
         List<String> schoolString = new ArrayList<>();
-        int nameTrim = (MatchInfo.getInstance().isExpertMode() ? 13 : 15);
+        int nameTrim = (MatchInfo.getInstance().isExpertMode() ? 12 : 15);
 
         StringBuilder ownerName = new StringBuilder(owner.getName().substring(0, Math.min(owner.getName().length(), nameTrim)));
 
@@ -172,7 +172,7 @@ public class School implements Serializable, Printable<List<String>> {
         schoolBuilder.append("│ ").append(owner.getTeamColor().print()).append(" ").append(ownerName);
 
         if(MatchInfo.getInstance().isExpertMode())
-            schoolBuilder.append(owner.getNumCoins()).append("©");
+            schoolBuilder.append(owner.getNumCoins()).append(" ©");
 
         schoolBuilder.append(" │");
         schoolString.add(schoolBuilder.toString());
