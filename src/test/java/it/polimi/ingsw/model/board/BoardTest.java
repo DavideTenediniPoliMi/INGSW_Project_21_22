@@ -244,6 +244,8 @@ public class BoardTest {
     void testPrint() {
         AnsiConsole.systemInstall();
 
+
+
         AnsiConsole.sysOut().println(StringUtils.listToString(board.print()));
 
         AnsiConsole.systemUninstall();

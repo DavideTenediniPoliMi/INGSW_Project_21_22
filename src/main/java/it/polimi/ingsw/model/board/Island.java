@@ -146,13 +146,20 @@ public abstract class Island implements Serializable, Printable<List<String>> {
 
         //First row: Conqueror team info
 
+        islandBuilder.append("│            Team: ")
+                    .append(getTeamColor() == null ? "   " : getTeamColor().print())
+                    .append("│");
+
+        islandString.add(islandBuilder.toString());
+        islandBuilder.setLength(0);
+
         if(bridge_W) {
             islandBuilder.append("┘");
         } else {
             islandBuilder.append("│");
         }
 
-        islandBuilder.append("            Team: ").append(getTeamColor() == null ? "   " : getTeamColor().print());
+        islandBuilder.append(" ".repeat(21));
 
         if(bridge_E) {
             islandBuilder.append("└");
@@ -187,7 +194,7 @@ public abstract class Island implements Serializable, Printable<List<String>> {
         islandString.add(islandBuilder.toString());
         islandBuilder.setLength(0);
 
-        //Third row: Mother nature
+        //Third row: empty
 
         if(bridge_W) {
             islandBuilder.append("┐");
@@ -195,7 +202,20 @@ public abstract class Island implements Serializable, Printable<List<String>> {
             islandBuilder.append("│");
         }
 
-        islandBuilder.append(" ".repeat(9));
+        islandBuilder.append(" ".repeat(21));
+
+        if(bridge_E) {
+            islandBuilder.append("┌");
+        } else {
+            islandBuilder.append("│");
+        }
+
+        islandString.add(islandBuilder.toString());
+        islandBuilder.setLength(0);
+
+        //Fourth row: Mother nature
+
+        islandBuilder.append("│").append(" ".repeat(9));
 
         if(motherNature) {
             islandBuilder.append(AnsiCodes.BROWN_BACKGROUND).append(" M ").append(AnsiCodes.RESET);
@@ -204,13 +224,8 @@ public abstract class Island implements Serializable, Printable<List<String>> {
         }
 
         islandBuilder.append(" ".repeat(9))
-                    .append(AnsiCodes.RESET);
+                    .append(AnsiCodes.RESET).append("│");
 
-        if(bridge_E) {
-            islandBuilder.append("┌");
-        } else {
-            islandBuilder.append("│");
-        }
         islandString.add(islandBuilder.toString());
         islandBuilder.setLength(0);
 
