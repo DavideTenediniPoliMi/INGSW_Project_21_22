@@ -152,7 +152,7 @@ public abstract class Island implements Serializable, Printable<List<String>> {
             islandBuilder.append("│");
         }
 
-        islandBuilder.append(AnsiCodes.BLACK_TEXT).append("            Team: ").append(getTeamColor() == null ? "   " : getTeamColor().print());
+        islandBuilder.append("            Team: ").append(getTeamColor() == null ? "   " : getTeamColor().print());
 
         if(bridge_E) {
             islandBuilder.append("└");

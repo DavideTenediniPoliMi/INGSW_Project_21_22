@@ -165,10 +165,12 @@ public class MultiIslandTest {
         game.mergeIslands(6, 7);
         game.addInitialStudentToIsland(6, new StudentGroup(Color.RED, 5));
 
-        //AnsiConsole.systemInstall();
+        AnsiConsole.systemInstall();
         for(Island is : game.getBoard().getIslands()) {
-            List<String> strIs = List.of(is.print(false, false, false, false));
-            //AnsiConsole.sysOut().println(strIs);
+            List<String> strIs = is.print(false, false, false, false);
+            for(String ilS : strIs) {
+                AnsiConsole.sysOut().println(ilS);
+            }
         }
     }*/
 }
