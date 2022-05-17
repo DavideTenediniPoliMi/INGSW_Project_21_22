@@ -97,7 +97,7 @@ class GameControllerTest {
 
         gameController.requestCommand(playerID, command);
 
-        assertFalse(game.getPlayerByID(playerID).getPlayableCards().contains(Card.CARD_1));
+        assertFalse(game.getPlayerByID(playerID).getPlayableCards().contains(Card.LION));
     }
 
     @Test

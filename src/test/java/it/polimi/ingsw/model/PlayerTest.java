@@ -32,11 +32,11 @@ class PlayerTest {
 
     @Test
     void setSelectedCard() {
-        Card c = Card.CARD_1;
+        Card c = Card.LION;
 
         assertNull(player.getSelectedCard());
         player.setSelectedCard(c);
-        assertEquals(Card.CARD_1, player.getSelectedCard());
+        assertEquals(Card.LION, player.getSelectedCard());
         assertEquals(9, player.getPlayableCards().size());
     }
 
@@ -61,7 +61,7 @@ class PlayerTest {
         Player p = new Player(1, "ciao");
         System.out.println(player.serialize());
         assertDoesNotThrow( () -> p.deserialize(player.serialize()));
-        p.setSelectedCard(Card.CARD_1);
+        p.setSelectedCard(Card.LION);
 
         Player p2 = new Player(3, "carlo");
         assertDoesNotThrow( () -> p2.deserialize(p.serialize()));

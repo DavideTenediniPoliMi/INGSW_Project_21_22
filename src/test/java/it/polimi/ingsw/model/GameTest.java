@@ -155,7 +155,7 @@ public class GameTest {
 
     @Test
     public void testPlayCard() {
-        Card c = Card.CARD_1;
+        Card c = Card.LION;
         g.playCard(0, c);
 
         assertAll(
@@ -166,7 +166,7 @@ public class GameTest {
 
     @Test
     public void testPlaySameCardTwice() {
-        Card c = Card.CARD_1;
+        Card c = Card.LION;
         g.playCard(0, c);
         g.playCard(1, c);
 
@@ -250,8 +250,8 @@ public class GameTest {
 
     @Test
     public void serializeWithCardsTest(){
-        g.playCard(0, Card.CARD_1);
-        g.playCard(1, Card.CARD_1);
+        g.playCard(0, Card.LION);
+        g.playCard(1, Card.LION);
         JsonObject jsonGame = g.serialize();
         JsonObject jsonCards = Card.serializeAll();
 
