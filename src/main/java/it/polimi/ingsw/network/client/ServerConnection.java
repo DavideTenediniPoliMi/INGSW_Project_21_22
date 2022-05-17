@@ -22,6 +22,7 @@ public class ServerConnection extends Connection {
     private final Client client;
     private final CLI cli;
     private boolean inGame;
+    private boolean ready;
 
     public ServerConnection(Socket socket, Client client) throws IOException {
         super(socket);
@@ -65,11 +66,13 @@ public class ServerConnection extends Connection {
         if(MatchInfo.getInstance().getSelectedNumPlayer() == 0) {
             //Begin lobby creation sequence
             cli.setViewState(new NoLobbyViewState(cli.getViewState()));
+            cli.handleInteraction();
             while(true) {
                 String received = receiveMessage();
                 JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
 
                 if(!jsonObject.has("error")) { //Lobby was created
+                    new ResponseParameters().deserialize(jsonObject);
                     break;
                 }
             }
@@ -88,7 +91,7 @@ public class ServerConnection extends Connection {
                 for(JsonElement player : players) {
                     if(player.getAsJsonObject().get("name").getAsString().equalsIgnoreCase(cli.getName())) {
                         joined = true;
-                        cli.setPlayerID(player.getAsJsonObject().get("id").getAsInt());
+                        cli.setPlayerID(player.getAsJsonObject().get("ID").getAsInt());
                         new ResponseParameters().deserialize(jsonObject);
                         break;
                     }
@@ -97,8 +100,28 @@ public class ServerConnection extends Connection {
         }
 
         // Begin lobby loop
-        cli.setViewState(new LobbyViewState(cli.getViewState()));
+        cli.setViewState(new SelectLobbyViewState(cli.getViewState()));
         cli.handleInteraction();
+
+        while(!ready) {
+            String response = receiveMessage();
+
+            executor.submit( () -> {
+                JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
+                synchronized (cli) {
+                    if(jsonObject.has("error")) {
+                        cli.resetInteraction(jsonObject.get("error").getAsString());
+                        cli.handleInteraction();
+                        return;
+                    }
+                    new ResponseParameters().deserialize(jsonObject);
+                    ready = Lobby.getLobby().isReady(cli.getPlayerID());
+                    cli.handleInteraction();
+                }
+            });
+        }
+
+        cli.setViewState(new LobbyViewState(cli.getViewState()));
 
         while(!inGame) {
             String response = receiveMessage();
@@ -117,16 +140,8 @@ public class ServerConnection extends Connection {
                     }
                 }
                 synchronized (cli) {
-                    if(jsonObject.has("error")) {
-                        cli.resetInteraction(jsonObject.get("error").getAsString());
-                        return;
-                    }
-                    if(!Lobby.getLobby().isReady(cli.getPlayerID())) {
-                        new ResponseParameters().deserialize(jsonObject);
-                        cli.handleInteraction();
-                    } else {
-                        cli.displayState();
-                    }
+                    new ResponseParameters().deserialize(jsonObject);
+                    cli.displayState();
                 }
             });
         }
