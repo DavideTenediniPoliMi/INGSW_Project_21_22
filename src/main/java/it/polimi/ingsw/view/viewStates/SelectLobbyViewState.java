@@ -23,7 +23,6 @@ public class SelectLobbyViewState extends LobbyViewState {
     private CardBack cardBack;
     private TowerColor team;
 
-
     public SelectLobbyViewState(ViewState oldViewState) {
         super(oldViewState);
     }
