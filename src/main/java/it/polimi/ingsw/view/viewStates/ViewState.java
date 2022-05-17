@@ -36,6 +36,10 @@ public class ViewState extends Observable<String> implements Printable<String> {
 
     }
 
+    public void resetInteraction() {
+
+    }
+
     public String manageCLIInput(String input) {
         return "";
     }

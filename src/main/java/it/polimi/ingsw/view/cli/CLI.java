@@ -160,6 +160,12 @@ public class CLI {
           AnsiConsole.sysOut().println(viewState.print() + viewState.getBuffer());
      }
 
+     public void resetInteraction(String error) {
+          viewState.resetInteraction();
+          viewState.appendBuffer(error);
+          viewState.setInteractionComplete(false);
+     }
+
      public void handleHandshake() {
           do {
                AnsiConsole.sysOut().println(viewState.print() + viewState.getBuffer());
