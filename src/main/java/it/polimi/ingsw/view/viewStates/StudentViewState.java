@@ -70,7 +70,6 @@ public class StudentViewState extends ExpertViewState {
             if(!isColorSelected) {
                 isColorSelected = true;
                 if(validColors.contains(input.toUpperCase())) {
-                    int playerID = matchInfo.getCurrentPlayerID();
                     Board board= game.getBoard();
                     switch(input.toUpperCase()) {
                         case "B":

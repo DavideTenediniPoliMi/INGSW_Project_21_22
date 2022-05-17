@@ -25,7 +25,7 @@ public class PlanningViewState extends GameViewState {
 
     @Override
     public void printCLIPrompt() {
-        List<Card> playableCards = game.getPlayerByID(matchInfo.getCurrentPlayerID()).getPlayableCards();
+        List<Card> playableCards = game.getPlayerByID(playerID).getPlayableCards();
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append("Select the card you want to play:\n");
