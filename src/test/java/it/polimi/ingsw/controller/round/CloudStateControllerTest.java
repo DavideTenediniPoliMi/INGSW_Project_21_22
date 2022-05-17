@@ -67,9 +67,9 @@ public class CloudStateControllerTest {
     void definePlayOrderTest() {
         matchInfo.removePlayer();
         matchInfo.removePlayer();
-        game.playCard(0, Card.CARD_2);
-        game.playCard(1, Card.CARD_1);
-        game.playCard(2, Card.CARD_3);
+        game.playCard(0, Card.OSTRICH);
+        game.playCard(1, Card.LION);
+        game.playCard(2, Card.CAT);
 
         controller.definePlayOrder();
 

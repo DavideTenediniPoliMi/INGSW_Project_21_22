@@ -67,9 +67,9 @@ public class PlanningStateControllerTest {
         matchInfo.removePlayer();
         matchInfo.removePlayer();
 
-        game.playCard(0, Card.CARD_1);
-        game.playCard(1, Card.CARD_5);
-        game.playCard(2, Card.CARD_3);
+        game.playCard(0, Card.LION);
+        game.playCard(1, Card.FOX);
+        game.playCard(2, Card.CAT);
 
         controller.definePlayOrder();
 
@@ -91,7 +91,7 @@ public class PlanningStateControllerTest {
             e.printStackTrace();
         }
         Player player = Game.getInstance().getPlayerByID(0);
-        assertEquals(Card.CARD_2, player.getSelectedCard());
+        assertEquals(Card.OSTRICH, player.getSelectedCard());
     }
 
     @Test
@@ -126,6 +126,6 @@ public class PlanningStateControllerTest {
         matchInfo.removePlayer();
 
         assertDoesNotThrow( () -> controller.playCard(9) );
-        assertEquals(Card.CARD_10, game.getPlayerByID(1).getSelectedCard());
+        assertEquals(Card.TORTOISE, game.getPlayerByID(1).getSelectedCard());
     }
 }

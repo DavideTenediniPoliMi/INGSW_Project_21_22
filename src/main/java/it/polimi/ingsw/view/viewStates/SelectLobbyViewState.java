@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.viewStates;
 
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
@@ -20,6 +21,7 @@ public class SelectLobbyViewState extends LobbyViewState {
     private List<String> validCardBacks = new ArrayList<>();
     private List<String> validTeams = new ArrayList<>();
     private final List<Integer> validNumbers = new ArrayList<>(List.of(0,1,2));
+    private boolean isLastActionSetCardBack;
 
 
     public SelectLobbyViewState(ViewState oldViewState) {
@@ -82,6 +84,8 @@ public class SelectLobbyViewState extends LobbyViewState {
                             .setCardBack(CardBack.valueOf(input))
                             .serialize().toString()
             );
+            isLastActionSetCardBack = true;
+            setInteractionComplete(true);
             return "";
         }
 
@@ -93,6 +97,8 @@ public class SelectLobbyViewState extends LobbyViewState {
                             .setTowerColor(TowerColor.valueOf(input))
                             .serialize().toString()
             );
+            isLastActionSetCardBack = false;
+            setInteractionComplete(true);
             return "";
         }
 
@@ -112,28 +118,37 @@ public class SelectLobbyViewState extends LobbyViewState {
                                     .setReady(true)
                                     .serialize().toString()
                     );
-                    setInteractionComplete(true);
+                    isLastActionSetCardBack = true;
                     break;
                 case 1:
                     notify(
                             new RequestParameters()
-                                    .setCommandType(CommandType.SEL_CARDBACK)
-                                    .setCardBack(null)
+                                    .setCommandType(CommandType.UNSEL_CARDBACK)
                                     .serialize().toString()
                     );
+                    isLastActionSetCardBack = false;
                     break;
                 case 2:
                     notify(
                             new RequestParameters()
-                                    .setCommandType(CommandType.SEL_TOWERCOLOR)
-                                    .setTowerColor(null)
+                                    .setCommandType(CommandType.UNSEL_TOWERCOLOR)
                                     .serialize().toString()
                     );
                     break;
             }
+            setInteractionComplete(true);
             return "";
         }
 
         return "That was not a valid choice! Try again!";
+    }
+
+    @Override
+    public void resetInteraction() {
+        int playerID = matchInfo.getCurrentPlayerID();
+        if(isLastActionSetCardBack)
+            lobby.selectCardBack(playerID, null);
+        else
+            lobby.selectTeam(playerID, null);
     }
 }

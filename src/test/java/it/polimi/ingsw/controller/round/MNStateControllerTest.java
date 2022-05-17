@@ -66,7 +66,7 @@ class MNStateControllerTest {
 
     @Test
     public void outOfRangTest() {
-        game.playCard(0, Card.CARD_1);
+        game.playCard(0, Card.LION);
         assertThrowsExactly(MNOutOfRangeException.class, () -> controller.moveMN(2));
     }
 
@@ -79,7 +79,7 @@ class MNStateControllerTest {
 
     @Test
     public void moveMNTest() throws MNOutOfRangeException {
-        game.playCard(0, Card.CARD_1);
+        game.playCard(0, Card.LION);
         controller.moveMN(1);
         assertEquals(1, game.getBoard().getMNPosition());
     }
@@ -87,7 +87,7 @@ class MNStateControllerTest {
     @Test
     public void moveMNWrapIndexTest() throws MNOutOfRangeException {
         game.moveMN(10);
-        game.playCard(0, Card.CARD_8);
+        game.playCard(0, Card.DOG);
         controller.moveMN(2);
         assertEquals(2, game.getBoard().getMNPosition());
     }

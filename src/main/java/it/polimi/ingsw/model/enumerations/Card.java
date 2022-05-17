@@ -10,16 +10,16 @@ import java.util.List;
  * Class to hold every Assistant Card in the game.
  */
 public enum Card implements Serializable {
-    CARD_1(1, 1),
-    CARD_2(2, 1),
-    CARD_3(3, 2),
-    CARD_4(4, 2),
-    CARD_5(5, 3),
-    CARD_6(6, 3),
-    CARD_7(7, 4),
-    CARD_8(8, 4),
-    CARD_9(9, 5),
-    CARD_10(10, 5),
+    LION(1, 1),
+    OSTRICH(2, 1),
+    CAT(3, 2),
+    EAGLE(4, 2),
+    FOX(5, 3),
+    VIPER(6, 3),
+    OCTOPUS(7, 4),
+    DOG(8, 4),
+    ELEPHANT(9, 5),
+    TORTOISE(10, 5),
     CARD_AFK(99, 0);
 
     public final int WEIGHT;
