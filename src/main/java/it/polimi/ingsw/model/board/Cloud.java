@@ -98,7 +98,10 @@ public class Cloud implements Serializable, Printable<List<String>> {
         cloudBuilder.append("─");
         cloudBuilder.append("┐");
         cloudString.add(cloudBuilder.toString());
+        int length = cloudBuilder.length();
         cloudBuilder.setLength(0);
+
+        cloudString.add("│" + " ".repeat(length - 2) + "│");
 
         String pureStudents = students.print(false);
 
@@ -111,6 +114,8 @@ public class Cloud implements Serializable, Printable<List<String>> {
                     .append("│");
         cloudString.add(cloudBuilder.toString());
         cloudBuilder.setLength(0);
+
+        cloudString.add("│" + " ".repeat(length - 2) + "│");
 
         cloudBuilder.append("└");
 

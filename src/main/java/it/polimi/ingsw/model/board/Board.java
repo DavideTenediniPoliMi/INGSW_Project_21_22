@@ -10,9 +10,7 @@ import it.polimi.ingsw.utils.Printable;
 import it.polimi.ingsw.utils.Serializable;
 import it.polimi.ingsw.utils.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Class to hold data for every entity of a Game (Islands, Schools, Clouds, Professors).
@@ -454,16 +452,14 @@ public class Board implements Serializable, Printable<List<String>> {
         }
 
         strings.add(" ".repeat(strings.get(0).length()));
+        strings.add(" ".repeat(strings.get(0).length()));
 
         // SECOND ROW OF ISLANDS (11 and 5)
         island = getIslandOfAbsoluteIndex(11);
         List<String> temp = island.print(false, false, false,false);
 
         //CLOUDS
-        temp = StringUtils.insertSpacesAfter(temp, 26);
-        temp = StringUtils.insertAfter(temp, clouds.get(0).print(), 1, 0);
-        temp = StringUtils.insertAfter(temp, clouds.get(1).print(), 1, 10);
-        temp = StringUtils.insertSpacesAfter(temp, 27);
+        temp = StringUtils.insertAfter(temp, printClouds(), 0,0);
 
         island = getIslandOfAbsoluteIndex(5);
         temp = StringUtils.insertAfter(temp, island.print(false, false, false,false), 0, 0);
@@ -471,6 +467,8 @@ public class Board implements Serializable, Printable<List<String>> {
         strings.addAll(temp);
 
         strings.add(" ".repeat(strings.get(0).length()));
+        strings.add(" ".repeat(strings.get(0).length()));
+
 
         temp.clear();
         island = getIslandOfAbsoluteIndex(10);
@@ -485,5 +483,37 @@ public class Board implements Serializable, Printable<List<String>> {
         strings.addAll(temp);
 
         return strings;
+    }
+
+    private List<String> printClouds() {
+        List<String> result = new ArrayList<>(Collections.nCopies(7, ""));
+
+        switch(clouds.size()) {
+            case 2:
+                result = StringUtils.insertSpacesAfter(result, 21);
+                result = StringUtils.insertAfter(result, clouds.get(0).print(), 1, 0);
+                result = StringUtils.insertAfter(result, clouds.get(1).print(), 1, 21);
+                result = StringUtils.insertSpacesAfter(result, 21);
+                break;
+            case 3:
+                result = StringUtils.insertSpacesAfter(result, 10);
+                result = StringUtils.insertAfter(result, clouds.get(0).print(), 1, 0);
+                result = StringUtils.insertAfter(result, clouds.get(1).print(), 1, 8);
+                result = StringUtils.insertAfter(result, clouds.get(1).print(), 1, 8);
+                result = StringUtils.insertSpacesAfter(result, 10);
+                break;
+            case 4:
+                result = StringUtils.insertSpacesAfter(result, 9);
+                result = StringUtils.insertAfter(result, clouds.get(0).print(), 1, 0);
+                result = StringUtils.insertAfter(result, clouds.get(1).print(), 1, 5);
+                result = StringUtils.insertAfter(result, clouds.get(1).print(), 1, 5);
+                result = StringUtils.insertAfter(result, clouds.get(1).print(), 1, 5);
+                result = StringUtils.insertSpacesAfter(result, 9);
+                break;
+            default:
+                break;
+        }
+
+        return result;
     }
 }

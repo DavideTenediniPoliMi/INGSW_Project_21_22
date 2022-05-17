@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.board;
 
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
@@ -241,13 +242,52 @@ public class BoardTest {
     }
 
     /*@Test
-    void testPrint() {
+    void testPrint4Clouds() {
         AnsiConsole.systemInstall();
 
+        board = null;
+        MatchInfo.getInstance().setUpGame(4,false);
 
+
+        board = new Board();
+        board.placeMNAt(0);
+
+        board.createClouds(4);
+        board.refillClouds(3);
 
         AnsiConsole.sysOut().println(StringUtils.listToString(board.print()));
 
         AnsiConsole.systemUninstall();
-    }*/
+    }
+
+    @Test
+    void testPrint3Clouds() {
+        AnsiConsole.systemInstall();
+
+        board = null;
+        MatchInfo.getInstance().setUpGame(3,false);
+
+        board = new Board();
+        board.placeMNAt(0);
+
+        board.createClouds(3);
+        board.refillClouds(4);
+
+        AnsiConsole.sysOut().println(StringUtils.listToString(board.print()));
+
+        AnsiConsole.systemUninstall();
+    }
+
+    @Test
+    void testPrint2Clouds() {
+        AnsiConsole.systemInstall();
+
+        MatchInfo.getInstance().setUpGame(2, false);
+
+        AnsiConsole.sysOut().println(StringUtils.listToString(board.print()));
+
+        AnsiConsole.systemUninstall();
+    }
+
+     */
 }
