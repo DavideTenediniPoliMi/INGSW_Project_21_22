@@ -76,6 +76,7 @@ public class LobbyController {
         }
 
         lobby.addPlayer(playerID, name);
+        matchInfo.setNumPlayersConnected(MatchInfo.getInstance().getNumPlayersConnected() + 1);
     }
 
     /**
@@ -174,6 +175,7 @@ public class LobbyController {
         }
 
         lobby.removePlayer(playerID);
+        matchInfo.setNumPlayersConnected(MatchInfo.getInstance().getNumPlayersConnected() - 1);
     }
 
     /**

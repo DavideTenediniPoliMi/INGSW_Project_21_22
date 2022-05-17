@@ -7,10 +7,12 @@ import it.polimi.ingsw.utils.Printable;
 public class ViewState extends Observable<String> implements Printable<String> {
     private boolean interactionComplete;
     private String buffer = "";
+    protected int playerID;
 
     public ViewState() {}
 
     public ViewState(ViewState oldViewState) {
+        playerID = oldViewState.playerID;
         for(Observer<String> observer: oldViewState.getObservers()) {
             addObserver(observer);
         }
@@ -38,6 +40,10 @@ public class ViewState extends Observable<String> implements Printable<String> {
 
     public void resetInteraction() {
 
+    }
+
+    public void setPlayerID(int playerID) {
+        this.playerID = playerID;
     }
 
     public String manageCLIInput(String input) {

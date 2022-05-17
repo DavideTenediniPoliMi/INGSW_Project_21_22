@@ -35,8 +35,6 @@ public class SelectLobbyViewState extends LobbyViewState {
 
     @Override
     public void printCLIPrompt() {
-        int playerID = matchInfo.getCurrentPlayerID();
-
         if(lobby.getPlayerByID(playerID).getCardBack() == null) {
             //it finds card backs already picked
             List<String> pickedCardBacks = new ArrayList<>();

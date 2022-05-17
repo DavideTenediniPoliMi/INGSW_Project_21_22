@@ -59,7 +59,7 @@ public class Lobby extends Observable<ResponseParameters> implements Serializabl
         players.add(new Player(playerID, name));
         readyStatus.put(playerID, false);
 
-        ResponseParameters params = new ResponseParameters().setPlayer(getPlayerByID(playerID));
+        ResponseParameters params = new ResponseParameters().setPlayers(players);
         notify(params);
     }
 
@@ -74,6 +74,7 @@ public class Lobby extends Observable<ResponseParameters> implements Serializabl
             players.remove(toRemove);
             readyStatus.remove(playerID);
         }
+        MatchInfo.getInstance().setNumPlayersConnected(MatchInfo.getInstance().getNumPlayersConnected() - 1);
 
         ResponseParameters params = new ResponseParameters().setPlayers(players);
         notify(params);
