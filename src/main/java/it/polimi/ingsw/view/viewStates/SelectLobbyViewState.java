@@ -10,17 +10,16 @@ import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.utils.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class SelectLobbyViewState extends LobbyViewState {
-    private Lobby lobby = Lobby.getLobby();
-    private MatchInfo matchInfo = MatchInfo.getInstance();
+    private final Lobby lobby = Lobby.getLobby();
+    private final MatchInfo matchInfo = MatchInfo.getInstance();
     private List<String> validCardBacks = new ArrayList<>();
     private List<String> validTeams = new ArrayList<>();
-    private List<Integer> validNumbers = new ArrayList<>(List.of(0,1,2));
+    private final List<Integer> validNumbers = new ArrayList<>(List.of(0,1,2));
 
 
     public SelectLobbyViewState(ViewState oldViewState) {
@@ -37,7 +36,7 @@ public class SelectLobbyViewState extends LobbyViewState {
         int playerID = matchInfo.getCurrentPlayerID();
 
         if(lobby.getPlayerByID(playerID).getCardBack() == null) {
-            //finds card backs already picked
+            //it finds card backs already picked
             List<String> pickedCardBacks = new ArrayList<>();
             for(Player p : lobby.getPlayers()) {
                 if(p.getCardBack() != null)
@@ -52,7 +51,7 @@ public class SelectLobbyViewState extends LobbyViewState {
 
 
         if(lobby.getPlayerByID(playerID).getTeamColor() == null) {
-            //finds teams already picked
+            //it finds teams already picked
             List<String> pickedTeams = new ArrayList<>();
             for(Player p : lobby.getPlayers()) {
                 if(p.getTeamColor() != null)
