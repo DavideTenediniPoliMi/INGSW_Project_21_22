@@ -2,7 +2,9 @@ package it.polimi.ingsw.model.board;
 
 import com.google.gson.*;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
@@ -10,9 +12,7 @@ import it.polimi.ingsw.utils.Printable;
 import it.polimi.ingsw.utils.Serializable;
 import it.polimi.ingsw.utils.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Class to hold data for every entity of a Game (Islands, Schools, Clouds, Professors).
@@ -80,7 +80,7 @@ public class Board implements Serializable, Printable<List<String>> {
         getIslandOfAbsoluteIndex(islandIndex).addStudents(students);
     }
 
-    private Island getIslandOfAbsoluteIndex(int islandIndex) {
+    public Island getIslandOfAbsoluteIndex(int islandIndex) {
         int runningIndex = 0;
         int fixedIndex = 0;
 
@@ -454,16 +454,14 @@ public class Board implements Serializable, Printable<List<String>> {
         }
 
         strings.add(" ".repeat(strings.get(0).length()));
+        strings.add(" ".repeat(strings.get(0).length()));
 
         // SECOND ROW OF ISLANDS (11 and 5)
         island = getIslandOfAbsoluteIndex(11);
         List<String> temp = island.print(false, false, false,false);
 
         //CLOUDS
-        temp = StringUtils.insertSpacesAfter(temp, 26);
-        temp = StringUtils.insertAfter(temp, clouds.get(0).print(), 1, 0);
-        temp = StringUtils.insertAfter(temp, clouds.get(1).print(), 1, 10);
-        temp = StringUtils.insertSpacesAfter(temp, 27);
+        temp = StringUtils.insertAfter(temp, printClouds(), 0,0);
 
         island = getIslandOfAbsoluteIndex(5);
         temp = StringUtils.insertAfter(temp, island.print(false, false, false,false), 0, 0);
@@ -471,6 +469,8 @@ public class Board implements Serializable, Printable<List<String>> {
         strings.addAll(temp);
 
         strings.add(" ".repeat(strings.get(0).length()));
+        strings.add(" ".repeat(strings.get(0).length()));
+
 
         temp.clear();
         island = getIslandOfAbsoluteIndex(10);
@@ -484,6 +484,84 @@ public class Board implements Serializable, Printable<List<String>> {
 
         strings.addAll(temp);
 
+        // PLAYERS
+        strings.addAll(printPlayers());
+
+        List<CharacterCard> characterCards = Game.getInstance().getCharacterCards();
+
+        // EXPERT MODE
+        if(MatchInfo.getInstance().isExpertMode()) {
+            temp = characterCards.get(0).print();
+            temp = StringUtils.insertAfter(temp, characterCards.get(1).print(), 0, 5);
+            temp = StringUtils.insertAfter(temp, characterCards.get(2).print(), 0, 5);
+        }
+
+        strings = StringUtils.insertAfter(strings, temp, 0, 5);
+
         return strings;
+    }
+
+    private List<String> printClouds() {
+        List<String> result = new ArrayList<>(Collections.nCopies(7, ""));
+
+        switch(clouds.size()) {
+            case 2:
+                result = StringUtils.insertSpacesAfter(result, 21);
+                result = StringUtils.insertAfter(result, clouds.get(0).print(), 1, 0);
+                result = StringUtils.insertAfter(result, clouds.get(1).print(), 1, 21);
+                result = StringUtils.insertSpacesAfter(result, 21);
+                break;
+            case 3:
+                result = StringUtils.insertSpacesAfter(result, 10);
+                result = StringUtils.insertAfter(result, clouds.get(0).print(), 1, 0);
+                result = StringUtils.insertAfter(result, clouds.get(1).print(), 1, 8);
+                result = StringUtils.insertAfter(result, clouds.get(2).print(), 1, 8);
+                result = StringUtils.insertSpacesAfter(result, 10);
+                break;
+            case 4:
+                result = StringUtils.insertSpacesAfter(result, 9);
+                result = StringUtils.insertAfter(result, clouds.get(0).print(), 1, 0);
+                result = StringUtils.insertAfter(result, clouds.get(1).print(), 1, 5);
+                result = StringUtils.insertAfter(result, clouds.get(2).print(), 1, 5);
+                result = StringUtils.insertAfter(result, clouds.get(3).print(), 1, 5);
+                result = StringUtils.insertSpacesAfter(result, 9);
+                break;
+            default:
+                break;
+        }
+
+        return result;
+    }
+
+    public List<String> printPlayers() {
+        List<String> result = new ArrayList<>(Collections.nCopies(10, ""));
+
+        switch(schools.size()) {
+            case 2:
+                result = StringUtils.insertSpacesAfter(result, 36);
+                result = StringUtils.insertAfter(result, schools.get(0).print(), 1, 0);
+                result = StringUtils.insertAfter(result, schools.get(1).print(), 1, 21);
+                result = StringUtils.insertSpacesAfter(result, 36);
+                break;
+            case 3:
+                result = StringUtils.insertSpacesAfter(result, 18);
+                result = StringUtils.insertAfter(result, schools.get(0).print(), 1, 0);
+                result = StringUtils.insertAfter(result, schools.get(1).print(), 1, 17);
+                result = StringUtils.insertAfter(result, schools.get(2).print(), 1, 17);
+                result = StringUtils.insertSpacesAfter(result, 18);
+                break;
+            case 4:
+                result = StringUtils.insertSpacesAfter(result, 10);
+                result = StringUtils.insertAfter(result, schools.get(0).print(), 1, 0);
+                result = StringUtils.insertAfter(result, schools.get(1).print(), 1, 9);
+                result = StringUtils.insertAfter(result, schools.get(2).print(), 1, 9);
+                result = StringUtils.insertAfter(result, schools.get(3).print(), 1, 9);
+                result = StringUtils.insertSpacesAfter(result, 10);
+                break;
+            default:
+                break;
+        }
+
+        return result;
     }
 }

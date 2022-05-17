@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.board;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
@@ -98,7 +99,11 @@ public class Cloud implements Serializable, Printable<List<String>> {
         cloudBuilder.append("─");
         cloudBuilder.append("┐");
         cloudString.add(cloudBuilder.toString());
+        int length = cloudBuilder.length();
         cloudBuilder.setLength(0);
+
+        cloudString.add("│" + Game.getInstance().getIndexOfCloud(this) + " ".repeat(length - 3) + "│");
+
 
         String pureStudents = students.print(false);
 
@@ -111,6 +116,8 @@ public class Cloud implements Serializable, Printable<List<String>> {
                     .append("│");
         cloudString.add(cloudBuilder.toString());
         cloudBuilder.setLength(0);
+
+        cloudString.add("│" + " ".repeat(length - 2) + "│");
 
         cloudBuilder.append("└");
 

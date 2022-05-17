@@ -170,8 +170,8 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
     }
 
     @Override
-    public String[] print(boolean... params) {
-        List<String> cardString = new java.util.ArrayList<>(List.of(super.print(params)));
+    public List<String> print(boolean... params) {
+        List<String> cardString = new java.util.ArrayList<>(super.print(params));
         StringBuilder cardBuilder = new StringBuilder();
 
         cardString.remove(cardString.size() - 1);
@@ -197,6 +197,6 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
         cardString.add(cardBuilder.toString());
         cardBuilder.setLength(0);
 
-        return cardString.toArray(new String[0]);
+        return cardString;
     }
 }

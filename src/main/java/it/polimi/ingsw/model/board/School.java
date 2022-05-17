@@ -172,7 +172,7 @@ public class School implements Serializable, Printable<List<String>> {
         schoolBuilder.append("│ ").append(owner.getTeamColor().print()).append(" ").append(ownerName);
 
         if(MatchInfo.getInstance().isExpertMode())
-            schoolBuilder.append(owner.getNumCoins()).append(AnsiCodes.COIN);
+            schoolBuilder.append(owner.getNumCoins()).append("©");
 
         schoolBuilder.append(" │");
         schoolString.add(schoolBuilder.toString());

@@ -36,6 +36,7 @@ public class CLI {
 
      public void setPlayerID(int playerID) {
           this.playerID = playerID;
+          viewState.setPlayerID(playerID);
      }
 
      public int getPlayerID() {
@@ -146,7 +147,7 @@ public class CLI {
      public void handleInteraction() {
           do {
                viewState.printCLIPrompt();
-               AnsiConsole.sysOut().println(viewState.print() + viewState.getBuffer());
+               AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + viewState.print() + viewState.getBuffer());
 
                String error = viewState.manageCLIInput(scanner.nextLine());
 
@@ -157,7 +158,7 @@ public class CLI {
 
      public void displayState() {
           viewState.printCLIPrompt();
-          AnsiConsole.sysOut().println(viewState.print() + viewState.getBuffer());
+          AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + viewState.print() + viewState.getBuffer());
      }
 
      public void resetInteraction(String error) {
@@ -168,7 +169,8 @@ public class CLI {
 
      public void handleHandshake() {
           do {
-               AnsiConsole.sysOut().println(viewState.print() + viewState.getBuffer());
+               viewState.printCLIPrompt();
+               AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + viewState.print() + viewState.getBuffer());
 
                name = scanner.nextLine();
 

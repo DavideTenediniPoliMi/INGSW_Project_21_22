@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.board.Board;
+import it.polimi.ingsw.model.board.Cloud;
+import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.network.observer.Observable;
@@ -114,6 +116,15 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         notify(params);
     }
 
+    public int getIndexOfIsland(Island island) {
+        for(int i = 0; i < 12; i++) {
+            if(board.getIslandOfAbsoluteIndex(i).equals(island))
+                return i;
+        }
+
+        return -1;
+    }
+
     // MOTHER NATURE
 
     /**
@@ -181,6 +192,15 @@ public class Game extends Observable<ResponseParameters> implements Serializable
                 .setClouds(board.getClouds())
                 .setBagEmpty(isStudentBagEmpty());
         notify(params);
+    }
+
+    public int getIndexOfCloud(Cloud cloud) {
+        for(int i = 0; i < board.getClouds().size(); i++) {
+            if(cloud.equals(board.getClouds().get(i)))
+                return i;
+        }
+
+        return -1;
     }
 
     // SCHOOL

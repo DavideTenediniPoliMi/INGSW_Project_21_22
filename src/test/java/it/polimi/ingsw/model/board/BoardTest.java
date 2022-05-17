@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.board;
 
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
@@ -239,15 +240,4 @@ public class BoardTest {
         assertTrue(board.getClouds().isEmpty());
         assertTrue(board.getSchools().isEmpty());
     }
-
-    /*@Test
-    void testPrint() {
-        AnsiConsole.systemInstall();
-
-
-
-        AnsiConsole.sysOut().println(StringUtils.listToString(board.print()));
-
-        AnsiConsole.systemUninstall();
-    }*/
 }

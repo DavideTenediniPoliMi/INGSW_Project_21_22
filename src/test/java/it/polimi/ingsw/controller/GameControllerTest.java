@@ -23,6 +23,8 @@ import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.network.commands.*;
 import it.polimi.ingsw.network.parameters.CardParameters;
+import it.polimi.ingsw.utils.StringUtils;
+import org.fusesource.jansi.AnsiConsole;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -1392,4 +1394,89 @@ class GameControllerTest {
 
         assertEquals(GameStatus.IN_GAME, matchInfo.getGameStatus());
     }
+/*
+    @Test
+    public void testPrintGame2() {
+        AnsiConsole.systemInstall();
+
+        AnsiConsole.sysOut().println(StringUtils.listToString(board.print()));
+
+        AnsiConsole.systemUninstall();
+    }
+
+    @Test
+    public void testPrintGame3() {
+        tearDown();
+        AnsiConsole.systemInstall();
+        gameController = new GameController();
+        game = Game.getInstance();
+        board = game.getBoard();
+        lobby = Lobby.getLobby();
+        matchInfo = MatchInfo.getInstance();
+
+        lobby.addPlayer(0, "a");
+        lobby.addPlayer(1, "b");
+        lobby.selectTeam(0, TowerColor.BLACK);
+        lobby.selectTeam(1, TowerColor.WHITE);
+        lobby.selectCardBack(0, CardBack.WIZARD_1);
+        lobby.selectCardBack(1, CardBack.WIZARD_2);
+        lobby.setReadyStatus(0, true);
+        lobby.setReadyStatus(1, true);
+
+        lobby.addPlayer(2, "c");
+        lobby.selectTeam(2, TowerColor.GREY);
+        lobby.selectCardBack(2, CardBack.WIZARD_3);
+        lobby.setReadyStatus(2, true);
+
+        matchInfo.setUpGame(3,false);
+
+        matchInfo.setNumPlayersConnected(3);
+
+        gameController.tryCreatingGame();
+
+        AnsiConsole.sysOut().println(StringUtils.listToString(board.print()));
+
+        AnsiConsole.systemUninstall();
+    }
+
+    @Test
+    public void testPrintGame4() {
+        tearDown();
+        AnsiConsole.systemInstall();
+        gameController = new GameController();
+        game = Game.getInstance();
+        board = game.getBoard();
+        lobby = Lobby.getLobby();
+        matchInfo = MatchInfo.getInstance();
+
+        lobby.addPlayer(0, "a");
+        lobby.addPlayer(1, "b");
+        lobby.selectTeam(0, TowerColor.BLACK);
+        lobby.selectTeam(1, TowerColor.WHITE);
+        lobby.selectCardBack(0, CardBack.WIZARD_1);
+        lobby.selectCardBack(1, CardBack.WIZARD_2);
+        lobby.setReadyStatus(0, true);
+        lobby.setReadyStatus(1, true);
+
+        lobby.addPlayer(2, "c");
+        lobby.selectTeam(2, TowerColor.BLACK);
+        lobby.selectCardBack(2, CardBack.WIZARD_3);
+        lobby.setReadyStatus(2, true);
+        lobby.addPlayer(3, "d");
+        lobby.selectTeam(3, TowerColor.WHITE);
+        lobby.selectCardBack(3, CardBack.WIZARD_4);
+        lobby.setReadyStatus(3, true);
+
+        matchInfo.setUpGame(4,true);
+
+        matchInfo.setNumPlayersConnected(4);
+
+        gameController.tryCreatingGame();
+
+        AnsiConsole.sysOut().println(StringUtils.listToString(board.print()));
+
+        AnsiConsole.systemUninstall();
+    }
+
+ */
 }
