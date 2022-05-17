@@ -491,12 +491,18 @@ public class Board implements Serializable, Printable<List<String>> {
 
         // EXPERT MODE
         if(MatchInfo.getInstance().isExpertMode()) {
-            temp = characterCards.get(0).print();
-            temp = StringUtils.insertAfter(temp, characterCards.get(1).print(), 0, 5);
-            temp = StringUtils.insertAfter(temp, characterCards.get(2).print(), 0, 5);
+            temp = new ArrayList<>();
+            temp.add(" ".repeat(13));
+            temp.add("Coins left : " + numCoinsLeft);
+            temp.add(" ".repeat(13));
+            temp.addAll(characterCards.get(0).print());
+            temp.add(" ".repeat(13));
+            temp.addAll(characterCards.get(1).print());
+            temp.add(" ".repeat(13));
+            temp.addAll(characterCards.get(2).print());
         }
 
-        strings = StringUtils.insertAfter(strings, temp, 0, 5);
+        strings = StringUtils.insertAfter(strings, temp, 0, 10);
 
         return strings;
     }
