@@ -80,7 +80,7 @@ public class Board implements Serializable, Printable<List<String>> {
         getIslandOfAbsoluteIndex(islandIndex).addStudents(students);
     }
 
-    private Island getIslandOfAbsoluteIndex(int islandIndex) {
+    public Island getIslandOfAbsoluteIndex(int islandIndex) {
         int runningIndex = 0;
         int fixedIndex = 0;
 

@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Cloud;
+import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.network.observer.Observable;
@@ -113,6 +114,15 @@ public class Game extends Observable<ResponseParameters> implements Serializable
 
         ResponseParameters params = new ResponseParameters().setIslands(board.getIslands());
         notify(params);
+    }
+
+    public int getIndexOfIsland(Island island) {
+        for(int i = 0; i < 12; i++) {
+            if(board.getIslandOfAbsoluteIndex(i).equals(island))
+                return i;
+        }
+
+        return -1;
     }
 
     // MOTHER NATURE

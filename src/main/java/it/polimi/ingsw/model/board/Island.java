@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.board;
 
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.model.enumerations.TowerColor;
@@ -145,8 +146,8 @@ public abstract class Island implements Serializable, Printable<List<String>> {
         islandBuilder.setLength(0);
 
         //First row: Conqueror team info
-
-        islandBuilder.append("│            Team: ")
+        int index = Game.getInstance().getIndexOfIsland(this);
+        islandBuilder.append("│" + index + (index < 10 ? " " : "") + "          Team: ")
                     .append(getTeamColor() == null ? "   " : getTeamColor().print())
                     .append("│");
 
