@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.Connection;
@@ -68,7 +69,7 @@ public class ServerConnection extends Connection {
                 String received = receiveMessage();
                 JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
 
-                if(!jsonObject.has("error")) {
+                if(!jsonObject.has("error")) { //Lobby was created
                     break;
                 }
             }
@@ -98,8 +99,6 @@ public class ServerConnection extends Connection {
         cli.setViewState(new LobbyViewState(cli.getViewState()));
         cli.handleInteraction();
 
-        JsonObject firstGameJson;
-
         while(!inGame) {
             String response = receiveMessage();
 
@@ -117,8 +116,12 @@ public class ServerConnection extends Connection {
                     }
                 }
                 synchronized (cli) {
-                    new ResponseParameters().deserialize(jsonObject);
-                    cli.handleInteraction();
+                    if(!Lobby.getLobby().isReady(cli.getPlayerID())) {
+                        new ResponseParameters().deserialize(jsonObject);
+                        cli.handleInteraction();
+                    } else {
+                        cli.displayState();
+                    }
                 }
             });
         }

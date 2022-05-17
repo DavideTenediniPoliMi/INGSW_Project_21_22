@@ -460,10 +460,10 @@ public class Board implements Serializable, Printable<List<String>> {
         List<String> temp = island.print(false, false, false,false);
 
         //CLOUDS
-        temp = StringUtils.insertSpacesAfter(temp, 30);
-        temp = StringUtils.insertAfter(temp, clouds.get(0).print(), 0, 0);
-        temp = StringUtils.insertAfter(temp, clouds.get(1).print(), 0, 10);
-        temp = StringUtils.insertSpacesAfter(temp, 30);
+        temp = StringUtils.insertSpacesAfter(temp, 26);
+        temp = StringUtils.insertAfter(temp, clouds.get(0).print(), 1, 0);
+        temp = StringUtils.insertAfter(temp, clouds.get(1).print(), 1, 10);
+        temp = StringUtils.insertSpacesAfter(temp, 27);
 
         island = getIslandOfAbsoluteIndex(5);
         temp = StringUtils.insertAfter(temp, island.print(false, false, false,false), 0, 0);

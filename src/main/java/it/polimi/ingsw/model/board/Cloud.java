@@ -107,8 +107,8 @@ public class Cloud implements Serializable, Printable<List<String>> {
         }
 
         cloudBuilder.append("│").append(students.print(false))
-                    .append(" ".repeat(MatchInfo.getInstance().getMaxMovableStudents()*4 - pureStudents.length()))
-                    .append(" │");
+                    .append(" ".repeat(MatchInfo.getInstance().getMaxMovableStudents()*4 - (pureStudents.length() - 1)))
+                    .append("│");
         cloudString.add(cloudBuilder.toString());
         cloudBuilder.setLength(0);
 
