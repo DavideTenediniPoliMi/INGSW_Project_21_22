@@ -6,6 +6,8 @@ import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
+import it.polimi.ingsw.utils.StringUtils;
+import org.fusesource.jansi.AnsiConsole;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -235,5 +237,14 @@ public class BoardTest {
 
         assertTrue(board.getClouds().isEmpty());
         assertTrue(board.getSchools().isEmpty());
+    }
+
+    @Test
+    void testPrint() {
+        AnsiConsole.systemInstall();
+
+        AnsiConsole.sysOut().println(StringUtils.listToString(board.print()));
+
+        AnsiConsole.systemUninstall();
     }
 }

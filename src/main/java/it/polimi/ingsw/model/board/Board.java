@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.utils.Printable;
 import it.polimi.ingsw.utils.Serializable;
+import it.polimi.ingsw.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -443,6 +444,46 @@ public class Board implements Serializable, Printable<List<String>> {
 
     @Override
     public List<String> print(boolean... params) {
-        return null;
+        Island island = getIslandOfAbsoluteIndex(0);
+        List<String> strings = island.print(false, false, false,false);
+
+        // FIRST ROW OF ISLANDS (0 - 4)
+        for(int i = 1; i < 5; i ++) {
+            island = getIslandOfAbsoluteIndex(i);
+            strings = StringUtils.insertAfter(strings, island.print(false, false, false,false), 0, 6);
+        }
+
+        strings.add(" ".repeat(strings.get(0).length()));
+
+        // SECOND ROW OF ISLANDS (11 and 5)
+        island = getIslandOfAbsoluteIndex(11);
+        List<String> temp = island.print(false, false, false,false);
+
+        //CLOUDS
+        temp = StringUtils.insertSpacesAfter(temp, 30);
+        temp = StringUtils.insertAfter(temp, clouds.get(0).print(), 0, 0);
+        temp = StringUtils.insertAfter(temp, clouds.get(1).print(), 0, 10);
+        temp = StringUtils.insertSpacesAfter(temp, 30);
+
+        island = getIslandOfAbsoluteIndex(5);
+        temp = StringUtils.insertAfter(temp, island.print(false, false, false,false), 0, 0);
+
+        strings.addAll(temp);
+
+        strings.add(" ".repeat(strings.get(0).length()));
+
+        temp.clear();
+        island = getIslandOfAbsoluteIndex(10);
+        temp = island.print(false, false, false,false);
+
+        // LAST ROW OF ISLANDS (10 - 6)
+        for(int i = 9; i >= 6; i --) {
+            island = getIslandOfAbsoluteIndex(i);
+            temp = StringUtils.insertAfter(temp, island.print(false, false, false,false), 0, 6);
+        }
+
+        strings.addAll(temp);
+
+        return strings;
     }
 }

@@ -5,6 +5,10 @@ import java.util.List;
 
 public class StringUtils {
     public static List<String> insertAfter(List<String> before, List<String> after, int starting, int spaces) {
+        if(after == null) {
+            return insertSpacesAfter(before, spaces);
+        }
+
         //ALWAYS ASSUME THAT EVERY ROW OF BEFORE HAS THE SAME LENGTH (SAME FOR AFTER)
         List<String> result = new ArrayList<>();
         int lengthBefore = before.get(0).length();
@@ -27,6 +31,20 @@ public class StringUtils {
             for (int i = before.size(); i < starting + after.size(); i++) {
                 result.add(" ".repeat(lengthBefore + spaces) + after.get(i - starting));
             }
+        }
+
+        return result;
+    }
+
+    public static List<String> insertSpacesAfter(List<String> before, int spaces) {
+        List<String> result = new ArrayList<>();
+
+        for(int i = 0; i < before.size(); i++) {
+            StringBuilder stringBuilder = new StringBuilder(before.get(i));
+
+            stringBuilder.append(" ".repeat(spaces));
+
+            result.add(stringBuilder.toString());
         }
 
         return result;
