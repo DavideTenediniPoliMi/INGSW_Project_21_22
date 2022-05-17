@@ -3,6 +3,8 @@ package it.polimi.ingsw.model.characters;
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.network.parameters.CardParameters;
 
+import java.util.List;
+
 /**
  * Class representing an abstract decorator for a generic <code>CharacterCard</code>. Used to implement different
  * effects to apply to the generic interface of a <code>CharacterCard</code>.
@@ -84,7 +86,7 @@ public abstract class CharacterCardDecorator extends CharacterCard {
     public abstract void setParameters(CardParameters params);
 
     @Override
-    public String[] print(boolean... params) {
+    public List<String> print(boolean... params) {
         return card.print(params);
     }
 }

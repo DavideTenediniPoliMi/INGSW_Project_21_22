@@ -2,7 +2,9 @@ package it.polimi.ingsw.model.board;
 
 import com.google.gson.*;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
@@ -483,13 +485,18 @@ public class Board implements Serializable, Printable<List<String>> {
         strings.addAll(temp);
 
         // PLAYERS
-        temp = schools.get(0).print();
+        strings.addAll(printPlayers());
 
-        for(int i = 1 ; i < schools.size(); i++) {
-            temp = StringUtils.insertAfter(temp, schools.get(i).print(), 0, 10);
+        List<CharacterCard> characterCards = Game.getInstance().getCharacterCards();
+
+        // EXPERT MODE
+        if(MatchInfo.getInstance().isExpertMode()) {
+            temp = characterCards.get(0).print();
+            temp = StringUtils.insertAfter(temp, characterCards.get(1).print(), 0, 5);
+            temp = StringUtils.insertAfter(temp, characterCards.get(2).print(), 0, 5);
         }
 
-        strings.addAll(temp);
+        strings = StringUtils.insertAfter(strings, temp, 0, 5);
 
         return strings;
     }
@@ -508,16 +515,48 @@ public class Board implements Serializable, Printable<List<String>> {
                 result = StringUtils.insertSpacesAfter(result, 10);
                 result = StringUtils.insertAfter(result, clouds.get(0).print(), 1, 0);
                 result = StringUtils.insertAfter(result, clouds.get(1).print(), 1, 8);
-                result = StringUtils.insertAfter(result, clouds.get(1).print(), 1, 8);
+                result = StringUtils.insertAfter(result, clouds.get(2).print(), 1, 8);
                 result = StringUtils.insertSpacesAfter(result, 10);
                 break;
             case 4:
                 result = StringUtils.insertSpacesAfter(result, 9);
                 result = StringUtils.insertAfter(result, clouds.get(0).print(), 1, 0);
                 result = StringUtils.insertAfter(result, clouds.get(1).print(), 1, 5);
-                result = StringUtils.insertAfter(result, clouds.get(1).print(), 1, 5);
-                result = StringUtils.insertAfter(result, clouds.get(1).print(), 1, 5);
+                result = StringUtils.insertAfter(result, clouds.get(2).print(), 1, 5);
+                result = StringUtils.insertAfter(result, clouds.get(3).print(), 1, 5);
                 result = StringUtils.insertSpacesAfter(result, 9);
+                break;
+            default:
+                break;
+        }
+
+        return result;
+    }
+
+    public List<String> printPlayers() {
+        List<String> result = new ArrayList<>(Collections.nCopies(10, ""));
+
+        switch(schools.size()) {
+            case 2:
+                result = StringUtils.insertSpacesAfter(result, 36);
+                result = StringUtils.insertAfter(result, schools.get(0).print(), 1, 0);
+                result = StringUtils.insertAfter(result, schools.get(1).print(), 1, 21);
+                result = StringUtils.insertSpacesAfter(result, 36);
+                break;
+            case 3:
+                result = StringUtils.insertSpacesAfter(result, 18);
+                result = StringUtils.insertAfter(result, schools.get(0).print(), 1, 0);
+                result = StringUtils.insertAfter(result, schools.get(1).print(), 1, 17);
+                result = StringUtils.insertAfter(result, schools.get(2).print(), 1, 17);
+                result = StringUtils.insertSpacesAfter(result, 18);
+                break;
+            case 4:
+                result = StringUtils.insertSpacesAfter(result, 10);
+                result = StringUtils.insertAfter(result, schools.get(0).print(), 1, 0);
+                result = StringUtils.insertAfter(result, schools.get(1).print(), 1, 9);
+                result = StringUtils.insertAfter(result, schools.get(2).print(), 1, 9);
+                result = StringUtils.insertAfter(result, schools.get(3).print(), 1, 9);
+                result = StringUtils.insertSpacesAfter(result, 10);
                 break;
             default:
                 break;

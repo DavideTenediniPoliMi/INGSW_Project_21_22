@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Abstract class representing a generic Character Card.
  */
-public abstract class CharacterCard implements Serializable, Printable<String[]> {
+public abstract class CharacterCard implements Serializable, Printable<List<String>> {
     protected String name;
     protected int cost;
     protected boolean active;
@@ -111,7 +111,7 @@ public abstract class CharacterCard implements Serializable, Printable<String[]>
     public abstract ResponseParameters getResponseParameters();
 
     @Override
-    public String[] print(boolean... params) {
+    public List<String> print(boolean... params) {
         StringBuilder cardBuilder = new StringBuilder();
         List<String> cardString = new ArrayList<>();
 
@@ -122,7 +122,7 @@ public abstract class CharacterCard implements Serializable, Printable<String[]>
         cardBuilder.append("│ ").append(active ? AnsiCodes.GREEN_BACKGROUND_BRIGHT : AnsiCodes.RED_BACKGROUND_BRIGHT)
                     .append(" A ").append(AnsiCodes.RESET)
                     .append(" ".repeat(4))
-                    .append(cost).append(AnsiCodes.COIN)
+                    .append(cost).append("©")
                     .append(" │");
         cardString.add(cardBuilder.toString());
         cardBuilder.setLength(0);
@@ -140,6 +140,6 @@ public abstract class CharacterCard implements Serializable, Printable<String[]>
         cardString.add(cardBuilder.toString());
         cardBuilder.setLength(0);
 
-        return cardString.toArray(new String[0]);
+        return cardString;
     }
 }
