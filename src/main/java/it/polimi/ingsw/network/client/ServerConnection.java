@@ -89,6 +89,7 @@ public class ServerConnection extends Connection {
                     if(player.getAsJsonObject().get("name").getAsString().equalsIgnoreCase(cli.getName())) {
                         joined = true;
                         cli.setPlayerID(player.getAsJsonObject().get("id").getAsInt());
+                        new ResponseParameters().deserialize(jsonObject);
                         break;
                     }
                 }
@@ -116,6 +117,10 @@ public class ServerConnection extends Connection {
                     }
                 }
                 synchronized (cli) {
+                    if(jsonObject.has("error")) {
+                        cli.resetInteraction(jsonObject.get("error").getAsString());
+                        return;
+                    }
                     if(!Lobby.getLobby().isReady(cli.getPlayerID())) {
                         new ResponseParameters().deserialize(jsonObject);
                         cli.handleInteraction();
