@@ -482,6 +482,15 @@ public class Board implements Serializable, Printable<List<String>> {
 
         strings.addAll(temp);
 
+        // PLAYERS
+        temp = schools.get(0).print();
+
+        for(int i = 1 ; i < schools.size(); i++) {
+            temp = StringUtils.insertAfter(temp, schools.get(i).print(), 0, 10);
+        }
+
+        strings.addAll(temp);
+
         return strings;
     }
 

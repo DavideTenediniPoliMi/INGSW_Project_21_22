@@ -23,6 +23,8 @@ import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.network.commands.*;
 import it.polimi.ingsw.network.parameters.CardParameters;
+import it.polimi.ingsw.utils.StringUtils;
+import org.fusesource.jansi.AnsiConsole;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -1391,5 +1393,14 @@ class GameControllerTest {
         gameController.tryCreatingGame();
 
         assertEquals(GameStatus.IN_GAME, matchInfo.getGameStatus());
+    }
+
+    @Test
+    public void testPrintGame() {
+        AnsiConsole.systemInstall();
+
+        AnsiConsole.sysOut().println(StringUtils.listToString(board.print()));
+
+        AnsiConsole.systemUninstall();
     }
 }
