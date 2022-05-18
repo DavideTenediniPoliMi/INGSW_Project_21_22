@@ -102,26 +102,33 @@ public class ServerConnection extends Connection {
         // Begin lobby loop
         cli.setViewState(new SelectLobbyViewState(cli.getViewState()));
         cli.handleInteraction();
+        String lastResp = "";
 
         while(!ready) {
             String response = receiveMessage();
+            lastResp = response;
 
             executor.submit( () -> {
                 JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
                 synchronized (cli) {
-                    if(jsonObject.has("error")) {
+                    if (jsonObject.has("error")) {
                         cli.resetInteraction(jsonObject.get("error").getAsString());
                         cli.handleInteraction();
                         return;
                     }
                     new ResponseParameters().deserialize(jsonObject);
-                    ready = Lobby.getLobby().isReady(cli.getPlayerID());
+                    if (Lobby.getLobby().isReady(cli.getPlayerID())) {
+                        ready = true;
+                        return;
+                    }
                     cli.handleInteraction();
                 }
             });
         }
 
         cli.setViewState(new LobbyViewState(cli.getViewState()));
+        new ResponseParameters().deserialize(JsonParser.parseString(lastResp).getAsJsonObject());
+        cli.displayState();
 
         while(!inGame) {
             String response = receiveMessage();
