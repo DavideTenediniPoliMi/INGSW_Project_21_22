@@ -146,9 +146,10 @@ public class CLI {
 
      public void handleInteraction() {
           do {
-               viewState.printCLIPrompt();
-               AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + viewState.print() + viewState.getBuffer());
-
+               synchronized(this){
+                    viewState.printCLIPrompt();
+                    AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + viewState.print() + viewState.getBuffer());
+               }
                String error = viewState.manageCLIInput(scanner.nextLine());
 
                if (error != null)

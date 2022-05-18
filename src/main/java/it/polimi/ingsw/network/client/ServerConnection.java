@@ -83,7 +83,7 @@ public class ServerConnection extends Connection {
                 .setCommandType(CommandType.JOIN);
         update(requestParameters.serialize().toString());
         boolean joined = false;
-        while(!joined) {
+        while(!joined && connected) {
             String received = receiveMessage();
             JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
             if(jsonObject.has("players")) {
@@ -101,16 +101,16 @@ public class ServerConnection extends Connection {
 
         // Begin lobby loop
         cli.setViewState(new SelectLobbyViewState(cli.getViewState()));
-        cli.handleInteraction();
+        executor.submit(cli::handleInteraction);
         String lastResp = "";
 
-        while(!ready) {
+        while(!ready && connected) {
             String response = receiveMessage();
             lastResp = response;
 
             executor.submit( () -> {
                 JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
-                synchronized (cli) {
+                synchronized (Lobby.getLobby()) {
                     if (jsonObject.has("error")) {
                         cli.resetInteraction(jsonObject.get("error").getAsString());
                         cli.handleInteraction();
@@ -121,8 +121,9 @@ public class ServerConnection extends Connection {
                         ready = true;
                         return;
                     }
-                    cli.handleInteraction();
                 }
+                if(cli.getViewState().isInteractionComplete())
+                    cli.handleInteraction();
             });
         }
 
@@ -130,8 +131,9 @@ public class ServerConnection extends Connection {
         new ResponseParameters().deserialize(JsonParser.parseString(lastResp).getAsJsonObject());
         cli.displayState();
 
-        while(!inGame) {
+        while(!inGame && connected) {
             String response = receiveMessage();
+            lastResp = response;
 
             executor.submit( () -> {
                 JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
@@ -140,8 +142,6 @@ public class ServerConnection extends Connection {
                     if(matchInfoJson.get("gameStatus").getAsString().equalsIgnoreCase("IN_GAME")) {
                         synchronized (cli) {
                             inGame = true;
-                            cli.nextState(jsonObject);
-                            new ResponseParameters().deserialize(jsonObject);
                         }
                         return;
                     }
@@ -152,7 +152,7 @@ public class ServerConnection extends Connection {
                 }
             });
         }
-        gameSequence();
+        gameSequence(lastResp);
     }
 
     /** PER QUANDO IN GAME
@@ -161,9 +161,15 @@ public class ServerConnection extends Connection {
      * SE NEXT_VIEW_STATE RITORNA TRUE VAI A FARE UN INTERAZIONE DELLA NUOVA VIEW
      * ALTRIMENTI CONTINUI A LEGGERE
      */
-    private void gameSequence() {
+    private void gameSequence(String lastResponse) {
+        JsonObject initJsonObject = JsonParser.parseString(lastResponse).getAsJsonObject();
 
-        cli.handleInteraction();
+        cli.setViewState(new GameViewState(cli.getViewState()));
+        boolean interact = cli.nextState(initJsonObject);
+        new ResponseParameters().deserialize(initJsonObject);
+
+        if(interact)
+            cli.handleInteraction();
 
         while(inGame) {
             String response = receiveMessage();

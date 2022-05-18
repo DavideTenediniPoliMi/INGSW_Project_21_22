@@ -34,6 +34,7 @@ public class SelectLobbyViewState extends LobbyViewState {
 
     @Override
     public void printCLIPrompt() {
+        setInteractionComplete(false);
         if(cardBack == null) {
             //it finds card backs already picked
             List<String> pickedCardBacks = new ArrayList<>();
