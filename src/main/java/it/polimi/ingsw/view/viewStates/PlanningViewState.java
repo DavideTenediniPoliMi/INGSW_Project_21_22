@@ -10,6 +10,7 @@ import it.polimi.ingsw.utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("StringConcatenationInsideStringBufferAppend")
 public class PlanningViewState extends GameViewState {
     private final Game game = Game.getInstance();
     private final MatchInfo matchInfo = MatchInfo.getInstance();
@@ -25,6 +26,7 @@ public class PlanningViewState extends GameViewState {
 
     @Override
     public void printCLIPrompt() {
+        setInteractionComplete(false);
         List<Card> playableCards = game.getPlayerByID(playerID).getPlayableCards();
         StringBuilder stringBuilder = new StringBuilder();
 
