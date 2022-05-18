@@ -5,7 +5,7 @@ import java.util.List;
 
 public class StringUtils {
     public static List<String> insertAfter(List<String> before, List<String> after, int starting, int spaces) {
-        if(after == null) {
+        if(after == null || after.size() == 0) {
             return insertSpacesAfter(before, spaces);
         }
 
@@ -39,12 +39,8 @@ public class StringUtils {
     public static List<String> insertSpacesAfter(List<String> before, int spaces) {
         List<String> result = new ArrayList<>();
 
-        for(int i = 0; i < before.size(); i++) {
-            StringBuilder stringBuilder = new StringBuilder(before.get(i));
-
-            stringBuilder.append(" ".repeat(spaces));
-
-            result.add(stringBuilder.toString());
+        for(String s : before) {
+            result.add(s + " ".repeat(spaces));
         }
 
         return result;

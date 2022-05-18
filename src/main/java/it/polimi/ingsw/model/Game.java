@@ -13,9 +13,13 @@ import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.model.helpers.StudentBag;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
+import it.polimi.ingsw.utils.Printable;
 import it.polimi.ingsw.utils.Serializable;
+import it.polimi.ingsw.utils.StringUtils;
+import it.polimi.ingsw.view.cli.AnsiCodes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +27,7 @@ import java.util.Optional;
  * Singleton class to act as DAO for a game of Eriantys.
  * Contains all calls for each step of the game.
  */
-public class Game extends Observable<ResponseParameters> implements Serializable {
+public class Game extends Observable<ResponseParameters> implements Serializable, Printable<List<String>> {
     private final int NUM_STARTING_STUDENTS_BY_COLOR = 24;
     private static Game instance;
     private final Board board = new Board();
@@ -627,5 +631,41 @@ public class Game extends Observable<ResponseParameters> implements Serializable
 
         if(jsonObject.has("bag"))
             bag.deserialize(jsonObject.get("bag").getAsJsonObject());
+    }
+
+    @Override
+    public List<String> print(boolean... params) {
+        List<String> strings = board.print();
+        List<String> temp = new ArrayList<>(Collections.nCopies(26, "│"));
+        //temp.add("┤");
+        temp.add("┘");
+        //temp.addAll(Collections.nCopies(11, "│"));
+
+        strings = StringUtils.insertAfter(strings, temp, 0, 0);
+
+        temp = new ArrayList<>();
+
+        // EXPERT MODE
+        if(MatchInfo.getInstance().isExpertMode()) {
+
+            temp.add(" ".repeat(13));
+            temp.add("Coins left : " + board.getNumCoinsLeft());
+            temp.add(" ".repeat(13));
+            temp.addAll(characterCards.get(0).print());
+            temp.add(" ".repeat(13));
+            temp.addAll(characterCards.get(1).print());
+            temp.add(" ".repeat(13));
+            temp.addAll(characterCards.get(2).print());
+
+        }
+
+        if(isStudentBagEmpty()){
+            temp.add(" ".repeat(13));
+            temp.add(AnsiCodes.RED_TEXT + "BAG IS EMPTY!" + AnsiCodes.RESET);
+        }
+
+        strings = StringUtils.insertAfter(strings, temp, 0, 4);
+
+        return strings;
     }
 }

@@ -483,26 +483,12 @@ public class Board implements Serializable, Printable<List<String>> {
         }
 
         strings.addAll(temp);
+        strings.add(" ".repeat(strings.get(0).length()));
+        strings.add("─".repeat(strings.get(0).length()));
+        strings = StringUtils.insertAfter(strings, new ArrayList<>(List.of("────")), strings.size() - 1, 0);
 
         // PLAYERS
         strings.addAll(printPlayers());
-
-        List<CharacterCard> characterCards = Game.getInstance().getCharacterCards();
-
-        // EXPERT MODE
-        if(MatchInfo.getInstance().isExpertMode()) {
-            temp = new ArrayList<>();
-            temp.add(" ".repeat(13));
-            temp.add("Coins left : " + numCoinsLeft);
-            temp.add(" ".repeat(13));
-            temp.addAll(characterCards.get(0).print());
-            temp.add(" ".repeat(13));
-            temp.addAll(characterCards.get(1).print());
-            temp.add(" ".repeat(13));
-            temp.addAll(characterCards.get(2).print());
-        }
-
-        strings = StringUtils.insertAfter(strings, temp, 0, 10);
 
         return strings;
     }
