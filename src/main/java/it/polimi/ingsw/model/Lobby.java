@@ -134,7 +134,7 @@ public class Lobby extends Observable<ResponseParameters> implements Serializabl
             }
         }
 
-        ResponseParameters params = new ResponseParameters().setPlayer(getPlayerByID(playerID));
+        ResponseParameters params = new ResponseParameters().setPlayers(players);
         notify(params);
     }
 
@@ -150,7 +150,7 @@ public class Lobby extends Observable<ResponseParameters> implements Serializabl
             p.setCardBack(cardBack);
         }
 
-        ResponseParameters params = new ResponseParameters().setPlayer(getPlayerByID(playerID));
+        ResponseParameters params = new ResponseParameters().setPlayers(players);
         notify(params);
     }
 
@@ -162,6 +162,9 @@ public class Lobby extends Observable<ResponseParameters> implements Serializabl
      */
     public void setReadyStatus(int playerID, boolean ready) {
         readyStatus.put(playerID, ready);
+
+        ResponseParameters params = new ResponseParameters().setPlayers(players);
+        notify(params);
     }
 
     /**
