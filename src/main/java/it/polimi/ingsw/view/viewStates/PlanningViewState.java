@@ -15,6 +15,7 @@ public class PlanningViewState extends GameViewState {
     private final Game game = Game.getInstance();
     private final MatchInfo matchInfo = MatchInfo.getInstance();
     private final List<Integer> validNumbers = new ArrayList<>();
+    private final List<Integer> validIndexes = new ArrayList<>();
 
     public PlanningViewState(ViewState oldViewState) {
         super(oldViewState);
@@ -36,6 +37,7 @@ public class PlanningViewState extends GameViewState {
             if(!c.isUsed()) {
                 stringBuilder.append(i + ") " + c.name() + " (weight: " + c.WEIGHT + ", range: " + c.RANGE + ")\n");
                 validNumbers.add(i);
+                validIndexes.add(c.ordinal());
                 i++;
             }
         }
@@ -53,11 +55,11 @@ public class PlanningViewState extends GameViewState {
             appendBuffer(error);
             return error;
         }
-        int index = Integer.parseInt(input);
+        int index = validIndexes.get(Integer.parseInt(input)-1);
         notify(
                 new RequestParameters()
                         .setCommandType(CommandType.PLAY_CARD)
-                        .setIndex(index-1)
+                        .setIndex(index)
                         .serialize().toString()
         );
         setInteractionComplete(true);
