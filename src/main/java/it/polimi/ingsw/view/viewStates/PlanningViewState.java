@@ -33,9 +33,11 @@ public class PlanningViewState extends GameViewState {
         stringBuilder.append("Select the card you want to play:\n");
         int i = 1;
         for(Card c : playableCards) {
-            stringBuilder.append(i + ") " + c.name() + " (weight: " + c.WEIGHT + ", range: " + c.RANGE + ")\n");
-            validNumbers.add(i);
-            i++;
+            if(!c.isUsed()) {
+                stringBuilder.append(i + ") " + c.name() + " (weight: " + c.WEIGHT + ", range: " + c.RANGE + ")\n");
+                validNumbers.add(i);
+                i++;
+            }
         }
 
         appendBuffer(stringBuilder.toString());
