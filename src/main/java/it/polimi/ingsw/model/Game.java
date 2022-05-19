@@ -121,12 +121,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
     }
 
     public int getIndexOfIsland(Island island) {
-        for(int i = 0; i < 12; i++) {
-            if(board.getIslandOfAbsoluteIndex(i).equals(island))
-                return i;
-        }
-
-        return -1;
+        return board.getIndexOfIsland(island);
     }
 
     // MOTHER NATURE

@@ -118,66 +118,7 @@ public class MultiIslandTest {
             assertEquals(noStudents.getNumStudentsByColor(color), i1.getNumStudentsByColor(color));
         }
     }
-
-    @Test
-    public void testPrint() {
-        SimpleIsland isld = new SimpleIsland();
-        isld.conquerIsland(TowerColor.GREY);
-        StudentGroup st = new StudentGroup(Color.BLUE, 4);
-        st.addByColor(Color.GREEN, 2);
-        st.addByColor(Color.RED, 1);
-        st.addByColor(Color.YELLOW, 9);
-
-        isld.addStudents(st);
-
-        isld.setMotherNatureTo(true);
-
-        isld.print(false, false, false, false);
-
-        /*AnsiConsole.systemInstall();
-        AnsiConsole.sysOut().println(isld.printIsland(null, false, false, false, false));
-        AnsiConsole.sysOut().println(isld.printIsland(null, false, true, false, false));
-        AnsiConsole.sysOut().println(isld.printIsland(null, true, false, false, false));
-        AnsiConsole.sysOut().println(isld.printIsland(null, false, false, true, false));*/
-    }
-
-    /*@Test
-    public void testPrintMulti() {
-        Game game = Game.getInstance();
-
-        game.placeMNAt(0);
-        for(int i = 0; i < 12; i++) {
-            game.conquerIsland(TowerColor.WHITE);
-            game.addInitialStudentToIsland(i, game.drawStudents(5));
-            game.moveMN(1);
-        }
-
-        game.moveMN(1);
-        game.conquerIsland(TowerColor.GREY);
-        game.moveMN(1);
-        game.conquerIsland(TowerColor.GREY);
-        game.mergeIslands(1, 2);
-        game.moveMN(1);
-        game.conquerIsland(TowerColor.GREY);
-        game.mergeIslands(1, 2);
-
-        game.addInitialStudentToIsland(1, new StudentGroup(Color.BLUE, 5));
-
-        game.moveMN(5);
-        game.conquerIsland(TowerColor.BLACK);
-        game.moveMN(1);
-        game.conquerIsland(TowerColor.BLACK);
-        game.mergeIslands(6, 7);
-        game.addInitialStudentToIsland(6, new StudentGroup(Color.RED, 5));
-
-        AnsiConsole.systemInstall();
-        for(Island is : game.getBoard().getIslands()) {
-            List<String> strIs = is.print(false, false, false, false);
-            for(String ilS : strIs) {
-                AnsiConsole.sysOut().println(ilS);
-            }
-        }
-    }
+    /*
 
     @Test
     public void testPrintGame4() {
@@ -222,8 +163,10 @@ public class MultiIslandTest {
 
         AnsiConsole.sysOut().println(StringUtils.listToString(game.print()));
 
-        AnsiConsole.systemUninstall();
-    }
+        game.mergeIslands(8, 9);
 
-     */
+        AnsiConsole.sysOut().println(StringUtils.listToString(game.print()));
+
+        AnsiConsole.systemUninstall();
+    }*/
 }

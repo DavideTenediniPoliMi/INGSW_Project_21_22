@@ -32,6 +32,8 @@ public class Board implements Serializable, Printable<List<String>> {
         for(int i = 0; i < NUM_STARTING_ISLANDS; i++) {
             islands.add(new SimpleIsland());
         }
+
+        islands.get(0).setStartingZero(true);
     }
 
     // ISLAND
@@ -88,6 +90,25 @@ public class Board implements Serializable, Printable<List<String>> {
         }
 
         return getIslandAt(fixedIndex).getIslandOfRelativeIndex(islandIndex - runningIndex);
+    }
+
+    public int getIndexOfIsland(Island island) {
+        for(int i = 0; i < 12; i++) {
+            if(getIslandOfAbsoluteIndex(i).equals(island))
+                return i;
+        }
+
+        return -1;
+    }
+
+    public int getStartingZeroRealIndex() {
+        for(int i = 0; i < 12; i++) {
+            Island island = getIslandOfAbsoluteIndex(i);
+            if(island.isStartingZero())
+                return i;
+        }
+
+        return -1;
     }
 
     /**
@@ -440,17 +461,33 @@ public class Board implements Serializable, Printable<List<String>> {
         numCoinsLeft = jsonObject.get("numCoinsLeft").getAsInt();
     }
 
+    public int getOriginalIndexOf(int islandIndex) {
+        int offset = 12 - getStartingZeroRealIndex();
+
+        if(islandIndex >= offset) {
+            islandIndex -= offset;
+        } else {
+            islandIndex = 12 - offset + islandIndex;
+        }
+
+        return islandIndex;
+    }
+
+    public Island getIslandOfAbsoluteIndexForGraphics(int islandIndex) {
+        return getIslandOfAbsoluteIndex(getOriginalIndexOf(islandIndex));
+    }
+
     @Override
     public List<String> print(boolean... params) {
         List<Boolean> bridges = findBridges();
-        Island island = getIslandOfAbsoluteIndex(0);
+        Island island = getIslandOfAbsoluteIndexForGraphics(0);
 
         List<String> strings = island.print(calculateOpenings(0, bridges));
         int spaces;
 
         // FIRST ROW OF ISLANDS (0 - 4)
         for(int i = 1; i < 5; i ++) {
-            island = getIslandOfAbsoluteIndex(i);
+            island = getIslandOfAbsoluteIndexForGraphics(i);
             spaces = 6;
 
             if(bridges.get(i - 1) == Boolean.TRUE) {
@@ -483,13 +520,13 @@ public class Board implements Serializable, Printable<List<String>> {
         strings.addAll(temp);
 
         // SECOND ROW OF ISLANDS (11 and 5)
-        island = getIslandOfAbsoluteIndex(11);
+        island = getIslandOfAbsoluteIndexForGraphics(11);
         temp = island.print(calculateOpenings(11, bridges));
 
         //CLOUDS
         temp = StringUtils.insertAfter(temp, printClouds(), 0,0);
 
-        island = getIslandOfAbsoluteIndex(5);
+        island = getIslandOfAbsoluteIndexForGraphics(5);
         temp = StringUtils.insertAfter(temp, island.print(calculateOpenings(5, bridges)), 0, 0);
 
         strings.addAll(temp);
@@ -514,12 +551,12 @@ public class Board implements Serializable, Printable<List<String>> {
 
         strings.addAll(temp);
 
-        island = getIslandOfAbsoluteIndex(10);
+        island = getIslandOfAbsoluteIndexForGraphics(10);
         temp = island.print(calculateOpenings(10, bridges));
 
         // LAST ROW OF ISLANDS (10 - 6)
         for(int i = 9; i >= 6; i --) {
-            island = getIslandOfAbsoluteIndex(i);
+            island = getIslandOfAbsoluteIndexForGraphics(i);
             spaces = 6;
 
             if(bridges.get(i) == Boolean.TRUE) {
@@ -627,6 +664,8 @@ public class Board implements Serializable, Printable<List<String>> {
             i.markBridges(bridges, runningIndex);
             runningIndex += i.getNumIslands();
         }
+
+        Collections.rotate(bridges, 12 - getStartingZeroRealIndex());
 
         return bridges;
     }

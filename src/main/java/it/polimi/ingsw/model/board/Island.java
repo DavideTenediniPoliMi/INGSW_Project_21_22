@@ -19,6 +19,15 @@ public abstract class Island implements Serializable, Printable<List<String>> {
     private final StudentGroup students = new StudentGroup();
     private TowerColor teamColor;
     private boolean motherNature;
+    private boolean startingZero;
+
+    public boolean isStartingZero() {
+        return startingZero;
+    }
+
+    public void setStartingZero(boolean startingZero) {
+        this.startingZero = startingZero;
+    }
 
     /**
      * Adds specified students to this <code>Island</code>
@@ -148,7 +157,9 @@ public abstract class Island implements Serializable, Printable<List<String>> {
         islandBuilder.setLength(0);
 
         //First row: Conqueror team info
-        int index = Game.getInstance().getIndexOfIsland(this);
+        int offset = 12 - Game.getInstance().getBoard().getStartingZeroRealIndex();
+        int index = (Game.getInstance().getIndexOfIsland(this) + offset ) % 12;
+
         islandBuilder.append("│" + index + (index < 10 ? " " : "") + "          Team: ")
                     .append(getTeamColor() == null ? "   " : getTeamColor().print())
                     .append("│");

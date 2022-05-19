@@ -93,13 +93,4 @@ public class StudentGroupTest {
     void testContains() {
         assertFalse(studentGroup.contains(new StudentGroup(Color.RED, 1)));
     }
-
-    @Test
-    void testPrint() {
-        StudentGroup s = new StudentGroup();
-        s.addByColor(Color.BLUE, 3);
-        s.addByColor(Color.GREEN, 6);
-        s.addByColor(Color.RED, 1);
-        s.print(false);
-    }
 }
