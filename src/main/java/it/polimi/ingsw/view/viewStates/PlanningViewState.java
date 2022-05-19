@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view.viewStates;
 
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
@@ -13,7 +12,6 @@ import java.util.List;
 @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
 public class PlanningViewState extends GameViewState {
     private final Game game = Game.getInstance();
-    private final MatchInfo matchInfo = MatchInfo.getInstance();
     private final List<Integer> validNumbers = new ArrayList<>();
     private final List<Integer> validIndexes = new ArrayList<>();
 

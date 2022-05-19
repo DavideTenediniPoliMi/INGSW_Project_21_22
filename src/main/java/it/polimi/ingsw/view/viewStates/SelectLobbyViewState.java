@@ -80,6 +80,7 @@ public class SelectLobbyViewState extends LobbyViewState {
             notify(
                     new RequestParameters()
                             .setCommandType(CommandType.SEL_CARDBACK)
+                            .setIndex(playerID)
                             .setCardBack(cardBack)
                             .serialize().toString()
             );
@@ -88,12 +89,13 @@ public class SelectLobbyViewState extends LobbyViewState {
             return "";
         }
 
+        input = input.toUpperCase();
         if(validTeams.contains(input)) {
             team = TowerColor.valueOf(input);
-            input = input.substring(0,1).toUpperCase() + input.substring(1).toLowerCase();
             notify(
                     new RequestParameters()
                             .setCommandType(CommandType.SEL_TOWERCOLOR)
+                            .setIndex(playerID)
                             .setTowerColor(team)
                             .serialize().toString()
             );
@@ -115,24 +117,29 @@ public class SelectLobbyViewState extends LobbyViewState {
                             new RequestParameters()
                                     .setCommandType(CommandType.READY_UP)
                                     .setReady(true)
+                                    .setIndex(playerID)
                                     .serialize().toString()
                     );
-                    isLastActionSetCardBack = true;
                     break;
                 case 1:
                     notify(
                             new RequestParameters()
                                     .setCommandType(CommandType.UNSEL_CARDBACK)
+                                    .setIndex(playerID)
                                     .serialize().toString()
                     );
-                    isLastActionSetCardBack = false;
+                    cardBack = null;
+                    isLastActionSetCardBack = true;
                     break;
                 case 2:
                     notify(
                             new RequestParameters()
                                     .setCommandType(CommandType.UNSEL_TOWERCOLOR)
+                                    .setIndex(playerID)
                                     .serialize().toString()
                     );
+                    team = null;
+                    isLastActionSetCardBack = false;
                     break;
             }
             setInteractionComplete(true);
