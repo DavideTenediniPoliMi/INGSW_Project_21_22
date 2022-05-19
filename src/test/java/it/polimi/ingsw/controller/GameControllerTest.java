@@ -1399,7 +1399,7 @@ class GameControllerTest {
     public void testPrintGame2() {
         AnsiConsole.systemInstall();
 
-        AnsiConsole.sysOut().println(StringUtils.listToString(board.print()));
+        AnsiConsole.sysOut().println(StringUtils.listToString(game.print()));
 
         AnsiConsole.systemUninstall();
     }
@@ -1433,8 +1433,9 @@ class GameControllerTest {
         matchInfo.setNumPlayersConnected(3);
 
         gameController.tryCreatingGame();
+        game.drawStudents(200);
 
-        AnsiConsole.sysOut().println(StringUtils.listToString(board.print()));
+        AnsiConsole.sysOut().println(StringUtils.listToString(game.print()));
 
         AnsiConsole.systemUninstall();
     }
@@ -1473,10 +1474,10 @@ class GameControllerTest {
 
         gameController.tryCreatingGame();
 
-        AnsiConsole.sysOut().println(StringUtils.listToString(board.print()));
+        game.drawStudents(200);
+
+        AnsiConsole.sysOut().println(StringUtils.listToString(game.print()));
 
         AnsiConsole.systemUninstall();
-    }
-
- */
+    }*/
 }

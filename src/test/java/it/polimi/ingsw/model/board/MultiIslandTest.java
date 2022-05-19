@@ -1,10 +1,15 @@
 package it.polimi.ingsw.model.board;
 
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Lobby;
+import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
+import it.polimi.ingsw.utils.StringUtils;
 import org.fusesource.jansi.AnsiConsole;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
@@ -172,5 +177,53 @@ public class MultiIslandTest {
                 AnsiConsole.sysOut().println(ilS);
             }
         }
-    }*/
+    }
+
+    @Test
+    public void testPrintGame4() {
+        tearDown();
+        AnsiConsole.systemInstall();
+        GameController gameController = new GameController();
+        Game game = Game.getInstance();
+        Board board = game.getBoard();
+        Lobby lobby = Lobby.getLobby();
+        MatchInfo matchInfo = MatchInfo.getInstance();
+
+        lobby.addPlayer(0, "a");
+        lobby.addPlayer(1, "b");
+        lobby.selectTeam(0, TowerColor.BLACK);
+        lobby.selectTeam(1, TowerColor.WHITE);
+        lobby.selectCardBack(0, CardBack.WIZARD_1);
+        lobby.selectCardBack(1, CardBack.WIZARD_2);
+        lobby.setReadyStatus(0, true);
+        lobby.setReadyStatus(1, true);
+
+        lobby.addPlayer(2, "c");
+        lobby.selectTeam(2, TowerColor.BLACK);
+        lobby.selectCardBack(2, CardBack.WIZARD_3);
+        lobby.setReadyStatus(2, true);
+        lobby.addPlayer(3, "d");
+        lobby.selectTeam(3, TowerColor.WHITE);
+        lobby.selectCardBack(3, CardBack.WIZARD_4);
+        lobby.setReadyStatus(3, true);
+
+        matchInfo.setUpGame(4,true);
+
+        matchInfo.setNumPlayersConnected(4);
+
+        gameController.tryCreatingGame();
+        AnsiConsole.sysOut().println(StringUtils.listToString(game.print()));
+
+        game.mergeIslands(11, 0);
+
+        AnsiConsole.sysOut().println(StringUtils.listToString(game.print()));
+
+        game.mergeIslands(10, 0);
+
+        AnsiConsole.sysOut().println(StringUtils.listToString(game.print()));
+
+        AnsiConsole.systemUninstall();
+    }
+
+     */
 }
