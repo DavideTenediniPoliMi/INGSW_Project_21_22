@@ -83,7 +83,7 @@ public class MultiIsland extends Island {
 
     @Override
     public Island getIslandOfRelativeIndex(int index) {
-        if(leftIsland.getNumIslands() < index) {
+        if(leftIsland.getNumIslands() > index) {
             return leftIsland.getIslandOfRelativeIndex(index);
         }
 
@@ -139,6 +139,13 @@ public class MultiIsland extends Island {
         boolean equalsRgt = rightIsland.equals(is);
 
         return equalsLft || equalsRgt || (this == is);
+    }
+
+    @Override
+    public void markBridges(List<Boolean> bridges, int startingIndex) {
+        leftIsland.markBridges(bridges, startingIndex);
+        rightIsland.markBridges(bridges, startingIndex + leftIsland.getNumIslands());
+        bridges.set(startingIndex + leftIsland.getNumIslands() - 1, Boolean.TRUE);
     }
 
     @Override

@@ -2,9 +2,7 @@ package it.polimi.ingsw.model.board;
 
 import com.google.gson.*;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
@@ -444,42 +442,92 @@ public class Board implements Serializable, Printable<List<String>> {
 
     @Override
     public List<String> print(boolean... params) {
+        List<Boolean> bridges = findBridges();
         Island island = getIslandOfAbsoluteIndex(0);
-        List<String> strings = island.print(false, false, false,false);
+
+        List<String> strings = island.print(calculateOpenings(0, bridges));
+        int spaces;
 
         // FIRST ROW OF ISLANDS (0 - 4)
         for(int i = 1; i < 5; i ++) {
             island = getIslandOfAbsoluteIndex(i);
-            strings = StringUtils.insertAfter(strings, island.print(false, false, false,false), 0, 6);
+            spaces = 6;
+
+            if(bridges.get(i - 1) == Boolean.TRUE) {
+                spaces = 0;
+                strings = StringUtils.insertAfter(strings, getHorizontalBridge(), 2, 0);
+            }
+
+            strings = StringUtils.insertAfter(strings, island.print(calculateOpenings(i, bridges)), 0, spaces);
         }
 
-        strings.add(" ".repeat(strings.get(0).length()));
-        strings.add(" ".repeat(strings.get(0).length()));
+        List<String> temp = new ArrayList<>(Collections.nCopies(2, ""));
+        List<String> verticalBridge = getVerticalBridge();
+        spaces = strings.get(0).length();
+
+        if(bridges.get(11) == Boolean.TRUE) {
+            spaces -= verticalBridge.get(0).length();
+            temp = StringUtils.insertAfter(temp, verticalBridge, 0, 0);
+        }
+
+        if(bridges.get(4) == Boolean.TRUE) {
+            spaces -= verticalBridge.get(0).length();
+        }
+
+        temp = StringUtils.insertSpacesAfter(temp, spaces);
+
+        if(bridges.get(4) == Boolean.TRUE) {
+             temp = StringUtils.insertAfter(temp, verticalBridge, 0, 0);
+        }
+
+        strings.addAll(temp);
 
         // SECOND ROW OF ISLANDS (11 and 5)
         island = getIslandOfAbsoluteIndex(11);
-        List<String> temp = island.print(false, false, false,false);
+        temp = island.print(calculateOpenings(11, bridges));
 
         //CLOUDS
         temp = StringUtils.insertAfter(temp, printClouds(), 0,0);
 
         island = getIslandOfAbsoluteIndex(5);
-        temp = StringUtils.insertAfter(temp, island.print(false, false, false,false), 0, 0);
+        temp = StringUtils.insertAfter(temp, island.print(calculateOpenings(5, bridges)), 0, 0);
 
         strings.addAll(temp);
 
-        strings.add(" ".repeat(strings.get(0).length()));
-        strings.add(" ".repeat(strings.get(0).length()));
+        temp = new ArrayList<>(Collections.nCopies(2, ""));
+        spaces = strings.get(0).length();
 
+        if(bridges.get(10) == Boolean.TRUE) {
+            spaces -= verticalBridge.get(0).length();
+            temp = StringUtils.insertAfter(temp, verticalBridge, 0, 0);
+        }
 
-        temp.clear();
+        if(bridges.get(5) == Boolean.TRUE) {
+            spaces -= verticalBridge.get(0).length();
+        }
+
+        temp = StringUtils.insertSpacesAfter(temp, spaces);
+
+        if(bridges.get(5) == Boolean.TRUE) {
+            temp = StringUtils.insertAfter(temp, verticalBridge, 0, 0);
+        }
+
+        strings.addAll(temp);
+
         island = getIslandOfAbsoluteIndex(10);
-        temp = island.print(false, false, false,false);
+        temp = island.print(calculateOpenings(10, bridges));
 
         // LAST ROW OF ISLANDS (10 - 6)
         for(int i = 9; i >= 6; i --) {
             island = getIslandOfAbsoluteIndex(i);
-            temp = StringUtils.insertAfter(temp, island.print(false, false, false,false), 0, 6);
+            spaces = 6;
+
+            if(bridges.get(i) == Boolean.TRUE) {
+                spaces = 0;
+                temp = StringUtils.insertAfter(temp, getHorizontalBridge(), 2, 0);
+            }
+
+            temp = StringUtils.insertAfter(temp, island.print(calculateOpenings(i, bridges)), 0, spaces);
         }
 
         strings.addAll(temp);
@@ -491,6 +539,20 @@ public class Board implements Serializable, Printable<List<String>> {
         strings.addAll(printPlayers());
 
         return strings;
+    }
+
+    public List<String> getHorizontalBridge() {
+        List<String> strings = new ArrayList<>();
+
+        strings.add("─".repeat(6));
+        strings.add(" ".repeat(6));
+        strings.add("─".repeat(6));
+
+        return strings;
+    }
+
+    public List<String> getVerticalBridge() {
+        return new ArrayList<>(Collections.nCopies(2, " ".repeat(8) + "│     │" + " ".repeat(8)));
     }
 
     private List<String> printClouds() {
@@ -555,5 +617,84 @@ public class Board implements Serializable, Printable<List<String>> {
         }
 
         return result;
+    }
+
+    public List<Boolean> findBridges() {
+        List<Boolean> bridges = new ArrayList<>(Collections.nCopies(12, Boolean.FALSE));
+        int runningIndex = 0;
+
+        for(Island i: islands) {
+            i.markBridges(bridges, runningIndex);
+            runningIndex += i.getNumIslands();
+        }
+
+        return bridges;
+    }
+
+    public boolean[] calculateOpenings(int index, List<Boolean> bridges) {
+        switch (index) {
+            case 0: // TOP ROW LEFT
+                return new boolean[] {
+                        false,
+                        bridges.get(0),
+                        bridges.get(11),
+                        false
+                };
+            case 1: // TOP ROW MID
+            case 2:
+            case 3:
+                return new boolean[] {
+                        false,
+                        bridges.get(index),
+                        false,
+                        bridges.get(index - 1)
+                };
+            case 4: // TOP ROW RIGHT
+                return new boolean[] {
+                        false,
+                        false,
+                        bridges.get(4),
+                        bridges.get(3)
+                };
+            case 5: // MID ROW RIGHT
+                return new boolean[] {
+                        bridges.get(4),
+                        false,
+                        bridges.get(5),
+                        false
+                };
+            case 6: // BOTTOM ROW RIGHT
+                return new boolean[] {
+                        bridges.get(5),
+                        false,
+                        false,
+                        bridges.get(6)
+                };
+            case 7: // BOTTOM ROW MID
+            case 8:
+            case 9:
+                return new boolean[] {
+                        false,
+                        bridges.get(index - 1),
+                        false,
+                        bridges.get(index)
+                };
+            case 10: // BOTTOM ROW LEFT
+                return new boolean[] {
+                        bridges.get(10),
+                        bridges.get(9),
+                        false,
+                        false
+                };
+            case 11: // MID ROW LEFT
+                return new boolean[] {
+                        bridges.get(11),
+                        false,
+                        bridges.get(10),
+                        false
+                };
+            default:
+                return null;
+        }
     }
 }

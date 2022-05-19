@@ -108,6 +108,8 @@ public abstract class Island implements Serializable, Printable<List<String>> {
      */
     public abstract Island getIslandOfRelativeIndex(int index);
 
+    public void markBridges(List<Boolean> bridges, int startingIndex) {}
+
     @Override
     public void deserialize(JsonObject jsonObject) {
         if(jsonObject.has("students"))
@@ -135,13 +137,13 @@ public abstract class Island implements Serializable, Printable<List<String>> {
 
         //width: 23 (For studentGroup)
 
-        islandBuilder.append("┌────────");
+        islandBuilder.append("┌───────");
         if(bridge_N) {
-            islandBuilder.append("┘   └");
+            islandBuilder.append("┘     └");
         } else {
-            islandBuilder.append("─────");
+            islandBuilder.append("───────");
         }
-        islandBuilder.append("────────┐");
+        islandBuilder.append("───────┐");
         islandString.add(islandBuilder.toString());
         islandBuilder.setLength(0);
 
@@ -232,14 +234,14 @@ public abstract class Island implements Serializable, Printable<List<String>> {
 
         //Fourth row: Closing the box
 
-        islandBuilder.append("└────────");
+        islandBuilder.append("└───────");
 
         if(bridge_S) {
-            islandBuilder.append("┐   ┌");
+            islandBuilder.append("┐     ┌");
         } else {
-            islandBuilder.append("─────");
+            islandBuilder.append("───────");
         }
-        islandBuilder.append("────────┘");
+        islandBuilder.append("───────┘");
         islandString.add(islandBuilder.toString());
         islandBuilder.setLength(0);
 
