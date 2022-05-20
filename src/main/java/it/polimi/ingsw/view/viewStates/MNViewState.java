@@ -20,7 +20,7 @@ public class MNViewState extends ExpertViewState {
 
         super.printCLIPrompt();
 
-        appendBuffer("Select the island on which you want to move mother nature:");
+        appendBuffer("Select the island on which you want to move mother nature: [index of island]");
     }
 
     @Override

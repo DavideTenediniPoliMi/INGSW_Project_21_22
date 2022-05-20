@@ -113,7 +113,7 @@ public class ExpertViewState extends GameViewState {
                     stringBuilder.append(printCLIStudentColorSelection());
                     return stringBuilder.toString();
                 }
-                return "Select the island where you want to move your student: [index of island]";
+                return "Select the island on which you want to move your student: [index of island]";
             case "MOVE_TO_DINING":
                 stringBuilder.append("Select the student you want to move from the card to your dining room: ");
                 stringBuilder.append(printCLIStudentColorSelection());
@@ -178,7 +178,6 @@ public class ExpertViewState extends GameViewState {
     @Override
     public String manageCLIInput (String input) {
         appendBuffer(input);
-        String error;
 
         if(!matchInfo.isExpertMode())
             return "Game is not in Expert Mode";

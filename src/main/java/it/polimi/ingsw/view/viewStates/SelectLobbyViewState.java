@@ -42,7 +42,7 @@ public class SelectLobbyViewState extends LobbyViewState {
                 if(p.getCardBack() != null)
                     pickedCardBacks.add(p.getCardBack().toString());
             }
-            validCardBacks = Stream.of(CardBack.values()).map((cb) -> cb.name()).collect(Collectors.toList());
+            validCardBacks = Stream.of(CardBack.values()).map(Enum::name).collect(Collectors.toList());
             validCardBacks.removeAll(pickedCardBacks);
 
             appendBuffer("Choose your card back: " + validCardBacks.toString());
@@ -57,7 +57,7 @@ public class SelectLobbyViewState extends LobbyViewState {
                 if(p.getTeamColor() != null)
                     pickedTeams.add(p.getTeamColor().toString());
             }
-            validTeams = Stream.of(TowerColor.values()).map((tc) -> tc.name()).collect(Collectors.toList());
+            validTeams = Stream.of(TowerColor.values()).map(Enum::name).collect(Collectors.toList());
             validTeams.removeAll(pickedTeams);
 
             appendBuffer("Choose your team: " + validTeams.toString());
@@ -75,7 +75,8 @@ public class SelectLobbyViewState extends LobbyViewState {
         appendBuffer(input);
         String error;
 
-        if(validCardBacks.contains(input)) {
+        if(validCardBacks.contains(input.toUpperCase())) {
+            input = input.toUpperCase();
             cardBack = CardBack.valueOf(input);
             notify(
                     new RequestParameters()
@@ -89,8 +90,8 @@ public class SelectLobbyViewState extends LobbyViewState {
             return "";
         }
 
-        input = input.toUpperCase();
-        if(validTeams.contains(input)) {
+        if(validTeams.contains(input.toUpperCase())) {
+            input = input.toUpperCase();
             team = TowerColor.valueOf(input);
             notify(
                     new RequestParameters()
