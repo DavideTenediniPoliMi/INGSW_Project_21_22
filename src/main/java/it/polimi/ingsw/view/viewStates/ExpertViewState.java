@@ -185,45 +185,59 @@ public class ExpertViewState extends GameViewState {
 
         if(isStudentsPhase) {
             if(!isMovingStudents) {
-                if(!cardBought) {
-                    error = StringUtils.checkInteger(input, validMenuChoice);
-                    if(!error.equals("")) {
-                        appendBuffer(error);
-                        return error;
-                    }
-                    int choice = Integer.parseInt(input);
-                    if(choice == 2) {
-                        isMovingStudents = true;
-                        return "manage students";
-                    }
-                    cardBought = true;
-                    return "";
-                }
-                if(!isCardSelected) {
-                    error = StringUtils.checkInteger(input, validCardIndexes);
-                    if(!error.equals("")) {
-                        appendBuffer(error);
-                        return error;
-                    }
-
-                    boughtCardIndex = Integer.parseInt(input);
-
-                    notify(
-                            new RequestParameters()
-                                    .setCommandType(CommandType.BUY_CHARACTER_CARD)
-                                    .setIndex(boughtCardIndex)
-                                    .serialize().toString()
-                    );
-
-                    isCardSelected = true;
-                    return "";
-                }
-                activeCard = game.getActiveCharacterCard();
-                return manageCLICardActivationParameters(input);
+                return manageCLICardMenu(input, true);
             }
         }
 
+        if(!isMovingMN) {
+            return manageCLICardMenu(input, false);
+        }
+
         return "";
+    }
+
+    private String manageCLICardMenu(String input, boolean isStudentsPhase) {
+        String error;
+
+        if(!cardBought) {
+            error = StringUtils.checkInteger(input, validMenuChoice);
+            if(!error.equals("")) {
+                appendBuffer(error);
+                return error;
+            }
+            int choice = Integer.parseInt(input);
+            if(choice == 2) {
+                if(isStudentsPhase) {
+                    isMovingStudents = true;
+                    return "manage students";
+                }
+                isMovingMN = true;
+                return "manage MN";
+            }
+            cardBought = true;
+            return "";
+        }
+        if(!isCardSelected) {
+            error = StringUtils.checkInteger(input, validCardIndexes);
+            if(!error.equals("")) {
+                appendBuffer(error);
+                return error;
+            }
+
+            boughtCardIndex = Integer.parseInt(input);
+
+            notify(
+                    new RequestParameters()
+                            .setCommandType(CommandType.BUY_CHARACTER_CARD)
+                            .setIndex(boughtCardIndex)
+                            .serialize().toString()
+            );
+
+            isCardSelected = true;
+            return "";
+        }
+        activeCard = game.getActiveCharacterCard();
+        return manageCLICardActivationParameters(input);
     }
 
     private String manageCLICardActivationParameters(String input) {
@@ -240,7 +254,7 @@ public class ExpertViewState extends GameViewState {
                     appendBuffer(error);
                     return error;
                 }
-                int islandIndex = Integer.parseInt(input);
+                int islandIndex = game.getBoard().getOriginalIndexOf(Integer.parseInt(input));
 
                 cardParams.setFromOrigin(new StudentGroup(cardColorSelected,1))
                         .setIslandIndex(islandIndex);

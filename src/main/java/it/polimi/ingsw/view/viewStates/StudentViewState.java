@@ -37,7 +37,7 @@ public class StudentViewState extends ExpertViewState {
         }
 
         if(isDestinationIsland) {
-           appendBuffer("Select the island where you want to move your student: [index of island]\n");
+           appendBuffer("Select the island on which you want to move your student: [index of island]\n");
         }
     }
 
@@ -76,7 +76,7 @@ public class StudentViewState extends ExpertViewState {
                     appendBuffer(error);
                     return error;
                 }
-                int islandIndex = Integer.parseInt(input);
+                int islandIndex = game.getBoard().getOriginalIndexOf(Integer.parseInt(input));
                 notify(
                         new RequestParameters()
                                 .setCommandType(CommandType.TRANSFER_STUDENT_TO_ISLAND)
