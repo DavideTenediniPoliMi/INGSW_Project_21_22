@@ -214,7 +214,7 @@ public class Player implements Serializable {
         name = jsonObject.get("name").getAsString();
         if(jsonObject.has("teamColor"))
             teamColor = TowerColor.valueOf(jsonObject.get("teamColor").getAsString());
-        if(jsonObject.has("teamColor"))
+        if(jsonObject.has("cardBack"))
             cardBack = CardBack.valueOf(jsonObject.get("cardBack").getAsString());
         towerHolder = jsonObject.get("towerHolder").getAsBoolean();
 
