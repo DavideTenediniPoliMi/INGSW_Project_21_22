@@ -54,7 +54,6 @@ class CharacterCardControllerTest {
     void buyCharacterCard_alreadyBoughtCard() throws NotEnoughCoinsException, CharacterCardActivationException {
         game.instantiateCharacterCard(0);
         characterCardController.buyCharacterCard(0);
-        System.out.println(game.getCharacterCards().get(0).getCost());
 
         int coinsBefore = game.getPlayerByID(0).getNumCoins();
         assertThrowsExactly(CharacterCardActivationException.class, () -> characterCardController.buyCharacterCard(0));

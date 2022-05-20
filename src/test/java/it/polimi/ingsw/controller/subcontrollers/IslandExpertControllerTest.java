@@ -39,5 +39,7 @@ class IslandExpertControllerTest {
         islandExpertController.moveMN(12);
 
         assertEquals(oldInfluence + 2, islandExpertController.getInfluenceOf(TowerColor.BLACK));
+
+        Game.resetInstance();
     }
 }

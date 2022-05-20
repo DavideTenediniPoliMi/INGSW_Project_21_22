@@ -173,10 +173,6 @@ class GameControllerTest {
 
         board.addToEntranceOf(playerID, new StudentGroup(Color.BLUE, 3));
 
-        for(Player player : game.getPlayers()) {
-            System.out.println("Player: " + player.getName());
-        }
-
         for(int i=0; i < 3; i++)
             gameController.requestCommand(playerID, command);
 

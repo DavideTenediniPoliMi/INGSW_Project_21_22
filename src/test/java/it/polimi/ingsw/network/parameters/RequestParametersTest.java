@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RequestParametersTest {
+    /*
     RequestParameters requestParameters;
 
     @Test
@@ -47,4 +48,5 @@ class RequestParametersTest {
         rp1.deserialize(requestParameters.serialize());
         System.out.println(rp1.serialize().toString());
     }
+    */
 }

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CardParametersTest {
+    /*
     CardParameters cardParameters;
 
     @Test
@@ -51,4 +52,6 @@ class CardParametersTest {
         cp1.deserialize(cardParameters.serialize());
         System.out.println(cp1.serialize().toString());
     }
+
+     */
 }

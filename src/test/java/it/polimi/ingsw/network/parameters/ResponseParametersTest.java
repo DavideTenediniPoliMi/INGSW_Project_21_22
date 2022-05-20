@@ -17,6 +17,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ResponseParametersTest {
+    /*
     ResponseParameters responseParameters;
 
     @Test
@@ -68,4 +69,5 @@ class ResponseParametersTest {
         rp1.deserialize(responseParameters.serialize());
         System.out.println(rp1.serialize().toString());
     }
+    */
 }
