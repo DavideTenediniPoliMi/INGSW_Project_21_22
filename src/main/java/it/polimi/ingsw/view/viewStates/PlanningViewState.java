@@ -63,4 +63,10 @@ public class PlanningViewState extends GameViewState {
         setInteractionComplete(true);
         return "";
     }
+
+    @Override
+    public void resetInteraction() {
+        validNumbers.clear();
+        validIndexes.clear();
+    }
 }

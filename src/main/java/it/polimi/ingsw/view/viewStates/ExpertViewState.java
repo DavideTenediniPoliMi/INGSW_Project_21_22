@@ -46,6 +46,8 @@ public class ExpertViewState extends GameViewState {
     private StudentGroup diningStudents = new StudentGroup();
     private StudentGroup cardStudents = new StudentGroup();
 
+    private boolean isLastActionBuyCharacterCard = false;
+
     public ExpertViewState(ViewState oldViewState) {
         super(oldViewState);
     }
@@ -206,6 +208,7 @@ public class ExpertViewState extends GameViewState {
             }
             int choice = Integer.parseInt(input);
             if(choice == 2) {
+                isLastActionBuyCharacterCard = false;
                 if(isStudentsPhase) {
                     isMovingStudents = true;
                     return "manage students";
@@ -213,6 +216,7 @@ public class ExpertViewState extends GameViewState {
                 isMovingMN = true;
                 return "manage MN";
             }
+            isLastActionBuyCharacterCard = true;
             cardBought = true;
             return "";
         }
@@ -589,5 +593,12 @@ public class ExpertViewState extends GameViewState {
                         .setCommandType(CommandType.ACTIVATE_CARD)
                         .serialize().toString()
         );
+    }
+
+    @Override
+    public void resetInteraction() {
+        if(isLastActionBuyCharacterCard) {
+            cardBought = false;
+        }
     }
 }

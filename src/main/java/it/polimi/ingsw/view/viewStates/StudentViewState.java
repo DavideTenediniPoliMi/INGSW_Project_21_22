@@ -91,4 +91,12 @@ public class StudentViewState extends ExpertViewState {
         }
         return "That was not a valid choice! Try again!";
     }
+
+    @Override
+    public void resetInteraction() {
+        super.resetInteraction();
+        colorSelected = null;
+        isDestinationSelected = false;
+        isDestinationIsland = false;
+    }
 }

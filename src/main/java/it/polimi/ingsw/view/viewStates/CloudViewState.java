@@ -23,6 +23,7 @@ public class CloudViewState extends GameViewState {
 
     @Override
     public void printCLIPrompt() {
+        setInteractionComplete(false);
         Game game = Game.getInstance();
 
         for(Cloud cloud : game.getBoard().getClouds()) {
@@ -52,6 +53,12 @@ public class CloudViewState extends GameViewState {
                         .setIndex(cloudIndex)
                         .serialize().toString()
         );
+        setInteractionComplete(true);
         return "";
+    }
+
+    @Override
+    public void resetInteraction() {
+        validIndexes.clear();
     }
 }

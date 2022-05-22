@@ -42,9 +42,9 @@ public class NoLobbyViewState extends LobbyViewState {
         appendBuffer(input);
         String error;
 
-        if(!creating) {
+        if (!creating) {
             creating = true;
-            if(!input.equals("")) {
+            if (!input.equals("")) {
                 error = "I said ENTER, but whatever let's keep going!";
                 appendBuffer(error);
                 return error;
@@ -52,10 +52,10 @@ public class NoLobbyViewState extends LobbyViewState {
             return "";
         }
 
-        if(lobbySize == 0) {
+        if (lobbySize == 0) {
             error = StringUtils.checkInteger(input, validNumbers);
 
-            if(!error.equals("")) {
+            if (!error.equals("")) {
                 appendBuffer(error);
                 return error;
             }
@@ -64,8 +64,8 @@ public class NoLobbyViewState extends LobbyViewState {
             return "";
         }
 
-        if(validCharacters.contains(input)) {
-            if(input.equalsIgnoreCase("Y"))
+        if (validCharacters.contains(input)) {
+            if (input.equalsIgnoreCase("Y"))
                 expertMode = true;
 
             notify(
@@ -81,5 +81,15 @@ public class NoLobbyViewState extends LobbyViewState {
         }
 
         return "That was not a valid choice! Try again!";
+    }
+
+    @Override
+    public void resetInteraction() {
+        if(creating) {
+            creating = false;
+        }
+        if(lobbySize > 0) {
+            lobbySize = 0;
+        }
     }
 }
