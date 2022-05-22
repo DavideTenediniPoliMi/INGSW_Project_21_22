@@ -209,9 +209,18 @@ public class GameController {
 
         // END CONDITION 3 : PLAYERS HAVE NO MORE ASSISTANT CARDS
         // END CONDITION 4 : THERE ARE NO MORE STUDENTS TO DRAW FROM THE BAG
-        if(!game.getPlayerByID(0).getPlayableCards().isEmpty() && !game.isStudentBagEmpty()) return;
+        if(everybodyHasCards() && !game.isStudentBagEmpty()) return;
 
         checkWinner();
+    }
+
+    private boolean everybodyHasCards() {
+        for(Player p: game.getPlayers()) {
+            if(p.getPlayableCards().isEmpty())
+                return false;
+        }
+
+        return true;
     }
 
     /**
