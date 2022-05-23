@@ -462,11 +462,14 @@ public class ExpertViewState extends GameViewState {
             }
             if(cardColorSelected == null) {
                 error = "No such student of that color!";
+                appendBuffer(error);
                 return error;
             }
             return "";
         }
-        return "That was not a valid choice! Try again!";
+        error = "That was not a valid choice! Try again!";
+        appendBuffer(error);
+        return error;
     }
 
     protected String manageCLIEntranceStudentColor(String input) {
@@ -504,11 +507,14 @@ public class ExpertViewState extends GameViewState {
             }
             if(colorSelected == null) {
                 error = "No such student of that color!";
+                appendBuffer(error);
                 return error;
             }
             return "";
         }
-        return "That was not a valid choice! Try again!";
+        error = "That was not a valid choice! Try again!";
+        appendBuffer(error);
+        return error;
     }
 
     private String manageCLIDiningStudentColor(String input) {
@@ -546,11 +552,14 @@ public class ExpertViewState extends GameViewState {
             }
             if(colorDiningSelected == null) {
                 error = "No such student of that color!";
+                appendBuffer(error);
                 return error;
             }
             return "";
         }
-        return "That was not a valid choice! Try again!";
+        error = "That was not a valid choice! Try again!";
+        appendBuffer(error);
+        return error;
     }
 
     private String manageCLIStudentColor(String input) {
@@ -574,7 +583,9 @@ public class ExpertViewState extends GameViewState {
             }
             return "";
         }
-        return "That was not a valid choice! Try again!";
+        String error = "That was not a valid choice! Try again!";
+        appendBuffer(error);
+        return error;
     }
 
     private void notifyCardParameters(CardParameters cardParams) {
