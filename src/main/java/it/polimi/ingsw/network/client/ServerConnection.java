@@ -81,7 +81,8 @@ public class ServerConnection extends Connection {
                     joined = true;
                     ready = true;
                     inGame = true;
-                    break;
+                    gameSequence(lastResp);
+                    return;
                 }
             }
         } else if(MatchInfo.getInstance().getSelectedNumPlayer() == 0) {
