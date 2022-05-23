@@ -191,12 +191,13 @@ public class CLI {
      public static Connection handleBinding(Client client) {
           do {
                AnsiConsole.sysOut().println("Insert the IP address of the server : (or Press X to close the game)");
-               String ip = scanner.nextLine();
-
-               if(ip.equals("X")) break;
-
-               AnsiConsole.sysOut().println("Insert the port :");
                try {
+                    String ip = scanner.nextLine();
+
+                    if(ip.equals("X")) break;
+
+                    AnsiConsole.sysOut().println("Insert the port :");
+
                     int port = scanner.nextInt();
                     scanner.nextLine();
 
