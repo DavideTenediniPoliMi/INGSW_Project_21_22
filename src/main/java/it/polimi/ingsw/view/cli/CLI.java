@@ -75,7 +75,7 @@ public class CLI {
                     }
 
                     if(matchInfo.getNumMovedStudents() != jo.get("numMovedStudents").getAsInt()) {
-                         setViewState(new ExpertViewState(new StudentViewState(viewState)));
+                         setViewState(new StudentViewState(viewState));
                          return true;
                     }
 
@@ -122,10 +122,10 @@ public class CLI {
                     setViewState(new PlanningViewState(viewState));
                     break;
                case STUDENTS:
-                    setViewState(new ExpertViewState(new StudentViewState(viewState)));
+                    setViewState(new StudentViewState(viewState));
                     break;
                case MOTHER_NATURE:
-                    setViewState(new ExpertViewState(new MNViewState(viewState)));
+                    setViewState(new MNViewState(viewState));
                     break;
                case CLOUD:
                     setViewState(new CloudViewState(viewState));
