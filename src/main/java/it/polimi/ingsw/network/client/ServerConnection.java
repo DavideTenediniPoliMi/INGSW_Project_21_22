@@ -52,7 +52,7 @@ public class ServerConnection extends Connection {
                 break;
             }
 
-            AnsiConsole.sysOut().println(jo.get("error"));
+            cli.resetInteraction(jo.get("error").getAsString());
         }
 
         lobbySequence();
@@ -132,6 +132,9 @@ public class ServerConnection extends Connection {
             String received = receiveMessage();
             if(received.equals("")) continue;
             lastResp = received;
+
+            if(isThisPlayerReady(received))
+                break;
 
             executor.submit( () -> {
                 JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
@@ -219,5 +222,19 @@ public class ServerConnection extends Connection {
             });
 
         }
+    }
+
+    private boolean isThisPlayerReady(String received) {
+        JsonObject jsonObject = (JsonObject) JsonParser.parseString(received);
+        if(jsonObject.has("players")) {
+            JsonArray jsonPlayers = jsonObject.get("players").getAsJsonArray();
+
+            for(JsonElement jsonPlayer : jsonPlayers) {
+                JsonObject playerObj = jsonPlayer.getAsJsonObject();
+                if(playerObj.get("ID").getAsInt() == cli.getPlayerID())
+                    return playerObj.get("ready").getAsBoolean();
+            }
+        }
+        return false;
     }
 }

@@ -44,9 +44,11 @@ public class Server {
 
             gameController.loadSavedState();
 
-            for(Player player : Game.getInstance().getPlayers()) {
-                VirtualView virtualView = getVVFor(player.getName());
-                virtualView.deserialize(player.getID());
+            if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.IN_GAME)) {
+                for(Player player : Game.getInstance().getPlayers()) {
+                    VirtualView virtualView = getVVFor(player.getName());
+                    virtualView.deserialize(player.getID());
+                }
             }
         }
     }
