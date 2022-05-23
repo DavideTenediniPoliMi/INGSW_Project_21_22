@@ -134,4 +134,9 @@ public class VirtualView extends Observable<String> implements Observer<Response
             handleRequest(skipCommand);
         }
     }
+
+    public void deserialize(int playerID) {
+        this.playerID = playerID;
+        commandFactory = new CommandFactory(playerID, lobbyController, gameController);
+    }
 }
