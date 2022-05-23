@@ -40,9 +40,10 @@ public class ServerConnection extends Connection {
         while(true) {
             cli.handleHandshake();
 
-            String response = receiveMessage();
+            String received = receiveMessage();
+            if(received.equals("")) continue;
 
-            JsonObject jo = JsonParser.parseString(response).getAsJsonObject();
+            JsonObject jo = JsonParser.parseString(received).getAsJsonObject();
 
             if (!jo.has("error")) {
                 new ResponseParameters().deserialize(jo);
@@ -69,6 +70,8 @@ public class ServerConnection extends Connection {
             cli.handleInteraction();
             while(true) {
                 String received = receiveMessage();
+                if(received.equals("")) continue;
+
                 JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
 
                 if(!jsonObject.has("error")) { //Lobby was created
@@ -85,6 +88,8 @@ public class ServerConnection extends Connection {
         boolean joined = false;
         while(!joined && connected) {
             String received = receiveMessage();
+            if(received.equals("")) continue;
+
             JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
             if(jsonObject.has("players")) {
                 JsonArray players = jsonObject.get("players").getAsJsonArray();
@@ -105,11 +110,12 @@ public class ServerConnection extends Connection {
         String lastResp = "";
 
         while(!ready && connected) {
-            String response = receiveMessage();
-            lastResp = response;
+            String received = receiveMessage();
+            if(received.equals("")) continue;
+            lastResp = received;
 
             executor.submit( () -> {
-                JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
+                JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
                 synchronized (Lobby.getLobby()) {
                     if (jsonObject.has("error")) {
                         cli.resetInteraction(jsonObject.get("error").getAsString());
@@ -132,10 +138,11 @@ public class ServerConnection extends Connection {
         cli.displayState();
 
         while(!inGame && connected) {
-            String response = receiveMessage();
-            lastResp = response;
+            String received = receiveMessage();
+            if(received.equals("")) continue;
+            lastResp = received;
 
-            JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
+            JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
             if(jsonObject.has("matchInfo")) {
                 JsonObject matchInfoJson = jsonObject.get("matchInfo").getAsJsonObject();
                 if(matchInfoJson.get("gameStatus").getAsString().equalsIgnoreCase("IN_GAME")) {
@@ -176,10 +183,11 @@ public class ServerConnection extends Connection {
         }
 
         while(inGame && connected) {
-            String response = receiveMessage();
+            String received = receiveMessage();
+            if(received.equals("")) continue;
 
             executor.submit( () -> {
-               JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
+               JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
                synchronized (cli) {
                    boolean reqInteraction = cli.nextState(jsonObject);
                    new ResponseParameters().deserialize(jsonObject);
