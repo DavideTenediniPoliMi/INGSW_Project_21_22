@@ -16,6 +16,11 @@ public class HandshakeViewState extends ViewState {
     @Override
     public String manageCLIInput(String input) {
         appendBuffer(input);
+        if(input.equals("")) {
+            String error = "That's not a valid name! Try again!";
+            appendBuffer(error);
+            return error;
+        }
 
         RequestParameters handshake = new RequestParameters()
                 .setCommandType(CommandType.HANDSHAKE)
