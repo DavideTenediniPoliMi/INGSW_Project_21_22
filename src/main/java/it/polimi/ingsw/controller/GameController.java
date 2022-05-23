@@ -319,7 +319,7 @@ public class GameController {
         matchInfo.declareTie(teamColors);
     }
 
-    public void handleReconnection(int playerID) {
+    public synchronized void handleReconnection(int playerID) {
         game.reconnectPlayer(playerID);
         matchInfo.setNumPlayersConnected(matchInfo.getNumPlayersConnected() + 1);
 
@@ -330,13 +330,19 @@ public class GameController {
 
             timer = null;
             paused = false;
+        } else {
+            requestTimeout();
         }
     }
 
-    public void handleDisconnection(int playerID) {
+    public synchronized void handleDisconnection(int playerID) {
         game.disconnectPlayer(playerID);
         matchInfo.setNumPlayersConnected(matchInfo.getNumPlayersConnected() - 1);
 
+        requestTimeout();
+    }
+
+    private void requestTimeout() {
         if(matchInfo.getNumPlayersConnected() == 1) {
             paused = true;
 
@@ -361,5 +367,46 @@ public class GameController {
 
     public RoundStateController getRoundStateController() {
         return roundStateController;
+    }
+
+    public synchronized boolean isPaused() {
+        return paused;
+    }
+
+    public void loadSavedState() {
+        if(!matchInfo.getGameStatus().equals(GameStatus.IN_GAME))
+            return;
+
+        IslandController islandController;
+        DiningRoomController diningRoomController;
+
+        if(matchInfo.isExpertMode()) {
+            islandController = new IslandExpertController(new CharacterCardController());
+            diningRoomController = new DiningRoomExpertController();
+        } else {
+            islandController = new IslandController();
+            diningRoomController = new DiningRoomController();
+        }
+
+        roundStateController = new RoundStateController(islandController, diningRoomController);
+
+        switch(matchInfo.getStateType()) {
+            case PLANNING:
+                roundStateController = new PlanningStateController(roundStateController);
+                break;
+            case STUDENTS:
+                roundStateController = new StudentsStateController(roundStateController);
+                break;
+            case MOTHER_NATURE:
+                roundStateController = new MNStateController(roundStateController);
+                break;
+            case CLOUD:
+                roundStateController = new CloudStateController(roundStateController);
+                break;
+            default:
+                System.err.println("Unable to load round information, going into planning state");
+                roundStateController = new PlanningStateController(roundStateController);
+                break;
+        }
     }
 }

@@ -42,6 +42,8 @@ public class Server {
             readDataFromFile(file);
             file.delete();
 
+            gameController.loadSavedState();
+
             for(Player player : Game.getInstance().getPlayers()) {
                 VirtualView virtualView = getVVFor(player.getName());
                 virtualView.deserialize(player.getID());

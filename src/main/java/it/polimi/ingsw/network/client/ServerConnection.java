@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.enumerations.CommandType;
@@ -23,6 +24,7 @@ public class ServerConnection extends Connection {
     private final CLI cli;
     private boolean inGame;
     private boolean ready;
+    private boolean joined;
 
     public ServerConnection(Socket socket, Client client) throws IOException {
         super(socket);
@@ -64,11 +66,29 @@ public class ServerConnection extends Connection {
      * Check se la lobby esiste già o no, quando joini checka finchè non ti arriva un messaggio con il tuo nome tra i player
      */
     private void lobbySequence() {
-        if(MatchInfo.getInstance().getSelectedNumPlayer() == 0) {
+        String lastResp = "";
+
+        if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.IN_GAME)) { //Handle reconnection
+            while(connected) {
+                String received = receiveMessage();
+                if(received.equals("")) continue;
+
+                lastResp = received;
+
+                JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
+
+                if(!jsonObject.has("error") && jsonObject.has("game")) { //Lobby was created
+                    joined = true;
+                    ready = true;
+                    inGame = true;
+                    break;
+                }
+            }
+        } else if(MatchInfo.getInstance().getSelectedNumPlayer() == 0) {
             //Begin lobby creation sequence
             cli.setViewState(new NoLobbyViewState(cli.getViewState()));
             cli.handleInteraction();
-            while(true) {
+            while(connected) {
                 String received = receiveMessage();
                 if(received.equals("")) continue;
 
@@ -85,7 +105,6 @@ public class ServerConnection extends Connection {
         RequestParameters requestParameters = new RequestParameters()
                 .setCommandType(CommandType.JOIN);
         update(requestParameters.serialize().toString());
-        boolean joined = false;
         while(!joined && connected) {
             String received = receiveMessage();
             if(received.equals("")) continue;
@@ -107,7 +126,6 @@ public class ServerConnection extends Connection {
         // Begin lobby loop
         cli.setViewState(new SelectLobbyViewState(cli.getViewState()));
         executor.submit(cli::handleInteraction);
-        String lastResp = "";
 
         while(!ready && connected) {
             String received = receiveMessage();
