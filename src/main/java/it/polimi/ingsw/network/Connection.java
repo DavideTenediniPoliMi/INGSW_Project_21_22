@@ -34,7 +34,9 @@ public abstract class Connection implements Runnable, Observer<String> {
     }
 
     public synchronized void sendMessage(String message) {
-        System.out.println("Sending message of size " + message.length() + ":\n" + message);
+        if(message.length() > 0) {
+            System.out.println("Sending message of size " + message.length() + ":\n" + message);
+        }
         try {
             out.writeInt(message.length());
 

@@ -81,7 +81,7 @@ public class ExpertViewState extends GameViewState {
         if(!cardBought) {
             stringBuilder.append("Choose your action:\n");
             stringBuilder.append("1) Buy character card\n");
-            stringBuilder.append("2) Move " + movementSubject + "\n");
+            stringBuilder.append("2) Move " + movementSubject);
 
             return stringBuilder.toString();
         }
@@ -236,6 +236,7 @@ public class ExpertViewState extends GameViewState {
                             .serialize().toString()
             );
 
+            setInteractionComplete(true);
             isCardSelected = true;
             return "";
         }

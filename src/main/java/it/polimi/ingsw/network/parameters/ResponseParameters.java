@@ -498,6 +498,6 @@ public class ResponseParameters implements Serializable {
         }
 
         if(jsonObject.has("error"))
-            error = jsonObject.getAsJsonObject("error").getAsString();
+            error = jsonObject.get("error").getAsString();
     }
 }
