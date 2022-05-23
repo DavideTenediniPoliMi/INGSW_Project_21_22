@@ -74,7 +74,6 @@ public class Lobby extends Observable<ResponseParameters> implements Serializabl
             players.remove(toRemove);
             readyStatus.remove(playerID);
         }
-        MatchInfo.getInstance().setNumPlayersConnected(MatchInfo.getInstance().getNumPlayersConnected() - 1);
 
         ResponseParameters params = new ResponseParameters().setPlayers(players);
         notify(params);

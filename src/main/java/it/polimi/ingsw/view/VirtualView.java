@@ -30,6 +30,7 @@ public class VirtualView extends Observable<String> implements Observer<Response
         this.lobbyController = lobbyController;
         this.gameController = gameController;
         this.name = name;
+        playerID = 0;
 
         Game.getInstance().addObserver(this);
         MatchInfo.getInstance().addObserver(this);
@@ -56,20 +57,19 @@ public class VirtualView extends Observable<String> implements Observer<Response
                     command = new CommandFactory(playerID, lobbyController, gameController).createCommand(params);
                 } else {
                     do {
-                        int plausibleID = MatchInfo.getInstance().getNumPlayersConnected();
                         try {
                             params.setName(name);
 
-                            CommandFactory tempFactory = new CommandFactory(plausibleID, lobbyController, gameController);
+                            CommandFactory tempFactory = new CommandFactory(playerID, lobbyController, gameController);
                             command = tempFactory.createCommand(params);
 
                             lobbyController.requestCommand(command);
 
                             commandFactory = tempFactory;
-                            playerID = plausibleID;
                             return;
                         } catch(DuplicateIDException e) {
                             System.out.println("Trying again!");
+                            playerID += 1;
                         } catch(EriantysException | EriantysRuntimeException e) {
                             update(new ResponseParameters().setError(e.getMessage()));
                             return;
