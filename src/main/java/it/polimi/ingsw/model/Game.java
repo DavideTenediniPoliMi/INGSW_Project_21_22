@@ -634,9 +634,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
     public List<String> print(boolean... params) {
         List<String> strings = board.print();
         List<String> temp = new ArrayList<>(Collections.nCopies(26, "│"));
-        //temp.add("┤");
         temp.add("┘");
-        //temp.addAll(Collections.nCopies(11, "│"));
 
         strings = StringUtils.insertAfter(strings, temp, 0, 0);
 
