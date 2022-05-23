@@ -14,7 +14,7 @@ class PlayerTest {
 
     @BeforeEach
     void setUp() {
-        player = new Player(0, "mario", TowerColor.BLACK, CardBack.WIZARD_1, true);
+        player = new Player(0, "mario", TowerColor.BLACK, CardBack.WIZARD1, true);
     }
 
     @AfterEach
@@ -25,7 +25,7 @@ class PlayerTest {
     @Test
     public void testGetter() {
         assertAll(
-                () -> assertEquals(CardBack.WIZARD_1, player.getCardBack()),
+                () -> assertEquals(CardBack.WIZARD1, player.getCardBack()),
                 () -> assertTrue(player.isTowerHolder())
         );
     }

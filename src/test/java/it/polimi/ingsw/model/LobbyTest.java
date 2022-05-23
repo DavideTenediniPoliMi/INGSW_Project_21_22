@@ -69,9 +69,9 @@ class LobbyTest {
 
     @Test
     void selectCardBack() {
-        lobby.selectCardBack(0, CardBack.WIZARD_1);
+        lobby.selectCardBack(0, CardBack.WIZARD1);
 
-        assertEquals(CardBack.WIZARD_1, lobby.getPlayerByID(0).getCardBack());
+        assertEquals(CardBack.WIZARD1, lobby.getPlayerByID(0).getCardBack());
     }
 
     @Test

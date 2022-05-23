@@ -33,11 +33,11 @@ public class StudentStateControllerTest {
     void setUp() {
         game = Game.getInstance();
         board = game.getBoard();
-        game.addPlayer(new Player(0, "lollo", TowerColor.BLACK, CardBack.WIZARD_1, true));
+        game.addPlayer(new Player(0, "lollo", TowerColor.BLACK, CardBack.WIZARD1, true));
         board.addSchool(game.getPlayerByID(0));
-        game.addPlayer(new Player(1, "lello", TowerColor.WHITE, CardBack.WIZARD_2, true));
+        game.addPlayer(new Player(1, "lello", TowerColor.WHITE, CardBack.WIZARD2, true));
         board.addSchool(game.getPlayerByID(1));
-        game.addPlayer(new Player(2, "lillo", TowerColor.GREY, CardBack.WIZARD_3, true));
+        game.addPlayer(new Player(2, "lillo", TowerColor.GREY, CardBack.WIZARD3, true));
         board.addSchool(game.getPlayerByID(2));
 
         matchInfo = MatchInfo.getInstance();

@@ -33,7 +33,7 @@ class CharacterCardControllerTest {
         characterCardController = new CharacterCardPlayableStateController(rc,TurnState.STUDENTS);
 
         game = Game.getInstance();
-        game.addPlayer(new Player(0, "lele", TowerColor.GREY, CardBack.WIZARD_3, true));
+        game.addPlayer(new Player(0, "lele", TowerColor.GREY, CardBack.WIZARD3, true));
         game.giveCoinToPlayer(0);
         matchInfo = MatchInfo.getInstance();
         matchInfo.setUpGame(2,true);

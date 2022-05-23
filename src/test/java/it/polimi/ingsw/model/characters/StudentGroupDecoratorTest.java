@@ -53,7 +53,7 @@ public class StudentGroupDecoratorTest {
 
 
         //toDiningRoom
-        game.addPlayer(new Player(0, "mario", TowerColor.BLACK, CardBack.WIZARD_1, true));
+        game.addPlayer(new Player(0, "mario", TowerColor.BLACK, CardBack.WIZARD1, true));
         board.addSchool(game.getPlayerByID(0));
 
         sg2 = null;

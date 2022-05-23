@@ -25,7 +25,7 @@ public class AlterInfluenceDecoratorTest {
     public void setUp() throws Exception {
         game = Game.getInstance();
         board = game.getBoard();
-        game.addPlayer(new Player(0, "mario", TowerColor.BLACK, CardBack.WIZARD_1, true));
+        game.addPlayer(new Player(0, "mario", TowerColor.BLACK, CardBack.WIZARD1, true));
         game.placeMNAt(0);
         game.conquerIsland(TowerColor.BLACK);
         game.giveProfessorTo(0, Color.BLUE);

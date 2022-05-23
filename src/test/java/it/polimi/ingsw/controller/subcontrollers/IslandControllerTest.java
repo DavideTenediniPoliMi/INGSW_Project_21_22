@@ -24,8 +24,8 @@ class IslandControllerTest {
         islandController = new IslandController();
         game = Game.getInstance();
         board = game.getBoard();
-        game.addPlayer(new Player(0, "luca", TowerColor.GREY, CardBack.WIZARD_1, true));
-        game.addPlayer(new Player(1, "paolo", TowerColor.BLACK, CardBack.WIZARD_2, true));
+        game.addPlayer(new Player(0, "luca", TowerColor.GREY, CardBack.WIZARD1, true));
+        game.addPlayer(new Player(1, "paolo", TowerColor.BLACK, CardBack.WIZARD2, true));
         board.addSchool(game.getPlayerByID(0));
         board.addSchool(game.getPlayerByID(1));
         game.placeMNAt(0);

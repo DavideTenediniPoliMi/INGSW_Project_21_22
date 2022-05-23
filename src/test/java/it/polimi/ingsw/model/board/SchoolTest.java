@@ -19,8 +19,8 @@ public class SchoolTest {
 
     @BeforeEach
     public void setUp() {
-        p1 = new Player(0, "Pippo", TowerColor.GREY, CardBack.WIZARD_1, true);
-        p2 = new Player(1, "Pluto", TowerColor.WHITE, CardBack.WIZARD_2, true);
+        p1 = new Player(0, "Pippo", TowerColor.GREY, CardBack.WIZARD1, true);
+        p2 = new Player(1, "Pluto", TowerColor.WHITE, CardBack.WIZARD2, true);
 
         s1 = new School(p1);
         s2 = new School(p2);

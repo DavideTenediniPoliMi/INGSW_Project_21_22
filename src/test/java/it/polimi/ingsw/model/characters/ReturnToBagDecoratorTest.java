@@ -27,8 +27,8 @@ public class ReturnToBagDecoratorTest {
 
         game = Game.getInstance();
         board = game.getBoard();
-        game.addPlayer(new Player(0, "mario", TowerColor.BLACK, CardBack.WIZARD_1, true));
-        game.addPlayer(new Player(1, "luigi", TowerColor.WHITE, CardBack.WIZARD_2, true));
+        game.addPlayer(new Player(0, "mario", TowerColor.BLACK, CardBack.WIZARD1, true));
+        game.addPlayer(new Player(1, "luigi", TowerColor.WHITE, CardBack.WIZARD2, true));
         board.addSchool(game.getPlayerByID(0));
         board.addSchool(game.getPlayerByID(1));
 

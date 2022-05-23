@@ -26,9 +26,9 @@ public class ExchangeStudentsDecoratorTest {
     public void setUp() throws Exception {
         game = Game.getInstance();
         board = game.getBoard();
-        Player player = new Player(0, "mario", TowerColor.BLACK, CardBack.WIZARD_1, true);
+        Player player = new Player(0, "mario", TowerColor.BLACK, CardBack.WIZARD1, true);
 
-        game.addPlayer(new Player(0, "mario", TowerColor.BLACK, CardBack.WIZARD_1, true));
+        game.addPlayer(new Player(0, "mario", TowerColor.BLACK, CardBack.WIZARD1, true));
         board.addSchool(player);
 
         StudentGroup entrance = new StudentGroup(Color.BLUE, 3);
