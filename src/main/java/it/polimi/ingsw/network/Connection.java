@@ -51,26 +51,22 @@ public abstract class Connection implements Runnable, Observer<String> {
     }
 
     public String receiveMessage() {
-        int length = 0;
-        while(length <= 0) {
-            try {
-                length = in.readInt();
+        try {
+            int length = in.readInt();
 
-                if (length > 0) {
-                    System.out.println("received message of length " + length);
+            if (length > 0) {
+                System.out.println("received message of length " + length);
 
-                    StringBuilder message = new StringBuilder();
-                    for (int i = 0; i < length; i++) {
-                        message.append(in.readChar());
-                    }
-                    System.out.println(message);
-
-                    return message.toString();
+                StringBuilder message = new StringBuilder();
+                for (int i = 0; i < length; i++) {
+                    message.append(in.readChar());
                 }
-            } catch (IOException e){
-                disconnect();
-                break;
+                System.out.println(message);
+
+                return message.toString();
             }
+        } catch (IOException e){
+            disconnect();
         }
 
         return "";
