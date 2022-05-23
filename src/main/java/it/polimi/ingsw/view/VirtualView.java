@@ -20,7 +20,7 @@ import it.polimi.ingsw.network.parameters.ResponseParameters;
 
 public class VirtualView extends Observable<String> implements Observer<ResponseParameters> {
     private final String name;
-    private boolean connected;
+    private boolean connected, skipping;
     private int playerID;
     private CommandFactory commandFactory;
     private final LobbyController lobbyController;
@@ -118,6 +118,7 @@ public class VirtualView extends Observable<String> implements Observer<Response
     public void reconnect() {
         String reconnectCommand = new RequestParameters().setCommandType(CommandType.RECONNECT).serialize().toString();
         handleRequest(reconnectCommand);
+        notify(new ResponseParameters().setSendGame(true).serialize().toString());
     }
 
     public void disconnect() {
@@ -129,10 +130,12 @@ public class VirtualView extends Observable<String> implements Observer<Response
 
     public void skipIfCurrent() {
         MatchInfo match = MatchInfo.getInstance();
-        if(match.getGameStatus().equals(GameStatus.IN_GAME) && match.getCurrentPlayerID() == playerID) {
+        if(match.getGameStatus().equals(GameStatus.IN_GAME) && match.getCurrentPlayerID() == playerID && !gameController.isPaused() && !skipping) {
+            skipping = true;
             String skipCommand = new RequestParameters().setCommandType(CommandType.SKIP_TURN).serialize().toString();
             handleRequest(skipCommand);
         }
+        skipping = false;
     }
 
     public void deserialize(int playerID) {
