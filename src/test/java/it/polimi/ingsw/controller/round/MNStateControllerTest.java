@@ -25,9 +25,9 @@ class MNStateControllerTest {
     @BeforeEach
     void setUp() {
         game = Game.getInstance();
-        game.addPlayer(new Player(0, "lollo", TowerColor.BLACK, CardBack.WIZARD_1, true));
-        game.addPlayer(new Player(1, "lello", TowerColor.WHITE, CardBack.WIZARD_2, true));
-        game.addPlayer(new Player(2, "lillo", TowerColor.GREY, CardBack.WIZARD_3, true));
+        game.addPlayer(new Player(0, "lollo", TowerColor.BLACK, CardBack.WIZARD1, true));
+        game.addPlayer(new Player(1, "lello", TowerColor.WHITE, CardBack.WIZARD2, true));
+        game.addPlayer(new Player(2, "lillo", TowerColor.GREY, CardBack.WIZARD3, true));
         game.placeMNAt(0);
 
         matchInfo = MatchInfo.getInstance();

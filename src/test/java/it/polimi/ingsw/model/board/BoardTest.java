@@ -1,15 +1,11 @@
 package it.polimi.ingsw.model.board;
 
 import com.google.gson.JsonObject;
-import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
-import it.polimi.ingsw.utils.StringUtils;
-import org.fusesource.jansi.AnsiConsole;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +26,7 @@ public class BoardTest {
         board.createClouds(2);
         board.refillClouds(3);
 
-        Player p = new Player(0, "Pippo", TowerColor.BLACK, CardBack.WIZARD_1, true);
+        Player p = new Player(0, "Pippo", TowerColor.BLACK, CardBack.WIZARD1, true);
         board.addSchool(p);
 
         board.addToEntranceOf(0, new StudentGroup(Color.GREEN, 2));

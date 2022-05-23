@@ -20,7 +20,7 @@ class IslandExpertControllerTest {
         Game game = Game.getInstance();
         Board board = game.getBoard();
 
-        game.addPlayer(new Player(0, "mar", TowerColor.BLACK, CardBack.WIZARD_2, true));
+        game.addPlayer(new Player(0, "mar", TowerColor.BLACK, CardBack.WIZARD2, true));
         board.addSchool(game.getPlayerByID(0));
 
         game.placeMNAt(0);
