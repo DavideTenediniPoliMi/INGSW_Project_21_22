@@ -160,7 +160,8 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
     @Override
     public void deserialize(JsonObject jsonObject) {
         students.deserialize(jsonObject.get("students").getAsJsonObject());
-        fromCard.deserialize(jsonObject.get("fromCard").getAsJsonObject());
+        if(jsonObject.has("fromCard"))
+            fromCard.deserialize(jsonObject.get("fromCard").getAsJsonObject());
         if(jsonObject.has("fromEntrance"))
             fromEntrance.deserialize(jsonObject.get("fromEntrance").getAsJsonObject());
         islandIndex = jsonObject.get("islandIndex").getAsInt();

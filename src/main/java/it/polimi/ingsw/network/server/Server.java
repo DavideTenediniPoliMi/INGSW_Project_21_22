@@ -9,6 +9,7 @@ import it.polimi.ingsw.exceptions.lobby.PlayerAlreadyConnectedException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.view.VirtualView;
 
@@ -34,12 +35,17 @@ public class Server {
     private final GameController gameController = new GameController();
     private final List<VirtualView> virtualViews = new ArrayList<>();
 
-    public Server() throws IOException {
+    public Server() throws IOException, PlayerAlreadyConnectedException {
         File file = new File(BACKUP_FILE);
 
         if(file.exists()) {
             readDataFromFile(file);
             file.delete();
+
+            for(Player player : Game.getInstance().getPlayers()) {
+                VirtualView virtualView = getVVFor(player.getName());
+                virtualView.deserialize(player.getID());
+            }
         }
     }
 

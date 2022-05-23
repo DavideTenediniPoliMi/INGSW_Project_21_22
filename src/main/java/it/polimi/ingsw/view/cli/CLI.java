@@ -59,7 +59,7 @@ public class CLI {
           jo = jo.get("matchInfo").getAsJsonObject();
 
           if(!isPlayerTurn(jo))
-               return true;
+               return false;
 
           switch(matchInfo.getStateType()) {
                case PLANNING:
