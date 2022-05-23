@@ -135,17 +135,17 @@ public class ServerConnection extends Connection {
             String response = receiveMessage();
             lastResp = response;
 
-            executor.submit( () -> {
-                JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
-                if(jsonObject.has("matchInfo")) {
-                    JsonObject matchInfoJson = jsonObject.get("matchInfo").getAsJsonObject();
-                    if(matchInfoJson.get("gameStatus").getAsString().equalsIgnoreCase("IN_GAME")) {
-                        synchronized (cli) {
-                            inGame = true;
-                        }
-                        return;
+            JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
+            if(jsonObject.has("matchInfo")) {
+                JsonObject matchInfoJson = jsonObject.get("matchInfo").getAsJsonObject();
+                if(matchInfoJson.get("gameStatus").getAsString().equalsIgnoreCase("IN_GAME")) {
+                    synchronized (cli) {
+                        inGame = true;
                     }
+                    break;
                 }
+            }
+            executor.submit( () -> {
                 synchronized (cli) {
                     new ResponseParameters().deserialize(jsonObject);
                     cli.displayState();
@@ -164,7 +164,7 @@ public class ServerConnection extends Connection {
     private void gameSequence(String lastResponse) {
         JsonObject initJsonObject = JsonParser.parseString(lastResponse).getAsJsonObject();
 
-        cli.setViewState(new GameViewState(cli.getViewState()));
+        cli.setViewState(new PlanningViewState(cli.getViewState()));
         boolean interact = cli.nextState(initJsonObject);
         new ResponseParameters().deserialize(initJsonObject);
 

@@ -613,7 +613,8 @@ public class Game extends Observable<ResponseParameters> implements Serializable
             if(MatchInfo.getInstance().isExpertMode()) {
                 JsonArray jsonCards = jsonObject.get("characterCards").getAsJsonArray();
                 for (JsonElement jsonCard : jsonCards) {
-                    String name = jsonCard.getAsJsonObject().get("name").getAsString();
+                    JsonObject cardObject = jsonCard.getAsJsonObject().get("card").getAsJsonObject();
+                    String name = cardObject.get("name").getAsString();
                     CharacterCard c = CharacterCards.valueOf(name).instantiate();
                     if(c != null) {
                         c.deserialize(jsonCard.getAsJsonObject());

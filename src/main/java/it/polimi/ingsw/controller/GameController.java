@@ -123,6 +123,7 @@ public class GameController {
         setState(new PlanningStateController(roundStateController));
 
         roundStateController.defineFirstPlayOrder();
+        matchInfo.setStateType(TurnState.PLANNING);
         matchInfo.setGameStatus(GameStatus.IN_GAME);
     }
 
