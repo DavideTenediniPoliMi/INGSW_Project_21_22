@@ -430,6 +430,7 @@ public class ResponseParameters implements Serializable {
         }
 
         if (jsonObject.has("professors")) {
+            professors = new ProfessorTracker();
             professors.deserialize(jsonObject.get("professors").getAsJsonObject());
             game.getBoard().setProfessorOwners(professors);
         }
