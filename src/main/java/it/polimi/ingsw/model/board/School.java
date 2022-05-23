@@ -43,6 +43,12 @@ public class School implements Serializable, Printable<List<String>> {
         return owner;
     }
 
+    public void updateOwner() {
+        int ownerID = owner.getID();
+
+        owner = Game.getInstance().getPlayerByID(ownerID);
+    }
+
     /**
      * Returns the amount of towers in this <code>School</code>
      *

@@ -166,26 +166,6 @@ public class ResponseParameters implements Serializable {
     }
 
     /**
-     * Gets the <code>Player</code>.
-     *
-     * @return the <code>Player</code> of this <code>ResponseParameters</code>.
-     */
-    public Player getPlayer() {
-        return player;
-    }
-
-    /**
-     * Sets the specified <code>Player</code> and returns this instance.
-     *
-     * @param player the <code>Player</code> to set.
-     * @return this <code>ResponseParameters</code>.
-     */
-    public ResponseParameters setPlayer(Player player) {
-        this.player = player;
-        return this;
-    }
-
-    /**
      * Gets the amount of coins left in the <code>Board</code>.
      *
      * @return the amount of coins set in this <code>ResponseParameters</code>.
@@ -347,9 +327,6 @@ public class ResponseParameters implements Serializable {
         if(professors != null)
             jsonObject.add("professors", professors.serialize());
 
-        if(player != null)
-            jsonObject.add("player", player.serialize());
-
         if(players != null && players.size() > 0) {
             JsonArray jsonArray = new JsonArray();
             for(Player p : players) {
@@ -478,22 +455,11 @@ public class ResponseParameters implements Serializable {
             }
             if(GameStatus.IN_GAME.equals(MatchInfo.getInstance().getGameStatus())) {
                 game.setPlayers(players);
+                for(School s: game.getBoard().getSchools()) {
+                    s.updateOwner();
+                }
             } else {
                 Lobby.getLobby().setPlayers(players);
-            }
-        }
-
-        if (jsonObject.has("player")) {
-            player.deserialize(jsonObject.get("player").getAsJsonObject());
-            Player modelPlayer;
-            if(GameStatus.IN_GAME.equals(MatchInfo.getInstance().getGameStatus())) {
-                modelPlayer = game.getPlayerByID(player.getID());
-            } else {
-                modelPlayer = Lobby.getLobby().getPlayerByID(player.getID());
-            }
-
-            if(modelPlayer != null) {
-                modelPlayer.deserialize(jsonObject.getAsJsonObject("player"));
             }
         }
 

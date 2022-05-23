@@ -387,7 +387,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         getPlayerByID(playerID).setSelectedCard(selectedCard);
         selectedCard.use(playerID);
 
-        ResponseParameters params = new ResponseParameters().setPlayer(getPlayerByID(playerID))
+        ResponseParameters params = new ResponseParameters().setPlayers(players)
                 .setSendCards(true);
         notify(params);
     }
@@ -413,7 +413,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         board.takeCoin();
         getPlayerByID(playerID).addCoin();
 
-        ResponseParameters params = new ResponseParameters().setPlayer(getPlayerByID(playerID))
+        ResponseParameters params = new ResponseParameters().setPlayers(players)
                 .setCoinsLeft(board.getNumCoinsLeft());
         notify(params);
     }

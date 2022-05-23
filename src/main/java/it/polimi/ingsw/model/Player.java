@@ -205,6 +205,9 @@ public class Player implements Serializable {
             jo.add("ready", new JsonPrimitive(Lobby.getLobby().isReady(ID)));
         }
 
+        if(selectedCard != null)
+            jo.add("selectedCard", new JsonPrimitive(selectedCard.toString()));
+
         return jo;
     }
 
