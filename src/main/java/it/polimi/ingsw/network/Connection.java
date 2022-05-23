@@ -52,7 +52,11 @@ public abstract class Connection implements Runnable, Observer<String> {
 
     public String receiveMessage() {
         try {
-            int length = in.readInt();
+            int length;
+
+            do {
+                length = in.readInt();
+            } while(length == 0);
 
             if (length > 0) {
                 System.out.println("received message of length " + length);
