@@ -47,8 +47,7 @@ public class CLI {
           MatchInfo matchInfo = MatchInfo.getInstance();
 
           if(jo.has("error")) {
-               AnsiConsole.sysOut().println(jo.get("error").getAsString());
-               viewState.appendBuffer(jo.get("error").getAsString());
+               resetInteraction(jo.get("error").getAsString());
                return true;
           }
 
@@ -171,7 +170,7 @@ public class CLI {
      public void handleHandshake() {
           do {
                viewState.printCLIPrompt();
-               AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + viewState.print() + viewState.getBuffer());
+               AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + viewState.getBuffer());
 
                name = scanner.nextLine();
 
