@@ -74,8 +74,13 @@ public class CLI {
                          return true;
                     }
 
-                    if(matchInfo.getNumMovedStudents() != jo.get("numMovedStudents").getAsInt()) {
-                         setViewState(new StudentViewState(viewState));
+                    int numMovedStudents = jo.get("numMovedStudents").getAsInt();
+                    if(matchInfo.getNumMovedStudents() != numMovedStudents) {
+                         if(numMovedStudents == MatchInfo.getInstance().getMaxMovableStudents()) {
+                              setViewState(new MNViewState(viewState));
+                         } else {
+                              setViewState(new StudentViewState(viewState));
+                         }
                          return true;
                     }
 
