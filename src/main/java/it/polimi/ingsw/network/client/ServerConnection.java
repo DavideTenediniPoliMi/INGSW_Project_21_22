@@ -163,33 +163,35 @@ public class ServerConnection extends Connection {
      */
     private void gameSequence(String lastResponse) {
         JsonObject initJsonObject = JsonParser.parseString(lastResponse).getAsJsonObject();
-
-        cli.setViewState(new PlanningViewState(cli.getViewState()));
-        boolean interact = cli.nextState(initJsonObject);
         new ResponseParameters().deserialize(initJsonObject);
 
-        if(interact)
-            cli.handleInteraction();
+        cli.setViewState(new PlanningViewState(cli.getViewState()));
+        cli.nextState(initJsonObject);
 
-        while(inGame) {
+        if(MatchInfo.getInstance().getCurrentPlayerID() == cli.getPlayerID())
+            cli.handleInteraction();
+        else {
+            MatchInfo.getInstance().setStateType(TurnState.CLOUD);
+            cli.displayState();
+        }
+
+        while(inGame && connected) {
             String response = receiveMessage();
 
             executor.submit( () -> {
                JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
                synchronized (cli) {
                    boolean reqInteraction = cli.nextState(jsonObject);
+                   new ResponseParameters().deserialize(jsonObject);
 
-                   if(MatchInfo.getInstance().getCurrentPlayerID() == cli.getPlayerID()) {
-                       new ResponseParameters().deserialize(jsonObject);
-
-                       if(reqInteraction) {
-                           cli.handleInteraction(); //Handle interaction in new view
-                       }
-                   } else {
+                   if(reqInteraction)
+                       cli.handleInteraction(); //Handle interaction in new view
+                   else
                        cli.displayState();
-                   }
+
                }
             });
+
         }
     }
 }

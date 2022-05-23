@@ -381,6 +381,9 @@ public class ResponseParameters implements Serializable {
     public void deserialize(JsonObject jsonObject) {
         Game game = Game.getInstance();
 
+        if(jsonObject.has("game"))
+            Game.getInstance().deserialize(jsonObject.getAsJsonObject("game"));
+
         if (jsonObject.has("schools")) {
             schools = new ArrayList<>();
             JsonArray jsonArray = jsonObject.get("schools").getAsJsonArray();
@@ -464,9 +467,6 @@ public class ResponseParameters implements Serializable {
 
         if(jsonObject.has("matchInfo"))
             MatchInfo.getInstance().deserialize(jsonObject.getAsJsonObject("matchInfo"));
-
-        if(jsonObject.has("game"))
-            Game.getInstance().deserialize(jsonObject.getAsJsonObject("game"));
 
         if (jsonObject.has("players")) {
             players = new ArrayList<>();
