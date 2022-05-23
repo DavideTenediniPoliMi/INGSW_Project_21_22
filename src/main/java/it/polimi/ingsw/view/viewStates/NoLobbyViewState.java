@@ -80,7 +80,9 @@ public class NoLobbyViewState extends LobbyViewState {
             return "";
         }
 
-        return "That was not a valid choice! Try again!";
+        error = "That was not a valid choice! Try again!";
+        appendBuffer(error);
+        return error;
     }
 
     @Override
