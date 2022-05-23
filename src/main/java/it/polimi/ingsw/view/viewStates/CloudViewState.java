@@ -24,6 +24,7 @@ public class CloudViewState extends GameViewState {
     @Override
     public void printCLIPrompt() {
         setInteractionComplete(false);
+        validIndexes.clear();
         Game game = Game.getInstance();
 
         for(Cloud cloud : game.getBoard().getClouds()) {
