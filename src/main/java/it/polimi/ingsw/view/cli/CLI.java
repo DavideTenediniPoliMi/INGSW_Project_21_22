@@ -11,6 +11,7 @@ import org.fusesource.jansi.AnsiConsole;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CLI {
@@ -195,15 +196,17 @@ public class CLI {
                if(ip.equals("X")) break;
 
                AnsiConsole.sysOut().println("Insert the port :");
-               int port = scanner.nextInt();
-               scanner.nextLine();
-
                try {
+                    int port = scanner.nextInt();
+                    scanner.nextLine();
+
                     return new ServerConnection(new Socket(ip, port), client);
                } catch(IOException | SecurityException | IllegalArgumentException e) {
                     AnsiConsole.sysOut().println("The combination IP/Port didn't work! Try again!");
+               } catch(InputMismatchException e) {
+                    AnsiConsole.sysOut().println("That was not a valid input! Try again!");
                } catch(Exception e) {
-                    AnsiConsole.sysOut().println("Something went wrong! Try again!" + e.getMessage());
+                    AnsiConsole.sysOut().println("Something went wrong! Try again!");
                }
           } while(true);
 
