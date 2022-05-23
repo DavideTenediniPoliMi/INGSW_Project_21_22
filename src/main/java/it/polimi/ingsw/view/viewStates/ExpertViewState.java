@@ -34,10 +34,10 @@ public class ExpertViewState extends GameViewState {
     CharacterCard activeCard = null;
     private int boughtCardIndex;
 
-    protected Color colorSelected;
-    private Color cardColorSelected;
-    private Color selectedColor;
-    private Color colorDiningSelected;
+    protected Color colorSelected = null;
+    private Color cardColorSelected = null;
+    private Color selectedColor = null;
+    private Color colorDiningSelected = null;
 
     private int studentsSwapped = 0;
     private int numStudentsToSwap = 0;
@@ -61,6 +61,10 @@ public class ExpertViewState extends GameViewState {
     public void printCLIPrompt() {
         setInteractionComplete(false);
         if(!matchInfo.isExpertMode()) {
+            if(isStudentsPhase)
+                isMovingStudents = true;
+            else
+                isMovingMN = true;
             return;
         }
         if(isStudentsPhase) {
@@ -96,11 +100,11 @@ public class ExpertViewState extends GameViewState {
     protected String printCLIStudentColorSelection() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("[" + AnsiCodes.BLUE_BACKGROUND_BRIGHT + "B" + AnsiCodes.RESET + ", ");
-        stringBuilder.append(AnsiCodes.GREEN_BACKGROUND_BRIGHT + "G" + AnsiCodes.RESET + ", ");
-        stringBuilder.append(AnsiCodes.PURPLE_BACKGROUND_BRIGHT + "P" + AnsiCodes.RESET + ", ");
-        stringBuilder.append(AnsiCodes.RED_BACKGROUND_BRIGHT + "R" + AnsiCodes.RESET + ", ");
-        stringBuilder.append(AnsiCodes.YELLOW_BACKGROUND_BRIGHT + "Y" + AnsiCodes.RESET + "]\n");
+        stringBuilder.append("[" + AnsiCodes.BLUE_TEXT + "B" + AnsiCodes.RESET + ", ");
+        stringBuilder.append(AnsiCodes.GREEN_TEXT + "G" + AnsiCodes.RESET + ", ");
+        stringBuilder.append(AnsiCodes.PURPLE_TEXT + "P" + AnsiCodes.RESET + ", ");
+        stringBuilder.append(AnsiCodes.RED_TEXT + "R" + AnsiCodes.RESET + ", ");
+        stringBuilder.append(AnsiCodes.YELLOW_TEXT + "Y" + AnsiCodes.RESET + "]");
 
         return stringBuilder.toString();
     }
@@ -181,8 +185,9 @@ public class ExpertViewState extends GameViewState {
     public String manageCLIInput (String input) {
         appendBuffer(input);
 
-        if(!matchInfo.isExpertMode())
+        if(!matchInfo.isExpertMode()) {
             return "Game is not in Expert Mode";
+        }
 
         if(isStudentsPhase) {
             if(!isMovingStudents) {

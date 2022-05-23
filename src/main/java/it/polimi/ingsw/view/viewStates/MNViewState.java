@@ -20,31 +20,33 @@ public class MNViewState extends ExpertViewState {
 
         super.printCLIPrompt();
 
-        appendBuffer("Select the island on which you want to move mother nature: [index of island]");
+        if(isMovingMN)
+            appendBuffer("Select the island on which you want to move mother nature: [index of island]");
     }
 
     @Override
     public String manageCLIInput(String input) {
-        appendBuffer(input);
         String error;
 
         if(!super.manageCLIInput(input).equals("")) {
-            error = StringUtils.checkInteger(input, validIslandIndexes);
-            if(!error.equals("")) {
-                appendBuffer(error);
-                return error;
-            }
-            int islandIndex = game.getBoard().getOriginalIndexOf(Integer.parseInt(input));
+            if(isMovingMN) {
+                error = StringUtils.checkInteger(input, validIslandIndexes);
+                if (!error.equals("")) {
+                    appendBuffer(error);
+                    return error;
+                }
+                int islandIndex = game.getBoard().getOriginalIndexOf(Integer.parseInt(input));
 
-            notify(
-                    new RequestParameters()
-                            .setCommandType(CommandType.MOVE_MN)
-                            .setIndex(islandIndex)
-                            .serialize().toString()
-            );
-            isMovingMN = false;
-            setInteractionComplete(true);
-            return "";
+                notify(
+                        new RequestParameters()
+                                .setCommandType(CommandType.MOVE_MN)
+                                .setIndex(islandIndex)
+                                .serialize().toString()
+                );
+                isMovingMN = false;
+                setInteractionComplete(true);
+                return "";
+            }
         }
         error = "That was not a valid choice! Try again!";
         appendBuffer(error);

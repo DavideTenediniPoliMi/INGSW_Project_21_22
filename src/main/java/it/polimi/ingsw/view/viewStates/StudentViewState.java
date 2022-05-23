@@ -45,7 +45,6 @@ public class StudentViewState extends ExpertViewState {
 
     @Override
     public String manageCLIInput (String input) {
-        appendBuffer(input);
         String error;
 
         if(!super.manageCLIInput(input).equals("")) {
