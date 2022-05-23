@@ -69,7 +69,7 @@ public class ClientConnection extends Connection {
             sendMessage(new ResponseParameters().setSendMatchInfo(true).serialize().toString());
             bound = true;
         } catch (PlayerAlreadyConnectedException exc) {
-            sendMessage(exc.toString());
+            sendMessage(new ResponseParameters().setError(exc.getMessage()).serialize().toString());
         }
     }
 
