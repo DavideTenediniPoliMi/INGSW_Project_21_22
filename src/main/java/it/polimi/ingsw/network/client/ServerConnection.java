@@ -201,6 +201,7 @@ public class ServerConnection extends Connection {
             cli.handleInteraction();
         else {
             MatchInfo.getInstance().setStateType(TurnState.CLOUD);
+            cli.setViewState(new GameViewState(cli.getViewState()));
             cli.displayState();
         }
 

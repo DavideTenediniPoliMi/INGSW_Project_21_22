@@ -123,6 +123,7 @@ public class VirtualView extends Observable<String> implements Observer<Response
 
     public void disconnect() {
         connected = false;
+        clearObservers();
         String disconnectCommand = new RequestParameters().setCommandType(CommandType.DISCONNECT).serialize().toString();
         handleRequest(disconnectCommand);
         skipIfCurrent();

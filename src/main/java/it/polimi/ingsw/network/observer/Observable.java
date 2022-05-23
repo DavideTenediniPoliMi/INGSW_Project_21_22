@@ -46,6 +46,13 @@ public class Observable<T> {
     }
 
     /**
+     * Clears the list of observers for this class.
+     */
+    public void clearObservers() {
+        observers.clear();
+    }
+
+    /**
      * Notifies every <code>Observer</code> attached to this class with the message specified.
      *
      * @param message the message to send to the Observers.
