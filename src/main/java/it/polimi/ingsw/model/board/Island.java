@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.board;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.Color;
@@ -120,6 +121,12 @@ public abstract class Island implements Serializable, Printable<List<String>> {
     public void markBridges(List<Boolean> bridges, int startingIndex) {}
 
     @Override
+    public JsonObject serialize() {
+        Gson gson = new Gson();
+        return gson.toJsonTree(this).getAsJsonObject();
+    }
+
+    @Override
     public void deserialize(JsonObject jsonObject) {
         if(jsonObject.has("students"))
             students.deserialize(jsonObject.get("students").getAsJsonObject());
@@ -129,6 +136,7 @@ public abstract class Island implements Serializable, Printable<List<String>> {
         else
             teamColor = null;
         motherNature = jsonObject.get("motherNature").getAsBoolean();
+        startingZero = jsonObject.get("startingZero").getAsBoolean();
     }
 
     @Override

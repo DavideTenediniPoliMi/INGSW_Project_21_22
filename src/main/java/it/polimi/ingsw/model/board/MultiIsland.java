@@ -91,12 +91,6 @@ public class MultiIsland extends Island {
     }
 
     @Override
-    public JsonObject serialize() {
-        Gson gson = new Gson();
-        return gson.toJsonTree(this).getAsJsonObject();
-    }
-
-    @Override
     public void deserialize(JsonObject jsonObject) {
         JsonObject left = new JsonObject();
         JsonObject right = new JsonObject();

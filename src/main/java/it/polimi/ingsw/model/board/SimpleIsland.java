@@ -23,10 +23,4 @@ public class SimpleIsland extends Island {
     public Island getIslandOfRelativeIndex(int index) {
         return this;
     }
-
-    @Override
-    public JsonObject serialize() {
-        Gson gson = new Gson();
-        return gson.toJsonTree(this).getAsJsonObject();
-    }
 }
