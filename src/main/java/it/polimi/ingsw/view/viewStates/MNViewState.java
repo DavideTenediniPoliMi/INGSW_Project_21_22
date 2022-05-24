@@ -45,10 +45,18 @@ public class MNViewState extends ExpertViewState {
 
             int MNPosition = game.getBoard().getMNPosition();
             int steps = game.getPlayerByID(matchInfo.getCurrentPlayerID()).getSelectedCard().RANGE;
-            if(islandIndex > (MNPosition + steps) % 11) {
-                error = "The island you have selected is too far!";
-                appendBuffer(error);
-                return error;
+            if(islandIndex > MNPosition) {
+                if(islandIndex - MNPosition > steps) {
+                    error = "The island you have selected is too far!";
+                    appendBuffer(error);
+                    return error;
+                }
+            } else {
+                if(game.getBoard().getNumIslands() + islandIndex - MNPosition > steps) {
+                    error = "The island you have selected is too far!";
+                    appendBuffer(error);
+                    return error;
+                }
             }
 
             notify(
