@@ -213,7 +213,9 @@ public class ServerConnection extends Connection {
                JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
                synchronized (cli) {
                    boolean reqInteraction = cli.nextState(jsonObject);
+                   System.out.println("before " + reqInteraction);
                    new ResponseParameters().deserialize(jsonObject);
+                   System.out.println("after deserialize " + jsonObject);
 
                    if(reqInteraction) {
                        cli.handleInteraction(); //Handle interaction in new view
