@@ -18,6 +18,7 @@ public class CLI {
      private ViewState viewState;
      private int playerID;
      private String name;
+     private boolean cardLoop;
      private static final Scanner scanner = new Scanner(System.in);
 
      public CLI(ViewState viewState) {
@@ -53,7 +54,16 @@ public class CLI {
           }
 
           if(!jo.has("matchInfo")) {
-               return checkForCharacterCards(jo);
+               if(checkForCharacterCards(jo)) {
+                    if(!cardLoop) {
+                         cardLoop = true;
+                    } else {
+                         resetTurnState(MatchInfo.getInstance().serialize());
+                         cardLoop = false;
+                    }
+                    return true;
+               }
+               return false;
           }
 
           jo = jo.get("matchInfo").getAsJsonObject();
