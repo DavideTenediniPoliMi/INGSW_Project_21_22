@@ -55,8 +55,8 @@ public class StudentViewState extends ExpertViewState {
         }
 
         if(!isDestinationSelected) {
-            isDestinationSelected = true;
             if(input.equalsIgnoreCase("Dining room")) {
+                isDestinationSelected = true;
                 notify(
                         new RequestParameters()
                                 .setCommandType(CommandType.TRANSFER_STUDENT_TO_DINING_ROOM)
