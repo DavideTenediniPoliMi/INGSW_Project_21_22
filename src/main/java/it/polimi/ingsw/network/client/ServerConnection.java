@@ -194,8 +194,8 @@ public class ServerConnection extends Connection {
         JsonObject initJsonObject = JsonParser.parseString(lastResponse).getAsJsonObject();
         new ResponseParameters().deserialize(initJsonObject);
 
-        cli.setViewState(new PlanningViewState(cli.getViewState()));
-        cli.nextState(initJsonObject);
+        cli.resetTurnState(MatchInfo.getInstance().serialize());
+        //cli.nextState(initJsonObject);
 
         if(MatchInfo.getInstance().getCurrentPlayerID() == cli.getPlayerID())
             cli.handleInteraction();
@@ -215,10 +215,11 @@ public class ServerConnection extends Connection {
                    boolean reqInteraction = cli.nextState(jsonObject);
                    new ResponseParameters().deserialize(jsonObject);
 
-                   if(reqInteraction)
+                   if(reqInteraction) {
                        cli.handleInteraction(); //Handle interaction in new view
-                   else
+                   } else {
                        cli.displayState();
+                   }
                }
             });
 
