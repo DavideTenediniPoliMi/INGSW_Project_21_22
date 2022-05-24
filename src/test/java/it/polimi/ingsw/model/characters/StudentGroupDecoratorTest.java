@@ -189,6 +189,7 @@ public class StudentGroupDecoratorTest {
 
     @Test
     void deserializeTest() {
+        c1.setActive();
         System.out.println(c1.serialize());
         c2.deserialize(c1.serialize());
         System.out.println(c2.serialize());

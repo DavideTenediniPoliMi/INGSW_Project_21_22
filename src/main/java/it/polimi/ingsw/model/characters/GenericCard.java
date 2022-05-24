@@ -47,6 +47,7 @@ public class GenericCard extends CharacterCard {
 
     @Override
     public void deserialize(JsonObject jsonObject) {
+        super.name = jsonObject.get("name").getAsString();
         super.cost = jsonObject.get("cost").getAsInt();
         super.active = jsonObject.get("active").getAsBoolean();
     }

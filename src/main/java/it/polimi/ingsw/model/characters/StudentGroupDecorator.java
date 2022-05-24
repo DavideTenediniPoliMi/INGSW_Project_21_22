@@ -168,6 +168,8 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
         playerID = jsonObject.get("playerID").getAsInt();
         isToIsland = jsonObject.get("isToIsland").getAsBoolean();
         isToDiningRoom = jsonObject.get("isToDiningRoom").getAsBoolean();
+        if(jsonObject.has("card"))
+            card.deserialize(jsonObject.get("card").getAsJsonObject());
     }
 
     @Override
