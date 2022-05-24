@@ -80,12 +80,13 @@ public class CLI {
 
                     return false;
                case STUDENTS:
+                    int numMovedStudents = jo.get("numMovedStudents").getAsInt();
+
                     if(areDifferentStates(jo, TurnState.STUDENTS)) {
                          resetTurnState(jo);
                          return true;
                     }
 
-                    int numMovedStudents = jo.get("numMovedStudents").getAsInt();
                     if(matchInfo.getNumMovedStudents() != numMovedStudents) {
                          if(numMovedStudents < MatchInfo.getInstance().getMaxMovableStudents()) {
                               setViewState(new StudentViewState(viewState));
@@ -104,7 +105,7 @@ public class CLI {
                case CLOUD:
                     if(areDifferentStates(jo, TurnState.CLOUD)) {
                          resetTurnState(jo);
-                         return true;
+                         return matchInfo.getNumMovedStudents() == 0;
                     }
 
                     return false;
