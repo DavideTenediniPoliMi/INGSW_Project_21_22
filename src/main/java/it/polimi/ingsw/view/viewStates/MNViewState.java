@@ -35,7 +35,7 @@ public class MNViewState extends ExpertViewState {
             return super.manageCLIInput(input);
 
         appendBuffer(input);
-        if(isMovingMN) {
+        if(isMovingMN || !matchInfo.isExpertMode()) {
             error = StringUtils.checkInteger(input, validIslandIndexes);
             if (!error.equals("")) {
                 appendBuffer(error);

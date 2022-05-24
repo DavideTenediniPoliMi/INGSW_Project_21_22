@@ -149,7 +149,9 @@ public class CLI {
 
      public void handleInteraction() {
           do {
+               System.out.println(viewState);
                synchronized(this){
+                    System.out.println("printing prompt");
                     viewState.printCLIPrompt();
                     AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + viewState.print() + viewState.getBuffer());
                }
@@ -161,6 +163,7 @@ public class CLI {
      }
 
      public void displayState() {
+          System.out.println("printing " + viewState);
           viewState.printCLIPrompt();
           AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + viewState.print() + viewState.getBuffer());
      }
