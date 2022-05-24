@@ -68,6 +68,7 @@ public class StudentViewState extends ExpertViewState {
                 return "";
             }
             if(input.equalsIgnoreCase("Island")) {
+                isDestinationSelected = true;
                 isDestinationIsland = true;
                 return "";
             }

@@ -23,7 +23,7 @@ public class MNViewState extends ExpertViewState {
             return;
         }
 
-        if(isMovingMN)
+        if(isMovingMN || !matchInfo.isExpertMode())
             appendBuffer("Select the island on which you want to move mother nature: [index of island]");
     }
 

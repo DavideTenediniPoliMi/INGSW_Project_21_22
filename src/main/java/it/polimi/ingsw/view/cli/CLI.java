@@ -77,12 +77,10 @@ public class CLI {
 
                     int numMovedStudents = jo.get("numMovedStudents").getAsInt();
                     if(matchInfo.getNumMovedStudents() != numMovedStudents) {
-                         if(numMovedStudents == MatchInfo.getInstance().getMaxMovableStudents()) {
-                              setViewState(new MNViewState(viewState));
-                         } else {
+                         if(numMovedStudents < MatchInfo.getInstance().getMaxMovableStudents()) {
                               setViewState(new StudentViewState(viewState));
+                              return true;
                          }
-                         return true;
                     }
 
                     return false;
