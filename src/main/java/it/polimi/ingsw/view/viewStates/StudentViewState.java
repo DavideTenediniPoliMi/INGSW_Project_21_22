@@ -49,6 +49,7 @@ public class StudentViewState extends ExpertViewState {
         if(matchInfo.isExpertMode() && !choiceSelected && menuChoice != 2)
             return super.manageCLIInput(input);
 
+        appendBuffer(input);
         if(colorSelected == null) {
             return manageCLIEntranceStudentColor(input);
         }
