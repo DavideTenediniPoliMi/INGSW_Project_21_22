@@ -71,6 +71,9 @@ public class StudentViewState extends ExpertViewState {
                 isDestinationIsland = true;
                 return "";
             }
+            error = "That was not a valid choice! Try again!";
+            appendBuffer(error);
+            return error;
         }
 
         if(isDestinationIsland) {
