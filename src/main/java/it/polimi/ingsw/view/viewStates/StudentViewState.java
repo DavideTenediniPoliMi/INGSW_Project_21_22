@@ -55,8 +55,8 @@ public class StudentViewState extends ExpertViewState {
         }
 
         if(!isDestinationSelected) {
-            isDestinationSelected = true;
             if(input.equalsIgnoreCase("Dining room")) {
+                isDestinationSelected = true;
                 notify(
                         new RequestParameters()
                                 .setCommandType(CommandType.TRANSFER_STUDENT_TO_DINING_ROOM)
@@ -71,6 +71,9 @@ public class StudentViewState extends ExpertViewState {
                 isDestinationIsland = true;
                 return "";
             }
+            error = "That was not a valid choice! Try again!";
+            appendBuffer(error);
+            return error;
         }
 
         if(isDestinationIsland) {
