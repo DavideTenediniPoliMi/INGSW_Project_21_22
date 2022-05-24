@@ -18,7 +18,10 @@ public class MNViewState extends ExpertViewState {
     public void printCLIPrompt() {
         isStudentsPhase = false;
 
-        super.printCLIPrompt();
+        if(matchInfo.isExpertMode() && !choiceSelected && menuChoice != 2) {
+            super.printCLIPrompt();
+            return;
+        }
 
         if(isMovingMN)
             appendBuffer("Select the island on which you want to move mother nature: [index of island]");
@@ -28,29 +31,36 @@ public class MNViewState extends ExpertViewState {
     public String manageCLIInput(String input) {
         String error;
 
-        if(!super.manageCLIInput(input).equals("")) {
-            if(isMovingMN) {
-                error = StringUtils.checkInteger(input, validIslandIndexes);
-                if (!error.equals("")) {
-                    appendBuffer(error);
-                    return error;
-                }
-                int islandIndex = game.getBoard().getOriginalIndexOf(Integer.parseInt(input));
+        if(matchInfo.isExpertMode() && !choiceSelected && menuChoice != 2)
+            return super.manageCLIInput(input);
 
-                notify(
-                        new RequestParameters()
-                                .setCommandType(CommandType.MOVE_MN)
-                                .setIndex(islandIndex)
-                                .serialize().toString()
-                );
-                isMovingMN = false;
-                setInteractionComplete(true);
-                return "";
+        if(isMovingMN) {
+            error = StringUtils.checkInteger(input, validIslandIndexes);
+            if (!error.equals("")) {
+                appendBuffer(error);
+                return error;
             }
+            int islandIndex = game.getBoard().getOriginalIndexOf(Integer.parseInt(input));
+
+            int MNPosition = game.getBoard().getMNPosition();
+            int steps = game.getPlayerByID(matchInfo.getCurrentPlayerID()).getSelectedCard().RANGE;
+            if(islandIndex > (MNPosition + steps) % 11) {
+                error = "The island you have selected is too far!";
+                appendBuffer(error);
+                return error;
+            }
+
+            notify(
+                    new RequestParameters()
+                            .setCommandType(CommandType.MOVE_MN)
+                            .setIndex(islandIndex)
+                            .serialize().toString()
+            );
+            isMovingMN = false;
+            setInteractionComplete(true);
+            return "";
         }
-        error = "That was not a valid choice! Try again!";
-        appendBuffer(error);
-        return error;
+        return "";
     }
 
     @Override

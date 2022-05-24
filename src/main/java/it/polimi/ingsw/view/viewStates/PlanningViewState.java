@@ -32,7 +32,7 @@ public class PlanningViewState extends GameViewState {
         stringBuilder.append("Select the card you want to play:\n");
         int i = 1;
         for(Card c : playableCards) {
-            if(!c.isUsed()) {
+            if(!c.isUsed() || playableCards.size() == 1) {
                 stringBuilder.append(i + ") " + c.name() + " (weight: " + c.WEIGHT + ", range: " + c.RANGE + ")\n");
                 validNumbers.add(i);
                 validIndexes.add(c.ordinal());

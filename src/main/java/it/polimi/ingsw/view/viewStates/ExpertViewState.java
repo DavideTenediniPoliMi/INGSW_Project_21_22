@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.characters.StudentGroupDecorator;
 import it.polimi.ingsw.model.enumerations.Color;
+import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.CardParameters;
@@ -17,10 +18,10 @@ import java.util.List;
 
 @SuppressWarnings({"StringBufferReplaceableByString", "StringConcatenationInsideStringBufferAppend"})
 public class ExpertViewState extends GameViewState {
-    Game game = Game.getInstance();
-    private final MatchInfo matchInfo = MatchInfo.getInstance();
+    protected final Game game = Game.getInstance();
+    protected final MatchInfo matchInfo = MatchInfo.getInstance();
     private final List<Integer> validCardIndexes = List.of(0,1,2);
-    private final List<Integer> validMenuChoice = List.of(1,2);
+    protected final List<Integer> validMenuChoice = List.of(1,2);
     protected final List<Integer> validIslandIndexes = List.of(0,1,2,3,4,5,6,7,8,9,10,11);
     private final List<Integer> validNumOfStudentsToSwap = List.of(1,2,3);
     private final List<Integer> validNumOfStudentsToExchange = List.of(1,2);
@@ -28,6 +29,8 @@ public class ExpertViewState extends GameViewState {
     protected boolean isStudentsPhase = true;
     protected boolean isMovingStudents = false;
     protected boolean isMovingMN = false;
+    protected boolean choiceSelected = false;
+    protected int menuChoice = 0;
 
     private boolean cardBought = false;
     private boolean isCardSelected = false;
@@ -60,13 +63,7 @@ public class ExpertViewState extends GameViewState {
     @Override
     public void printCLIPrompt() {
         setInteractionComplete(false);
-        if(!matchInfo.isExpertMode()) {
-            if(isStudentsPhase)
-                isMovingStudents = true;
-            else
-                isMovingMN = true;
-            return;
-        }
+
         if(isStudentsPhase) {
             if(!isMovingStudents) {
                 appendBuffer(printCLICardMenu("student"));
@@ -93,7 +90,7 @@ public class ExpertViewState extends GameViewState {
         if(!isCardSelected) {
             return ("Select the card to be bought: [0,1,2]");
         }
-
+        activeCard = game.getActiveCharacterCard();
         return printCLICardActivationParameters();
     }
 
@@ -127,7 +124,7 @@ public class ExpertViewState extends GameViewState {
                 return stringBuilder.toString();
             case "POOL_SWAP":
                 if(studentsSwapped == 0 && !fromOriginSwapCompleted) {
-                    return "How many students do you want to swap?\n";
+                    return "How many students do you want to swap?";
                 }
                 if(!fromOriginSwapCompleted) {
                     if(studentsSwapped < numStudentsToSwap) {
@@ -153,7 +150,7 @@ public class ExpertViewState extends GameViewState {
                 return stringBuilder.toString();
             case "EXCHANGE_STUDENTS":
                 if(studentsSwapped == 0 && !fromOriginSwapCompleted) {
-                    return "How many students do you want to swap?\n";
+                    return "How many students do you want to swap?";
                 }
                 if(!fromOriginSwapCompleted) {
                     if(studentsSwapped < numStudentsToSwap) {
@@ -178,25 +175,24 @@ public class ExpertViewState extends GameViewState {
 
                 return stringBuilder.toString();
         }
-        return null;
+        return "";
     }
 
     @Override
     public String manageCLIInput (String input) {
         appendBuffer(input);
 
-        if(!matchInfo.isExpertMode()) {
-            return "Game is not in Expert Mode";
-        }
-
-        if(isStudentsPhase) {
-            if(!isMovingStudents) {
-                return manageCLICardMenu(input, true);
+        if(matchInfo.isExpertMode() && !choiceSelected) {
+            if (isStudentsPhase) {
+                if (!isMovingStudents) {
+                    return manageCLICardMenu(input, true);
+                }
+                return "students";
             }
-        }
 
-        if(!isMovingMN) {
-            return manageCLICardMenu(input, false);
+            if (!isMovingMN) {
+                return manageCLICardMenu(input, false);
+            }
         }
 
         return "";
@@ -211,8 +207,9 @@ public class ExpertViewState extends GameViewState {
                 appendBuffer(error);
                 return error;
             }
-            int choice = Integer.parseInt(input);
-            if(choice == 2) {
+            menuChoice = Integer.parseInt(input);
+            if (menuChoice == 2) {
+                choiceSelected = true;
                 isLastActionBuyCharacterCard = false;
                 if(isStudentsPhase) {
                     isMovingStudents = true;
@@ -245,7 +242,7 @@ public class ExpertViewState extends GameViewState {
             isCardSelected = true;
             return "";
         }
-        activeCard = game.getActiveCharacterCard();
+        
         return manageCLICardActivationParameters(input);
     }
 
@@ -266,7 +263,9 @@ public class ExpertViewState extends GameViewState {
                 int islandIndex = game.getBoard().getOriginalIndexOf(Integer.parseInt(input));
 
                 cardParams.setFromOrigin(new StudentGroup(cardColorSelected,1))
-                        .setIslandIndex(islandIndex);
+                        .setPlayerID(playerID)
+                        .setIslandIndex(islandIndex)
+                        .setFromDestination(new StudentGroup());    //not needed
 
                 cardColorSelected = null;
 
@@ -281,7 +280,9 @@ public class ExpertViewState extends GameViewState {
                 }
 
                 cardParams.setFromOrigin(new StudentGroup(cardColorSelected,1))
-                        .setPlayerID(playerID);
+                        .setPlayerID(playerID)
+                        .setIslandIndex(0)      //not needed
+                        .setFromDestination(new StudentGroup());    //not needed
 
                 cardColorSelected = null;
 
@@ -289,7 +290,7 @@ public class ExpertViewState extends GameViewState {
                 notifyCardActivation();
                 break;
             case "POOL_SWAP":
-                if(studentsSwapped == 0 && !fromOriginSwapCompleted) {
+                if(numStudentsToSwap == 0 && !fromOriginSwapCompleted) {
                     return manageCLINumStudentsToSwap(input, validNumOfStudentsToSwap);
                 }
                 if(!fromOriginSwapCompleted) {
@@ -320,7 +321,8 @@ public class ExpertViewState extends GameViewState {
 
                 cardParams.setFromOrigin(cardStudents)
                         .setPlayerID(playerID)
-                        .setFromDestination(entranceStudents);
+                        .setFromDestination(entranceStudents)
+                        .setIslandIndex(0);     //not needed
 
                 studentsSwapped = 0;
                 cardColorSelected = null;
@@ -331,7 +333,8 @@ public class ExpertViewState extends GameViewState {
                 notifyCardActivation();
                 break;
             case "INFLUENCE_ADD_TWO":
-                cardParams.setBoostedTeam(game.getPlayerByID(playerID).getTeamColor());
+                cardParams.setBoostedTeam(game.getPlayerByID(playerID).getTeamColor())
+                        .setSelectedColor(Color.RED);   //not needed
 
                 notifyCardParameters(cardParams);
                 break;
@@ -342,13 +345,14 @@ public class ExpertViewState extends GameViewState {
                     return error;
                 }
 
-                cardParams.setSelectedColor(selectedColor);
+                cardParams.setSelectedColor(selectedColor)
+                        .setBoostedTeam(TowerColor.BLACK);      //not needed
 
                 selectedColor = null;
 
                 notifyCardParameters(cardParams);
             case "EXCHANGE_STUDENTS":
-                if(studentsSwapped == 0 && !fromOriginSwapCompleted) {
+                if(numStudentsToSwap == 0 && !fromOriginSwapCompleted) {
                     return manageCLINumStudentsToSwap(input, validNumOfStudentsToExchange);
                 }
                 if(!fromOriginSwapCompleted) {
@@ -379,7 +383,8 @@ public class ExpertViewState extends GameViewState {
 
                 cardParams.setPlayerID(playerID)
                         .setFromOrigin(entranceStudents)
-                        .setFromDestination(diningStudents);
+                        .setFromDestination(diningStudents)
+                        .setPlayerID(0);        //not needed
 
                 studentsSwapped = 0;
                 colorSelected = null;
@@ -431,7 +436,7 @@ public class ExpertViewState extends GameViewState {
             colorSelected = null;
             return "";
         }
-        return null;
+        return "";
     }
 
     protected String manageCLICardStudentColor(String input) {
@@ -493,7 +498,6 @@ public class ExpertViewState extends GameViewState {
                     if(board.getSchoolByPlayerID(playerID).getNumStudentsInEntranceByColor(Color.GREEN) > 0) {
                         colorSelected = Color.GREEN;
                     }
-
                     break;
                 case "P":
                     if(board.getSchoolByPlayerID(playerID).getNumStudentsInEntranceByColor(Color.PINK) > 0) {

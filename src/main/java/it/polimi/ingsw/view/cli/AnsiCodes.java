@@ -38,13 +38,13 @@ public enum AnsiCodes {
     public static String getBackgroundColor(Color color) {
         switch (color) {
             case BLUE:
-                return BLUE_BACKGROUND_BRIGHT.code + BLACK_TEXT.code;
+                return BLUE_BACKGROUND_BRIGHT.code;
             case GREEN:
                 return GREEN_BACKGROUND_BRIGHT.code;
             case RED:
                 return RED_BACKGROUND_BRIGHT.code;
             case PINK:
-                return PURPLE_BACKGROUND_BRIGHT.code + BLACK_TEXT.code;
+                return PURPLE_BACKGROUND_BRIGHT.code;
             case YELLOW:
                 return YELLOW_BACKGROUND_BRIGHT.code + BLACK_TEXT.code;
             default:
