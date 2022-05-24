@@ -12,8 +12,8 @@ import it.polimi.ingsw.network.parameters.ResponseParameters;
  * Class to manage the behaviour of 1 <code>CharacterCard</code>, <code>EXCHANGE_STUDENTS</code>.
  */
 public class ExchangeStudentsDecorator extends CharacterCardDecorator {
-    private StudentGroup fromEntrance;
-    private StudentGroup fromDiningRoom;
+    private StudentGroup fromEntrance = new StudentGroup();
+    private StudentGroup fromDiningRoom = new StudentGroup();
     private int playerID;
 
     /**
@@ -70,7 +70,8 @@ public class ExchangeStudentsDecorator extends CharacterCardDecorator {
 
     @Override
     public JsonObject serialize() {
-        JsonObject jsonObject = new JsonObject();
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
 
         jsonObject.add("card", card.serialize());
 
@@ -79,6 +80,12 @@ public class ExchangeStudentsDecorator extends CharacterCardDecorator {
 
     @Override
     public void deserialize(JsonObject jsonObject) {
+        if(jsonObject.has("fromEntrance")) {
+            fromEntrance.deserialize(jsonObject.get("fromEntrance").getAsJsonObject());
+        }
+        if(jsonObject.has("fromDiningRoom")) {
+            fromDiningRoom.deserialize(jsonObject.get("fromDiningRoom").getAsJsonObject());
+        }
         card.deserialize(jsonObject.get("card").getAsJsonObject());
     }
 }
