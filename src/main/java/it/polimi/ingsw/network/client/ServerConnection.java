@@ -14,7 +14,6 @@ import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
 import it.polimi.ingsw.view.cli.CLI;
 import it.polimi.ingsw.view.viewStates.*;
-import org.fusesource.jansi.AnsiConsole;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -25,6 +24,8 @@ public class ServerConnection extends Connection {
     private boolean inGame;
     private boolean ready;
     private boolean joined;
+    private MessageQueue<String> packetQueue;
+    private MessageConsumer jsonConsumer;
 
     public ServerConnection(Socket socket, Client client) throws IOException {
         super(socket);
@@ -205,27 +206,18 @@ public class ServerConnection extends Connection {
             cli.displayState();
         }
 
+        packetQueue = new MessageQueue<>();
+        jsonConsumer = new MessageConsumer(packetQueue, cli);
+        executor.submit( () -> jsonConsumer.run());
+
         while(inGame && connected) {
             String received = receiveMessage();
             if(received.equals("")) continue;
 
-            executor.submit( () -> {
-               JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
-               synchronized (cli) {
-                   boolean reqInteraction = cli.nextState(jsonObject);
-                   System.out.println("before " + reqInteraction);
-                   new ResponseParameters().deserialize(jsonObject);
-                   System.out.println("after deserialize " + jsonObject);
-
-                   if(reqInteraction) {
-                       cli.handleInteraction(); //Handle interaction in new view
-                   } else {
-                       cli.displayState();
-                   }
-               }
-            });
-
+            packetQueue.add(received);
+            packetQueue.notifyAllForEmpty();
         }
+        jsonConsumer.stop();
     }
 
     private boolean isThisPlayerReady(String received) {
