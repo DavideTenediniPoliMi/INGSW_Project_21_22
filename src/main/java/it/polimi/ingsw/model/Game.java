@@ -501,7 +501,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
 
         card.setActive();
 
-        ResponseParameters params = new ResponseParameters().setCharacterCards(characterCards);
+        ResponseParameters params = new ResponseParameters().setCharacterCards(characterCards).setPlayers(players);
         notify(params);
     }
 

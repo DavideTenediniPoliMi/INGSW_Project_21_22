@@ -1,9 +1,6 @@
 package it.polimi.ingsw.controller.round;
 
-import it.polimi.ingsw.exceptions.game.BadParametersException;
-import it.polimi.ingsw.exceptions.game.CharacterCardActivationException;
-import it.polimi.ingsw.exceptions.game.ExpertModeDisabledException;
-import it.polimi.ingsw.exceptions.game.NullPlayerException;
+import it.polimi.ingsw.exceptions.game.*;
 import it.polimi.ingsw.exceptions.player.NotEnoughCoinsException;
 import it.polimi.ingsw.exceptions.students.NotEnoughStudentsException;
 import it.polimi.ingsw.model.Game;
@@ -82,5 +79,10 @@ public class CharacterCardPlayableStateController extends RoundStateController {
 
     private boolean isEnabled() {
         return MatchInfo.getInstance().isExpertMode();
+    }
+
+    @Override
+    public void skip() throws IllegalActionException {
+        super.skip();
     }
 }

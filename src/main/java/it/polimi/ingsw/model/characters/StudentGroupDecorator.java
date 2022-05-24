@@ -25,8 +25,8 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
     private final int TRANSFER_CARD_STUDENTS = 4;
 
     private final StudentGroup students;
-    private StudentGroup fromCard;
-    private StudentGroup fromEntrance;
+    private StudentGroup fromCard = new StudentGroup();
+    private StudentGroup fromEntrance = new StudentGroup();
     private int islandIndex, playerID;
     private boolean isToIsland, isToDiningRoom;
 
