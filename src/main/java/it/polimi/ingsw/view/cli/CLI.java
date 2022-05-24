@@ -122,7 +122,7 @@ public class CLI {
           return true;
      }
 
-     private void resetTurnState(JsonObject jo) {
+     public void resetTurnState(JsonObject jo) {
           switch(getTurnState(jo)) {
                case PLANNING:
                     setViewState(new PlanningViewState(viewState));
