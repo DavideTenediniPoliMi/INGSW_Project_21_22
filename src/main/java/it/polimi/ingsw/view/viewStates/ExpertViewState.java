@@ -36,6 +36,7 @@ public class ExpertViewState extends GameViewState {
     private boolean isCardSelected = false;
     CharacterCard activeCard = null;
     private int boughtCardIndex;
+    private boolean cardActivated = false;
 
     protected Color colorSelected = null;
     private Color cardColorSelected = null;
@@ -62,6 +63,7 @@ public class ExpertViewState extends GameViewState {
 
     @Override
     public void printCLIPrompt() {
+        System.out.println("inside expert");
         setInteractionComplete(false);
 
         if(isStudentsPhase) {
@@ -77,6 +79,7 @@ public class ExpertViewState extends GameViewState {
     }
 
     private String printCLICardMenu(String movementSubject) {
+        System.out.println("inside print menu");
         StringBuilder stringBuilder = new StringBuilder();
 
         if(!cardBought) {
@@ -86,12 +89,16 @@ public class ExpertViewState extends GameViewState {
 
             return stringBuilder.toString();
         }
-
+        System.out.println("between");
         if(!isCardSelected) {
             return ("Select the card to be bought: [0,1,2]");
         }
-        activeCard = game.getActiveCharacterCard();
-        return printCLICardActivationParameters();
+
+        if(!cardActivated) {
+            activeCard = game.getActiveCharacterCard();
+            return printCLICardActivationParameters();
+        }
+        return "";
     }
 
     protected String printCLIStudentColorSelection() {
@@ -108,9 +115,13 @@ public class ExpertViewState extends GameViewState {
 
     private String printCLICardActivationParameters() {
         StringBuilder stringBuilder = new StringBuilder();
+        System.out.println(Game.getInstance().serialize().toString());
+        System.out.println(activeCard);
 
+        System.out.println("before switch");
         switch(activeCard.getName()) {
             case "MOVE_TO_ISLAND":
+                System.out.println("inside card");
                 if(cardColorSelected == null) {
                     stringBuilder.append("Select the student you want to move from the card to an island: ");
                     stringBuilder.append(printCLIStudentColorSelection());
@@ -123,7 +134,7 @@ public class ExpertViewState extends GameViewState {
 
                 return stringBuilder.toString();
             case "POOL_SWAP":
-                if(studentsSwapped == 0 && !fromOriginSwapCompleted) {
+                if(numStudentsToSwap == 0 && !fromOriginSwapCompleted) {
                     return "How many students do you want to swap?";
                 }
                 if(!fromOriginSwapCompleted) {
@@ -149,7 +160,7 @@ public class ExpertViewState extends GameViewState {
 
                 return stringBuilder.toString();
             case "EXCHANGE_STUDENTS":
-                if(studentsSwapped == 0 && !fromOriginSwapCompleted) {
+                if(numStudentsToSwap == 0 && !fromOriginSwapCompleted) {
                     return "How many students do you want to swap?";
                 }
                 if(!fromOriginSwapCompleted) {
@@ -202,6 +213,7 @@ public class ExpertViewState extends GameViewState {
         String error;
 
         if(!cardBought) {
+            System.out.println("not card bought");
             error = StringUtils.checkInteger(input, validMenuChoice);
             if(!error.equals("")) {
                 appendBuffer(error);
@@ -211,11 +223,13 @@ public class ExpertViewState extends GameViewState {
             if (menuChoice == 2) {
                 choiceSelected = true;
                 isLastActionBuyCharacterCard = false;
-                if(isStudentsPhase) {
+                if (isStudentsPhase) {
+                    System.out.println("manage Students");
                     isMovingStudents = true;
                     return "manage students";
                 }
                 isMovingMN = true;
+                System.out.println("manage MN");
                 return "manage MN";
             }
             isLastActionBuyCharacterCard = true;
@@ -242,14 +256,16 @@ public class ExpertViewState extends GameViewState {
             isCardSelected = true;
             return "";
         }
-        
-        return manageCLICardActivationParameters(input);
+        if(!cardActivated) {
+            return manageCLICardActivationParameters(input);
+        }
+        return "";
     }
 
     private String manageCLICardActivationParameters(String input) {
         String error;
         CardParameters cardParams = new CardParameters();
-
+        System.out.println("before manage switch");
         switch (activeCard.getName()) {
             case "MOVE_TO_ISLAND":
                 if(cardColorSelected == null) {
@@ -290,11 +306,12 @@ public class ExpertViewState extends GameViewState {
                 notifyCardActivation();
                 break;
             case "POOL_SWAP":
+                System.out.println("start pool swap - numStudentsToSwap: " + numStudentsToSwap);
                 if(numStudentsToSwap == 0 && !fromOriginSwapCompleted) {
                     return manageCLINumStudentsToSwap(input, validNumOfStudentsToSwap);
                 }
                 if(!fromOriginSwapCompleted) {
-                    if(studentsSwapped < numStudentsToSwap) {
+                    if(studentsSwapped < numStudentsToSwap-1) {
                         if (cardColorSelected == null) {
                             error = manageCLICardStudentColor(input);
                             if (!error.equals("")) {
@@ -307,7 +324,15 @@ public class ExpertViewState extends GameViewState {
                             return "";
                         }
                     }
+                    error = manageCLICardStudentColor(input);
+                    if (!error.equals("")) {
+                        appendBuffer(error);
+                        return error;
+                    }
+                    cardStudents.addByColor(cardColorSelected, 1);
+                    cardColorSelected = null;
                     fromOriginSwapCompleted = true;
+                    studentsSwapped = 0;
                 }
                 if(studentsSwapped < numStudentsToSwap-1) {
                     return manageCLIFromEntranceSwap(input);
@@ -409,6 +434,7 @@ public class ExpertViewState extends GameViewState {
                 notifyCardActivation();
                 break;
         }
+        cardActivated = true;
         setInteractionComplete(true);
         return "";
     }
@@ -420,6 +446,7 @@ public class ExpertViewState extends GameViewState {
             return error;
         }
         numStudentsToSwap = Integer.parseInt(input);
+        System.out.println("manage num swap - numStudentsToSwap: " + numStudentsToSwap);
         return "";
     }
 
@@ -478,12 +505,13 @@ public class ExpertViewState extends GameViewState {
             }
             return "";
         }
-        error = "That was not a valid choice! Try again!";
+        error = "That was not a valid choice! Try again! - cardStudentColor";
         appendBuffer(error);
         return error;
     }
 
     protected String manageCLIEntranceStudentColor(String input) {
+        System.out.println("manage entrance");
         String error;
 
         if(validColors.contains(input.toUpperCase())) {
@@ -522,7 +550,7 @@ public class ExpertViewState extends GameViewState {
             }
             return "";
         }
-        error = "That was not a valid choice! Try again!";
+        error = "That was not a valid choice! Try again! - entrance student color";
         appendBuffer(error);
         return error;
     }
@@ -567,7 +595,7 @@ public class ExpertViewState extends GameViewState {
             }
             return "";
         }
-        error = "That was not a valid choice! Try again!";
+        error = "That was not a valid choice! Try again! - dining student color";
         appendBuffer(error);
         return error;
     }
@@ -593,7 +621,7 @@ public class ExpertViewState extends GameViewState {
             }
             return "";
         }
-        String error = "That was not a valid choice! Try again!";
+        String error = "That was not a valid choice! Try again! - student color";
         appendBuffer(error);
         return error;
     }

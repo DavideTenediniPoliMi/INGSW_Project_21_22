@@ -382,16 +382,19 @@ public class ResponseParameters implements Serializable {
                 }
             }
         }
-
+        System.out.println("before char");
         if (jsonObject.has("characterCards")) {
             characterCards = new ArrayList<>();
             JsonArray jsonArray = jsonObject.get("characterCards").getAsJsonArray();
             for (JsonElement je : jsonArray) {
+                System.out.println("did one");
                 String name = je.getAsJsonObject().get("name").getAsString();
                 CharacterCard c = CharacterCards.valueOf(name).instantiate();
                 c.deserialize(je.getAsJsonObject());
+                System.out.println("deserialize one");
                 characterCards.add(c);
             }
+            System.out.println("some done");
             game.setCharacterCards(characterCards);
         }
 
