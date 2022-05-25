@@ -54,16 +54,17 @@ public class CLI {
           }
 
           if(!jo.has("matchInfo")) {
-               if(checkForCharacterCards(jo)) {
-                    if(!cardLoop) {
-                         cardLoop = true;
-                    } else {
-                         resetTurnState(MatchInfo.getInstance().serialize());
-                         cardLoop = false;
-                    }
-                    return true;
+               if(!checkForCharacterCards(jo)) {
+                    return false;
                }
-               return false;
+
+               if(cardLoop) {
+                    resetTurnState(MatchInfo.getInstance().serialize());
+                    cardLoop = false;
+               } else {
+                    cardLoop = true;
+               }
+               return true;
           }
 
           jo = jo.get("matchInfo").getAsJsonObject();
