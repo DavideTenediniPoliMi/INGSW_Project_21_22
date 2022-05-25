@@ -382,7 +382,7 @@ public class ResponseParameters implements Serializable {
                 }
             }
         }
-        System.out.println("before char");
+        System.out.println("before cards");
         if (jsonObject.has("characterCards")) {
             characterCards = new ArrayList<>();
             JsonArray jsonArray = jsonObject.get("characterCards").getAsJsonArray();

@@ -59,13 +59,14 @@ public abstract class Connection implements Runnable, Observer<String> {
             } while(length == 0);
 
             if (length > 0) {
-                System.out.println("received message of length " + length);
+                //System.out.println("received message of length " + length);
 
                 StringBuilder message = new StringBuilder();
                 for (int i = 0; i < length; i++) {
                     message.append(in.readChar());
                 }
-                System.out.println(message);
+                System.out.println("received message of length " + length + ": " + message);
+                //System.out.println(message);
 
                 return message.toString();
             }

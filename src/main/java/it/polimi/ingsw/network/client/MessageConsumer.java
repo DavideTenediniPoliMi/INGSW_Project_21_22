@@ -40,6 +40,7 @@ public class MessageConsumer implements Runnable{
             jsonObject = (JsonObject) JsonParser.parseString(message);
             boolean reqInteraction = cli.nextState(jsonObject);
             System.out.println("before: " + reqInteraction);
+            System.out.println("packet: " + message);
             new ResponseParameters().deserialize(jsonObject);
             System.out.println("after dese");
 

@@ -164,6 +164,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
      * @param stateType the new <code>TurnState</code>
      */
     public synchronized void setStateType(TurnState stateType) {
+        if(stateType.equals(this.stateType)) return;
         this.stateType = stateType;
         if(GameStatus.IN_GAME.equals(gameStatus))
             notifyMatchInfo();

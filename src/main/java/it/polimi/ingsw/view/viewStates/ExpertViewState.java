@@ -115,7 +115,6 @@ public class ExpertViewState extends GameViewState {
 
     private String printCLICardActivationParameters() {
         StringBuilder stringBuilder = new StringBuilder();
-        System.out.println(Game.getInstance().serialize().toString());
         System.out.println(activeCard);
 
         System.out.println("before switch");
