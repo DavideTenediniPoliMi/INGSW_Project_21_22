@@ -413,7 +413,7 @@ public class ResponseParameters implements Serializable {
             islands = new ArrayList<>();
             JsonArray jsonArray = jsonObject.get("islands").getAsJsonArray();
             for (JsonElement je : jsonArray) {
-                if (je.isJsonArray()) {
+                if (je.getAsJsonObject().has("rightIsland")) {
                     MultiIsland multiIsland = new MultiIsland(new SimpleIsland(), new SimpleIsland());
                     multiIsland.deserialize(je.getAsJsonObject());
                     islands.add(multiIsland);
