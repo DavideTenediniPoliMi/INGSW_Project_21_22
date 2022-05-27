@@ -171,6 +171,7 @@ public class GameController {
                 roundStateController.clearEffects();
                 break;
         }
+        matchInfo.notifyMatchInfo();
     }
 
     /**
