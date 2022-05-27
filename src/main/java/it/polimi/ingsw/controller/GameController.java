@@ -157,6 +157,7 @@ public class GameController {
             case CLOUD:
                 matchInfo.removePlayer();
 
+                matchInfo.resetNumMovedStudents();
                 if(matchInfo.getNumPlayersStillToAct() == 0) {
                     roundStateController.definePlayOrder();
 

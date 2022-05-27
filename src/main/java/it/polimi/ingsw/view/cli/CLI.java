@@ -114,7 +114,7 @@ public class CLI {
                case CLOUD:
                     if(areDifferentStates(jo, TurnState.CLOUD)) {
                          resetTurnState(jo);
-                         return matchInfo.getNumMovedStudents() == 0;
+                         return jo.get("numMovedStudents").getAsInt() == 0;
                     }
 
                     return false;
