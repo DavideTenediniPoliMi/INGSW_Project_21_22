@@ -198,10 +198,9 @@ public class ServerConnection extends Connection {
         cli.resetTurnState(MatchInfo.getInstance().serialize());
         //cli.nextState(initJsonObject);
 
-        if(MatchInfo.getInstance().getCurrentPlayerID() == cli.getPlayerID())
-            cli.handleInteraction();
-        else {
-            MatchInfo.getInstance().setStateType(TurnState.CLOUD);
+        if(MatchInfo.getInstance().getCurrentPlayerID() == cli.getPlayerID()) {
+            cli.handleInteractionAsFirst();
+        } else {
             cli.setViewState(new GameViewState(cli.getViewState()));
             cli.displayState();
         }

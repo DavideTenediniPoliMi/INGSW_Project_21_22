@@ -19,6 +19,7 @@ public class CLI {
      private int playerID;
      private String name;
      private boolean cardLoop;
+     private boolean playedPlanning;
      private static final Scanner scanner = new Scanner(System.in);
 
      public CLI(ViewState viewState) {
@@ -79,9 +80,16 @@ public class CLI {
                          return true;
                     }
 
+                    if(isPlayerTurn(jo) && !playedPlanning) {
+                         playedPlanning = true;
+                         resetTurnState(jo);
+                         return true;
+                    }
+
                     return false;
                case STUDENTS:
                     int numMovedStudents = jo.get("numMovedStudents").getAsInt();
+                    playedPlanning = false;
 
                     if(areDifferentStates(jo, TurnState.STUDENTS)) {
                          resetTurnState(jo);
@@ -159,6 +167,11 @@ public class CLI {
           return TurnState.valueOf(jo.get("stateType").getAsString());
      }
 
+     public void handleInteractionAsFirst() {
+          playedPlanning = true;
+          handleInteraction();
+     }
+
      public void handleInteraction() {
           do {
                System.out.println(viewState);
@@ -203,18 +216,19 @@ public class CLI {
 
      public static Connection handleBinding(Client client) {
           do {
-               AnsiConsole.sysOut().println("Insert the IP address of the server : (or Press X to close the game)");
+               //AnsiConsole.sysOut().println("Insert the IP address of the server : (or Press X to close the game)");
                try {
-                    String ip = scanner.nextLine();
+                    //String ip = scanner.nextLine();
 
-                    if(ip.equals("X")) break;
+                    //if(ip.equals("X")) break;
 
-                    AnsiConsole.sysOut().println("Insert the port :");
+                    //AnsiConsole.sysOut().println("Insert the port :");
 
-                    int port = scanner.nextInt();
-                    scanner.nextLine();
+                    //int port = scanner.nextInt();
+                    //scanner.nextLine();
 
-                    return new ServerConnection(new Socket(ip, port), client);
+                    //return new ServerConnection(new Socket(ip, port), client);
+                    return new ServerConnection(new Socket("localhost", 12345), client);
                } catch(IOException | SecurityException | IllegalArgumentException e) {
                     AnsiConsole.sysOut().println("The combination IP/Port didn't work! Try again!");
                } catch(InputMismatchException e) {
@@ -224,6 +238,6 @@ public class CLI {
                }
           } while(true);
 
-          return null;
+          //return null;
      }
 }
