@@ -140,6 +140,8 @@ public class GameController {
                 if(matchInfo.getNumPlayersStillToAct() == 0) {
                     roundStateController.definePlayOrder();
                     setState(new StudentsStateController(roundStateController));
+                } else {
+                    matchInfo.notifyMatchInfo();
                 }
                 break;
             case STUDENTS:
@@ -150,8 +152,8 @@ public class GameController {
             case MOTHER_NATURE:
                 if(matchInfo.hasMNMoved()) {
                     checkEndConditionAfterMN();
-                    setState(new CloudStateController(roundStateController));
                     matchInfo.setMNMoved(false);
+                    setState(new CloudStateController(roundStateController));
                 }
                 break;
             case CLOUD:
@@ -173,7 +175,6 @@ public class GameController {
 
                 break;
         }
-        matchInfo.notifyMatchInfo();
     }
 
     /**

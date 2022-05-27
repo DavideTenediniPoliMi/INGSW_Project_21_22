@@ -166,6 +166,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
         if(stateType.equals(this.stateType)) return;
 
         this.stateType = stateType;
+        notifyMatchInfo();
     }
 
     /**
