@@ -68,18 +68,22 @@ public class IslandController {
         TowerColor oldMostInfluential = getOldMostInfluentialTeam();
         TowerColor mostInfluentialTeam = null;
         int maxInfluenceScore = 0;
+        boolean tie = false;
 
         for(TowerColor teamColor: TowerColor.values()) {
             int teamScore = getInfluenceOf(teamColor);
 
             if(teamScore > maxInfluenceScore ||
-                    (teamScore == maxInfluenceScore && teamColor == oldMostInfluential)) { // in case of tie we keep the current team
+                    (teamScore == maxInfluenceScore && teamColor.equals(oldMostInfluential))) { // in case of tie we keep the current team
                 mostInfluentialTeam = teamColor;
                 maxInfluenceScore = teamScore;
+                tie = false;
+            } else if(teamScore == maxInfluenceScore && !teamColor.equals(mostInfluentialTeam)) {
+                tie = true;
             }
         }
 
-        return mostInfluentialTeam;
+        return tie ? null : mostInfluentialTeam;
     }
 
     /**
