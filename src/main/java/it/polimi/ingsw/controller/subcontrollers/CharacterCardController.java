@@ -98,10 +98,7 @@ public class CharacterCardController {
      * Clears the effects of the active <code>CharacterCard</code> if present.
      */
     public void clearEffects() {
-        CharacterCard card = Game.getInstance().getActiveCharacterCard();
-        if(card != null) {
-            card.clearEffect();
-        }
+        Game.getInstance().clearEffects();
     }
 
     /**

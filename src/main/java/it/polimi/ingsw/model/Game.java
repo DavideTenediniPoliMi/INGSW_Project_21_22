@@ -531,6 +531,14 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         return temp;
     }
 
+    public void clearEffects() {
+        CharacterCard card = getActiveCharacterCard();
+        if(card != null) {
+            card.clearEffect();
+        }
+        notify(new ResponseParameters().setCharacterCards(characterCards));
+    }
+
     public void setCharacterCards(List<CharacterCard> characterCards) {
         this.characterCards = new ArrayList<>(characterCards);
     }

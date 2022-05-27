@@ -158,6 +158,8 @@ public class GameController {
                 matchInfo.removePlayer();
 
                 matchInfo.resetNumMovedStudents();
+                roundStateController.clearEffects();
+
                 if(matchInfo.getNumPlayersStillToAct() == 0) {
                     roundStateController.definePlayOrder();
 
@@ -168,7 +170,7 @@ public class GameController {
                 } else {
                     setState(new StudentsStateController(roundStateController));
                 }
-                roundStateController.clearEffects();
+
                 break;
         }
     }
