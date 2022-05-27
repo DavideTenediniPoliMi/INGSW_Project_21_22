@@ -173,6 +173,7 @@ public class GameController {
 
                 break;
         }
+        matchInfo.notifyMatchInfo();
     }
 
     /**
