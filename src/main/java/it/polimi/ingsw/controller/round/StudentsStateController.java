@@ -26,7 +26,6 @@ public class StudentsStateController extends CharacterCardPlayableStateControlle
      */
     public StudentsStateController(RoundStateController oldState) {
         super(oldState, TurnState.STUDENTS);
-        MatchInfo.getInstance().resetNumMovedStudents();
     }
 
     @Override
