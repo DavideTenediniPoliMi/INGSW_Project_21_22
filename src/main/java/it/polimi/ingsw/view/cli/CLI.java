@@ -1,7 +1,12 @@
 package it.polimi.ingsw.view.cli;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.characters.CharacterCard;
+import it.polimi.ingsw.model.enumerations.CharacterCards;
+import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.client.Client;
@@ -18,7 +23,8 @@ public class CLI {
      private ViewState viewState;
      private int playerID;
      private String name;
-     private boolean cardLoop;
+     private boolean boughtCard;
+     private boolean cardBoughtIsAlterInfluence;
      private boolean playedPlanning;
      private static final Scanner scanner = new Scanner(System.in);
 
@@ -59,19 +65,26 @@ public class CLI {
                     return false;
                }
 
-               if(cardLoop) {
-                    resetTurnState(MatchInfo.getInstance().serialize());
-                    cardLoop = false;
-               } else {
-                    cardLoop = true;
-               }
-               return true;
+               boughtCard = true;
+               cardBoughtIsAlterInfluence = isCardBoughtAlterInfluence(jo);
+
+               return false;
           }
 
           jo = jo.get("matchInfo").getAsJsonObject();
 
           if(!isPlayerTurn(jo))
                return false;
+
+          if(boughtCard) {
+               boughtCard = false;
+               return true;
+          }
+
+          if(cardBoughtIsAlterInfluence) {
+               cardBoughtIsAlterInfluence = false;
+               return true;
+          }
 
           switch(matchInfo.getStateType()) {
                case PLANNING:
@@ -129,6 +142,20 @@ public class CLI {
                   matchInfo.getCurrentPlayerID() == playerID &&
                   !matchInfo.getStateType().equals(TurnState.PLANNING) &&
                   !matchInfo.getStateType().equals(TurnState.CLOUD);
+     }
+
+     private boolean isCardBoughtAlterInfluence(JsonObject jo) {
+          JsonArray jsonArray = jo.get("characterCards").getAsJsonArray();
+          for (JsonElement je : jsonArray) {
+               String name = je.getAsJsonObject().get("name").getAsString();
+               CharacterCard c = CharacterCards.valueOf(name).instantiate();
+               c.deserialize(je.getAsJsonObject());
+
+               if(c.isActive())
+                    return c.getEffectType().equals(EffectType.ALTER_INFLUENCE) &&
+                            !c.getName().equals("INFLUENCE_ADD_TWO");
+          }
+          return false;
      }
 
      private boolean isPlayerTurn(JsonObject jo) {
