@@ -156,6 +156,8 @@ public class GameController {
                     checkEndConditionAfterMN();
                     matchInfo.setMNMoved(false);
                     setState(new CloudStateController(roundStateController));
+                } else {
+                    matchInfo.notifyMatchInfo();
                 }
                 break;
             case CLOUD:
