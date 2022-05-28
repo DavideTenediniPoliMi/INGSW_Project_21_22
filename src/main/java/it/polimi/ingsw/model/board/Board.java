@@ -111,6 +111,15 @@ public class Board implements Serializable, Printable<List<String>> {
         return -1;
     }
 
+    public int getIndexOfMultiIslandContainingIslandOfIndex(int islandIndex) {
+        for(int i = 0, runningIndex = 0; i < islands.size(); i++) {
+            runningIndex += islands.get(i).getNumIslands();
+            if(islandIndex < runningIndex)
+                return i;
+        }
+        return -1;
+    }
+
     /**
      * Conquers the island where Mother Nature is currently on for the specified team.
      *

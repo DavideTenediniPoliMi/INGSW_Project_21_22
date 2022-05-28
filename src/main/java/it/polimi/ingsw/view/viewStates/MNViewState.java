@@ -41,7 +41,8 @@ public class MNViewState extends ExpertViewState {
                 appendBuffer(error);
                 return error;
             }
-            int islandIndex = game.getBoard().getOriginalIndexOf(Integer.parseInt(input));
+            int islandAbsoluteIndex = game.getBoard().getOriginalIndexOf(Integer.parseInt(input));
+            int islandIndex = game.getBoard().getIndexOfMultiIslandContainingIslandOfIndex(islandAbsoluteIndex);
 
             int MNPosition = game.getBoard().getMNPosition();
             int steps = game.getPlayerByID(matchInfo.getCurrentPlayerID()).getSelectedCard().RANGE;
