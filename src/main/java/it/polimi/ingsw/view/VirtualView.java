@@ -123,9 +123,11 @@ public class VirtualView extends Observable<String> implements Observer<Response
 
     public void disconnect() {
         connected = false;
+        skipping = true;
         clearObservers();
         String disconnectCommand = new RequestParameters().setCommandType(CommandType.DISCONNECT).serialize().toString();
         handleRequest(disconnectCommand);
+        skipping = false;
         skipIfCurrent();
     }
 

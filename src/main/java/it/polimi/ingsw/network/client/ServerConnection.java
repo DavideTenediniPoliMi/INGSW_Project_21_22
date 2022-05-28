@@ -78,8 +78,7 @@ public class ServerConnection extends Connection {
 
                 JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
 
-                if(!jsonObject.has("error") && jsonObject.has("game")) { //Lobby was created
-                    joined = true;
+                if(!jsonObject.has("error") && jsonObject.has("game")) { //Received game package
                     ready = true;
                     inGame = true;
                     gameSequence(lastResp);
@@ -112,17 +111,7 @@ public class ServerConnection extends Connection {
             if(received.equals("")) continue;
 
             JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
-            if(jsonObject.has("players")) {
-                JsonArray players = jsonObject.get("players").getAsJsonArray();
-                for(JsonElement player : players) {
-                    if(player.getAsJsonObject().get("name").getAsString().equalsIgnoreCase(cli.getName())) {
-                        joined = true;
-                        cli.setPlayerID(player.getAsJsonObject().get("ID").getAsInt());
-                        new ResponseParameters().deserialize(jsonObject);
-                        break;
-                    }
-                }
-            }
+            bindPlayerID(jsonObject);
         }
 
         // Begin lobby loop
@@ -193,6 +182,8 @@ public class ServerConnection extends Connection {
      */
     private void gameSequence(String lastResponse) {
         JsonObject initJsonObject = JsonParser.parseString(lastResponse).getAsJsonObject();
+        if(!joined)
+            bindPlayerID(initJsonObject);
         new ResponseParameters().deserialize(initJsonObject);
 
         cli.resetTurnState(MatchInfo.getInstance().serialize());
@@ -231,5 +222,26 @@ public class ServerConnection extends Connection {
             }
         }
         return false;
+    }
+
+    private void bindPlayerID(JsonObject jsonObject) {
+        JsonObject gameObject;
+
+        if(jsonObject.has("game"))
+            gameObject = jsonObject.get("game").getAsJsonObject();
+        else
+            gameObject = jsonObject;
+
+        if(gameObject.has("players")) {
+            JsonArray players = gameObject.get("players").getAsJsonArray();
+            for(JsonElement player : players) {
+                if(player.getAsJsonObject().get("name").getAsString().equalsIgnoreCase(cli.getName())) {
+                    joined = true;
+                    cli.setPlayerID(player.getAsJsonObject().get("ID").getAsInt());
+                    new ResponseParameters().deserialize(jsonObject);
+                    break;
+                }
+            }
+        }
     }
 }

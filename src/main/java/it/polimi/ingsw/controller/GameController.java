@@ -331,6 +331,7 @@ public class GameController {
     public synchronized void handleReconnection(int playerID) {
         game.reconnectPlayer(playerID);
         matchInfo.setNumPlayersConnected(matchInfo.getNumPlayersConnected() + 1);
+        matchInfo.notifyMatchInfo();
 
         if(timer != null) {
             // Cancel running timer
@@ -349,6 +350,7 @@ public class GameController {
         matchInfo.setNumPlayersConnected(matchInfo.getNumPlayersConnected() - 1);
 
         requestTimeout();
+        MatchInfo.getInstance().notifyMatchInfo();
     }
 
     private void requestTimeout() {
