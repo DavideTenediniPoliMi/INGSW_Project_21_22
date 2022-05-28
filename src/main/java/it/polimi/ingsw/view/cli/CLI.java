@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.CharacterCards;
-import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.client.Client;
@@ -67,13 +66,18 @@ public class CLI {
                     return false;
                }
 
+               System.out.println("SAW CHARACTER CARDS");
+
                activeCardName = getActiveCardName(jo);
 
                if(!activeCardName.equals("")) {
-                    boughtCard = true;
                     if(waitForActivatedCard) {
+                         System.out.println("WAS WAITING");
                          waitForActivatedCard = false;
                          activatedCard = true;
+                    } else {
+                         System.out.println("BOUGHT CARD");
+                         boughtCard = true;
                     }
                }
 
@@ -86,33 +90,42 @@ public class CLI {
                return false;
 
           if(boughtCard) {
+               System.out.println("SAW MATCHINFO AFTER BUYING");
                boughtCard = false;
 
-               if(activeCardName.equals("INFLUENCE_ADD_TWO"))
+               if("INFLUENCE_ADD_TWO".equals(activeCardName)) {
+                    System.out.println("WAITING FOR SETTING PARAMS ADD TWO");
                     return false;
+               }
 
-               if(activeCardName.equals("IGNORE_TOWERS")) {
+               if("IGNORE_TOWERS".equals(activeCardName)) {
+                    System.out.println("AND WAS FOR IGNORE TOWERS");
                     resetTurnState(jo);
                     activeCardName = "";
                     return true;
                }
 
+               System.out.println("AND WAITING FOR USER");
                waitForActivatedCard = true;
                return true;
           }
 
-          if(activeCardName.equals("INFLUENCE_ADD_TWO")) {
+          if("INFLUENCE_ADD_TWO".equals(activeCardName)) {
+               System.out.println("FINISHED ADD TWO");
                activeCardName = "";
                resetTurnState(jo);
                return true;
           }
 
           if(activatedCard) {
+               System.out.println("ACTIVATED CARD FROM USER");
                activeCardName = "";
                activatedCard = false;
                resetTurnState(jo);
                return true;
           }
+
+          System.out.println("DIDN'T BUY CARDS");
 
           switch(matchInfo.getStateType()) {
                case PLANNING:
