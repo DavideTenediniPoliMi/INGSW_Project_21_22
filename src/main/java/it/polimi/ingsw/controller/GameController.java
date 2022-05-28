@@ -147,6 +147,8 @@ public class GameController {
             case STUDENTS:
                 if(matchInfo.getNumMovedStudents() == matchInfo.getMaxMovableStudents()) {
                     setState(new MNStateController(roundStateController));
+                } else {
+                    matchInfo.notifyMatchInfo();
                 }
                 break;
             case MOTHER_NATURE:

@@ -45,7 +45,7 @@ public class VirtualView extends Observable<String> implements Observer<Response
         return connected;
     }
 
-    public void handleRequest(String message) {
+    public synchronized void handleRequest(String message) {
         RequestParameters params = new RequestParameters();
         params.deserialize(JsonParser.parseString(message).getAsJsonObject());
 
