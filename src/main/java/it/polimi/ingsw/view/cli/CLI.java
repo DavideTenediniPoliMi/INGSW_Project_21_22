@@ -24,7 +24,9 @@ public class CLI {
      private int playerID;
      private String name;
      private boolean boughtCard;
-     private boolean cardBoughtIsAlterInfluence;
+     private boolean waitForActivatedCard;
+     private String activeCardName;
+     private boolean activatedCard;
      private boolean playedPlanning;
      private static final Scanner scanner = new Scanner(System.in);
 
@@ -65,8 +67,15 @@ public class CLI {
                     return false;
                }
 
-               boughtCard = true;
-               cardBoughtIsAlterInfluence = isCardBoughtAlterInfluence(jo);
+               activeCardName = getActiveCardName(jo);
+
+               if(!activeCardName.equals("")) {
+                    boughtCard = true;
+                    if(waitForActivatedCard) {
+                         waitForActivatedCard = false;
+                         activatedCard = true;
+                    }
+               }
 
                return false;
           }
@@ -78,11 +87,30 @@ public class CLI {
 
           if(boughtCard) {
                boughtCard = false;
+
+               if(activeCardName.equals("INFLUENCE_ADD_TWO"))
+                    return false;
+
+               if(activeCardName.equals("IGNORE_TOWERS")) {
+                    resetTurnState(jo);
+                    activeCardName = "";
+                    return true;
+               }
+
+               waitForActivatedCard = true;
                return true;
           }
 
-          if(cardBoughtIsAlterInfluence) {
-               cardBoughtIsAlterInfluence = false;
+          if(activeCardName.equals("INFLUENCE_ADD_TWO")) {
+               activeCardName = "";
+               resetTurnState(jo);
+               return true;
+          }
+
+          if(activatedCard) {
+               activeCardName = "";
+               activatedCard = false;
+               resetTurnState(jo);
                return true;
           }
 
@@ -144,7 +172,7 @@ public class CLI {
                   !matchInfo.getStateType().equals(TurnState.CLOUD);
      }
 
-     private boolean isCardBoughtAlterInfluence(JsonObject jo) {
+     private String getActiveCardName(JsonObject jo) {
           JsonArray jsonArray = jo.get("characterCards").getAsJsonArray();
           for (JsonElement je : jsonArray) {
                String name = je.getAsJsonObject().get("name").getAsString();
@@ -152,10 +180,9 @@ public class CLI {
                c.deserialize(je.getAsJsonObject());
 
                if(c.isActive())
-                    return c.getEffectType().equals(EffectType.ALTER_INFLUENCE) &&
-                            !c.getName().equals("INFLUENCE_ADD_TWO");
+                    return c.getName();
           }
-          return false;
+          return "";
      }
 
      private boolean isPlayerTurn(JsonObject jo) {
