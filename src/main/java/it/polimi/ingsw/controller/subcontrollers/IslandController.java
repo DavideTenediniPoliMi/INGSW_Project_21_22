@@ -83,7 +83,7 @@ public class IslandController {
             }
         }
 
-        return tie ? null : mostInfluentialTeam;
+        return tie ? oldMostInfluential : mostInfluentialTeam;
     }
 
     /**

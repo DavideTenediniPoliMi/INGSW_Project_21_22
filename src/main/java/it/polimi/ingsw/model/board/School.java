@@ -194,6 +194,11 @@ public class School implements Serializable, Printable<List<String>> {
         schoolString.add(schoolBuilder.toString());
         schoolBuilder.setLength(0);
 
+        //TOWERS section
+        schoolBuilder.append("│ Towers: ").append(numTowers).append(" ".repeat(11)).append("│");
+        schoolString.add(schoolBuilder.toString());
+        schoolBuilder.setLength(0);
+
         //ENTRANCE section
         schoolBuilder.append("├─Entrance:───────────┤");
         schoolString.add(schoolBuilder.toString());
