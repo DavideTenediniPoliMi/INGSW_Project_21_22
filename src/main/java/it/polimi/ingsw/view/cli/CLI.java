@@ -86,6 +86,11 @@ public class CLI {
 
           jo = jo.get("matchInfo").getAsJsonObject();
 
+          if(isGameOver(jo)) {
+               setViewState(new EndGameViewState(viewState));
+               return true;
+          }
+
           if(!isPlayerTurn(jo))
                return false;
 
@@ -205,6 +210,13 @@ public class CLI {
                return false;
           }
           return true;
+     }
+
+     private boolean isGameOver(JsonObject jo) {
+          if(jo.has("gameOver")) {
+               return jo.get("gameOver").getAsBoolean();
+          }
+          return false;
      }
 
      public void resetTurnState(JsonObject jo) {
