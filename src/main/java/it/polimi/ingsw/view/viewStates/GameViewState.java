@@ -21,7 +21,11 @@ public class GameViewState extends ViewState {
 
         int activePlayerID = MatchInfo.getInstance().getCurrentPlayerID();
         Player activePlayer = Game.getInstance().getPlayerByID(activePlayerID);
-        appendBuffer("It's " + activePlayer.getName() + "'s turn!");
+        if(MatchInfo.getInstance().isGamePaused()) {
+            appendBuffer("Game is currently paused!");
+        } else {
+            appendBuffer("It's " + activePlayer.getName() + "'s turn!");
+        }
     }
 
     @Override

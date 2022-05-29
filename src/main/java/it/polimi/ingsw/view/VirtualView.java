@@ -133,7 +133,10 @@ public class VirtualView extends Observable<String> implements Observer<Response
 
     public void skipIfCurrent() {
         MatchInfo match = MatchInfo.getInstance();
-        if(match.getGameStatus().equals(GameStatus.IN_GAME) && match.getCurrentPlayerID() == playerID && !gameController.isPaused() && !skipping) {
+        if(match.getGameStatus().equals(GameStatus.IN_GAME) &&
+                match.getCurrentPlayerID() == playerID &&
+                !MatchInfo.getInstance().isGamePaused() &&
+                !skipping) {
             skipping = true;
             String skipCommand = new RequestParameters().setCommandType(CommandType.SKIP_TURN).serialize().toString();
             handleRequest(skipCommand);

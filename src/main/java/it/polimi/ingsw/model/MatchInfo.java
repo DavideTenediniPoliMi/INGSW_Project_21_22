@@ -32,6 +32,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
     private boolean gameTied;
     private GameStatus gameStatus;
     private boolean movedMN;
+    private boolean gamePaused;
 
     /**
      * Sole constructor to avoid being instantiated more than once. MatchInfo is a singleton <code>class</code>.
@@ -254,6 +255,18 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
         return gameTied;
     }
 
+    public synchronized boolean isGamePaused() {
+        return gamePaused;
+    }
+
+    public synchronized void setGamePaused(boolean gamePaused) {
+        if(gamePaused == this.gamePaused) return;
+
+        this.gamePaused = gamePaused;
+
+        notifyMatchInfo();
+    }
+
     /**
      * Returns game winner. If more teams have tied, returns a list of winning teams.
      *
@@ -310,7 +323,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
      *
      * @param moved the flag specifying if Mother Nature has moved
      */
-    public void setMNMoved(boolean moved) {
+    public synchronized void setMNMoved(boolean moved) {
         movedMN = moved;
     }
 
@@ -319,7 +332,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
      *
      * @return <code>true</code> if Mother Nature was moved.
      */
-    public boolean hasMNMoved() {
+    public synchronized boolean hasMNMoved() {
         return movedMN;
     }
 
@@ -355,6 +368,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
 
         numMovedStudents = jsonObject.get("numMovedStudents").getAsInt();
         gameOver = jsonObject.get("gameOver").getAsBoolean();
+        gamePaused = jsonObject.get("gamePaused").getAsBoolean();
 
         JsonArray jsonWinners = jsonObject.get("winners").getAsJsonArray();
         for(JsonElement winner : jsonWinners) {

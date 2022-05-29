@@ -36,7 +36,6 @@ public class GameController {
     private final MatchInfo matchInfo;
     private final Game game;
     private final Lobby lobby;
-    private boolean paused;
     private Timer timer;
 
     /**
@@ -46,7 +45,7 @@ public class GameController {
         matchInfo = MatchInfo.getInstance();
         game = Game.getInstance();
         lobby = Lobby.getLobby();
-        paused = false;
+        matchInfo.setGamePaused(false);
     }
 
     /**
@@ -62,7 +61,7 @@ public class GameController {
         if(playerID != matchInfo.getCurrentPlayerID()){
             throw new NotCurrentPlayerException(playerID);
         }
-        if(paused) {
+        if(matchInfo.isGamePaused()) {
             throw new GamePausedException();
         }
         command.execute();
@@ -342,7 +341,7 @@ public class GameController {
             timer.purge();
 
             timer = null;
-            paused = false;
+            matchInfo.setGamePaused(false);
         } else {
             requestTimeout();
         }
@@ -358,7 +357,7 @@ public class GameController {
 
     private void requestTimeout() {
         if(matchInfo.getNumPlayersConnected() == 1) {
-            paused = true;
+            matchInfo.setGamePaused(true);
 
             // Start timer
             timer = new Timer();
@@ -381,10 +380,6 @@ public class GameController {
 
     public RoundStateController getRoundStateController() {
         return roundStateController;
-    }
-
-    public synchronized boolean isPaused() {
-        return paused;
     }
 
     public void loadSavedState() {

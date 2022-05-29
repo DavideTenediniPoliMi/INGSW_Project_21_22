@@ -91,8 +91,18 @@ public class CLI {
                return true;
           }
 
+          if(isGamePaused(jo)) {
+               setViewState(new GameViewState(viewState));
+               return false;
+          }
+
           if(!isPlayerTurn(jo))
                return false;
+
+          if(MatchInfo.getInstance().isGamePaused()) {
+               resetTurnState(jo);
+               return true;
+          }
 
           if(boughtCard) {
                System.out.println("SAW MATCHINFO AFTER BUYING");
@@ -215,6 +225,13 @@ public class CLI {
      private boolean isGameOver(JsonObject jo) {
           if(jo.has("gameOver")) {
                return jo.get("gameOver").getAsBoolean();
+          }
+          return false;
+     }
+
+     private boolean isGamePaused(JsonObject jo) {
+          if(jo.has("gamePaused")) {
+               return jo.get("gamePaused").getAsBoolean();
           }
           return false;
      }
