@@ -42,6 +42,7 @@ public class PlanningViewState extends GameViewState {
             }
         }
 
+        stringBuilder.setLength(stringBuilder.length()-1);
         appendBuffer(stringBuilder.toString());
     }
 
