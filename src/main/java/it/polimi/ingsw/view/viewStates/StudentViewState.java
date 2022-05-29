@@ -84,8 +84,7 @@ public class StudentViewState extends ExpertViewState {
                 return error;
             }
 
-            int islandAbsoluteIndex = game.getBoard().getOriginalIndexOf(Integer.parseInt(input));
-            int islandIndex = game.getBoard().getIndexOfMultiIslandContainingIslandOfIndex(islandAbsoluteIndex);
+            int islandIndex = game.getBoard().getOriginalIndexOf(Integer.parseInt(input));
             notify(
                     new RequestParameters()
                             .setCommandType(CommandType.TRANSFER_STUDENT_TO_ISLAND)
