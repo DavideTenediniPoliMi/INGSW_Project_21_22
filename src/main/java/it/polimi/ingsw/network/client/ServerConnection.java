@@ -12,11 +12,19 @@ import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
+import it.polimi.ingsw.view.cli.AnsiCodes;
 import it.polimi.ingsw.view.cli.CLI;
 import it.polimi.ingsw.view.viewStates.*;
+import org.fusesource.jansi.AnsiConsole;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.Socket;
+import java.util.Scanner;
+import java.util.concurrent.Future;
 
 public class ServerConnection extends Connection {
     private final Client client;
@@ -26,6 +34,7 @@ public class ServerConnection extends Connection {
     private boolean joined;
     private MessageQueue<String> packetQueue;
     private MessageConsumer jsonConsumer;
+    private final Object connectionLock = new Object();
 
     public ServerConnection(Socket socket, Client client) throws IOException {
         super(socket);
@@ -86,26 +95,20 @@ public class ServerConnection extends Connection {
                 }
             }
         } else if(MatchInfo.getInstance().getSelectedNumPlayer() == 0) {
+            executor.submit(this::waitForLobbyCreation);
+
             //Begin lobby creation sequence
             cli.setViewState(new NoLobbyViewState(cli.getViewState()));
             cli.handleInteraction();
-            while(connected) {
-                String received = receiveMessage();
-                if(received.equals("")) continue;
-
-                JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
-
-                if(!jsonObject.has("error")) { //Lobby was created
-                    new ResponseParameters().deserialize(jsonObject);
-                    break;
-                }
-            }
         }
 
         //Force connection to lobby
-        RequestParameters requestParameters = new RequestParameters()
-                .setCommandType(CommandType.JOIN);
-        update(requestParameters.serialize().toString());
+        synchronized (connectionLock) {
+            RequestParameters requestParameters = new RequestParameters()
+                    .setCommandType(CommandType.JOIN);
+            update(requestParameters.serialize().toString());
+        }
+
         while(!joined && connected) {
             String received = receiveMessage();
             if(received.equals("")) continue;
@@ -241,6 +244,29 @@ public class ServerConnection extends Connection {
                     new ResponseParameters().deserialize(jsonObject);
                     break;
                 }
+            }
+        }
+    }
+
+    private void waitForLobbyCreation() {
+        while(connected) {
+            String received;
+            synchronized (connectionLock) {
+                received = receiveMessage();
+            }
+            if(received.equals("")) continue;
+
+            JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
+
+            if(!jsonObject.has("error")) { //Lobby was created
+                new ResponseParameters().deserialize(jsonObject);
+                synchronized (cli) {
+                    if(!cli.getViewState().isInteractionComplete()) {
+                        cli.setViewState(new LobbyCreatedViewState(cli.getViewState()));
+                        cli.handleInteraction();
+                    }
+                }
+                break;
             }
         }
     }

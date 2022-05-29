@@ -13,6 +13,7 @@ import it.polimi.ingsw.network.client.ServerConnection;
 import it.polimi.ingsw.view.viewStates.*;
 import org.fusesource.jansi.AnsiConsole;
 
+import java.awt.desktop.SystemSleepEvent;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.InputMismatchException;
@@ -27,7 +28,7 @@ public class CLI {
      private String activeCardName;
      private boolean activatedCard;
      private boolean playedPlanning;
-     private static final Scanner scanner = new Scanner(System.in);
+     private static Scanner scanner = new Scanner(System.in);
 
      public CLI(ViewState viewState) {
           this.viewState = viewState;
