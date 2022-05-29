@@ -290,8 +290,7 @@ public class ExpertViewState extends GameViewState {
                     appendBuffer(error);
                     return error;
                 }
-                int islandAbsoluteIndex = game.getBoard().getOriginalIndexOf(Integer.parseInt(input));
-                int islandIndex = game.getBoard().getIndexOfMultiIslandContainingIslandOfIndex(islandAbsoluteIndex);
+                int islandIndex = game.getBoard().getOriginalIndexOf(Integer.parseInt(input));
 
                 cardParams.setFromOrigin(new StudentGroup(cardColorSelected,1))
                         .setPlayerID(playerID)
