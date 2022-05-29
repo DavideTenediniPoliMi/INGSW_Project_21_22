@@ -31,7 +31,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
     private final List<TowerColor> winners = new ArrayList<>();
     private boolean gameTied;
     private GameStatus gameStatus;
-    private boolean movedMN = false;
+    private boolean movedMN;
 
     /**
      * Sole constructor to avoid being instantiated more than once. MatchInfo is a singleton <code>class</code>.

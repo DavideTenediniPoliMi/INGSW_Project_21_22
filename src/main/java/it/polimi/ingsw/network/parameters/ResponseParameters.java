@@ -322,7 +322,7 @@ public class ResponseParameters implements Serializable {
         }
 
         if(bagEmpty)
-            jsonObject.add("bagEmpty", new JsonPrimitive(bagEmpty));
+            jsonObject.add("bagEmpty", new JsonPrimitive(true));
 
         if(professors != null)
             jsonObject.add("professors", professors.serialize());

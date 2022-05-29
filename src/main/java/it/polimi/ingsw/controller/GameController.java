@@ -171,6 +171,7 @@ public class GameController {
 
                     checkEndConditionAfterRound();
                     Game.getInstance().resetCards();
+                    Game.getInstance().refillClouds(MatchInfo.getInstance().getMaxMovableStudents());
 
                     setState(new PlanningStateController(roundStateController));
                 } else {
