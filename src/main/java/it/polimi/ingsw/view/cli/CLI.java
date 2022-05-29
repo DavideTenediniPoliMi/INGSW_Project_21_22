@@ -275,7 +275,7 @@ public class CLI {
 
                String error = viewState.manageCLIInput(name);
 
-               if (error != null)
+               if (error != "")
                     AnsiConsole.sysOut().println(error);
           } while(!viewState.isInteractionComplete());
      }
