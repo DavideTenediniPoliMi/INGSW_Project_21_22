@@ -119,6 +119,8 @@ public class GameController {
             diningRoomController = new DiningRoomController();
         }
 
+        game.refillClouds(matchInfo.getMaxMovableStudents());
+
         roundStateController = new RoundStateController(islandController, diningRoomController);
         setState(new PlanningStateController(roundStateController));
 
