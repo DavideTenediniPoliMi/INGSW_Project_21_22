@@ -249,7 +249,7 @@ public class CLI {
                }
                String error = viewState.manageCLIInput(scanner.nextLine());
 
-               if (error != "")
+               if (!"".equals(error))
                     AnsiConsole.sysOut().println(error);
           } while(!viewState.isInteractionComplete());
      }
@@ -275,7 +275,7 @@ public class CLI {
 
                String error = viewState.manageCLIInput(name);
 
-               if (error != "")
+               if (!"".equals(error))
                     AnsiConsole.sysOut().println(error);
           } while(!viewState.isInteractionComplete());
      }
