@@ -16,7 +16,9 @@ public class GameViewState extends ViewState {
     }
 
     @Override
-    public void printCLIPrompt() {
+    public void printCLIPrompt(boolean shouldPrint) {
+        if(!"".equals(getBuffer())) return;
+
         int activePlayerID = MatchInfo.getInstance().getCurrentPlayerID();
         Player activePlayer = Game.getInstance().getPlayerByID(activePlayerID);
         appendBuffer("It's " + activePlayer.getName() + "'s turn!");

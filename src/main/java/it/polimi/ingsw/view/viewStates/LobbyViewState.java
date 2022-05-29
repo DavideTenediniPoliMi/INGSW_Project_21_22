@@ -71,11 +71,9 @@ public class LobbyViewState extends ViewState {
     }
 
     @Override
-    public void printCLIPrompt() {
-    }
+    public void printCLIPrompt(boolean shouldPrint) {
+        if(!"".equals(getBuffer())) return;
 
-    @Override
-    public String manageCLIInput(String input) {
-        return null;
+        appendBuffer("Waiting for the other players to be ready!");
     }
 }

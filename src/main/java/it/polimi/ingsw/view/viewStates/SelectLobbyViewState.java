@@ -33,7 +33,9 @@ public class SelectLobbyViewState extends LobbyViewState {
     }
 
     @Override
-    public void printCLIPrompt() {
+    public void printCLIPrompt(boolean shouldPrint) {
+        if(!shouldPrint) return;
+
         setInteractionComplete(false);
         if(cardBack == null) {
             //it finds card backs already picked
@@ -59,6 +61,10 @@ public class SelectLobbyViewState extends LobbyViewState {
             }
             validTeams = Stream.of(TowerColor.values()).map(Enum::name).collect(Collectors.toList());
             validTeams.removeAll(pickedTeams);
+
+            if(MatchInfo.getInstance().getSelectedNumPlayer() != 3) {
+                validTeams.remove("GREY");
+            }
 
             appendBuffer("Choose your team: " + validTeams.toString());
             return;

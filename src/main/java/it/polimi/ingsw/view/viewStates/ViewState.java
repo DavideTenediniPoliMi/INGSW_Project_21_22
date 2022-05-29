@@ -23,7 +23,10 @@ public class ViewState extends Observable<String> implements Printable<String> {
     }
 
     public void appendBuffer(String s) {
-        buffer += "\n" + s;
+        if(!"".equals(buffer)) {
+            buffer += "\n";
+        }
+        buffer += s;
     }
 
     public void setInteractionComplete(boolean interactionComplete) {
@@ -34,13 +37,9 @@ public class ViewState extends Observable<String> implements Printable<String> {
         return interactionComplete;
     }
 
-    public void printCLIPrompt() {
+    public void printCLIPrompt(boolean shouldPrint) {}
 
-    }
-
-    public void resetInteraction() {
-
-    }
+    public void resetInteraction() {}
 
     public void setPlayerID(int playerID) {
         this.playerID = playerID;

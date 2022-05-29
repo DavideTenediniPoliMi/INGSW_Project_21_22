@@ -61,7 +61,9 @@ public class ExpertViewState extends GameViewState {
     }
 
     @Override
-    public void printCLIPrompt() {
+    public void printCLIPrompt(boolean shouldPrint) {
+        if(!shouldPrint) return;
+
         System.out.println("inside expert");
         setInteractionComplete(false);
 

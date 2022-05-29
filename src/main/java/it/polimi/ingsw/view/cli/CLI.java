@@ -244,10 +244,10 @@ public class CLI {
                System.out.println(viewState);
                synchronized(this){
                     System.out.println("printing prompt");
-                    viewState.printCLIPrompt();
+                    viewState.printCLIPrompt(true);
                     AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + viewState.print() + viewState.getBuffer());
                }
-               String error = viewState.manageCLIInput(scanner.nextLine());
+               String error = viewState.manageCLIInput(scanner.nextLine().trim());
 
                if (!"".equals(error))
                     AnsiConsole.sysOut().println(error);
@@ -256,7 +256,7 @@ public class CLI {
 
      public void displayState() {
           System.out.println("printing " + viewState);
-          viewState.printCLIPrompt();
+          viewState.printCLIPrompt(false);
           AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + viewState.print() + viewState.getBuffer());
      }
 
@@ -268,18 +268,17 @@ public class CLI {
 
      public void handleHandshake() {
           do {
-               viewState.printCLIPrompt();
+               viewState.printCLIPrompt(true);
                AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + viewState.getBuffer());
 
                name = scanner.nextLine();
 
-               String error = viewState.manageCLIInput(name);
+               String error = viewState.manageCLIInput(name.trim());
 
                if (!"".equals(error))
                     AnsiConsole.sysOut().println(error);
           } while(!viewState.isInteractionComplete());
      }
-
 
      public static Connection handleBinding(Client client) {
           do {

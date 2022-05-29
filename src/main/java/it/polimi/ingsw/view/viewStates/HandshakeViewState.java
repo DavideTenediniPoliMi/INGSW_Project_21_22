@@ -9,7 +9,7 @@ public class HandshakeViewState extends ViewState {
     }
 
     @Override
-    public void printCLIPrompt() {
+    public void printCLIPrompt(boolean shouldPrint) {
         appendBuffer("Insert your name :");
     }
 

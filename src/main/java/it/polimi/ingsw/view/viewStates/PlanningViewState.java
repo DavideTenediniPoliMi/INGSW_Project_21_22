@@ -24,7 +24,9 @@ public class PlanningViewState extends GameViewState {
     }
 
     @Override
-    public void printCLIPrompt() {
+    public void printCLIPrompt(boolean shouldPrint) {
+        if(!shouldPrint) return;
+
         setInteractionComplete(false);
         List<Card> playableCards = game.getPlayerByID(playerID).getPlayableCards();
         StringBuilder stringBuilder = new StringBuilder();

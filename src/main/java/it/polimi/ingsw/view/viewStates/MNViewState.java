@@ -15,11 +15,13 @@ public class MNViewState extends ExpertViewState {
     }
 
     @Override
-    public void printCLIPrompt() {
+    public void printCLIPrompt(boolean shouldPrint) {
+        if(!shouldPrint) return;
+
         isStudentsPhase = false;
 
         if(matchInfo.isExpertMode() && !choiceSelected && menuChoice != 2) {
-            super.printCLIPrompt();
+            super.printCLIPrompt(true);
             return;
         }
 

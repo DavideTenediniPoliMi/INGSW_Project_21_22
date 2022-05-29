@@ -23,7 +23,9 @@ public class NoLobbyViewState extends LobbyViewState {
     }
 
     @Override
-    public void printCLIPrompt() {
+    public void printCLIPrompt(boolean shouldPrint) {
+        if(!shouldPrint) return;
+
         if(!creating) {
             appendBuffer("Press ENTER to start creating a lobby!");
             return;

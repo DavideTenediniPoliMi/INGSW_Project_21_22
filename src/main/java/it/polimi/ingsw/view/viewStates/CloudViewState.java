@@ -22,7 +22,9 @@ public class CloudViewState extends GameViewState {
     }
 
     @Override
-    public void printCLIPrompt() {
+    public void printCLIPrompt(boolean shouldPrint) {
+        if(!shouldPrint) return;
+
         setInteractionComplete(false);
         validIndexes.clear();
         Game game = Game.getInstance();
@@ -32,7 +34,7 @@ public class CloudViewState extends GameViewState {
                 validIndexes.add(game.getIndexOfCloud(cloud));
         }
 
-        appendBuffer("Select the cloud from which you want to take the students: " + validIndexes.toString());
+        appendBuffer("Select the cloud from which you want to take the students: " + validIndexes);
     }
 
     @Override
