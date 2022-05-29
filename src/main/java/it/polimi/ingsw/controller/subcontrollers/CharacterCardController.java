@@ -49,7 +49,7 @@ public class CharacterCardController {
             }
         }else {
             throw new CharacterCardActivationException(CharacterCards.values()[cardIndex].toString(),
-                    Game.getInstance().getActiveCharacterCard().toString());
+                    Game.getInstance().getActiveCharacterCard().getName());
         }
     }
 
