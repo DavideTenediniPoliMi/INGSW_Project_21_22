@@ -322,36 +322,16 @@ public class ExpertViewState extends GameViewState {
                 notifyCardActivation();
                 break;
             case "POOL_SWAP":
-                System.out.println("start pool swap - numStudentsToSwap: " + numStudentsToSwap);
                 if(numStudentsToSwap == 0 && !fromOriginSwapCompleted) {
                     return manageCLINumStudentsToSwap(input, validNumOfStudentsToSwap);
                 }
                 if(!fromOriginSwapCompleted) {
                     if(studentsSwapped < numStudentsToSwap-1) {
-                        if (cardColorSelected == null) {
-                            error = manageCLICardStudentColor(input);
-                            if (!error.equals("")) {
-                                appendBuffer(error);
-                                return error;
-                            }
-                            cardStudents.addByColor(cardColorSelected, 1);
-                            studentsSwapped++;
-                            cardColorSelected = null;
-                            return "";
-                        }
+                        return manageCLIFromCardSwap(input);
                     }
-                    if (cardColorSelected == null) {
-                        error = manageCLICardStudentColor(input);
-                        if (!error.equals("")) {
-                            appendBuffer(error);
-                            return error;
-                        }
-                        cardStudents.addByColor(cardColorSelected, 1);
-                        cardColorSelected = null;
-                        fromOriginSwapCompleted = true;
-                        studentsSwapped = 0;
-                        return "";
-                    }
+                    manageCLIFromCardSwap(input);
+                    fromOriginSwapCompleted = true;
+                    studentsSwapped = 0;
                 }
                 if(studentsSwapped < numStudentsToSwap-1) {
                     manageCLIFromEntranceSwap(input);
@@ -404,31 +384,21 @@ public class ExpertViewState extends GameViewState {
                 }
 
                 if(!fromOriginSwapCompleted) {
-                    if(studentsSwapped < numStudentsToSwap) {
-                        manageCLIFromEntranceSwap(input);
+                    if(studentsSwapped < numStudentsToSwap-1) {
+                        return manageCLIFromEntranceSwap(input);
                     }
+                    manageCLIFromEntranceSwap(input);
                     fromOriginSwapCompleted = true;
                     colorSelected = null;
                     studentsSwapped = 0;
+                    return "";
                 }
-                if(studentsSwapped < numStudentsToSwap) {
-                    if (colorDiningSelected == null) {
-                        error = manageCLIDiningStudentColor(input);
-                        if(!error.equals("")) {
-                            appendBuffer(error);
-                            return error;
-                        }
-                        diningStudents.addByColor(colorDiningSelected, 1);
-                        studentsSwapped++;
-                        colorDiningSelected = null;
-                        return "";
-                    }
+                if(studentsSwapped < numStudentsToSwap-1) {
+                    return manageCLIFromDiningSwap(input);
                 }
+                manageCLIFromDiningSwap(input);
                 studentsSwapped = 0;
-                colorSelected = null;
-                colorDiningSelected = null;
-                entranceStudents = new StudentGroup();
-                diningStudents = new StudentGroup();
+                fromOriginSwapCompleted = false;
 
                 cardParams.setPlayerID(playerID)
                         .setFromOrigin(entranceStudents)
@@ -437,6 +407,9 @@ public class ExpertViewState extends GameViewState {
 
                 notifyCardParameters(cardParams);
                 notifyCardActivation();
+
+                entranceStudents = new StudentGroup();
+                diningStudents = new StudentGroup();
                 break;
             case "RETURN_TO_BAG":
                 error = manageCLIStudentColor(input);
@@ -464,7 +437,22 @@ public class ExpertViewState extends GameViewState {
             return error;
         }
         numStudentsToSwap = Integer.parseInt(input);
-        System.out.println("manage num swap - numStudentsToSwap: " + numStudentsToSwap);
+        return "";
+    }
+
+    private String manageCLIFromCardSwap(String input) {
+        String error;
+        if (cardColorSelected == null) {
+            error = manageCLICardStudentColor(input);
+            if (!error.equals("")) {
+                appendBuffer(error);
+                return error;
+            }
+            cardStudents.addByColor(cardColorSelected, 1);
+            studentsSwapped++;
+            cardColorSelected = null;
+            return "";
+        }
         return "";
     }
 
@@ -479,6 +467,22 @@ public class ExpertViewState extends GameViewState {
             entranceStudents.addByColor(colorSelected, 1);
             studentsSwapped++;
             colorSelected = null;
+            return "";
+        }
+        return "";
+    }
+
+    private String manageCLIFromDiningSwap(String input) {
+        String error;
+        if (colorDiningSelected == null) {
+            error = manageCLIDiningStudentColor(input);
+            if(!error.equals("")) {
+                appendBuffer(error);
+                return error;
+            }
+            diningStudents.addByColor(colorDiningSelected, 1);
+            studentsSwapped++;
+            colorDiningSelected = null;
             return "";
         }
         return "";
