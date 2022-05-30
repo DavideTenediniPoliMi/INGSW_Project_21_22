@@ -9,6 +9,7 @@ import it.polimi.ingsw.model.enumerations.CharacterCards;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.client.Client;
+import it.polimi.ingsw.network.client.InterruptibleScanner;
 import it.polimi.ingsw.network.client.ServerConnection;
 import it.polimi.ingsw.view.viewStates.*;
 import org.fusesource.jansi.AnsiConsole;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.concurrent.*;
 
 public class CLI {
      private ViewState viewState;
@@ -27,7 +29,10 @@ public class CLI {
      private String activeCardName;
      private boolean activatedCard;
      private boolean playedPlanning;
-     private final static Scanner scanner = new Scanner(System.in);
+     public static boolean exit;
+     //private final static Scanner scanner = new Scanner(System.in);
+     private static final InterruptibleScanner intScan = new InterruptibleScanner();
+     private static Thread inputThread;
 
      public CLI(ViewState viewState) {
           this.viewState = viewState;
@@ -251,19 +256,20 @@ public class CLI {
           return TurnState.valueOf(jo.get("stateType").getAsString());
      }
 
-     public void handleInteractionAsFirst() {
+     public void handleInteractionAsFirst() throws ExecutionException {
           playedPlanning = true;
           handleInteraction();
      }
 
-     public void handleInteraction() {
+     public void handleInteraction() throws ExecutionException {
           do {
                synchronized(this){
                     viewState.printCLIPrompt(true);
                     AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + viewState.print() + viewState.getBuffer());
                }
-               String error = viewState.manageCLIInput(scanner.nextLine().trim());
+               String input = readInput();
 
+               String error = viewState.manageCLIInput(input);
                if (!"".equals(error))
                     AnsiConsole.sysOut().println(error);
           } while(!viewState.isInteractionComplete());
@@ -280,12 +286,12 @@ public class CLI {
           viewState.setInteractionComplete(false);
      }
 
-     public void handleHandshake() {
+     public void handleHandshake() throws ExecutionException {
           do {
                viewState.printCLIPrompt(true);
                AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + viewState.getBuffer());
 
-               name = scanner.nextLine();
+               name = readInput();
 
                String error = viewState.manageCLIInput(name.trim());
 
@@ -296,19 +302,21 @@ public class CLI {
 
      public static Connection handleBinding(Client client) {
           do {
-               //AnsiConsole.sysOut().println("Insert the IP address of the server : (or Press X to close the game)");
+               AnsiConsole.sysOut().println(AnsiCodes.CLS + "Insert the IP address of the server : (or Press X to close the game)");
                try {
-                    //String ip = scanner.nextLine();
+                    String ip = readInput();
 
-                    //if(ip.equals("X")) break;
+                    if(ip.equals("X")) {
+                         exit = true;
+                         break;
+                    }
 
-                    //AnsiConsole.sysOut().println("Insert the port :");
+                    AnsiConsole.sysOut().println("Insert the port :");
 
-                    //int port = scanner.nextInt();
-                    //scanner.nextLine();
+                    int port = Integer.parseInt(readInput());
 
-                    //return new ServerConnection(new Socket(ip, port), client);
-                    return new ServerConnection(new Socket("localhost", 12345), client);
+                    return new ServerConnection(new Socket(ip, port), client);
+                    //return new ServerConnection(new Socket("localhost", 12345), client);
                } catch(IOException | SecurityException | IllegalArgumentException e) {
                     AnsiConsole.sysOut().println("The combination IP/Port didn't work! Try again!");
                } catch(InputMismatchException e) {
@@ -318,6 +326,25 @@ public class CLI {
                }
           } while(true);
 
-          //return null;
+          return null;
+     }
+
+     private static String readInput() throws ExecutionException {
+          FutureTask<String> task = new FutureTask<>(intScan);
+          inputThread = new Thread(task);
+          inputThread.start();
+
+          String input = null;
+
+          try {
+               input = task.get();
+          } catch(InterruptedException e) {
+               task.cancel(true);
+          }
+          return input;
+     }
+
+     public void stopReading() {
+          inputThread.interrupt();
      }
 }

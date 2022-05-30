@@ -7,7 +7,6 @@ import com.google.gson.JsonParser;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.GameStatus;
-import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
@@ -17,14 +16,9 @@ import it.polimi.ingsw.view.cli.CLI;
 import it.polimi.ingsw.view.viewStates.*;
 import org.fusesource.jansi.AnsiConsole;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.Socket;
-import java.util.Scanner;
-import java.util.concurrent.Future;
+import java.util.concurrent.ExecutionException;
 
 public class ServerConnection extends Connection {
     private final Client client;
@@ -50,7 +44,12 @@ public class ServerConnection extends Connection {
     public void run() {
         // THIS FIRST INTERACTION IS THE HANDSHAKE (name)
         while(true) {
-            cli.handleHandshake();
+            try {
+                cli.handleHandshake();
+            } catch (ExecutionException e) {
+                AnsiConsole.sysOut().println(AnsiCodes.CLS + "Something went wrong, please try again");
+                continue;
+            }
 
             String received = receiveMessage();
             if(received.equals("")) continue;
@@ -99,7 +98,11 @@ public class ServerConnection extends Connection {
 
             //Begin lobby creation sequence
             cli.setViewState(new NoLobbyViewState(cli.getViewState()));
-            cli.handleInteraction();
+            try {
+                cli.handleInteraction();
+            } catch (ExecutionException e) {
+                // Lobby already created, move on...
+            }
         }
 
         //Force connection to lobby
@@ -119,7 +122,7 @@ public class ServerConnection extends Connection {
 
         // Begin lobby loop
         cli.setViewState(new SelectLobbyViewState(cli.getViewState()));
-        executor.submit(cli::handleInteraction);
+        executor.submit(this::asyncInteraction);
 
         while(!ready && connected) {
             String received = receiveMessage();
@@ -134,7 +137,7 @@ public class ServerConnection extends Connection {
                 synchronized (Lobby.getLobby()) {
                     if (jsonObject.has("error")) {
                         cli.resetInteraction(jsonObject.get("error").getAsString());
-                        cli.handleInteraction();
+                        asyncInteraction();
                         return;
                     }
                     new ResponseParameters().deserialize(jsonObject);
@@ -144,13 +147,15 @@ public class ServerConnection extends Connection {
                     }
                 }
                 if(cli.getViewState().isInteractionComplete())
-                    cli.handleInteraction();
+                    asyncInteraction();
             });
         }
 
-        cli.setViewState(new LobbyViewState(cli.getViewState()));
-        new ResponseParameters().deserialize(JsonParser.parseString(lastResp).getAsJsonObject());
-        cli.displayState();
+        if(connected) {
+            cli.setViewState(new LobbyViewState(cli.getViewState()));
+            new ResponseParameters().deserialize(JsonParser.parseString(lastResp).getAsJsonObject());
+            cli.displayState();
+        }
 
         while(!inGame && connected) {
             String received = receiveMessage();
@@ -174,7 +179,8 @@ public class ServerConnection extends Connection {
                 }
             });
         }
-        gameSequence(lastResp);
+        if(connected)
+            gameSequence(lastResp);
     }
 
     /** PER QUANDO IN GAME
@@ -193,7 +199,11 @@ public class ServerConnection extends Connection {
         //cli.nextState(initJsonObject);
 
         if(MatchInfo.getInstance().getCurrentPlayerID() == cli.getPlayerID()) {
-            cli.handleInteractionAsFirst();
+            try {
+                cli.handleInteractionAsFirst();
+            } catch (ExecutionException e) {
+                //Server disconnected
+            }
         } else {
             cli.setViewState(new GameViewState(cli.getViewState()));
             cli.displayState();
@@ -253,21 +263,35 @@ public class ServerConnection extends Connection {
             String received;
             synchronized (connectionLock) {
                 received = receiveMessage();
-            }
-            if(received.equals("")) continue;
 
-            JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
+                if(received.equals("")) continue;
 
-            if(!jsonObject.has("error")) { //Lobby was created
-                new ResponseParameters().deserialize(jsonObject);
-                synchronized (cli) {
-                    if(!cli.getViewState().isInteractionComplete()) {
+                JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
+
+                if(!jsonObject.has("error")) { //Lobby was created
+                    new ResponseParameters().deserialize(jsonObject);
+                    if (!cli.getViewState().isInteractionComplete()) {
+                        cli.stopReading();
                         cli.setViewState(new LobbyCreatedViewState(cli.getViewState()));
-                        cli.handleInteraction();
+                        asyncInteraction();
                     }
                 }
-                break;
             }
+            break;
         }
+    }
+
+    private void asyncInteraction() {
+        try {
+            cli.handleInteraction();
+        } catch (ExecutionException e) {
+            //Server was disconnected, do nothing
+        }
+    }
+
+    @Override
+    public void disconnect() {
+        super.disconnect();
+        cli.stopReading();
     }
 }
