@@ -94,6 +94,7 @@ public class MultiIsland extends Island {
     public void deserialize(JsonObject jsonObject) {
         JsonObject left = new JsonObject();
         JsonObject right = new JsonObject();
+
         if(isMulti(jsonObject)) {
             left = jsonObject.get("leftIsland").getAsJsonObject();
             right = jsonObject.get("rightIsland").getAsJsonObject();
@@ -115,7 +116,8 @@ public class MultiIsland extends Island {
 
         leftIsland.deserialize(left);
         rightIsland.deserialize(right);
-        super.conquerIsland(leftIsland.getTeamColor());
+        super.conquerIsland(TowerColor.valueOf(jsonObject.get("teamColor").getAsString()));
+        super.setMotherNatureTo(jsonObject.get("motherNature").getAsBoolean());
     }
 
     private boolean isMulti(JsonObject island) {
