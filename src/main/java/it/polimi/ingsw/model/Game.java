@@ -512,6 +512,9 @@ public class Game extends Observable<ResponseParameters> implements Serializable
      */
     public void setCardParameters(CardParameters params){
         getActiveCharacterCard().setParameters(params);
+
+        if(getActiveCharacterCard().getName().equals("IGNORE_COLOR"))
+            notify(new ResponseParameters().setCharacterCards(characterCards));
     }
 
     /**

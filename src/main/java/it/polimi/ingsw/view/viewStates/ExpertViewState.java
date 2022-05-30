@@ -245,6 +245,16 @@ public class ExpertViewState extends GameViewState {
 
             boughtCardIndex = Integer.parseInt(input);
 
+            int playerCoins = game.getPlayerByID(playerID).getNumCoins();
+            int cardCost = game.getCharacterCards().get(boughtCardIndex).getCost();
+            if(playerCoins < cardCost) {
+                cardBought = false;
+                isCardSelected = false;
+                error = "Not enough coins to buy this card!";
+                appendBuffer(error);
+                return error;
+            }
+
             notify(
                     new RequestParameters()
                             .setCommandType(CommandType.BUY_CHARACTER_CARD)
