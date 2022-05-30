@@ -24,7 +24,9 @@ public class EndGameViewState extends GameViewState {
         appendBuffer(message);
 
         for(Player player: Game.getInstance().getPlayers()) {
-            appendBuffer(player.getName() + " (TEAM " + player.getTeamColor().print() +")");
+            if(MatchInfo.getInstance().getWinners().contains(player.getTeamColor())) {
+                appendBuffer(player.getName() + " (TEAM " + player.getTeamColor().print() + ")");
+            }
         }
 
         appendBuffer("\n");
