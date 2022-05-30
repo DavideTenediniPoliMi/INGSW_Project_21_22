@@ -55,12 +55,20 @@ public class SelectLobbyViewState extends LobbyViewState {
         if(team == null) {
             //it finds teams already picked
             List<String> pickedTeams = new ArrayList<>();
-            for(Player p : lobby.getPlayers()) {
-                if(p.getTeamColor() != null)
-                    pickedTeams.add(p.getTeamColor().toString());
-            }
+
             validTeams = Stream.of(TowerColor.values()).map(Enum::name).collect(Collectors.toList());
-            validTeams.removeAll(pickedTeams);
+
+            for(Player p : lobby.getPlayers()) {
+                if(p.getTeamColor() != null) {
+                    if(matchInfo.getSelectedNumPlayer() == 4 && pickedTeams.contains(p.getTeamColor().toString())) {
+                        validTeams.remove(p.getTeamColor().toString());
+                    }
+                    pickedTeams.add(p.getTeamColor().toString());
+                }
+            }
+            if(matchInfo.getSelectedNumPlayer() != 4) {
+                validTeams.removeAll(pickedTeams);
+            }
 
             if(MatchInfo.getInstance().getSelectedNumPlayer() != 3) {
                 validTeams.remove("GREY");
