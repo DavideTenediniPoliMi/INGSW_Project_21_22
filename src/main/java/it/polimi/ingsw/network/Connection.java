@@ -34,9 +34,6 @@ public abstract class Connection implements Runnable, Observer<String> {
     }
 
     public synchronized void sendMessage(String message) {
-        if(message.length() > 0) {
-            System.out.println("Sending message of size " + message.length() + ":\n" + message);
-        }
         try {
             out.writeInt(message.length());
 
@@ -59,14 +56,10 @@ public abstract class Connection implements Runnable, Observer<String> {
             } while(length == 0);
 
             if (length > 0) {
-                //System.out.println("received message of length " + length);
-
                 StringBuilder message = new StringBuilder();
                 for (int i = 0; i < length; i++) {
                     message.append(in.readChar());
                 }
-                System.out.println("received message of length " + length + ": " + message);
-                //System.out.println(message);
 
                 return message.toString();
             }

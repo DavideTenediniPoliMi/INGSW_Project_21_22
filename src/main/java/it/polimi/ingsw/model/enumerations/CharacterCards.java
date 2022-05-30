@@ -66,7 +66,6 @@ public enum CharacterCards {
         try {
             return (CharacterCard) cardClass.getConstructors()[0].newInstance(fullParams.toArray());
         } catch(InstantiationException | IllegalAccessException | InvocationTargetException | IllegalArgumentException e) {
-            System.out.println("Failed to instantiate " + this);
             e.printStackTrace();
             return null;
         }

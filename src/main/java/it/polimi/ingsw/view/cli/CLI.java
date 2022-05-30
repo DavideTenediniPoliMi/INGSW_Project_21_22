@@ -66,17 +66,13 @@ public class CLI {
                     return false;
                }
 
-               System.out.println("SAW CHARACTER CARDS");
-
                activeCardName = getActiveCardName(jo);
 
                if(!activeCardName.equals("")) {
                     if(waitForActivatedCard) {
-                         System.out.println("WAS WAITING");
                          waitForActivatedCard = false;
                          activatedCard = true;
                     } else {
-                         System.out.println("BOUGHT CARD");
                          boughtCard = true;
                     }
                }
@@ -105,42 +101,34 @@ public class CLI {
           }
 
           if(boughtCard) {
-               System.out.println("SAW MATCHINFO AFTER BUYING");
                boughtCard = false;
 
                if("INFLUENCE_ADD_TWO".equals(activeCardName)) {
-                    System.out.println("WAITING FOR SETTING PARAMS ADD TWO");
                     return false;
                }
 
                if("IGNORE_TOWERS".equals(activeCardName)) {
-                    System.out.println("AND WAS FOR IGNORE TOWERS");
                     resetTurnState(jo);
                     activeCardName = "";
                     return true;
                }
 
-               System.out.println("AND WAITING FOR USER");
                waitForActivatedCard = true;
                return true;
           }
 
           if("INFLUENCE_ADD_TWO".equals(activeCardName)) {
-               System.out.println("FINISHED ADD TWO");
                activeCardName = "";
                resetTurnState(jo);
                return true;
           }
 
           if(activatedCard) {
-               System.out.println("ACTIVATED CARD FROM USER");
                activeCardName = "";
                activatedCard = false;
                resetTurnState(jo);
                return true;
           }
-
-          System.out.println("DIDN'T BUY CARDS");
 
           switch(matchInfo.getStateType()) {
                case PLANNING:
@@ -270,9 +258,7 @@ public class CLI {
 
      public void handleInteraction() {
           do {
-               System.out.println(viewState);
                synchronized(this){
-                    System.out.println("printing prompt");
                     viewState.printCLIPrompt(true);
                     AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + viewState.print() + viewState.getBuffer());
                }
@@ -284,7 +270,6 @@ public class CLI {
      }
 
      public void displayState() {
-          System.out.println("printing " + viewState);
           viewState.printCLIPrompt(false);
           AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + viewState.print() + viewState.getBuffer());
      }

@@ -98,7 +98,6 @@ public class VirtualView extends Observable<String> implements Observer<Response
     @Override
     public void update(ResponseParameters params) {
         if(connected) {
-            System.out.println(params.serialize().toString());
             notify(params.serialize().toString());
         } else {
             skipIfCurrent();

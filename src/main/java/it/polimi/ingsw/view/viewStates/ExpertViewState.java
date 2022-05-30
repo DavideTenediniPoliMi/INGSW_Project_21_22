@@ -64,7 +64,6 @@ public class ExpertViewState extends GameViewState {
     public void printCLIPrompt(boolean shouldPrint) {
         if(!shouldPrint) return;
 
-        System.out.println("inside expert");
         setInteractionComplete(false);
 
         if(isStudentsPhase) {
@@ -80,7 +79,6 @@ public class ExpertViewState extends GameViewState {
     }
 
     private String printCLICardMenu(String movementSubject) {
-        System.out.println("inside print menu");
         StringBuilder stringBuilder = new StringBuilder();
 
         if(!cardBought) {
@@ -90,7 +88,7 @@ public class ExpertViewState extends GameViewState {
 
             return stringBuilder.toString();
         }
-        System.out.println("between");
+
         if(!isCardSelected) {
             return ("Select the card to be bought: [0,1,2]");
         }
@@ -116,12 +114,9 @@ public class ExpertViewState extends GameViewState {
 
     private String printCLICardActivationParameters() {
         StringBuilder stringBuilder = new StringBuilder();
-        System.out.println(activeCard);
 
-        System.out.println("before switch");
         switch(activeCard.getName()) {
             case "MOVE_TO_ISLAND":
-                System.out.println("inside card");
                 if(cardColorSelected == null) {
                     stringBuilder.append("Select the student you want to move from the card to an island: ");
                     stringBuilder.append(printCLIStudentColorSelection());
@@ -213,7 +208,6 @@ public class ExpertViewState extends GameViewState {
         String error;
 
         if(!cardBought) {
-            System.out.println("not card bought");
             error = StringUtils.checkInteger(input, validMenuChoice);
             if(!error.equals("")) {
                 appendBuffer(error);
@@ -224,12 +218,10 @@ public class ExpertViewState extends GameViewState {
                 choiceSelected = true;
                 isLastActionBuyCharacterCard = false;
                 if (isStudentsPhase) {
-                    System.out.println("manage Students");
                     isMovingStudents = true;
                     return "manage students";
                 }
                 isMovingMN = true;
-                System.out.println("manage MN");
                 return "manage MN";
             }
             isLastActionBuyCharacterCard = true;
@@ -291,7 +283,6 @@ public class ExpertViewState extends GameViewState {
     private String manageCLICardActivationParameters(String input) throws InterruptedException {
         String error;
         CardParameters cardParams = new CardParameters();
-        System.out.println("before manage switch");
         switch (activeCard.getName()) {
             case "MOVE_TO_ISLAND":
                 if(cardColorSelected == null) {
@@ -543,7 +534,6 @@ public class ExpertViewState extends GameViewState {
     }
 
     protected String manageCLIEntranceStudentColor(String input) {
-        System.out.println("manage entrance");
         String error;
 
         if(validColors.contains(input.toUpperCase())) {
