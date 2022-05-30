@@ -442,6 +442,8 @@ class GameControllerTest {
             game.instantiateCharacterCard(7);
         }
 
+        game.refillClouds(game.getPlayers().size());
+
         matchInfo.setStateType(TurnState.PLANNING);
 
         RoundStateController roundStateController = new RoundStateController(new IslandExpertController(new CharacterCardController())
