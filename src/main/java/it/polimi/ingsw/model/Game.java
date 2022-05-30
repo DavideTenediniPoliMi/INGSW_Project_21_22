@@ -512,9 +512,6 @@ public class Game extends Observable<ResponseParameters> implements Serializable
      */
     public void setCardParameters(CardParameters params){
         getActiveCharacterCard().setParameters(params);
-
-        if(getActiveCharacterCard().getEffectType().equals(EffectType.ALTER_INFLUENCE))
-            notify(new ResponseParameters().setCharacterCards(characterCards));
     }
 
     /**

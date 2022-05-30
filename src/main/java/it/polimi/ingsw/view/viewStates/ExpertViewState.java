@@ -332,6 +332,7 @@ public class ExpertViewState extends GameViewState {
                     manageCLIFromCardSwap(input);
                     fromOriginSwapCompleted = true;
                     studentsSwapped = 0;
+                    return "";
                 }
                 if(studentsSwapped < numStudentsToSwap-1) {
                     manageCLIFromEntranceSwap(input);
@@ -402,8 +403,7 @@ public class ExpertViewState extends GameViewState {
 
                 cardParams.setPlayerID(playerID)
                         .setFromOrigin(entranceStudents)
-                        .setFromDestination(diningStudents)
-                        .setPlayerID(0);        //not needed
+                        .setFromDestination(diningStudents);
 
                 notifyCardParameters(cardParams);
                 notifyCardActivation();
