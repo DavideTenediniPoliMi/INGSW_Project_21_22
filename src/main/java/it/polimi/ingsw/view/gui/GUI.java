@@ -1,31 +1,63 @@
 package it.polimi.ingsw.view.gui;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import it.polimi.ingsw.network.Connection;
+import it.polimi.ingsw.network.client.Client;
+import it.polimi.ingsw.view.View;
+import it.polimi.ingsw.view.viewStates.ViewState;
+import javafx.application.Platform;
 
+import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-public class GUI extends Application {
+public class GUI extends View {
+    public GUI(ViewState viewState) {
+        super(viewState);
+    }
     @Override
-    public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say Hello World!");
-        btn.setOnAction(event -> System.out.println("Hello World!"));
+    public void loadStartingScreen() {
+        ExecutorService executor = Executors.newFixedThreadPool(16);
 
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
+        try {
+            ApplicationFX.semaphore.acquire();
 
-        Scene scene = new Scene(root, 300, 250);
+            executor.submit(() -> ApplicationFX.main(null));
 
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+            ApplicationFX.semaphore.acquire();
+            ApplicationFX.semaphore.release();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void loadClosingScreen() {
+    }
+
+    @Override
+    public Connection handleBinding(Client client) {
+        Platform.runLater(() -> {
+            try {
+                ApplicationFX.loadBindingScreen();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        return null;
+    }
+
+    @Override
+    public void handleInteraction() {
 
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    @Override
+    public void handleHandshake() {
+
+    }
+
+    @Override
+    public void displayState() {
+
     }
 }
