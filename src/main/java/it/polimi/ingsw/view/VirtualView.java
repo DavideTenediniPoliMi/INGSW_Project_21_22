@@ -10,6 +10,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.GameStatus;
+import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.commands.Command;
 import it.polimi.ingsw.network.commands.CommandFactory;
 import it.polimi.ingsw.network.enumerations.CommandType;
@@ -17,6 +18,7 @@ import it.polimi.ingsw.network.observer.Observable;
 import it.polimi.ingsw.network.observer.Observer;
 import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
+import javafx.css.Match;
 
 public class VirtualView extends Observable<String> implements Observer<ResponseParameters> {
     private final String name;
@@ -25,6 +27,7 @@ public class VirtualView extends Observable<String> implements Observer<Response
     private CommandFactory commandFactory;
     private final LobbyController lobbyController;
     private final GameController gameController;
+    private TurnState skippingTurn;
 
     public VirtualView(String name, LobbyController lobbyController, GameController gameController) {
         this.lobbyController = lobbyController;
@@ -100,6 +103,10 @@ public class VirtualView extends Observable<String> implements Observer<Response
         if(connected) {
             notify(params.serialize().toString());
         } else {
+            if(skipping) {
+                skipping = false;
+                return;
+            }
             skipIfCurrent();
         }
     }
@@ -127,20 +134,30 @@ public class VirtualView extends Observable<String> implements Observer<Response
         String disconnectCommand = new RequestParameters().setCommandType(CommandType.DISCONNECT).serialize().toString();
         handleRequest(disconnectCommand);
         skipping = false;
-        skipIfCurrent();
+        if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.LOBBY)){
+            Lobby.getLobby().removeObserver(this);
+            Game.getInstance().removeObserver(this);
+            MatchInfo.getInstance().removeObserver(this);
+        } else {
+            skipIfCurrent();
+        }
     }
 
     public void skipIfCurrent() {
         MatchInfo match = MatchInfo.getInstance();
         if(match.getGameStatus().equals(GameStatus.IN_GAME) &&
                 match.getCurrentPlayerID() == playerID &&
-                !MatchInfo.getInstance().isGamePaused() &&
-                !skipping) {
-            skipping = true;
+                !MatchInfo.getInstance().isGamePaused()) {
+            if(skippingTurn != null && skippingTurn.equals(MatchInfo.getInstance().getStateType()))
+                return;
+
+            skippingTurn = MatchInfo.getInstance().getStateType();
             String skipCommand = new RequestParameters().setCommandType(CommandType.SKIP_TURN).serialize().toString();
+            skipping = true;
             handleRequest(skipCommand);
+            skippingTurn = null;
+            skipIfCurrent();
         }
-        skipping = false;
     }
 
     public void deserialize(int playerID) {
