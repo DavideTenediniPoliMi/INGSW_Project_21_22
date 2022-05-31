@@ -11,48 +11,61 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <ImageView pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@/images/gameArtwork.jpg" />
-         </image>
-         <viewport>
-            <Rectangle2D />
-         </viewport>
-      </ImageView>
-      <Label layoutX="666.0" layoutY="241.0" style="-fx-background-color: #e1e5eb#e1e5eb; -fx-opacity: .6;" AnchorPane.bottomAnchor="240.0" AnchorPane.leftAnchor="650.0" AnchorPane.rightAnchor="650.0" AnchorPane.topAnchor="240.0">
-         <padding>
-            <Insets bottom="300.0" left="300.0" right="300.0" top="300.0" />
-         </padding>
-      </Label>
-      <Label alignment="CENTER" layoutX="590.0" layoutY="46.0" text="Insert IP Address:" textAlignment="CENTER" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="700.0" AnchorPane.topAnchor="300.0">
-         <font>
-            <Font name="Hiragino Sans W6" size="54.0" />
-         </font>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </Label>
-      <TextField fx:id="ipAddress" alignment="CENTER" layoutX="638.0" layoutY="118.0" promptText="IP address" text="localhost" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="700.0" AnchorPane.topAnchor="380.0">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </TextField>
-      <Label alignment="CENTER" layoutX="505.0" layoutY="302.0" text="Port:" textAlignment="CENTER" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="700.0" AnchorPane.topAnchor="500.0">
-         <font>
-            <Font name="Hiragino Sans W6" size="54.0" />
-         </font>
-      </Label>
-      <TextField fx:id="port" alignment="CENTER" layoutX="743.0" layoutY="714.0" promptText="port" text="12345" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="700.0" AnchorPane.topAnchor="580.0">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </TextField>
-      <Button fx:id="bindingButton" layoutX="693.0" layoutY="451.0" mnemonicParsing="false" text="Connect!" AnchorPane.leftAnchor="850.0" AnchorPane.rightAnchor="850.0" AnchorPane.topAnchor="700.0">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Button>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0"
+            prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="it.polimi.ingsw.view.gui.BindingController">
+   <ImageView pickOnBounds="true" preserveRatio="true">
+      <viewport>
+         <Rectangle2D/>
+      </viewport>
+      <Image url="@/images/gameArtwork.jpg"/>
+   </ImageView>
+   <Label fx:id="error" layoutX="666.0" style="-fx-background-color: red;" visible="false" layoutY="241.0" text="ERROR"
+          AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+      <font>
+         <Font size="36.0"/>
+      </font>
+   </Label>
+   <Label layoutX="666.0" layoutY="241.0" style="-fx-background-color: #e1e5eb#e1e5eb; -fx-opacity: .6;"
+          AnchorPane.bottomAnchor="240.0" AnchorPane.leftAnchor="650.0" AnchorPane.rightAnchor="650.0"
+          AnchorPane.topAnchor="240.0">
+      <padding>
+         <Insets bottom="300.0" left="300.0" right="300.0" top="300.0"/>
+      </padding>
+   </Label>
+   <Label alignment="CENTER" layoutX="590.0" layoutY="46.0" text="Insert IP Address:" textAlignment="CENTER"
+          AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="700.0" AnchorPane.topAnchor="300.0">
+      <font>
+         <Font name="Hiragino Sans W6" size="54.0"/>
+      </font>
+      <opaqueInsets>
+         <Insets/>
+      </opaqueInsets>
+   </Label>
+   <TextField fx:id="ipAddressText" alignment="CENTER" layoutX="638.0" layoutY="118.0" promptText="IP address"
+              text="localhost" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="700.0"
+              AnchorPane.topAnchor="380.0">
+      <font>
+         <Font size="36.0"/>
+      </font>
+   </TextField>
+   <Label alignment="CENTER" layoutX="505.0" layoutY="302.0" text="Port:" textAlignment="CENTER"
+          AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="700.0" AnchorPane.topAnchor="500.0">
+      <font>
+         <Font name="Hiragino Sans W6" size="54.0"/>
+      </font>
+   </Label>
+   <TextField fx:id="portText" alignment="CENTER" layoutX="743.0" layoutY="714.0" promptText="port" text="12345"
+              AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="700.0" AnchorPane.topAnchor="580.0">
+      <font>
+         <Font size="36.0"/>
+      </font>
+   </TextField>
+   <Button layoutX="693.0" layoutY="451.0" mnemonicParsing="false" text="Connect!"
+           AnchorPane.leftAnchor="850.0" AnchorPane.rightAnchor="850.0" AnchorPane.topAnchor="700.0"
+           onMouseClicked="#handleBindingButton">
+      <font>
+         <Font size="30.0"/>
+      </font>
+   </Button>
 </AnchorPane>

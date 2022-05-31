@@ -14,7 +14,6 @@ public class Client {
         Connection connection = view.handleBinding(this);
 
         if(connection != null) {
-            connection.setGraphic(view.isGraphic());
             connection.run();
         }
 

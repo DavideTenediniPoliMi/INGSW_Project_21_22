@@ -22,10 +22,8 @@ public class CLI extends View {
      @Override
      public void handleInteraction() {
           do {
-               synchronized(this){
-                    getViewState().printCLIPrompt(true);
-                    AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + getViewState().print() + getViewState().getBuffer());
-               }
+               getViewState().printCLIPrompt(true);
+               AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + getViewState().print() + getViewState().getBuffer());
                String input = scanner.nextLine().trim();
 
                String error = getViewState().manageCLIInput(input);
@@ -78,7 +76,7 @@ public class CLI extends View {
 
                     int port = Integer.parseInt(scanner.nextLine().trim());
 
-                    return new ServerConnection(new Socket(ip, port), client);
+                    return new ServerConnection(new Socket(ip, port), client, false);
                     //return new ServerConnection(new Socket("localhost", 12345), client);
                } catch(IOException | SecurityException | IllegalArgumentException e) {
                     AnsiConsole.sysOut().println("The combination IP/Port didn't work! Try again!");

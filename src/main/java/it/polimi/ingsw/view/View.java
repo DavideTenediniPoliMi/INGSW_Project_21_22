@@ -28,10 +28,6 @@ public abstract class View {
 
     public ViewState getViewState() { return viewState; }
 
-    public boolean isGraphic() {
-        return graphic;
-    }
-
     public void setPlayerID(int playerID) {
         this.playerID = playerID;
         viewState.setPlayerID(playerID);

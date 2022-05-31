@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.client.Client;
+import it.polimi.ingsw.network.client.ServerConnection;
 import it.polimi.ingsw.view.View;
 import it.polimi.ingsw.view.viewStates.ViewState;
 import javafx.application.Platform;
@@ -32,18 +33,32 @@ public class GUI extends View {
 
     @Override
     public void loadClosingScreen() {
+
     }
 
     @Override
     public Connection handleBinding(Client client) {
+        try {
+            ApplicationFX.semaphore.acquire();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         Platform.runLater(() -> {
             try {
-                ApplicationFX.loadBindingScreen();
+                ApplicationFX.showBindingScreen();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
-        return null;
+
+        try {
+            ApplicationFX.semaphore.acquire();
+            ApplicationFX.semaphore.release();
+            return new ServerConnection(BindingController.socket, client, true);
+        } catch (InterruptedException | IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -53,7 +68,7 @@ public class GUI extends View {
 
     @Override
     public void handleHandshake() {
-
+        Platform.runLater(ApplicationFX::showHandshakeScreen);
     }
 
     @Override

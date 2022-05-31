@@ -13,6 +13,7 @@ import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
 import it.polimi.ingsw.view.View;
 import it.polimi.ingsw.view.cli.CLI;
+import it.polimi.ingsw.view.gui.GUI;
 import it.polimi.ingsw.view.viewStates.*;
 
 import java.io.IOException;
@@ -28,17 +29,18 @@ public class ServerConnection extends Connection {
     private MessageConsumer jsonConsumer;
     private final Object connectionLock = new Object();
 
-    public ServerConnection(Socket socket, Client client) throws IOException {
+    public ServerConnection(Socket socket, Client client, boolean graphic) throws IOException {
         super(socket);
 
         this.client = client;
         ViewState viewState = new ViewState();
         viewState.addObserver(this);
 
-        if(isGraphic()) {
-            //view = new GUI(new HandshakeViewState(viewState));
-            view = null;
+        if(graphic) {
+            System.out.println("here");
+            view = new GUI(new HandshakeViewState(viewState));
         } else {
+            System.out.println("teher");
             view = new CLI(new HandshakeViewState(viewState));
         }
     }

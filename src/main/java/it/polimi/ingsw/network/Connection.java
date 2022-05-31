@@ -15,7 +15,6 @@ public abstract class Connection implements Runnable, Observer<String> {
     protected final ExecutorService executor = Executors.newFixedThreadPool(16);
     private final ScheduledFuture pingTask;
     protected boolean connected;
-    private boolean graphic;
 
     public Connection(Socket socket) throws IOException {
         this.socket = socket;
@@ -81,13 +80,5 @@ public abstract class Connection implements Runnable, Observer<String> {
         pingTask.cancel(false);
 
         connected = false;
-    }
-
-    public void setGraphic(boolean graphic) {
-        this.graphic = graphic;
-    }
-
-    public boolean isGraphic() {
-        return graphic;
     }
 }
