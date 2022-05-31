@@ -13,6 +13,7 @@ import it.polimi.ingsw.view.viewStates.*;
 
 public abstract class View {
     private ViewState viewState;
+    private boolean graphic;
     private int playerID;
     private String name;
     private boolean playedPlanning;
@@ -26,6 +27,10 @@ public abstract class View {
     public void setViewState(ViewState viewState) { this.viewState = viewState; }
 
     public ViewState getViewState() { return viewState; }
+
+    public boolean isGraphic() {
+        return graphic;
+    }
 
     public void setPlayerID(int playerID) {
         this.playerID = playerID;
@@ -260,9 +265,11 @@ public abstract class View {
         getViewState().setInteractionComplete(false);
     }
 
-    public static Connection handleBinding(Client client) {
-        return null;
-    }
+    public abstract void loadStartingScreen();
+
+    public abstract void loadClosingScreen();
+
+    public abstract Connection handleBinding(Client client);
 
     public void handleInteractionAsFirst() {
         playedPlanning = true;
@@ -275,5 +282,4 @@ public abstract class View {
 
     public abstract void displayState();
 
-    public static void handleBinding() {}
 }

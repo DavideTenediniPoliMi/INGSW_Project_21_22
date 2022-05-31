@@ -35,7 +35,12 @@ public class ServerConnection extends Connection {
         ViewState viewState = new ViewState();
         viewState.addObserver(this);
 
-        view = new CLI(new HandshakeViewState(viewState));
+        if(isGraphic()) {
+            //view = new GUI(new HandshakeViewState(viewState));
+            view = null;
+        } else {
+            view = new CLI(new HandshakeViewState(viewState));
+        }
     }
 
     @Override
@@ -43,7 +48,6 @@ public class ServerConnection extends Connection {
         // THIS FIRST INTERACTION IS THE HANDSHAKE (name)
         while(true) {
             view.handleHandshake();
-
 
             String received = receiveMessage();
             if(received.equals("")) continue;

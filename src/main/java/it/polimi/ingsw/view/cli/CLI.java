@@ -19,6 +19,7 @@ public class CLI extends View {
           super(viewState);
      }
 
+     @Override
      public void handleInteraction() {
           do {
                synchronized(this){
@@ -33,11 +34,13 @@ public class CLI extends View {
           } while(!getViewState().isInteractionComplete());
      }
 
+     @Override
      public void displayState() {
           getViewState().printCLIPrompt(false);
           AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + getViewState().print() + getViewState().getBuffer());
      }
 
+     @Override
      public void handleHandshake() {
           do {
                getViewState().printCLIPrompt(true);
@@ -52,7 +55,16 @@ public class CLI extends View {
           } while(!getViewState().isInteractionComplete());
      }
 
-     public static Connection handleBinding(Client client) {
+     @Override
+     public void loadStartingScreen() {
+          AnsiConsole.systemInstall();
+
+          AnsiConsole.sysOut().print(AnsiCodes.CLS + "" + AnsiCodes.HOME);
+          AnsiConsole.sysOut().println("Welcome to Eriantys!");
+     }
+
+     @Override
+     public Connection handleBinding(Client client) {
           do {
                AnsiConsole.sysOut().println("Insert the IP address of the server : (or Press X to close the game)");
                try {
@@ -78,5 +90,12 @@ public class CLI extends View {
           } while(true);
 
           return null;
+     }
+
+     @Override
+     public void loadClosingScreen() {
+          AnsiConsole.sysOut().println("Thanks for playing Eriantys!");
+
+          AnsiConsole.systemUninstall();
      }
 }
