@@ -87,6 +87,10 @@ public abstract class View {
             return true;
         }
 
+        if(hasPlayerReconnected(jo)) {
+           return false;
+        }
+
         if(isGamePaused(jo)) {
             setViewState(new GameViewState(getViewState()));
             return false;
@@ -223,6 +227,10 @@ public abstract class View {
             return jo.get("gameOver").getAsBoolean();
         }
         return false;
+    }
+
+    private boolean hasPlayerReconnected(JsonObject jo) {
+        return MatchInfo.getInstance().getNumPlayersConnected() != jo.get("numPlayersConnected").getAsInt();
     }
 
     private boolean isGamePaused(JsonObject jo) {
