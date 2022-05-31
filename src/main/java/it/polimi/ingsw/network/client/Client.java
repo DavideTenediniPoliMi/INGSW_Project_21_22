@@ -27,12 +27,11 @@ public class Client {
         AnsiConsole.sysOut().print(AnsiCodes.CLS + "" + AnsiCodes.HOME);
         AnsiConsole.sysOut().println("Welcome to Eriantys!");
 
-        while(!CLI.exit) {
-            Connection connection = CLI.handleBinding(this);
+        Connection connection = CLI.handleBinding(this);
 
-            if(connection != null)
-                connection.run();
-        }
+        if(connection != null)
+            connection.run();
+
 
         AnsiConsole.sysOut().println("Thanks for playing Eriantys!");
 

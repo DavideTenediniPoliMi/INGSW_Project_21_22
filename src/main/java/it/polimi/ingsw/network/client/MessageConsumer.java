@@ -6,8 +6,6 @@ import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
 import it.polimi.ingsw.view.cli.CLI;
 
-import java.util.concurrent.ExecutionException;
-
 public class MessageConsumer implements Runnable{
     private final MessageQueue<String> queue;
     private volatile boolean runFlag;
@@ -21,15 +19,10 @@ public class MessageConsumer implements Runnable{
 
     @Override
     public void run() {
-        try {
-            consume();
-        } catch (ExecutionException e) {
-            //Disconnected from server
-            stop();
-        }
+        consume();
     }
 
-    private void consume() throws ExecutionException {
+    private void consume() {
         while (runFlag) {
             String message;
             JsonObject jsonObject;
