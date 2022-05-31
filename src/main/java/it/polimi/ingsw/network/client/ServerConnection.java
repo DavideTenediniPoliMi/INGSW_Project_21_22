@@ -11,6 +11,7 @@ import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
+import it.polimi.ingsw.view.View;
 import it.polimi.ingsw.view.cli.CLI;
 import it.polimi.ingsw.view.viewStates.*;
 
@@ -19,7 +20,7 @@ import java.net.Socket;
 
 public class ServerConnection extends Connection {
     private final Client client;
-    private final CLI cli;
+    private final View view;
     private boolean inGame;
     private boolean ready;
     private boolean joined;
@@ -34,14 +35,14 @@ public class ServerConnection extends Connection {
         ViewState viewState = new ViewState();
         viewState.addObserver(this);
 
-        cli = new CLI(new HandshakeViewState(viewState));
+        view = new CLI(new HandshakeViewState(viewState));
     }
 
     @Override
     public void run() {
         // THIS FIRST INTERACTION IS THE HANDSHAKE (name)
         while(true) {
-            cli.handleHandshake();
+            view.handleHandshake();
 
 
             String received = receiveMessage();
@@ -54,7 +55,7 @@ public class ServerConnection extends Connection {
                 break;
             }
 
-            cli.resetInteraction(jo.get("error").getAsString());
+            view.resetInteraction(jo.get("error").getAsString());
         }
 
         lobbySequence();
@@ -90,8 +91,8 @@ public class ServerConnection extends Connection {
             executor.submit(this::waitForLobbyCreation);
 
             //Begin lobby creation sequence
-            cli.setViewState(new NoLobbyViewState(cli.getViewState()));
-            cli.handleInteraction();
+            view.setViewState(new NoLobbyViewState(view.getViewState()));
+            view.handleInteraction();
 
         }
 
@@ -111,8 +112,8 @@ public class ServerConnection extends Connection {
         }
 
         // Begin lobby loop
-        cli.setViewState(new SelectLobbyViewState(cli.getViewState()));
-        executor.submit(cli::handleInteraction);
+        view.setViewState(new SelectLobbyViewState(view.getViewState()));
+        executor.submit(view::handleInteraction);
 
         while(!ready && connected) {
             String received = receiveMessage();
@@ -126,24 +127,24 @@ public class ServerConnection extends Connection {
                 JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
                 synchronized (Lobby.getLobby()) {
                     if (jsonObject.has("error")) {
-                        cli.resetInteraction(jsonObject.get("error").getAsString());
-                        cli.handleInteraction();
+                        view.resetInteraction(jsonObject.get("error").getAsString());
+                        view.handleInteraction();
                         return;
                     }
                     new ResponseParameters().deserialize(jsonObject);
-                    if (Lobby.getLobby().isReady(cli.getPlayerID())) {
+                    if (Lobby.getLobby().isReady(view.getPlayerID())) {
                         ready = true;
                         return;
                     }
                 }
-                if(cli.getViewState().isInteractionComplete())
-                    cli.handleInteraction();
+                if(view.getViewState().isInteractionComplete())
+                    view.handleInteraction();
             });
         }
 
-            cli.setViewState(new LobbyViewState(cli.getViewState()));
+            view.setViewState(new LobbyViewState(view.getViewState()));
             new ResponseParameters().deserialize(JsonParser.parseString(lastResp).getAsJsonObject());
-            cli.displayState();
+            view.displayState();
 
         while(!inGame && connected) {
             String received = receiveMessage();
@@ -154,16 +155,16 @@ public class ServerConnection extends Connection {
             if(jsonObject.has("matchInfo")) {
                 JsonObject matchInfoJson = jsonObject.get("matchInfo").getAsJsonObject();
                 if(matchInfoJson.get("gameStatus").getAsString().equalsIgnoreCase("IN_GAME")) {
-                    synchronized (cli) {
+                    synchronized (view) {
                         inGame = true;
                     }
                     break;
                 }
             }
             executor.submit( () -> {
-                synchronized (cli) {
+                synchronized (view) {
                     new ResponseParameters().deserialize(jsonObject);
-                    cli.displayState();
+                    view.displayState();
                 }
             });
         }
@@ -182,20 +183,20 @@ public class ServerConnection extends Connection {
             bindPlayerID(initJsonObject);
         new ResponseParameters().deserialize(initJsonObject);
 
-        cli.resetTurnState(MatchInfo.getInstance().serialize());
+        view.resetTurnState(MatchInfo.getInstance().serialize());
         //cli.nextState(initJsonObject);
 
-        if(MatchInfo.getInstance().getCurrentPlayerID() == cli.getPlayerID()) {
+        if(MatchInfo.getInstance().getCurrentPlayerID() == view.getPlayerID()) {
 
-                cli.handleInteractionAsFirst();
+            view.handleInteractionAsFirst();
 
         } else {
-            cli.setViewState(new GameViewState(cli.getViewState()));
-            cli.displayState();
+            view.setViewState(new GameViewState(view.getViewState()));
+            view.displayState();
         }
 
         packetQueue = new MessageQueue<>();
-        jsonConsumer = new MessageConsumer(packetQueue, cli);
+        jsonConsumer = new MessageConsumer(packetQueue, view);
         executor.submit( () -> jsonConsumer.run());
 
         while(inGame && connected) {
@@ -215,7 +216,7 @@ public class ServerConnection extends Connection {
 
             for(JsonElement jsonPlayer : jsonPlayers) {
                 JsonObject playerObj = jsonPlayer.getAsJsonObject();
-                if(playerObj.get("ID").getAsInt() == cli.getPlayerID())
+                if(playerObj.get("ID").getAsInt() == view.getPlayerID())
                     return playerObj.get("ready").getAsBoolean();
             }
         }
@@ -233,9 +234,9 @@ public class ServerConnection extends Connection {
         if(gameObject.has("players")) {
             JsonArray players = gameObject.get("players").getAsJsonArray();
             for(JsonElement player : players) {
-                if(player.getAsJsonObject().get("name").getAsString().equalsIgnoreCase(cli.getName())) {
+                if(player.getAsJsonObject().get("name").getAsString().equalsIgnoreCase(view.getName())) {
                     joined = true;
-                    cli.setPlayerID(player.getAsJsonObject().get("ID").getAsInt());
+                    view.setPlayerID(player.getAsJsonObject().get("ID").getAsInt());
                     new ResponseParameters().deserialize(jsonObject);
                     break;
                 }
@@ -255,10 +256,10 @@ public class ServerConnection extends Connection {
 
             if(!jsonObject.has("error")) { //Lobby was created
                 new ResponseParameters().deserialize(jsonObject);
-                synchronized (cli) {
-                    if(!cli.getViewState().isInteractionComplete()) {
-                        cli.setViewState(new LobbyCreatedViewState(cli.getViewState()));
-                        cli.handleInteraction();
+                synchronized (view) {
+                    if(!view.getViewState().isInteractionComplete()) {
+                        view.setViewState(new LobbyCreatedViewState(view.getViewState()));
+                        view.handleInteraction();
                     }
                 }
                 break;

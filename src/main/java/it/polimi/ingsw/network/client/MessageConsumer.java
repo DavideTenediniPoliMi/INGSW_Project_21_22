@@ -4,16 +4,16 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
-import it.polimi.ingsw.view.cli.CLI;
+import it.polimi.ingsw.view.View;
 
 public class MessageConsumer implements Runnable{
     private final MessageQueue<String> queue;
     private volatile boolean runFlag;
-    private final CLI cli;
+    private final View view;
 
-    public MessageConsumer(MessageQueue<String> queue, CLI cli) {
+    public MessageConsumer(MessageQueue<String> queue, View view) {
         this.queue = queue;
-        this.cli = cli;
+        this.view = view;
         runFlag = true;
     }
 
@@ -38,14 +38,14 @@ public class MessageConsumer implements Runnable{
 
             message = queue.remove();
             jsonObject = (JsonObject) JsonParser.parseString(message);
-            boolean reqInteraction = cli.nextState(jsonObject);
+            boolean reqInteraction = view.nextState(jsonObject);
             new ResponseParameters().deserialize(jsonObject);
 
             if(reqInteraction) {
-                cli.handleInteraction(); //Handle interaction in new view
+                view.handleInteraction(); //Handle interaction in new view
             } else {
                 if(MatchInfo.getInstance().getCurrentPlayerID() > -1)
-                    cli.displayState();
+                    view.displayState();
             }
         }
     }

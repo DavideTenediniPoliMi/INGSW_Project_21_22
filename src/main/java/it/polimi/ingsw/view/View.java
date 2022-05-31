@@ -270,4 +270,10 @@ public abstract class View {
     }
 
     public abstract void handleInteraction();
+
+    public abstract void handleHandshake();
+
+    public abstract void displayState();
+
+    public static void handleBinding() {}
 }
