@@ -247,6 +247,17 @@ public class ExpertViewState extends GameViewState {
                 return error;
             }
 
+            int numStudentsInDining = 0;
+            for(Color c : Color.values()) {
+                numStudentsInDining += game.getBoard().getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(c);
+            }
+            if(numStudentsInDining < numStudentsToSwap) {
+                appendBuffer("Not enough students in dining room!");
+                cardBought = false;
+                isCardSelected = false;
+                return "";
+            }
+
             notify(
                     new RequestParameters()
                             .setCommandType(CommandType.BUY_CHARACTER_CARD)
@@ -371,18 +382,6 @@ public class ExpertViewState extends GameViewState {
             case "EXCHANGE_STUDENTS":
                 if(numStudentsToSwap == 0 && !fromOriginSwapCompleted) {
                     return manageCLINumStudentsToSwap(input, validNumOfStudentsToExchange);
-                }
-
-                int numStudentsInDining = 0;
-                for(Color c : Color.values()) {
-                    numStudentsInDining += game.getBoard().getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(c);
-                }
-                if(numStudentsInDining < numStudentsToSwap) {
-                    appendBuffer("Not enough students in dining room!");
-                    cardBought = false;
-                    isCardSelected = false;
-                    cardActivated = false;
-                    return "";
                 }
 
                 if(!fromOriginSwapCompleted) {
