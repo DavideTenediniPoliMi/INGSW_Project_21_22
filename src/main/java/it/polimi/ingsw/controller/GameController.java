@@ -376,6 +376,7 @@ public class GameController {
                 .findAny();
 
         lastPlayer.ifPresent(player -> declareWinner(player.getTeamColor()));
+        matchInfo.notifyMatchInfo();
     }
 
     public RoundStateController getRoundStateController() {
