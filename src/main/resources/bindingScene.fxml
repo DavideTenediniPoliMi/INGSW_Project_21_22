@@ -31,7 +31,7 @@
          <Bloom threshold="0.0" />
       </effect>
    </Label>
-   <Label layoutX="666.0" layoutY="241.0" style="-fx-background-color: #e1e5eb#e1e5eb; -fx-opacity: .6;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="480.0" AnchorPane.topAnchor="240.0">
+   <Label layoutX="666.0" layoutY="241.0" style="-fx-background-color: #e1e5eb#e1e5eb; -fx-opacity: .7;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="480.0" AnchorPane.topAnchor="240.0">
       <padding>
          <Insets bottom="300.0" left="300.0" right="300.0" top="300.0" />
       </padding>
@@ -59,7 +59,7 @@
          <Font size="36.0" />
       </font>
    </TextField>
-   <Button layoutX="693.0" layoutY="451.0" mnemonicParsing="false" onMouseClicked="#handleBindingButton" text="Connect!" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0" AnchorPane.topAnchor="580.0">
+   <Button layoutX="693.0" layoutY="451.0" mnemonicParsing="false" onMouseClicked="#handleBindingButton" style="-fx-background-radius: 20px;" text="Connect!" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0" AnchorPane.topAnchor="580.0">
       <font>
          <Font size="30.0" />
       </font>

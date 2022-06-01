@@ -3,8 +3,8 @@ package it.polimi.ingsw.view.cli;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.network.client.ServerConnection;
+import it.polimi.ingsw.view.viewStates.ViewState;
 import it.polimi.ingsw.view.View;
-import it.polimi.ingsw.view.viewStates.*;
 import org.fusesource.jansi.AnsiConsole;
 
 import java.io.IOException;
