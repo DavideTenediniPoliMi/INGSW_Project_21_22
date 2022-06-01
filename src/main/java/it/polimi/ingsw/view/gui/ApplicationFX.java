@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.gui;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -31,8 +32,15 @@ public class ApplicationFX extends Application {
         Scene scene = new Scene(root, resX, resY);
 
         stage.setTitle("Eriantys!");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+
+        //stops process on window close
+        stage.setOnCloseRequest(e -> {
+            Platform.exit();
+            System.exit(0);
+        });
     }
 
     public static void main(String[] args) {
