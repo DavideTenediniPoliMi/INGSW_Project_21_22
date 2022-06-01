@@ -16,8 +16,8 @@ import java.util.concurrent.Semaphore;
 public class ApplicationFX extends Application {
     public static Semaphore semaphore = new Semaphore(1);
     public static Stage stage;
-    private static final int resX = 1920;
-    private static final int resY = 1080;
+    private static final int resX = 1366;
+    private static final int resY = 768;
 
     @Override
     public void start(Stage stage) {
@@ -34,6 +34,8 @@ public class ApplicationFX extends Application {
         stage.setTitle("Eriantys!");
         stage.setResizable(false);
         stage.setScene(scene);
+        stage.setX(0);
+        stage.setY(0);
         stage.show();
 
         //stops process on window close
@@ -50,7 +52,9 @@ public class ApplicationFX extends Application {
     public static void showBindingScreen() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(ApplicationFX.class.getResource("/bindingScene.fxml")));
 
-        stage.setScene(new Scene(root, resX , resY));
+        stage.setScene(new Scene(root, resX, resY));
+        stage.setX(0);
+        stage.setY(0);
         stage.show();
     }
 
@@ -68,17 +72,10 @@ public class ApplicationFX extends Application {
         stage.show();
     }
 
-    public static void showHandshakeScreen() {
-        Button btn = new Button();
-        btn.setText("test");
-        btn.setOnAction(event -> System.out.println("test"));
+    public static void showHandshakeScreen() throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(ApplicationFX.class.getResource("/handshakeScene.fxml")));
 
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-
-        Scene scene = new Scene(root, resX, resY);
-
-        stage.setScene(scene);
+        stage.setScene(new Scene(root, resX, resY));
         stage.show();
     }
 }

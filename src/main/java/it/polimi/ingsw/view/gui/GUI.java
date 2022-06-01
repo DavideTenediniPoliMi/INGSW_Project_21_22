@@ -68,7 +68,13 @@ public class GUI extends View {
 
     @Override
     public void handleHandshake() {
-        Platform.runLater(ApplicationFX::showHandshakeScreen);
+        Platform.runLater(() -> {
+            try {
+                ApplicationFX.showHandshakeScreen();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @Override
