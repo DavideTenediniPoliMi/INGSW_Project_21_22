@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0"
+            prefWidth="1366.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <ImageView fitHeight="768.0" fitWidth="1366.0" opacity="0.8" pickOnBounds="true" preserveRatio="true"
+              AnchorPane.topAnchor="0.0">
+      <viewport>
+         <Rectangle2D/>
+      </viewport>
+      <Image url="@images/gameArtwork.png"/>
+   </ImageView>
+   <Label fx:id="error" cache="true" layoutX="666.0" layoutY="241.0"
+          style="-fx-background-color: rgb(255,0,0, .5); -fx-border-color: red; -fx-border-radius: 10px; -fx-background-radius: 10px;"
+          text="ERROR" textFill="WHITE" visible="false" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+      <font>
+         <Font size="36.0"/>
+      </font>
+   </Label>
+   <Label layoutX="46.0" layoutY="16.0" text="Lobby Selection" AnchorPane.leftAnchor="50.0">
+      <font>
+         <Font name="AppleMyungjo Regular" size="64.0"/>
+      </font>
+      <effect>
+         <Bloom threshold="0.07">
+            <input>
+               <InnerShadow/>
+            </input>
+         </Bloom>
+      </effect>
+   </Label>
+   <ImageView fx:id="lobbyImage1" fitHeight="450.0" pickOnBounds="true" preserveRatio="true"
+              AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="120.0">
+      <viewport>
+         <Rectangle2D/>
+      </viewport>
+      <Image url="@images/Personaggi_retro.jpg"/>
+      <effect>
+         <InnerShadow/>
+      </effect>
+   </ImageView>
+   <Label fx:id="usernameText1" alignment="CENTER" layoutX="103.0" layoutY="131.0"
+          style="-fx-background-color: grey; -fx-background-radius: 10px;" text="tommi" textFill="WHITE"
+          AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="1050.0" AnchorPane.topAnchor="130.0">
+      <font>
+         <Font name="AppleMyungjo Regular" size="36.0"/>
+      </font>
+      <effect>
+         <Glow level="0.5"/>
+      </effect>
+   </Label>
+   <ImageView fx:id="lobbyImage2" fitHeight="450.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true"
+              preserveRatio="true" AnchorPane.leftAnchor="365.0" AnchorPane.topAnchor="120.0">
+      <viewport>
+         <Rectangle2D/>
+      </viewport>
+      <Image url="@images/Personaggi_retro.jpg"/>
+      <effect>
+         <InnerShadow/>
+      </effect>
+   </ImageView>
+   <Label fx:id="usernameText2" alignment="CENTER" layoutX="113.0" layoutY="141.0"
+          style="-fx-background-color: grey; -fx-background-radius: 10px;" text="sara" textFill="WHITE" visible="false"
+          AnchorPane.leftAnchor="390.0" AnchorPane.rightAnchor="720.0" AnchorPane.topAnchor="130.0">
+      <font>
+         <Font name="AppleMyungjo Regular" size="36.0"/>
+      </font>
+      <effect>
+         <Glow level="0.5"/>
+      </effect>
+   </Label>
+   <ImageView fx:id="lobbyImage3" fitHeight="450.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true"
+              preserveRatio="true" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="120.0">
+      <viewport>
+         <Rectangle2D/>
+      </viewport>
+      <Image url="@images/Personaggi_retro.jpg"/>
+      <effect>
+         <InnerShadow/>
+      </effect>
+   </ImageView>
+   <Label fx:id="textUsername3" alignment="CENTER" layoutX="113.0" layoutY="141.0"
+          style="-fx-background-color: grey; -fx-background-radius: 10px;" text="tene" textFill="WHITE" visible="false"
+          AnchorPane.leftAnchor="730.0" AnchorPane.rightAnchor="390.0" AnchorPane.topAnchor="130.0">
+      <font>
+         <Font name="AppleMyungjo Regular" size="36.0"/>
+      </font>
+      <effect>
+         <Glow level="0.5"/>
+      </effect>
+   </Label>
+   <ImageView fx:id="lobbyImage4" fitHeight="450.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true"
+              preserveRatio="true" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="120.0">
+      <viewport>
+         <Rectangle2D/>
+      </viewport>
+      <Image url="@images/Personaggi_retro.jpg"/>
+      <effect>
+         <InnerShadow/>
+      </effect>
+   </ImageView>
+   <Label fx:id="textUsername4" alignment="CENTER" layoutX="113.0" layoutY="141.0"
+          style="-fx-background-color: grey; -fx-background-radius: 10px;" text="fede" textFill="WHITE" visible="false"
+          AnchorPane.leftAnchor="1050.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="130.0">
+      <font>
+         <Font name="AppleMyungjo Regular" size="36.0"/>
+      </font>
+      <effect>
+         <Glow level="0.5"/>
+      </effect>
+   </Label>
+   <Button layoutX="100.0" layoutY="150.0" mnemonicParsing="false"
+           style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="110.0"
+           AnchorPane.topAnchor="600.0">
+      <graphic>
+         <ImageView fitHeight="200.0" fitWidth="100.0" nodeOrientation="INHERIT" pickOnBounds="true"
+                    preserveRatio="true">
+            <Image url="@images/MAGO_1.jpg"/>
+         </ImageView>
+      </graphic>
+      <padding>
+         <Insets bottom="-1.0" left="-1.0" right="-1.0"/>
+      </padding>
+      <effect>
+         <InnerShadow/>
+      </effect>
+   </Button>
+   <Button layoutX="110.0" layoutY="160.0" mnemonicParsing="false"
+           style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="220.0"
+           AnchorPane.topAnchor="600.0">
+      <padding>
+         <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0"/>
+      </padding>
+      <graphic>
+         <ImageView fitHeight="200.0" fitWidth="100.0" nodeOrientation="INHERIT" pickOnBounds="true"
+                    preserveRatio="true">
+            <Image url="@images/MAGO_2.jpg"/>
+         </ImageView>
+      </graphic>
+      <effect>
+         <InnerShadow/>
+      </effect>
+   </Button>
+   <Button layoutX="110.0" layoutY="160.0" mnemonicParsing="false"
+           style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="330.0"
+           AnchorPane.topAnchor="600.0">
+      <padding>
+         <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0"/>
+      </padding>
+      <graphic>
+         <ImageView fitHeight="200.0" fitWidth="100.0" nodeOrientation="INHERIT" pickOnBounds="true"
+                    preserveRatio="true">
+            <Image url="@images/MAGO_3.jpg"/>
+         </ImageView>
+      </graphic>
+      <effect>
+         <InnerShadow/>
+      </effect>
+   </Button>
+   <Button layoutX="110.0" layoutY="160.0" mnemonicParsing="false"
+           style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="440.0"
+           AnchorPane.topAnchor="600.0">
+      <padding>
+         <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0"/>
+      </padding>
+      <graphic>
+         <ImageView fitHeight="200.0" fitWidth="100.0" nodeOrientation="INHERIT" pickOnBounds="true"
+                    preserveRatio="true">
+            <Image url="@images/MAGO_4.jpg"/>
+         </ImageView>
+      </graphic>
+      <effect>
+         <InnerShadow/>
+      </effect>
+   </Button>
+   <Button disable="true" layoutX="562.0" layoutY="663.0" mnemonicParsing="false"
+           style="-fx-background-radius: 20px; -fx-background-color: #D6E3F8; -fx-border-color: blue; -fx-border-radius: 20px;"
+           text="Confirm!" AnchorPane.leftAnchor="580.0" AnchorPane.topAnchor="650.0">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Button>
+   <RadioButton layoutX="921.0" layoutY="624.0" mnemonicParsing="false" text="Black" AnchorPane.leftAnchor="880.0"
+                AnchorPane.topAnchor="605.0">
+      <font>
+         <Font size="24.0"/>
+      </font>
+      <effect>
+         <DropShadow>
+            <color>
+               <Color red="1.0" green="1.0" blue="1.0"/>
+            </color>
+         </DropShadow>
+      </effect>
+      <toggleGroup>
+         <ToggleGroup fx:id="team"/>
+      </toggleGroup>
+   </RadioButton>
+   <Label layoutX="56.0" layoutY="26.0" text="Wizards" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="600.0">
+      <font>
+         <Font name="Arial Bold" size="24.0"/>
+      </font>
+      <effect>
+         <Lighting diffuseConstant="0.0" specularConstant="0.0" specularExponent="0.0" surfaceScale="0.0">
+            <bumpInput>
+               <Shadow/>
+            </bumpInput>
+         </Lighting>
+      </effect>
+   </Label>
+   <RadioButton layoutX="948.0" layoutY="674.0" mnemonicParsing="false" text="White" toggleGroup="$team"
+                AnchorPane.leftAnchor="880.0" AnchorPane.topAnchor="660.0">
+      <font>
+         <Font size="24.0"/>
+      </font>
+      <effect>
+         <DropShadow>
+            <color>
+               <Color red="1.0" green="1.0" blue="1.0"/>
+            </color>
+         </DropShadow>
+      </effect>
+   </RadioButton>
+   <RadioButton layoutX="955.0" layoutY="720.0" mnemonicParsing="false" text="Grey" toggleGroup="$team"
+                AnchorPane.leftAnchor="880.0" AnchorPane.topAnchor="715.0">
+      <font>
+         <Font size="24.0"/>
+      </font>
+      <effect>
+         <DropShadow>
+            <color>
+               <Color red="1.0" green="1.0" blue="1.0"/>
+            </color>
+         </DropShadow>
+      </effect>
+   </RadioButton>
+   <Label layoutX="775.0" layoutY="612.0" text="Teams" AnchorPane.leftAnchor="775.0" AnchorPane.topAnchor="600.0">
+      <font>
+         <Font name="Arial Bold" size="24.0"/>
+      </font>
+      <effect>
+         <Lighting diffuseConstant="0.0" specularConstant="0.0" specularExponent="0.0" surfaceScale="0.0">
+            <bumpInput>
+               <Shadow/>
+            </bumpInput>
+         </Lighting>
+      </effect>
+   </Label>
+   <Button disable="true" layoutX="572.0" layoutY="673.0" mnemonicParsing="false"
+           style="-fx-background-radius: 20px; -fx-background-color: #D6E3F8; -fx-border-color: blue; -fx-border-radius: 20px;"
+           text="Confirm!" AnchorPane.leftAnchor="1020.0" AnchorPane.topAnchor="650.0">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Button>
+   <Button disable="true" layoutX="1232.0" layoutY="656.0" mnemonicParsing="false"
+           style="-fx-background-color: lightgreen;" text="Ready!" underline="true" AnchorPane.leftAnchor="1200.0"
+           AnchorPane.topAnchor="640.0">
+      <font>
+         <Font size="30.0"/>
+      </font>
+      <effect>
+         <InnerShadow choke="0.6">
+            <color>
+               <Color red="0.11951754242181778" green="0.5263158082962036" blue="0.06578947603702545"/>
+            </color>
+         </InnerShadow>
+      </effect>
+   </Button>
+   <Label layoutX="690.0" layoutY="54.0" text="Players connected" AnchorPane.leftAnchor="700.0"
+          AnchorPane.topAnchor="35.0">
+      <font>
+         <Font name="AppleMyungjo Regular" size="46.0"/>
+      </font>
+      <effect>
+         <Bloom threshold="0.07">
+            <input>
+               <InnerShadow/>
+            </input>
+         </Bloom>
+      </effect>
+   </Label>
+   <Label fx:id="playersConnected" layoutX="700.0" layoutY="64.0" text="0" AnchorPane.leftAnchor="1100.0"
+          AnchorPane.topAnchor="35.0">
+      <font>
+         <Font name="AppleMyungjo Regular" size="46.0"/>
+      </font>
+      <effect>
+         <Bloom threshold="0.07">
+            <input>
+               <InnerShadow/>
+            </input>
+         </Bloom>
+      </effect>
+   </Label>
+   <Label fx:id="maxPlayers" layoutX="710.0" layoutY="74.0" text="0" AnchorPane.leftAnchor="1200.0"
+          AnchorPane.topAnchor="35.0">
+      <font>
+         <Font name="AppleMyungjo Regular" size="46.0"/>
+      </font>
+      <effect>
+         <Bloom threshold="0.07">
+            <input>
+               <InnerShadow/>
+            </input>
+         </Bloom>
+      </effect>
+   </Label>
+   <Label layoutX="710.0" layoutY="74.0" text="/" AnchorPane.leftAnchor="1150.0" AnchorPane.topAnchor="35.0">
+      <font>
+         <Font name="AppleMyungjo Regular" size="46.0"/>
+      </font>
+      <effect>
+         <Bloom threshold="0.07">
+            <input>
+               <InnerShadow/>
+            </input>
+         </Bloom>
+      </effect>
+   </Label>
+</AnchorPane>
