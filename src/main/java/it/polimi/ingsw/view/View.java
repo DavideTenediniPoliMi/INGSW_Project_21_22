@@ -21,6 +21,7 @@ public abstract class View {
     private boolean waitForActivatedCard;
     private String activeCardName;
     private boolean activatedCard;
+    protected boolean exiting;
 
     public View(ViewState viewState) { this.viewState = viewState; }
 
@@ -286,4 +287,7 @@ public abstract class View {
 
     public abstract void displayState();
 
+    public boolean isExiting() {
+        return exiting;
+    }
 }

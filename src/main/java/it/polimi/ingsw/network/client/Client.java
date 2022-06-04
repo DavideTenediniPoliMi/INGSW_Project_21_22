@@ -2,6 +2,8 @@ package it.polimi.ingsw.network.client;
 
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.view.View;
+import it.polimi.ingsw.view.cli.AnsiCodes;
+import org.fusesource.jansi.AnsiConsole;
 
 public class Client {
     public Client() {
@@ -11,12 +13,16 @@ public class Client {
 
         view.loadStartingScreen();
 
-        Connection connection = view.handleBinding(this);
+        while(!view.isExiting()) {
+            Connection connection = view.handleBinding(this);
 
-        if(connection != null) {
-            connection.run();
+            if(connection != null) {
+                connection.run();
+                AnsiConsole.sysOut().println(AnsiCodes.CLS);
+            }
         }
 
         view.loadClosingScreen();
+        System.exit(0);
     }
 }

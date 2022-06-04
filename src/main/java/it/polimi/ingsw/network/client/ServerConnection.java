@@ -146,9 +146,11 @@ public class ServerConnection extends Connection {
             });
         }
 
+        if(connected) {
             view.setViewState(new LobbyViewState(view.getViewState()));
             new ResponseParameters().deserialize(JsonParser.parseString(lastResp).getAsJsonObject());
             view.displayState();
+        }
 
         while(!inGame && connected) {
             String received = receiveMessage();
@@ -182,9 +184,13 @@ public class ServerConnection extends Connection {
      * ALTRIMENTI CONTINUI A LEGGERE
      */
     private void gameSequence(String lastResponse) {
+        if(!connected)
+            return;
+
         JsonObject initJsonObject = JsonParser.parseString(lastResponse).getAsJsonObject();
         if(!joined)
             bindPlayerID(initJsonObject);
+
         new ResponseParameters().deserialize(initJsonObject);
 
         view.resetTurnState(MatchInfo.getInstance().serialize());
@@ -274,5 +280,6 @@ public class ServerConnection extends Connection {
     @Override
     public void disconnect() {
         super.disconnect();
+        view.getViewState().setInteractionComplete(true);
     }
 }

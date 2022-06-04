@@ -26,6 +26,9 @@ public class CLI extends View {
                AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + getViewState().print() + getViewState().getBuffer());
                String input = scanner.nextLine().trim();
 
+               if(getViewState().isInteractionComplete())
+                    return;
+
                String error = getViewState().manageCLIInput(input);
                if (!"".equals(error))
                     AnsiConsole.sysOut().println(error);
@@ -69,6 +72,7 @@ public class CLI extends View {
                     String ip = scanner.nextLine().trim();
 
                     if(ip.equals("X")) {
+                         exiting = true;
                          break;
                     }
 
@@ -83,7 +87,8 @@ public class CLI extends View {
                } catch(InputMismatchException e) {
                     AnsiConsole.sysOut().println("That was not a valid input! Try again!");
                } catch(Exception e) {
-                    AnsiConsole.sysOut().println("Something went wrong! Try again!");
+                    AnsiConsole.sysOut().println("Something went wrong, please restart the game");
+                    exiting = true;
                }
           } while(true);
 
