@@ -37,10 +37,8 @@ public class ServerConnection extends Connection {
         viewState.addObserver(this);
 
         if(graphic) {
-            System.out.println("here");
             view = new GUI(new HandshakeViewState(viewState));
         } else {
-            System.out.println("teher");
             view = new CLI(new HandshakeViewState(viewState));
         }
     }

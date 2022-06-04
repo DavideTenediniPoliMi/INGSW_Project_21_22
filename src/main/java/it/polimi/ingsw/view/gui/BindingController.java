@@ -19,7 +19,6 @@ public class BindingController {
     private TextField portText;
 
     public void handleBindingButton() {
-        System.out.println("button");
         String ip = ipAddressText.getText().trim();
         int port;
 

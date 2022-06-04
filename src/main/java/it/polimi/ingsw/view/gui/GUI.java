@@ -16,49 +16,30 @@ public class GUI extends View {
         super(viewState);
     }
     @Override
-    public void loadStartingScreen() {
-        ExecutorService executor = Executors.newFixedThreadPool(16);
+    public void loadStartingScreen() {}
+
+    @Override
+    public void loadClosingScreen() {}
+
+    @Override
+    public Connection handleBinding(Client client) {
+        ExecutorService executor = Executors.newFixedThreadPool(1);
 
         try {
             ApplicationFX.semaphore.acquire();
 
             executor.submit(() -> ApplicationFX.main(null));
 
-            ApplicationFX.semaphore.acquire();
-            ApplicationFX.semaphore.release();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public void loadClosingScreen() {
-
-    }
-
-    @Override
-    public Connection handleBinding(Client client) {
-        try {
-            ApplicationFX.semaphore.acquire();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        Platform.runLater(() -> {
-            try {
-                ApplicationFX.showBindingScreen();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-
-        try {
-            ApplicationFX.semaphore.acquire();
-            ApplicationFX.semaphore.release();
+            waitForGuiInteraction();
             return new ServerConnection(BindingController.socket, client, true);
         } catch (InterruptedException | IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e); // TODO
         }
+    }
+
+    private void waitForGuiInteraction() throws InterruptedException {
+        ApplicationFX.semaphore.acquire();
+        ApplicationFX.semaphore.release();
     }
 
     @Override

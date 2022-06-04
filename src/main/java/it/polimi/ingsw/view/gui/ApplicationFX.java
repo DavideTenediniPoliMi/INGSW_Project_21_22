@@ -20,14 +20,9 @@ public class ApplicationFX extends Application {
     private static final int resY = 768;
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws IOException {
         ApplicationFX.stage = stage;
-        Button btn = new Button();
-        btn.setText("PLAY");
-        btn.setOnAction(event -> semaphore.release());
-
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
+        Parent root = FXMLLoader.load(Objects.requireNonNull(ApplicationFX.class.getResource("/bindingScene.fxml")));
 
         Scene scene = new Scene(root, resX, resY);
 
@@ -47,15 +42,6 @@ public class ApplicationFX extends Application {
 
     public static void main(String[] args) {
         launch();
-    }
-
-    public static void showBindingScreen() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(ApplicationFX.class.getResource("/bindingScene.fxml")));
-
-        stage.setScene(new Scene(root, resX, resY));
-        stage.setX(0);
-        stage.setY(0);
-        stage.show();
     }
 
     public static void showClosingScreen() {
