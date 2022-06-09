@@ -4,7 +4,9 @@
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -33,7 +35,7 @@
       </Label>
       <ImageView fitHeight="200.0" layoutX="583.0" layoutY="501.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="453.0" AnchorPane.topAnchor="550.0">
          <image>
-            <Image url="@images/PLANCIA GIOCO.png" />
+            <Image url="@images/Plancia_DEF.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="269.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="80.0">
@@ -725,18 +727,119 @@
             <Image url="@images/Assistente (1).png" />
          </image>
       </ImageView>
-      <GridPane layoutX="466.0" layoutY="572.0" prefHeight="156.0" prefWidth="53.0" AnchorPane.leftAnchor="466.0" AnchorPane.topAnchor="572.0">
+      <GridPane layoutX="466.0" layoutY="572.0" prefHeight="156.0" prefWidth="53.0" AnchorPane.leftAnchor="466.0" AnchorPane.topAnchor="570.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="30.323974609375" minHeight="10.0" prefHeight="26.5140380859375" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="39.380126953125" minHeight="10.0" prefHeight="34.4859619140625" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="33.5140380859375" minHeight="10.0" prefHeight="32.74298095703125" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="32.09503173828125" minHeight="10.0" prefHeight="31.25701904296875" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
         </rowConstraints>
+         <children>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@images/student_green.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets bottom="3.0" left="3.0" />
+               </GridPane.margin>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/student_green.png" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="3.0" left="3.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/student_blue.png" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="3.0" left="3.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@images/student_green.png" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="3.0" left="3.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@images/student_pink.png" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="3.0" left="3.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@images/student_green.png" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="3.0" left="3.0" top="3.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@images/student_red.png" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="3.0" left="3.0" top="3.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+               <image>
+                  <Image url="@images/student_green.png" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="3.0" left="3.0" top="3.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <image>
+                  <Image url="@images/student_yellow.png" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="3.0" left="3.0" top="3.0" />
+               </GridPane.margin>
+            </ImageView>
+         </children>
       </GridPane>
       <GridPane layoutX="539.0" layoutY="582.0" prefHeight="156.0" prefWidth="141.0" AnchorPane.leftAnchor="539.0" AnchorPane.topAnchor="570.0">
          <columnConstraints>
@@ -758,6 +861,228 @@
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
          </rowConstraints>
+         <children>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/student_green.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@images/student_green.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+               <image>
+                  <Image url="@images/student_green.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+               <image>
+                  <Image url="@images/student_green.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+               <image>
+                  <Image url="@images/student_green.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5">
+               <image>
+                  <Image url="@images/student_green.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6">
+               <image>
+                  <Image url="@images/student_green.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7">
+               <image>
+                  <Image url="@images/student_green.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8">
+               <image>
+                  <Image url="@images/student_green.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9">
+               <image>
+                  <Image url="@images/student_green.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/student_red.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="32.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/student_red.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="54.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/student_red.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="76.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/student_red.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="98.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/student_red.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="120.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/student_red.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="142.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/student_red.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="164.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/student_red.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="186.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/student_red.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="208.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/student_red.png" />
+               </image>
+               <effect>
+                  <DropShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+         </children>
       </GridPane>
       <GridPane layoutX="549.0" layoutY="592.0" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="570.0">
          <columnConstraints>
@@ -771,5 +1096,159 @@
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
+      <GridPane layoutX="476.0" layoutY="582.0" AnchorPane.leftAnchor="830.0" AnchorPane.topAnchor="585.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/black_tower.png" />
+               </image>
+               <effect>
+                  <InnerShadow />
+               </effect></ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@images/black_tower.png" />
+               </image>
+               <effect>
+                  <InnerShadow />
+               </effect></ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="10.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/black_tower.png" />
+               </image>
+               <effect>
+                  <InnerShadow />
+               </effect></ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="10.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/black_tower.png" />
+               </image>
+               <effect>
+                  <InnerShadow />
+               </effect></ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="10.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@images/black_tower.png" />
+               </image>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="10.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@images/black_tower.png" />
+               </image>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="10.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@images/black_tower.png" />
+               </image>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="10.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@images/black_tower.png" />
+               </image>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </ImageView>
+         </children>
+      </GridPane>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/student_green.png" />
+         </image>
+         <effect>
+            <DropShadow height="10.0" radius="4.5" width="10.0" />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/student_green.png" />
+         </image>
+         <effect>
+            <DropShadow height="10.0" radius="4.5" width="10.0" />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/student_green.png" />
+         </image>
+         <effect>
+            <DropShadow height="10.0" radius="4.5" width="10.0" />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/student_green.png" />
+         </image>
+         <effect>
+            <DropShadow height="10.0" radius="4.5" width="10.0" />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/student_green.png" />
+         </image>
+         <effect>
+            <DropShadow height="10.0" radius="4.5" width="10.0" />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/student_green.png" />
+         </image>
+         <effect>
+            <DropShadow height="10.0" radius="4.5" width="10.0" />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/student_green.png" />
+         </image>
+         <effect>
+            <DropShadow height="10.0" radius="4.5" width="10.0" />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/student_green.png" />
+         </image>
+         <effect>
+            <DropShadow height="10.0" radius="4.5" width="10.0" />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/student_green.png" />
+         </image>
+         <effect>
+            <DropShadow height="10.0" radius="4.5" width="10.0" />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/student_green.png" />
+         </image>
+         <effect>
+            <DropShadow height="10.0" radius="4.5" width="10.0" />
+         </effect>
+      </ImageView>
    </children>
 </AnchorPane>
