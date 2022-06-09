@@ -51,7 +51,7 @@
          <InnerShadow />
       </effect>
    </ImageView>
-   <Label fx:id="usernameText1" alignment="CENTER" layoutX="103.0" layoutY="131.0" style="-fx-background-color: grey; -fx-background-radius: 10px;" text="cerlonghish" textFill="WHITE" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="1040.0" AnchorPane.topAnchor="130.0">
+   <Label fx:id="usernameText1" alignment="CENTER" layoutX="103.0" layoutY="131.0" style="-fx-background-color: grey; -fx-background-radius: 10px;" text="cerlonghish" textFill="WHITE" textOverrun="CLIP" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="1040.0" AnchorPane.topAnchor="130.0">
       <font>
          <Font name="AppleMyungjo Regular" size="36.0" />
       </font>
@@ -68,7 +68,7 @@
          <InnerShadow />
       </effect>
    </ImageView>
-   <Label fx:id="usernameText2" alignment="CENTER" layoutX="113.0" layoutY="141.0" style="-fx-background-color: grey; -fx-background-radius: 10px;" text="sara" textFill="WHITE" visible="false" AnchorPane.leftAnchor="380.0" AnchorPane.rightAnchor="710.0" AnchorPane.topAnchor="130.0">
+   <Label fx:id="usernameText2" alignment="CENTER" layoutX="113.0" layoutY="141.0" style="-fx-background-color: grey; -fx-background-radius: 10px;" text="sara" textFill="WHITE" textOverrun="CLIP" visible="false" AnchorPane.leftAnchor="380.0" AnchorPane.rightAnchor="710.0" AnchorPane.topAnchor="130.0">
       <font>
          <Font name="AppleMyungjo Regular" size="36.0" />
       </font>
@@ -85,7 +85,7 @@
          <InnerShadow />
       </effect>
    </ImageView>
-   <Label fx:id="textUsername3" alignment="CENTER" layoutX="113.0" layoutY="141.0" style="-fx-background-color: grey; -fx-background-radius: 10px;" text="tene" textFill="WHITE" visible="false" AnchorPane.leftAnchor="720.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="130.0">
+   <Label fx:id="textUsername3" alignment="CENTER" layoutX="113.0" layoutY="141.0" style="-fx-background-color: grey; -fx-background-radius: 10px;" text="tene" textFill="WHITE" textOverrun="CLIP" visible="false" AnchorPane.leftAnchor="720.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="130.0">
       <font>
          <Font name="AppleMyungjo Regular" size="36.0" />
       </font>
@@ -102,7 +102,7 @@
          <InnerShadow />
       </effect>
    </ImageView>
-   <Label fx:id="textUsername4" alignment="CENTER" layoutX="113.0" layoutY="141.0" style="-fx-background-color: grey; -fx-background-radius: 10px;" text="fede" textFill="WHITE" visible="false" AnchorPane.leftAnchor="1050.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="130.0">
+   <Label fx:id="textUsername4" alignment="CENTER" layoutX="113.0" layoutY="141.0" style="-fx-background-color: grey; -fx-background-radius: 10px;" text="fede" textFill="WHITE" textOverrun="CLIP" visible="false" AnchorPane.leftAnchor="1050.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="130.0">
       <font>
          <Font name="AppleMyungjo Regular" size="36.0" />
       </font>
@@ -295,53 +295,46 @@
          </Bloom>
       </effect>
    </Label>
-   <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="224.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true"
-              AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="130.0">
+   <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="224.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="130.0">
       <effect>
-         <DropShadow spread="0.3"/>
+         <DropShadow spread="0.3" />
       </effect>
-      <Image url="@images/white_tower.png"/>
+      <Image url="@images/white_tower.png" />
    </ImageView>
-   <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="234.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true"
-              visible="false" AnchorPane.leftAnchor="610.0" AnchorPane.topAnchor="130.0">
+   <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="234.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="610.0" AnchorPane.topAnchor="130.0">
       <effect>
-         <DropShadow spread="0.3"/>
+         <DropShadow spread="0.3" />
       </effect>
-      <Image url="@images/black_tower.png"/>
+      <Image url="@images/black_tower.png" />
    </ImageView>
-   <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="244.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true"
-              visible="false" AnchorPane.leftAnchor="940.0" AnchorPane.topAnchor="130.0">
+   <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="244.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="940.0" AnchorPane.topAnchor="130.0">
       <effect>
-         <DropShadow spread="0.3"/>
+         <DropShadow spread="0.3" />
       </effect>
-      <Image url="@images/black_tower.png"/>
+      <Image url="@images/black_tower.png" />
    </ImageView>
-   <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="254.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true"
-              visible="false" AnchorPane.leftAnchor="1270.0" AnchorPane.topAnchor="130.0">
+   <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="254.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="1270.0" AnchorPane.topAnchor="130.0">
       <effect>
-         <DropShadow spread="0.3"/>
+         <DropShadow spread="0.3" />
       </effect>
-      <Image url="@images/black_tower.png"/>
+      <Image url="@images/black_tower.png" />
    </ImageView>
-   <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="234.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true"
-              AnchorPane.leftAnchor="955.0" AnchorPane.topAnchor="585.0">
+   <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="234.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="955.0" AnchorPane.topAnchor="585.0">
       <effect>
-         <DropShadow/>
+         <DropShadow />
       </effect>
-      <Image url="@images/black_tower.png"/>
+      <Image url="@images/black_tower.png" />
    </ImageView>
-   <ImageView fitHeight="45.0" fitWidth="50.0" layoutX="244.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true"
-              AnchorPane.leftAnchor="957.0" AnchorPane.topAnchor="645.0">
+   <ImageView fitHeight="45.0" fitWidth="50.0" layoutX="244.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="957.0" AnchorPane.topAnchor="645.0">
       <effect>
-         <DropShadow/>
+         <DropShadow />
       </effect>
-      <Image url="@images/white_tower.png"/>
+      <Image url="@images/white_tower.png" />
    </ImageView>
-   <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="254.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true"
-              AnchorPane.leftAnchor="955.0" AnchorPane.topAnchor="700.0">
+   <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="254.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="955.0" AnchorPane.topAnchor="700.0">
       <effect>
-         <DropShadow/>
+         <DropShadow />
       </effect>
-      <Image url="@images/grey_tower.png"/>
+      <Image url="@images/grey_tower.png" />
    </ImageView>
 </AnchorPane>

@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitWidth="1366.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+         <image>
+            <Image url="@images/cloudsBackground.jpg" />
+         </image>
+         <effect>
+            <ColorAdjust brightness="-0.4" contrast="0.2" />
+         </effect>
+      </ImageView>
+      <Label fx:id="error" cache="true" layoutX="666.0" layoutY="241.0" style="-fx-background-color: rgb(255,0,0, .5); -fx-border-color: red; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="ERROR" textFill="WHITE" visible="false" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="200.0" layoutX="583.0" layoutY="501.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="453.0" AnchorPane.topAnchor="550.0">
+         <image>
+            <Image url="@images/PLANCIA GIOCO.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="269.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="80.0">
+         <image>
+            <Image url="@images/island1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="982.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="200.0">
+         <image>
+            <Image url="@images/island2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="591.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="608.0" AnchorPane.rightAnchor="608.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@images/island3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="427.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="436.0" AnchorPane.topAnchor="20.0">
+         <image>
+            <Image url="@images/island2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="921.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="80.0">
+         <image>
+            <Image url="@images/island3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="750.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="20.0">
+         <image>
+            <Image url="@images/island1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="935.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="320.0">
+         <image>
+            <Image url="@images/island1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="218.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="200.0">
+         <image>
+            <Image url="@images/island1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="805.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="380.0">
+         <image>
+            <Image url="@images/island2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="491.0" layoutY="399.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="436.0" AnchorPane.topAnchor="380.0">
+         <image>
+            <Image url="@images/island2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="650.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="608.0" AnchorPane.rightAnchor="608.0" AnchorPane.topAnchor="400.0">
+         <image>
+            <Image url="@images/island3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="351.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="320.0">
+         <image>
+            <Image url="@images/island3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="150.0" layoutX="488.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="230.0">
+         <image>
+            <Image url="@images/cloud_card_1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="150.0" layoutX="498.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="640.0" AnchorPane.topAnchor="160.0">
+         <image>
+            <Image url="@images/cloud_card_2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="150.0" layoutX="498.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="640.0" AnchorPane.topAnchor="300.0">
+         <image>
+            <Image url="@images/cloud_card_4.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="150.0" layoutX="498.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="230.0">
+         <image>
+            <Image url="@images/cloud_card_3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="65.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <image>
+            <Image url="@images/School_asset.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="75.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="230.0">
+         <image>
+            <Image url="@images/School_asset.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="75.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="440.0">
+         <image>
+            <Image url="@images/School_asset.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="50.0" layoutX="-19.0" layoutY="-25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0">
+         <image>
+            <Image url="@images/black_tower.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="50.0" layoutX="-9.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="235.0">
+         <image>
+            <Image url="@images/black_tower.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="50.0" layoutX="1.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="445.0">
+         <image>
+            <Image url="@images/black_tower.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="usernameText1" alignment="CENTER" layoutX="113.0" layoutY="141.0" style="-fx-background-radius: 10px;" text="tommi" textFill="WHITE" textOverrun="CLIP" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="1190.0" AnchorPane.topAnchor="30.0">
+         <font>
+            <Font name="AppleMyungjo Regular" size="20.0" />
+         </font>
+         <effect>
+            <Glow level="0.5" />
+         </effect>
+      </Label>
+      <ImageView fitHeight="30.0" fitWidth="50.0" layoutX="107.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="30.0">
+         <image>
+            <Image url="@images/Moneta_base.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="30.0" layoutY="67.0" text="8" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="60.0">
+         <font>
+            <Font name="AppleMyungjo Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="40.0" layoutY="77.0" text="1" AnchorPane.leftAnchor="190.0" AnchorPane.topAnchor="60.0">
+         <font>
+            <Font name="AppleMyungjo Regular" size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="30.0" fitWidth="50.0" layoutX="117.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="240.0">
+         <image>
+            <Image url="@images/Moneta_base.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="30.0" fitWidth="50.0" layoutX="127.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="450.0">
+         <image>
+            <Image url="@images/Moneta_base.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="50.0" layoutY="87.0" text="1" AnchorPane.leftAnchor="190.0" AnchorPane.topAnchor="480.0">
+         <font>
+            <Font name="AppleMyungjo Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="87.0" text="1" AnchorPane.leftAnchor="190.0" AnchorPane.topAnchor="270.0">
+         <font>
+            <Font name="AppleMyungjo Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="usernameText11" alignment="CENTER" layoutX="123.0" layoutY="151.0" style="-fx-background-radius: 10px;" text="tene" textFill="WHITE" textOverrun="CLIP" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="1190.0" AnchorPane.topAnchor="240.0">
+         <font>
+            <Font name="AppleMyungjo Regular" size="20.0" />
+         </font>
+         <effect>
+            <Glow level="0.5" />
+         </effect>
+      </Label>
+      <Label fx:id="usernameText111" alignment="CENTER" layoutX="133.0" layoutY="161.0" style="-fx-background-radius: 10px;" text="fede" textFill="WHITE" textOverrun="CLIP" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="1190.0" AnchorPane.topAnchor="450.0">
+         <font>
+            <Font name="AppleMyungjo Regular" size="20.0" />
+         </font>
+         <effect>
+            <Glow level="0.5" />
+         </effect>
+      </Label>
+      <Label layoutX="40.0" layoutY="77.0" text="8" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="480.0">
+         <font>
+            <Font name="AppleMyungjo Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="40.0" layoutY="77.0" text="8" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="270.0">
+         <font>
+            <Font name="AppleMyungjo Regular" size="14.0" />
+         </font>
+      </Label>
+      <GridPane layoutX="35.0" layoutY="105.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="105.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label alignment="CENTER" text="0">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="13.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="1">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="10.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="2">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="11.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="3">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="13.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="4">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="11.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+         </children>
+      </GridPane>
+      <GridPane layoutX="45.0" layoutY="115.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="315.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER" text="0">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="13.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="1">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="10.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="2">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="11.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="3">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="13.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="4">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="11.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+         </children>
+      </GridPane>
+      <GridPane layoutX="55.0" layoutY="125.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="525.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER" text="0">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="13.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="1">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="10.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="2">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="11.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="3">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="13.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="4">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="11.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+         </children>
+      </GridPane>
+      <GridPane layoutX="45.0" layoutY="115.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="175.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER" text="0">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="13.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="1">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="10.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="2">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="11.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="3">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="13.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="4">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="11.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+         </children>
+      </GridPane>
+      <GridPane layoutX="55.0" layoutY="125.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="150.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/teacher_blue.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="4.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@images/teacher_green.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="1.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+               <image>
+                  <Image url="@images/teacher_pink.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+               <image>
+                  <Image url="@images/teacher_red.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="4.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4">
+               <image>
+                  <Image url="@images/teacher_yellow.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="1.0" />
+               </GridPane.margin>
+            </ImageView>
+         </children>
+      </GridPane>
+      <GridPane layoutX="65.0" layoutY="135.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="360.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@images/teacher_blue.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="4.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@images/teacher_green.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="1.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2">
+               <image>
+                  <Image url="@images/teacher_pink.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="3">
+               <image>
+                  <Image url="@images/teacher_red.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="4.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4">
+               <image>
+                  <Image url="@images/teacher_yellow.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="1.0" />
+               </GridPane.margin>
+            </ImageView>
+         </children>
+      </GridPane>
+      <GridPane layoutX="75.0" layoutY="145.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="570.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@images/teacher_blue.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="4.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@images/teacher_green.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="1.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2">
+               <image>
+                  <Image url="@images/teacher_pink.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="2.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="3">
+               <image>
+                  <Image url="@images/teacher_red.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="4.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4">
+               <image>
+                  <Image url="@images/teacher_yellow.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="1.0" />
+               </GridPane.margin>
+            </ImageView>
+         </children>
+      </GridPane>
+      <GridPane layoutX="55.0" layoutY="125.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="385.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER" text="0">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="13.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="1">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="10.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="2">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="11.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="3">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="13.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="4">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="11.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+         </children>
+      </GridPane>
+      <GridPane layoutX="65.0" layoutY="135.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="595.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER" text="0">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="13.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="1">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="10.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="2">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="11.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="3">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="13.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="0" GridPane.columnIndex="4">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="12.5" left="11.5" top="9.5" />
+               </GridPane.margin>
+            </Label>
+         </children>
+      </GridPane>
+      <ImageView fx:id="lobbyImage1" fitHeight="200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="550.0">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+         <image>
+            <Image url="@images/Personaggi_retro.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="usernameText12" alignment="CENTER" layoutX="113.0" layoutY="141.0" style="-fx-background-color: grey; -fx-background-radius: 5px;" text="cerlonghish" textFill="WHITE" textOverrun="CLIP" AnchorPane.leftAnchor="305.0" AnchorPane.rightAnchor="935.0" AnchorPane.topAnchor="555.0">
+         <font>
+            <Font name="AppleMyungjo Regular" size="20.0" />
+         </font>
+         <effect>
+            <Glow level="0.5" />
+         </effect>
+      </Label>
+      <ImageView fx:id="lobbyImage11" fitHeight="200.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="930.0" AnchorPane.topAnchor="550.0">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+         <image>
+            <Image url="@images/Assistente (1).png" />
+         </image>
+      </ImageView>
+      <GridPane layoutX="466.0" layoutY="572.0" prefHeight="156.0" prefWidth="53.0" AnchorPane.leftAnchor="466.0" AnchorPane.topAnchor="572.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="30.323974609375" minHeight="10.0" prefHeight="26.5140380859375" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="39.380126953125" minHeight="10.0" prefHeight="34.4859619140625" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="33.5140380859375" minHeight="10.0" prefHeight="32.74298095703125" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="32.09503173828125" minHeight="10.0" prefHeight="31.25701904296875" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+      <GridPane layoutX="539.0" layoutY="582.0" prefHeight="156.0" prefWidth="141.0" AnchorPane.leftAnchor="539.0" AnchorPane.topAnchor="570.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="22.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="22.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="22.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="22.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="22.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="22.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="22.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="22.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="22.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane layoutX="549.0" layoutY="592.0" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="570.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+   </children>
+</AnchorPane>
