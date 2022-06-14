@@ -1,18 +1,13 @@
-package it.polimi.ingsw.view.gui;
+package it.polimi.ingsw.view.gui.controllers;
 
+import it.polimi.ingsw.view.gui.ApplicationFX;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.Socket;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
-public class BindingController {
+public class BindingController extends FXController {
     public static Socket socket;
-
-    @FXML
-    private Label error;
     @FXML
     private TextField ipAddressText;
     @FXML
@@ -28,10 +23,7 @@ public class BindingController {
 
             ApplicationFX.semaphore.release();
         } catch(Exception e) {
-            error.setText("Something went wrong! Try again!");
-            error.setVisible(true);
-            ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
-            executor.schedule(() -> error.setVisible(false), 5, TimeUnit.SECONDS);
+            showError("Something went wrong! Try again!");
         }
     }
 

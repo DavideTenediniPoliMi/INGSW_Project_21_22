@@ -1,20 +1,21 @@
 package it.polimi.ingsw.network.client;
 
 import it.polimi.ingsw.network.Connection;
-import it.polimi.ingsw.view.View;
 import it.polimi.ingsw.view.cli.AnsiCodes;
+import it.polimi.ingsw.view.cli.CLI;
+import it.polimi.ingsw.view.gui.GUI;
 import org.fusesource.jansi.AnsiConsole;
 
 public class Client {
     public Client() {
     }
 
-    public void run(View view) {
+    public void run(CLI view) {
 
         view.loadStartingScreen();
 
         while(!view.isExiting()) {
-            Connection connection = view.handleBinding(this);
+            Connection connection = view.handleBinding();
 
             if(connection != null) {
                 connection.run();
@@ -24,5 +25,9 @@ public class Client {
 
         view.loadClosingScreen();
         System.exit(0);
+    }
+
+    public void run(GUI view) {
+
     }
 }

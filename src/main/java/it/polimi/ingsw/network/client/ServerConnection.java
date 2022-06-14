@@ -11,17 +11,14 @@ import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
-import it.polimi.ingsw.view.View;
 import it.polimi.ingsw.view.cli.CLI;
-import it.polimi.ingsw.view.gui.GUI;
 import it.polimi.ingsw.view.viewStates.*;
 
 import java.io.IOException;
 import java.net.Socket;
 
 public class ServerConnection extends Connection {
-    private final Client client;
-    private final View view;
+    private final CLI view;
     private boolean inGame;
     private boolean ready;
     private boolean joined;
@@ -29,18 +26,12 @@ public class ServerConnection extends Connection {
     private MessageConsumer jsonConsumer;
     private final Object connectionLock = new Object();
 
-    public ServerConnection(Socket socket, Client client, boolean graphic) throws IOException {
+    public ServerConnection(Socket socket) throws IOException {
         super(socket);
 
-        this.client = client;
         ViewState viewState = new ViewState();
         viewState.addObserver(this);
-
-        if(graphic) {
-            view = new GUI(new HandshakeViewState(viewState));
-        } else {
-            view = new CLI(new HandshakeViewState(viewState));
-        }
+        view = new CLI(new HandshakeViewState(viewState));
     }
 
     @Override

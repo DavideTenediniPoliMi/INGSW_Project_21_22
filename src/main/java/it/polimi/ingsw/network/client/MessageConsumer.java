@@ -4,14 +4,14 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
-import it.polimi.ingsw.view.View;
+import it.polimi.ingsw.view.cli.CLI;
 
 public class MessageConsumer implements Runnable{
     private final MessageQueue<String> queue;
     private volatile boolean runFlag;
-    private final View view;
+    private final CLI view;
 
-    public MessageConsumer(MessageQueue<String> queue, View view) {
+    public MessageConsumer(MessageQueue<String> queue, CLI view) {
         this.queue = queue;
         this.view = view;
         runFlag = true;
