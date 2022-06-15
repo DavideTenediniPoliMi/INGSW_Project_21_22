@@ -27,7 +27,7 @@ public class Client {
         System.exit(0);
     }
 
-    public void run(GUI view) {
-
+    public void run() {
+        GUI.main(null);
     }
 }

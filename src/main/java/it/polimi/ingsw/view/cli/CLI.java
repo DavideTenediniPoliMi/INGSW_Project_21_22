@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.enumerations.CharacterCards;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.Connection;
-import it.polimi.ingsw.network.client.ServerConnection;
+import it.polimi.ingsw.network.client.ServerConnectionCLI;
 import it.polimi.ingsw.view.viewStates.*;
 import org.fusesource.jansi.AnsiConsole;
 
@@ -337,8 +337,8 @@ public class CLI {
 
                     int port = Integer.parseInt(scanner.nextLine().trim());
 
-                    return new ServerConnection(new Socket(ip, port));
-                    //return new ServerConnection(new Socket("localhost", 12345), client);
+                    return new ServerConnectionCLI(new Socket(ip, port));
+                    //return new ServerConnectionCLI(new Socket("localhost", 12345), client);
                } catch(IOException | SecurityException | IllegalArgumentException e) {
                     AnsiConsole.sysOut().println("The combination IP/Port didn't work! Try again!");
                } catch(InputMismatchException e) {

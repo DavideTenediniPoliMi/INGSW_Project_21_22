@@ -1,13 +1,14 @@
 package it.polimi.ingsw.view.gui.controllers;
 
-import it.polimi.ingsw.view.gui.ApplicationFX;
+import it.polimi.ingsw.network.client.ServerConnectionGUI;
+import it.polimi.ingsw.view.gui.GUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.net.Socket;
 
 public class BindingController extends FXController {
-    public static Socket socket;
     @FXML
     private TextField ipAddressText;
     @FXML
@@ -19,12 +20,12 @@ public class BindingController extends FXController {
 
         try {
             port = Integer.parseInt(portText.getText().trim());
-            socket = new Socket(ip, port);
+            GUI.setServerConnection(new ServerConnectionGUI(new Socket(ip, port)));
 
-            ApplicationFX.semaphore.release();
-        } catch(Exception e) {
+            // IF NO EXCEPTIONS WERE THROWN PROCEED TO THE HANDSHAKE SCENE
+            GUI.loadScene("/scenes/handshakeScene.fxml");
+        } catch(IOException | IllegalArgumentException | SecurityException e) {
             showError("Something went wrong! Try again!");
         }
     }
-
 }

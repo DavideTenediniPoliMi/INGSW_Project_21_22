@@ -17,7 +17,7 @@ import it.polimi.ingsw.view.viewStates.*;
 import java.io.IOException;
 import java.net.Socket;
 
-public class ServerConnection extends Connection {
+public class ServerConnectionCLI extends Connection {
     private final CLI view;
     private boolean inGame;
     private boolean ready;
@@ -26,7 +26,7 @@ public class ServerConnection extends Connection {
     private MessageConsumer jsonConsumer;
     private final Object connectionLock = new Object();
 
-    public ServerConnection(Socket socket) throws IOException {
+    public ServerConnectionCLI(Socket socket) throws IOException {
         super(socket);
 
         ViewState viewState = new ViewState();

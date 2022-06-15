@@ -16,7 +16,7 @@
       <viewport>
          <Rectangle2D />
       </viewport>
-      <Image url="@images/gameArtwork.png" />
+      <Image url="@../images/gameArtwork.png" />
    </ImageView>
    <Label fx:id="error" cache="true" layoutX="666.0" layoutY="241.0" style="-fx-background-color: rgb(255,0,0, .5); -fx-border-color: red; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="ERROR" textFill="WHITE" visible="false" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
       <font>

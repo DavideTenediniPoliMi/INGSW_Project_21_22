@@ -23,7 +23,7 @@
       <viewport>
          <Rectangle2D />
       </viewport>
-      <Image url="@images/gameArtwork.png" />
+      <Image url="@../images/gameArtwork.png" />
    </ImageView>
    <Label fx:id="error" cache="true" layoutX="666.0" layoutY="241.0" style="-fx-background-color: rgb(255,0,0, .5); -fx-border-color: red; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="ERROR" textFill="WHITE" visible="false" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
       <font>
@@ -46,7 +46,7 @@
       <viewport>
          <Rectangle2D />
       </viewport>
-      <Image url="@images/Personaggi_retro.jpg" />
+      <Image url="@../images/Personaggi_retro.jpg" />
       <effect>
          <InnerShadow />
       </effect>
@@ -63,7 +63,7 @@
       <viewport>
          <Rectangle2D />
       </viewport>
-      <Image url="@images/Personaggi_retro.jpg" />
+      <Image url="@../images/Personaggi_retro.jpg" />
       <effect>
          <InnerShadow />
       </effect>
@@ -80,7 +80,7 @@
       <viewport>
          <Rectangle2D />
       </viewport>
-      <Image url="@images/Personaggi_retro.jpg" />
+      <Image url="@../images/Personaggi_retro.jpg" />
       <effect>
          <InnerShadow />
       </effect>
@@ -97,7 +97,7 @@
       <viewport>
          <Rectangle2D />
       </viewport>
-      <Image url="@images/Personaggi_retro.jpg" />
+      <Image url="@../images/Personaggi_retro.jpg" />
       <effect>
          <InnerShadow />
       </effect>
@@ -113,7 +113,7 @@
    <Button layoutX="100.0" layoutY="150.0" mnemonicParsing="false" style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="600.0">
       <graphic>
          <ImageView fitHeight="200.0" fitWidth="100.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-            <Image url="@images/MAGO_1.jpg" />
+            <Image url="@../images/MAGO_1.jpg" />
          </ImageView>
       </graphic>
       <padding>
@@ -129,7 +129,7 @@
       </padding>
       <graphic>
          <ImageView fitHeight="200.0" fitWidth="100.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-            <Image url="@images/MAGO_2.jpg" />
+            <Image url="@../images/MAGO_2.jpg" />
          </ImageView>
       </graphic>
       <effect>
@@ -142,7 +142,7 @@
       </padding>
       <graphic>
          <ImageView fitHeight="200.0" fitWidth="100.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-            <Image url="@images/MAGO_3.jpg" />
+            <Image url="@../images/MAGO_3.jpg" />
          </ImageView>
       </graphic>
       <effect>
@@ -155,7 +155,7 @@
       </padding>
       <graphic>
          <ImageView fitHeight="200.0" fitWidth="100.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-            <Image url="@images/MAGO_4.jpg" />
+            <Image url="@../images/MAGO_4.jpg" />
          </ImageView>
       </graphic>
       <effect>
@@ -299,42 +299,42 @@
       <effect>
          <DropShadow spread="0.3" />
       </effect>
-      <Image url="@images/white_tower.png" />
+      <Image url="@../images/white_tower.png" />
    </ImageView>
    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="234.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="610.0" AnchorPane.topAnchor="130.0">
       <effect>
          <DropShadow spread="0.3" />
       </effect>
-      <Image url="@images/black_tower.png" />
+      <Image url="@../images/black_tower.png" />
    </ImageView>
    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="244.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="940.0" AnchorPane.topAnchor="130.0">
       <effect>
          <DropShadow spread="0.3" />
       </effect>
-      <Image url="@images/black_tower.png" />
+      <Image url="@../images/black_tower.png" />
    </ImageView>
    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="254.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="1270.0" AnchorPane.topAnchor="130.0">
       <effect>
          <DropShadow spread="0.3" />
       </effect>
-      <Image url="@images/black_tower.png" />
+      <Image url="@../images/black_tower.png" />
    </ImageView>
    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="234.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="955.0" AnchorPane.topAnchor="585.0">
       <effect>
          <DropShadow />
       </effect>
-      <Image url="@images/black_tower.png" />
+      <Image url="@../images/black_tower.png" />
    </ImageView>
    <ImageView fitHeight="45.0" fitWidth="50.0" layoutX="244.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="957.0" AnchorPane.topAnchor="645.0">
       <effect>
          <DropShadow />
       </effect>
-      <Image url="@images/white_tower.png" />
+      <Image url="@../images/white_tower.png" />
    </ImageView>
    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="254.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="955.0" AnchorPane.topAnchor="700.0">
       <effect>
          <DropShadow />
       </effect>
-      <Image url="@images/grey_tower.png" />
+      <Image url="@../images/grey_tower.png" />
    </ImageView>
 </AnchorPane>

@@ -2,7 +2,7 @@ package it.polimi.ingsw.view.gui.controllers;
 
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
-import it.polimi.ingsw.view.gui.ApplicationFX;
+import it.polimi.ingsw.view.gui.GUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
@@ -18,6 +18,5 @@ public class HandshakeController extends FXController {
                 .setName(name);
 
         notify(handshake.serialize().toString());
-        ApplicationFX.semaphore.release();
     }
 }

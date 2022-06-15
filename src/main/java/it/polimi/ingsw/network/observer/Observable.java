@@ -20,6 +20,8 @@ public class Observable<T> {
      * @param observer the <code>Observer</code> to add.
      */
     public void addObserver(Observer<T> observer) {
+        if(observer == null) return;
+
         synchronized (observers) {
             observers.add(observer);
         }
