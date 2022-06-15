@@ -14,7 +14,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="it.polimi.ingsw.view.gui.controllers.CreateLobbyController">
    <ImageView fitHeight="768.0" fitWidth="1366.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">
       <viewport>
          <Rectangle2D />
@@ -53,12 +54,13 @@
          <Insets bottom="5.0" />
       </padding>
    </Label>
-   <Button layoutX="693.0" layoutY="451.0" mnemonicParsing="false" style="-fx-background-radius: 20px;" text="Create Game!" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="580.0">
+   <Button layoutX="693.0" layoutY="451.0" mnemonicParsing="false" style="-fx-background-radius: 20px;" text="Create Game!" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="580.0"
+           onMouseClicked="#handleCreateLobbyButton">
       <font>
          <Font name="HiraMinProN-W3" size="30.0" />
       </font>
    </Button>
-   <Slider blockIncrement="1.0" layoutX="543.0" layoutY="350.0" majorTickUnit="2.0" max="4.0" min="2.0" minorTickCount="1" showTickMarks="true" snapToTicks="true" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="350.0">
+   <Slider fx:id="numPlayers" blockIncrement="1.0" layoutX="543.0" layoutY="350.0" majorTickUnit="1.0" minorTickCount="0" max="4.0" min="2.0" showTickMarks="true" snapToTicks="true" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="350.0">
       <effect>
          <DropShadow />
       </effect>
@@ -89,7 +91,7 @@
          <Shadow height="0.0" radius="0.0" width="0.0" />
       </effect>
    </Label>
-   <CheckBox layoutX="734.0" layoutY="434.0" mnemonicParsing="false" AnchorPane.rightAnchor="580.0" AnchorPane.topAnchor="482.0">
+   <CheckBox fx:id="expertMode" layoutX="734.0" layoutY="434.0" mnemonicParsing="false" AnchorPane.rightAnchor="580.0" AnchorPane.topAnchor="482.0">
       <font>
          <Font name="Hiragino Sans W6" size="18.0" />
       </font>

@@ -13,10 +13,8 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;
 
 public class GUI extends Application {
-    public static Semaphore semaphore = new Semaphore(1);
     private static FXController sceneController;
     private static Connection serverConnection;
     private static Stage stage;
@@ -28,7 +26,7 @@ public class GUI extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         GUI.stage = stage;
 
         stage.setTitle("Eriantys!");
@@ -45,13 +43,20 @@ public class GUI extends Application {
         });
     }
 
-    public static void loadScene(String path) throws IOException {
+    public static void loadScene(String path) {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(GUI.class.getResource(path)));
-        Parent root = loader.load();
+        Parent root;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            showError(e.getMessage());
+            return;
+        }
 
         sceneController = loader.getController();
-        sceneController.addObserver(serverConnection);
-
+        if(sceneController != null) {
+            sceneController.addObserver(serverConnection);
+        }
         stage.setScene(new Scene(root, resX, resY));
         stage.show();
     }

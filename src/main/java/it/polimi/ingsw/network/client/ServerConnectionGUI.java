@@ -2,6 +2,7 @@ package it.polimi.ingsw.network.client;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
 import it.polimi.ingsw.view.gui.GUI;
@@ -16,29 +17,34 @@ public class ServerConnectionGUI extends Connection {
         super(socket);
     }
 
-    @Override
-    public void run() {
+    private JsonObject waitForValidMessage() {
         while(true) {
             String received = receiveMessage();
-            if(received.equals("")) continue;
+            if (received.equals("")) continue;
 
             JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
 
-            if(jsonObject.has("error")) {
-                String errorText = jsonObject.get("error").getAsString();
-                Platform.runLater(() -> GUI.showError(errorText));
-                continue;
-            }
+            if (!jsonObject.has("error")) return jsonObject;
 
-            Platform.runLater(() -> {
-                try {
-                    GUI.loadScene("/scenes/bindingScene.fxml");
-                } catch (IOException e) {
-                    Platform.runLater(() -> GUI.showError(e.getMessage()));
-                }
-            });
-
-            new ResponseParameters().deserialize(jsonObject);
+            String errorText = jsonObject.get("error").getAsString();
+            Platform.runLater(() -> GUI.showError(errorText));
         }
+    }
+
+    @Override
+    public void run() {
+        new ResponseParameters().deserialize(waitForValidMessage());
+
+        // TODO reconnection check
+
+        String path = (MatchInfo.getInstance().getSelectedNumPlayer() == 0) ?
+                "/scenes/createLobbyScene.fxml" :
+                "/scenes/lobbySelectionScene.fxml";
+
+        Platform.runLater(() -> GUI.loadScene(path));
+
+        new ResponseParameters().deserialize(waitForValidMessage());
+
+        Platform.runLater(() -> GUI.loadScene("/scenes/bindingScene.fxml"));
     }
 }
