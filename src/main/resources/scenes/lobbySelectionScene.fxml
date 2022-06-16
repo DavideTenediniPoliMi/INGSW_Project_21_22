@@ -185,7 +185,7 @@
          </DropShadow>
       </effect>
       <toggleGroup>
-         <ToggleGroup fx:id="team" />
+         <ToggleGroup fx:id="team"/>
       </toggleGroup>
    </RadioButton>
    <Label layoutX="56.0" layoutY="26.0" text="Wizards" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="600.0">
@@ -236,12 +236,14 @@
          </Lighting>
       </effect>
    </Label>
-   <Button disable="true" layoutX="572.0" layoutY="673.0" mnemonicParsing="false" style="-fx-background-radius: 20px; -fx-background-color: #D6E3F8; -fx-border-color: blue; -fx-border-radius: 20px;" text="Confirm!" AnchorPane.leftAnchor="1020.0" AnchorPane.topAnchor="650.0">
+   <Button fx:id="towerColorButton" disable="true" layoutX="572.0" layoutY="673.0" mnemonicParsing="false" style="-fx-background-radius: 20px; -fx-background-color: #D6E3F8; -fx-border-color: blue; -fx-border-radius: 20px;" text="Confirm!" AnchorPane.leftAnchor="1020.0" AnchorPane.topAnchor="650.0"
+         onMouseClicked="#handleTowerColorButton">
       <font>
          <Font size="18.0" />
       </font>
    </Button>
-   <Button disable="true" layoutX="1232.0" layoutY="656.0" mnemonicParsing="false" style="-fx-background-color: lightgreen;" text="Ready!" underline="true" AnchorPane.leftAnchor="1200.0" AnchorPane.topAnchor="640.0">
+   <Button fx:id="readyButton" disable="true" layoutX="1232.0" layoutY="656.0" mnemonicParsing="false" style="-fx-background-color: lightgreen;" text="Ready!" underline="true" AnchorPane.leftAnchor="1200.0" AnchorPane.topAnchor="640.0"
+         onMouseClicked="#handleReadyButton">
       <font>
          <Font size="30.0" />
       </font>

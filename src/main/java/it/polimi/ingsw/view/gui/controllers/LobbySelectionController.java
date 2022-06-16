@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view.gui.controllers;
 
-import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
@@ -9,10 +8,7 @@ import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -68,9 +64,14 @@ public class LobbySelectionController extends FXController {
     @FXML
     private Button cardBackButton;
     @FXML
+    private Button towerColorButton;
+    @FXML
+    private Button readyButton;
+    @FXML
     private ToggleGroup team;
 
     private CardBack activeCardBack;
+    private TowerColor activeTowerColor;
 
     private final List<Label> usernames = new ArrayList<>();
     private final List<ImageView> images = new ArrayList<>();
@@ -97,6 +98,18 @@ public class LobbySelectionController extends FXController {
             greyOption.setVisible(false);
             greyTower.setVisible(false);
         }
+
+        team.selectedToggleProperty().addListener((event) -> {
+            if(team.getSelectedToggle() != null) {
+                activeTowerColor = TowerColor.valueOf(((RadioButton) team.getSelectedToggle()).getText().toUpperCase());
+                towerColorButton.setDisable(false);
+            } else {
+                activeTowerColor = null;
+                if(towerColorButton.getText().equals("Confirm!")) {
+                    towerColorButton.setDisable(true);
+                }
+            }
+        });
 
         applyChanges();
     }
@@ -142,8 +155,8 @@ public class LobbySelectionController extends FXController {
             setDisableWizardButtons(false);
         }
 
-        for(RadioButton option : teamOptions) {
-            option.setDisable(false);
+        if(towerColorButton.getText().equals("Confirm!")) {
+            setDisableTeamOptions(false);
         }
 
         for(int i = 0 ; i < matchInfo.getSelectedNumPlayer() ; i++) {
@@ -194,7 +207,6 @@ public class LobbySelectionController extends FXController {
                 image.setImage(defaultImage);
             }
         }
-
     }
 
     public void handleWizardButtons(MouseEvent mouseEvent) {
@@ -209,6 +221,12 @@ public class LobbySelectionController extends FXController {
 
     private void setDisableWizardButtons(boolean disable) {
         for (Button button : wizardButtons){
+            button.setDisable(disable);
+        }
+    }
+
+    private void setDisableTeamOptions(boolean disable) {
+        for (RadioButton button : teamOptions){
             button.setDisable(disable);
         }
     }
@@ -246,6 +264,10 @@ public class LobbySelectionController extends FXController {
             activeCardBack = null;
             setDisableWizardButtons(true);
 
+            if(towerColorButton.getText().equals("Undo!")) {
+                readyButton.setDisable(false);
+            }
+
             cardBackButton.setText("Undo!");
         } else {
             notify(
@@ -256,6 +278,50 @@ public class LobbySelectionController extends FXController {
             setDisableWizardButtons(false);
             cardBackButton.setText("Confirm!");
             cardBackButton.setDisable(true);
+            readyButton.setDisable(true);
         }
+    }
+
+    public void handleTowerColorButton() {
+        if (towerColorButton.getText().equals("Confirm!")) {
+            notify(
+                    new RequestParameters()
+                            .setCommandType(CommandType.SEL_TOWERCOLOR)
+                            .setTowerColor(activeTowerColor).serialize().toString()
+            );
+
+            activeTowerColor = null;
+            setDisableTeamOptions(true);
+            towerColorButton.setText("Undo!");
+
+            if(cardBackButton.getText().equals("Undo!")) {
+                readyButton.setDisable(false);
+            }
+
+        } else {
+            notify(
+                    new RequestParameters()
+                            .setCommandType(CommandType.UNSEL_TOWERCOLOR).serialize().toString()
+            );
+
+            towerColorButton.setText("Confirm!");
+
+            setDisableTeamOptions(false);
+            if(team.getSelectedToggle() == null) {
+                towerColorButton.setDisable(true);
+            }
+
+            readyButton.setDisable(true);
+        }
+    }
+
+    public void handleReadyButton() {
+        notify(
+                new RequestParameters().setCommandType(CommandType.READY_UP).serialize().toString()
+        );
+
+        readyButton.setDisable(true);
+        towerColorButton.setDisable(true);
+        cardBackButton.setDisable(true);
     }
 }
