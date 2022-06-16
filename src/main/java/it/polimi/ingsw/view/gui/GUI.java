@@ -17,6 +17,7 @@ import java.util.concurrent.Executors;
 public class GUI extends Application {
     private static FXController sceneController;
     private static Connection serverConnection;
+    private static String name;
     private static Stage stage;
     private static final int resX = 1366;
     private static final int resY = 768;
@@ -49,6 +50,7 @@ public class GUI extends Application {
         try {
             root = loader.load();
         } catch (IOException e) {
+            e.printStackTrace();
             showError(e.getMessage());
             return;
         }
@@ -79,5 +81,17 @@ public class GUI extends Application {
 
     public static void showError(String error) {
         sceneController.showError(error);
+    }
+
+    public static void setName(String name) {
+        GUI.name = name;
+    }
+
+    public static String getName() {
+        return name;
+    }
+
+    public static void applyChanges() {
+        sceneController.applyChanges();
     }
 }

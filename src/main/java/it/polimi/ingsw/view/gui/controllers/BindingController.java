@@ -28,4 +28,7 @@ public class BindingController extends FXController {
             showError("Something went wrong! Try again!");
         }
     }
+
+    @Override
+    public void applyChanges() {}
 }

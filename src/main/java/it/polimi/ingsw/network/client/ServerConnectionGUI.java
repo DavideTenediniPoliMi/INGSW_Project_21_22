@@ -4,6 +4,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.network.Connection;
+import it.polimi.ingsw.network.enumerations.CommandType;
+import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
 import it.polimi.ingsw.view.gui.GUI;
 import javafx.application.Platform;
@@ -37,14 +39,25 @@ public class ServerConnectionGUI extends Connection {
 
         // TODO reconnection check
 
-        String path = (MatchInfo.getInstance().getSelectedNumPlayer() == 0) ?
-                "/scenes/createLobbyScene.fxml" :
-                "/scenes/lobbySelectionScene.fxml";
+        if(MatchInfo.getInstance().getSelectedNumPlayer() == 0) {
+           Platform.runLater(() -> GUI.loadScene("/scenes/createLobbyScene.fxml"));
 
-        Platform.runLater(() -> GUI.loadScene(path));
+           new ResponseParameters().deserialize(waitForValidMessage());
+        }
+
+        sendMessage(
+               new RequestParameters()
+                   .setCommandType(CommandType.JOIN)
+                   .setName(GUI.getName()).serialize().toString());
+
 
         new ResponseParameters().deserialize(waitForValidMessage());
 
-        Platform.runLater(() -> GUI.loadScene("/scenes/bindingScene.fxml"));
+        Platform.runLater(() -> GUI.loadScene("/scenes/lobbySelectionScene.fxml"));
+
+        while(true) {
+            new ResponseParameters().deserialize(waitForValidMessage());
+            Platform.runLater(GUI::applyChanges);
+        }
     }
 }

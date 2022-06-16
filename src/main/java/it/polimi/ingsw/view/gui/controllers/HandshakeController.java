@@ -17,6 +17,11 @@ public class HandshakeController extends FXController {
                 .setCommandType(CommandType.HANDSHAKE)
                 .setName(name);
 
+        GUI.setName(name);
+
         notify(handshake.serialize().toString());
     }
+
+    @Override
+    public void applyChanges() {}
 }

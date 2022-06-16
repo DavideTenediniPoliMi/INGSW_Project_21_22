@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class FXController extends Observable<String> {
+public abstract class FXController extends Observable<String> {
     @FXML
     private Label error;
 
@@ -17,4 +17,6 @@ public class FXController extends Observable<String> {
         ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
         executor.schedule(() -> error.setVisible(false), 5, TimeUnit.SECONDS);
     }
+
+    public abstract void applyChanges();
 }

@@ -23,4 +23,7 @@ public class CreateLobbyController extends FXController {
                         .serialize().toString()
         );
     }
+
+    @Override
+    public void applyChanges() {}
 }
