@@ -50,8 +50,9 @@ public class ServerConnectionGUI extends Connection {
                    .setCommandType(CommandType.JOIN)
                    .setName(GUI.getName()).serialize().toString());
 
-
         new ResponseParameters().deserialize(waitForValidMessage());
+
+        GUI.bindPlayerId();
 
         Platform.runLater(() -> GUI.loadScene("/scenes/lobbySelectionScene.fxml"));
 

@@ -6,6 +6,8 @@ import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.TowerColor;
+import it.polimi.ingsw.network.enumerations.CommandType;
+import it.polimi.ingsw.network.parameters.RequestParameters;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,6 +15,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +66,11 @@ public class LobbySelectionController extends FXController {
     @FXML
     private ImageView greyTower;
     @FXML
+    private Button cardBackButton;
+    @FXML
     private ToggleGroup team;
+
+    private CardBack activeCardBack;
 
     private final List<Label> usernames = new ArrayList<>();
     private final List<ImageView> images = new ArrayList<>();
@@ -131,8 +138,8 @@ public class LobbySelectionController extends FXController {
 
         playersConnected.setText(String.valueOf(lobby.getPlayers().size()));
 
-        for(Button wizardButton : wizardButtons) {
-            wizardButton.setDisable(false);
+        if(cardBackButton.getText().equals("Confirm!")) {
+            setDisableWizardButtons(false);
         }
 
         for(RadioButton option : teamOptions) {
@@ -176,11 +183,79 @@ public class LobbySelectionController extends FXController {
             }
 
             if(player.getCardBack() != null) {
+                if(player.getCardBack().equals(activeCardBack)) {
+                    activeCardBack = null;
+                    resetWizardButtons();
+                    cardBackButton.setDisable(true);
+                }
                 wizardButtons.get(player.getCardBack().ordinal()).setDisable(true);
                 image.setImage(player.getCardBack().getImage());
             } else {
                 image.setImage(defaultImage);
             }
+        }
+
+    }
+
+    public void handleWizardButtons(MouseEvent mouseEvent) {
+        Button button = (Button) mouseEvent.getSource();
+        activeCardBack = getCardBackOfButton(button);
+
+        resetWizardButtons();
+
+        button.setStyle("-fx-border-color: yellow; -fx-border-width: 5px;");
+        cardBackButton.setDisable(false);
+    }
+
+    private void setDisableWizardButtons(boolean disable) {
+        for (Button button : wizardButtons){
+            button.setDisable(disable);
+        }
+    }
+
+    private void resetWizardButtons() {
+        for (Button button : wizardButtons){
+            button.setStyle("-fx-border-color: grey; -fx-border-width: 3px;");
+        }
+    }
+
+    private CardBack getCardBackOfButton(Button button) {
+        switch (button.getId()) {
+            case "wizardButton1":
+                return CardBack.WIZARD1;
+            case "wizardButton2":
+                return CardBack.WIZARD2;
+            case "wizardButton3":
+                return CardBack.WIZARD3;
+            case "wizardButton4":
+                return CardBack.WIZARD4;
+            default:
+                return null;
+        }
+    }
+
+    public void handleCardBackButton() {
+        if (cardBackButton.getText().equals("Confirm!")) {
+            notify(
+                    new RequestParameters()
+                            .setCommandType(CommandType.SEL_CARDBACK)
+                            .setCardBack(activeCardBack).serialize().toString()
+            );
+
+            resetWizardButtons();
+            activeCardBack = null;
+            setDisableWizardButtons(true);
+
+            cardBackButton.setText("Undo!");
+        } else {
+            notify(
+                    new RequestParameters()
+                            .setCommandType(CommandType.UNSEL_CARDBACK).serialize().toString()
+            );
+
+            setDisableWizardButtons(false);
+            cardBackButton.setText("Confirm!");
+            cardBackButton.setDisable(true);
         }
     }
 }

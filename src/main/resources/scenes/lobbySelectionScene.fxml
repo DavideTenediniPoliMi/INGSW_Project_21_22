@@ -111,7 +111,8 @@
          <Glow level="0.5" />
       </effect>
    </Label>
-   <Button fx:id="wizardButton1" layoutX="100.0" layoutY="150.0" mnemonicParsing="false" style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="600.0">
+   <Button fx:id="wizardButton1" layoutX="100.0" layoutY="150.0" mnemonicParsing="false" style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="600.0"
+         onMouseClicked="#handleWizardButtons">
       <graphic>
          <ImageView fitHeight="200.0" fitWidth="100.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/MAGO_1.jpg" />
@@ -124,7 +125,8 @@
          <InnerShadow />
       </effect>
    </Button>
-   <Button fx:id="wizardButton2" layoutX="110.0" layoutY="160.0" mnemonicParsing="false" style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="600.0">
+   <Button fx:id="wizardButton2" layoutX="110.0" layoutY="160.0" mnemonicParsing="false" style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="600.0"
+           onMouseClicked="#handleWizardButtons">
       <padding>
          <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
       </padding>
@@ -137,7 +139,8 @@
          <InnerShadow />
       </effect>
    </Button>
-   <Button fx:id="wizardButton3" layoutX="110.0" layoutY="160.0" mnemonicParsing="false" style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="330.0" AnchorPane.topAnchor="600.0">
+   <Button fx:id="wizardButton3" layoutX="110.0" layoutY="160.0" mnemonicParsing="false" style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="330.0" AnchorPane.topAnchor="600.0"
+           onMouseClicked="#handleWizardButtons">
       <padding>
          <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
       </padding>
@@ -150,7 +153,8 @@
          <InnerShadow />
       </effect>
    </Button>
-   <Button fx:id="wizardButton4" layoutX="110.0" layoutY="160.0" mnemonicParsing="false" style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="440.0" AnchorPane.topAnchor="600.0">
+   <Button fx:id="wizardButton4" layoutX="110.0" layoutY="160.0" mnemonicParsing="false" style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="440.0" AnchorPane.topAnchor="600.0"
+           onMouseClicked="#handleWizardButtons">
       <padding>
          <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
       </padding>
@@ -163,7 +167,8 @@
          <InnerShadow />
       </effect>
    </Button>
-   <Button disable="true" layoutX="562.0" layoutY="663.0" mnemonicParsing="false" style="-fx-background-radius: 20px; -fx-background-color: #D6E3F8; -fx-border-color: blue; -fx-border-radius: 20px;" text="Confirm!" AnchorPane.leftAnchor="580.0" AnchorPane.topAnchor="650.0">
+   <Button fx:id="cardBackButton" disable="true" layoutX="562.0" layoutY="663.0" mnemonicParsing="false" style="-fx-background-radius: 20px; -fx-background-color: #D6E3F8; -fx-border-color: blue; -fx-border-radius: 20px;" text="Confirm!" AnchorPane.leftAnchor="580.0" AnchorPane.topAnchor="650.0"
+         onMouseClicked="#handleCardBackButton">
       <font>
          <Font size="18.0" />
       </font>

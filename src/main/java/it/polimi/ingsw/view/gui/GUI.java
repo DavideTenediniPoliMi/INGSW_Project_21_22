@@ -1,5 +1,8 @@
 package it.polimi.ingsw.view.gui;
 
+import it.polimi.ingsw.model.Lobby;
+import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.view.gui.controllers.FXController;
 import javafx.application.Application;
@@ -11,12 +14,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class GUI extends Application {
     private static FXController sceneController;
     private static Connection serverConnection;
+    private static int playerId;
     private static String name;
     private static Stage stage;
     private static final int resX = 1366;
@@ -93,5 +98,19 @@ public class GUI extends Application {
 
     public static void applyChanges() {
         sceneController.applyChanges();
+    }
+
+    public static void bindPlayerId() {
+        Optional<Player> result = Lobby.getLobby().getPlayers().stream()
+                .filter((player) -> (player.getName().equals(name)))
+                .findAny();
+
+        if(result.isEmpty()) return;
+
+        playerId = result.get().getID();
+    }
+
+    public int getPlayerId() {
+        return playerId;
     }
 }
