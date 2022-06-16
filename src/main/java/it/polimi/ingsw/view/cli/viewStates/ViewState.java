@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.viewStates;
+package it.polimi.ingsw.view.cli.viewStates;
 
 import it.polimi.ingsw.network.observer.Observable;
 import it.polimi.ingsw.network.observer.Observer;

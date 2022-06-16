@@ -9,7 +9,7 @@ import it.polimi.ingsw.model.enumerations.CharacterCards;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.client.ServerConnectionCLI;
-import it.polimi.ingsw.view.viewStates.*;
+import it.polimi.ingsw.view.cli.viewStates.*;
 import org.fusesource.jansi.AnsiConsole;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.viewStates;
+package it.polimi.ingsw.view.cli.viewStates;
 
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.view.cli.AnsiCodes;
@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LobbyCreatedViewState extends LobbyViewState {
-    private final List<String> validCharacters = new ArrayList<>(List.of("Y", "y", "N", "n"));
-    private MatchInfo matchInfo;
     private boolean printed;
     public LobbyCreatedViewState(ViewState oldViewState) {
         super(oldViewState);
@@ -22,7 +20,7 @@ public class LobbyCreatedViewState extends LobbyViewState {
     @Override
     public void printCLIPrompt(boolean shouldPrint) {
         setInteractionComplete(false);
-        matchInfo = MatchInfo.getInstance();
+        MatchInfo matchInfo = MatchInfo.getInstance();
         appendBuffer("Another lobby was created [Players: "
                 + "1/"+ matchInfo.getSelectedNumPlayer() + ", Expert: "
                 + (matchInfo.isExpertMode() ?

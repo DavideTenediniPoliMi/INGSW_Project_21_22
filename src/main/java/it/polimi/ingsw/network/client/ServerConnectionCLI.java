@@ -12,7 +12,7 @@ import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
 import it.polimi.ingsw.view.cli.CLI;
-import it.polimi.ingsw.view.viewStates.*;
+import it.polimi.ingsw.view.cli.viewStates.*;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -22,7 +22,6 @@ public class ServerConnectionCLI extends Connection {
     private boolean inGame;
     private boolean ready;
     private boolean joined;
-    private MessageQueue<String> packetQueue;
     private MessageConsumer jsonConsumer;
     private final Object connectionLock = new Object();
 
@@ -196,7 +195,7 @@ public class ServerConnectionCLI extends Connection {
             view.displayState();
         }
 
-        packetQueue = new MessageQueue<>();
+        MessageQueue<String> packetQueue = new MessageQueue<>();
         jsonConsumer = new MessageConsumer(packetQueue, view);
         executor.submit( () -> jsonConsumer.run());
 
