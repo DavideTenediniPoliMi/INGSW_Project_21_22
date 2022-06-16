@@ -18,8 +18,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="it.polimi.ingsw.view.gui.controllers.LobbySelectionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.LobbySelectionController">
    <ImageView fitHeight="768.0" fitWidth="1366.0" opacity="0.8" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">
       <viewport>
          <Rectangle2D />
@@ -31,9 +30,9 @@
          <Font size="36.0" />
       </font>
    </Label>
-   <Label layoutX="46.0" layoutY="16.0" text="Lobby Selection" AnchorPane.leftAnchor="50.0">
+   <Label layoutX="46.0" layoutY="16.0" text="Lobby Selection" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="30.0">
       <font>
-         <Font name="AppleMyungjo Regular" size="64.0" />
+         <Font name="Arial Rounded MT Bold" size="58.0" />
       </font>
       <effect>
          <Bloom threshold="0.07">
@@ -52,7 +51,7 @@
          <InnerShadow />
       </effect>
    </ImageView>
-   <Label fx:id="usernameText1" alignment="CENTER" layoutX="103.0" layoutY="131.0" style="-fx-background-color: grey; -fx-background-radius: 10px;" text="cerlonghish" textFill="WHITE" visible="false" textOverrun="CLIP" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="1040.0" AnchorPane.topAnchor="130.0">
+   <Label fx:id="usernameText1" alignment="CENTER" layoutX="103.0" layoutY="131.0" style="-fx-background-color: grey; -fx-background-radius: 10px;" text="cerlonghish" textFill="WHITE" textOverrun="CLIP" visible="false" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="1040.0" AnchorPane.topAnchor="130.0">
       <font>
          <Font name="AppleMyungjo Regular" size="36.0" />
       </font>
@@ -111,8 +110,7 @@
          <Glow level="0.5" />
       </effect>
    </Label>
-   <Button fx:id="wizardButton1" layoutX="100.0" layoutY="150.0" mnemonicParsing="false" style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="600.0"
-         onMouseClicked="#handleWizardButtons">
+   <Button fx:id="wizardButton1" layoutX="100.0" layoutY="150.0" mnemonicParsing="false" onMouseClicked="#handleWizardButtons" style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="600.0">
       <graphic>
          <ImageView fitHeight="200.0" fitWidth="100.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/MAGO_1.jpg" />
@@ -125,8 +123,7 @@
          <InnerShadow />
       </effect>
    </Button>
-   <Button fx:id="wizardButton2" layoutX="110.0" layoutY="160.0" mnemonicParsing="false" style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="600.0"
-           onMouseClicked="#handleWizardButtons">
+   <Button fx:id="wizardButton2" layoutX="110.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#handleWizardButtons" style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="600.0">
       <padding>
          <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
       </padding>
@@ -139,8 +136,7 @@
          <InnerShadow />
       </effect>
    </Button>
-   <Button fx:id="wizardButton3" layoutX="110.0" layoutY="160.0" mnemonicParsing="false" style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="330.0" AnchorPane.topAnchor="600.0"
-           onMouseClicked="#handleWizardButtons">
+   <Button fx:id="wizardButton3" layoutX="110.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#handleWizardButtons" style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="330.0" AnchorPane.topAnchor="600.0">
       <padding>
          <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
       </padding>
@@ -153,8 +149,7 @@
          <InnerShadow />
       </effect>
    </Button>
-   <Button fx:id="wizardButton4" layoutX="110.0" layoutY="160.0" mnemonicParsing="false" style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="440.0" AnchorPane.topAnchor="600.0"
-           onMouseClicked="#handleWizardButtons">
+   <Button fx:id="wizardButton4" layoutX="110.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#handleWizardButtons" style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="440.0" AnchorPane.topAnchor="600.0">
       <padding>
          <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
       </padding>
@@ -167,8 +162,7 @@
          <InnerShadow />
       </effect>
    </Button>
-   <Button fx:id="cardBackButton" disable="true" layoutX="562.0" layoutY="663.0" mnemonicParsing="false" style="-fx-background-radius: 20px; -fx-background-color: #D6E3F8; -fx-border-color: blue; -fx-border-radius: 20px;" text="Confirm!" AnchorPane.leftAnchor="580.0" AnchorPane.topAnchor="650.0"
-         onMouseClicked="#handleCardBackButton">
+   <Button fx:id="cardBackButton" disable="true" layoutX="562.0" layoutY="663.0" mnemonicParsing="false" onMouseClicked="#handleCardBackButton" style="-fx-background-radius: 20px; -fx-background-color: #D6E3F8; -fx-border-color: blue; -fx-border-radius: 20px;" text="Confirm!" AnchorPane.leftAnchor="580.0" AnchorPane.topAnchor="650.0">
       <font>
          <Font size="18.0" />
       </font>
@@ -185,7 +179,7 @@
          </DropShadow>
       </effect>
       <toggleGroup>
-         <ToggleGroup fx:id="team"/>
+         <ToggleGroup fx:id="team" />
       </toggleGroup>
    </RadioButton>
    <Label layoutX="56.0" layoutY="26.0" text="Wizards" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="600.0">
@@ -236,14 +230,12 @@
          </Lighting>
       </effect>
    </Label>
-   <Button fx:id="towerColorButton" disable="true" layoutX="572.0" layoutY="673.0" mnemonicParsing="false" style="-fx-background-radius: 20px; -fx-background-color: #D6E3F8; -fx-border-color: blue; -fx-border-radius: 20px;" text="Confirm!" AnchorPane.leftAnchor="1020.0" AnchorPane.topAnchor="650.0"
-         onMouseClicked="#handleTowerColorButton">
+   <Button fx:id="towerColorButton" disable="true" layoutX="572.0" layoutY="673.0" mnemonicParsing="false" onMouseClicked="#handleTowerColorButton" style="-fx-background-radius: 20px; -fx-background-color: #D6E3F8; -fx-border-color: blue; -fx-border-radius: 20px;" text="Confirm!" AnchorPane.leftAnchor="1020.0" AnchorPane.topAnchor="650.0">
       <font>
          <Font size="18.0" />
       </font>
    </Button>
-   <Button fx:id="readyButton" disable="true" layoutX="1232.0" layoutY="656.0" mnemonicParsing="false" style="-fx-background-color: lightgreen;" text="Ready!" underline="true" AnchorPane.leftAnchor="1200.0" AnchorPane.topAnchor="640.0"
-         onMouseClicked="#handleReadyButton">
+   <Button fx:id="readyButton" disable="true" layoutX="1232.0" layoutY="656.0" mnemonicParsing="false" onMouseClicked="#handleReadyButton" style="-fx-background-color: lightgreen;" text="Ready!" underline="true" AnchorPane.leftAnchor="1200.0" AnchorPane.topAnchor="640.0">
       <font>
          <Font size="30.0" />
       </font>
@@ -255,55 +247,59 @@
          </InnerShadow>
       </effect>
    </Button>
-   <Label layoutX="690.0" layoutY="54.0" text="Players connected" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="35.0">
-      <font>
-         <Font name="AppleMyungjo Regular" size="46.0" />
-      </font>
-      <effect>
-         <Bloom threshold="0.07">
-            <input>
-               <InnerShadow />
-            </input>
-         </Bloom>
-      </effect>
-   </Label>
-   <Label fx:id="playersConnected" layoutX="700.0" layoutY="64.0" text="0" AnchorPane.leftAnchor="1100.0" AnchorPane.topAnchor="35.0">
-      <font>
-         <Font name="AppleMyungjo Regular" size="46.0" />
-      </font>
-      <effect>
-         <Bloom threshold="0.07">
-            <input>
-               <InnerShadow />
-            </input>
-         </Bloom>
-      </effect>
-   </Label>
-   <Label fx:id="maxPlayers" layoutX="710.0" layoutY="74.0" text="0" AnchorPane.leftAnchor="1200.0" AnchorPane.topAnchor="35.0">
-      <font>
-         <Font name="AppleMyungjo Regular" size="46.0" />
-      </font>
-      <effect>
-         <Bloom threshold="0.07">
-            <input>
-               <InnerShadow />
-            </input>
-         </Bloom>
-      </effect>
-   </Label>
-   <Label layoutX="710.0" layoutY="74.0" text="/" AnchorPane.leftAnchor="1150.0" AnchorPane.topAnchor="35.0">
-      <font>
-         <Font name="AppleMyungjo Regular" size="46.0" />
-      </font>
-      <effect>
-         <Bloom threshold="0.07">
-            <input>
-               <InnerShadow />
-            </input>
-         </Bloom>
-      </effect>
-   </Label>
-   <ImageView fx:id="tower1" fitHeight="50.0" fitWidth="50.0" layoutX="224.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="280.0" visible="false" AnchorPane.topAnchor="130.0">
+   <AnchorPane layoutX="700.0" layoutY="35.0" AnchorPane.leftAnchor="800.0" AnchorPane.topAnchor="45.0">
+      <children>
+         <Label text="Players connected">
+            <font>
+               <Font name="Arial Rounded MT Bold" size="40.0" />
+            </font>
+            <effect>
+               <Bloom threshold="0.07">
+                  <input>
+                     <InnerShadow />
+                  </input>
+               </Bloom>
+            </effect>
+         </Label>
+         <Label fx:id="playersConnected" layoutX="400.0" text="0">
+            <font>
+               <Font name="Arial Rounded MT Bold" size="40.0" />
+            </font>
+            <effect>
+               <Bloom threshold="0.07">
+                  <input>
+                     <InnerShadow />
+                  </input>
+               </Bloom>
+            </effect>
+         </Label>
+         <Label layoutX="450.0" text="/">
+            <font>
+               <Font name="Arial Rounded MT Bold" size="40.0" />
+            </font>
+            <effect>
+               <Bloom threshold="0.07">
+                  <input>
+                     <InnerShadow />
+                  </input>
+               </Bloom>
+            </effect>
+         </Label>
+         <Label fx:id="maxPlayers" layoutX="500.0" text="0">
+            <font>
+               <Font name="Arial Rounded MT Bold" size="40.0" />
+            </font>
+            <effect>
+               <Bloom threshold="0.07">
+                  <input>
+                     <InnerShadow />
+                  </input>
+               </Bloom>
+            </effect>
+         </Label>
+      </children>
+   </AnchorPane>
+   <ImageView fx:id="tower1" fitHeight="50.0" fitWidth="50.0" layoutX="224.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="130.0">
       <effect>
          <DropShadow spread="0.3" />
       </effect>
@@ -345,4 +341,16 @@
       </effect>
       <Image url="@../images/grey_tower.png" />
    </ImageView>
+   <Label layoutX="56.0" layoutY="26.0" text="[Expert Mode]" AnchorPane.leftAnchor="520.0" AnchorPane.topAnchor="45.0">
+      <font>
+         <Font name="Arial Rounded MT Bold" size="36.0" />
+      </font>
+      <effect>
+         <Bloom threshold="0.07">
+            <input>
+               <InnerShadow />
+            </input>
+         </Bloom>
+      </effect>
+   </Label>
 </AnchorPane>
