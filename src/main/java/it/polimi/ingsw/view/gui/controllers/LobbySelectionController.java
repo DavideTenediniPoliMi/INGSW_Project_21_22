@@ -18,6 +18,8 @@ import java.util.List;
 
 public class LobbySelectionController extends FXController {
     @FXML
+    private Label expertMode;
+    @FXML
     private Label playersConnected;
     @FXML
     private Label maxPlayers;
@@ -87,6 +89,7 @@ public class LobbySelectionController extends FXController {
         prepArrays();
 
         maxPlayers.setText(String.valueOf(matchInfo.getSelectedNumPlayer()));
+        expertMode.setVisible(false);
 
         for(int i = 0; i < 4; i ++) {
             if(i >= matchInfo.getSelectedNumPlayer())

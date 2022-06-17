@@ -248,56 +248,54 @@
       </effect>
    </Button>
    <AnchorPane layoutX="700.0" layoutY="35.0" AnchorPane.leftAnchor="800.0" AnchorPane.topAnchor="45.0">
-      <children>
-         <Label text="Players connected">
-            <font>
-               <Font name="Arial Rounded MT Bold" size="40.0" />
-            </font>
-            <effect>
-               <Bloom threshold="0.07">
-                  <input>
-                     <InnerShadow />
-                  </input>
-               </Bloom>
-            </effect>
-         </Label>
-         <Label fx:id="playersConnected" layoutX="400.0" text="0">
-            <font>
-               <Font name="Arial Rounded MT Bold" size="40.0" />
-            </font>
-            <effect>
-               <Bloom threshold="0.07">
-                  <input>
-                     <InnerShadow />
-                  </input>
-               </Bloom>
-            </effect>
-         </Label>
-         <Label layoutX="450.0" text="/">
-            <font>
-               <Font name="Arial Rounded MT Bold" size="40.0" />
-            </font>
-            <effect>
-               <Bloom threshold="0.07">
-                  <input>
-                     <InnerShadow />
-                  </input>
-               </Bloom>
-            </effect>
-         </Label>
-         <Label fx:id="maxPlayers" layoutX="500.0" text="0">
-            <font>
-               <Font name="Arial Rounded MT Bold" size="40.0" />
-            </font>
-            <effect>
-               <Bloom threshold="0.07">
-                  <input>
-                     <InnerShadow />
-                  </input>
-               </Bloom>
-            </effect>
-         </Label>
-      </children>
+      <Label text="Players connected">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="40.0"/>
+         </font>
+         <effect>
+            <Bloom threshold="0.07">
+               <input>
+                  <InnerShadow/>
+               </input>
+            </Bloom>
+         </effect>
+      </Label>
+      <Label fx:id="playersConnected" layoutX="400.0" text="0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="40.0"/>
+         </font>
+         <effect>
+            <Bloom threshold="0.07">
+               <input>
+                  <InnerShadow/>
+               </input>
+            </Bloom>
+         </effect>
+      </Label>
+      <Label layoutX="450.0" text="/">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="40.0"/>
+         </font>
+         <effect>
+            <Bloom threshold="0.07">
+               <input>
+                  <InnerShadow/>
+               </input>
+            </Bloom>
+         </effect>
+      </Label>
+      <Label fx:id="maxPlayers" layoutX="500.0" text="0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="40.0"/>
+         </font>
+         <effect>
+            <Bloom threshold="0.07">
+               <input>
+                  <InnerShadow/>
+               </input>
+            </Bloom>
+         </effect>
+      </Label>
    </AnchorPane>
    <ImageView fx:id="tower1" fitHeight="50.0" fitWidth="50.0" layoutX="224.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="130.0">
       <effect>
@@ -341,7 +339,7 @@
       </effect>
       <Image url="@../images/grey_tower.png" />
    </ImageView>
-   <Label layoutX="56.0" layoutY="26.0" text="[Expert Mode]" AnchorPane.leftAnchor="520.0" AnchorPane.topAnchor="45.0">
+   <Label fx:id="expertMode" layoutX="56.0" layoutY="26.0" text="[Expert Mode]" AnchorPane.leftAnchor="520.0" AnchorPane.topAnchor="45.0">
       <font>
          <Font name="Arial Rounded MT Bold" size="36.0" />
       </font>
