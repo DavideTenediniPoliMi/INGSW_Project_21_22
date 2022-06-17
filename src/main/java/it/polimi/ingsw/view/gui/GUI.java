@@ -26,9 +26,18 @@ public class GUI extends Application {
     private static Stage stage;
     private static final int resX = 1366;
     private static final int resY = 768;
+    private static boolean createdLobby;
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public static void setCreatedLobby(boolean createdLobby) {
+        GUI.createdLobby = createdLobby;
+    }
+
+    public static boolean didCreateLobby() {
+        return GUI.createdLobby;
     }
 
     @Override
@@ -108,6 +117,10 @@ public class GUI extends Application {
         if(result.isEmpty()) return;
 
         playerId = result.get().getID();
+    }
+
+    public static void showAlert() {
+        sceneController.showAlert();
     }
 
     public int getPlayerId() {

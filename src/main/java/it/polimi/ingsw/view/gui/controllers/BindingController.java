@@ -24,11 +24,8 @@ public class BindingController extends FXController {
 
             // IF NO EXCEPTIONS WERE THROWN PROCEED TO THE HANDSHAKE SCENE
             GUI.loadScene("/scenes/handshakeScene.fxml");
-        } catch(IOException | IllegalArgumentException | SecurityException e) {
+        } catch (IOException | IllegalArgumentException | SecurityException e) {
             showError("Something went wrong! Try again!");
         }
     }
-
-    @Override
-    public void applyChanges() {}
 }

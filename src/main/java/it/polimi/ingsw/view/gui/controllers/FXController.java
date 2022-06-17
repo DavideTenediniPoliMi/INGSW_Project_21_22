@@ -18,5 +18,7 @@ public abstract class FXController extends Observable<String> {
         executor.schedule(() -> error.setVisible(false), 5, TimeUnit.SECONDS);
     }
 
-    public abstract void applyChanges();
+    public void applyChanges() {}
+
+    public void showAlert() {}
 }

@@ -40,9 +40,11 @@ public class ServerConnectionGUI extends Connection {
         // TODO reconnection check
 
         if(MatchInfo.getInstance().getSelectedNumPlayer() == 0) {
-           Platform.runLater(() -> GUI.loadScene("/scenes/createLobbyScene.fxml"));
+            Platform.runLater(() -> GUI.loadScene("/scenes/createLobbyScene.fxml"));
 
-           new ResponseParameters().deserialize(waitForValidMessage());
+            new ResponseParameters().deserialize(waitForValidMessage());
+            if(!GUI.didCreateLobby())
+                Platform.runLater(GUI::showAlert);
         }
 
         sendMessage(

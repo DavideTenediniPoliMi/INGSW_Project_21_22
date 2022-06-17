@@ -21,7 +21,4 @@ public class HandshakeController extends FXController {
 
         notify(handshake.serialize().toString());
     }
-
-    @Override
-    public void applyChanges() {}
 }
