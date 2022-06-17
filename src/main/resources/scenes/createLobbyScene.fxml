@@ -14,8 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="it.polimi.ingsw.view.gui.controllers.CreateLobbyController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.CreateLobbyController">
    <ImageView fitHeight="768.0" fitWidth="1366.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">
       <viewport>
          <Rectangle2D />
@@ -27,9 +26,9 @@
          <Font size="36.0" />
       </font>
    </Label>
-   <Label layoutX="528.0" layoutY="99.0" text="Eriantys" textFill="WHITE" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0">
+   <Label layoutX="528.0" layoutY="99.0" text="Eriantys" textFill="WHITE" AnchorPane.leftAnchor="498.0" AnchorPane.rightAnchor="498.5">
       <font>
-         <Font name="AppleMyungjo Regular" size="96.0" />
+         <Font name="Arial Rounded MT Bold" size="92.0" />
       </font>
       <effect>
          <Bloom threshold="0.0" />
@@ -54,13 +53,12 @@
          <Insets bottom="5.0" />
       </padding>
    </Label>
-   <Button layoutX="693.0" layoutY="451.0" mnemonicParsing="false" style="-fx-background-radius: 20px;" text="Create Game!" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="580.0"
-           onMouseClicked="#handleCreateLobbyButton">
+   <Button layoutX="693.0" layoutY="451.0" mnemonicParsing="false" onMouseClicked="#handleCreateLobbyButton" style="-fx-background-radius: 20px;" text="Create Game!" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="580.0">
       <font>
-         <Font name="HiraMinProN-W3" size="30.0" />
+         <Font name="Arial" size="30.0" />
       </font>
    </Button>
-   <Slider fx:id="numPlayers" blockIncrement="1.0" layoutX="543.0" layoutY="350.0" majorTickUnit="1.0" minorTickCount="0" max="4.0" min="2.0" showTickMarks="true" snapToTicks="true" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="350.0">
+   <Slider fx:id="numPlayers" blockIncrement="1.0" layoutX="543.0" layoutY="350.0" majorTickUnit="1.0" max="4.0" min="2.0" minorTickCount="0" showTickMarks="true" snapToTicks="true" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="350.0">
       <effect>
          <DropShadow />
       </effect>

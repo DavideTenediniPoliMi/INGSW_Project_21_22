@@ -23,9 +23,9 @@
          <Font size="36.0" />
       </font>
    </Label>
-   <Label layoutX="528.0" layoutY="99.0" text="Eriantys" textFill="WHITE" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0">
+   <Label layoutX="528.0" layoutY="99.0" text="Eriantys" textFill="WHITE" AnchorPane.leftAnchor="498.0" AnchorPane.rightAnchor="498.0" AnchorPane.topAnchor="100.0">
       <font>
-         <Font name="AppleMyungjo Regular" size="96.0" />
+         <Font name="Arial Rounded MT Bold" size="92.0" />
       </font>
       <effect>
          <Bloom threshold="0.0" />
@@ -38,30 +38,30 @@
    </Label>
    <Label alignment="CENTER" layoutX="590.0" layoutY="46.0" text="Insert IP Address:" textAlignment="CENTER" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="270.0">
       <font>
-         <Font name="Hiragino Sans W6" size="36.0" />
+         <Font name="Arial Rounded MT Bold" size="36.0" />
       </font>
       <opaqueInsets>
          <Insets />
       </opaqueInsets>
    </Label>
-   <TextField fx:id="ipAddressText" alignment="CENTER" layoutX="638.0" layoutY="118.0" promptText="IP address" style="-fx-background-radius: 10px;" text="localhost" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="320.0">
+   <TextField fx:id="ipAddressText" alignment="CENTER" layoutX="638.0" layoutY="118.0" style="-fx-background-radius: 10px;" text="localhost" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="320.0">
       <font>
-         <Font size="36.0" />
+         <Font name="Arial" size="32.0" />
       </font>
    </TextField>
    <Label alignment="CENTER" layoutX="505.0" layoutY="302.0" text="Port:" textAlignment="CENTER" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="420.0">
       <font>
-         <Font name="Hiragino Sans W6" size="36.0" />
+         <Font name="Arial Rounded MT Bold" size="36.0" />
       </font>
    </Label>
-   <TextField fx:id="portText" alignment="CENTER" layoutX="743.0" layoutY="714.0" promptText="port" style="-fx-background-radius: 10px;" text="12345" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="470.0">
+   <TextField fx:id="portText" alignment="CENTER" layoutX="743.0" layoutY="714.0" style="-fx-background-radius: 10px;" text="12345" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="470.0">
       <font>
-         <Font size="36.0" />
+         <Font name="Arial" size="32.0" />
       </font>
    </TextField>
    <Button layoutX="693.0" layoutY="451.0" mnemonicParsing="false" onMouseClicked="#handleBindingButton" style="-fx-background-radius: 20px;" text="Connect!" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0" AnchorPane.topAnchor="580.0">
       <font>
-         <Font size="30.0" />
+         <Font name="Arial" size="30.0" />
       </font>
    </Button>
 </AnchorPane>
