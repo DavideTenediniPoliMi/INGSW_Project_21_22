@@ -71,6 +71,10 @@ public class LobbySelectionController extends FXController {
     @FXML
     private RadioButton greyOption;
     @FXML
+    private ImageView blackTower;
+    @FXML
+    private ImageView whiteTower;
+    @FXML
     private ImageView greyTower;
     @FXML
     private Button cardBackButton;
@@ -89,6 +93,7 @@ public class LobbySelectionController extends FXController {
     private final List<ImageView> towers = new ArrayList<>();
     private final List<Button> wizardButtons = new ArrayList<>();
     private final List<RadioButton> teamOptions = new ArrayList<>();
+    private final List<ImageView> towerOptions = new ArrayList<>();
     private final List<CheckBox> readyCheckBoxes = new ArrayList<>();
 
     @FXML
@@ -103,7 +108,7 @@ public class LobbySelectionController extends FXController {
 
         for(int i = 0; i < 4; i ++) {
             if(i >= matchInfo.getSelectedNumPlayer())
-                images.get(i).setStyle("-fx-opacity: 0.45;");
+                images.get(i).setImage(new Image("images/cardback_black_and_white.png"));
             //TODO improve visibility (possibly change opacity to a grey out version)
         }
 
@@ -152,6 +157,10 @@ public class LobbySelectionController extends FXController {
         teamOptions.add(whiteOption);
         teamOptions.add(greyOption);
 
+        towerOptions.add(blackTower);
+        towerOptions.add(whiteTower);
+        towerOptions.add(greyTower);
+
         readyCheckBoxes.add(readyCheckbox1);
         readyCheckBoxes.add(readyCheckbox2);
         readyCheckBoxes.add(readyCheckbox3);
@@ -166,6 +175,9 @@ public class LobbySelectionController extends FXController {
         List<Player> players = lobby.getPlayers();
 
         List<TowerColor> pickedTeams = new ArrayList<>();
+
+        if(matchInfo.isExpertMode())
+            expertMode.setVisible(true);
 
         playersConnected.setText(String.valueOf(lobby.getPlayers().size()));
 
@@ -200,10 +212,12 @@ public class LobbySelectionController extends FXController {
                 if(matchInfo.getSelectedNumPlayer() != 4) {
                     teamOptions.get(player.getTeamColor().ordinal()).setDisable(true);
                     teamOptions.get(player.getTeamColor().ordinal()).setSelected(false);
+                    towerOptions.get(player.getTeamColor().ordinal()).setDisable(true);
                 } else {
                     if(pickedTeams.contains(player.getTeamColor())) {
                         teamOptions.get(player.getTeamColor().ordinal()).setDisable(true);
                         teamOptions.get(player.getTeamColor().ordinal()).setSelected(false);
+                        towerOptions.get(player.getTeamColor().ordinal()).setDisable(true);
                     } else {
                         pickedTeams.add(player.getTeamColor());
                     }
@@ -250,8 +264,11 @@ public class LobbySelectionController extends FXController {
     }
 
     private void setDisableTeamOptions(boolean disable) {
+        int i = 0;
         for (RadioButton button : teamOptions){
             button.setDisable(disable);
+            towerOptions.get(i).setDisable(false);
+            i++;
         }
     }
 
@@ -338,6 +355,7 @@ public class LobbySelectionController extends FXController {
             towerColorButton.setText("Confirm!");
 
             setDisableTeamOptions(false);
+
             if(team.getSelectedToggle() == null) {
                 towerColorButton.setDisable(true);
             }

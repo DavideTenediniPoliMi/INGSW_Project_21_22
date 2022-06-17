@@ -44,132 +44,140 @@
       </effect>
    </Label>
    <AnchorPane layoutX="30.0" layoutY="120.0">
-      <children>
-         <ImageView fx:id="lobbyImage1" fitHeight="450.0" pickOnBounds="true" preserveRatio="true">
-            <viewport>
-               <Rectangle2D />
-            </viewport>
-            <Image url="@../images/Personaggi_retro.jpg" />
-            <effect>
-               <InnerShadow />
-            </effect>
-         </ImageView>
-         <Label fx:id="usernameText1" alignment="CENTER" layoutX="10.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: grey; -fx-background-radius: 10px;" text="cerlonghish" textFill="WHITE" textOverrun="CLIP" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-            <font>
-               <Font name="Arial Hebrew" size="36.0" />
-            </font>
-            <effect>
-               <Glow level="0.5" />
-            </effect>
-         </Label>
-         <ImageView fx:id="tower1" fitHeight="50.0" fitWidth="50.0" layoutX="250.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-            <effect>
-               <DropShadow spread="0.3" />
-            </effect>
-            <Image url="@../images/white_tower.png" />
-         </ImageView>
-         <CheckBox fx:id="readyCheckbox1" disable="true" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" selected="true" style="-fx-opacity: 1;" styleClass="readyCheckbox" textOverrun="CLIP" visible="false">
-            <font>
-               <Font size="22.0" />
-            </font>
-         </CheckBox>
-      </children>
+      <ImageView fx:id="lobbyImage1" fitHeight="450.0" pickOnBounds="true" preserveRatio="true">
+         <viewport>
+            <Rectangle2D/>
+         </viewport>
+         <Image url="@../images/Personaggi_retro.jpg"/>
+         <effect>
+            <InnerShadow/>
+         </effect>
+      </ImageView>
+      <Label fx:id="usernameText1" alignment="CENTER" layoutX="10.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT"
+             style="-fx-background-color: grey; -fx-background-radius: 10px;" text="cerlonghish" textFill="WHITE"
+             textOverrun="CLIP" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <font>
+            <Font name="Arial Hebrew" size="36.0"/>
+         </font>
+         <effect>
+            <Glow level="0.5"/>
+         </effect>
+      </Label>
+      <ImageView fx:id="tower1" fitHeight="50.0" fitWidth="50.0" layoutX="250.0" layoutY="10.0" pickOnBounds="true"
+                 preserveRatio="true">
+         <effect>
+            <DropShadow spread="0.3"/>
+         </effect>
+         <Image url="@../images/white_tower.png"/>
+      </ImageView>
+      <CheckBox fx:id="readyCheckbox1" disable="true" layoutX="20.0" layoutY="20.0" mnemonicParsing="false"
+                selected="true" style="-fx-opacity: 1;" styleClass="readyCheckbox" textOverrun="CLIP" visible="false">
+         <font>
+            <Font size="22.0"/>
+         </font>
+      </CheckBox>
    </AnchorPane>
    <AnchorPane layoutX="365.0" layoutY="120.0">
-      <children>
-         <ImageView fx:id="lobbyImage2" fitHeight="450.0" pickOnBounds="true" preserveRatio="true">
-            <viewport>
-               <Rectangle2D />
-            </viewport>
-            <Image url="@../images/Personaggi_retro.jpg" />
-            <effect>
-               <InnerShadow />
-            </effect>
-         </ImageView>
-         <Label fx:id="usernameText2" alignment="CENTER" layoutX="15.0" layoutY="10.0" style="-fx-background-color: grey; -fx-background-radius: 10px;" text="sara" textFill="WHITE" textOverrun="CLIP" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-            <font>
-               <Font name="Arial Hebrew" size="36.0" />
-            </font>
-            <effect>
-               <Glow level="0.5" />
-            </effect>
-         </Label>
-         <ImageView fx:id="tower2" fitHeight="50.0" fitWidth="50.0" layoutX="245.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" visible="false">
-            <effect>
-               <DropShadow spread="0.3" />
-            </effect>
-            <Image url="@../images/black_tower.png" />
-         </ImageView>
-         <CheckBox fx:id="readyCheckbox2" disable="true" layoutX="25.0" layoutY="20.0" mnemonicParsing="false" selected="true" style="-fx-opacity: 1;" styleClass="readyCheckbox" textOverrun="CLIP" visible="false">
-            <font>
-               <Font size="22.0" />
-            </font>
-         </CheckBox>
-      </children>
+      <ImageView fx:id="lobbyImage2" fitHeight="450.0" pickOnBounds="true" preserveRatio="true">
+         <viewport>
+            <Rectangle2D/>
+         </viewport>
+         <Image url="@../images/Personaggi_retro.jpg"/>
+         <effect>
+            <InnerShadow/>
+         </effect>
+      </ImageView>
+      <Label fx:id="usernameText2" alignment="CENTER" layoutX="15.0" layoutY="10.0"
+             style="-fx-background-color: grey; -fx-background-radius: 10px;" text="sara" textFill="WHITE"
+             textOverrun="CLIP" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <font>
+            <Font name="Arial Hebrew" size="36.0"/>
+         </font>
+         <effect>
+            <Glow level="0.5"/>
+         </effect>
+      </Label>
+      <ImageView fx:id="tower2" fitHeight="50.0" fitWidth="50.0" layoutX="245.0" layoutY="10.0" pickOnBounds="true"
+                 preserveRatio="true" visible="false">
+         <effect>
+            <DropShadow spread="0.3"/>
+         </effect>
+         <Image url="@../images/black_tower.png"/>
+      </ImageView>
+      <CheckBox fx:id="readyCheckbox2" disable="true" layoutX="25.0" layoutY="20.0" mnemonicParsing="false"
+                selected="true" style="-fx-opacity: 1;" styleClass="readyCheckbox" textOverrun="CLIP" visible="false">
+         <font>
+            <Font size="22.0"/>
+         </font>
+      </CheckBox>
    </AnchorPane>
    <AnchorPane layoutX="700.0" layoutY="120.0">
-      <children>
-         <ImageView fx:id="lobbyImage3" fitHeight="450.0" pickOnBounds="true" preserveRatio="true">
-            <viewport>
-               <Rectangle2D />
-            </viewport>
-            <Image url="@../images/Personaggi_retro.jpg" />
-            <effect>
-               <InnerShadow />
-            </effect>
-         </ImageView>
-         <Label fx:id="usernameText3" alignment="CENTER" layoutX="20.0" layoutY="10.0" style="-fx-background-color: grey; -fx-background-radius: 10px;" text="tene" textFill="WHITE" textOverrun="CLIP" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-            <font>
-               <Font name="AppleMyungjo Regular" size="36.0" />
-            </font>
-            <effect>
-               <Glow level="0.5" />
-            </effect>
-         </Label>
-         <ImageView fx:id="tower3" fitHeight="50.0" fitWidth="50.0" layoutX="240.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" visible="false">
-            <effect>
-               <DropShadow spread="0.3" />
-            </effect>
-            <Image url="@../images/black_tower.png" />
-         </ImageView>
-         <CheckBox fx:id="readyCheckbox3" disable="true" layoutX="30.0" layoutY="20.0" mnemonicParsing="false" selected="true" style="-fx-opacity: 1;" styleClass="readyCheckbox" textOverrun="CLIP" visible="false">
-            <font>
-               <Font size="22.0" />
-            </font>
-         </CheckBox>
-      </children>
+      <ImageView fx:id="lobbyImage3" fitHeight="450.0" pickOnBounds="true" preserveRatio="true">
+         <viewport>
+            <Rectangle2D/>
+         </viewport>
+         <Image url="@../images/Personaggi_retro.jpg"/>
+         <effect>
+            <InnerShadow/>
+         </effect>
+      </ImageView>
+      <Label fx:id="usernameText3" alignment="CENTER" layoutX="20.0" layoutY="10.0"
+             style="-fx-background-color: grey; -fx-background-radius: 10px;" text="tene" textFill="WHITE"
+             textOverrun="CLIP" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <font>
+            <Font name="AppleMyungjo Regular" size="36.0"/>
+         </font>
+         <effect>
+            <Glow level="0.5"/>
+         </effect>
+      </Label>
+      <ImageView fx:id="tower3" fitHeight="50.0" fitWidth="50.0" layoutX="240.0" layoutY="10.0" pickOnBounds="true"
+                 preserveRatio="true" visible="false">
+         <effect>
+            <DropShadow spread="0.3"/>
+         </effect>
+         <Image url="@../images/black_tower.png"/>
+      </ImageView>
+      <CheckBox fx:id="readyCheckbox3" disable="true" layoutX="30.0" layoutY="20.0" mnemonicParsing="false"
+                selected="true" style="-fx-opacity: 1;" styleClass="readyCheckbox" textOverrun="CLIP" visible="false">
+         <font>
+            <Font size="22.0"/>
+         </font>
+      </CheckBox>
    </AnchorPane>
    <AnchorPane layoutX="1032.0" layoutY="120.0">
-      <children>
-         <ImageView fx:id="lobbyImage4" fitHeight="450.0" pickOnBounds="true" preserveRatio="true">
-            <viewport>
-               <Rectangle2D />
-            </viewport>
-            <Image url="@../images/Personaggi_retro.jpg" />
-            <effect>
-               <InnerShadow />
-            </effect>
-         </ImageView>
-         <Label fx:id="usernameText4" alignment="CENTER" layoutX="18.0" layoutY="10.0" style="-fx-background-color: grey; -fx-background-radius: 10px;" text="fede" textFill="WHITE" textOverrun="CLIP" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-            <font>
-               <Font name="AppleMyungjo Regular" size="36.0" />
-            </font>
-            <effect>
-               <Glow level="0.5" />
-            </effect>
-         </Label>
-         <ImageView fx:id="tower4" fitHeight="50.0" fitWidth="50.0" layoutX="238.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" visible="false">
-            <effect>
-               <DropShadow spread="0.3" />
-            </effect>
-            <Image url="@../images/black_tower.png" />
-         </ImageView>
-         <CheckBox fx:id="readyCheckbox4" disable="true" layoutX="28.0" layoutY="20.0" mnemonicParsing="false" selected="true" style="-fx-opacity: 1;" styleClass="readyCheckbox" textOverrun="CLIP" visible="false">
-            <font>
-               <Font size="22.0" />
-            </font>
-         </CheckBox>
-      </children>
+      <ImageView fx:id="lobbyImage4" fitHeight="450.0" pickOnBounds="true" preserveRatio="true">
+         <viewport>
+            <Rectangle2D/>
+         </viewport>
+         <Image url="@../images/Personaggi_retro.jpg"/>
+         <effect>
+            <InnerShadow/>
+         </effect>
+      </ImageView>
+      <Label fx:id="usernameText4" alignment="CENTER" layoutX="18.0" layoutY="10.0"
+             style="-fx-background-color: grey; -fx-background-radius: 10px;" text="fede" textFill="WHITE"
+             textOverrun="CLIP" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <font>
+            <Font name="AppleMyungjo Regular" size="36.0"/>
+         </font>
+         <effect>
+            <Glow level="0.5"/>
+         </effect>
+      </Label>
+      <ImageView fx:id="tower4" fitHeight="50.0" fitWidth="50.0" layoutX="238.0" layoutY="10.0" pickOnBounds="true"
+                 preserveRatio="true" visible="false">
+         <effect>
+            <DropShadow spread="0.3"/>
+         </effect>
+         <Image url="@../images/black_tower.png"/>
+      </ImageView>
+      <CheckBox fx:id="readyCheckbox4" disable="true" layoutX="28.0" layoutY="20.0" mnemonicParsing="false"
+                selected="true" style="-fx-opacity: 1;" styleClass="readyCheckbox" textOverrun="CLIP" visible="false">
+         <font>
+            <Font size="22.0"/>
+         </font>
+      </CheckBox>
    </AnchorPane>
    <Button fx:id="wizardButton1" layoutX="100.0" layoutY="150.0" mnemonicParsing="false" onMouseClicked="#handleWizardButtons" style="-fx-border-color: grey; -fx-border-width: 3px;" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="600.0">
       <graphic>
@@ -358,19 +366,19 @@
          </effect>
       </Label>
    </AnchorPane>
-   <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="234.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="955.0" AnchorPane.topAnchor="585.0">
+   <ImageView fx:id="blackTower" fitHeight="50.0" fitWidth="50.0" layoutX="234.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" styleClass="towerOption" AnchorPane.leftAnchor="955.0" AnchorPane.topAnchor="585.0">
       <effect>
          <DropShadow />
       </effect>
       <Image url="@../images/black_tower.png" />
    </ImageView>
-   <ImageView fitHeight="45.0" fitWidth="50.0" layoutX="244.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="957.0" AnchorPane.topAnchor="645.0">
+   <ImageView fx:id="whiteTower" fitHeight="45.0" fitWidth="50.0" layoutX="244.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" styleClass="towerOption" AnchorPane.leftAnchor="957.0" AnchorPane.topAnchor="645.0">
       <effect>
          <DropShadow />
       </effect>
       <Image url="@../images/white_tower.png" />
    </ImageView>
-   <ImageView fx:id="greyTower" fitHeight="50.0" fitWidth="50.0" layoutX="254.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="955.0" AnchorPane.topAnchor="700.0">
+   <ImageView fx:id="greyTower" fitHeight="50.0" fitWidth="50.0" layoutX="254.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" styleClass="towerOption" AnchorPane.leftAnchor="955.0" AnchorPane.topAnchor="700.0">
       <effect>
          <DropShadow />
       </effect>

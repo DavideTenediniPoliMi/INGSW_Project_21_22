@@ -9,3 +9,7 @@
 .readyCheckbox:selected .mark {
     -fx-background-color: white;
 }
+
+.towerOption:disabled {
+    -fx-opacity: 50%;
+}
