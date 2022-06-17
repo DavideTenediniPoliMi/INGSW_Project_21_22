@@ -1,3 +1,11 @@
 .assistantCard:hover {
     -fx-translate-y: -80;
 }
+
+.readyCheckbox:selected .box {
+    -fx-background-color: green;
+}
+
+.readyCheckbox:selected .mark {
+    -fx-background-color: white;
+}

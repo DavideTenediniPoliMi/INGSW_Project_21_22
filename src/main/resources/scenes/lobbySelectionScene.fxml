@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -18,7 +19,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.LobbySelectionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.LobbySelectionController">
    <ImageView fitHeight="768.0" fitWidth="1366.0" opacity="0.8" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">
       <viewport>
          <Rectangle2D />
@@ -169,7 +170,7 @@
    </Button>
    <RadioButton fx:id="blackOption" layoutX="921.0" layoutY="624.0" mnemonicParsing="false" text="Black" AnchorPane.leftAnchor="860.0" AnchorPane.topAnchor="605.0">
       <font>
-         <Font size="24.0" />
+         <Font name="Arial" size="24.0" />
       </font>
       <effect>
          <DropShadow>
@@ -250,48 +251,48 @@
    <AnchorPane layoutX="700.0" layoutY="35.0" AnchorPane.leftAnchor="800.0" AnchorPane.topAnchor="45.0">
       <Label text="Players connected">
          <font>
-            <Font name="Arial Rounded MT Bold" size="40.0"/>
+            <Font name="Arial Rounded MT Bold" size="40.0" />
          </font>
          <effect>
             <Bloom threshold="0.07">
                <input>
-                  <InnerShadow/>
+                  <InnerShadow />
                </input>
             </Bloom>
          </effect>
       </Label>
       <Label fx:id="playersConnected" layoutX="400.0" text="0">
          <font>
-            <Font name="Arial Rounded MT Bold" size="40.0"/>
+            <Font name="Arial Rounded MT Bold" size="40.0" />
          </font>
          <effect>
             <Bloom threshold="0.07">
                <input>
-                  <InnerShadow/>
+                  <InnerShadow />
                </input>
             </Bloom>
          </effect>
       </Label>
       <Label layoutX="450.0" text="/">
          <font>
-            <Font name="Arial Rounded MT Bold" size="40.0"/>
+            <Font name="Arial Rounded MT Bold" size="40.0" />
          </font>
          <effect>
             <Bloom threshold="0.07">
                <input>
-                  <InnerShadow/>
+                  <InnerShadow />
                </input>
             </Bloom>
          </effect>
       </Label>
       <Label fx:id="maxPlayers" layoutX="500.0" text="0">
          <font>
-            <Font name="Arial Rounded MT Bold" size="40.0"/>
+            <Font name="Arial Rounded MT Bold" size="40.0" />
          </font>
          <effect>
             <Bloom threshold="0.07">
                <input>
-                  <InnerShadow/>
+                  <InnerShadow />
                </input>
             </Bloom>
          </effect>
@@ -351,4 +352,24 @@
          </Bloom>
       </effect>
    </Label>
+   <CheckBox fx:id="readyCheckbox1" disable="true" layoutX="16.0" layoutY="146.0" mnemonicParsing="false" selected="true" style="-fx-opacity: 1;" styleClass="readyCheckbox" textOverrun="CLIP" visible="false" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="140.0">
+      <font>
+         <Font size="22.0" />
+      </font>
+   </CheckBox>
+   <CheckBox fx:id="readyCheckbox2" disable="true" layoutX="26.0" layoutY="156.0" mnemonicParsing="false" selected="true" style="-fx-opacity: 1;" styleClass="readyCheckbox" textOverrun="CLIP" visible="false" AnchorPane.leftAnchor="390.0" AnchorPane.topAnchor="140.0">
+      <font>
+         <Font size="22.0" />
+      </font>
+   </CheckBox>
+   <CheckBox fx:id="readyCheckbox3" disable="true" layoutX="26.0" layoutY="156.0" mnemonicParsing="false" selected="true" style="-fx-opacity: 1;" styleClass="readyCheckbox" textOverrun="CLIP" visible="false" AnchorPane.leftAnchor="730.0" AnchorPane.topAnchor="140.0">
+      <font>
+         <Font size="22.0" />
+      </font>
+   </CheckBox>
+   <CheckBox fx:id="readyCheckbox4" disable="true" layoutX="26.0" layoutY="156.0" mnemonicParsing="false" selected="true" style="-fx-opacity: 1;" styleClass="readyCheckbox" textOverrun="CLIP" visible="false" AnchorPane.leftAnchor="1060.0" AnchorPane.topAnchor="140.0">
+      <font>
+         <Font size="22.0" />
+      </font>
+   </CheckBox>
 </AnchorPane>
