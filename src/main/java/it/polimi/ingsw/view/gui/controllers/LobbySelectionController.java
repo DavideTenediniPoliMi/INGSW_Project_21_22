@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
+import it.polimi.ingsw.view.gui.GUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -56,6 +57,14 @@ public class LobbySelectionController extends FXController {
     @FXML
     private Button wizardButton4;
     @FXML
+    private CheckBox readyCheckbox1;
+    @FXML
+    private CheckBox readyCheckbox2;
+    @FXML
+    private CheckBox readyCheckbox3;
+    @FXML
+    private CheckBox readyCheckbox4;
+    @FXML
     private RadioButton blackOption;
     @FXML
     private RadioButton whiteOption;
@@ -80,6 +89,7 @@ public class LobbySelectionController extends FXController {
     private final List<ImageView> towers = new ArrayList<>();
     private final List<Button> wizardButtons = new ArrayList<>();
     private final List<RadioButton> teamOptions = new ArrayList<>();
+    private final List<CheckBox> readyCheckBoxes = new ArrayList<>();
 
     @FXML
     public void initialize() {
@@ -141,6 +151,11 @@ public class LobbySelectionController extends FXController {
         teamOptions.add(blackOption);
         teamOptions.add(whiteOption);
         teamOptions.add(greyOption);
+
+        readyCheckBoxes.add(readyCheckbox1);
+        readyCheckBoxes.add(readyCheckbox2);
+        readyCheckBoxes.add(readyCheckbox3);
+        readyCheckBoxes.add(readyCheckbox4);
     }
 
     @Override
@@ -161,6 +176,8 @@ public class LobbySelectionController extends FXController {
         if(towerColorButton.getText().equals("Confirm!")) {
             setDisableTeamOptions(false);
         }
+
+        resetReadyCheckBoxes();
 
         for(int i = 0 ; i < matchInfo.getSelectedNumPlayer() ; i++) {
             ImageView image = images.get(i);
@@ -209,6 +226,10 @@ public class LobbySelectionController extends FXController {
             } else {
                 image.setImage(defaultImage);
             }
+
+            if(lobby.isReady(player.getID())) {
+                readyCheckBoxes.get(i).setVisible(true);
+            }
         }
     }
 
@@ -239,6 +260,13 @@ public class LobbySelectionController extends FXController {
             button.setStyle("-fx-border-color: grey; -fx-border-width: 3px;");
         }
     }
+
+    private void resetReadyCheckBoxes() {
+        for (CheckBox checkBox : readyCheckBoxes){
+            checkBox.setVisible(false);
+        }
+    }
+
 
     private CardBack getCardBackOfButton(Button button) {
         switch (button.getId()) {
@@ -320,7 +348,9 @@ public class LobbySelectionController extends FXController {
 
     public void handleReadyButton() {
         notify(
-                new RequestParameters().setCommandType(CommandType.READY_UP).serialize().toString()
+                new RequestParameters()
+                        .setCommandType(CommandType.READY_UP).setReady(true)
+                        .setIndex(GUI.getPlayerId()).serialize().toString()
         );
 
         readyButton.setDisable(true);

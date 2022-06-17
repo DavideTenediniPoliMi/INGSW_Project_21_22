@@ -123,7 +123,7 @@ public class GUI extends Application {
         sceneController.showAlert();
     }
 
-    public int getPlayerId() {
+    public static int getPlayerId() {
         return playerId;
     }
 }
