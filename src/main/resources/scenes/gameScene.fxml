@@ -84,7 +84,7 @@
             <Glow level="0.5" />
          </effect>
       </Label>
-      <ImageView fitHeight="30.0" fitWidth="50.0" layoutX="160.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="30.0" fitWidth="50.0" layoutX="160.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="158.0">
          <Image url="@../images/Moneta_base.png" />
       </ImageView>
       <Label layoutX="20.0" layoutY="40.0" text="8" AnchorPane.topAnchor="45.0">
@@ -228,7 +228,7 @@
          </effect>
          <Image url="@../images/black_tower.png" />
       </ImageView>
-      <ImageView fitHeight="30.0" fitWidth="50.0" layoutX="160.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="30.0" fitWidth="50.0" layoutX="160.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="158.0">
          <Image url="@../images/Moneta_base.png" />
       </ImageView>
       <Label layoutX="170.0" layoutY="40.0" text="1" AnchorPane.topAnchor="45.0">
@@ -380,7 +380,7 @@
          </effect>
          <Image url="@../images/black_tower.png" />
       </ImageView>
-      <ImageView fitHeight="30.0" fitWidth="50.0" layoutX="160.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="30.0" fitWidth="50.0" layoutX="160.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="158.0">
          <Image url="@../images/Moneta_base.png" />
       </ImageView>
       <Label layoutX="170.0" layoutY="40.0" text="1" AnchorPane.topAnchor="45.0">
@@ -560,7 +560,7 @@
                   <children>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@../images/student_green.png" />
+                           <Image url="@../images/green_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -571,7 +571,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                         <image>
-                           <Image url="@../images/student_red.png" />
+                           <Image url="@../images/red_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -582,7 +582,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_pink.png" />
+                           <Image url="@../images/pink_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -593,7 +593,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                         <image>
-                           <Image url="@../images/student_yellow.png" />
+                           <Image url="@../images/yellow_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -604,7 +604,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_blue.png" />
+                           <Image url="@../images/blue_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -696,7 +696,7 @@
                   <children>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@../images/student_green.png" />
+                           <Image url="@../images/green_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -707,7 +707,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                         <image>
-                           <Image url="@../images/student_red.png" />
+                           <Image url="@../images/red_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -718,7 +718,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_pink.png" />
+                           <Image url="@../images/pink_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -729,7 +729,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                         <image>
-                           <Image url="@../images/student_yellow.png" />
+                           <Image url="@../images/yellow_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -740,7 +740,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_blue.png" />
+                           <Image url="@../images/blue_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -832,7 +832,7 @@
                   <children>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@../images/student_green.png" />
+                           <Image url="@../images/green_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -843,7 +843,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                         <image>
-                           <Image url="@../images/student_red.png" />
+                           <Image url="@../images/red_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -854,7 +854,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_pink.png" />
+                           <Image url="@../images/pink_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -865,7 +865,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                         <image>
-                           <Image url="@../images/student_yellow.png" />
+                           <Image url="@../images/yellow_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -876,7 +876,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_blue.png" />
+                           <Image url="@../images/blue_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -968,7 +968,7 @@
                   <children>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@../images/student_green.png" />
+                           <Image url="@../images/green_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -979,7 +979,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                         <image>
-                           <Image url="@../images/student_red.png" />
+                           <Image url="@../images/red_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -990,7 +990,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_pink.png" />
+                           <Image url="@../images/pink_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1001,7 +1001,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                         <image>
-                           <Image url="@../images/student_yellow.png" />
+                           <Image url="@../images/yellow_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1012,7 +1012,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_blue.png" />
+                           <Image url="@../images/blue_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1104,7 +1104,7 @@
                   <children>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@../images/student_green.png" />
+                           <Image url="@../images/green_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1115,7 +1115,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                         <image>
-                           <Image url="@../images/student_red.png" />
+                           <Image url="@../images/red_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1126,7 +1126,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_pink.png" />
+                           <Image url="@../images/pink_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1137,7 +1137,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                         <image>
-                           <Image url="@../images/student_yellow.png" />
+                           <Image url="@../images/yellow_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1148,7 +1148,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_blue.png" />
+                           <Image url="@../images/blue_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1240,7 +1240,7 @@
                   <children>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@../images/student_green.png" />
+                           <Image url="@../images/green_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1251,7 +1251,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                         <image>
-                           <Image url="@../images/student_red.png" />
+                           <Image url="@../images/red_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1262,7 +1262,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_pink.png" />
+                           <Image url="@../images/pink_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1273,7 +1273,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                         <image>
-                           <Image url="@../images/student_yellow.png" />
+                           <Image url="@../images/yellow_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1284,7 +1284,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_blue.png" />
+                           <Image url="@../images/blue_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1376,7 +1376,7 @@
                   <children>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@../images/student_green.png" />
+                           <Image url="@../images/green_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1387,7 +1387,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                         <image>
-                           <Image url="@../images/student_red.png" />
+                           <Image url="@../images/red_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1398,7 +1398,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_pink.png" />
+                           <Image url="@../images/pink_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1409,7 +1409,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                         <image>
-                           <Image url="@../images/student_yellow.png" />
+                           <Image url="@../images/yellow_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1420,7 +1420,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_blue.png" />
+                           <Image url="@../images/blue_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1512,7 +1512,7 @@
                   <children>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@../images/student_green.png" />
+                           <Image url="@../images/green_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1523,7 +1523,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                         <image>
-                           <Image url="@../images/student_red.png" />
+                           <Image url="@../images/red_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1534,7 +1534,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_pink.png" />
+                           <Image url="@../images/pink_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1545,7 +1545,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                         <image>
-                           <Image url="@../images/student_yellow.png" />
+                           <Image url="@../images/yellow_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1556,7 +1556,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_blue.png" />
+                           <Image url="@../images/blue_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1648,7 +1648,7 @@
                   <children>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@../images/student_green.png" />
+                           <Image url="@../images/green_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1659,7 +1659,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                         <image>
-                           <Image url="@../images/student_red.png" />
+                           <Image url="@../images/red_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1670,7 +1670,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_pink.png" />
+                           <Image url="@../images/pink_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1681,7 +1681,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                         <image>
-                           <Image url="@../images/student_yellow.png" />
+                           <Image url="@../images/yellow_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1692,7 +1692,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_blue.png" />
+                           <Image url="@../images/blue_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1784,7 +1784,7 @@
                   <children>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@../images/student_green.png" />
+                           <Image url="@../images/green_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1795,7 +1795,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                         <image>
-                           <Image url="@../images/student_red.png" />
+                           <Image url="@../images/red_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1806,7 +1806,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_pink.png" />
+                           <Image url="@../images/pink_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1817,7 +1817,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                         <image>
-                           <Image url="@../images/student_yellow.png" />
+                           <Image url="@../images/yellow_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1828,7 +1828,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_blue.png" />
+                           <Image url="@../images/blue_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1923,7 +1923,7 @@
                   <children>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@../images/student_green.png" />
+                           <Image url="@../images/green_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1934,7 +1934,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                         <image>
-                           <Image url="@../images/student_red.png" />
+                           <Image url="@../images/red_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1945,7 +1945,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_pink.png" />
+                           <Image url="@../images/pink_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1956,7 +1956,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                         <image>
-                           <Image url="@../images/student_yellow.png" />
+                           <Image url="@../images/yellow_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -1967,7 +1967,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_blue.png" />
+                           <Image url="@../images/blue_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -2059,7 +2059,7 @@
                   <children>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@../images/student_green.png" />
+                           <Image url="@../images/green_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -2070,7 +2070,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                         <image>
-                           <Image url="@../images/student_red.png" />
+                           <Image url="@../images/red_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -2081,7 +2081,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_pink.png" />
+                           <Image url="@../images/pink_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -2092,7 +2092,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                         <image>
-                           <Image url="@../images/student_yellow.png" />
+                           <Image url="@../images/yellow_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -2103,7 +2103,7 @@
                      </ImageView>
                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                         <image>
-                           <Image url="@../images/student_blue.png" />
+                           <Image url="@../images/blue_student_background.png" />
                         </image>
                         <effect>
                            <DropShadow />
@@ -2192,7 +2192,7 @@
             <children>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                   <image>
-                     <Image url="@../images/student_green.png" />
+                     <Image url="@../images/green_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2203,7 +2203,7 @@
                </ImageView>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                   <image>
-                     <Image url="@../images/student_red.png" />
+                     <Image url="@../images/red_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2214,7 +2214,7 @@
                </ImageView>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                   <image>
-                     <Image url="@../images/student_pink.png" />
+                     <Image url="@../images/pink_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2225,7 +2225,7 @@
                </ImageView>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                   <image>
-                     <Image url="@../images/student_yellow.png" />
+                     <Image url="@../images/yellow_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2236,7 +2236,7 @@
                </ImageView>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                   <image>
-                     <Image url="@../images/student_blue.png" />
+                     <Image url="@../images/blue_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2310,7 +2310,7 @@
             <children>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                   <image>
-                     <Image url="@../images/student_green.png" />
+                     <Image url="@../images/green_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2321,7 +2321,7 @@
                </ImageView>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                   <image>
-                     <Image url="@../images/student_red.png" />
+                     <Image url="@../images/red_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2332,7 +2332,7 @@
                </ImageView>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                   <image>
-                     <Image url="@../images/student_pink.png" />
+                     <Image url="@../images/pink_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2343,7 +2343,7 @@
                </ImageView>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                   <image>
-                     <Image url="@../images/student_yellow.png" />
+                     <Image url="@../images/yellow_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2354,7 +2354,7 @@
                </ImageView>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                   <image>
-                     <Image url="@../images/student_blue.png" />
+                     <Image url="@../images/blue_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2428,7 +2428,7 @@
             <children>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                   <image>
-                     <Image url="@../images/student_green.png" />
+                     <Image url="@../images/green_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2439,7 +2439,7 @@
                </ImageView>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                   <image>
-                     <Image url="@../images/student_red.png" />
+                     <Image url="@../images/red_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2450,7 +2450,7 @@
                </ImageView>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                   <image>
-                     <Image url="@../images/student_pink.png" />
+                     <Image url="@../images/pink_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2461,7 +2461,7 @@
                </ImageView>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                   <image>
-                     <Image url="@../images/student_yellow.png" />
+                     <Image url="@../images/yellow_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2472,7 +2472,7 @@
                </ImageView>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                   <image>
-                     <Image url="@../images/student_blue.png" />
+                     <Image url="@../images/blue_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2546,7 +2546,7 @@
             <children>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                   <image>
-                     <Image url="@../images/student_green.png" />
+                     <Image url="@../images/green_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2557,7 +2557,7 @@
                </ImageView>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                   <image>
-                     <Image url="@../images/student_red.png" />
+                     <Image url="@../images/red_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2568,7 +2568,7 @@
                </ImageView>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                   <image>
-                     <Image url="@../images/student_pink.png" />
+                     <Image url="@../images/pink_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2579,7 +2579,7 @@
                </ImageView>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                   <image>
-                     <Image url="@../images/student_yellow.png" />
+                     <Image url="@../images/yellow_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -2590,7 +2590,7 @@
                </ImageView>
                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                   <image>
-                     <Image url="@../images/student_blue.png" />
+                     <Image url="@../images/blue_student_background.png" />
                   </image>
                   <effect>
                      <DropShadow />
@@ -3598,6 +3598,19 @@
                </ImageView>
             </children>
          </GridPane>
+         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="2.0">
+            <image>
+               <Image url="@../images/Moneta_base.png" />
+            </image>
+            <effect>
+               <DropShadow />
+            </effect>
+         </ImageView>
+         <Label text="0" textFill="WHITE" visible="false" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="6.0">
+            <font>
+               <Font name="Arial" size="14.0" />
+            </font>
+         </Label>
       </children>
    </AnchorPane>
    <AnchorPane layoutX="1247.0" layoutY="190.0">
@@ -3673,6 +3686,19 @@
                </ImageView>
             </children>
          </GridPane>
+         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="2.0">
+            <image>
+               <Image url="@../images/Moneta_base.png" />
+            </image>
+            <effect>
+               <DropShadow />
+            </effect>
+         </ImageView>
+         <Label text="0" textFill="WHITE" visible="false" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="6.0">
+            <font>
+               <Font name="Arial" size="14.0" />
+            </font>
+         </Label>
       </children>
    </AnchorPane>
    <AnchorPane layoutX="1247.0" layoutY="360.0">
@@ -3748,7 +3774,7 @@
                </ImageView>
             </children>
          </GridPane>
-         <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="-3.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="-3.0" AnchorPane.topAnchor="-5.0">
+         <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="-3.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="2.0">
             <image>
                <Image url="@../images/Moneta_base.png" />
             </image>
@@ -3756,7 +3782,7 @@
                <DropShadow />
             </effect>
          </ImageView>
-         <Label layoutX="29.0" layoutY="6.0" text="0" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="6.0">
+         <Label layoutX="29.0" layoutY="6.0" text="0" textFill="WHITE" visible="false" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="6.0">
             <font>
                <Font name="Arial" size="14.0" />
             </font>
