@@ -158,6 +158,8 @@
                   <artifact>*:*</artifact>
                   <excludes>
                     <exclude>module-info.class</exclude>
+                    <exclude>**/*.jar</exclude>
+                    <exclude>target/**/*.class</exclude>
                   </excludes>
                 </filter>
               </filters>
