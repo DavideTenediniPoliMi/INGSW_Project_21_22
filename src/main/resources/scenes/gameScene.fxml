@@ -3138,13 +3138,13 @@
             </effect>
             <Image url="@../images/black_tower.png" />
          </ImageView>
-         <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="10.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="3" visible="false">
+         <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="10.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="3">
             <effect>
                <InnerShadow height="10.0" radius="4.5" width="10.0" />
             </effect>
             <Image url="@../images/black_tower.png" />
          </ImageView>
-         <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="10.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" visible="false">
+         <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="10.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
             <effect>
                <InnerShadow height="10.0" radius="4.5" width="10.0" />
             </effect>
@@ -3174,7 +3174,7 @@
       </viewport>
       <Image url="@../images/Assistente (1).png" />
    </ImageView>
-   <AnchorPane fx:id="coinsHero" layoutX="232.0" layoutY="511.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="660.0">
+   <AnchorPane fx:id="coinsHero" layoutX="232.0" layoutY="511.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="660.0" visible="false">
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
          <effect>
             <DropShadow />
@@ -3464,7 +3464,7 @@
       </font>
    </Label>
    <ImageView fx:id="assistantCard1" fitHeight="100.0" fitWidth="60.0" layoutX="181.0" layoutY="27.0"
-              pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="230.0"
+              pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="230.0"
               AnchorPane.topAnchor="25.0">
       <Image url="@../images/Assistente (1).png"/>
    </ImageView>

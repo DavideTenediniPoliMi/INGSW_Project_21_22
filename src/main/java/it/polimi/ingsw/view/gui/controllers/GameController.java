@@ -3,8 +3,14 @@ package it.polimi.ingsw.view.gui.controllers;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.board.Board;
+import it.polimi.ingsw.model.board.Cloud;
 import it.polimi.ingsw.model.board.School;
+import it.polimi.ingsw.model.characters.CharacterCard;
+import it.polimi.ingsw.model.characters.StudentGroupDecorator;
+import it.polimi.ingsw.model.enumerations.CharacterCards;
 import it.polimi.ingsw.model.enumerations.Color;
+import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.view.gui.GUI;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -40,6 +46,12 @@ public class GameController extends FXController {
     @FXML
     private Label numTowers3;
     @FXML
+    private AnchorPane coins1;
+    @FXML
+    private AnchorPane coins2;
+    @FXML
+    private AnchorPane coins3;
+    @FXML
     private Label numCoins1;
     @FXML
     private Label numCoins2;
@@ -57,6 +69,12 @@ public class GameController extends FXController {
     private GridPane diningRoom2;
     @FXML
     private GridPane diningRoom3;
+    @FXML
+    private ImageView assistantCard1;
+    @FXML
+    private ImageView assistantCard2;
+    @FXML
+    private ImageView assistantCard3;
     @FXML
     private Label usernameTextHero;
     @FXML
@@ -257,9 +275,11 @@ public class GameController extends FXController {
     private final List<GridPane> charCardsStudents = new ArrayList<>();
     private final List<Label> charCardsCost = new ArrayList<>();
     private final List<ImageView> studentsEntranceHero = new ArrayList<>();
+    private final List<ImageView> otherAssistants = new ArrayList<>();
 
     @FXML
     public void initialize() {
+        Board board =  Game.getInstance().getBoard();
         MatchInfo matchInfo = MatchInfo.getInstance();
 
         prepArrays();
@@ -274,6 +294,7 @@ public class GameController extends FXController {
             cloudPane3.setVisible(true);
             clouds.add(cloudPane3);
             cloudStudents.add(studentCloud3);
+            otherAssistants.add(assistantCard2);
 
             if(matchInfo.getSelectedNumPlayer() == 4) {
                 player3.setVisible(true);
@@ -285,6 +306,7 @@ public class GameController extends FXController {
                 cloudPane4.setVisible(true);
                 clouds.add(cloudPane4);
                 cloudStudents.add(studentCloud4);
+                otherAssistants.add(assistantCard3);
             } else if(matchInfo.getSelectedNumPlayer() == 3){
                 for(Node node : entranceHero.getChildren()) {
                     if(GridPane.getRowIndex(node) == 4) {
@@ -301,15 +323,17 @@ public class GameController extends FXController {
         }
 
         if(matchInfo.isExpertMode()) {
-            //show coins pane for other players
+            coins1.setVisible(true);
 
             otherNumCoins.add(numCoins1);
 
             if(matchInfo.getSelectedNumPlayer() >= 3) {
                 otherNumCoins.add(numCoins2);
+                coins2.setVisible(true);
 
                 if(matchInfo.getSelectedNumPlayer() == 4) {
                     otherNumCoins.add(numCoins3);
+                    coins3.setVisible(true);
                 }
             }
 
@@ -330,9 +354,45 @@ public class GameController extends FXController {
             charCardsCost.add(charCardCost3);
 
             boardCoins.setVisible(true);
+            coinsHero.setVisible(true);
+
+            List<CharacterCard> cards = Game.getInstance().getCharacterCards();
+
+            for(int i = 0 ; i < cards.size(); i++) {
+                charCards.get(i).setImage(CharacterCards.valueOf(cards.get(i).getName()).getImage());
+                if(cards.get(i).getEffectType().equals(EffectType.STUDENT_GROUP)) {
+                    charCardsStudents.get(i).setVisible(true);
+                    if(cards.get(i).getName().equals("POOL_SWAP")) {
+                        getNodeFromCard(4, charCardsStudents.get(i)).setVisible(true);
+                        getNodeFromCard(5, charCardsStudents.get(i)).setVisible(true);
+                    }
+
+                    int cardIndex = 0;
+                    for(Color c : Color.values()) {
+                        int numStud = ((StudentGroupDecorator)cards.get(i)).getStudentsByColor(c);
+                        for(int j = 0; j < numStud; j++) {
+                            ImageView stud = (ImageView) getNodeFromCard(cardIndex, charCardsStudents.get(i));
+                            stud.setImage(c.getStudImage());
+                            cardIndex++;
+                        }
+                    }
+                }
+                charCardsCost.get(i).setText(String.valueOf(cards.get(i).getCost()));
+            }
         }
 
         initPlayers();
+
+        List<Cloud> clouds = board.getClouds();
+
+        for(int i = 0; i < clouds.size(); i++) {
+            for(Color c : Color.values()) {
+                Label numStud = (Label) getNodeFromCloud(c, cloudStudents.get(i));
+                numStud.setText(String.valueOf(clouds.get(i).getStudents().getByColor(c)));
+            }
+        }
+
+        islandMN.get(board.getMNPosition()).setVisible(true);
     }
 
     private void prepArrays() {
@@ -341,6 +401,7 @@ public class GameController extends FXController {
         otherNumTowers.add(numTowers1);
         otherEntrance.add(entrance1);
         otherDiningRoom.add(diningRoom1);
+        otherAssistants.add(assistantCard1);
 
         clouds.add(cloudPane1);
         clouds.add(cloudPane2);
@@ -465,6 +526,46 @@ public class GameController extends FXController {
     private Node getNodeFromSchool(Color c, GridPane grid) {
         for(Node n : grid.getChildren()) {
             if(GridPane.getColumnIndex(n) == c.ordinal() && n instanceof Label)
+                return n;
+        }
+
+        return null;
+    }
+
+    private Node getNodeFromCloud(Color c, GridPane grid) {
+        for(Node n : grid.getChildren()) {
+            if(!(n instanceof Label)) continue;
+
+            switch (c) {
+                case RED:
+                    if(GridPane.getRowIndex(n) == 0 && GridPane.getColumnIndex(n) == 1)
+                        return n;
+                    break;
+                case GREEN:
+                    if(GridPane.getRowIndex(n) == 1 && GridPane.getColumnIndex(n) == 0)
+                        return n;
+                    break;
+                case YELLOW:
+                    if(GridPane.getRowIndex(n) == 1 && GridPane.getColumnIndex(n) == 2)
+                        return n;
+                    break;
+                case PINK:
+                    if(GridPane.getRowIndex(n) == 2 && GridPane.getColumnIndex(n) == 0)
+                        return n;
+                    break;
+                case BLUE:
+                    if(GridPane.getRowIndex(n) == 2 && GridPane.getColumnIndex(n) == 2)
+                        return n;
+                    break;
+            }
+        }
+
+        return null;
+    }
+
+    private Node getNodeFromCard(int i, GridPane grid) {
+        for(Node n : grid.getChildren()) {
+            if(GridPane.getColumnIndex(n) == i)
                 return n;
         }
 
