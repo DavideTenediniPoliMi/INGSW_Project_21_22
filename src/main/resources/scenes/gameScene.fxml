@@ -63,7 +63,7 @@
    <ImageView fx:id="bridge12" fitHeight="90.0" fitWidth="90.0" layoutX="446.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: -70;" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="205.0">
       <Image url="@../images/bridge.png" />
    </ImageView>
-   <AnchorPane fx:id="player1" layoutX="20.0" layoutY="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+   <AnchorPane layoutX="20.0" layoutY="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
       <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0">
          <Image url="@../images/School_asset.png" />
       </ImageView>
@@ -139,7 +139,7 @@
          </Label>
          <Label alignment="CENTER" text="0" GridPane.columnIndex="4">
             <font>
-               <Font name="System Bold" size="14.0" />
+               <Font name="Arial" size="14.0" />
             </font>
             <GridPane.margin>
                <Insets bottom="12.5" left="11.5" top="9.5" />
@@ -158,37 +158,37 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
          </rowConstraints>
-         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
             <GridPane.margin>
                <Insets />
             </GridPane.margin>
             <Image url="@../images/teacher_blue.png" />
          </ImageView>
-         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="1">
             <GridPane.margin>
                <Insets left="3.0" />
             </GridPane.margin>
             <Image url="@../images/teacher_green.png" />
          </ImageView>
-         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="2">
             <GridPane.margin>
                <Insets left="2.0" />
             </GridPane.margin>
             <Image url="@../images/teacher_pink.png" />
          </ImageView>
-         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="3">
             <GridPane.margin>
                <Insets left="2.0" />
             </GridPane.margin>
             <Image url="@../images/teacher_red.png" />
          </ImageView>
-         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="4">
             <GridPane.margin>
                <Insets left="4.0" />
             </GridPane.margin>
             <Image url="@../images/teacher_yellow.png" />
          </ImageView>
-         <Label alignment="CENTER" contentDisplay="CENTER" text="0" GridPane.rowIndex="1">
+         <Label alignment="CENTER" contentDisplay="CENTER" text="0" GridPane.rowIndex="1" GridPane.columnIndex="0">
             <font>
                <Font name="Arial" size="14.0" />
             </font>
@@ -257,7 +257,7 @@
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
-         <Label alignment="CENTER" text="0">
+         <Label alignment="CENTER" text="0" GridPane.columnIndex="0">
             <font>
                <Font name="Arial" size="14.0" />
             </font>
@@ -291,7 +291,7 @@
          </Label>
          <Label alignment="CENTER" text="0" GridPane.columnIndex="4">
             <font>
-               <Font name="System Bold" size="14.0" />
+               <Font name="Arial" size="14.0" />
             </font>
             <GridPane.margin>
                <Insets bottom="12.5" left="11.5" top="9.5" />
@@ -310,37 +310,37 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
          </rowConstraints>
-         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="0">
             <GridPane.margin>
                <Insets />
             </GridPane.margin>
             <Image url="@../images/teacher_blue.png" />
          </ImageView>
-         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="1">
             <GridPane.margin>
                <Insets left="3.0" />
             </GridPane.margin>
             <Image url="@../images/teacher_green.png" />
          </ImageView>
-         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="2">
             <GridPane.margin>
                <Insets left="2.0" />
             </GridPane.margin>
             <Image url="@../images/teacher_pink.png" />
          </ImageView>
-         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="3">
             <GridPane.margin>
                <Insets left="2.0" />
             </GridPane.margin>
             <Image url="@../images/teacher_red.png" />
          </ImageView>
-         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="4">
             <GridPane.margin>
                <Insets left="4.0" />
             </GridPane.margin>
             <Image url="@../images/teacher_yellow.png" />
          </ImageView>
-         <Label alignment="CENTER" contentDisplay="CENTER" text="0" GridPane.rowIndex="1">
+         <Label alignment="CENTER" contentDisplay="CENTER" text="0" GridPane.rowIndex="1" GridPane.columnIndex="0">
             <font>
                <Font name="Arial" size="14.0" />
             </font>
@@ -409,7 +409,7 @@
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
          </rowConstraints>
-         <Label alignment="CENTER" text="0">
+         <Label alignment="CENTER" text="0" GridPane.columnIndex="0">
             <font>
                <Font name="Arial" size="14.0"/>
             </font>
@@ -443,7 +443,7 @@
          </Label>
          <Label alignment="CENTER" text="0" GridPane.columnIndex="4">
             <font>
-               <Font name="System Bold" size="14.0"/>
+               <Font name="Arial" size="14.0"/>
             </font>
             <GridPane.margin>
                <Insets bottom="12.5" left="11.5" top="9.5"/>
@@ -464,37 +464,37 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
          </rowConstraints>
-         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="0">
             <GridPane.margin>
                <Insets/>
             </GridPane.margin>
             <Image url="@../images/teacher_blue.png"/>
          </ImageView>
-         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="1">
             <GridPane.margin>
                <Insets left="3.0"/>
             </GridPane.margin>
             <Image url="@../images/teacher_green.png"/>
          </ImageView>
-         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="2">
             <GridPane.margin>
                <Insets left="2.0"/>
             </GridPane.margin>
             <Image url="@../images/teacher_pink.png"/>
          </ImageView>
-         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="3">
             <GridPane.margin>
                <Insets left="2.0"/>
             </GridPane.margin>
             <Image url="@../images/teacher_red.png"/>
          </ImageView>
-         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+         <ImageView visible="false" fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="4">
             <GridPane.margin>
                <Insets left="4.0"/>
             </GridPane.margin>
             <Image url="@../images/teacher_yellow.png"/>
          </ImageView>
-         <Label alignment="CENTER" contentDisplay="CENTER" text="0" GridPane.rowIndex="1">
+         <Label alignment="CENTER" contentDisplay="CENTER" text="0" GridPane.rowIndex="1" GridPane.columnIndex="0">
             <font>
                <Font name="Arial" size="14.0"/>
             </font>
@@ -539,7 +539,7 @@
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -549,7 +549,7 @@
                <Image url="@../images/green_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="2">
+                       GridPane.columnIndex="2" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -569,7 +569,7 @@
                <Image url="@../images/pink_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="4">
+                       GridPane.columnIndex="4" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -588,7 +588,7 @@
                </GridPane.margin>
                <Image url="@../images/blue_student_background.png"/>
             </ImageView>
-            <Label text="0" textFill="BLACK">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="0" GridPane.rowIndex="0">
                <GridPane.margin>
                   <Insets left="6.0"/>
                </GridPane.margin>
@@ -596,7 +596,7 @@
                   <Font name="Arial" size="13.0"/>
                </font>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="2">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="2" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -620,7 +620,7 @@
                   <Insets left="6.0"/>
                </GridPane.margin>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="4">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="4" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -659,7 +659,7 @@
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -669,7 +669,7 @@
                <Image url="@../images/green_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="2">
+                       GridPane.columnIndex="2" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -689,7 +689,7 @@
                <Image url="@../images/pink_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="4">
+                       GridPane.columnIndex="4" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -708,7 +708,7 @@
                </GridPane.margin>
                <Image url="@../images/blue_student_background.png"/>
             </ImageView>
-            <Label text="0" textFill="BLACK">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="0" GridPane.rowIndex="0">
                <GridPane.margin>
                   <Insets left="6.0"/>
                </GridPane.margin>
@@ -716,7 +716,7 @@
                   <Font name="Arial" size="13.0"/>
                </font>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="2">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="2" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -740,7 +740,7 @@
                   <Insets left="6.0"/>
                </GridPane.margin>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="4">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="4" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -778,7 +778,7 @@
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -788,7 +788,7 @@
                <Image url="@../images/green_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="2">
+                       GridPane.columnIndex="2" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -808,7 +808,7 @@
                <Image url="@../images/pink_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="4">
+                       GridPane.columnIndex="4" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -827,7 +827,7 @@
                </GridPane.margin>
                <Image url="@../images/blue_student_background.png"/>
             </ImageView>
-            <Label text="0" textFill="BLACK">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="0" GridPane.rowIndex="0">
                <GridPane.margin>
                   <Insets left="6.0"/>
                </GridPane.margin>
@@ -835,7 +835,7 @@
                   <Font name="Arial" size="13.0"/>
                </font>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="2">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="2" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -859,7 +859,7 @@
                   <Insets left="6.0"/>
                </GridPane.margin>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="4">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="4" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -898,7 +898,7 @@
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -908,7 +908,7 @@
                <Image url="@../images/green_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="2">
+                       GridPane.columnIndex="2" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -928,7 +928,7 @@
                <Image url="@../images/pink_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="4">
+                       GridPane.columnIndex="4" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -947,7 +947,7 @@
                </GridPane.margin>
                <Image url="@../images/blue_student_background.png"/>
             </ImageView>
-            <Label text="0" textFill="BLACK">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="0" GridPane.rowIndex="0">
                <GridPane.margin>
                   <Insets left="6.0"/>
                </GridPane.margin>
@@ -955,7 +955,7 @@
                   <Font name="Arial" size="13.0"/>
                </font>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="2">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="2" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -979,7 +979,7 @@
                   <Insets left="6.0"/>
                </GridPane.margin>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="4">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="4" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -1018,7 +1018,7 @@
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1028,7 +1028,7 @@
                <Image url="@../images/green_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="2">
+                       GridPane.columnIndex="2" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1048,7 +1048,7 @@
                <Image url="@../images/pink_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="4">
+                       GridPane.columnIndex="4" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1067,7 +1067,7 @@
                </GridPane.margin>
                <Image url="@../images/blue_student_background.png"/>
             </ImageView>
-            <Label text="0" textFill="BLACK">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="0" GridPane.rowIndex="0">
                <GridPane.margin>
                   <Insets left="6.0"/>
                </GridPane.margin>
@@ -1075,7 +1075,7 @@
                   <Font name="Arial" size="13.0"/>
                </font>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="2">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="2" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -1099,7 +1099,7 @@
                   <Insets left="6.0"/>
                </GridPane.margin>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="4">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="4" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -1138,7 +1138,7 @@
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1148,7 +1148,7 @@
                <Image url="@../images/green_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="2">
+                       GridPane.columnIndex="2" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1168,7 +1168,7 @@
                <Image url="@../images/pink_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="4">
+                       GridPane.columnIndex="4" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1187,7 +1187,7 @@
                </GridPane.margin>
                <Image url="@../images/blue_student_background.png"/>
             </ImageView>
-            <Label text="0" textFill="BLACK">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="0" GridPane.rowIndex="0">
                <GridPane.margin>
                   <Insets left="6.0"/>
                </GridPane.margin>
@@ -1195,7 +1195,7 @@
                   <Font name="Arial" size="13.0"/>
                </font>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="2">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="2" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -1219,7 +1219,7 @@
                   <Insets left="6.0"/>
                </GridPane.margin>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="4">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="4" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -1258,7 +1258,7 @@
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1268,7 +1268,7 @@
                <Image url="@../images/green_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="2">
+                       GridPane.columnIndex="2" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1288,7 +1288,7 @@
                <Image url="@../images/pink_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="4">
+                       GridPane.columnIndex="4" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1307,7 +1307,7 @@
                </GridPane.margin>
                <Image url="@../images/blue_student_background.png"/>
             </ImageView>
-            <Label text="0" textFill="BLACK">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="0" GridPane.rowIndex="0">
                <GridPane.margin>
                   <Insets left="6.0"/>
                </GridPane.margin>
@@ -1315,7 +1315,7 @@
                   <Font name="Arial" size="13.0"/>
                </font>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="2">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="2" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -1339,7 +1339,7 @@
                   <Insets left="6.0"/>
                </GridPane.margin>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="4">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="4" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -1378,7 +1378,7 @@
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1388,7 +1388,7 @@
                <Image url="@../images/green_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="2">
+                       GridPane.columnIndex="2" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1408,7 +1408,7 @@
                <Image url="@../images/pink_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="4">
+                       GridPane.columnIndex="4" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1427,7 +1427,7 @@
                </GridPane.margin>
                <Image url="@../images/blue_student_background.png"/>
             </ImageView>
-            <Label text="0" textFill="BLACK">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="0" GridPane.rowIndex="0">
                <GridPane.margin>
                   <Insets left="6.0"/>
                </GridPane.margin>
@@ -1435,7 +1435,7 @@
                   <Font name="Arial" size="13.0"/>
                </font>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="2">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="2" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -1459,7 +1459,7 @@
                   <Insets left="6.0"/>
                </GridPane.margin>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="4">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="4" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -1498,7 +1498,7 @@
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1508,7 +1508,7 @@
                <Image url="@../images/green_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="2">
+                       GridPane.columnIndex="2" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1528,7 +1528,7 @@
                <Image url="@../images/pink_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="4">
+                       GridPane.columnIndex="4" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1547,7 +1547,7 @@
                </GridPane.margin>
                <Image url="@../images/blue_student_background.png"/>
             </ImageView>
-            <Label text="0" textFill="BLACK">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="0" GridPane.rowIndex="0">
                <GridPane.margin>
                   <Insets left="6.0"/>
                </GridPane.margin>
@@ -1555,7 +1555,7 @@
                   <Font name="Arial" size="13.0"/>
                </font>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="2">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="2" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -1571,7 +1571,7 @@
                   <Insets left="6.0"/>
                </GridPane.margin>
             </Label>
-            <Label text="1" textFill="BLACK" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -1579,7 +1579,7 @@
                   <Insets left="6.0"/>
                </GridPane.margin>
             </Label>
-            <Label text="2" textFill="BLACK" GridPane.columnIndex="4">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="4" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -1617,7 +1617,7 @@
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1627,7 +1627,7 @@
                <Image url="@../images/green_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="2">
+                       GridPane.columnIndex="2" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1647,7 +1647,7 @@
                <Image url="@../images/pink_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="4">
+                       GridPane.columnIndex="4" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1666,7 +1666,7 @@
                </GridPane.margin>
                <Image url="@../images/blue_student_background.png"/>
             </ImageView>
-            <Label text="0" textFill="BLACK">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="0" GridPane.rowIndex="0">
                <GridPane.margin>
                   <Insets left="6.0"/>
                </GridPane.margin>
@@ -1674,7 +1674,7 @@
                   <Font name="Arial" size="13.0"/>
                </font>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="2">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="2" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -1698,16 +1698,13 @@
                   <Insets left="6.0"/>
                </GridPane.margin>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="4">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="4" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
                <GridPane.margin>
                   <Insets left="6.0"/>
                </GridPane.margin>
-               <effect>
-                  <DropShadow/>
-               </effect>
             </Label>
          </GridPane>
          <ImageView fx:id="MNIsland10" visible="false" fitHeight="30.0" fitWidth="30.0" layoutX="43.0" pickOnBounds="true" preserveRatio="true">
@@ -1740,7 +1737,7 @@
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1750,7 +1747,7 @@
                <Image url="@../images/green_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="2">
+                       GridPane.columnIndex="2" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1770,7 +1767,7 @@
                <Image url="@../images/pink_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="4">
+                       GridPane.columnIndex="4" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1789,7 +1786,7 @@
                </GridPane.margin>
                <Image url="@../images/blue_student_background.png"/>
             </ImageView>
-            <Label text="0" textFill="BLACK">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="0" GridPane.rowIndex="0">
                <GridPane.margin>
                   <Insets left="6.0"/>
                </GridPane.margin>
@@ -1797,7 +1794,7 @@
                   <Font name="Arial" size="13.0"/>
                </font>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="2">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="2" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -1821,7 +1818,7 @@
                   <Insets left="6.0"/>
                </GridPane.margin>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="4">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="4" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -1860,7 +1857,7 @@
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1870,7 +1867,7 @@
                <Image url="@../images/green_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="2">
+                       GridPane.columnIndex="2" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1890,7 +1887,7 @@
                <Image url="@../images/pink_student_background.png"/>
             </ImageView>
             <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                       GridPane.columnIndex="4">
+                       GridPane.columnIndex="4" GridPane.rowIndex="0">
                <effect>
                   <DropShadow/>
                </effect>
@@ -1909,7 +1906,7 @@
                </GridPane.margin>
                <Image url="@../images/blue_student_background.png"/>
             </ImageView>
-            <Label text="0" textFill="BLACK">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="0" GridPane.rowIndex="0">
                <GridPane.margin>
                   <Insets left="6.0"/>
                </GridPane.margin>
@@ -1917,7 +1914,7 @@
                   <Font name="Arial" size="13.0"/>
                </font>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="2">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="2" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -1941,7 +1938,7 @@
                   <Insets left="6.0"/>
                </GridPane.margin>
             </Label>
-            <Label text="0" textFill="BLACK" GridPane.columnIndex="4">
+            <Label text="0" textFill="BLACK" GridPane.columnIndex="4" GridPane.rowIndex="0">
                <font>
                   <Font name="Arial" size="13.0"/>
                </font>
@@ -1978,7 +1975,7 @@
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
          </rowConstraints>
-         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" GridPane.columnIndex="0">
             <effect>
                <DropShadow/>
             </effect>
@@ -1988,7 +1985,7 @@
             <Image url="@../images/green_student_background.png"/>
          </ImageView>
          <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                    GridPane.columnIndex="1">
+                    GridPane.columnIndex="1" GridPane.rowIndex="0">
             <effect>
                <DropShadow/>
             </effect>
@@ -1997,7 +1994,7 @@
             </GridPane.margin>
             <Image url="@../images/red_student_background.png"/>
          </ImageView>
-         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" GridPane.columnIndex="0">
             <effect>
                <DropShadow/>
             </effect>
@@ -2026,7 +2023,7 @@
             </GridPane.margin>
             <Image url="@../images/blue_student_background.png"/>
          </ImageView>
-         <Label text="0" textFill="BLACK" GridPane.rowIndex="1">
+         <Label text="0" textFill="BLACK" GridPane.rowIndex="1" GridPane.columnIndex="0">
             <GridPane.margin>
                <Insets left="6.0"/>
             </GridPane.margin>
@@ -2034,7 +2031,7 @@
                <Font name="Arial" size="13.0"/>
             </font>
          </Label>
-         <Label text="0" textFill="BLACK" GridPane.columnIndex="1">
+         <Label text="0" textFill="BLACK" GridPane.columnIndex="1" GridPane.rowIndex="0">
             <font>
                <Font name="Arial" size="13.0"/>
             </font>
@@ -2042,7 +2039,7 @@
                <Insets left="6.0"/>
             </GridPane.margin>
          </Label>
-         <Label text="0" textFill="BLACK" GridPane.rowIndex="2">
+         <Label text="0" textFill="BLACK" GridPane.rowIndex="2" GridPane.columnIndex="0">
             <font>
                <Font name="Arial" size="13.0"/>
             </font>
@@ -2084,7 +2081,7 @@
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
          </rowConstraints>
-         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" GridPane.columnIndex="0">
             <effect>
                <DropShadow/>
             </effect>
@@ -2094,7 +2091,7 @@
             <Image url="@../images/green_student_background.png"/>
          </ImageView>
          <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                    GridPane.columnIndex="1">
+                    GridPane.columnIndex="1" GridPane.rowIndex="0">
             <effect>
                <DropShadow/>
             </effect>
@@ -2103,7 +2100,7 @@
             </GridPane.margin>
             <Image url="@../images/red_student_background.png"/>
          </ImageView>
-         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" GridPane.columnIndex="0">
             <effect>
                <DropShadow/>
             </effect>
@@ -2132,7 +2129,7 @@
             </GridPane.margin>
             <Image url="@../images/blue_student_background.png"/>
          </ImageView>
-         <Label text="0" textFill="BLACK" GridPane.rowIndex="1">
+         <Label text="0" textFill="BLACK" GridPane.rowIndex="1" GridPane.columnIndex="0">
             <GridPane.margin>
                <Insets left="6.0"/>
             </GridPane.margin>
@@ -2140,7 +2137,7 @@
                <Font name="Arial" size="13.0"/>
             </font>
          </Label>
-         <Label text="0" textFill="BLACK" GridPane.columnIndex="1">
+         <Label text="0" textFill="BLACK" GridPane.columnIndex="1" GridPane.rowIndex="0">
             <font>
                <Font name="Arial" size="13.0"/>
             </font>
@@ -2148,7 +2145,7 @@
                <Insets left="6.0"/>
             </GridPane.margin>
          </Label>
-         <Label text="0" textFill="BLACK" GridPane.rowIndex="2">
+         <Label text="0" textFill="BLACK" GridPane.rowIndex="2" GridPane.columnIndex="0">
             <font>
                <Font name="Arial" size="13.0"/>
             </font>
@@ -2190,7 +2187,7 @@
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
          </rowConstraints>
-         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" GridPane.columnIndex="0">
             <effect>
                <DropShadow/>
             </effect>
@@ -2200,7 +2197,7 @@
             <Image url="@../images/green_student_background.png"/>
          </ImageView>
          <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                    GridPane.columnIndex="1">
+                    GridPane.columnIndex="1" GridPane.rowIndex="0">
             <effect>
                <DropShadow/>
             </effect>
@@ -2209,7 +2206,7 @@
             </GridPane.margin>
             <Image url="@../images/red_student_background.png"/>
          </ImageView>
-         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" GridPane.columnIndex="0">
             <effect>
                <DropShadow/>
             </effect>
@@ -2238,7 +2235,7 @@
             </GridPane.margin>
             <Image url="@../images/blue_student_background.png"/>
          </ImageView>
-         <Label text="0" textFill="BLACK" GridPane.rowIndex="1">
+         <Label text="0" textFill="BLACK" GridPane.rowIndex="1" GridPane.columnIndex="0">
             <GridPane.margin>
                <Insets left="6.0"/>
             </GridPane.margin>
@@ -2246,7 +2243,7 @@
                <Font name="Arial" size="13.0"/>
             </font>
          </Label>
-         <Label text="0" textFill="BLACK" GridPane.columnIndex="1">
+         <Label text="0" textFill="BLACK" GridPane.columnIndex="1" GridPane.rowIndex="0">
             <font>
                <Font name="Arial" size="13.0"/>
             </font>
@@ -2254,7 +2251,7 @@
                <Insets left="6.0"/>
             </GridPane.margin>
          </Label>
-         <Label text="0" textFill="BLACK" GridPane.rowIndex="2">
+         <Label text="0" textFill="BLACK" GridPane.rowIndex="2" GridPane.columnIndex="0">
             <font>
                <Font name="Arial" size="13.0"/>
             </font>
@@ -2296,7 +2293,7 @@
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES"/>
          </rowConstraints>
-         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" GridPane.columnIndex="0">
             <effect>
                <DropShadow/>
             </effect>
@@ -2306,7 +2303,7 @@
             <Image url="@../images/green_student_background.png"/>
          </ImageView>
          <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true"
-                    GridPane.columnIndex="1">
+                    GridPane.columnIndex="1" GridPane.rowIndex="0">
             <effect>
                <DropShadow/>
             </effect>
@@ -2315,7 +2312,7 @@
             </GridPane.margin>
             <Image url="@../images/red_student_background.png"/>
          </ImageView>
-         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" GridPane.columnIndex="0">
             <effect>
                <DropShadow/>
             </effect>
@@ -2344,7 +2341,7 @@
             </GridPane.margin>
             <Image url="@../images/blue_student_background.png"/>
          </ImageView>
-         <Label text="0" textFill="BLACK" GridPane.rowIndex="1">
+         <Label text="0" textFill="BLACK" GridPane.rowIndex="1" GridPane.columnIndex="0">
             <GridPane.margin>
                <Insets left="6.0"/>
             </GridPane.margin>
@@ -2352,7 +2349,7 @@
                <Font name="Arial" size="13.0"/>
             </font>
          </Label>
-         <Label text="0" textFill="BLACK" GridPane.columnIndex="1">
+         <Label text="0" textFill="BLACK" GridPane.columnIndex="1" GridPane.rowIndex="0">
             <font>
                <Font name="Arial" size="13.0"/>
             </font>
@@ -2360,7 +2357,7 @@
                <Insets left="6.0"/>
             </GridPane.margin>
          </Label>
-         <Label text="0" textFill="BLACK" GridPane.rowIndex="2">
+         <Label text="0" textFill="BLACK" GridPane.rowIndex="2" GridPane.columnIndex="0">
             <font>
                <Font name="Arial" size="13.0"/>
             </font>
@@ -2403,7 +2400,7 @@
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES"/>
          </rowConstraints>
          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
-                    GridPane.columnIndex="1">
+                    GridPane.columnIndex="1" GridPane.rowIndex="0">
             <GridPane.margin>
                <Insets bottom="3.0" left="3.0"/>
             </GridPane.margin>
@@ -2412,7 +2409,7 @@
             </effect>
             <Image url="@../images/student_green.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" GridPane.columnIndex="0">
             <effect>
                <DropShadow/>
             </effect>
@@ -2431,7 +2428,7 @@
             </GridPane.margin>
             <Image url="@../images/student_blue.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" GridPane.columnIndex="0">
             <effect>
                <DropShadow/>
             </effect>
@@ -2450,7 +2447,7 @@
             </GridPane.margin>
             <Image url="@../images/student_pink.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" GridPane.columnIndex="0">
             <effect>
                <DropShadow/>
             </effect>
@@ -2469,7 +2466,7 @@
             </GridPane.margin>
             <Image url="@../images/student_red.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4" visible="false" GridPane.columnIndex="0">
             <effect>
                <DropShadow/>
             </effect>
@@ -2479,7 +2476,7 @@
             <Image url="@../images/student_green.png"/>
          </ImageView>
          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
-                    GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    GridPane.columnIndex="1" GridPane.rowIndex="4" visible="false">
             <effect>
                <DropShadow/>
             </effect>
@@ -2509,7 +2506,7 @@
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES"/>
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES"/>
          </rowConstraints>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.rowIndex="0" GridPane.columnIndex="0">
             <GridPane.margin>
                <Insets bottom="2.0"/>
             </GridPane.margin>
@@ -2518,7 +2515,7 @@
             </effect>
             <Image url="@../images/student_green.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false"
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.rowIndex="0"
                     GridPane.columnIndex="1">
             <effect>
                <DropShadow height="5.0" radius="2.0" width="5.0"/>
@@ -2528,7 +2525,7 @@
             </GridPane.margin>
             <Image url="@../images/student_green.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false"
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.rowIndex="0"
                     GridPane.columnIndex="2">
             <effect>
                <DropShadow height="5.0" radius="2.0" width="5.0"/>
@@ -2538,7 +2535,7 @@
             </GridPane.margin>
             <Image url="@../images/student_green.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false"
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.rowIndex="0"
                     GridPane.columnIndex="3">
             <effect>
                <DropShadow height="5.0" radius="2.0" width="5.0"/>
@@ -2548,7 +2545,7 @@
             </GridPane.margin>
             <Image url="@../images/student_green.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false"
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.rowIndex="0"
                     GridPane.columnIndex="4">
             <effect>
                <DropShadow height="5.0" radius="2.0" width="5.0"/>
@@ -2558,7 +2555,7 @@
             </GridPane.margin>
             <Image url="@../images/student_green.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false"
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.rowIndex="0"
                     GridPane.columnIndex="5">
             <effect>
                <DropShadow height="5.0" radius="2.0" width="5.0"/>
@@ -2568,7 +2565,7 @@
             </GridPane.margin>
             <Image url="@../images/student_green.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false"
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.rowIndex="0"
                     GridPane.columnIndex="6">
             <effect>
                <DropShadow height="5.0" radius="2.0" width="5.0"/>
@@ -2578,7 +2575,7 @@
             </GridPane.margin>
             <Image url="@../images/student_green.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false"
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.rowIndex="0"
                     GridPane.columnIndex="7">
             <effect>
                <DropShadow height="5.0" radius="2.0" width="5.0"/>
@@ -2588,7 +2585,7 @@
             </GridPane.margin>
             <Image url="@../images/student_green.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false"
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.rowIndex="0"
                     GridPane.columnIndex="8">
             <effect>
                <DropShadow height="5.0" radius="2.0" width="5.0"/>
@@ -2598,7 +2595,7 @@
             </GridPane.margin>
             <Image url="@../images/student_green.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false"
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.rowIndex="0"
                     GridPane.columnIndex="9">
             <effect>
                <DropShadow height="5.0" radius="2.0" width="5.0"/>
@@ -2609,7 +2606,7 @@
             <Image url="@../images/student_green.png"/>
          </ImageView>
          <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" visible="false"
-                    preserveRatio="true" GridPane.rowIndex="1">
+                    preserveRatio="true" GridPane.rowIndex="1" GridPane.columnIndex="0">
             <effect>
                <DropShadow height="5.0" radius="2.0" width="5.0"/>
             </effect>
@@ -2708,7 +2705,7 @@
             </GridPane.margin>
             <Image url="@../images/student_red.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" visible="false">
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="2" visible="false">
             <effect>
                <DropShadow height="5.0" radius="2.0" width="5.0"/>
             </effect>
@@ -2807,7 +2804,7 @@
             </GridPane.margin>
             <Image url="@../images/student_yellow.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" visible="false">
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="3" visible="false">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
@@ -2906,7 +2903,7 @@
             </GridPane.margin>
             <Image url="@../images/student_pink.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4" visible="false">
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="4" visible="false">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
@@ -3014,7 +3011,7 @@
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES"/>
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES"/>
          </rowConstraints>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="0">
             <GridPane.margin>
                <Insets bottom="3.0"/>
             </GridPane.margin>
@@ -3023,13 +3020,13 @@
             </effect>
             <Image url="@../images/teacher_green.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" visible="false">
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="1" visible="false">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
             <Image url="@../images/teacher_red.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" visible="false">
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="2" visible="false">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
@@ -3038,7 +3035,7 @@
             </GridPane.margin>
             <Image url="@../images/teacher_yellow.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" visible="false">
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="3" visible="false">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
@@ -3047,7 +3044,7 @@
             </GridPane.margin>
             <Image url="@../images/teacher_pink.png"/>
          </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4" visible="false">
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="4" visible="false">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
@@ -3068,21 +3065,21 @@
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES"/>
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES"/>
          </rowConstraints>
-         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
             <effect>
                <InnerShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
             <Image url="@../images/black_tower.png"/>
          </ImageView>
          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true"
-                    GridPane.columnIndex="1">
+                    GridPane.columnIndex="1" GridPane.rowIndex="0">
             <effect>
                <InnerShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
             <Image url="@../images/black_tower.png"/>
          </ImageView>
          <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="10.0" layoutY="11.0" pickOnBounds="true"
-                    preserveRatio="true" GridPane.rowIndex="1">
+                    preserveRatio="true" GridPane.rowIndex="1" GridPane.columnIndex="0">
             <effect>
                <InnerShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
@@ -3096,7 +3093,7 @@
             <Image url="@../images/black_tower.png"/>
          </ImageView>
          <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="10.0" layoutY="11.0" pickOnBounds="true"
-                    preserveRatio="true" GridPane.rowIndex="2">
+                    preserveRatio="true" GridPane.rowIndex="2" GridPane.columnIndex="0">
             <effect>
                <InnerShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
@@ -3110,7 +3107,7 @@
             <Image url="@../images/black_tower.png"/>
          </ImageView>
          <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="10.0" layoutY="75.0" pickOnBounds="true"
-                    preserveRatio="true" GridPane.rowIndex="3">
+                    preserveRatio="true" GridPane.rowIndex="3" GridPane.columnIndex="0">
             <effect>
                <InnerShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
@@ -3190,42 +3187,42 @@
          <rowConstraints>
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="15.0" vgrow="SOMETIMES"/>
          </rowConstraints>
-         <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
             <Image url="@../images/student_red.png"/>
          </ImageView>
          <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true"
-                    GridPane.columnIndex="1">
+                    GridPane.columnIndex="1" GridPane.rowIndex="0">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
             <Image url="@../images/student_red.png"/>
          </ImageView>
          <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true"
-                    GridPane.columnIndex="2">
+                    GridPane.columnIndex="2" GridPane.rowIndex="0">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
             <Image url="@../images/student_red.png"/>
          </ImageView>
          <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true"
-                    GridPane.columnIndex="3">
+                    GridPane.columnIndex="3" GridPane.rowIndex="0">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
             <Image url="@../images/student_red.png"/>
          </ImageView>
          <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true" visible="false"
-                    GridPane.columnIndex="4">
+                    GridPane.columnIndex="4" GridPane.rowIndex="0">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
             <Image url="@../images/student_red.png"/>
          </ImageView>
          <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true" visible="false"
-                    GridPane.columnIndex="5">
+                    GridPane.columnIndex="5" GridPane.rowIndex="0">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
@@ -3271,42 +3268,42 @@
          <rowConstraints>
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="15.0" vgrow="SOMETIMES"/>
          </rowConstraints>
-         <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
             <Image url="@../images/student_red.png"/>
          </ImageView>
          <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true"
-                    GridPane.columnIndex="1">
+                    GridPane.columnIndex="1" GridPane.rowIndex="0">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
             <Image url="@../images/student_red.png"/>
          </ImageView>
          <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true"
-                    GridPane.columnIndex="2">
+                    GridPane.columnIndex="2" GridPane.rowIndex="0">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
             <Image url="@../images/student_red.png"/>
          </ImageView>
          <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true"
-                    GridPane.columnIndex="3">
+                    GridPane.columnIndex="3" GridPane.rowIndex="0">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
             <Image url="@../images/student_red.png"/>
          </ImageView>
          <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true"
-                    GridPane.columnIndex="4">
+                    GridPane.columnIndex="4" GridPane.rowIndex="0">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
             <Image url="@../images/student_red.png"/>
          </ImageView>
          <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true"
-                    GridPane.columnIndex="5">
+                    GridPane.columnIndex="5" GridPane.rowIndex="0">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
@@ -3352,42 +3349,42 @@
          <rowConstraints>
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="15.0" vgrow="SOMETIMES"/>
          </rowConstraints>
-         <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" GridPane.columnIndex="0">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
             <Image url="@../images/student_red.png"/>
          </ImageView>
          <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true"
-                    GridPane.columnIndex="1">
+                    GridPane.columnIndex="1" GridPane.rowIndex="0">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
             <Image url="@../images/student_yellow.png"/>
          </ImageView>
          <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true"
-                    GridPane.columnIndex="2">
+                    GridPane.columnIndex="2" GridPane.rowIndex="0">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
             <Image url="@../images/student_red.png"/>
          </ImageView>
          <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true"
-                    GridPane.columnIndex="3">
+                    GridPane.columnIndex="3" GridPane.rowIndex="0">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
             <Image url="@../images/student_red.png"/>
          </ImageView>
          <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true" visible="false"
-                    GridPane.columnIndex="4">
+                    GridPane.columnIndex="4" GridPane.rowIndex="0">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
             <Image url="@../images/student_red.png"/>
          </ImageView>
          <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true" visible="false"
-                    GridPane.columnIndex="5">
+                    GridPane.columnIndex="5" GridPane.rowIndex="0">
             <effect>
                <DropShadow height="10.0" radius="4.5" width="10.0"/>
             </effect>
