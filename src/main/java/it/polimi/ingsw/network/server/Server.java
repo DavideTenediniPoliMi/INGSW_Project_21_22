@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.controller.LobbyController;
+import it.polimi.ingsw.exceptions.lobby.GameFullException;
 import it.polimi.ingsw.exceptions.lobby.PlayerAlreadyConnectedException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Lobby;
@@ -35,7 +36,7 @@ public class Server {
     private final GameController gameController = new GameController();
     private final List<VirtualView> virtualViews = new ArrayList<>();
 
-    public Server() throws IOException, PlayerAlreadyConnectedException {
+    public Server() throws IOException, PlayerAlreadyConnectedException, GameFullException {
         File file = new File(BACKUP_FILE);
 
         if(file.exists()) {
@@ -53,7 +54,12 @@ public class Server {
         }
     }
 
-    public synchronized VirtualView getVVFor(String name) throws PlayerAlreadyConnectedException {
+    public synchronized VirtualView getVVFor(String name) throws PlayerAlreadyConnectedException, GameFullException {
+        MatchInfo matchInfo = MatchInfo.getInstance();
+        if(matchInfo.getNumPlayersConnected() == matchInfo.getSelectedNumPlayer() && matchInfo.getSelectedNumPlayer() != 0) {
+            throw new GameFullException();
+        }
+
         Optional<VirtualView> result = virtualViews.stream()
                 .filter((virtualView) -> (virtualView.getName().equals(name)))
                 .findAny();

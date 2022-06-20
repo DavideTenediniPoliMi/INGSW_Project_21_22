@@ -2,6 +2,7 @@ package it.polimi.ingsw.network.server;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import it.polimi.ingsw.exceptions.lobby.GameFullException;
 import it.polimi.ingsw.exceptions.lobby.PlayerAlreadyConnectedException;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.GameStatus;
@@ -68,7 +69,7 @@ public class ClientConnection extends Connection {
             virtualView.addObserver(this);
             sendMessage(new ResponseParameters().setSendMatchInfo(true).serialize().toString());
             bound = true;
-        } catch (PlayerAlreadyConnectedException exc) {
+        } catch (PlayerAlreadyConnectedException | GameFullException exc) {
             sendMessage(new ResponseParameters().setError(exc.getMessage()).serialize().toString());
         }
     }
