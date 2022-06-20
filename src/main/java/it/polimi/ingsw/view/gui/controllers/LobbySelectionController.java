@@ -98,7 +98,6 @@ public class LobbySelectionController extends FXController {
 
     @FXML
     public void initialize() {
-        Lobby lobby = Lobby.getLobby();
         MatchInfo matchInfo = MatchInfo.getInstance();
 
         prepArrays();

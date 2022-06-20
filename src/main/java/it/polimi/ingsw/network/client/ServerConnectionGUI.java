@@ -35,32 +35,43 @@ public class ServerConnectionGUI extends Connection {
 
     @Override
     public void run() {
-        new ResponseParameters().deserialize(waitForValidMessage());
+        JsonObject jsonObject = waitForValidMessage();
+        new ResponseParameters().deserialize(jsonObject);
 
-        // TODO reconnection check
+        if(!jsonObject.has("game")) {
+            if (MatchInfo.getInstance().getSelectedNumPlayer() == 0) {
+                Platform.runLater(() -> GUI.loadScene("/scenes/createLobbyScene.fxml"));
 
-        if(MatchInfo.getInstance().getSelectedNumPlayer() == 0) {
-            Platform.runLater(() -> GUI.loadScene("/scenes/createLobbyScene.fxml"));
+                new ResponseParameters().deserialize(waitForValidMessage());
+                if (!GUI.didCreateLobby())
+                    Platform.runLater(GUI::showAlert);
+            }
+
+            sendMessage(
+                    new RequestParameters()
+                            .setCommandType(CommandType.JOIN)
+                            .setName(GUI.getName()).serialize().toString());
 
             new ResponseParameters().deserialize(waitForValidMessage());
-            if(!GUI.didCreateLobby())
-                Platform.runLater(GUI::showAlert);
+
+            GUI.bindPlayerId();
+
+            Platform.runLater(() -> GUI.loadScene("/scenes/lobbySelectionScene.fxml"));
+        } else {
+            GUI.bindPlayerId();
+            Platform.runLater(() -> GUI.loadScene("/scenes/gameScene.fxml"));
         }
 
-        sendMessage(
-               new RequestParameters()
-                   .setCommandType(CommandType.JOIN)
-                   .setName(GUI.getName()).serialize().toString());
-
-        new ResponseParameters().deserialize(waitForValidMessage());
-
-        GUI.bindPlayerId();
-
-        Platform.runLater(() -> GUI.loadScene("/scenes/lobbySelectionScene.fxml"));
-
         while(true) {
-            new ResponseParameters().deserialize(waitForValidMessage());
-            Platform.runLater(GUI::applyChanges);
+            jsonObject = waitForValidMessage();
+
+            new ResponseParameters().deserialize(jsonObject);
+
+            if(jsonObject.has("game")) {
+                Platform.runLater(() -> GUI.loadScene("/scenes/gameScene.fxml"));
+            } else {
+                Platform.runLater(GUI::applyChanges);
+            }
         }
     }
 }

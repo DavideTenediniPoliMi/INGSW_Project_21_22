@@ -1,7 +1,7 @@
 package it.polimi.ingsw.view.gui;
 
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Lobby;
-import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.view.gui.controllers.FXController;
@@ -114,9 +114,13 @@ public class GUI extends Application {
                 .filter((player) -> (player.getName().equals(name)))
                 .findAny();
 
-        if(result.isEmpty()) return;
+        if(result.isEmpty()) {
+            result = Game.getInstance().getPlayers().stream()
+                    .filter((player) -> (player.getName().equals(name)))
+                    .findAny();
+        }
 
-        playerId = result.get().getID();
+        playerId = (result.isEmpty()) ? -1 : result.get().getID();
     }
 
     public static void showAlert() {
