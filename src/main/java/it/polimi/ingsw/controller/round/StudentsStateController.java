@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller.round;
 
 import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
+import it.polimi.ingsw.exceptions.students.FullDiningRoomException;
 import it.polimi.ingsw.exceptions.students.NotEnoughStudentsException;
 import it.polimi.ingsw.exceptions.students.StudentTransferException;
 import it.polimi.ingsw.model.Game;
@@ -59,11 +60,15 @@ public class StudentsStateController extends CharacterCardPlayableStateControlle
         School playerSchool = Game.getInstance().getBoard().getSchoolByPlayerID(matchInfo.getCurrentPlayerID());
 
         if(playerSchool.getNumStudentsInEntranceByColor(c) > 0) {
-            Game.getInstance().transferStudentToDiningRoom(matchInfo.getCurrentPlayerID(), c);
+            if(playerSchool.getNumStudentsInDiningRoomByColor(c) < 10) {
+                Game.getInstance().transferStudentToDiningRoom(matchInfo.getCurrentPlayerID(), c);
 
-            diningRoomController.manageDiningRoomOf(matchInfo.getCurrentPlayerID(), new StudentGroup(c, 1));
+                diningRoomController.manageDiningRoomOf(matchInfo.getCurrentPlayerID(), new StudentGroup(c, 1));
 
-            matchInfo.studentWasMoved();
+                matchInfo.studentWasMoved();
+            }else {
+                throw new FullDiningRoomException(c);
+            }
         }else {
             throw new NotEnoughStudentsException(c);
         }
