@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.gui.controllers;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
@@ -128,7 +129,7 @@ public class LobbySelectionController extends FXController {
             }
         });
 
-        applyChanges();
+        applyChanges(null);
     }
 
     private void prepArrays() {
@@ -167,7 +168,7 @@ public class LobbySelectionController extends FXController {
     }
 
     @Override
-    public void applyChanges() {
+    public void applyChanges(JsonObject jsonObject) {
         Image defaultImage = new Image("/images/Personaggi_retro.jpg");
         Lobby lobby = Lobby.getLobby();
         MatchInfo matchInfo = MatchInfo.getInstance();

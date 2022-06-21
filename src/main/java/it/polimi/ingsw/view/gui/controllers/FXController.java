@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.gui.controllers;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.network.observer.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -18,7 +19,7 @@ public abstract class FXController extends Observable<String> {
         executor.schedule(() -> error.setVisible(false), 5, TimeUnit.SECONDS);
     }
 
-    public void applyChanges() {}
+    public void applyChanges(JsonObject jsonObject) {}
 
     public void showAlert() {}
 }

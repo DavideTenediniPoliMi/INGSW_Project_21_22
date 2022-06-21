@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.gui;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.Player;
@@ -83,16 +84,6 @@ public class GUI extends Application {
         executor.submit(serverConnection);
     }
 
-    public static void showHandshakeScreen() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(GUI.class.getResource("/scenes/handshakeScene.fxml")));
-        Parent root = loader.load();
-        sceneController = loader.getController();
-        sceneController.addObserver(serverConnection);
-
-        stage.setScene(new Scene(root, resX, resY));
-        stage.show();
-    }
-
     public static void showError(String error) {
         sceneController.showError(error);
     }
@@ -105,8 +96,8 @@ public class GUI extends Application {
         return name;
     }
 
-    public static void applyChanges() {
-        sceneController.applyChanges();
+    public static void applyChanges(JsonObject jsonObject) {
+        sceneController.applyChanges(jsonObject);
     }
 
     public static void bindPlayerId() {

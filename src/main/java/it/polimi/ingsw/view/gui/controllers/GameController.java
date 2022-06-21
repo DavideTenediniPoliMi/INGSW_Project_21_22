@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.gui.controllers;
 
+import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
@@ -521,6 +522,11 @@ public class GameController extends FXController {
                 otherPlayersIndex++;
             }
         }
+    }
+
+    @Override
+    public void applyChanges(JsonObject jsonObject) {
+
     }
 
     private Node getNodeFromSchool(Color c, GridPane grid) {

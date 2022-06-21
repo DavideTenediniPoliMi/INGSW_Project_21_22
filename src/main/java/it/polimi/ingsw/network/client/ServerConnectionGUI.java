@@ -3,6 +3,7 @@ package it.polimi.ingsw.network.client;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
@@ -38,7 +39,7 @@ public class ServerConnectionGUI extends Connection {
         JsonObject jsonObject = waitForValidMessage();
         new ResponseParameters().deserialize(jsonObject);
 
-        if(!jsonObject.has("game")) {
+        if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.LOBBY)) {
             if (MatchInfo.getInstance().getSelectedNumPlayer() == 0) {
                 Platform.runLater(() -> GUI.loadScene("/scenes/createLobbyScene.fxml"));
 
@@ -58,6 +59,11 @@ public class ServerConnectionGUI extends Connection {
 
             Platform.runLater(() -> GUI.loadScene("/scenes/lobbySelectionScene.fxml"));
         } else {
+            while(!jsonObject.has("game")) {
+                jsonObject = waitForValidMessage();
+                new ResponseParameters().deserialize(jsonObject);
+            }
+
             GUI.bindPlayerId();
             Platform.runLater(() -> GUI.loadScene("/scenes/gameScene.fxml"));
         }
@@ -70,7 +76,8 @@ public class ServerConnectionGUI extends Connection {
             if(jsonObject.has("game")) {
                 Platform.runLater(() -> GUI.loadScene("/scenes/gameScene.fxml"));
             } else {
-                Platform.runLater(GUI::applyChanges);
+                JsonObject finalJsonObject = jsonObject;
+                Platform.runLater(() -> GUI.applyChanges(finalJsonObject));
             }
         }
     }
