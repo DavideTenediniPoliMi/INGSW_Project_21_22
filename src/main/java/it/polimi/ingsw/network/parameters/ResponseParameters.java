@@ -26,7 +26,6 @@ public class ResponseParameters implements Serializable {
     private List<Island> islands;
     private boolean bagEmpty;
     private ProfessorTracker professors;
-    private Player player;
     private int coinsLeft = -1;
     private boolean sendCards;
     private boolean sendMatchInfo;

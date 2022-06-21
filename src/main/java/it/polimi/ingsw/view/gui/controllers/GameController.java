@@ -394,6 +394,7 @@ public class GameController extends FXController {
         }
 
         islandMN.get(board.getMNPosition()).setVisible(true);
+        numCoinsLeft.setText(String.valueOf(board.getNumCoinsLeft()));
     }
 
     private void prepArrays() {
@@ -526,7 +527,62 @@ public class GameController extends FXController {
 
     @Override
     public void applyChanges(JsonObject jsonObject) {
+        if(jsonObject.has("schools")) {
+            applyChangesSchools();
+        }
 
+        if(jsonObject.has("characterCards")) {
+            applyChangesCharCards();
+        }
+
+        if(jsonObject.has("clouds")) {
+            applyChangesClouds();
+        }
+
+        if(jsonObject.has("islands")) {
+            applyChangesIslands();
+        }
+
+        if(jsonObject.has("bagEmpty")) {
+            studentBag.setVisible(Game.getInstance().isStudentBagEmpty());
+        }
+
+        if(jsonObject.has("professors")) {
+            applyChangesProfessors();
+        }
+
+        if(jsonObject.has("coinsLeft")) {
+            numCoinsLeft.setText(String.valueOf(Game.getInstance().getBoard().getNumCoinsLeft()));
+        }
+
+        if(jsonObject.has("cards")) {
+            applyChangesCards();
+        }
+        
+        if(jsonObject.has("players")) {
+            applyChangesPlayers();
+        }
+    }
+
+    private void applyChangesPlayers() {
+    }
+
+    private void applyChangesCards() {
+    }
+
+    private void applyChangesProfessors() {
+    }
+
+    private void applyChangesIslands() {
+    }
+
+    private void applyChangesClouds() {
+    }
+
+    private void applyChangesCharCards() {
+    }
+
+    private void applyChangesSchools() {
     }
 
     private Node getNodeFromSchool(Color c, GridPane grid) {
