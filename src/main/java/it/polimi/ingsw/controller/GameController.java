@@ -351,6 +351,12 @@ public class GameController {
         game.disconnectPlayer(playerID);
         matchInfo.setNumPlayersConnected(matchInfo.getNumPlayersConnected() - 1);
 
+        if(matchInfo.getNumPlayersConnected() == 0) {
+            //Abort match
+            matchInfo.declareWinner(null);
+            return;
+        }
+
         requestTimeout();
         MatchInfo.getInstance().notifyMatchInfo();
     }

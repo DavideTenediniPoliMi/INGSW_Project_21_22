@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.network.client.Client;
+import it.polimi.ingsw.view.cli.CLI;
 
 public class ClientApp {
 
@@ -8,6 +9,6 @@ public class ClientApp {
         Client client = new Client();
         // IF CLI THEN USE client.run(new CLI(null))
         // WHICH IS THE OVERLOADED METHOD
-        client.run();
+        client.run(new CLI(null));
     }
 }

@@ -139,6 +139,8 @@ public class VirtualView extends Observable<String> implements Observer<Response
             Game.getInstance().removeObserver(this);
             MatchInfo.getInstance().removeObserver(this);
         } else {
+            if(MatchInfo.getInstance().isGameOver())
+                return;
             skipIfCurrent();
         }
     }

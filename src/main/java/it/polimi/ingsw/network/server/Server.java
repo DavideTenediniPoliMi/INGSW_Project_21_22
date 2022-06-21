@@ -32,8 +32,8 @@ public class Server {
     private static final String BACKUP_FILE = "BackupData.txt";
     private final ServerSocket serverSocket = new ServerSocket(PORT);
     private final ExecutorService executor = Executors.newFixedThreadPool(16);
-    private final LobbyController lobbyController = new LobbyController();
-    private final GameController gameController = new GameController();
+    private LobbyController lobbyController = new LobbyController();
+    private GameController gameController = new GameController();
     private final List<VirtualView> virtualViews = new ArrayList<>();
 
     public Server() throws IOException, PlayerAlreadyConnectedException, GameFullException {
@@ -137,5 +137,14 @@ public class Server {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void resetGame() {
+        Lobby.resetLobby();
+        Game.resetInstance();
+        MatchInfo.resetInstance();
+        lobbyController = new LobbyController();
+        gameController = new GameController();
+        virtualViews.clear();
     }
 }

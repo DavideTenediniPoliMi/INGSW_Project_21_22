@@ -10,6 +10,7 @@ import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.observer.Observer;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
 import it.polimi.ingsw.view.VirtualView;
+import javafx.css.Match;
 
 import java.io.*;
 import java.net.Socket;
@@ -79,8 +80,16 @@ public class ClientConnection extends Connection {
         super.disconnect();
         virtualView.disconnect();
 
-        if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.LOBBY)) {
+        if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.LOBBY))
             server.removeVV(virtualView);
-        }
+        else if(MatchInfo.getInstance().isGameOver())
+            resetGame();
+    }
+
+    public void resetGame() {
+        GameStatus status = MatchInfo.getInstance().getGameStatus();
+        if(status.equals(GameStatus.RESETTING) || status.equals(GameStatus.LOBBY)) //Game is resetting or has already been reset
+            return;
+        server.resetGame();
     }
 }
