@@ -17,3 +17,11 @@
 .usernameText:disabled {
     -fx-strikethrough: true;
 }
+
+.cloud:disabled {
+    -fx-opacity: 0.6;
+}
+
+.characterCard:disabled {
+    -fx-opacity: 0.6;
+}

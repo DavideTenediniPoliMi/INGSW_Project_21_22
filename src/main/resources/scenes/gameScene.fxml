@@ -1431,7 +1431,7 @@
             </ImageView>
          </AnchorPane>
       </AnchorPane>
-      <AnchorPane fx:id="cloudPane1" layoutX="240.0" layoutY="240.0">
+      <AnchorPane fx:id="cloudPane1" layoutX="240.0" layoutY="240.0" styleClass="cloud">
          <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/cloud_card.png" />
          </ImageView>
@@ -1533,7 +1533,7 @@
             </Label>
          </GridPane>
       </AnchorPane>
-      <AnchorPane fx:id="cloudPane4" layoutX="390.0" layoutY="160.0" visible="false">
+      <AnchorPane fx:id="cloudPane4" layoutX="390.0" layoutY="160.0" styleClass="cloud" visible="false">
          <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/cloud_card.png" />
          </ImageView>
@@ -1635,7 +1635,7 @@
             </Label>
          </GridPane>
       </AnchorPane>
-      <AnchorPane fx:id="cloudPane2" layoutX="526.0" layoutY="240.0">
+      <AnchorPane fx:id="cloudPane2" layoutX="526.0" layoutY="240.0" styleClass="cloud">
          <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/cloud_card.png" />
          </ImageView>
@@ -1737,7 +1737,7 @@
             </Label>
          </GridPane>
       </AnchorPane>
-      <AnchorPane fx:id="cloudPane3" layoutX="390.0" layoutY="300.0" visible="false">
+      <AnchorPane fx:id="cloudPane3" layoutX="390.0" layoutY="300.0" styleClass="cloud" visible="false">
          <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/cloud_card.png" />
          </ImageView>
@@ -3060,7 +3060,7 @@
          </font>
       </Label>
    </AnchorPane>
-   <AnchorPane fx:id="charCardPane1" layoutX="1247.0" layoutY="20.0" visible="false">
+   <AnchorPane fx:id="charCardPane1" layoutX="1247.0" layoutY="20.0" style="-fx-opacity: 0.6;" styleClass="characterCard" visible="false">
       <ImageView fx:id="characterCard1" fitHeight="150.0" pickOnBounds="true" preserveRatio="true">
          <viewport>
             <Rectangle2D />
@@ -3122,13 +3122,13 @@
          </effect>
          <Image url="@../images/Moneta_base.png" />
       </ImageView>
-      <Label fx:id="charCardCost1" text="0" textFill="WHITE" visible="false" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="6.0">
+      <Label fx:id="charCardCost1" text="0" textFill="WHITE" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="6.0">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Label>
    </AnchorPane>
-   <AnchorPane fx:id="charCardPane2" layoutX="1247.0" layoutY="190.0" visible="false">
+   <AnchorPane fx:id="charCardPane2" layoutX="1247.0" layoutY="190.0" styleClass="characterCard" visible="false">
       <ImageView fx:id="characterCard2" fitHeight="150.0" pickOnBounds="true" preserveRatio="true">
          <viewport>
             <Rectangle2D />
@@ -3190,13 +3190,13 @@
          </effect>
          <Image url="@../images/Moneta_base.png" />
       </ImageView>
-      <Label fx:id="charCardCost2" text="0" textFill="WHITE" visible="false" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="6.0">
+      <Label fx:id="charCardCost2" text="0" textFill="WHITE" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="6.0">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Label>
    </AnchorPane>
-   <AnchorPane fx:id="charCardPane3" layoutX="1247.0" layoutY="360.0" visible="false">
+   <AnchorPane fx:id="charCardPane3" layoutX="1247.0" layoutY="360.0" styleClass="characterCard" visible="false">
       <ImageView fx:id="characterCard3" fitHeight="150.0" pickOnBounds="true" preserveRatio="true">
          <viewport>
             <Rectangle2D />
