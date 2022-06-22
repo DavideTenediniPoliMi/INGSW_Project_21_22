@@ -377,7 +377,7 @@ public class GameController extends FXController {
                         int numStud = ((StudentGroupDecorator)cards.get(i)).getStudentsByColor(c);
                         for(int j = 0; j < numStud; j++) {
                             ImageView stud = (ImageView) getNodeFromCard(cardIndex, charCardsStudents.get(i));
-                            stud.setImage(c.getStudImage());
+                            stud.setImage(c.getImage());
                             cardIndex++;
                         }
                     }
@@ -494,7 +494,7 @@ public class GameController extends FXController {
                     int amount = school.getNumStudentsInEntranceByColor(c);
 
                     for(int i = 0; i < amount; i++) {
-                        studentsEntranceHero.get(entranceIndex).setImage(c.getStudImage());
+                        studentsEntranceHero.get(entranceIndex).setImage(c.getImage());
                         entranceIndex++;
                     }
                 }
@@ -693,7 +693,7 @@ public class GameController extends FXController {
                     int numStud = ((StudentGroupDecorator)charCards.get(i)).getStudentsByColor(c);
                     for(int j = 0; j < numStud; j++) {
                         ImageView stud = (ImageView) getNodeFromCard(cardIndex, charCardsStudents.get(i));
-                        stud.setImage(c.getStudImage());
+                        stud.setImage(c.getImage());
                         cardIndex++;
                     }
                 }
@@ -713,7 +713,7 @@ public class GameController extends FXController {
                     int amount = school.getNumStudentsInEntranceByColor(c);
 
                     for(int i = 0; i < amount; i++) {
-                        studentsEntranceHero.get(entranceIndex).setImage(c.getStudImage());
+                        studentsEntranceHero.get(entranceIndex).setImage(c.getImage());
                         entranceIndex++;
                     }
                 }

@@ -79,6 +79,11 @@ public class Lobby extends Observable<ResponseParameters> implements Serializabl
         notify(params);
     }
 
+    /**
+     * Sets the specified players.
+     *
+     * @param players <Code>List</Code> of <code>Player</code> to be set
+     */
     public void setPlayers(List<Player> players) {
         this.players = new ArrayList<>(players);
     }

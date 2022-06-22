@@ -120,6 +120,11 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         notify(params);
     }
 
+    /**
+     * Returns the index corresponding to the specified <code>Island</code>
+     * @param island the <code>Island</code> of which you want to know the index
+     * @return the index corresponding to the specified <code>Island</code>
+     */
     public int getIndexOfIsland(Island island) {
         return board.getIndexOfIsland(island);
     }
@@ -193,6 +198,13 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         notify(params);
     }
 
+    /**
+     * Returns the index of the specified <code>Cloud</code>.
+     *
+     * @param cloud the <code>Cloud</code> you want to know the index
+     *
+     * @return the index of the specified <code>Cloud</code>
+     */
     public int getIndexOfCloud(Cloud cloud) {
         for(int i = 0; i < board.getClouds().size(); i++) {
             if(cloud.equals(board.getClouds().get(i)))
@@ -483,6 +495,11 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         return active.orElse(null); // will be handled by an exception
     }
 
+    /**
+     * Returns the index of the specified <code>CharacterCard</code>
+     * @param characterCard the <code>CharacterCard</code> you want to know the index
+     * @return index of the specified <code>CharacterCard</code>
+     */
     public int getIndexOfCharacterCard(CharacterCard characterCard) {
         for(int i = 0; i < 3; i++) {
             if(characterCards.get(i).getName().equals(characterCard.getName()))
@@ -540,6 +557,9 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         return temp;
     }
 
+    /**
+     * Sets all the <code>CharacterCards</code> that have been instantiated as not active
+     */
     public void clearEffects() {
         CharacterCard card = getActiveCharacterCard();
         if(card != null) {
@@ -548,6 +568,11 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         notify(new ResponseParameters().setCharacterCards(characterCards));
     }
 
+    /**
+     * Sets the specified <code>CharacterCards</code> in Game
+     *
+     * @param characterCards the <code>CharacterCards</code> to be set
+     */
     public void setCharacterCards(List<CharacterCard> characterCards) {
         this.characterCards = new ArrayList<>(characterCards);
     }
@@ -582,6 +607,11 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         return bag.isEmpty();
     }
 
+    /**
+     * Sets the <code>StudentBag</code>.
+     *
+     * @param bag the <code>StudentBag</code> to be set
+     */
     public void setStudentBag(StudentBag bag) {
         this.bag = bag;
     }

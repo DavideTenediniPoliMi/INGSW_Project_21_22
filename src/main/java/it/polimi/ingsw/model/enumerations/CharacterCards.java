@@ -83,6 +83,11 @@ public enum CharacterCards {
         return printableName.clone();
     }
 
+    /**
+     * Returns an image corresponding to the character card
+     *
+     * @return an <code>Image</code> corresponding to the character card
+     */
     public Image getImage() {
         return new Image(path);
     }

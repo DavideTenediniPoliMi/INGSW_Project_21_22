@@ -57,6 +57,11 @@ public class Board implements Serializable, Printable<List<String>> {
         return new ArrayList<>(islands);
     }
 
+    /**
+     * Sets the <code>List</code> of <code>Island</code>.
+     *
+     * @param islands The <code>List</code> of <code>Island</code> to be set
+     */
     public void setIslands(List<Island> islands) {
         this.islands = new ArrayList<>(islands);
     }
@@ -80,6 +85,13 @@ public class Board implements Serializable, Printable<List<String>> {
         getIslandOfAbsoluteIndex(islandIndex).addStudents(students);
     }
 
+    /**
+     * Returns the <code>Island</code> at the specified index base twelve.
+     *
+     * @param islandIndex the index base twelve of the <code>Island</code> to be return
+     *
+     * @return the <code>Island</code> at the specified index base twelve
+     */
     public Island getIslandOfAbsoluteIndex(int islandIndex) {
         int runningIndex = 0;
         int fixedIndex = 0;
@@ -92,6 +104,13 @@ public class Board implements Serializable, Printable<List<String>> {
         return getIslandAt(fixedIndex).getIslandOfRelativeIndex(islandIndex - runningIndex);
     }
 
+    /**
+     * Returns the index of the specified <code>Island</code>.
+     *
+     * @param island the <code>Island</code> of which you want to know the index
+     *
+     * @return Index of the specified <code>Island</code>
+     */
     public int getIndexOfIsland(Island island) {
         for(int i = 0; i < 12; i++) {
             if(getIslandOfAbsoluteIndex(i).equals(island))
@@ -101,6 +120,11 @@ public class Board implements Serializable, Printable<List<String>> {
         return -1;
     }
 
+    /**
+     * Returns the index of the <code>Island</code> that was originally in position zero.
+     *
+     * @return Index of the <code>Island</code> that was originally in position zero.
+     */
     public int getStartingZeroRealIndex() {
         for(int i = 0; i < 12; i++) {
             Island island = getIslandOfAbsoluteIndex(i);
@@ -111,6 +135,14 @@ public class Board implements Serializable, Printable<List<String>> {
         return -1;
     }
 
+    /**
+     * Returns the index of the <code>MultiIsland</code> that contains the <code>Island</code> at the specified
+     * index.
+     *
+     * @param islandIndex Index of the <code>Island</code>
+     *
+     * @return Index of the <code>MultiIsland</code> that contains the <code>Island</code> at the specified index.
+     */
     public int getIndexOfMultiIslandContainingIslandOfIndex(int islandIndex) {
         for(int i = 0, runningIndex = 0; i < islands.size(); i++) {
             runningIndex += islands.get(i).getNumIslands();
@@ -199,6 +231,11 @@ public class Board implements Serializable, Printable<List<String>> {
         }
     }
 
+    /**
+     * Sets the specified <code>List</code> of <code>Cloud</code>.
+     *
+     * @param clouds <code>List</code> of <code>Cloud</code> to be set
+     */
     public void setClouds(List<Cloud> clouds) {
         this.clouds = new ArrayList<>(clouds);
     }
@@ -388,6 +425,11 @@ public class Board implements Serializable, Printable<List<String>> {
         numCoinsLeft = Math.max(numCoinsLeft - 1, 0);
     }
 
+    /**
+     * Sets the number of coins left in the board.
+     *
+     * @param num Number of coins remaining
+     */
     public void setNumCoinsLeft(int num) {
         this.numCoinsLeft = num;
     }
@@ -470,6 +512,13 @@ public class Board implements Serializable, Printable<List<String>> {
         numCoinsLeft = jsonObject.get("numCoinsLeft").getAsInt();
     }
 
+    /**
+     * Returns the original index base twelve.
+     *
+     * @param islandIndex Index of the <code>Island</code>
+     *
+     * @return Original index base twelve.
+     */
     public int getOriginalIndexOf(int islandIndex) {
         int offset = 12 - getStartingZeroRealIndex();
 
@@ -482,6 +531,13 @@ public class Board implements Serializable, Printable<List<String>> {
         return islandIndex;
     }
 
+    /**
+     * Returns the <code>Island</code> at the absolute specified index.
+     *
+     * @param islandIndex Index of the <code>Island</code>
+     *
+     * @return <code>Island</code> at the absolute specified index.
+     */
     public Island getIslandOfAbsoluteIndexForGraphics(int islandIndex) {
         return getIslandOfAbsoluteIndex(getOriginalIndexOf(islandIndex));
     }
@@ -587,6 +643,11 @@ public class Board implements Serializable, Printable<List<String>> {
         return strings;
     }
 
+    /**
+     * Returns the <code>List</code> of <code>String</code> representing the horizontal bridges to be print.
+     *
+     * @return <code>String</code> representing the bridge to be print
+     */
     public List<String> getHorizontalBridge() {
         List<String> strings = new ArrayList<>();
 
@@ -597,10 +658,20 @@ public class Board implements Serializable, Printable<List<String>> {
         return strings;
     }
 
+    /**
+     * Returns the <code>List</code> of <code>String</code> representing the vertical bridges to be print.
+     *
+     * @return <code>String</code> representing the bridge to be print
+     */
     public List<String> getVerticalBridge() {
         return new ArrayList<>(Collections.nCopies(2, " ".repeat(8) + "│     │" + " ".repeat(8)));
     }
 
+    /**
+     * Returns the <code>List</code> of <code>String</code> representing the clouds to be print.
+     *
+     * @return <code>List</code> of <code>String</code> representing the clouds to be print
+     */
     private List<String> printClouds() {
         List<String> result = new ArrayList<>(Collections.nCopies(7, ""));
 
@@ -633,6 +704,11 @@ public class Board implements Serializable, Printable<List<String>> {
         return result;
     }
 
+    /**
+     * Returns the <code>List</code> of <code>String</code> representing the players to be print.
+     *
+     * @return <code>List</code> of <code>String</code> representing the players to be print
+     */
     public List<String> printPlayers() {
         List<String> result = new ArrayList<>(Collections.nCopies(10, ""));
 
@@ -665,6 +741,11 @@ public class Board implements Serializable, Printable<List<String>> {
         return result;
     }
 
+    /**
+     * Returns a <code>List</code> of <code>boolean</code> that indicates if there are bridges.
+     *
+     * @return <code>List</code> of <code>boolean</code> that indicates if there are bridges
+     */
     public List<Boolean> findBridges() {
         List<Boolean> bridges = new ArrayList<>(Collections.nCopies(12, Boolean.FALSE));
         int runningIndex = 0;
@@ -679,6 +760,16 @@ public class Board implements Serializable, Printable<List<String>> {
         return bridges;
     }
 
+    /**
+     * Returns an array of <code>boolean</code> that are the graphic position of the bridges for island at the
+     * specified index.
+     *
+     * @param index Index of the <code>Island</code> that you want to calcute openings
+     * @param bridges <code>List</code> of <code>boolean</code> that indicates whether there are bridges
+     *
+     * @return Array of <code>boolean</code> that are the graphic position of the bridges for island at the
+     *      * specified index.
+     */
     public boolean[] calculateOpenings(int index, List<Boolean> bridges) {
         switch (index) {
             case 0: // TOP ROW LEFT
