@@ -4,11 +4,10 @@ import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.board.Board;
-import it.polimi.ingsw.model.board.Cloud;
-import it.polimi.ingsw.model.board.School;
+import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.characters.StudentGroupDecorator;
+import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CharacterCards;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.EffectType;
@@ -24,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameController extends FXController {
+    @FXML
+    private AnchorPane player1;
     @FXML
     private AnchorPane player2;
     @FXML
@@ -259,6 +260,7 @@ public class GameController extends FXController {
     @FXML
     private AnchorPane studentBag;
 
+    private final List<AnchorPane> otherPlayers = new ArrayList<>();
     private final List<Label> otherUsernames = new ArrayList<>();
     private final List<ImageView> otherTowers = new ArrayList<>();
     private final List<Label> otherNumTowers = new ArrayList<>();
@@ -287,6 +289,7 @@ public class GameController extends FXController {
 
         if(matchInfo.getSelectedNumPlayer() >= 3) {
             player2.setVisible(true);
+            otherPlayers.add(player2);
             otherUsernames.add(usernameText2);
             otherTowers.add(tower2);
             otherNumTowers.add(numTowers2);
@@ -299,6 +302,7 @@ public class GameController extends FXController {
 
             if(matchInfo.getSelectedNumPlayer() == 4) {
                 player3.setVisible(true);
+                otherPlayers.add(player3);
                 otherUsernames.add(usernameText3);
                 otherTowers.add(tower3);
                 otherNumTowers.add(numTowers3);
@@ -384,20 +388,14 @@ public class GameController extends FXController {
 
         initPlayers();
 
-        List<Cloud> clouds = board.getClouds();
-
-        for(int i = 0; i < clouds.size(); i++) {
-            for(Color c : Color.values()) {
-                Label numStud = (Label) getNodeFromCloud(c, cloudStudents.get(i));
-                numStud.setText(String.valueOf(clouds.get(i).getStudents().getByColor(c)));
-            }
-        }
+        applyChangesClouds();
 
         islandMN.get(board.getMNPosition()).setVisible(true);
         numCoinsLeft.setText(String.valueOf(board.getNumCoinsLeft()));
     }
 
     private void prepArrays() {
+        otherPlayers.add(player1);
         otherUsernames.add(usernameText1);
         otherTowers.add(tower1);
         otherNumTowers.add(numTowers1);
@@ -516,7 +514,7 @@ public class GameController extends FXController {
                 otherNumTowers.get(otherPlayersIndex).setText(String.valueOf(school.getNumTowers()));
 
                 for(Color c : Color.values()) {
-                    Label numStud = (Label) getNodeFromSchool(c, otherEntrance.get(otherPlayersIndex));
+                    Label numStud = (Label) getNodeFromSchoolEntrance(c, otherEntrance.get(otherPlayersIndex));
                     numStud.setText(String.valueOf(school.getNumStudentsInEntranceByColor(c)));
                 }
 
@@ -565,29 +563,228 @@ public class GameController extends FXController {
     }
 
     private void applyChangesPlayers() {
+        int otherIndex = 0;
+        for(Player player: Game.getInstance().getPlayers()) {
+            if(player.getID() == GUI.getPlayerId()) {
+                applyChangesCards();
+
+                if(player.getSelectedCard() != null && !player.getSelectedCard().equals(Card.CARD_AFK)) {
+                    selectedCardHero.setImage(player.getSelectedCard().getImage());
+                }
+
+                numCoinsHero.setText(String.valueOf(player.getNumCoins()));
+            } else {
+                otherPlayers.get(otherIndex).setDisable(!player.isConnected());
+                otherUsernames.get(otherIndex).setDisable(!player.isConnected());
+
+                otherAssistants.get(otherIndex).setImage(player.getSelectedCard().getImageHalf());
+                otherNumCoins.get(otherIndex).setText(String.valueOf(player.getNumCoins()));
+                otherIndex++;
+            }
+        }
     }
 
     private void applyChangesCards() {
+        Player hero = Game.getInstance().getPlayerByID(GUI.getPlayerId());
+
+        for(int i = 0; i < cards.size(); i++) {
+            ImageView card = cards.get(i);
+
+            if(Card.values()[i].isUsed() || !hero.getPlayableCards().contains(Card.values()[i])) {
+                card.setImage(Card.values()[i].getImageBW());
+            } else {
+                card.setImage(Card.values()[i].getImage());
+            }
+        }
     }
 
     private void applyChangesProfessors() {
+        ProfessorTracker profs = Game.getInstance().getBoard().getProfessorOwners();
+
+        resetProfs();
+
+        for(Color c : Color.values()) {
+            int ownerID = profs.getOwnerIDByColor(c);
+
+            if(ownerID == GUI.getPlayerId()) {
+                getProfFromHeroSchool(c, professorsHero).setVisible(true);
+            } else {
+                getProfFromOtherSchool(c, otherDiningRoom.get(getAdjustedOtherPlayerIndex(ownerID))).setVisible(true);
+            }
+        }
+    }
+
+    private int getAdjustedOtherPlayerIndex(int ownerID) {
+        Game game = Game.getInstance();
+        int targetId = game.getIndexOfPlayer(game.getPlayerByID(ownerID));
+        return (game.getIndexOfPlayer(game.getPlayerByID(GUI.getPlayerId())) < targetId) ? targetId - 1 : targetId;
+    }
+
+    private void resetProfs() {
+        for(GridPane otherProf : otherDiningRoom) {
+            for(Color c: Color.values()) {
+                getProfFromOtherSchool(c, otherProf).setVisible(false);
+            }
+        }
+
+        for(Color c: Color.values()) {
+            getProfFromHeroSchool(c, professorsHero).setVisible(false);
+        }
     }
 
     private void applyChangesIslands() {
+        resetIslands();
+
+        List<Boolean> bridgeList = Game.getInstance().getBoard().findBridges();
+
+        for(int i = 0; i < bridges.size() ; i ++){
+            bridges.get(i).setVisible(bridgeList.get(i));
+        }
+
+        for(int i = 0; i < 12; i++) {
+            Island island = Game.getInstance().getBoard().getIslandOfAbsoluteIndexForGraphics(i);
+
+            islandMN.get(i).setVisible(island.isMotherNatureOnIsland());
+            islandTowers.get(i).setVisible(island.getTeamColor() != null);
+
+            if(island.getTeamColor() != null) {
+                islandTowers.get(i).setImage(island.getTeamColor().getImage());
+            }
+
+            for(Color c : Color.values()) {
+                Label numStud = (Label) getNodeFromIsland(c, islandStudents.get(i));
+                numStud.setText(String.valueOf(island.getNumStudentsByColor(c)));
+            }
+        }
+    }
+
+    private void resetIslands() {
+        for(int i = 0; i < 12; i++) {
+            islandMN.get(i).setVisible(false);
+            islandTowers.get(i).setVisible(false);
+        }
     }
 
     private void applyChangesClouds() {
+        List<Cloud> cloudsList = Game.getInstance().getBoard().getClouds();
+
+        for(int i = 0; i < cloudsList.size(); i++) {
+            clouds.get(i).setDisable(!cloudsList.get(i).isAvailable());
+
+            for(Color c : Color.values()) {
+                Label numStud = (Label) getNodeFromCloud(c, cloudStudents.get(i));
+                numStud.setText(String.valueOf(cloudsList.get(i).getStudents().getByColor(c)));
+            }
+        }
     }
 
     private void applyChangesCharCards() {
+        List<CharacterCard> charCards = Game.getInstance().getCharacterCards();
+
+        for(int i = 0; i < charCards.size(); i++) {
+            charCardsCost.get(i).setText(String.valueOf(charCards.get(i).getCost()));
+
+            this.charCards.get(i).setDisable(Game.getInstance().getActiveCharacterCard() != null
+                    && !Game.getInstance().getActiveCharacterCard().equals(charCards.get(i)));
+
+            if(charCards.get(i).getEffectType().equals(EffectType.STUDENT_GROUP)) {
+                int cardIndex = 0;
+                for(Color c : Color.values()) {
+                    int numStud = ((StudentGroupDecorator)charCards.get(i)).getStudentsByColor(c);
+                    for(int j = 0; j < numStud; j++) {
+                        ImageView stud = (ImageView) getNodeFromCard(cardIndex, charCardsStudents.get(i));
+                        stud.setImage(c.getStudImage());
+                        cardIndex++;
+                    }
+                }
+            }
+        }
     }
 
     private void applyChangesSchools() {
+        List<School> schools = Game.getInstance().getBoard().getSchools();
+        int otherIndex = 0;
+
+        for(School school : schools) {
+            if(school.getOwner().getID() == GUI.getPlayerId()) {
+                int entranceIndex = 0;
+
+                for(Color c : Color.values()) {
+                    int amount = school.getNumStudentsInEntranceByColor(c);
+
+                    for(int i = 0; i < amount; i++) {
+                        studentsEntranceHero.get(entranceIndex).setImage(c.getStudImage());
+                        entranceIndex++;
+                    }
+                }
+
+                for(Color c : Color.values()) {
+                    for (int j = 0; j < 10; j++) {
+                        ImageView stud = (ImageView) getNodeFromDiningHero(c, j, diningRoomHero);
+                        stud.setVisible(j < school.getNumStudentsInDiningRoomByColor(c));
+                    }
+                }
+
+                int j = 0;
+                for(Node tower : towersHero.getChildren()) {
+                    ImageView towerView = (ImageView) tower;
+                    towerView.setVisible(j < school.getNumTowers());
+                    j++;
+                }
+            } else {
+                for(Color c : Color.values()) {
+                    Label numTextEntrance = (Label) getNodeFromSchoolEntrance(c, otherEntrance.get(otherIndex));
+                    numTextEntrance.setText(String.valueOf(schools.get(otherIndex).getNumStudentsInEntranceByColor(c)));
+                    Label numTextDining = (Label) getNodeFromSchoolDining(c, otherDiningRoom.get(otherIndex));
+                    numTextDining.setText(String.valueOf(schools.get(otherIndex).getNumStudentsInDiningRoomByColor(c)));
+                }
+
+                otherNumTowers.get(otherIndex).setText(String.valueOf(school.getNumTowers()));
+
+                otherIndex++;
+            }
+        }
     }
 
-    private Node getNodeFromSchool(Color c, GridPane grid) {
+    private Node getProfFromHeroSchool(Color c, GridPane grid) {
+        for(Node n : grid.getChildren()) {
+            if(GridPane.getRowIndex(n) == c.ordinal())
+                return n;
+        }
+
+        return null;
+    }
+
+    private Node getNodeFromDiningHero(Color c, int i, GridPane grid) {
+        for(Node n : grid.getChildren()) {
+            if(GridPane.getRowIndex(n) == c.ordinal() && GridPane.getColumnIndex(n) == i)
+                return n;
+        }
+
+        return null;
+    }
+
+    private Node getProfFromOtherSchool(Color c, GridPane grid) {
+        for(Node n : grid.getChildren()) {
+            if(GridPane.getColumnIndex(n) == c.ordinal() && GridPane.getRowIndex(n) == 0)
+                return n;
+        }
+
+        return null;
+    }
+
+    private Node getNodeFromSchoolEntrance(Color c, GridPane grid) {
         for(Node n : grid.getChildren()) {
             if(GridPane.getColumnIndex(n) == c.ordinal() && n instanceof Label)
+                return n;
+        }
+
+        return null;
+    }
+
+    private Node getNodeFromSchoolDining(Color c, GridPane grid) {
+        for(Node n : grid.getChildren()) {
+            if(GridPane.getColumnIndex(n) == c.ordinal() && GridPane.getRowIndex(n) == 1)
                 return n;
         }
 
@@ -617,6 +814,37 @@ public class GameController extends FXController {
                     break;
                 case BLUE:
                     if(GridPane.getRowIndex(n) == 2 && GridPane.getColumnIndex(n) == 2)
+                        return n;
+                    break;
+            }
+        }
+
+        return null;
+    }
+
+    private Node getNodeFromIsland(Color c, GridPane grid) {
+        for(Node n : grid.getChildren()) {
+            if(!(n instanceof Label)) continue;
+
+            switch (c) {
+                case RED:
+                    if(GridPane.getRowIndex(n) == 0 && GridPane.getColumnIndex(n) == 2)
+                        return n;
+                    break;
+                case GREEN:
+                    if(GridPane.getRowIndex(n) == 0 && GridPane.getColumnIndex(n) == 0)
+                        return n;
+                    break;
+                case YELLOW:
+                    if(GridPane.getRowIndex(n) == 0 && GridPane.getColumnIndex(n) == 4)
+                        return n;
+                    break;
+                case PINK:
+                    if(GridPane.getRowIndex(n) == 1 && GridPane.getColumnIndex(n) == 1)
+                        return n;
+                    break;
+                case BLUE:
+                    if(GridPane.getRowIndex(n) == 1 && GridPane.getColumnIndex(n) == 3)
                         return n;
                     break;
             }

@@ -327,6 +327,15 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         return result.orElse(null);
     }
 
+    public int getIndexOfPlayer(Player player) {
+        for(int i = 0; i < players.size(); i++) {
+            if(players.get(i).equals(player))
+                return i;
+        }
+
+        return -1;
+    }
+
     /**
      * Returns the ID of the player who holds the towers for the specified <code>TowerColor</code>.
      *
