@@ -1880,7 +1880,7 @@
          </effect>
          <Image url="@../images/black_tower.png" />
       </ImageView>
-      <Label fx:id="usernameText1" alignment="CENTER" layoutX="40.0" layoutY="10.0" style="-fx-background-radius: 10px;" text="tommi" textFill="WHITE" textOverrun="CLIP" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="15.0">
+      <Label fx:id="usernameText1" alignment="CENTER" layoutX="40.0" layoutY="10.0" style="-fx-background-radius: 10px;" styleClass="usernameText" text="tommi" textFill="WHITE" textOverrun="CLIP" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="15.0">
          <font>
             <Font name="Arial" size="20.0" />
          </font>
@@ -2047,7 +2047,7 @@
             </font>
          </Label>
       </AnchorPane>
-      <Label fx:id="usernameText2" alignment="CENTER" layoutX="40.0" layoutY="10.0" style="-fx-background-radius: 10px;" text="tene" textFill="WHITE" textOverrun="CLIP" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="15.0">
+      <Label fx:id="usernameText2" alignment="CENTER" layoutX="40.0" layoutY="10.0" style="-fx-background-radius: 10px;" styleClass="usernameText" text="tene" textFill="WHITE" textOverrun="CLIP" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="15.0">
          <font>
             <Font name="Arial" size="20.0" />
          </font>
@@ -2204,7 +2204,7 @@
             </font>
          </Label>
       </AnchorPane>
-      <Label fx:id="usernameText3" alignment="CENTER" layoutX="40.0" layoutY="10.0" style="-fx-background-radius: 10px;" text="fede" textFill="WHITE" textOverrun="CLIP" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="15.0">
+      <Label fx:id="usernameText3" alignment="CENTER" layoutX="40.0" layoutY="10.0" style="-fx-background-radius: 10px;" styleClass="usernameText" text="fede" textFill="WHITE" textOverrun="CLIP" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="15.0">
          <font>
             <Font name="Arial" size="20.0" />
          </font>

@@ -13,3 +13,7 @@
 .towerOption:disabled {
     -fx-opacity: 50%;
 }
+
+.usernameText:disabled {
+    -fx-strikethrough: true;
+}
