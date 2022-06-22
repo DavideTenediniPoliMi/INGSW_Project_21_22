@@ -236,4 +236,14 @@ public class BoardTest {
         assertTrue(board.getClouds().isEmpty());
         assertTrue(board.getSchools().isEmpty());
     }
+
+    @Test
+    void getOriginalIndexOf() {
+        assertEquals(0, board.getOriginalIndexOf(0));
+    }
+
+    @Test
+    void getIslandOfAbsoluteIndexForGraphics() {
+        assertDoesNotThrow(() -> board.getIslandOfAbsoluteIndexForGraphics(0));
+    }
 }

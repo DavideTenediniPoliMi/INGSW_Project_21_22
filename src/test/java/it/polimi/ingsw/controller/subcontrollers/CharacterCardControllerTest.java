@@ -96,10 +96,9 @@ class CharacterCardControllerTest {
         game.instantiateCharacterCard(0);
         game.buyCharacterCard(0,0);
         CardParameters params = new CardParameters();
-        params.setFromDestination(new StudentGroup(Color.GREEN, 2));
-        params.setIslandIndex(0);
+        params.setPlayerID(0);
 
-        assertThrowsExactly(NullPlayerException.class, () -> characterCardController.setCardParameters(params));
+        assertThrowsExactly(BadParametersException.class, () -> characterCardController.setCardParameters(params));
     }
 
     @Test
@@ -182,8 +181,9 @@ class CharacterCardControllerTest {
         game.giveCoinToPlayer(0);
         game.buyCharacterCard(0,0);
         CardParameters params = new CardParameters();
+        params.setPlayerID(0);
 
-        assertThrowsExactly(NullPlayerException.class, () -> characterCardController.setCardParameters(params));
+        assertThrowsExactly(BadParametersException.class, () -> characterCardController.setCardParameters(params));
     }
 
     @Test

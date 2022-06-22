@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CardBack;
@@ -41,6 +42,7 @@ public class GameTest {
     void tearDown() {
         Game.resetInstance();
         g = null;
+        MatchInfo.resetInstance();
     }
 
     @Test
@@ -285,5 +287,27 @@ public class GameTest {
                 AnsiConsole.sysOut().println(s);
             }
         }*/
+    }
+
+    @Test
+    void print() {
+        g.print();
+    }
+
+    @Test
+    void printExpert() {
+        MatchInfo matchInfo = MatchInfo.getInstance();
+        matchInfo.setUpGame(1, true);
+        g.instantiateCharacterCard(0);
+        g.instantiateCharacterCard(1);
+        g.instantiateCharacterCard(2);
+        g.getBoard().setNumCoinsLeft(10);
+        g.print();
+    }
+
+    @Test
+    void printStudentBag() {
+        g.setStudentBag(new StudentBag(0));
+        g.print();
     }
 }

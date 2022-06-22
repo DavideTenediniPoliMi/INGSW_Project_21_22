@@ -1390,6 +1390,14 @@ class GameControllerTest {
 
         assertEquals(GameStatus.IN_GAME, matchInfo.getGameStatus());
     }
+
+    @Test
+    public void handleDisconnection_zeroPlayersConnected() {
+        int numPlayers = matchInfo.getNumPlayersConnected();
+        matchInfo.setNumPlayersConnected(numPlayers-(numPlayers-1));
+        gameController.handleDisconnection(matchInfo.getCurrentPlayerID());
+        assertNull(matchInfo.getWinners().get(0));
+    }
 /*
     @Test
     public void testPrintGame2() {

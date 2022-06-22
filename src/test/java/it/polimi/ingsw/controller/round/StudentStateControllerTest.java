@@ -5,6 +5,7 @@ import it.polimi.ingsw.controller.subcontrollers.IslandController;
 import it.polimi.ingsw.exceptions.game.BadParametersException;
 import it.polimi.ingsw.exceptions.game.ExpertModeDisabledException;
 import it.polimi.ingsw.exceptions.game.IllegalActionException;
+import it.polimi.ingsw.exceptions.students.FullDiningRoomException;
 import it.polimi.ingsw.exceptions.students.NotEnoughStudentsException;
 import it.polimi.ingsw.exceptions.students.StudentTransferException;
 import it.polimi.ingsw.model.Game;
@@ -139,5 +140,12 @@ public class StudentStateControllerTest {
 
         assertDoesNotThrow(() -> controller.transferStudentToDiningRoom(Color.BLUE));
         assertThrowsExactly(NotEnoughStudentsException.class, () -> controller.transferStudentToDiningRoom(Color.BLUE));
+    }
+
+    @Test
+    void transferStudentToDiningRoom_fullDiningRoom() {
+        board.addToDiningRoomOf(0, new StudentGroup(Color.PINK, 10));
+        board.addToEntranceOf(0, new StudentGroup(Color.PINK, 1));
+        assertThrowsExactly(FullDiningRoomException.class, () -> controller.transferStudentToDiningRoom(Color.PINK));
     }
 }

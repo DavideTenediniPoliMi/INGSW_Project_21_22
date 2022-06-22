@@ -163,8 +163,7 @@ public class CharacterCardController {
                 throw new BadParametersException("EXCHANGE_STUDENTS card. fromEntrance: " + fromEntrance_ex
                                                  + " fromDiningRoom: " + fromDiningRoom
                                                  + " playerID: " + playerID_ex);
-            default:
-                return false;
         }
+        return false;
     }
 }
