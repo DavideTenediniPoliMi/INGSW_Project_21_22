@@ -3,8 +3,11 @@ package it.polimi.ingsw.view.gui;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Lobby;
+import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.Connection;
+import it.polimi.ingsw.utils.JsonUtils;
 import it.polimi.ingsw.view.gui.controllers.FXController;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -28,6 +31,11 @@ public class GUI extends Application {
     private static final int resX = 1366;
     private static final int resY = 768;
     private static boolean createdLobby;
+    private static boolean playedPlanning;
+    private static boolean boughtCard;
+    private static boolean waitForActivatedCard;
+    private static String activeCardName;
+    private static boolean activatedCard;
 
     public static void main(String[] args) {
         launch();
@@ -120,5 +128,141 @@ public class GUI extends Application {
 
     public static int getPlayerId() {
         return playerId;
+    }
+
+    public static boolean nextState(JsonObject jo) {
+        MatchInfo matchInfo = MatchInfo.getInstance();
+
+        if(!jo.has("matchInfo")) {
+            if(JsonUtils.isNotCharCardJSON(jo, playerId)) {
+                return false;
+            }
+
+            System.out.println("SAW CHARACTER CARDS");
+
+            activeCardName = JsonUtils.getActiveCardName(jo);
+
+            if(!activeCardName.equals("")) {
+                if(waitForActivatedCard) {
+                    waitForActivatedCard = false;
+                    activatedCard = true;
+                } else {
+                    boughtCard = true;
+                }
+            }
+
+            return false;
+        }
+
+        jo = jo.get("matchInfo").getAsJsonObject();
+
+        if(JsonUtils.isGameOver(jo)) {
+
+            return true;
+        }
+
+        if(JsonUtils.hasPlayerReconnected(jo)) {
+            return false;
+        }
+
+        if(JsonUtils.isGamePaused(jo)) {
+
+            return false;
+        }
+
+        if(JsonUtils.isNotPlayerTurn(jo, playerId))
+            return false;
+
+        if(MatchInfo.getInstance().isGamePaused()) {
+
+            return true;
+        }
+
+        if(boughtCard) {
+            System.out.println("SAW MATCHINFO AFTER BUYING");
+            boughtCard = false;
+
+            if("INFLUENCE_ADD_TWO".equals(activeCardName)) {
+                System.out.println("WAITING FOR SETTING PARAMS ADD TWO");
+                return false;
+            }
+
+            if("IGNORE_TOWERS".equals(activeCardName)) {
+                System.out.println("AND WAS FOR IGNORE TOWERS");
+
+                activeCardName = "";
+                return true;
+            }
+
+            System.out.println("AND WAITING FOR USER");
+            waitForActivatedCard = true;
+            return true;
+        }
+
+        if("INFLUENCE_ADD_TWO".equals(activeCardName)) {
+            System.out.println("FINISHED ADD TWO");
+            activeCardName = "";
+
+            return true;
+        }
+
+        if(activatedCard) {
+            System.out.println("ACTIVATED CARD FROM USER");
+            activeCardName = "";
+            activatedCard = false;
+
+            return true;
+        }
+
+        System.out.println("DIDN'T BUY CARDS");
+
+        switch(matchInfo.getStateType()) {
+            case PLANNING:
+                if(JsonUtils.areDifferentStates(jo, TurnState.PLANNING)) {
+
+                    return true;
+                }
+
+                if(!playedPlanning) {
+                    playedPlanning = true;
+
+                    return true;
+                }
+
+                return false;
+            case STUDENTS:
+                int numMovedStudents = jo.get("numMovedStudents").getAsInt();
+                playedPlanning = false;
+
+                if(JsonUtils.areDifferentStates(jo, TurnState.STUDENTS)) {
+
+                    return true;
+                }
+
+                if(matchInfo.getNumMovedStudents() != numMovedStudents) {
+                    if(numMovedStudents < MatchInfo.getInstance().getMaxMovableStudents()) {
+
+                        return true;
+                    }
+                }
+
+                return false;
+            case MOTHER_NATURE:
+                if(JsonUtils.areDifferentStates(jo, TurnState.MOTHER_NATURE)) {
+
+                    return true;
+                }
+
+                return false;
+            case CLOUD:
+                if(JsonUtils.areDifferentStates(jo, TurnState.CLOUD)) {
+
+                    return jo.get("numMovedStudents").getAsInt() == 0;
+                }
+
+                return false;
+            default:
+                return false;
+        }
     }
 }

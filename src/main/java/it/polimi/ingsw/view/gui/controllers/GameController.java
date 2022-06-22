@@ -577,6 +577,7 @@ public class GameController extends FXController {
                 otherPlayers.get(otherIndex).setDisable(!player.isConnected());
                 otherUsernames.get(otherIndex).setDisable(!player.isConnected());
 
+                otherAssistants.get(otherIndex).setVisible(true);
                 otherAssistants.get(otherIndex).setImage(player.getSelectedCard().getImageHalf());
                 otherNumCoins.get(otherIndex).setText(String.valueOf(player.getNumCoins()));
                 otherIndex++;
