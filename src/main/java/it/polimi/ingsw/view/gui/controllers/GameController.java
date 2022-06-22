@@ -752,7 +752,7 @@ public class GameController extends FXController {
                 return n;
         }
 
-        return null;
+        return new ImageView();
     }
 
     private Node getNodeFromDiningHero(Color c, int i, GridPane grid) {
@@ -761,7 +761,7 @@ public class GameController extends FXController {
                 return n;
         }
 
-        return null;
+        return new ImageView();
     }
 
     private Node getProfFromOtherSchool(Color c, GridPane grid) {
@@ -770,7 +770,7 @@ public class GameController extends FXController {
                 return n;
         }
 
-        return null;
+        return new ImageView();
     }
 
     private Node getNodeFromSchoolEntrance(Color c, GridPane grid) {
@@ -779,7 +779,7 @@ public class GameController extends FXController {
                 return n;
         }
 
-        return null;
+        return new Label();
     }
 
     private Node getNodeFromSchoolDining(Color c, GridPane grid) {
@@ -788,7 +788,7 @@ public class GameController extends FXController {
                 return n;
         }
 
-        return null;
+        return new Label();
     }
 
     private Node getNodeFromCloud(Color c, GridPane grid) {
@@ -819,7 +819,7 @@ public class GameController extends FXController {
             }
         }
 
-        return null;
+        return new Label();
     }
 
     private Node getNodeFromIsland(Color c, GridPane grid) {
@@ -850,7 +850,7 @@ public class GameController extends FXController {
             }
         }
 
-        return null;
+        return new Label();
     }
 
     private Node getNodeFromCard(int i, GridPane grid) {
@@ -859,6 +859,6 @@ public class GameController extends FXController {
                 return n;
         }
 
-        return null;
+        return new ImageView();
     }
 }
