@@ -18,6 +18,11 @@ public enum TowerColor implements Printable<String> {
 
     private final String path;
 
+    /**
+     * Returns an image corresponding to the tower color
+     *
+     * @return an <code>Image</code> corresponding to the tower color
+     */
     public Image getImage() {
         return new Image(path);
     }

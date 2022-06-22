@@ -43,6 +43,9 @@ public class School implements Serializable, Printable<List<String>> {
         return owner;
     }
 
+    /**
+     * Updates the owner of the <code>School</code>
+     */
     public void updateOwner() {
         int ownerID = owner.getID();
 

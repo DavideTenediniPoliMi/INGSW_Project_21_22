@@ -182,6 +182,11 @@ public class RoundStateController {
         throw new IllegalActionException("collectFromCloud", MatchInfo.getInstance().getStateType());
     }
 
+    /**
+     * Skips the turn.
+     *
+     * @throws IllegalActionException If called during the wrong state
+     */
     public void skip() throws IllegalActionException {
         throw new IllegalActionException("skip", MatchInfo.getInstance().getStateType());
     }

@@ -68,6 +68,9 @@ public class GameController {
         nextState();
     }
 
+    /**
+     * If the lobby is full and all players are ready, it creates the game.
+     */
     public void tryCreatingGame() {
         if(Lobby.getLobby().checkLobbyIsReady()) {
             createGame();
@@ -226,6 +229,11 @@ public class GameController {
         checkWinner();
     }
 
+    /**
+     * Check if all players have at least an assistant card.
+     *
+     * @return <code>true</code> if all the players have at least one assistant card
+     */
     private boolean everybodyHasCards() {
         for(Player p: game.getPlayers()) {
             if(p.getPlayableCards().isEmpty())
@@ -330,6 +338,11 @@ public class GameController {
         matchInfo.declareTie(teamColors);
     }
 
+    /**
+     * Handles the reconnection of a player to the game
+     *
+     * @param playerID the ID of <code>Player</code> that has reconnected to the game
+     */
     public synchronized void handleReconnection(int playerID) {
         game.reconnectPlayer(playerID);
         matchInfo.setNumPlayersConnected(matchInfo.getNumPlayersConnected() + 1);
@@ -347,6 +360,11 @@ public class GameController {
         }
     }
 
+    /**
+     * Handles the disconnection of a player to the game
+     *
+     * @param playerID the ID of <code>Player</code> that has disconnected from the game
+     */
     public synchronized void handleDisconnection(int playerID) {
         game.disconnectPlayer(playerID);
         matchInfo.setNumPlayersConnected(matchInfo.getNumPlayersConnected() - 1);
@@ -361,6 +379,10 @@ public class GameController {
         MatchInfo.getInstance().notifyMatchInfo();
     }
 
+    /**
+     * If there is only one <code>Player</code> remaining in game, sets the game to paused and starts a timer that waits for the
+     * reconnection of a player.
+     */
     private void requestTimeout() {
         if(matchInfo.getNumPlayersConnected() == 1) {
             matchInfo.setGamePaused(true);
@@ -376,6 +398,9 @@ public class GameController {
         }
     }
 
+    /**
+     * Declares the winner in case of timeout of the timer.
+     */
     private void forceDeclareWinner() {
         Optional<Player> lastPlayer = game.getPlayers().stream()
                 .filter(Player::isConnected)
@@ -385,10 +410,18 @@ public class GameController {
         matchInfo.notifyMatchInfo();
     }
 
+    /**
+     * Return the <code>RoundStateController</code>.
+     *
+     * @return the <code>RoundStateController</code>
+     */
     public RoundStateController getRoundStateController() {
         return roundStateController;
     }
 
+    /**
+     * Sets the loaded state.
+     */
     public void loadSavedState() {
         if(!matchInfo.getGameStatus().equals(GameStatus.IN_GAME))
             return;

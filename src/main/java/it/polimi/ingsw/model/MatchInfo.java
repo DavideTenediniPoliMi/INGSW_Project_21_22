@@ -255,10 +255,20 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
         return gameTied;
     }
 
+    /**
+     * Returns whether the game is paused.
+     *
+     * @return <code>true</code> if the game is paused
+     */
     public synchronized boolean isGamePaused() {
         return gamePaused;
     }
 
+    /**
+     * Set the <code>boolean</code> that indicates whether the game is paused.
+     *
+     * @param gamePaused <code>boolean</code> that indicates whether the game is paused
+     */
     public synchronized void setGamePaused(boolean gamePaused) {
         if(gamePaused == this.gamePaused) return;
 
@@ -336,6 +346,9 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
         return movedMN;
     }
 
+    /**
+     * If the <code>GameStatus</code> is not <code>IN_GAME</code> notifies the match info
+     */
     public void notifyMatchInfo() {
         if(gameStatus != GameStatus.IN_GAME) return;
 

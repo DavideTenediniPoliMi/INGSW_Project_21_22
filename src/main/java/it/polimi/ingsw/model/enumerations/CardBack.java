@@ -17,6 +17,11 @@ public enum CardBack {
 
     private final String path;
 
+    /**
+     * Returns an image corresponding to the card back
+     *
+     * @return an <code>Image</code> corresponding to the card back
+     */
     public Image getImage() {
         return new Image(path);
     }

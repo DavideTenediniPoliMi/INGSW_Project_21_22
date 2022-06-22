@@ -68,6 +68,12 @@ public class ProfessorTracker implements Cloneable, Serializable {
         }
     }
 
+    /**
+     * Returns the print of the professors of the playerID.
+     *
+     * @param playerID ID of the player that needs to print the professors
+     * @return the <code>String</code> of the print of the professors of the playerID
+     */
     public String printFor(int playerID) {
         StringBuilder professorBuilder = new StringBuilder(" ");
         for(Color color : Color.values()) {

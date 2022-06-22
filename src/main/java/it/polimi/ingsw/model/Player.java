@@ -183,14 +183,25 @@ public class Player implements Serializable {
         numCoins -= amount;
     }
 
+    /**
+     * Sets <code>connected</code> attribute to <code>false</code>.
+     */
     protected void disconnect() {
         connected = false;
     }
 
+    /**
+     * Sets <code>connected</code> attribute to <code>true</code>.
+     */
     protected void reconnect() {
         connected = true;
     }
 
+    /**
+     * Returns whether the player is connected.
+     *
+     * @return <code>true</code> if the player is connected
+     */
     public boolean isConnected() {
         return connected;
     }

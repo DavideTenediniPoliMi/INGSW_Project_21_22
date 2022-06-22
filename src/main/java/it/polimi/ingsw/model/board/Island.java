@@ -22,6 +22,10 @@ public abstract class Island implements Serializable, Printable<List<String>> {
     private boolean motherNature;
     private boolean startingZero;
 
+    /**
+     * Returns if is the starting zero island.
+     * @return a boolean that indicates if is the starting zero island
+     */
     public boolean isStartingZero() {
         return startingZero;
     }
@@ -111,13 +115,19 @@ public abstract class Island implements Serializable, Printable<List<String>> {
     }
 
     /**
-     * Return the island with a specific internal relative index
+     * Returns the island with a specific internal relative index
      *
      * @param index the relative index of the requested island
      * @return the index-th island inside this island
      */
     public abstract Island getIslandOfRelativeIndex(int index);
 
+    /**
+     * Marks the bridges to be shown on the this island.
+     *
+     * @param bridges the booleans that indicates if a bridge should be shown
+     * @param startingIndex the number of simple islands before this island
+     */
     public void markBridges(List<Boolean> bridges, int startingIndex) {}
 
     @Override
