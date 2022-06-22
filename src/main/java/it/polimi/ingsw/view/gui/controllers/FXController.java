@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.gui.controllers;
 
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.network.observer.Observable;
+import it.polimi.ingsw.view.gui.GUIState;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -22,4 +23,6 @@ public abstract class FXController extends Observable<String> {
     public void applyChanges(JsonObject jsonObject) {}
 
     public void showAlert() {}
+
+    public void handleInteraction(GUIState nextState) {}
 }

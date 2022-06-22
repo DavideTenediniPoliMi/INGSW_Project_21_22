@@ -11,11 +11,16 @@ import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.CharacterCards;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.EffectType;
+import it.polimi.ingsw.network.enumerations.CommandType;
+import it.polimi.ingsw.network.parameters.RequestParameters;
+import it.polimi.ingsw.utils.JsonUtils;
 import it.polimi.ingsw.view.gui.GUI;
+import it.polimi.ingsw.view.gui.GUIState;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
@@ -280,6 +285,8 @@ public class GameController extends FXController {
     private final List<ImageView> studentsEntranceHero = new ArrayList<>();
     private final List<ImageView> otherAssistants = new ArrayList<>();
 
+    private GUIState state;
+
     @FXML
     public void initialize() {
         Board board =  Game.getInstance().getBoard();
@@ -299,6 +306,7 @@ public class GameController extends FXController {
             clouds.add(cloudPane3);
             cloudStudents.add(studentCloud3);
             otherAssistants.add(assistantCard2);
+            otherNumCoins.add(numCoins2);
 
             if(matchInfo.getSelectedNumPlayer() == 4) {
                 player3.setVisible(true);
@@ -312,6 +320,7 @@ public class GameController extends FXController {
                 clouds.add(cloudPane4);
                 cloudStudents.add(studentCloud4);
                 otherAssistants.add(assistantCard3);
+                otherNumCoins.add(numCoins3);
             } else if(matchInfo.getSelectedNumPlayer() == 3){
                 for(Node node : entranceHero.getChildren()) {
                     if(GridPane.getRowIndex(node) == 4) {
@@ -330,14 +339,10 @@ public class GameController extends FXController {
         if(matchInfo.isExpertMode()) {
             coins1.setVisible(true);
 
-            otherNumCoins.add(numCoins1);
-
             if(matchInfo.getSelectedNumPlayer() >= 3) {
-                otherNumCoins.add(numCoins2);
                 coins2.setVisible(true);
 
                 if(matchInfo.getSelectedNumPlayer() == 4) {
-                    otherNumCoins.add(numCoins3);
                     coins3.setVisible(true);
                 }
             }
@@ -392,6 +397,28 @@ public class GameController extends FXController {
 
         islandMN.get(board.getMNPosition()).setVisible(true);
         numCoinsLeft.setText(String.valueOf(board.getNumCoinsLeft()));
+
+        for(ImageView card : cards) {
+            card.setOnMouseClicked(this::handleCardClick);
+            card.setOnMouseClicked(null);
+        }
+
+        handleInteraction((matchInfo.getCurrentPlayerID() == GUI.getPlayerId()) ? getCurrentState() : GUIState.WAIT_ACTION);
+    }
+
+    private GUIState getCurrentState() {
+        switch (MatchInfo.getInstance().getStateType()) {
+            case PLANNING:
+                return GUIState.PLANNING;
+            case STUDENTS:
+                return GUIState.MOVE_STUDENT;
+            case MOTHER_NATURE:
+                return GUIState.MOVE_MN;
+            case CLOUD:
+                return GUIState.CLOUD;
+            default:
+                return GUIState.WAIT_RESPONSE;
+        }
     }
 
     private void prepArrays() {
@@ -402,6 +429,7 @@ public class GameController extends FXController {
         otherEntrance.add(entrance1);
         otherDiningRoom.add(diningRoom1);
         otherAssistants.add(assistantCard1);
+        otherNumCoins.add(numCoins1);
 
         clouds.add(cloudPane1);
         clouds.add(cloudPane2);
@@ -569,6 +597,7 @@ public class GameController extends FXController {
                 applyChangesCards();
 
                 if(player.getSelectedCard() != null && !player.getSelectedCard().equals(Card.CARD_AFK)) {
+                    selectedCardHero.setVisible(true);
                     selectedCardHero.setImage(player.getSelectedCard().getImage());
                 }
 
@@ -577,8 +606,10 @@ public class GameController extends FXController {
                 otherPlayers.get(otherIndex).setDisable(!player.isConnected());
                 otherUsernames.get(otherIndex).setDisable(!player.isConnected());
 
-                otherAssistants.get(otherIndex).setVisible(true);
-                otherAssistants.get(otherIndex).setImage(player.getSelectedCard().getImageHalf());
+                if(player.getSelectedCard() != null) {
+                    otherAssistants.get(otherIndex).setVisible(true);
+                    otherAssistants.get(otherIndex).setImage(player.getSelectedCard().getImageHalf());
+                }
                 otherNumCoins.get(otherIndex).setText(String.valueOf(player.getNumCoins()));
                 otherIndex++;
             }
@@ -861,5 +892,70 @@ public class GameController extends FXController {
         }
 
         return new ImageView();
+    }
+
+    @Override
+    public void handleInteraction(GUIState newState) {
+        Game game = Game.getInstance();
+        if(!GUIState.REPEAT_ACTION.equals(newState)) {
+            state = newState;
+        }
+
+        disableGraphic();
+
+        switch (state) {
+            case WAIT_RESPONSE:
+                actionText.setText("Waiting for a server response");
+                break;
+            case WAIT_ACTION:
+                Player player = game.getPlayerByID(MatchInfo.getInstance().getCurrentPlayerID());
+                actionText.setText("It's " + player.getName()  + "'s turn!");
+                break;
+            case PLANNING:
+                actionText.setText("Chose an Assistant Card!");
+                Player hero = Game.getInstance().getPlayerByID(GUI.getPlayerId());
+
+                for(int i = 0; i < cards.size(); i++) {
+                    ImageView card = cards.get(i);
+
+                    if(!Card.values()[i].isUsed() && hero.getPlayableCards().contains(Card.values()[i])) {
+                        card.setOnMouseClicked(this::handleCardClick);
+                        card.getStyleClass().add("assistantCard");
+                    }
+                }
+                break;
+            case MOVE_STUDENT:
+                actionText.setText("Select a Student from your Entrance!");
+        }
+    }
+
+    private void handleCardClick(MouseEvent event) {
+        ImageView card = (ImageView) event.getSource();
+        String id = card.getId();
+        String numText = id.substring(4);
+
+        int num;
+        try {
+            num = Integer.parseInt(numText);
+        } catch (NumberFormatException e) {
+            showError("Invalid choice! Try again!");
+            return;
+        }
+
+        notify(
+                new RequestParameters()
+                        .setCommandType(CommandType.PLAY_CARD)
+                        .setIndex(num - 1)
+                        .serialize().toString()
+        );
+    }
+
+    private void disableGraphic() {
+        for(ImageView card : cards) {
+            card.setOnMouseClicked(null);
+            card.getStyleClass().clear();
+        }
+
+        actionText.setText("");
     }
 }
