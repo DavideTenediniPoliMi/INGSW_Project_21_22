@@ -255,7 +255,8 @@ public class GameTest {
         g.playCard(0, Card.LION);
         g.playCard(1, Card.LION);
         JsonObject jsonGame = g.serialize();
-        JsonObject jsonCards = Card.serializeAll();
+        System.out.println(jsonGame.toString());
+        //JsonObject jsonCards = Card.serializeAll();
 
         Game.resetInstance();
         for(Card card : Card.values()) {
@@ -265,8 +266,13 @@ public class GameTest {
 
         MatchInfo.getInstance().setUpGame(2, true);
 
+        System.out.println("____________before deserialize (reset cards)_____________________");
+        System.out.println(g.serialize());
+
         g.deserialize(jsonGame);
-        Card.deserializeAll(jsonCards);
+        System.out.println("__________________________________________");
+        System.out.println(g.serialize());
+        //Card.deserializeAll(jsonCards);
         assertEquals("ezio", g.getPlayerByID(0).getName());
         assertEquals("bruso", g.getPlayerByID(1).getName());
 

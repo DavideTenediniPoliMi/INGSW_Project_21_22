@@ -636,6 +636,8 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         }
         jsonObject.add("players", jsonPlayers);
 
+        jsonObject.add("cards", Card.serializeAll());
+
         JsonArray jsonCards = new JsonArray();
         for(CharacterCard card : characterCards) {
             jsonCards.add(card.serialize());
@@ -660,6 +662,9 @@ public class Game extends Observable<ResponseParameters> implements Serializable
             }
         }else
             players.clear();
+
+        if(jsonObject.has("cards"))
+            Card.deserializeAll(jsonObject.get("cards").getAsJsonObject());
 
         if(jsonObject.has("board"))
             board.deserialize(jsonObject.get("board").getAsJsonObject());
