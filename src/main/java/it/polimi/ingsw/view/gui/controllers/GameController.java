@@ -13,11 +13,11 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.EffectType;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
-import it.polimi.ingsw.utils.JsonUtils;
 import it.polimi.ingsw.view.gui.GUI;
 import it.polimi.ingsw.view.gui.GUIState;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -404,6 +404,13 @@ public class GameController extends FXController {
             card.setOnMouseClicked(null);
         }
 
+        for(int i = 0; i < 12; i++) {
+            islandStudents.get(i).setUserData(i);
+        }
+
+        for(int i = 0; i < cloudStudents.size(); i++) {
+            cloudStudents.get(i).setUserData(i);
+        }
 
         applyChangesSchools();
         applyChangesCharCards();
@@ -759,11 +766,17 @@ public class GameController extends FXController {
                     int amount = school.getNumStudentsInEntranceByColor(c);
 
                     for(int i = 0; i < amount; i++) {
+                        studentsEntranceHero.get(entranceIndex).setVisible(true);
                         studentsEntranceHero.get(entranceIndex).setImage(c.getImage());
                         studentsEntranceHero.get(entranceIndex).setUserData(c);
                         entranceIndex++;
                     }
                 }
+
+                for(int i = entranceIndex; i < MatchInfo.getInstance().getInitialNumStudents(); i++) {
+                    studentsEntranceHero.get(i).setVisible(false);
+                }
+
 
                 for(Color c : Color.values()) {
                     for (int j = 0; j < 10; j++) {
@@ -795,8 +808,28 @@ public class GameController extends FXController {
 
     private Node getProfFromHeroSchool(Color c, GridPane grid) {
         for(Node n : grid.getChildren()) {
-            if(GridPane.getRowIndex(n) == c.ordinal())
-                return n;
+            switch (c) {
+                case RED:
+                    if(GridPane.getRowIndex(n) == 1)
+                        return n;
+                    break;
+                case GREEN:
+                    if(GridPane.getRowIndex(n) == 0)
+                        return n;
+                    break;
+                case YELLOW:
+                    if(GridPane.getRowIndex(n) == 2)
+                        return n;
+                    break;
+                case PINK:
+                    if(GridPane.getRowIndex(n) == 3)
+                        return n;
+                    break;
+                case BLUE:
+                    if(GridPane.getRowIndex(n) == 4)
+                        return n;
+                    break;
+            }
         }
 
         return new ImageView();
@@ -804,8 +837,28 @@ public class GameController extends FXController {
 
     private Node getNodeFromDiningHero(Color c, int i, GridPane grid) {
         for(Node n : grid.getChildren()) {
-            if(GridPane.getRowIndex(n) == c.ordinal() && GridPane.getColumnIndex(n) == i)
-                return n;
+            switch (c) {
+                case RED:
+                    if(GridPane.getRowIndex(n) == 1 && GridPane.getColumnIndex(n) == i)
+                        return n;
+                    break;
+                case GREEN:
+                    if(GridPane.getRowIndex(n) == 0 && GridPane.getColumnIndex(n) == i)
+                        return n;
+                    break;
+                case YELLOW:
+                    if(GridPane.getRowIndex(n) == 2 && GridPane.getColumnIndex(n) == i)
+                        return n;
+                    break;
+                case PINK:
+                    if(GridPane.getRowIndex(n) == 3 && GridPane.getColumnIndex(n) == i)
+                        return n;
+                    break;
+                case BLUE:
+                    if(GridPane.getRowIndex(n) == 4 && GridPane.getColumnIndex(n) == i)
+                        return n;
+                    break;
+            }
         }
 
         return new ImageView();
@@ -912,6 +965,8 @@ public class GameController extends FXController {
     @Override
     public void handleInteraction(GUIState newState) {
         Game game = Game.getInstance();
+        MatchInfo matchInfo = MatchInfo.getInstance();
+
         if(!GUIState.REPEAT_ACTION.equals(newState)) {
             state = newState;
         }
@@ -933,7 +988,8 @@ public class GameController extends FXController {
                 for(int i = 0; i < cards.size(); i++) {
                     ImageView card = cards.get(i);
 
-                    if(!Card.values()[i].isUsed() && hero.getPlayableCards().contains(Card.values()[i])) {
+                    if((!Card.values()[i].isUsed() || hero.getPlayableCards().size() == 1)
+                            && hero.getPlayableCards().contains(Card.values()[i])) {
                         card.setOnMouseClicked(this::handleCardClick);
                         card.getStyleClass().add("assistantCard");
                     }
@@ -942,15 +998,110 @@ public class GameController extends FXController {
             case MOVE_STUDENT:
                 actionText.setText("Select a Student from your Entrance!");
 
+                entranceHero.getStyleClass().add("target");
+
                 for(ImageView stud : studentsEntranceHero) {
                     stud.setOnMouseClicked(this::handleEntranceSelect);
                 }
+                break;
+            case PAUSE:
+                String message = "Game is paused";
+
+                if(MatchInfo.getInstance().getNumPlayersConnected() == 1)
+                    message += " and ending in 1 minute";
+                actionText.setText(message + "!");
+                break;
+            case MOVE_MN:
+                actionText.setText("Select an Island to move MN!");
+
+                for(int i = 0; i < 12; i++) {
+                    int islandAbsoluteIndex = game.getBoard().getOriginalIndexOf(i);
+                    int islandIndex = game.getBoard().getIndexOfMultiIslandContainingIslandOfIndex(islandAbsoluteIndex);
+                    int MNPosition = game.getBoard().getMNPosition();
+                    int steps = game.getPlayerByID(matchInfo.getCurrentPlayerID()).getSelectedCard().RANGE;
+
+                    if(islandIndex > MNPosition) {
+                        if(islandIndex - MNPosition > steps) continue;
+                    } else {
+                        if(game.getBoard().getNumIslands() + islandIndex - MNPosition > steps) continue;
+                    }
+
+                    islandStudents.get(i).getStyleClass().add("target");
+                    islandStudents.get(i).setOnMouseClicked(this::handleIslandSelectionWhileMoveMN);
+                }
+                break;
+            case CLOUD:
+                actionText.setText("Pick a Cloud!");
+
+                List<Cloud> cloudList = game.getBoard().getClouds();
+                for(int i = 0; i < cloudList.size(); i++) {
+                    if(cloudList.get(i).isAvailable()) {
+                        cloudStudents.get(i).getStyleClass().add("target");
+                        cloudStudents.get(i).setOnMouseClicked(this::handleCloudSelection);
+                    }
+                }
+                break;
+            case END_GAME:
+                Alert winnerAlert = new Alert(Alert.AlertType.INFORMATION);
+                winnerAlert.setTitle("The Game is OVER!");
+
+                if(matchInfo.isGameTied()) {
+                    message = "It ended in a TIE between the following players :\n";
+                } else {
+                    message = "It was WON by :\n";
+                }
+
+                for(Player p: game.getPlayers()) {
+                    if(matchInfo.getWinners().contains(p.getTeamColor())) {
+                        message += p.getName() + " (TEAM " + p.getTeamColor() + ")\n";
+                    }
+                }
+
+                winnerAlert.setContentText(message);
+
+                winnerAlert.showAndWait();
+                System.exit(0);
+                break;
         }
+    }
+
+    private void handleCloudSelection(MouseEvent mouseEvent) {
+        GridPane cloud = (GridPane) mouseEvent.getSource();
+
+        disableGraphic();
+        actionText.setText("Waiting for a server response");
+
+        notify(
+                new RequestParameters()
+                        .setCommandType(CommandType.COLLECT_FROM_CLOUD)
+                        .setIndex(Integer.parseInt(cloud.getUserData().toString()))
+                        .serialize().toString()
+        );
+    }
+
+    private void handleIslandSelectionWhileMoveMN(MouseEvent mouseEvent) {
+        GridPane island = (GridPane) mouseEvent.getSource();
+        Board board = Game.getInstance().getBoard();
+
+        int islandAbsoluteIndex = board.getOriginalIndexOf(Integer.parseInt(island.getUserData().toString()));
+        int islandIndex = board.getIndexOfMultiIslandContainingIslandOfIndex(islandAbsoluteIndex);
+
+        disableGraphic();
+        actionText.setText("Waiting for a server response");
+
+        notify(
+                new RequestParameters()
+                        .setCommandType(CommandType.MOVE_MN)
+                        .setIndex(islandIndex)
+                        .serialize().toString()
+        );
     }
 
     private void handleEntranceSelect(MouseEvent mouseEvent) {
         ImageView stud = (ImageView) mouseEvent.getSource();
         selectedColor = (Color) stud.getUserData();
+
+        entranceHero.getStyleClass().clear();
 
         for(ImageView node : studentsEntranceHero) {
             if(!stud.equals(node)) {
@@ -960,15 +1111,44 @@ public class GameController extends FXController {
                 node.setOnMouseClicked(this::handleEntranceDeselect);
         }
 
+        diningRoomHero.getStyleClass().add("target");
+        diningRoomHero.setOnMouseClicked(this::handleDiningSelection);
+
+        for(GridPane island : islandStudents) {
+            island.getStyleClass().add("target");
+            island.setOnMouseClicked(this::handleIslandSelectionWhileMoveStudent);
+        }
+
         actionText.setText("Select an Island or the Dining Room!");
+    }
+
+    private void handleIslandSelectionWhileMoveStudent(MouseEvent mouseEvent) {
+        GridPane island = (GridPane) mouseEvent.getSource();
+
+        disableGraphic();
+        actionText.setText("Waiting for a server response");
+
+        notify(
+                new RequestParameters()
+                        .setCommandType(CommandType.TRANSFER_STUDENT_TO_ISLAND)
+                        .setIndex(Integer.parseInt(island.getUserData().toString()))
+                        .setColor(selectedColor)
+                        .serialize().toString()
+        );
+    }
+
+    private void handleDiningSelection(MouseEvent mouseEvent) {
+        disableGraphic();
+        actionText.setText("Waiting for a server response");
+
+        notify(
+                new RequestParameters().setCommandType(CommandType.TRANSFER_STUDENT_TO_DINING_ROOM)
+                        .setColor(selectedColor).serialize().toString()
+        );
     }
 
     private void handleEntranceDeselect(MouseEvent mouseEvent) {
         selectedColor = null;
-
-        for(ImageView node : studentsEntranceHero) {
-            node.getStyleClass().clear();
-        }
 
         handleInteraction(GUIState.MOVE_STUDENT);
     }
@@ -986,6 +1166,9 @@ public class GameController extends FXController {
             return;
         }
 
+        disableGraphic();
+        actionText.setText("Waiting for a server response");
+
         notify(
                 new RequestParameters()
                         .setCommandType(CommandType.PLAY_CARD)
@@ -995,9 +1178,29 @@ public class GameController extends FXController {
     }
 
     private void disableGraphic() {
+        entranceHero.getStyleClass().clear();
+
         for(ImageView card : cards) {
             card.setOnMouseClicked(null);
             card.getStyleClass().clear();
+        }
+
+        for(ImageView stud : studentsEntranceHero) {
+            stud.setOnMouseClicked(null);
+            stud.getStyleClass().clear();
+        }
+
+        diningRoomHero.getStyleClass().clear();
+        diningRoomHero.setOnMouseClicked(null);
+
+        for(GridPane island : islandStudents) {
+            island.getStyleClass().clear();
+            island.setOnMouseClicked(null);
+        }
+
+        for(GridPane cloud : cloudStudents) {
+            cloud.getStyleClass().clear();
+            cloud.setOnMouseClicked(null);
         }
 
         actionText.setText("");

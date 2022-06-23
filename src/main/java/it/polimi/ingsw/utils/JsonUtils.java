@@ -43,7 +43,7 @@ public class JsonUtils {
     }
 
     public static boolean hasPlayerReconnected(JsonObject jo) {
-        return MatchInfo.getInstance().getNumPlayersConnected() != jo.get("numPlayersConnected").getAsInt();
+        return MatchInfo.getInstance().getNumPlayersConnected() > jo.get("numPlayersConnected").getAsInt();
     }
 
     public static boolean isGamePaused(JsonObject jo) {
