@@ -386,6 +386,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
      */
     public void disconnectPlayer(int playerID) {
         getPlayerByID(playerID).disconnect();
+        notify(new ResponseParameters().setPlayers(players));
     }
 
     /**
@@ -395,6 +396,13 @@ public class Game extends Observable<ResponseParameters> implements Serializable
      */
     public void reconnectPlayer(int playerID) {
         getPlayerByID(playerID).reconnect();
+    }
+
+    /**
+     * Notifies every VV the new list of players after a reconnection.
+     */
+    public void notifyPlayerReconnected() {
+        notify(new ResponseParameters().setPlayers(players));
     }
 
     /**

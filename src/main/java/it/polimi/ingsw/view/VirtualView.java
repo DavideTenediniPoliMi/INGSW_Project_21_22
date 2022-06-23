@@ -125,6 +125,7 @@ public class VirtualView extends Observable<String> implements Observer<Response
         String reconnectCommand = new RequestParameters().setCommandType(CommandType.RECONNECT).serialize().toString();
         handleRequest(reconnectCommand);
         notify(new ResponseParameters().setSendGame(true).serialize().toString());
+        Game.getInstance().notifyPlayerReconnected();
     }
 
     public void disconnect() {

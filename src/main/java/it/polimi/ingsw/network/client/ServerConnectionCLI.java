@@ -77,7 +77,7 @@ public class ServerConnectionCLI extends Connection {
                 if(!jsonObject.has("error") && jsonObject.has("game")) { //Received game package
                     ready = true;
                     inGame = true;
-                    gameSequence(lastResp);
+                    gameSequence(lastResp, true);
                     return;
                 }
             }
@@ -164,7 +164,7 @@ public class ServerConnectionCLI extends Connection {
                 }
             });
         }
-            gameSequence(lastResp);
+            gameSequence(lastResp, false);
     }
 
     /** PER QUANDO IN GAME
@@ -173,7 +173,7 @@ public class ServerConnectionCLI extends Connection {
      * SE NEXT_VIEW_STATE RITORNA TRUE VAI A FARE UN INTERAZIONE DELLA NUOVA VIEW
      * ALTRIMENTI CONTINUI A LEGGERE
      */
-    private void gameSequence(String lastResponse) {
+    private void gameSequence(String lastResponse, boolean isReconnection) {
         if(!connected)
             return;
 
@@ -183,13 +183,15 @@ public class ServerConnectionCLI extends Connection {
 
         new ResponseParameters().deserialize(initJsonObject);
 
+        if(isReconnection) {
+            new ResponseParameters().deserialize(JsonParser.parseString(receiveMessage()).getAsJsonObject());
+            new ResponseParameters().deserialize(JsonParser.parseString(receiveMessage()).getAsJsonObject());
+        }
+
         view.resetTurnState(MatchInfo.getInstance().serialize());
-        //cli.nextState(initJsonObject);
 
         if(MatchInfo.getInstance().getCurrentPlayerID() == view.getPlayerID()) {
-
             view.handleInteractionAsFirst();
-
         } else {
             view.setViewState(new GameViewState(view.getViewState()));
             view.displayState();

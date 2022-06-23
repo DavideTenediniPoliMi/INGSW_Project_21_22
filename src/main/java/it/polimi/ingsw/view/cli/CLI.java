@@ -1,15 +1,13 @@
 package it.polimi.ingsw.view.cli;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.model.MatchInfo;
-import it.polimi.ingsw.model.characters.CharacterCard;
-import it.polimi.ingsw.model.enumerations.CharacterCards;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.client.ServerConnectionCLI;
+import it.polimi.ingsw.utils.JsonUtils;
 import it.polimi.ingsw.view.cli.viewStates.*;
+import it.polimi.ingsw.view.gui.GUIState;
 import org.fusesource.jansi.AnsiConsole;
 
 import java.io.IOException;
@@ -27,6 +25,7 @@ public class CLI {
      private boolean waitForActivatedCard;
      private String activeCardName;
      private boolean activatedCard;
+     private boolean waitingForPlayer;
      protected boolean exiting;
 
      public CLI(ViewState viewState) { this.viewState = viewState; }
@@ -61,21 +60,24 @@ public class CLI {
           }
 
           if(!jo.has("matchInfo")) {
-               if(!checkForCharacterCards(jo)) {
+               if(JsonUtils.isNotCharCardJSON(jo, playerID)) {
+                    if(waitingForPlayer && jo.has("players")) {
+                         waitingForPlayer = false;
+                         if(matchInfo.getCurrentPlayerID() == playerID) {
+                              setCurrentViewState();
+                              return true;
+                         }
+                    }
                     return false;
                }
 
-               System.out.println("SAW CHARACTER CARDS");
-
-               activeCardName = getActiveCardName(jo);
+               activeCardName = JsonUtils.getActiveCardName(jo);
 
                if(!activeCardName.equals("")) {
                     if(waitForActivatedCard) {
-                         System.out.println("WAS WAITING");
                          waitForActivatedCard = false;
                          activatedCard = true;
                     } else {
-                         System.out.println("BOUGHT CARD");
                          boughtCard = true;
                     }
                }
@@ -85,22 +87,25 @@ public class CLI {
 
           jo = jo.get("matchInfo").getAsJsonObject();
 
-          if(isGameOver(jo)) {
+          if(JsonUtils.isGameOver(jo)) {
                setViewState(new EndGameViewState(getViewState()));
                return true;
           }
 
-          if(hasPlayerReconnected(jo)) {
+          if(JsonUtils.hasPlayerReconnected(jo)) {
+               waitingForPlayer = true;
                return false;
           }
 
-          if(isGamePaused(jo)) {
+          if(JsonUtils.isGamePaused(jo)) {
                setViewState(new GameViewState(getViewState()));
                return false;
           }
 
-          if(!isPlayerTurn(jo))
+          if(JsonUtils.isNotPlayerTurn(jo, playerID)) {
+               setViewState(new GameViewState(getViewState()));
                return false;
+          }
 
           if(MatchInfo.getInstance().isGamePaused()) {
                resetTurnState(jo);
@@ -108,51 +113,43 @@ public class CLI {
           }
 
           if(boughtCard) {
-               System.out.println("SAW MATCHINFO AFTER BUYING");
                boughtCard = false;
 
                if("INFLUENCE_ADD_TWO".equals(activeCardName)) {
-                    System.out.println("WAITING FOR SETTING PARAMS ADD TWO");
                     return false;
                }
 
                if("IGNORE_TOWERS".equals(activeCardName)) {
-                    System.out.println("AND WAS FOR IGNORE TOWERS");
                     resetTurnState(jo);
                     activeCardName = "";
                     return true;
                }
 
-               System.out.println("AND WAITING FOR USER");
                waitForActivatedCard = true;
                return true;
           }
 
           if("INFLUENCE_ADD_TWO".equals(activeCardName)) {
-               System.out.println("FINISHED ADD TWO");
                activeCardName = "";
                resetTurnState(jo);
                return true;
           }
 
           if(activatedCard) {
-               System.out.println("ACTIVATED CARD FROM USER");
                activeCardName = "";
                activatedCard = false;
                resetTurnState(jo);
                return true;
           }
 
-          System.out.println("DIDN'T BUY CARDS");
-
           switch(matchInfo.getStateType()) {
                case PLANNING:
-                    if(areDifferentStates(jo, TurnState.PLANNING)) {
+                    if(JsonUtils.areDifferentStates(jo, TurnState.PLANNING)) {
                          resetTurnState(jo);
                          return true;
                     }
 
-                    if(isPlayerTurn(jo) && !playedPlanning) {
+                    if(!playedPlanning) {
                          playedPlanning = true;
                          resetTurnState(jo);
                          return true;
@@ -163,7 +160,7 @@ public class CLI {
                     int numMovedStudents = jo.get("numMovedStudents").getAsInt();
                     playedPlanning = false;
 
-                    if(areDifferentStates(jo, TurnState.STUDENTS)) {
+                    if(JsonUtils.areDifferentStates(jo, TurnState.STUDENTS)) {
                          resetTurnState(jo);
                          return true;
                     }
@@ -177,14 +174,14 @@ public class CLI {
 
                     return false;
                case MOTHER_NATURE:
-                    if(areDifferentStates(jo, TurnState.MOTHER_NATURE)) {
+                    if(JsonUtils.areDifferentStates(jo, TurnState.MOTHER_NATURE)) {
                          resetTurnState(jo);
                          return true;
                     }
 
                     return false;
                case CLOUD:
-                    if(areDifferentStates(jo, TurnState.CLOUD)) {
+                    if(JsonUtils.areDifferentStates(jo, TurnState.CLOUD)) {
                          resetTurnState(jo);
                          return jo.get("numMovedStudents").getAsInt() == 0;
                     }
@@ -195,56 +192,8 @@ public class CLI {
           }
      }
 
-     private boolean checkForCharacterCards(JsonObject jo) {
-          MatchInfo matchInfo = MatchInfo.getInstance();
-          return jo.has("characterCards") &&
-                  matchInfo.getCurrentPlayerID() == playerID &&
-                  !matchInfo.getStateType().equals(TurnState.PLANNING) &&
-                  !matchInfo.getStateType().equals(TurnState.CLOUD);
-     }
-
-     private String getActiveCardName(JsonObject jo) {
-          JsonArray jsonArray = jo.get("characterCards").getAsJsonArray();
-          for (JsonElement je : jsonArray) {
-               String name = je.getAsJsonObject().get("name").getAsString();
-               CharacterCard c = CharacterCards.valueOf(name).instantiate();
-               c.deserialize(je.getAsJsonObject());
-
-               if(c.isActive())
-                    return c.getName();
-          }
-          return "";
-     }
-
-     private boolean isPlayerTurn(JsonObject jo) {
-          if(jo.get("playOrder").getAsJsonArray().size() == 0 ||
-                  jo.get("playOrder").getAsJsonArray().get(0).getAsInt() != playerID) {
-               setViewState(new GameViewState(getViewState()));
-               return false;
-          }
-          return true;
-     }
-
-     private boolean isGameOver(JsonObject jo) {
-          if(jo.has("gameOver")) {
-               return jo.get("gameOver").getAsBoolean();
-          }
-          return false;
-     }
-
-     private boolean hasPlayerReconnected(JsonObject jo) {
-          return MatchInfo.getInstance().getNumPlayersConnected() != jo.get("numPlayersConnected").getAsInt();
-     }
-
-     private boolean isGamePaused(JsonObject jo) {
-          if(jo.has("gamePaused")) {
-               return jo.get("gamePaused").getAsBoolean();
-          }
-          return false;
-     }
-
      public void resetTurnState(JsonObject jo) {
-          switch(getTurnState(jo)) {
+          switch (JsonUtils.getTurnState(jo)) {
                case PLANNING:
                     setViewState(new PlanningViewState(getViewState()));
                     break;
@@ -262,12 +211,23 @@ public class CLI {
           }
      }
 
-     private boolean areDifferentStates(JsonObject jo, TurnState state) {
-          return !getTurnState(jo).equals(state);
-     }
-
-     private TurnState getTurnState(JsonObject jo) {
-          return TurnState.valueOf(jo.get("stateType").getAsString());
+     private void setCurrentViewState() {
+          switch (MatchInfo.getInstance().getStateType()) {
+               case PLANNING:
+                    setViewState(new PlanningViewState(getViewState()));
+                    break;
+               case STUDENTS:
+                    setViewState(new StudentViewState(getViewState()));
+                    break;
+               case MOTHER_NATURE:
+                    setViewState(new MNViewState(getViewState()));
+                    break;
+               case CLOUD:
+                    setViewState(new CloudViewState(getViewState()));
+                    break;
+               default:
+                    setViewState(new GameViewState(getViewState()));
+          }
      }
 
      public void resetInteraction(String error) {

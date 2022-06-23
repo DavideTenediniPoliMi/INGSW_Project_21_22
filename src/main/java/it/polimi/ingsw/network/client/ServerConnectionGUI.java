@@ -9,6 +9,7 @@ import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
 import it.polimi.ingsw.view.gui.GUI;
+import it.polimi.ingsw.view.gui.GUIState;
 import javafx.application.Platform;
 
 import java.io.IOException;
@@ -66,6 +67,10 @@ public class ServerConnectionGUI extends Connection {
 
             GUI.bindPlayerId();
             Platform.runLater(() -> GUI.loadScene("/scenes/gameScene.fxml"));
+            new ResponseParameters().deserialize(waitForValidMessage());
+            new ResponseParameters().deserialize(waitForValidMessage());
+            gameLoop();
+            return;
         }
 
         while(true) {
@@ -75,10 +80,28 @@ public class ServerConnectionGUI extends Connection {
 
             if(jsonObject.has("game")) {
                 Platform.runLater(() -> GUI.loadScene("/scenes/gameScene.fxml"));
+                gameLoop();
+                return;
             } else {
                 JsonObject finalJsonObject = jsonObject;
                 Platform.runLater(() -> GUI.applyChanges(finalJsonObject));
             }
+        }
+    }
+
+    private void gameLoop() {
+        JsonObject jsonObject;
+
+        while(true) {
+            jsonObject = waitForValidMessage();
+
+            GUIState nextState = GUI.nextState(jsonObject);
+            new ResponseParameters().deserialize(jsonObject);
+
+            JsonObject finalJsonObject = jsonObject;
+            Platform.runLater(() -> GUI.applyChanges(finalJsonObject));
+            Platform.runLater(() -> GUI.handleInteraction(nextState));
+
         }
     }
 }

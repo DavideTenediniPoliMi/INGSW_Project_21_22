@@ -25,3 +25,13 @@
 .characterCard:disabled {
     -fx-opacity: 0.6;
 }
+
+.studentNotSelected {
+    -fx-opacity: 0.6;
+}
+
+.target {
+    -fx-border-width: 3px;
+    -fx-border-radius: 3px;
+    -fx-border-color: yellow;
+}

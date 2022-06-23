@@ -3060,7 +3060,7 @@
          </font>
       </Label>
    </AnchorPane>
-   <AnchorPane fx:id="charCardPane1" layoutX="1247.0" layoutY="20.0" style="-fx-opacity: 0.6;" styleClass="characterCard" visible="false">
+   <AnchorPane fx:id="charCardPane1" layoutX="1247.0" layoutY="20.0" styleClass="characterCard" visible="false">
       <ImageView fx:id="characterCard1" fitHeight="150.0" pickOnBounds="true" preserveRatio="true">
          <viewport>
             <Rectangle2D />
@@ -3326,7 +3326,7 @@
          <Image url="@../images/Assistente (10).png" />
       </ImageView>
    </AnchorPane>
-   <Label fx:id="actionText" ellipsisString=".." layoutX="1056.0" layoutY="527.0" text="ACTION" visible="false" AnchorPane.leftAnchor="900.0" AnchorPane.rightAnchor="20.0">
+   <Label fx:id="actionText" ellipsisString=".." layoutX="1056.0" layoutY="527.0" AnchorPane.leftAnchor="900.0" AnchorPane.rightAnchor="20.0">
       <font>
          <Font name="Arial Black" size="18.0" />
       </font>
