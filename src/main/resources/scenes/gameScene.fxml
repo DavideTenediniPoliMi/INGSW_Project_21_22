@@ -1870,7 +1870,7 @@
          </Label>
       </AnchorPane>
    </AnchorPane>
-   <AnchorPane fx:id="player1" layoutX="20.0" layoutY="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+   <AnchorPane fx:id="player1" layoutX="20.0" layoutY="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="1146.0" AnchorPane.topAnchor="20.0">
       <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <Image url="@../images/School_asset.png" />
       </ImageView>
@@ -2027,7 +2027,7 @@
    <ImageView fx:id="assistantCard1" fitHeight="100.0" fitWidth="120.0" layoutX="181.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="25.0">
       <Image url="@../images/Assistente (1)_half.png" />
    </ImageView>
-   <AnchorPane fx:id="player2" layoutX="20.0" layoutY="230.0" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="230.0">
+   <AnchorPane fx:id="player2" layoutX="20.0" layoutY="230.0" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="1146.0" AnchorPane.topAnchor="230.0">
       <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../images/School_asset.png" />
       </ImageView>
@@ -2184,7 +2184,7 @@
    <ImageView fx:id="assistantCard2" fitHeight="100.0" fitWidth="120.0" layoutX="191.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="235.0">
       <Image url="@../images/Assistente (1)_half.png" />
    </ImageView>
-   <AnchorPane fx:id="player3" layoutX="20.0" layoutY="440.0" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="440.0">
+   <AnchorPane fx:id="player3" layoutX="20.0" layoutY="440.0" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="1146.0" AnchorPane.topAnchor="440.0">
       <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../images/School_asset.png" />
       </ImageView>
@@ -3054,10 +3054,13 @@
          </effect>
          <Image url="@../images/Moneta_base.png" />
       </ImageView>
-      <Label fx:id="numCoinsHero" text="1" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="-12.0">
+      <Label fx:id="numCoinsHero" text="1" textFill="WHITE" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="-20.0">
          <font>
-            <Font name="Arial" size="16.0" />
+            <Font name="Arial" size="22.0" />
          </font>
+         <effect>
+            <DropShadow spread="0.7" />
+         </effect>
       </Label>
    </AnchorPane>
    <AnchorPane fx:id="charCardPane1" layoutX="1247.0" layoutY="20.0" styleClass="characterCard" visible="false">
@@ -3126,6 +3129,9 @@
          <font>
             <Font name="Arial" size="14.0" />
          </font>
+         <effect>
+            <DropShadow spread="0.7" />
+         </effect>
       </Label>
    </AnchorPane>
    <AnchorPane fx:id="charCardPane2" layoutX="1247.0" layoutY="190.0" styleClass="characterCard" visible="false">
@@ -3194,6 +3200,9 @@
          <font>
             <Font name="Arial" size="14.0" />
          </font>
+         <effect>
+            <DropShadow spread="0.7" />
+         </effect>
       </Label>
    </AnchorPane>
    <AnchorPane fx:id="charCardPane3" layoutX="1247.0" layoutY="360.0" styleClass="characterCard" visible="false">
@@ -3262,6 +3271,9 @@
          <font>
             <Font name="Arial" size="14.0" />
          </font>
+         <effect>
+            <DropShadow spread="0.7" />
+         </effect>
       </Label>
    </AnchorPane>
    <AnchorPane layoutX="900.0" layoutY="600.0" AnchorPane.leftAnchor="890.0" AnchorPane.topAnchor="700.0">
