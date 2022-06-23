@@ -28,15 +28,18 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
-    private static final int PORT = 12345;
     private static final String BACKUP_FILE = "BackupData.txt";
-    private final ServerSocket serverSocket = new ServerSocket(PORT);
+    private ServerSocket serverSocket;
     private final ExecutorService executor = Executors.newFixedThreadPool(16);
     private LobbyController lobbyController = new LobbyController();
     private GameController gameController = new GameController();
     private final List<VirtualView> virtualViews = new ArrayList<>();
 
-    public Server() throws IOException, PlayerAlreadyConnectedException, GameFullException {
+    public Server(int port) throws GameFullException, PlayerAlreadyConnectedException, IOException {
+        this();
+        serverSocket = new ServerSocket(port);
+    }
+    private Server() throws IOException, PlayerAlreadyConnectedException, GameFullException {
         File file = new File(BACKUP_FILE);
 
         if(file.exists()) {
