@@ -20,6 +20,7 @@ public class ServerApp {
                         System.out.println("Invalid port: " + args[1] + "\nexiting...");
                         System.exit(1);
                     }
+                    break;
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid port: " + args[1] + "\nexiting...");
                     System.exit(1);
