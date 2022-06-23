@@ -147,7 +147,7 @@
         <version>3.1.1</version>
         <executions>
           <execution>
-            <id>eriantys</id>
+            <id>eriantys-client</id>
             <phase>package</phase>
             <goals>
               <goal>shade</goal>
@@ -168,7 +168,32 @@
                   <mainClass>it.polimi.ingsw.ClientApp</mainClass>
                 </transformer>
               </transformers>
-              <finalName>EriantysCLI</finalName>
+              <finalName>EriantysClient</finalName>
+            </configuration>
+          </execution>
+          <execution>
+            <id>eriantys-server</id>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>module-info.class</exclude>
+                    <exclude>**/*.jar</exclude>
+                    <exclude>target/**/*.class</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>it.polimi.ingsw.ServerApp</mainClass>
+                </transformer>
+              </transformers>
+              <finalName>EriantysServer</finalName>
             </configuration>
           </execution>
         </executions>
