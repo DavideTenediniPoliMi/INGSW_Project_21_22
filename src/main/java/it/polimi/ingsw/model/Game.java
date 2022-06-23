@@ -398,6 +398,9 @@ public class Game extends Observable<ResponseParameters> implements Serializable
         getPlayerByID(playerID).reconnect();
     }
 
+    /**
+     * Notifies every VV the new list of players after a reconnection.
+     */
     public void notifyPlayerReconnected() {
         notify(new ResponseParameters().setPlayers(players));
     }
