@@ -174,4 +174,8 @@ public class VirtualView extends Observable<String> implements Observer<Response
         this.playerID = playerID;
         commandFactory = new CommandFactory(playerID, lobbyController, gameController);
     }
+
+    public boolean hasJoined() {
+        return joined;
+    }
 }

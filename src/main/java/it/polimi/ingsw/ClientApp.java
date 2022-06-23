@@ -10,7 +10,8 @@ public class ClientApp {
         // IF CLI THEN USE client.run(new CLI(null))
         // WHICH IS THE OVERLOADED METHOD
         boolean isCli = false;
-        for(String arg : args) {
+        client.run(new CLI(null));
+        /*for(String arg : args) {
             if(arg.equalsIgnoreCase("-cli")) {
                 isCli = true;
                 break;
@@ -19,6 +20,6 @@ public class ClientApp {
         if(isCli)
             client.run(new CLI(null));
         else
-            client.run();
+            client.run();*/
     }
 }
