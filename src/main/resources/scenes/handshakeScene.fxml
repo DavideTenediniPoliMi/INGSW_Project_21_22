@@ -18,11 +18,6 @@
       </viewport>
       <Image url="@../images/gameArtwork.png" />
    </ImageView>
-   <Label fx:id="error" cache="true" layoutX="666.0" layoutY="241.0" style="-fx-background-color: rgb(255,0,0, .5); -fx-border-color: red; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="ERROR" textFill="WHITE" visible="false" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
-      <font>
-         <Font size="36.0" />
-      </font>
-   </Label>
    <Label layoutX="528.0" layoutY="99.0" text="Eriantys" textFill="WHITE" AnchorPane.leftAnchor="498.0" AnchorPane.rightAnchor="498.5">
       <font>
          <Font name="Arial Rounded MT Bold" size="92.0" />
@@ -54,4 +49,9 @@
          <Font name="HiraMinProN-W3" size="30.0" />
       </font>
    </Button>
+   <Label fx:id="error" cache="true" layoutX="666.0" layoutY="241.0" style="-fx-background-color: rgb(255,0,0, .5); -fx-border-color: red; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="ERROR" textFill="WHITE" visible="false" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+      <font>
+         <Font size="36.0" />
+      </font>
+   </Label>
 </AnchorPane>
