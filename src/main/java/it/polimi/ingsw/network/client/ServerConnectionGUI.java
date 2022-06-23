@@ -67,6 +67,8 @@ public class ServerConnectionGUI extends Connection {
 
             GUI.bindPlayerId();
             Platform.runLater(() -> GUI.loadScene("/scenes/gameScene.fxml"));
+            new ResponseParameters().deserialize(waitForValidMessage());
+            new ResponseParameters().deserialize(waitForValidMessage());
             gameLoop();
             return;
         }

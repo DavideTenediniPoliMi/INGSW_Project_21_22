@@ -286,6 +286,7 @@ public class GameController extends FXController {
     private final List<ImageView> otherAssistants = new ArrayList<>();
 
     private GUIState state;
+    private Color selectedColor;
 
     @FXML
     public void initialize() {
@@ -402,6 +403,18 @@ public class GameController extends FXController {
             card.setOnMouseClicked(this::handleCardClick);
             card.setOnMouseClicked(null);
         }
+
+
+        applyChangesSchools();
+        applyChangesCharCards();
+        applyChangesClouds();
+        applyChangesIslands();
+        studentBag.setVisible(Game.getInstance().isStudentBagEmpty());
+        applyChangesProfessors();
+        numCoinsLeft.setText(String.valueOf(Game.getInstance().getBoard().getNumCoinsLeft()));
+        applyChangesCards();
+        applyChangesPlayers();
+
 
         handleInteraction((matchInfo.getCurrentPlayerID() == GUI.getPlayerId()) ? getCurrentState() : GUIState.WAIT_ACTION);
     }
@@ -637,6 +650,7 @@ public class GameController extends FXController {
 
         for(Color c : Color.values()) {
             int ownerID = profs.getOwnerIDByColor(c);
+            if(ownerID == -1) continue;
 
             if(ownerID == GUI.getPlayerId()) {
                 getProfFromHeroSchool(c, professorsHero).setVisible(true);
@@ -746,6 +760,7 @@ public class GameController extends FXController {
 
                     for(int i = 0; i < amount; i++) {
                         studentsEntranceHero.get(entranceIndex).setImage(c.getImage());
+                        studentsEntranceHero.get(entranceIndex).setUserData(c);
                         entranceIndex++;
                     }
                 }
@@ -926,7 +941,36 @@ public class GameController extends FXController {
                 break;
             case MOVE_STUDENT:
                 actionText.setText("Select a Student from your Entrance!");
+
+                for(ImageView stud : studentsEntranceHero) {
+                    stud.setOnMouseClicked(this::handleEntranceSelect);
+                }
         }
+    }
+
+    private void handleEntranceSelect(MouseEvent mouseEvent) {
+        ImageView stud = (ImageView) mouseEvent.getSource();
+        selectedColor = (Color) stud.getUserData();
+
+        for(ImageView node : studentsEntranceHero) {
+            if(!stud.equals(node)) {
+                node.setOnMouseClicked(null);
+                node.getStyleClass().add("studentNotSelected");
+            } else
+                node.setOnMouseClicked(this::handleEntranceDeselect);
+        }
+
+        actionText.setText("Select an Island or the Dining Room!");
+    }
+
+    private void handleEntranceDeselect(MouseEvent mouseEvent) {
+        selectedColor = null;
+
+        for(ImageView node : studentsEntranceHero) {
+            node.getStyleClass().clear();
+        }
+
+        handleInteraction(GUIState.MOVE_STUDENT);
     }
 
     private void handleCardClick(MouseEvent event) {

@@ -37,6 +37,7 @@ public class GUI extends Application {
     private static boolean waitForActivatedCard;
     private static String activeCardName;
     private static boolean activatedCard;
+    private static boolean waitingForPlayer;
 
     public static void main(String[] args) {
         launch();
@@ -140,6 +141,10 @@ public class GUI extends Application {
 
         if(!jo.has("matchInfo")) {
             if(JsonUtils.isNotCharCardJSON(jo, playerId)) {
+                if(waitingForPlayer && jo.has("players")) {
+                    waitingForPlayer = false;
+                    return (matchInfo.getCurrentPlayerID() != playerId) ? GUIState.WAIT_ACTION : resetState(jo);
+                }
                 return GUIState.WAIT_RESPONSE;
             }
 
@@ -162,8 +167,10 @@ public class GUI extends Application {
         if(JsonUtils.isGameOver(jo))
             return GUIState.END_GAME;
 
-        if(JsonUtils.hasPlayerReconnected(jo))
+        if(JsonUtils.hasPlayerReconnected(jo)) {
+            waitingForPlayer = true;
             return GUIState.WAIT_RESPONSE;
+        }
 
         if(JsonUtils.isGamePaused(jo))
             return GUIState.PAUSE;

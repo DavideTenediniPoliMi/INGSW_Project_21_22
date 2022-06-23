@@ -7,6 +7,7 @@ import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.client.ServerConnectionCLI;
 import it.polimi.ingsw.utils.JsonUtils;
 import it.polimi.ingsw.view.cli.viewStates.*;
+import it.polimi.ingsw.view.gui.GUIState;
 import org.fusesource.jansi.AnsiConsole;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class CLI {
      private boolean waitForActivatedCard;
      private String activeCardName;
      private boolean activatedCard;
+     private boolean waitingForPlayer;
      protected boolean exiting;
 
      public CLI(ViewState viewState) { this.viewState = viewState; }
@@ -59,6 +61,13 @@ public class CLI {
 
           if(!jo.has("matchInfo")) {
                if(JsonUtils.isNotCharCardJSON(jo, playerID)) {
+                    if(waitingForPlayer && jo.has("players")) {
+                         waitingForPlayer = false;
+                         if(matchInfo.getCurrentPlayerID() == playerID) {
+                              setCurrentViewState();
+                              return true;
+                         }
+                    }
                     return false;
                }
 
@@ -84,6 +93,7 @@ public class CLI {
           }
 
           if(JsonUtils.hasPlayerReconnected(jo)) {
+               waitingForPlayer = true;
                return false;
           }
 
@@ -184,6 +194,25 @@ public class CLI {
 
      public void resetTurnState(JsonObject jo) {
           switch (JsonUtils.getTurnState(jo)) {
+               case PLANNING:
+                    setViewState(new PlanningViewState(getViewState()));
+                    break;
+               case STUDENTS:
+                    setViewState(new StudentViewState(getViewState()));
+                    break;
+               case MOTHER_NATURE:
+                    setViewState(new MNViewState(getViewState()));
+                    break;
+               case CLOUD:
+                    setViewState(new CloudViewState(getViewState()));
+                    break;
+               default:
+                    setViewState(new GameViewState(getViewState()));
+          }
+     }
+
+     private void setCurrentViewState() {
+          switch (MatchInfo.getInstance().getStateType()) {
                case PLANNING:
                     setViewState(new PlanningViewState(getViewState()));
                     break;
