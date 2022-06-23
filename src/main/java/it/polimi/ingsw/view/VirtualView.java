@@ -22,7 +22,7 @@ import javafx.css.Match;
 
 public class VirtualView extends Observable<String> implements Observer<ResponseParameters> {
     private final String name;
-    private boolean connected, skipping;
+    private boolean connected, skipping, joined;
     private int playerID;
     private CommandFactory commandFactory;
     private final LobbyController lobbyController;
@@ -34,6 +34,7 @@ public class VirtualView extends Observable<String> implements Observer<Response
         this.gameController = gameController;
         this.name = name;
         playerID = 0;
+        joined = false;
 
         Game.getInstance().addObserver(this);
         MatchInfo.getInstance().addObserver(this);
@@ -69,6 +70,7 @@ public class VirtualView extends Observable<String> implements Observer<Response
                             lobbyController.requestCommand(command);
 
                             commandFactory = tempFactory;
+                            joined = true;
                             return;
                         } catch(DuplicateIDException e) {
                             System.out.println("Trying again!");
@@ -130,6 +132,11 @@ public class VirtualView extends Observable<String> implements Observer<Response
 
     public void disconnect() {
         connected = false;
+        //Skip everything else if player has NOT joined the game (Only applies to lobby)
+        if(!joined)
+            return;
+
+        //Begin turn-skip sequence (Player is in-game)
         skipping = true;
         clearObservers();
         String disconnectCommand = new RequestParameters().setCommandType(CommandType.DISCONNECT).serialize().toString();
