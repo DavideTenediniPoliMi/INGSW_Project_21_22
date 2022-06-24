@@ -48,11 +48,6 @@
          <Insets bottom="5.0" />
       </padding>
    </Label>
-   <Button layoutX="693.0" layoutY="451.0" mnemonicParsing="false" onMouseClicked="#handleCreateLobbyButton" style="-fx-background-radius: 20px;" text="Create Game!" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="580.0">
-      <font>
-         <Font name="Arial" size="30.0" />
-      </font>
-   </Button>
    <Slider fx:id="numPlayers" blockIncrement="1.0" layoutX="543.0" layoutY="350.0" majorTickUnit="1.0" max="4.0" min="2.0" minorTickCount="0" showTickMarks="true" snapToTicks="true" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="350.0">
       <effect>
          <DropShadow />
@@ -92,6 +87,11 @@
          <DropShadow />
       </effect>
    </CheckBox>
+   <Button layoutX="693.0" layoutY="451.0" mnemonicParsing="false" onKeyPressed="#handleKeyPress" onMouseClicked="#handleCreateLobbyButton" style="-fx-background-radius: 20px;" text="Create Game!" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="580.0">
+      <font>
+         <Font name="Arial" size="30.0" />
+      </font>
+   </Button>
    <Label fx:id="error" cache="true" layoutX="666.0" layoutY="241.0" style="-fx-background-color: rgb(255,0,0, .5); -fx-border-color: red; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="ERROR" textFill="WHITE" visible="false" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
       <font>
          <Font size="36.0" />

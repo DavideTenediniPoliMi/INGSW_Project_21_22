@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
@@ -281,8 +282,9 @@ public class GameController extends FXController {
     private final List<ImageView> bridges = new ArrayList<>();
     private final List<ImageView> charCards = new ArrayList<>();
     private final List<GridPane> charCardsStudents = new ArrayList<>();
+    private final List<AnchorPane> charCardPanes = new ArrayList<>();
     private final List<Label> charCardsCost = new ArrayList<>();
-    private final List<ImageView> studentsEntranceHero = new ArrayList<>();
+    private final List<BorderPane> studentsEntranceHero = new ArrayList<>();
     private final List<ImageView> otherAssistants = new ArrayList<>();
 
     private GUIState state;
@@ -352,6 +354,10 @@ public class GameController extends FXController {
             charCardPane2.setVisible(true);
             charCardPane3.setVisible(true);
 
+            charCardPanes.add(charCardPane1);
+            charCardPanes.add(charCardPane2);
+            charCardPanes.add(charCardPane3);
+
             charCards.add(characterCard1);
             charCards.add(characterCard2);
             charCards.add(characterCard3);
@@ -371,6 +377,8 @@ public class GameController extends FXController {
 
             for(int i = 0 ; i < cards.size(); i++) {
                 charCards.get(i).setImage(CharacterCards.valueOf(cards.get(i).getName()).getImage());
+                charCards.get(i).setUserData(i);
+
                 if(cards.get(i).getEffectType().equals(EffectType.STUDENT_GROUP)) {
                     charCardsStudents.get(i).setVisible(true);
                     if(cards.get(i).getName().equals("POOL_SWAP")) {
@@ -382,8 +390,9 @@ public class GameController extends FXController {
                     for(Color c : Color.values()) {
                         int numStud = ((StudentGroupDecorator)cards.get(i)).getStudentsByColor(c);
                         for(int j = 0; j < numStud; j++) {
-                            ImageView stud = (ImageView) getNodeFromCard(cardIndex, charCardsStudents.get(i));
-                            stud.setImage(c.getImage());
+                            BorderPane stud = (BorderPane) getNodeFromCard(cardIndex, charCardsStudents.get(i));
+                            ImageView image = (ImageView) stud.getCenter();
+                            image.setImage(c.getImage());
                             cardIndex++;
                         }
                     }
@@ -520,7 +529,7 @@ public class GameController extends FXController {
         bridges.add(bridge12);
 
         for(Node node : entranceHero.getChildren()) {
-            studentsEntranceHero.add((ImageView)node);
+            studentsEntranceHero.add((BorderPane)node);
         }
     }
 
@@ -542,7 +551,8 @@ public class GameController extends FXController {
                     int amount = school.getNumStudentsInEntranceByColor(c);
 
                     for(int i = 0; i < amount; i++) {
-                        studentsEntranceHero.get(entranceIndex).setImage(c.getImage());
+                        ImageView image = (ImageView) studentsEntranceHero.get(entranceIndex).getCenter();
+                        image.setImage(c.getImage());
                         entranceIndex++;
                     }
                 }
@@ -737,7 +747,7 @@ public class GameController extends FXController {
         for(int i = 0; i < charCards.size(); i++) {
             charCardsCost.get(i).setText(String.valueOf(charCards.get(i).getCost()));
 
-            this.charCards.get(i).setDisable(Game.getInstance().getActiveCharacterCard() != null
+            charCardPanes.get(i).setDisable(Game.getInstance().getActiveCharacterCard() != null
                     && !Game.getInstance().getActiveCharacterCard().equals(charCards.get(i)));
 
             if(charCards.get(i).getEffectType().equals(EffectType.STUDENT_GROUP)) {
@@ -745,8 +755,9 @@ public class GameController extends FXController {
                 for(Color c : Color.values()) {
                     int numStud = ((StudentGroupDecorator)charCards.get(i)).getStudentsByColor(c);
                     for(int j = 0; j < numStud; j++) {
-                        ImageView stud = (ImageView) getNodeFromCard(cardIndex, charCardsStudents.get(i));
-                        stud.setImage(c.getImage());
+                        BorderPane stud = (BorderPane) getNodeFromCard(cardIndex, charCardsStudents.get(i));
+                        ImageView image = (ImageView) stud.getCenter();
+                        image.setImage(c.getImage());
                         cardIndex++;
                     }
                 }
@@ -767,7 +778,8 @@ public class GameController extends FXController {
 
                     for(int i = 0; i < amount; i++) {
                         studentsEntranceHero.get(entranceIndex).setVisible(true);
-                        studentsEntranceHero.get(entranceIndex).setImage(c.getImage());
+                        ImageView image = (ImageView) studentsEntranceHero.get(entranceIndex).getCenter();
+                        image.setImage(c.getImage());
                         studentsEntranceHero.get(entranceIndex).setUserData(c);
                         entranceIndex++;
                     }
@@ -998,9 +1010,12 @@ public class GameController extends FXController {
             case MOVE_STUDENT:
                 actionText.setText("Select a Student from your Entrance!");
 
+                prepCharCards();
+
+                entranceHero.getStyleClass().clear();
                 entranceHero.getStyleClass().add("target");
 
-                for(ImageView stud : studentsEntranceHero) {
+                for(BorderPane stud : studentsEntranceHero) {
                     stud.setOnMouseClicked(this::handleEntranceSelect);
                 }
                 break;
@@ -1014,6 +1029,8 @@ public class GameController extends FXController {
             case MOVE_MN:
                 actionText.setText("Select an Island to move MN!");
 
+                prepCharCards();
+
                 for(int i = 0; i < 12; i++) {
                     int islandAbsoluteIndex = game.getBoard().getOriginalIndexOf(i);
                     int islandIndex = game.getBoard().getIndexOfMultiIslandContainingIslandOfIndex(islandAbsoluteIndex);
@@ -1026,6 +1043,7 @@ public class GameController extends FXController {
                         if(game.getBoard().getNumIslands() + islandIndex - MNPosition > steps) continue;
                     }
 
+                    islandStudents.get(i).getStyleClass().clear();
                     islandStudents.get(i).getStyleClass().add("target");
                     islandStudents.get(i).setOnMouseClicked(this::handleIslandSelectionWhileMoveMN);
                 }
@@ -1036,10 +1054,14 @@ public class GameController extends FXController {
                 List<Cloud> cloudList = game.getBoard().getClouds();
                 for(int i = 0; i < cloudList.size(); i++) {
                     if(cloudList.get(i).isAvailable()) {
-                        cloudStudents.get(i).getStyleClass().add("targetCloud");
+                        clouds.get(i).getStyleClass().remove("def");
+                        clouds.get(i).getStyleClass().add("target");
                         cloudStudents.get(i).setOnMouseClicked(this::handleCloudSelection);
                     }
                 }
+                break;
+            case SET_CARD_PARAMS:
+                manageSetParams();
                 break;
             case END_GAME:
                 Alert winnerAlert = new Alert(Alert.AlertType.INFORMATION);
@@ -1065,6 +1087,41 @@ public class GameController extends FXController {
                 System.exit(0);
                 break;
         }
+    }
+
+    private void manageSetParams() {
+
+    }
+
+    private void prepCharCards() {
+        Game game = Game.getInstance();
+
+        if(!MatchInfo.getInstance().isExpertMode())
+            return;
+
+        List<CharacterCard> charCardList = game.getCharacterCards();
+
+        for(int i = 0 ; i < charCardList.size() ; i++) {
+            if(game.getPlayerByID(GUI.getPlayerId()).getNumCoins() >= charCardList.get(i).getCost()) {
+                charCards.get(i).setOnMouseClicked(this::handleCharCardSelect);
+            } else {
+                charCards.get(i).setOnMouseClicked(this::handleCharCardNoMoney);
+            }
+        }
+    }
+
+    private void handleCharCardNoMoney(MouseEvent mouseEvent) {
+        showError("Not enough coins!");
+    }
+
+    private void handleCharCardSelect(MouseEvent mouseEvent) {
+        ImageView card = (ImageView) mouseEvent.getSource();
+        notify(
+                new RequestParameters()
+                        .setCommandType(CommandType.BUY_CHARACTER_CARD)
+                        .setIndex(Integer.parseInt(card.getUserData().toString()))
+                        .serialize().toString()
+        );
     }
 
     private void handleCloudSelection(MouseEvent mouseEvent) {
@@ -1100,27 +1157,32 @@ public class GameController extends FXController {
     }
 
     private void handleEntranceSelect(MouseEvent mouseEvent) {
-        ImageView stud = (ImageView) mouseEvent.getSource();
+        BorderPane stud = (BorderPane) mouseEvent.getSource();
         selectedColor = (Color) stud.getUserData();
 
         entranceHero.getStyleClass().clear();
+        entranceHero.getStyleClass().add("def");
 
-        for(ImageView node : studentsEntranceHero) {
+        for(BorderPane node : studentsEntranceHero) {
             if(!stud.equals(node)) {
                 node.setOnMouseClicked(null);
-                node.getStyleClass().add("studentNotSelected");
-            } else
+            } else {
                 node.setOnMouseClicked(this::handleEntranceDeselect);
+                node.getStyleClass().clear();
+                node.getStyleClass().add("target");
+            }
         }
 
         String optional = "";
         if(Game.getInstance().getBoard().getSchoolByPlayerID(GUI.getPlayerId()).getNumStudentsInDiningRoomByColor(selectedColor) < 10) {
+            diningRoomHero.getStyleClass().clear();
             diningRoomHero.getStyleClass().add("target");
             diningRoomHero.setOnMouseClicked(this::handleDiningSelection);
             optional += "or the Dining Room";
         }
 
         for(GridPane island : islandStudents) {
+            island.getStyleClass().clear();
             island.getStyleClass().add("target");
             island.setOnMouseClicked(this::handleIslandSelectionWhileMoveStudent);
         }
@@ -1191,24 +1253,42 @@ public class GameController extends FXController {
             card.getStyleClass().clear();
         }
 
-        for(ImageView stud : studentsEntranceHero) {
+        for(BorderPane stud : studentsEntranceHero) {
             stud.setOnMouseClicked(null);
             stud.getStyleClass().clear();
         }
 
         diningRoomHero.getStyleClass().clear();
+        diningRoomHero.getStyleClass().add("def");
         diningRoomHero.setOnMouseClicked(null);
 
         for(GridPane island : islandStudents) {
             island.getStyleClass().clear();
+            island.getStyleClass().add("def");
             island.setOnMouseClicked(null);
         }
 
-        for(GridPane cloud : cloudStudents) {
-            cloud.getStyleClass().clear();
+        for(AnchorPane cloud : clouds) {
+            cloud.getStyleClass().remove("target");
+            cloud.getStyleClass().remove("def");
             cloud.setOnMouseClicked(null);
         }
 
+        disableCharCards();
+
         actionText.setText("");
+    }
+
+    private void disableCharCards() {
+        if(!MatchInfo.getInstance().isExpertMode())
+            return;
+
+        for (ImageView charCard : charCards) {
+            charCard.setOnMouseClicked(this::handleCharCardForbidden);
+        }
+    }
+
+    private void handleCharCardForbidden(MouseEvent mouseEvent) {
+        showError("Cannot buy a card at this stage!");
     }
 }

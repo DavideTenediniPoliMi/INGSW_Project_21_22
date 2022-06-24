@@ -3,10 +3,10 @@ package it.polimi.ingsw.view.gui.controllers;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.view.gui.GUI;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.util.Optional;
 
@@ -15,7 +15,6 @@ public class CreateLobbyController extends FXController {
     private Slider numPlayers;
     @FXML
     private CheckBox expertMode;
-
 
     public void handleCreateLobbyButton() {
         GUI.setCreatedLobby(true);
@@ -37,5 +36,11 @@ public class CreateLobbyController extends FXController {
         alert.setContentText("You automatically joined the new lobby!");
 
         alert.show();
+    }
+
+    public void handleKeyPress(KeyEvent keyEvent) {
+        if(keyEvent.getCode().equals(KeyCode.ENTER)) {
+            handleCreateLobbyButton();
+        }
     }
 }

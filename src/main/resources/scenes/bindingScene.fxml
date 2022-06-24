@@ -39,7 +39,7 @@
          <Insets />
       </opaqueInsets>
    </Label>
-   <TextField fx:id="ipAddressText" alignment="CENTER" layoutX="638.0" layoutY="118.0" style="-fx-background-radius: 10px;" text="localhost" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="320.0">
+   <TextField fx:id="ipAddressText" onKeyPressed="#handleKeyPress" alignment="CENTER" layoutX="638.0" layoutY="118.0" style="-fx-background-radius: 10px;" text="localhost" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="320.0">
       <font>
          <Font name="Arial" size="32.0" />
       </font>
@@ -49,7 +49,7 @@
          <Font name="Arial Rounded MT Bold" size="36.0" />
       </font>
    </Label>
-   <TextField fx:id="portText" alignment="CENTER" layoutX="743.0" layoutY="714.0" style="-fx-background-radius: 10px;" text="12345" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="470.0">
+   <TextField fx:id="portText" onKeyPressed="#handleKeyPress" alignment="CENTER" layoutX="743.0" layoutY="714.0" style="-fx-background-radius: 10px;" text="12345" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="470.0">
       <font>
          <Font name="Arial" size="32.0" />
       </font>

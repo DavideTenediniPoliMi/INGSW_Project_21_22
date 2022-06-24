@@ -39,7 +39,7 @@
          <Insets />
       </opaqueInsets>
    </Label>
-   <TextField fx:id="nameText" alignment="CENTER" layoutX="638.0" layoutY="118.0" promptText="name" style="-fx-background-radius: 10px;" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="380.0">
+   <TextField fx:id="nameText" onKeyPressed="#handleKeyPress" alignment="CENTER" layoutX="638.0" layoutY="118.0" promptText="name" style="-fx-background-radius: 10px;" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="380.0">
       <font>
          <Font name="Arial" size="36.0" />
       </font>

@@ -3,7 +3,10 @@ package it.polimi.ingsw.view.gui.controllers;
 import it.polimi.ingsw.network.client.ServerConnectionGUI;
 import it.polimi.ingsw.view.gui.GUI;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -26,6 +29,16 @@ public class BindingController extends FXController {
             GUI.loadScene("/scenes/handshakeScene.fxml");
         } catch (IOException | IllegalArgumentException | SecurityException e) {
             showError("Something went wrong! Try again!");
+        }
+    }
+
+    public void handleKeyPress(KeyEvent keyEvent) {
+        if(keyEvent.getCode().equals(KeyCode.ENTER)) {
+            if(((Node) keyEvent.getSource()).getId().equals("ipAddressText")) {
+                portText.requestFocus();
+            } else {
+                handleBindingButton();
+            }
         }
     }
 }

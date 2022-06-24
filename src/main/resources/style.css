@@ -31,13 +31,9 @@
 }
 
 .target {
-    -fx-border-width: 3px;
-    -fx-border-radius: 6px;
     -fx-border-color: yellow;
 }
 
-.targetCloud {
-    -fx-border-width: 3px;
-    -fx-border-radius: 6px;
-    -fx-border-color: #e9ac13;
+.def {
+    -fx-border-color: transparent;
 }
