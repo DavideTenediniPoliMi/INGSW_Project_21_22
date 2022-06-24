@@ -3083,7 +3083,9 @@
          </viewport>
          <Image url="@../images/CarteTOT_front.jpg" />
       </ImageView>
-      <GridPane fx:id="charCardStudents1" layoutX="79.0" layoutY="70.0" visible="false" style="-fx-background-color: lightgrey; -fx-background-radius: 10px;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="70.0">
+      <GridPane fx:id="charCardStudents1" layoutX="79.0" layoutY="70.0" visible="false" styleClass="def"
+                style="-fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-color: lightgrey; -fx-background-radius: 10px;"
+                AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="70.0">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="15.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="15.0" />
@@ -3180,7 +3182,7 @@
          <Image url="@../images/CarteTOT_front5.jpg" />
       </ImageView>
       <GridPane fx:id="charCardStudents2" layoutX="89.0" layoutY="80.0" visible="false"
-                style="-fx-background-color: lightgrey; -fx-background-radius: 10px;" AnchorPane.leftAnchor="5.0"
+                styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-color: lightgrey; -fx-background-radius: 10px;" AnchorPane.leftAnchor="5.0"
                 AnchorPane.topAnchor="70.0">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
@@ -3199,9 +3201,9 @@
          <rowConstraints>
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="15.0" vgrow="SOMETIMES"/>
          </rowConstraints>
-         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;">
+         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.columnIndex="0">
             <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0">
+               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true" >
                   <Image url="@../images/student_yellow.png"/>
                </ImageView>
             </center>
@@ -3287,7 +3289,7 @@
          </viewport>
          <Image url="@../images/CarteTOT_front10.jpg" />
       </ImageView>
-      <GridPane fx:id="charCardStudents3" style="-fx-background-color: lightgrey; -fx-background-radius: 10px;" visible="false"
+      <GridPane fx:id="charCardStudents3" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-color: lightgrey; -fx-background-radius: 10px;" visible="false"
                 AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="70.0">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"

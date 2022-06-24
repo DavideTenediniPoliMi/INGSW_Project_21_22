@@ -82,7 +82,7 @@ public class AlterInfluenceDecorator extends CharacterCardDecorator {
         }else if(isIgnoreTowers) {
             Island island = board.getIslandAt(islandIndex);
 
-            if(island.getTeamColor().equals(currentTeam)) {
+            if(island.getTeamColor() == currentTeam) {
                 delta -= island.getNumIslands();
             }
         }else if(isIgnoreColor) {

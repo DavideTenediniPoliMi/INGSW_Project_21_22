@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.utils.JsonUtils;
@@ -26,7 +27,7 @@ import java.util.concurrent.Executors;
 public class GUI extends Application {
     private static FXController sceneController;
     private static Connection serverConnection;
-    private static int playerId;
+    private static int playerId = -1;
     private static String name;
     private static Stage stage;
     private static final int resX = 1366;
@@ -100,6 +101,9 @@ public class GUI extends Application {
 
     public static void showError(String error) {
         sceneController.showError(error);
+        if(GameStatus.IN_GAME == MatchInfo.getInstance().getGameStatus() && GUI.getPlayerId() != -1) {
+            handleInteraction(GUIState.REPEAT_ACTION);
+        }
     }
 
     public static void setName(String name) {
@@ -139,12 +143,16 @@ public class GUI extends Application {
     public static GUIState nextState(JsonObject jo) {
         MatchInfo matchInfo = MatchInfo.getInstance();
 
+        System.out.println(jo);
+
         if(!jo.has("matchInfo")) {
             if(JsonUtils.isNotCharCardJSON(jo, playerId)) {
                 if(waitingForPlayer && jo.has("players")) {
                     waitingForPlayer = false;
+                    System.out.println("in here");
                     return (matchInfo.getCurrentPlayerID() != playerId) ? GUIState.WAIT_ACTION : resetState(jo);
                 }
+                System.out.println("here");
                 return GUIState.WAIT_RESPONSE;
             }
 
@@ -158,6 +166,7 @@ public class GUI extends Application {
                     boughtCard = true;
                 }
             }
+            System.out.println("this one");
 
             return GUIState.WAIT_RESPONSE;
         }

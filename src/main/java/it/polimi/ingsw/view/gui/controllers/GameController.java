@@ -7,11 +7,10 @@ import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.characters.CharacterCard;
 import it.polimi.ingsw.model.characters.StudentGroupDecorator;
-import it.polimi.ingsw.model.enumerations.Card;
-import it.polimi.ingsw.model.enumerations.CharacterCards;
-import it.polimi.ingsw.model.enumerations.Color;
-import it.polimi.ingsw.model.enumerations.EffectType;
+import it.polimi.ingsw.model.enumerations.*;
+import it.polimi.ingsw.model.helpers.StudentGroup;
 import it.polimi.ingsw.network.enumerations.CommandType;
+import it.polimi.ingsw.network.parameters.CardParameters;
 import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.view.gui.GUI;
 import it.polimi.ingsw.view.gui.GUIState;
@@ -289,6 +288,7 @@ public class GameController extends FXController {
 
     private GUIState state;
     private Color selectedColor;
+    private int selectedCharCard;
 
     @FXML
     public void initialize() {
@@ -391,12 +391,23 @@ public class GameController extends FXController {
                         int numStud = ((StudentGroupDecorator)cards.get(i)).getStudentsByColor(c);
                         for(int j = 0; j < numStud; j++) {
                             BorderPane stud = (BorderPane) getNodeFromCard(cardIndex, charCardsStudents.get(i));
+                            stud.setUserData(c);
                             ImageView image = (ImageView) stud.getCenter();
                             image.setImage(c.getImage());
                             cardIndex++;
                         }
                     }
+                } else {
+                    getNodeFromCard(4, charCardsStudents.get(i)).setVisible(true);
+
+                    for(int j = 0; j < Color.NUM_COLORS ; j++) {
+                        BorderPane stud = (BorderPane) getNodeFromCard(j, charCardsStudents.get(i));
+                        stud.setUserData(Color.values()[j]);
+                        ImageView image = (ImageView) stud.getCenter();
+                        image.setImage(Color.values()[j].getImage());
+                    }
                 }
+
                 charCardsCost.get(i).setText(String.valueOf(cards.get(i).getCost()));
             }
         }
@@ -423,7 +434,6 @@ public class GameController extends FXController {
 
         applyChangesSchools();
         applyChangesCharCards();
-        applyChangesClouds();
         applyChangesIslands();
         studentBag.setVisible(Game.getInstance().isStudentBagEmpty());
         applyChangesProfessors();
@@ -756,10 +766,18 @@ public class GameController extends FXController {
                     int numStud = ((StudentGroupDecorator)charCards.get(i)).getStudentsByColor(c);
                     for(int j = 0; j < numStud; j++) {
                         BorderPane stud = (BorderPane) getNodeFromCard(cardIndex, charCardsStudents.get(i));
+                        stud.setUserData(c);
                         ImageView image = (ImageView) stud.getCenter();
                         image.setImage(c.getImage());
                         cardIndex++;
                     }
+                }
+            } else if(Game.getInstance().getActiveCharacterCard() == null) {
+                charCardsStudents.get(i).setVisible(false);
+                for(int j = 0 ; j < Color.NUM_COLORS; j++) {
+                    Node n = getNodeFromCard(j, charCardsStudents.get(i));
+                    n.getStyleClass().clear();
+                    n.getStyleClass().add("def");
                 }
             }
         }
@@ -1090,13 +1108,148 @@ public class GameController extends FXController {
     }
 
     private void manageSetParams() {
+        GridPane students = charCardsStudents.get(selectedCharCard);
+        switch (Game.getInstance().getActiveCharacterCard().getName()) {
+            case "IGNORE_COLOR":
+            case "RETURN_TO_BAG":
+            case "MOVE_TO_DINING_ROOM":
+            case "MOVE_TO_ISLAND":
+                students.setVisible(true);
+                students.getStyleClass().clear();
+                students.getStyleClass().add("target");
 
+                actionText.setText("Select a Color from the Card!");
+
+                for(int i = 0 ; i < Color.NUM_COLORS; i++) {
+                    getNodeFromCard(i, students).setOnMouseClicked(this::handleCardStudentSelection);
+                }
+                break;
+        }
+
+    }
+
+    private void handleCardStudentSelection(MouseEvent mouseEvent) {
+        BorderPane target = (BorderPane) mouseEvent.getSource();
+        GridPane students = charCardsStudents.get(selectedCharCard);
+        Color c = (Color) target.getUserData();
+        System.out.println(c);
+
+        switch (Game.getInstance().getActiveCharacterCard().getName()) {
+            case "IGNORE_COLOR":
+                target.getStyleClass().clear();
+                target.getStyleClass().add("target");
+
+                for(int i = 0 ; i < Color.NUM_COLORS; i++) {
+                    getNodeFromCard(i, students).setOnMouseClicked(null);
+                }
+
+                students.getStyleClass().clear();
+                students.getStyleClass().add("def");
+
+                notifyCardParameters(new CardParameters().setSelectedColor(c)
+                        .setBoostedTeam(TowerColor.BLACK)); // not needed
+                break;
+            case "RETURN_TO_BAG":
+                target.getStyleClass().clear();
+                target.getStyleClass().add("target");
+
+                for(int i = 0 ; i < Color.NUM_COLORS; i++) {
+                    getNodeFromCard(i, students).setOnMouseClicked(null);
+                }
+
+                students.getStyleClass().clear();
+                students.getStyleClass().add("def");
+
+                actionText.setText("Waiting for a server response");
+                notifyCardParameters(new CardParameters().setSelectedColor(c));
+                notifyCardActivation();
+                break;
+            case "MOVE_TO_DINING_ROOM":
+                for(int i = 0 ; i < 4; i++) {
+                    getNodeFromCard(i, students).setOnMouseClicked(null);
+                }
+
+                students.getStyleClass().clear();
+                students.getStyleClass().add("def");
+
+                actionText.setText("Waiting for a server response");
+                notifyCardParameters(new CardParameters().setFromOrigin(new StudentGroup(c,1))
+                        .setPlayerID(GUI.getPlayerId())
+                        .setIslandIndex(0)      //not needed
+                        .setFromDestination(new StudentGroup()));    //not needed
+                notifyCardActivation();
+                break;
+            case "MOVE_TO_ISLAND":
+                target.getStyleClass().clear();
+                target.getStyleClass().add("target");
+
+                for(int i = 0 ; i < 4; i++) {
+                    getNodeFromCard(i, students).setOnMouseClicked(null);
+                }
+
+                students.getStyleClass().clear();
+                students.getStyleClass().add("def");
+
+                actionText.setText("Select the Destination Island!");
+
+                for(GridPane stud : islandStudents) {
+                    stud.setOnMouseClicked(this::handleIslandSelectionWhileSettingParams);
+                    stud.getStyleClass().clear();
+                    stud.getStyleClass().add("target");
+                }
+
+                selectedColor = c;
+                break;
+        }
+    }
+
+    private void handleIslandSelectionWhileSettingParams(MouseEvent mouseEvent) {
+        GridPane island = (GridPane) mouseEvent.getSource();
+        Board board = Game.getInstance().getBoard();
+        GridPane students = charCardsStudents.get(selectedCharCard);
+
+        int islandIndex = board.getOriginalIndexOf(Integer.parseInt(island.getUserData().toString()));
+
+        disableGraphic();
+        actionText.setText("Waiting for a server response");
+
+        notifyCardParameters(
+                new CardParameters().setFromOrigin(new StudentGroup(selectedColor,1))
+                .setPlayerID(GUI.getPlayerId())
+                .setIslandIndex(islandIndex)
+                .setFromDestination(new StudentGroup()));  //not needed
+
+        for(int i = 0 ; i < 4; i++) {
+            getNodeFromCard(i, students).getStyleClass().clear();
+            getNodeFromCard(i, students).getStyleClass().add("def");
+        }
+
+        selectedColor = null;
+        notifyCardActivation();
+    }
+
+    private void notifyCardParameters(CardParameters cardParams) {
+        notify(
+                new RequestParameters()
+                        .setCommandType(CommandType.SET_CARD_PARAMETERS)
+                        .setIndex(selectedCharCard)
+                        .setCardParams(cardParams)
+                        .serialize().toString()
+        );
+    }
+
+    private void notifyCardActivation() {
+        notify(
+                new RequestParameters()
+                        .setCommandType(CommandType.ACTIVATE_CARD)
+                        .serialize().toString()
+        );
     }
 
     private void prepCharCards() {
         Game game = Game.getInstance();
 
-        if(!MatchInfo.getInstance().isExpertMode())
+        if(!MatchInfo.getInstance().isExpertMode() || Game.getInstance().getActiveCharacterCard() != null)
             return;
 
         List<CharacterCard> charCardList = game.getCharacterCards();
@@ -1116,12 +1269,24 @@ public class GameController extends FXController {
 
     private void handleCharCardSelect(MouseEvent mouseEvent) {
         ImageView card = (ImageView) mouseEvent.getSource();
+
+        selectedCharCard = Integer.parseInt(card.getUserData().toString());
+        disableCharCards();
+
         notify(
                 new RequestParameters()
                         .setCommandType(CommandType.BUY_CHARACTER_CARD)
-                        .setIndex(Integer.parseInt(card.getUserData().toString()))
+                        .setIndex(selectedCharCard)
                         .serialize().toString()
         );
+
+        if(Game.getInstance().getCharacterCards().get(selectedCharCard).getName().equals("INFLUENCE_ADD_TWO")) {
+            CardParameters cardParameters = new CardParameters()
+                    .setBoostedTeam(Game.getInstance().getPlayerByID(GUI.getPlayerId()).getTeamColor())
+                    .setSelectedColor(Color.RED);   //not needed
+
+            notifyCardParameters(cardParameters);
+        }
     }
 
     private void handleCloudSelection(MouseEvent mouseEvent) {

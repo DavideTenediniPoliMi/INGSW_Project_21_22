@@ -40,7 +40,7 @@ public class IslandExpertController extends IslandController {
             params.setIslandIndex(targetIslandIndex);
             game.getActiveCharacterCard().setParameters(params);
 
-            adjustedScore += game.getActiveCharacterCard().activate();;
+            adjustedScore += game.getActiveCharacterCard().activate();
         }
 
         return adjustedScore;
