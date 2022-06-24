@@ -1005,10 +1005,10 @@ public class GameController extends FXController {
                 }
                 break;
             case PAUSE:
-                String message = "Game is paused";
+                StringBuilder message = new StringBuilder("Game is paused");
 
                 if(MatchInfo.getInstance().getNumPlayersConnected() == 1)
-                    message += " and ending in 1 minute";
+                    message.append(" and ending in 1 minute");
                 actionText.setText(message + "!");
                 break;
             case MOVE_MN:
@@ -1036,7 +1036,7 @@ public class GameController extends FXController {
                 List<Cloud> cloudList = game.getBoard().getClouds();
                 for(int i = 0; i < cloudList.size(); i++) {
                     if(cloudList.get(i).isAvailable()) {
-                        cloudStudents.get(i).getStyleClass().add("target");
+                        cloudStudents.get(i).getStyleClass().add("targetCloud");
                         cloudStudents.get(i).setOnMouseClicked(this::handleCloudSelection);
                     }
                 }
@@ -1044,20 +1044,22 @@ public class GameController extends FXController {
             case END_GAME:
                 Alert winnerAlert = new Alert(Alert.AlertType.INFORMATION);
                 winnerAlert.setTitle("The Game is OVER!");
+                winnerAlert.setHeaderText("Thanks for playing!");
 
+                message = new StringBuilder("The game");
                 if(matchInfo.isGameTied()) {
-                    message = "It ended in a TIE between the following players :\n";
+                    message.append(" ended in a TIE between :\n");
                 } else {
-                    message = "It was WON by :\n";
+                    message.append(" was WON by :\n");
                 }
 
                 for(Player p: game.getPlayers()) {
                     if(matchInfo.getWinners().contains(p.getTeamColor())) {
-                        message += p.getName() + " (TEAM " + p.getTeamColor() + ")\n";
+                        message.append(p.getName()).append(" (TEAM ").append(p.getTeamColor()).append(")\n");
                     }
                 }
 
-                winnerAlert.setContentText(message);
+                winnerAlert.setContentText(message.toString());
 
                 winnerAlert.showAndWait();
                 System.exit(0);
@@ -1111,15 +1113,19 @@ public class GameController extends FXController {
                 node.setOnMouseClicked(this::handleEntranceDeselect);
         }
 
-        diningRoomHero.getStyleClass().add("target");
-        diningRoomHero.setOnMouseClicked(this::handleDiningSelection);
+        String optional = "";
+        if(Game.getInstance().getBoard().getSchoolByPlayerID(GUI.getPlayerId()).getNumStudentsInDiningRoomByColor(selectedColor) < 10) {
+            diningRoomHero.getStyleClass().add("target");
+            diningRoomHero.setOnMouseClicked(this::handleDiningSelection);
+            optional += "or the Dining Room";
+        }
 
         for(GridPane island : islandStudents) {
             island.getStyleClass().add("target");
             island.setOnMouseClicked(this::handleIslandSelectionWhileMoveStudent);
         }
 
-        actionText.setText("Select an Island or the Dining Room!");
+        actionText.setText("Select an Island " + optional + "!");
     }
 
     private void handleIslandSelectionWhileMoveStudent(MouseEvent mouseEvent) {
