@@ -68,6 +68,13 @@ public class ClientConnection extends Connection {
         try {
             virtualView = server.getVVFor(jsonObject.get("name").getAsString());
             virtualView.addObserver(this);
+            //If VirtualView is new and game has already started send error
+            if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.IN_GAME) && !virtualView.hasJoined()) {
+                sendMessage(new ResponseParameters().setError("Game has already started!").toString());
+                disconnect();
+                return;
+            }
+
             sendMessage(new ResponseParameters().setSendMatchInfo(true).serialize().toString());
             bound = true;
         } catch (PlayerAlreadyConnectedException | GameFullException exc) {

@@ -102,6 +102,10 @@ public class ServerConnectionCLI extends Connection {
             if(received.equals("")) continue;
 
             JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
+            if(jsonObject.has("error")) {
+                System.out.println("Error while trying to join the lobby (" + jsonObject.get("error").getAsString() +")");
+                disconnect();
+            }
             bindPlayerID(jsonObject);
         }
 
@@ -273,5 +277,7 @@ public class ServerConnectionCLI extends Connection {
     public void disconnect() {
         super.disconnect();
         view.getViewState().setInteractionComplete(true);
+        view.loadClosingScreen();
+        System.exit(1);
     }
 }

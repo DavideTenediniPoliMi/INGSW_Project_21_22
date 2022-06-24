@@ -9,6 +9,17 @@ public class ClientApp {
         Client client = new Client();
         // IF CLI THEN USE client.run(new CLI(null))
         // WHICH IS THE OVERLOADED METHOD
+        boolean isCli = false;
         client.run(new CLI(null));
+        /*for(String arg : args) {
+            if(arg.equalsIgnoreCase("-cli")) {
+                isCli = true;
+                break;
+            }
+        }
+        if(isCli)
+            client.run(new CLI(null));
+        else
+            client.run();*/
     }
 }
