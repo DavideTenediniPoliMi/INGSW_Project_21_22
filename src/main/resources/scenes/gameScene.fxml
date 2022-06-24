@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
@@ -3076,7 +3077,12 @@
          </effect>
       </Label>
    </AnchorPane>
-   <AnchorPane fx:id="charCardPane1" layoutX="1247.0" layoutY="20.0" styleClass="characterCard" visible="false">
+   <Button fx:id="swapButton" layoutX="572.0" layoutY="673.0" mnemonicParsing="false" style="-fx-background-radius: 20px; -fx-background-color: #D6E3F8; -fx-border-color: blue; -fx-border-radius: 20px;" text="Swap!" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="20.0">
+      <font>
+         <Font name="Arial" size="14.0" />
+      </font>
+   </Button>
+   <AnchorPane fx:id="charCardPane1" layoutX="1247.0" layoutY="20.0" styleClass="characterCard">
       <ImageView fx:id="characterCard1" fitHeight="150.0" pickOnBounds="true" preserveRatio="true">
          <viewport>
             <Rectangle2D />
