@@ -37,3 +37,7 @@
 .def {
     -fx-border-color: transparent;
 }
+
+.def:disabled {
+    -fx-opacity: 0.6;
+}

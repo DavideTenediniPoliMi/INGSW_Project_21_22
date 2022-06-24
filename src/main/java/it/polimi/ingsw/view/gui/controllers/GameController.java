@@ -17,6 +17,7 @@ import it.polimi.ingsw.view.gui.GUIState;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -264,6 +265,8 @@ public class GameController extends FXController {
     private Label numCoinsLeft;
     @FXML
     private AnchorPane studentBag;
+    @FXML
+    private Button swapButton;
 
     private final List<AnchorPane> otherPlayers = new ArrayList<>();
     private final List<Label> otherUsernames = new ArrayList<>();
@@ -289,6 +292,9 @@ public class GameController extends FXController {
     private GUIState state;
     private Color selectedColor;
     private int selectedCharCard;
+    private StudentGroup selectedStudentsFromCard;
+    private StudentGroup selectedStudentsFromEntrance;
+    private StudentGroup selectedStudentsFromDiningRoom;
 
     @FXML
     public void initialize() {
@@ -1072,7 +1078,8 @@ public class GameController extends FXController {
                 List<Cloud> cloudList = game.getBoard().getClouds();
                 for(int i = 0; i < cloudList.size(); i++) {
                     if(cloudList.get(i).isAvailable()) {
-                        clouds.get(i).getStyleClass().remove("def");
+                        clouds.get(i).getStyleClass().clear();
+                        clouds.get(i).getStyleClass().add("cloud");
                         clouds.get(i).getStyleClass().add("target");
                         cloudStudents.get(i).setOnMouseClicked(this::handleCloudSelection);
                     }
@@ -1112,8 +1119,6 @@ public class GameController extends FXController {
         switch (Game.getInstance().getActiveCharacterCard().getName()) {
             case "IGNORE_COLOR":
             case "RETURN_TO_BAG":
-            case "MOVE_TO_DINING_ROOM":
-            case "MOVE_TO_ISLAND":
                 students.setVisible(true);
                 students.getStyleClass().clear();
                 students.getStyleClass().add("target");
@@ -1124,8 +1129,95 @@ public class GameController extends FXController {
                     getNodeFromCard(i, students).setOnMouseClicked(this::handleCardStudentSelection);
                 }
                 break;
+            case "MOVE_TO_DINING_ROOM":
+            case "MOVE_TO_ISLAND":
+                students.getStyleClass().clear();
+                students.getStyleClass().add("target");
+
+                actionText.setText("Select a Student from the Card!");
+
+                for(int i = 0 ; i < 4; i++) {
+                    getNodeFromCard(i, students).setOnMouseClicked(this::handleCardStudentSelection);
+                }
+                break;
+            case "POOL_SWAP":
+                students.getStyleClass().clear();
+                students.getStyleClass().add("target");
+                selectedStudentsFromCard = new StudentGroup();
+                selectedStudentsFromEntrance = new StudentGroup();
+
+                actionText.setText("Select Students from the Card and Entrance!");
+
+                for(int i = 0 ; i < 6; i++) {
+                    getNodeFromCard(i, students).setOnMouseClicked(this::handleCardStudentSelection);
+                }
+
+                entranceHero.getStyleClass().clear();
+                entranceHero.getStyleClass().add("target");
+
+                for(BorderPane stud : studentsEntranceHero) {
+                    stud.setOnMouseClicked(this::handleEntranceSelectWhileSettingParams);
+                }
+
+                swapButton.setVisible(true);
+                break;
+            case "EXCHANGE_STUDENTS":
+                selectedStudentsFromEntrance = new StudentGroup();
+                selectedStudentsFromDiningRoom = new StudentGroup();
+
+                actionText.setText("Select Students from Entrance and Dining Room!");
+
+                entranceHero.getStyleClass().clear();
+                entranceHero.getStyleClass().add("target");
+
+                diningRoomHero.getStyleClass().clear();
+                diningRoomHero.getStyleClass().add("target");
+                break;
+        }
+    }
+
+    private void handleEntranceSelectWhileSettingParams(MouseEvent mouseEvent) {
+        BorderPane target = (BorderPane) mouseEvent.getSource();
+        Color c = (Color) target.getUserData();
+
+        target.getStyleClass().clear();
+        target.getStyleClass().add("target");
+        target.setOnMouseClicked(this::handleEntranceDeselectWhileSettingParams);
+
+        selectedStudentsFromEntrance.addByColor(c, 1);
+
+        if(selectedStudentsFromEntrance.getTotalAmount() == 3) {
+            for(BorderPane stud : studentsEntranceHero) {
+                if(!stud.getStyleClass().contains("target")) {
+                    stud.setDisable(true);
+                }
+            }
         }
 
+        swapButton.setDisable(selectedStudentsFromCard.getTotalAmount() != selectedStudentsFromEntrance.getTotalAmount()
+                || selectedStudentsFromCard.getTotalAmount() == 0);
+    }
+
+    private void handleEntranceDeselectWhileSettingParams(MouseEvent mouseEvent) {
+        BorderPane target = (BorderPane) mouseEvent.getSource();
+        Color c = (Color) target.getUserData();
+
+        target.getStyleClass().clear();
+        target.getStyleClass().add("def");
+        target.setOnMouseClicked(this::handleEntranceSelectWhileSettingParams);
+
+        selectedStudentsFromEntrance.removeByColor(c, 1);
+
+        if(selectedStudentsFromEntrance.getTotalAmount() == 2) {
+            for(BorderPane stud : studentsEntranceHero) {
+                if(!stud.getStyleClass().contains("target")) {
+                    stud.setDisable(false);
+                }
+            }
+        }
+
+        swapButton.setDisable(selectedStudentsFromCard.getTotalAmount() != selectedStudentsFromEntrance.getTotalAmount()
+                || selectedStudentsFromCard.getTotalAmount() == 0);
     }
 
     private void handleCardStudentSelection(MouseEvent mouseEvent) {
@@ -1200,7 +1292,49 @@ public class GameController extends FXController {
 
                 selectedColor = c;
                 break;
+            case "POOL_SWAP":
+                target.getStyleClass().clear();
+                target.getStyleClass().add("target");
+                target.setOnMouseClicked(this::handleCardStudentDeselection);
+
+                selectedStudentsFromCard.addByColor(c, 1);
+
+                if(selectedStudentsFromCard.getTotalAmount() == 3) {
+                    for(int i = 0 ; i < 6; i++) {
+                        Node n = getNodeFromCard(i,  students);
+                        if(!n.getStyleClass().contains("target")) {
+                            n.setDisable(true);
+                        }
+                    }
+                }
+
+                swapButton.setDisable(selectedStudentsFromCard.getTotalAmount() != selectedStudentsFromEntrance.getTotalAmount()
+                        || selectedStudentsFromCard.getTotalAmount() == 0);
+                break;
         }
+    }
+
+    private void handleCardStudentDeselection(MouseEvent mouseEvent) {
+        BorderPane target = (BorderPane) mouseEvent.getSource();
+        Color c = (Color) target.getUserData();
+
+        target.getStyleClass().clear();
+        target.getStyleClass().add("def");
+        target.setOnMouseClicked(this::handleCardStudentSelection);
+
+        selectedStudentsFromCard.removeByColor(c, 1);
+
+        if(selectedStudentsFromCard.getTotalAmount() == 2) {
+            for(int i = 0 ; i < 6; i++) {
+                Node n = getNodeFromCard(i,  charCardsStudents.get(selectedCharCard));
+                if(!n.getStyleClass().contains("target")) {
+                    n.setDisable(false);
+                }
+            }
+        }
+
+        swapButton.setDisable(selectedStudentsFromCard.getTotalAmount() != selectedStudentsFromEntrance.getTotalAmount()
+                || selectedStudentsFromCard.getTotalAmount() == 0);
     }
 
     private void handleIslandSelectionWhileSettingParams(MouseEvent mouseEvent) {
@@ -1256,6 +1390,19 @@ public class GameController extends FXController {
 
         for(int i = 0 ; i < charCardList.size() ; i++) {
             if(game.getPlayerByID(GUI.getPlayerId()).getNumCoins() >= charCardList.get(i).getCost()) {
+                if(charCardList.get(i).getName().equals("EXCHANGE_STUDENTS")) {
+                    int studInEntrance = 0;
+                    School school = game.getBoard().getSchoolByPlayerID(GUI.getPlayerId());
+
+                    for(Color c : Color.values()) {
+                        studInEntrance += school.getNumStudentsInDiningRoomByColor(c);
+                    }
+
+                    if(studInEntrance == 0) {
+                        charCards.get(i).setOnMouseClicked(this::handleCharCardNoStudents);
+                        continue;
+                    }
+                }
                 charCards.get(i).setOnMouseClicked(this::handleCharCardSelect);
             } else {
                 charCards.get(i).setOnMouseClicked(this::handleCharCardNoMoney);
@@ -1263,8 +1410,12 @@ public class GameController extends FXController {
         }
     }
 
+    private void handleCharCardNoStudents(MouseEvent mouseEvent) {
+        showError("Not enough Students in Dining Room!");
+    }
+
     private void handleCharCardNoMoney(MouseEvent mouseEvent) {
-        showError("Not enough coins!");
+        showError("Not enough Coins!");
     }
 
     private void handleCharCardSelect(MouseEvent mouseEvent) {
@@ -1421,6 +1572,7 @@ public class GameController extends FXController {
         for(BorderPane stud : studentsEntranceHero) {
             stud.setOnMouseClicked(null);
             stud.getStyleClass().clear();
+            stud.getStyleClass().add("def");
         }
 
         diningRoomHero.getStyleClass().clear();
@@ -1434,8 +1586,9 @@ public class GameController extends FXController {
         }
 
         for(AnchorPane cloud : clouds) {
-            cloud.getStyleClass().remove("target");
-            cloud.getStyleClass().remove("def");
+            cloud.getStyleClass().clear();
+            cloud.getStyleClass().add("cloud");
+            cloud.getStyleClass().add("def");
             cloud.setOnMouseClicked(null);
         }
 
@@ -1455,5 +1608,38 @@ public class GameController extends FXController {
 
     private void handleCharCardForbidden(MouseEvent mouseEvent) {
         showError("Cannot buy a card at this stage!");
+    }
+
+    public void handleSwapButton() {
+        charCardsStudents.get(selectedCharCard).getStyleClass().clear();
+        charCardsStudents.get(selectedCharCard).getStyleClass().add("def");
+
+        for(int i = 0 ; i < 6; i++) {
+            Node n = getNodeFromCard(i, charCardsStudents.get(selectedCharCard));
+            n.getStyleClass().clear();
+            n.getStyleClass().add("def");
+            n.setDisable(false);
+            n.setOnMouseClicked(null);
+        }
+
+        entranceHero.getStyleClass().clear();
+        entranceHero.getStyleClass().add("def");
+
+        for(BorderPane node : studentsEntranceHero) {
+            node.setDisable(false);
+            node.setOnMouseClicked(null);
+            node.getStyleClass().clear();
+            node.getStyleClass().add("def");
+        }
+
+        swapButton.setDisable(true);
+        swapButton.setVisible(false);
+
+        notifyCardParameters(new CardParameters().setFromOrigin(selectedStudentsFromCard)
+                .setPlayerID(GUI.getPlayerId())
+                .setFromDestination(selectedStudentsFromEntrance)
+                .setIslandIndex(0));     //not needed
+
+        notifyCardActivation();
     }
 }

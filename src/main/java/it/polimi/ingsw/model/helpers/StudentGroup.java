@@ -47,6 +47,21 @@ public class StudentGroup implements Cloneable, Serializable, Printable<String> 
     }
 
     /**
+     * Returns the total number of students contained in this StudentGroup
+     *
+     * @return the total of students contained in this StudentGroup
+     */
+    public int getTotalAmount() {
+        int sum = 0;
+
+        for(int i = 0 ; i < Color.NUM_COLORS; i++) {
+            sum += students[i];
+        }
+
+        return sum;
+    }
+
+    /**
      * Add the specified amount of students of the specified <code>Color</code> to this <code>StudentGroup</code>
      *
      * @param c the <code>Color</code> of the students
@@ -54,6 +69,17 @@ public class StudentGroup implements Cloneable, Serializable, Printable<String> 
      */
     public void addByColor(Color c, int amount) {
         students[c.ordinal()] += amount;
+    }
+
+    /**
+     * Removes the specified amount of students of the specified <code>Color</code> from this <code>StudentGroup</code>.
+     * If amount is less than the number of students of color c, this StudentGroup will be left with 0 students of that color.
+     *
+     * @param c the <code>Color</code> of the students
+     * @param amount the amount of students to remove
+     */
+    public void removeByColor(Color c, int amount) {
+        students[c.ordinal()] = Math.max(students[c.ordinal()] - amount, 0);
     }
 
     /**
