@@ -78,6 +78,13 @@ public class ExpertViewState extends GameViewState {
         }
     }
 
+    /**
+     * Returns a <code>String</code> representing the choice menu in case of expert mode.
+     *
+     * @param movementSubject <code>String</code> correspondent to the subject of the action (student, MN)
+     *
+     * @return <code>String</code> representing the choice menu in case of expert mode
+     */
     private String printCLICardMenu(String movementSubject) {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -100,6 +107,11 @@ public class ExpertViewState extends GameViewState {
         return "";
     }
 
+    /**
+     * Returns the <code>String</code> representing the students color choice.
+     *
+     * @return <code>String</code> representing the students color choice.
+     */
     protected String printCLIStudentColorSelection() {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -112,6 +124,12 @@ public class ExpertViewState extends GameViewState {
         return stringBuilder.toString();
     }
 
+    /**
+     * Return a String representing the action of setting the parameters of a character card, based on the type of card.
+     *
+     * @return <code>String</code> representing the action of set the parameters of a character card, based on the
+     * type of card
+     */
     private String printCLICardActivationParameters() {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -204,6 +222,15 @@ public class ExpertViewState extends GameViewState {
         return "";
     }
 
+    /**
+     * /**
+     * Manages the input received by the user and handles the menu choice in case of expert mode.
+     *
+     * @param input Input received from Input Stream
+     * @param isStudentsPhase Boolean that indicates whether is in students phase or not
+     *
+     * @return <code>String</code> that is the result of the action
+     */
     private String manageCLICardMenu(String input, boolean isStudentsPhase) {
         String error;
 
@@ -291,6 +318,14 @@ public class ExpertViewState extends GameViewState {
         return "";
     }
 
+    /**
+     * Manages the input received by the user and handles the action of setting parameters of a character card,
+     * based on the type of card.
+     *
+     * @param input Input received from Input Stream
+     *
+     * @return <code>String</code> that is the result of the action
+     */
     private String manageCLICardActivationParameters(String input) throws InterruptedException {
         String error;
         CardParameters cardParams = new CardParameters();
@@ -430,6 +465,14 @@ public class ExpertViewState extends GameViewState {
         return "";
     }
 
+    /**
+     * Manages the input received by the user handling the number of students to swap.
+     *
+     * @param input Input received from Input Stream
+     * @param validInputs List of Int that represent the valid input that the user can submit
+     *
+     * @return <code>String</code> that is the result of the action
+     */
     private String manageCLINumStudentsToSwap(String input, List<Integer> validInputs) {
         String error = StringUtils.checkInteger(input, validInputs);
         if(!error.equals("")) {
@@ -440,6 +483,13 @@ public class ExpertViewState extends GameViewState {
         return "";
     }
 
+    /**
+     * Manages the input received by the user handling the students swap from the card.
+     *
+     * @param input Input received from Input Stream
+     *
+     * @return <code>String</code> that is the result of the action
+     */
     private String manageCLIFromCardSwap(String input) {
         String error;
         if (cardColorSelected == null) {
@@ -456,6 +506,13 @@ public class ExpertViewState extends GameViewState {
         return "";
     }
 
+    /**
+     * Manages the input received by the user handling the students swap from the entrance.
+     *
+     * @param input Input received from Input Stream
+     *
+     * @return <code>String</code> that is the result of the action
+     */
     private String manageCLIFromEntranceSwap(String input) {
         String error;
         if (colorSelected == null) {
@@ -472,6 +529,13 @@ public class ExpertViewState extends GameViewState {
         return "";
     }
 
+    /**
+     * Manages the input received by the user handling the students swap from the dining.
+     *
+     * @param input Input received from Input Stream
+     *
+     * @return <code>String</code> that is the result of the action
+     */
     private String manageCLIFromDiningSwap(String input) {
         String error;
         if (colorDiningSelected == null) {
@@ -488,6 +552,13 @@ public class ExpertViewState extends GameViewState {
         return "";
     }
 
+    /**
+     * Manages the input received by the user handling the students color selection for the card.
+     *
+     * @param input Input received from Input Stream
+     *
+     * @return <code>String</code> that is the result of the action
+     */
     protected String manageCLICardStudentColor(String input) {
         String error;
 
@@ -532,6 +603,13 @@ public class ExpertViewState extends GameViewState {
         return error;
     }
 
+    /**
+     * Manages the input received by the user handling the students color selection for the entrance.
+     *
+     * @param input Input received from Input Stream
+     *
+     * @return <code>String</code> that is the result of the action
+     */
     protected String manageCLIEntranceStudentColor(String input) {
         String error;
 
@@ -576,6 +654,13 @@ public class ExpertViewState extends GameViewState {
         return error;
     }
 
+    /**
+     * Manages the input received by the user handling the students color selection for the dining.
+     *
+     * @param input Input received from Input Stream
+     *
+     * @return <code>String</code> that is the result of the action
+     */
     private String manageCLIDiningStudentColor(String input) {
         String error;
 
@@ -621,6 +706,13 @@ public class ExpertViewState extends GameViewState {
         return error;
     }
 
+    /**
+     * Manages the input received by the user handling the students color selection (Used for some type of cards).
+     *
+     * @param input Input received from Input Stream
+     *
+     * @return <code>String</code> that is the result of the action
+     */
     private String manageCLIStudentColor(String input) {
         if(validColors.contains(input.toUpperCase())) {
             switch(input.toUpperCase()) {
@@ -647,6 +739,10 @@ public class ExpertViewState extends GameViewState {
         return error;
     }
 
+    /**
+     * Notifies the parameters of a card.
+     * @param cardParams <code>CardParameters</code> to be set.
+     */
     private void notifyCardParameters(CardParameters cardParams) {
         notify(
                 new RequestParameters()
@@ -657,6 +753,9 @@ public class ExpertViewState extends GameViewState {
         );
     }
 
+    /**
+     * Notifies the activation of a card.
+     */
     private void notifyCardActivation() {
         notify(
                 new RequestParameters()

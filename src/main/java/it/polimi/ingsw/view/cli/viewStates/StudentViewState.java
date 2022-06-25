@@ -4,6 +4,9 @@ import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.utils.StringUtils;
 
+/**
+ * Class that manages students phase view
+ */
 public class StudentViewState extends ExpertViewState {
     private boolean isDestinationSelected = false;
     private boolean isDestinationIsland = false;

@@ -5,6 +5,9 @@ import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.utils.StringUtils;
 
+/**
+ * Class that manages game view printing the game
+ */
 public class GameViewState extends ViewState {
     public GameViewState(ViewState oldViewState) {
         super(oldViewState);

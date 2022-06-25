@@ -4,6 +4,9 @@ import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.utils.StringUtils;
 
+/**
+ * Class that manages MN phase view
+ */
 public class MNViewState extends ExpertViewState {
     public MNViewState(ViewState oldViewState) {
         super(oldViewState);

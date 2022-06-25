@@ -9,6 +9,9 @@ import it.polimi.ingsw.utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that manages planning phase view
+ */
 @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
 public class PlanningViewState extends GameViewState {
     private final Game game = Game.getInstance();

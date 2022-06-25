@@ -4,6 +4,9 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 
+/**
+ * Class that manages end game view
+ */
 public class EndGameViewState extends GameViewState {
     public EndGameViewState(ViewState oldViewState) {
         super(oldViewState);

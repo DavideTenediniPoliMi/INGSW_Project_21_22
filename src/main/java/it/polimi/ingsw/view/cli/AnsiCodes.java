@@ -3,6 +3,9 @@ package it.polimi.ingsw.view.cli;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 
+/**
+ * Class that contains the <code>AnsiCodes</code> for the color to be printed in the CLI
+ */
 public enum AnsiCodes {
     BLUE_BACKGROUND_BRIGHT("\033[0;104m"),// BLUE
     GREEN_BACKGROUND_BRIGHT("\033[42m"),// GREEN
@@ -35,6 +38,14 @@ public enum AnsiCodes {
       this.code = code;
     }
 
+    /**
+     * Returns the <code>String</code> of the background color to be appended corresponding to the
+     * specified <code>Color</code>
+     *
+     * @param color <code>Color</code> that has to be converted in AnsiCodes string
+     *
+     * @return <code>String</code> of the background color corresponding to the specified <code>Color</code>
+     */
     public static String getBackgroundColor(Color color) {
         switch (color) {
             case BLUE:
@@ -52,6 +63,13 @@ public enum AnsiCodes {
         }
     }
 
+    /**
+     * Returns the <code>String</code> of the text color to be appended corresponding to the specified <code>Color</code>
+     *
+     * @param color <code>Color</code> that has to be converted in AnsiCodes string
+     *
+     * @return <code>String</code> of the text color corresponding to the specified <code>Color</code>
+     */
     public static String getTextColor(Color color) {
         switch (color) {
             case BLUE:
@@ -69,6 +87,15 @@ public enum AnsiCodes {
         }
     }
 
+    /**
+     * Returns the <code>String</code> of the combination of color to represent a team
+     * corresponding to the specified <code>Color</code>
+     *
+     * @param color <code>Color</code> that has to be converted in AnsiCodes string
+     *
+     * @return <code>String</code> of the combination of color to represent a team
+     * corresponding to the specified <code>Color</code>
+     */
     public static String getTeamColor(TowerColor color) {
         switch (color){
             case BLACK:

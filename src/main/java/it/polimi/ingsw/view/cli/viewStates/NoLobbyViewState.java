@@ -7,6 +7,9 @@ import it.polimi.ingsw.utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that manages the view of the lobby when is not yet created
+ */
 public class NoLobbyViewState extends LobbyViewState {
     public NoLobbyViewState(ViewState oldViewState) {
         super(oldViewState);

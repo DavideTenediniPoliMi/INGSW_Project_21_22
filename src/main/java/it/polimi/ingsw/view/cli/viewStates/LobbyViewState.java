@@ -5,6 +5,9 @@ import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.view.cli.AnsiCodes;
 
+/**
+ * Class that manages the lobby view
+ */
 public class LobbyViewState extends ViewState {
     MatchInfo matchInfo;
     Lobby lobby;

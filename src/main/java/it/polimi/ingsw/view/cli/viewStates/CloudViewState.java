@@ -9,6 +9,9 @@ import it.polimi.ingsw.utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that manages clouds phase view
+ */
 public class CloudViewState extends GameViewState {
     private final List<Integer> validIndexes = new ArrayList<>();
 

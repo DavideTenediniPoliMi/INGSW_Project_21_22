@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Class that manages the view of the lobby selection phase
+ */
 public class SelectLobbyViewState extends LobbyViewState {
     private final Lobby lobby = Lobby.getLobby();
     private List<String> validCardBacks = new ArrayList<>();
