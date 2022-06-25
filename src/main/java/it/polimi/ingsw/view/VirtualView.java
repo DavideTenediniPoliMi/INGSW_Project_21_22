@@ -20,6 +20,10 @@ import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
 import javafx.css.Match;
 
+/**
+ * Class representing the VirtualView. It acts as a layer of virtualization between the server and the network where the
+ * actual clients are.
+ */
 public class VirtualView extends Observable<String> implements Observer<ResponseParameters> {
     private final String name;
     private boolean connected, skipping, joined;
@@ -41,14 +45,29 @@ public class VirtualView extends Observable<String> implements Observer<Response
         Lobby.getLobby().addObserver(this);
     }
 
+    /**
+     * Returns the name of the player bound to this VirtualView.
+     *
+     * @return the name of the player.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Checks if the player is connected to this VirtualView.
+     *
+     * @return true if the player is connected, false otherwise.
+     */
     public boolean isConnected() {
         return connected;
     }
 
+    /**
+     * Handles any request coming from the clients, and it interfaces with the controller.
+     *
+     * @param message the message received from the client.
+     */
     public synchronized void handleRequest(String message) {
         RequestParameters params = new RequestParameters();
         params.deserialize(JsonParser.parseString(message).getAsJsonObject());
@@ -123,6 +142,9 @@ public class VirtualView extends Observable<String> implements Observer<Response
         }
     }
 
+    /**
+     * Tells the controller that the player bound to this VirtualView has reconnected.
+     */
     public void reconnect() {
         String reconnectCommand = new RequestParameters().setCommandType(CommandType.RECONNECT).serialize().toString();
         handleRequest(reconnectCommand);
@@ -130,6 +152,10 @@ public class VirtualView extends Observable<String> implements Observer<Response
         Game.getInstance().notifyPlayerReconnected();
     }
 
+    /**
+     * Tells the controller that the player bound to this VirtualView has disconnected. If necessary sets up
+     * the skipping mechanism for the player.
+     */
     public void disconnect() {
         connected = false;
         //Skip everything else if player has NOT joined the game (Only applies to lobby)
@@ -153,6 +179,9 @@ public class VirtualView extends Observable<String> implements Observer<Response
         }
     }
 
+    /**
+     * If the player is not connected and if necessary it tells the controller to skip the turns of the player.
+     */
     public void skipIfCurrent() {
         MatchInfo match = MatchInfo.getInstance();
         if(match.getGameStatus().equals(GameStatus.IN_GAME) &&
@@ -170,11 +199,21 @@ public class VirtualView extends Observable<String> implements Observer<Response
         }
     }
 
+    /**
+     * Rebuilds a working VirtualView for the ID after the server shut down.
+     *
+     * @param playerID the ID of a player who was connected to the server before the shut down.
+     */
     public void deserialize(int playerID) {
         this.playerID = playerID;
         commandFactory = new CommandFactory(playerID, lobbyController, gameController);
     }
 
+    /**
+     * Checks if the player bound to this VirtualView has joined the game.
+     *
+     * @return true if the player joined the game, false otherwise.
+     */
     public boolean hasJoined() {
         return joined;
     }
