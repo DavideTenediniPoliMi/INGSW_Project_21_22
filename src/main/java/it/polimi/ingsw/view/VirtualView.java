@@ -9,6 +9,7 @@ import it.polimi.ingsw.exceptions.lobby.DuplicateIDException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.commands.Command;
@@ -26,7 +27,7 @@ import javafx.css.Match;
  */
 public class VirtualView extends Observable<String> implements Observer<ResponseParameters> {
     private final String name;
-    private boolean connected, skipping, joined;
+    private boolean connected, skipping, joined, outdated;
     private int playerID;
     private CommandFactory commandFactory;
     private final LobbyController lobbyController;
@@ -39,6 +40,7 @@ public class VirtualView extends Observable<String> implements Observer<Response
         this.name = name;
         playerID = 0;
         joined = false;
+        outdated = true;
 
         Game.getInstance().addObserver(this);
         MatchInfo.getInstance().addObserver(this);
@@ -121,14 +123,19 @@ public class VirtualView extends Observable<String> implements Observer<Response
 
     @Override
     public void update(ResponseParameters params) {
-        if(connected) {
+        if(connected && !params.shouldSkip()) { // Avoid notifying useless packets if the client is connected
             notify(params.serialize().toString());
-        } else {
-            if(skipping) {
-                skipping = false;
-                return;
+            //If the last turn skipped is NOT a PLANNING turn (Meaning this player has already skipped its last round)
+            if(skippingTurn != null && !skippingTurn.equals(TurnState.PLANNING)) {
+                //If we are into a new round, set this VirtualView to outdated
+                if(MatchInfo.getInstance().getStateType().equals(TurnState.PLANNING)) {
+                    outdated = true;
+                    skipping = false;
+                }
             }
-            skipIfCurrent();
+        } else {
+            if(params.shouldSkip() && shouldSkip())
+                skipIfCurrent();
         }
     }
 
@@ -150,6 +157,14 @@ public class VirtualView extends Observable<String> implements Observer<Response
         handleRequest(reconnectCommand);
         notify(new ResponseParameters().setSendGame(true).serialize().toString());
         Game.getInstance().notifyPlayerReconnected();
+        /*
+         * If the current round is in a different state compared to the last one skipped, then the info on this
+         * VirtualView is outdated.
+         */
+        if(!MatchInfo.getInstance().getStateType().equals(skippingTurn)) {
+            outdated = true; // Force the update of the skipping boolean
+            skipping = false; // Reset skipping value
+        }
     }
 
     /**
@@ -163,20 +178,36 @@ public class VirtualView extends Observable<String> implements Observer<Response
             return;
 
         //Begin turn-skip sequence (Player is in-game)
-        skipping = true;
         clearObservers();
         String disconnectCommand = new RequestParameters().setCommandType(CommandType.DISCONNECT).serialize().toString();
         handleRequest(disconnectCommand);
-        skipping = false;
+
+        //This VirtualView will skip if the player reconnects DURING A ROUND
+        skipping = true;
+
         if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.LOBBY)){
             Lobby.getLobby().removeObserver(this);
             Game.getInstance().removeObserver(this);
             MatchInfo.getInstance().removeObserver(this);
-        } else {
-            if(MatchInfo.getInstance().isGameOver())
-                return;
-            skipIfCurrent();
         }
+    }
+
+    /**
+     * Returns whether the <code>Player</code> bound to this <code>VirtualView</code> should try to skip a turn.
+     *
+     * @return <code>true</code> if the <code>Player</code> has to skip a turn.
+     */
+    private boolean shouldSkip() {
+        if(!connected)
+            return true;
+
+        //If the round is in any state other than PLANNING, then this Player must skip until the end of this round.
+        if(outdated && !MatchInfo.getInstance().getStateType().equals(TurnState.PLANNING)) {
+            skipping = Game.getInstance().getPlayerByID(playerID).getSelectedCard().equals(Card.CARD_AFK);
+            outdated = false;
+            skippingTurn = null;
+        }
+        return skipping;
     }
 
     /**
@@ -187,15 +218,9 @@ public class VirtualView extends Observable<String> implements Observer<Response
         if(match.getGameStatus().equals(GameStatus.IN_GAME) &&
                 match.getCurrentPlayerID() == playerID &&
                 !MatchInfo.getInstance().isGamePaused()) {
-            if(skippingTurn != null && skippingTurn.equals(MatchInfo.getInstance().getStateType()))
-                return;
-
             skippingTurn = MatchInfo.getInstance().getStateType();
             String skipCommand = new RequestParameters().setCommandType(CommandType.SKIP_TURN).serialize().toString();
-            skipping = true;
             handleRequest(skipCommand);
-            skippingTurn = null;
-            skipIfCurrent();
         }
     }
 

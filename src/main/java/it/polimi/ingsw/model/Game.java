@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Singleton class to act as DAO for a game of Eriantys.
@@ -387,6 +388,19 @@ public class Game extends Observable<ResponseParameters> implements Serializable
     public void disconnectPlayer(int playerID) {
         getPlayerByID(playerID).disconnect();
         notify(new ResponseParameters().setPlayers(players));
+    }
+
+    /**
+     * Checks if any <code>Player</code> is disconnected or has played the AFK_CARD. If any <code>Player</code> is found,
+     * a TurnSkip notify is sent to the VirtualViews.
+     */
+    public void requestTurnSkip() {
+        List<Player> disconnectedPlayers = players.stream()
+                .filter( (p) -> !p.isConnected()
+                                || (p.getSelectedCard() != null && p.getSelectedCard().equals(Card.CARD_AFK)))
+                .collect(Collectors.toList());
+        if(!disconnectedPlayers.isEmpty())
+            notify(new ResponseParameters().setShouldSkip(true));
     }
 
     /**

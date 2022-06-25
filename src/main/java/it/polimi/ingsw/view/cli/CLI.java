@@ -1,7 +1,9 @@
 package it.polimi.ingsw.view.cli;
 
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.enumerations.Card;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.client.ServerConnectionCLI;
@@ -28,7 +30,7 @@ public class CLI {
      private String activeCardName;
      private boolean activatedCard;
      private boolean waitingForPlayer;
-     protected boolean exiting;
+     protected boolean exiting, skipping;
 
      public CLI(ViewState viewState) { this.viewState = viewState; }
 
@@ -92,6 +94,14 @@ public class CLI {
       * display the content
       */
      public boolean nextState(JsonObject jo) {
+          if(skipping) {
+               if(JsonUtils.areDifferentStates(jo, MatchInfo.getInstance().getStateType())
+                    && JsonUtils.getTurnState(jo).equals(TurnState.PLANNING)) {
+                    skipping = false;
+                    setViewState(new GameViewState(viewState)); //Reset old viewState
+               }
+               else return false;
+          }
           MatchInfo matchInfo = MatchInfo.getInstance();
 
           if(jo.has("error")) {
@@ -293,8 +303,25 @@ public class CLI {
       * Handles the first interaction.
       */
      public void handleFirstInteraction() {
+          if(shouldSkip()) {
+               skipping = true;
+               setViewState(new GameViewState(viewState));
+               displayState();
+               return;
+          }
           playedPlanning = true;
           handleInteraction();
+     }
+
+     /**
+      * Returns whether this CLI should skip the current round.
+      *
+      * @return <code>true</code> if this CLI has to skip the current round.
+      */
+     public boolean shouldSkip() {
+          return (Game.getInstance().getPlayerByID(playerID).getSelectedCard() != null
+                  && Game.getInstance().getPlayerByID(playerID).getSelectedCard().equals(Card.CARD_AFK)
+                  && !MatchInfo.getInstance().getStateType().equals(TurnState.PLANNING));
      }
 
      /**
@@ -402,5 +429,14 @@ public class CLI {
       */
      public boolean isExiting() {
           return exiting;
+     }
+
+     /**
+      * Returns whether this CLI has to skip the current round
+      *
+      * @return <code>true</code> if this CLI has to skip this round.
+      */
+     public boolean isSkipping() {
+          return skipping;
      }
 }

@@ -184,6 +184,7 @@ public class GameController {
 
                 break;
         }
+        game.requestTurnSkip();
     }
 
     /**
@@ -377,6 +378,8 @@ public class GameController {
 
         requestTimeout();
         MatchInfo.getInstance().notifyMatchInfo();
+        //A player just disconnected, so we may need to skip a turn.
+        game.requestTurnSkip();
     }
 
     /**

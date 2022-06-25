@@ -10,7 +10,7 @@ public class ClientApp {
 
     public static void main(String[] args) {
         Client client = new Client();
-        boolean isCli = false;
+        boolean isCli = true;
 
         for(String arg : args) {
             if(arg.equalsIgnoreCase("-cli")) {

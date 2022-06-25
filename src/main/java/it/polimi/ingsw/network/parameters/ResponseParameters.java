@@ -30,6 +30,7 @@ public class ResponseParameters implements Serializable {
     private boolean sendCards;
     private boolean sendMatchInfo;
     private boolean sendGame;
+    private boolean skip;
     private List<Player> players;
     private String error;
 
@@ -244,6 +245,25 @@ public class ResponseParameters implements Serializable {
         return this;
     }
 
+    /**
+     * Returns whether this message is requesting a skip command from the <code>VirtualView</code> receiving it.
+     *
+     *  @return <code>true</code> if the game is waiting for a skip command.
+     */
+    public boolean shouldSkip() {
+        return skip;
+    }
+
+    /**
+     * Sets whether this message should request a skip command from a <code>VirtualView</code>.
+     *
+     * @param skip the skip flag. <code>true</code> if requesting to skip.
+     * @return this <code>ResponseParameters</code>
+     */
+    public ResponseParameters setShouldSkip(boolean skip) {
+        this.skip = skip;
+        return this;
+    }
     /**
      * Gets the list of players of this <code>ResponseParameters</code>.
      *

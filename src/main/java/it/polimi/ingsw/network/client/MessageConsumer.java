@@ -41,7 +41,7 @@ public class MessageConsumer implements Runnable{
             boolean reqInteraction = view.nextState(jsonObject);
             new ResponseParameters().deserialize(jsonObject);
 
-            if(reqInteraction) {
+            if(reqInteraction && !view.isSkipping() && !view.shouldSkip()) {
                 view.handleInteraction(); //Handle interaction in new view
             } else {
                 if(MatchInfo.getInstance().getCurrentPlayerID() > -1)
