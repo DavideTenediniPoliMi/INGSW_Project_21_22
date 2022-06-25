@@ -3135,7 +3135,7 @@
          </effect>
       </Label>
    </AnchorPane>
-   <Button fx:id="swapButton" disable="true" layoutX="572.0" layoutY="673.0" mnemonicParsing="false" onMouseClicked="#handleSwapButton" style="-fx-background-radius: 20px; -fx-background-color: #D6E3F8; -fx-border-color: blue; -fx-border-radius: 20px;" text="Swap!" visible="false" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="20.0">
+   <Button fx:id="swapButton" disable="true" layoutX="572.0" layoutY="673.0" mnemonicParsing="false" onMouseClicked="#handleSwapButton" style="-fx-background-radius: 20px; -fx-background-color: #D6E3F8; -fx-border-color: blue; -fx-border-radius: 20px;" text="Swap!" visible="false" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="510.0">
       <font>
          <Font name="Arial" size="14.0" />
       </font>
