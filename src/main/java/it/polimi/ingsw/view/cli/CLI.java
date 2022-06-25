@@ -7,7 +7,6 @@ import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.client.ServerConnectionCLI;
 import it.polimi.ingsw.utils.JsonUtils;
 import it.polimi.ingsw.view.cli.viewStates.*;
-import it.polimi.ingsw.view.gui.GUIState;
 import org.fusesource.jansi.AnsiConsole;
 
 import java.io.IOException;
@@ -15,6 +14,9 @@ import java.net.Socket;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Class that handles the state machine for the CLI visualization and management
+ */
 public class CLI {
      private final static Scanner scanner = new Scanner(System.in);
      private ViewState viewState;
@@ -30,27 +32,65 @@ public class CLI {
 
      public CLI(ViewState viewState) { this.viewState = viewState; }
 
+     /**
+      * Sets the specified <code>ViewState</code>.
+      *
+      * @param viewState <code>ViewState</code> that has to be set
+      */
      public void setViewState(ViewState viewState) { this.viewState = viewState; }
 
+     /**
+      * Returns the current <code>ViewState</code>.
+      *
+      * @return Current <code>ViewState</code>
+      */
      public ViewState getViewState() { return viewState; }
 
+     /**
+      * Set player ID.
+      *
+      * @param playerID ID of the player to be set
+      */
      public void setPlayerID(int playerID) {
           this.playerID = playerID;
           viewState.setPlayerID(playerID);
      }
 
+     /**
+      * Returns the ID of the player correspondent to this CLI.
+      *
+      * @return ID of the player correspondent to this CLI
+      */
      public int getPlayerID() {
           return playerID;
      }
 
+     /**
+      * Sets the specified name.
+      *
+      * @param name Name to be set
+      */
      public void setName(String name) {
           this.name = name;
      }
 
+     /**
+      * Returns the name of the player correspondent to this CLI.
+      *
+      * @return Name of the player correspondent to this CLI
+      */
      public String getName() {
           return name;
      }
 
+     /**
+      * Sets the new <code>ViewState</code> based on the current state and the interaction that has been performed.
+      *
+      * @param jo <code>JsonObject</code> that contains the info sent by the <code>ServerConnection</code>
+      *
+      * @return <code>true</code> if the interaction needs to be handled, <code>false</code> if the view only has to
+      * display the content
+      */
      public boolean nextState(JsonObject jo) {
           MatchInfo matchInfo = MatchInfo.getInstance();
 
@@ -192,6 +232,11 @@ public class CLI {
           }
      }
 
+     /**
+      * Resets the <code>ViewState</code>.
+      *
+      * @param jo <code>JsonObject</code> that contains the infos about the previous state
+      */
      public void resetTurnState(JsonObject jo) {
           switch (JsonUtils.getTurnState(jo)) {
                case PLANNING:
@@ -211,6 +256,9 @@ public class CLI {
           }
      }
 
+     /**
+      * Sets the current <code>ViewState</code>.
+      */
      private void setCurrentViewState() {
           switch (MatchInfo.getInstance().getStateType()) {
                case PLANNING:
@@ -230,17 +278,28 @@ public class CLI {
           }
      }
 
+     /**
+      * Resets the interaction if an error during an action occurs.
+      *
+      * @param error <code>String</code> correspondent to the error
+      */
      public void resetInteraction(String error) {
           getViewState().resetInteraction();
           getViewState().appendBuffer(error);
           getViewState().setInteractionComplete(false);
      }
 
-     public void handleInteractionAsFirst() {
+     /**
+      * Handles the first interaction.
+      */
+     public void handleFirstInteraction() {
           playedPlanning = true;
           handleInteraction();
      }
 
+     /**
+      * Handles interactions by printing the CLI prompt, waiting for the user input and managing it.
+      */
      public void handleInteraction() {
           do {
                getViewState().printCLIPrompt(true);
@@ -256,11 +315,17 @@ public class CLI {
           } while(!getViewState().isInteractionComplete());
      }
 
+     /**
+      * Prints the <code>ViewState</code> and its buffer.
+      */
      public void displayState() {
           getViewState().printCLIPrompt(false);
           AnsiConsole.sysOut().println(AnsiCodes.CLS.code + AnsiCodes.HOME + getViewState().print() + getViewState().getBuffer());
      }
 
+     /**
+      * Handles the interaction of handshaking.
+      */
      public void handleHandshake() {
           do {
                getViewState().printCLIPrompt(true);
@@ -275,6 +340,9 @@ public class CLI {
           } while(!getViewState().isInteractionComplete());
      }
 
+     /**
+      * Prints the initial message of welcome.
+      */
      public void loadStartingScreen() {
           AnsiConsole.systemInstall();
 
@@ -282,6 +350,12 @@ public class CLI {
           AnsiConsole.sysOut().println("Welcome to Eriantys!");
      }
 
+     /**
+      * Handles the interaction of connecting to the server.
+      *
+      * @return The <code>ServerConnection</code> created if the connection has been created successfully,
+      * <code>null</code> otherwise.
+      */
      public Connection handleBinding() {
           do {
                AnsiConsole.sysOut().println("Insert the IP address of the server : (or Press X to close the game)");
@@ -312,12 +386,20 @@ public class CLI {
           return null;
      }
 
+     /**
+      * Prints the final message.
+      */
      public void loadClosingScreen() {
           AnsiConsole.sysOut().println("Thanks for playing Eriantys!");
 
           AnsiConsole.systemUninstall();
      }
 
+     /**
+      * Returns <code>boolean</code> that indicates whether the player is exiting the game.
+      *
+      * @return <code>boolean</code> that indicates whether the player is exiting the game
+      */
      public boolean isExiting() {
           return exiting;
      }

@@ -195,7 +195,7 @@ public class ServerConnectionCLI extends Connection {
         view.resetTurnState(MatchInfo.getInstance().serialize());
 
         if(MatchInfo.getInstance().getCurrentPlayerID() == view.getPlayerID()) {
-            view.handleInteractionAsFirst();
+            view.handleFirstInteraction();
         } else {
             view.setViewState(new GameViewState(view.getViewState()));
             view.displayState();
