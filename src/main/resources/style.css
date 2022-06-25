@@ -10,24 +10,15 @@
     -fx-background-color: white;
 }
 
-.towerOption:disabled {
-    -fx-opacity: 50%;
+.towerOption:disabled,
+.cloud:disabled,
+.characterCard:disabled,
+.def:disabled {
+    -fx-opacity: 0.6;
 }
 
-.usernameText:disabled {
+.usernameText:disabled .text {
     -fx-strikethrough: true;
-}
-
-.cloud:disabled {
-    -fx-opacity: 0.6;
-}
-
-.characterCard:disabled {
-    -fx-opacity: 0.6;
-}
-
-.studentNotSelected {
-    -fx-opacity: 0.6;
 }
 
 .target {
@@ -36,8 +27,4 @@
 
 .def {
     -fx-border-color: transparent;
-}
-
-.def:disabled {
-    -fx-opacity: 0.6;
 }

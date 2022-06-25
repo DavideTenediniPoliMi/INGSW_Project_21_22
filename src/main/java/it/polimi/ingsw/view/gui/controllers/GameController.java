@@ -315,6 +315,7 @@ public class GameController extends FXController {
             clouds.add(cloudPane3);
             cloudStudents.add(studentCloud3);
             otherAssistants.add(assistantCard2);
+            assistantCard2.setUserData("");
             otherNumCoins.add(numCoins2);
 
             if(matchInfo.getSelectedNumPlayer() == 4) {
@@ -329,6 +330,7 @@ public class GameController extends FXController {
                 clouds.add(cloudPane4);
                 cloudStudents.add(studentCloud4);
                 otherAssistants.add(assistantCard3);
+                assistantCard3.setUserData("");
                 otherNumCoins.add(numCoins3);
             } else if(matchInfo.getSelectedNumPlayer() == 3){
                 for(Node node : entranceHero.getChildren()) {
@@ -474,6 +476,7 @@ public class GameController extends FXController {
         otherEntrance.add(entrance1);
         otherDiningRoom.add(diningRoom1);
         otherAssistants.add(assistantCard1);
+        assistantCard1.setUserData("");
         otherNumCoins.add(numCoins1);
 
         clouds.add(cloudPane1);
@@ -649,12 +652,18 @@ public class GameController extends FXController {
 
                 numCoinsHero.setText(String.valueOf(player.getNumCoins()));
             } else {
-                otherPlayers.get(otherIndex).setDisable(!player.isConnected());
                 otherUsernames.get(otherIndex).setDisable(!player.isConnected());
+                otherPlayers.get(otherIndex).setDisable(!player.isConnected());
 
                 if(player.getSelectedCard() != null) {
                     otherAssistants.get(otherIndex).setVisible(true);
                     otherAssistants.get(otherIndex).setImage(player.getSelectedCard().getImageHalf());
+                    if(player.getSelectedCard().equals(Card.CARD_AFK)){
+                        otherAssistants.get(otherIndex).setUserData("AFK");
+                    }
+                } else if("AFK".equals(otherAssistants.get(otherIndex).getUserData().toString())) {
+                    otherAssistants.get(otherIndex).setUserData("");
+                    otherAssistants.get(otherIndex).setVisible(false);
                 }
                 otherNumCoins.get(otherIndex).setText(String.valueOf(player.getNumCoins()));
                 otherIndex++;

@@ -2362,7 +2362,7 @@
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
          </rowConstraints>
-         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.columnIndex="1">
+         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.columnIndex="1" GridPane.rowIndex="0">
             <GridPane.margin>
                <Insets />
             </GridPane.margin>
@@ -2375,7 +2375,7 @@
                <DropShadow />
             </effect>
          </BorderPane>
-         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.rowIndex="1">
+         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.rowIndex="1" GridPane.columnIndex="0">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                   <Image url="@../images/student_green.png"/>
@@ -2395,7 +2395,7 @@
                <DropShadow />
             </effect>
          </BorderPane>
-         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.rowIndex="2">
+         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.rowIndex="2" GridPane.columnIndex="0">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                   <Image url="@../images/student_green.png"/>
@@ -2415,7 +2415,7 @@
                <DropShadow />
             </effect>
          </BorderPane>
-         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.rowIndex="3">
+         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.rowIndex="3" GridPane.columnIndex="0">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                   <Image url="@../images/student_green.png"/>
@@ -2435,7 +2435,7 @@
                <DropShadow />
             </effect>
          </BorderPane>
-         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.rowIndex="4">
+         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.rowIndex="4" GridPane.columnIndex="0">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                   <Image url="@../images/student_green.png"/>
