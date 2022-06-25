@@ -8,14 +8,18 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-import java.util.Optional;
-
+/**
+ * Class representing the controller of the scene handling the creation of a new Lobby.
+ */
 public class CreateLobbyController extends FXController {
     @FXML
     private Slider numPlayers;
     @FXML
     private CheckBox expertMode;
 
+    /**
+     * Handles the click of the button in this scene
+     */
     public void handleCreateLobbyButton() {
         GUI.setCreatedLobby(true);
 
@@ -38,6 +42,11 @@ public class CreateLobbyController extends FXController {
         alert.show();
     }
 
+    /**
+     * Handles the press of the ENTER key. It acts as if the Create button had been pressed instead.
+     *
+     * @param keyEvent the event fired by the press of any key.
+     */
     public void handleKeyPress(KeyEvent keyEvent) {
         if(keyEvent.getCode().equals(KeyCode.ENTER)) {
             handleCreateLobbyButton();

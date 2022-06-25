@@ -6,6 +6,9 @@ import it.polimi.ingsw.network.server.Server;
 
 import java.io.IOException;
 
+/**
+ * Class representing the Server application.
+ */
 public class ServerApp {
     private static final int DEFAULT_PORT = 12345;
 

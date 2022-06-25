@@ -18,6 +18,9 @@ import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class representing the controller of the scene handling the Lobby.
+ */
 public class LobbySelectionController extends FXController {
     @FXML
     private Label expertMode;
@@ -109,7 +112,6 @@ public class LobbySelectionController extends FXController {
         for(int i = 0; i < 4; i ++) {
             if(i >= matchInfo.getSelectedNumPlayer())
                 images.get(i).setImage(new Image("images/cardback_black_and_white.png"));
-            //TODO improve visibility (possibly change opacity to a grey out version)
         }
 
         if(matchInfo.getSelectedNumPlayer() != 3) {
@@ -132,6 +134,9 @@ public class LobbySelectionController extends FXController {
         applyChanges(null);
     }
 
+    /**
+     * Populates all the arrays used with the different elements of the graphic in the predetermined ordered.
+     */
     private void prepArrays() {
         usernames.add(usernameText1);
         usernames.add(usernameText2);
@@ -247,6 +252,13 @@ public class LobbySelectionController extends FXController {
         }
     }
 
+    // EVENT LISTENERS
+
+    /**
+     * Handles the click of the wizard buttons. Sets the cardBack selected.
+     *
+     * @param mouseEvent the event fired by the click of the mouse.
+     */
     public void handleWizardButtons(MouseEvent mouseEvent) {
         Button button = (Button) mouseEvent.getSource();
         activeCardBack = getCardBackOfButton(button);
@@ -257,34 +269,12 @@ public class LobbySelectionController extends FXController {
         cardBackButton.setDisable(false);
     }
 
-    private void setDisableWizardButtons(boolean disable) {
-        for (Button button : wizardButtons){
-            button.setDisable(disable);
-        }
-    }
-
-    private void setDisableTeamOptions(boolean disable) {
-        int i = 0;
-        for (RadioButton button : teamOptions){
-            button.setDisable(disable);
-            towerOptions.get(i).setDisable(false);
-            i++;
-        }
-    }
-
-    private void resetWizardButtons() {
-        for (Button button : wizardButtons){
-            button.setStyle("-fx-border-color: grey; -fx-border-width: 3px;");
-        }
-    }
-
-    private void resetReadyCheckBoxes() {
-        for (CheckBox checkBox : readyCheckBoxes){
-            checkBox.setVisible(false);
-        }
-    }
-
-
+    /**
+     * Calculates the corresponding cardBack of any given button by looking its ID.
+     *
+     * @param button the target button.
+     * @return the CardBack corresponding to the given Button.
+     */
     private CardBack getCardBackOfButton(Button button) {
         switch (button.getId()) {
             case "wizardButton1":
@@ -300,6 +290,10 @@ public class LobbySelectionController extends FXController {
         }
     }
 
+    /**
+     * Handles the click of the Card Back Button. If the button is in the "Confirm!" state then it sends the SET message
+     * to the server, otherwise it sends the UNSELECT message to the server.
+     */
     public void handleCardBackButton() {
         if (cardBackButton.getText().equals("Confirm!")) {
             notify(
@@ -330,6 +324,10 @@ public class LobbySelectionController extends FXController {
         }
     }
 
+    /**
+     * Handles the click on the TowerColor Button. If the button is in the "Confirm!" state then it sends the SET message
+     *      * to the server, otherwise it sends the UNSELECT message to the server.
+     */
     public void handleTowerColorButton() {
         if (towerColorButton.getText().equals("Confirm!")) {
             notify(
@@ -364,6 +362,9 @@ public class LobbySelectionController extends FXController {
         }
     }
 
+    /**
+     * Handles the click on the Ready button.
+     */
     public void handleReadyButton() {
         notify(
                 new RequestParameters()
@@ -374,5 +375,50 @@ public class LobbySelectionController extends FXController {
         readyButton.setDisable(true);
         towerColorButton.setDisable(true);
         cardBackButton.setDisable(true);
+    }
+
+    // CLEAN UP METHODS
+
+    /**
+     * Sets every wizard button to the disable state given as input.
+     *
+     * @param disable whether the buttons should be disabled or not.
+     */
+    private void setDisableWizardButtons(boolean disable) {
+        for (Button button : wizardButtons){
+            button.setDisable(disable);
+        }
+    }
+
+    /**
+     * Sets every tower option to the disable state given as input.
+     *
+     * @param disable whether the options should be disabled or not.
+     */
+    private void setDisableTeamOptions(boolean disable) {
+        int i = 0;
+        for (RadioButton button : teamOptions){
+            button.setDisable(disable);
+            towerOptions.get(i).setDisable(false);
+            i++;
+        }
+    }
+
+    /**
+     * Resets the CSS style of every Wizard Button.
+     */
+    private void resetWizardButtons() {
+        for (Button button : wizardButtons){
+            button.setStyle("-fx-border-color: grey; -fx-border-width: 3px;");
+        }
+    }
+
+    /**
+     * Hides all the Ready checkboxes.
+     */
+    private void resetReadyCheckBoxes() {
+        for (CheckBox checkBox : readyCheckBoxes){
+            checkBox.setVisible(false);
+        }
     }
 }

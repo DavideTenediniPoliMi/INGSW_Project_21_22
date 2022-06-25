@@ -1,5 +1,9 @@
 package it.polimi.ingsw.view.gui;
 
+/**
+ * Enum class representing the states in which the GUI can be. To each state corresponds a different response from the
+ * graphic interface.
+ */
 public enum GUIState {
     REPEAT_ACTION,
     WAIT_RESPONSE,

@@ -28,6 +28,9 @@ import javafx.scene.layout.GridPane;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class representing the controller of the scene handling the game.
+ */
 public class GameController extends FXController {
     @FXML
     private AnchorPane player1;
@@ -423,7 +426,7 @@ public class GameController extends FXController {
 
         for(Color c : Color.values()) {
             for (int j = 0; j < 10; j++) {
-                getNodeFromDiningHero(c, j, diningRoomHero).setUserData(c);
+                getNodeFromDiningHero(c, j).setUserData(c);
             }
         }
 
@@ -459,6 +462,11 @@ public class GameController extends FXController {
         handleInteraction((matchInfo.getCurrentPlayerID() == GUI.getPlayerId()) ? getCurrentState() : GUIState.WAIT_ACTION);
     }
 
+    /**
+     * Returns the current GUIState corresponding to the current TurnState.
+     *
+     * @return the current GUIState.
+     */
     private GUIState getCurrentState() {
         switch (MatchInfo.getInstance().getStateType()) {
             case PLANNING:
@@ -474,6 +482,9 @@ public class GameController extends FXController {
         }
     }
 
+    /**
+     * Populates all the arrays used with the different elements of the graphic in the predetermined ordered.
+     */
     private void prepArrays() {
         otherPlayers.add(player1);
         otherUsernames.add(usernameText1);
@@ -558,6 +569,10 @@ public class GameController extends FXController {
         }
     }
 
+    /**
+     * Initializes all the graphic elements of the Hero player and every other player in this game.
+     * The behaviour changes based on the type and size of game.
+     */
     private void initPlayers() {
         Game game = Game.getInstance();
         List<Player> players = game.getPlayers();
@@ -646,6 +661,9 @@ public class GameController extends FXController {
         }
     }
 
+    /**
+     * Changes various elements of the graphic to match the changes after a message regarding Schools changes.
+     */
     private void applyChangesSchools() {
         List<School> schools = Game.getInstance().getBoard().getSchools();
         int otherIndex = 0;
@@ -673,7 +691,7 @@ public class GameController extends FXController {
 
                 for(Color c : Color.values()) {
                     for (int j = 0; j < 10; j++) {
-                        BorderPane stud = (BorderPane) getNodeFromDiningHero(c, j, diningRoomHero);
+                        BorderPane stud = (BorderPane) getNodeFromDiningHero(c, j);
                         stud.setVisible(j < school.getNumStudentsInDiningRoomByColor(c));
                     }
                 }
@@ -699,6 +717,9 @@ public class GameController extends FXController {
         }
     }
 
+    /**
+     * Changes various elements of the graphic to match the changes after a message regarding Character Cards changes.
+     */
     private void applyChangesCharCards() {
         List<CharacterCard> charCards = Game.getInstance().getCharacterCards();
 
@@ -731,6 +752,9 @@ public class GameController extends FXController {
         }
     }
 
+    /**
+     * Changes various elements of the graphic to match the changes after a message regarding Clouds changes.
+     */
     private void applyChangesClouds() {
         List<Cloud> cloudsList = Game.getInstance().getBoard().getClouds();
 
@@ -744,8 +768,14 @@ public class GameController extends FXController {
         }
     }
 
+    /**
+     * Changes various elements of the graphic to match the changes after a message regarding Island changes.
+     */
     private void applyChangesIslands() {
-        resetIslands();
+        for(int i = 0; i < 12; i++) {
+            islandMN.get(i).setVisible(false);
+            islandTowers.get(i).setVisible(false);
+        }
 
         List<Boolean> bridgeList = Game.getInstance().getBoard().findBridges();
 
@@ -770,23 +800,37 @@ public class GameController extends FXController {
         }
     }
 
+    /**
+     * Changes various elements of the graphic to match the changes after a message regarding Professors changes.
+     */
     private void applyChangesProfessors() {
         ProfessorTracker profs = Game.getInstance().getBoard().getProfessorOwners();
 
-        resetProfs();
+        for(GridPane otherProf : otherDiningRoom) {
+            for(Color c: Color.values()) {
+                getProfFromOtherSchool(c, otherProf).setVisible(false);
+            }
+        }
+
+        for(Color c: Color.values()) {
+            getProfFromHeroSchool(c).setVisible(false);
+        }
 
         for(Color c : Color.values()) {
             int ownerID = profs.getOwnerIDByColor(c);
             if(ownerID == -1) continue;
 
             if(ownerID == GUI.getPlayerId()) {
-                getProfFromHeroSchool(c, professorsHero).setVisible(true);
+                getProfFromHeroSchool(c).setVisible(true);
             } else {
                 getProfFromOtherSchool(c, otherDiningRoom.get(getAdjustedOtherPlayerIndex(ownerID))).setVisible(true);
             }
         }
     }
 
+    /**
+     * Changes various elements of the graphic to match the changes after a message regarding Cards changes.
+     */
     private void applyChangesCards() {
         Player hero = Game.getInstance().getPlayerByID(GUI.getPlayerId());
 
@@ -801,6 +845,9 @@ public class GameController extends FXController {
         }
     }
 
+    /**
+     * Changes various elements of the graphic to match the changes after a message regarding Players changes.
+     */
     private void applyChangesPlayers() {
         int otherIndex = 0;
         for(Player player: Game.getInstance().getPlayers()) {
@@ -834,14 +881,28 @@ public class GameController extends FXController {
     }
 
     // GETTER FOR GRIDPANES
+
+    /**
+     * Returns the position of the graphic elements regarding the player with the specified ID inside the various
+     * lists of graphic elements.
+     *
+     * @param ownerID the ID of the player.
+     * @return the position of the player's elements.
+     */
     private int getAdjustedOtherPlayerIndex(int ownerID) {
         Game game = Game.getInstance();
         int targetId = game.getIndexOfPlayer(game.getPlayerByID(ownerID));
         return (game.getIndexOfPlayer(game.getPlayerByID(GUI.getPlayerId())) < targetId) ? targetId - 1 : targetId;
     }
 
-    private Node getProfFromHeroSchool(Color c, GridPane grid) {
-        for(Node n : grid.getChildren()) {
+    /**
+     * Returns the Node corresponding to the Hero's professor of the color specified.
+     *
+     * @param c the color of the professor wanted.
+     * @return the node containing the BorderPane of the professor.
+     */
+    private Node getProfFromHeroSchool(Color c) {
+        for(Node n : professorsHero.getChildren()) {
             switch (c) {
                 case RED:
                     if(GridPane.getRowIndex(n) == 1)
@@ -866,11 +927,18 @@ public class GameController extends FXController {
             }
         }
 
-        return new ImageView();
+        return new BorderPane();
     }
 
-    private Node getNodeFromDiningHero(Color c, int i, GridPane grid) {
-        for(Node n : grid.getChildren()) {
+    /**
+     * Returns the Node corresponding to the Hero's student in the dining room of the color and position specified.
+     *
+     * @param c the color of the student wanted.
+     * @param i the position of the student wanted, from 0 to 9.
+     * @return the node containing the BorderPane of the student.
+     */
+    private Node getNodeFromDiningHero(Color c, int i) {
+        for(Node n : diningRoomHero.getChildren()) {
             switch (c) {
                 case RED:
                     if(GridPane.getRowIndex(n) == 1 && GridPane.getColumnIndex(n) == i)
@@ -895,9 +963,16 @@ public class GameController extends FXController {
             }
         }
 
-        return new ImageView();
+        return new BorderPane();
     }
 
+    /**
+     * Returns the Node of the professor of the specified color from the grid of a player other than the Hero.
+     *
+     * @param c the color of the professor wanted.
+     * @param grid the other player's dining room.
+     * @return the ImageView containing the Professor.
+     */
     private Node getProfFromOtherSchool(Color c, GridPane grid) {
         for(Node n : grid.getChildren()) {
             if(GridPane.getColumnIndex(n) == c.ordinal() && GridPane.getRowIndex(n) == 0)
@@ -907,6 +982,13 @@ public class GameController extends FXController {
         return new ImageView();
     }
 
+    /**
+     * Returns the Node of the label for the students of the specified color from the entrance of a player other than the Hero.
+     *
+     * @param c the color of the students wanted.
+     * @param grid the other player's entrance.
+     * @return the Label containing the count.
+     */
     private Node getNodeFromSchoolEntrance(Color c, GridPane grid) {
         for(Node n : grid.getChildren()) {
             if(GridPane.getColumnIndex(n) == c.ordinal() && n instanceof Label)
@@ -916,6 +998,13 @@ public class GameController extends FXController {
         return new Label();
     }
 
+    /**
+     * Returns the Node of the label for the students of the specified color from the dining room of a player other than the Hero.
+     *
+     * @param c the color of the students wanted.
+     * @param grid the other player's dining room.
+     * @return the Label containing the count.
+     */
     private Node getNodeFromSchoolDining(Color c, GridPane grid) {
         for(Node n : grid.getChildren()) {
             if(GridPane.getColumnIndex(n) == c.ordinal() && GridPane.getRowIndex(n) == 1)
@@ -925,6 +1014,13 @@ public class GameController extends FXController {
         return new Label();
     }
 
+    /**
+     * Returns the Node of the label for the students of the specified color from the cloud.
+     *
+     * @param c the color of the students wanted.
+     * @param grid the cloud.
+     * @return the Label containing the count.
+     */
     private Node getNodeFromCloud(Color c, GridPane grid) {
         for(Node n : grid.getChildren()) {
             if(!(n instanceof Label)) continue;
@@ -956,6 +1052,13 @@ public class GameController extends FXController {
         return new Label();
     }
 
+    /**
+     * Returns the Node of the label for the students of the specified color from the island.
+     *
+     * @param c the color of the students wanted.
+     * @param grid the island.
+     * @return the Label containing the count.
+     */
     private Node getNodeFromIsland(Color c, GridPane grid) {
         for(Node n : grid.getChildren()) {
             if(!(n instanceof Label)) continue;
@@ -987,6 +1090,13 @@ public class GameController extends FXController {
         return new Label();
     }
 
+    /**
+     * Returns the Node of the label for the students of the specified index from the card.
+     *
+     * @param i the index of the students wanted.
+     * @param grid the card.
+     * @return the BorderPane containing the count.
+     */
     private Node getNodeFromCard(int i, GridPane grid) {
         for(Node n : grid.getChildren()) {
             switch (i) {
@@ -1017,7 +1127,7 @@ public class GameController extends FXController {
             }
         }
 
-        return new ImageView();
+        return new BorderPane();
     }
 
     // HANDLE INTERACTIONS
@@ -1137,6 +1247,9 @@ public class GameController extends FXController {
         }
     }
 
+    /**
+     * Changes various graphic elements to accommodate the user of the cards.
+     */
     private void prepCharCards() {
         Game game = Game.getInstance();
 
@@ -1167,6 +1280,9 @@ public class GameController extends FXController {
         }
     }
 
+    /**
+     * Handles the interaction of setting the parameters of all the cards.
+     */
     private void manageSetParams() {
         GridPane students = charCardsStudents.get(selectedCharCard);
         switch (Game.getInstance().getActiveCharacterCard().getName()) {
@@ -1240,6 +1356,12 @@ public class GameController extends FXController {
     }
 
     // EVENT LISTENERS
+
+    /**
+     * Handles the selection of the Assistant cards.
+     *
+     * @param event the event fired by the click of the card.
+     */
     private void handleCardClick(MouseEvent event) {
         ImageView card = (ImageView) event.getSource();
         String id = card.getId();
@@ -1264,6 +1386,12 @@ public class GameController extends FXController {
         );
     }
 
+    /**
+     * Handles the selection of a student in the Entrance of the Hero during the Move students state. After the
+     * selection the user will be prompted to selection the destination of such student.
+     *
+     * @param mouseEvent the event fired by the click of the student.
+     */
     private void handleEntranceSelect(MouseEvent mouseEvent) {
         BorderPane stud = (BorderPane) mouseEvent.getSource();
         selectedColor = (Color) stud.getUserData();
@@ -1298,12 +1426,23 @@ public class GameController extends FXController {
         actionText.setText("Select an Island " + optional + "!");
     }
 
+    /**
+     * Handles the deselection of the selected student from the Entrance of the Hero during the Move student state.
+     * The user will be prompted to selecting a student again.
+     *
+     * @param mouseEvent the event fired by the click of the student.
+     */
     private void handleEntranceDeselect(MouseEvent mouseEvent) {
         selectedColor = null;
 
         handleInteraction(GUIState.MOVE_STUDENT);
     }
 
+    /**
+     * Handles the selection of a student from the Entrance of the Hero during the Set Params state.
+     *
+     * @param mouseEvent the event fired by the click of the student.
+     */
     private void handleEntranceSelectWhileSettingParams(MouseEvent mouseEvent) {
         BorderPane target = (BorderPane) mouseEvent.getSource();
         Color c = (Color) target.getUserData();
@@ -1337,6 +1476,11 @@ public class GameController extends FXController {
                 || selectedStudentsFromEntrance.getTotalAmount() == 0);
     }
 
+    /**
+     * Handles the deselection of a student from the Entrance of the Hero during the Set Params state.
+     *
+     * @param mouseEvent the event fired by the click of the student.
+     */
     private void handleEntranceDeselectWhileSettingParams(MouseEvent mouseEvent) {
         BorderPane target = (BorderPane) mouseEvent.getSource();
         Color c = (Color) target.getUserData();
@@ -1370,6 +1514,11 @@ public class GameController extends FXController {
                 || selectedStudentsFromEntrance.getTotalAmount() == 0);
     }
 
+    /**
+     * Handles the selection of a student in the Dining Room of the Hero during the Move students state.
+     *
+     * @param mouseEvent the event fired by the click of the student.
+     */
     private void handleDiningSelection(MouseEvent mouseEvent) {
         disableGraphic();
         actionText.setText("Waiting for a server response");
@@ -1380,6 +1529,11 @@ public class GameController extends FXController {
         );
     }
 
+    /**
+     * Handles the selection of a student from the Dining Room of the Hero during the Set Params state.
+     *
+     * @param mouseEvent the event fired by the click of the student.
+     */
     private void handleDiningSelectionWhileSettingParams(MouseEvent mouseEvent) {
         BorderPane target = (BorderPane) mouseEvent.getSource();
         Color color = (Color) target.getUserData();
@@ -1393,7 +1547,7 @@ public class GameController extends FXController {
         if(selectedStudentsFromDiningRoom.getTotalAmount() == 2) {
             for(Color c : Color.values()) {
                 for(int i = 0 ; i < 10 ; i++) {
-                    Node n = getNodeFromDiningHero(c, i, diningRoomHero);
+                    Node n = getNodeFromDiningHero(c, i);
                     if (!n.getStyleClass().contains("target")) {
                         n.setDisable(true);
                     }
@@ -1405,6 +1559,11 @@ public class GameController extends FXController {
                 || selectedStudentsFromDiningRoom.getTotalAmount() == 0);
     }
 
+    /**
+     * Handles the deselection of a student from the Dining Room of the Hero during the Set Params state.
+     *
+     * @param mouseEvent the event fired by the click of the student.
+     */
     private void handleDiningDeselectionWhileSettingParams(MouseEvent mouseEvent) {
         BorderPane target = (BorderPane) mouseEvent.getSource();
         Color color = (Color) target.getUserData();
@@ -1418,7 +1577,7 @@ public class GameController extends FXController {
         if(selectedStudentsFromDiningRoom.getTotalAmount() == 1) {
             for(Color c : Color.values()) {
                 for(int i = 0 ; i < 10 ; i++) {
-                    Node n = getNodeFromDiningHero(c, i, diningRoomHero);
+                    Node n = getNodeFromDiningHero(c, i);
                     if (!n.getStyleClass().contains("target")) {
                         n.setDisable(false);
                     }
@@ -1430,6 +1589,11 @@ public class GameController extends FXController {
                 || selectedStudentsFromDiningRoom.getTotalAmount() == 0);
     }
 
+    /**
+     * Handles the selection of an Island during the Move MN state.
+     *
+     * @param mouseEvent the event fired by the click of the island.
+     */
     private void handleIslandSelectionWhileMoveMN(MouseEvent mouseEvent) {
         GridPane island = (GridPane) mouseEvent.getSource();
         Board board = Game.getInstance().getBoard();
@@ -1448,6 +1612,11 @@ public class GameController extends FXController {
         );
     }
 
+    /**
+     * Handles the selection of an Island during the Move student state.
+     *
+     * @param mouseEvent the event fired by the click of the island.
+     */
     private void handleIslandSelectionWhileMoveStudent(MouseEvent mouseEvent) {
         GridPane island = (GridPane) mouseEvent.getSource();
 
@@ -1463,6 +1632,11 @@ public class GameController extends FXController {
         );
     }
 
+    /**
+     * Handles the selection of an Island during the Set Params state.
+     *
+     * @param mouseEvent the event fired by the click of the island.
+     */
     private void handleIslandSelectionWhileSettingParams(MouseEvent mouseEvent) {
         GridPane island = (GridPane) mouseEvent.getSource();
         Board board = Game.getInstance().getBoard();
@@ -1488,6 +1662,11 @@ public class GameController extends FXController {
         notifyCardActivation();
     }
 
+    /**
+     * Handles the selection of a cloud during the Cloud State.
+     *
+     * @param mouseEvent the event fired by the click of the cloud.
+     */
     private void handleCloudSelection(MouseEvent mouseEvent) {
         GridPane cloud = (GridPane) mouseEvent.getSource();
 
@@ -1502,6 +1681,11 @@ public class GameController extends FXController {
         );
     }
 
+    /**
+     * Handles the click on an available CharacterCard during Move student and MN states.
+     *
+     * @param mouseEvent the event fired by the click of the card.
+     */
     private void handleCharCardSelect(MouseEvent mouseEvent) {
         ImageView card = (ImageView) mouseEvent.getSource();
 
@@ -1524,18 +1708,38 @@ public class GameController extends FXController {
         }
     }
 
+    /**
+     * Handles the click on EXCHANGE STUDENTS CharacterCard when the Hero does not have enough students in their Dining Room.
+     *
+     * @param mouseEvent the event fired by the click of the card.
+     */
     private void handleCharCardNoStudents(MouseEvent mouseEvent) {
         showError("Not enough Students in Dining Room!");
     }
 
+    /**
+     * Handles the click on a CharacterCard when the Hero does not have enough money to buy it.
+     *
+     * @param mouseEvent the event fired by the click of the card.
+     */
     private void handleCharCardNoMoney(MouseEvent mouseEvent) {
         showError("Not enough Coins!");
     }
 
+    /**
+     * Handles the click on a CharacterCard during any state other than Move students and MN.
+     *
+     * @param mouseEvent the event fired by the click of the card.
+     */
     private void handleCharCardForbidden(MouseEvent mouseEvent) {
         showError("Cannot buy a card at this stage!");
     }
 
+    /**
+     * Handles the selection of a student from the card while setting the card parameters.
+     *
+     * @param mouseEvent the event fired by the click of the student.
+     */
     private void handleCardStudentSelection(MouseEvent mouseEvent) {
         BorderPane target = (BorderPane) mouseEvent.getSource();
         GridPane students = charCardsStudents.get(selectedCharCard);
@@ -1630,6 +1834,11 @@ public class GameController extends FXController {
         }
     }
 
+    /**
+     * Handles the deselection of a student from the card while setting the card parameters.
+     *
+     * @param mouseEvent the event fired by the click of the student.
+     */
     private void handleCardStudentDeselection(MouseEvent mouseEvent) {
         BorderPane target = (BorderPane) mouseEvent.getSource();
         Color c = (Color) target.getUserData();
@@ -1653,6 +1862,10 @@ public class GameController extends FXController {
                 || selectedStudentsFromCard.getTotalAmount() == 0);
     }
 
+    /**
+     * Handles the press of the Swap Button after having set the card parameters and activates the card bought.
+     * This button is only used for SWAP POOL and EXCHANGE STUDENTS cards.
+     */
     public void handleSwapButton() {
         charCardsStudents.get(selectedCharCard).getStyleClass().clear();
         charCardsStudents.get(selectedCharCard).getStyleClass().add("def");
@@ -1680,7 +1893,7 @@ public class GameController extends FXController {
 
         for(Color c : Color.values()) {
             for(int i = 0 ; i < 10 ; i++) {
-                Node n = getNodeFromDiningHero(c, i, diningRoomHero);
+                Node n = getNodeFromDiningHero(c, i);
                 n.setDisable(false);
                 n.setOnMouseClicked(null);
                 n.getStyleClass().clear();
@@ -1706,6 +1919,12 @@ public class GameController extends FXController {
     }
 
     // CARD UTILS
+
+    /**
+     * Sends the parameters to the server.
+     *
+     * @param cardParams the parameters to be sent.
+     */
     private void notifyCardParameters(CardParameters cardParams) {
         notify(
                 new RequestParameters()
@@ -1716,6 +1935,9 @@ public class GameController extends FXController {
         );
     }
 
+    /**
+     * Sends a ACTIVATE CARD command to the server.
+     */
     private void notifyCardActivation() {
         notify(
                 new RequestParameters()
@@ -1725,6 +1947,10 @@ public class GameController extends FXController {
     }
 
     // CLEAN UP METHODS
+
+    /**
+     * Resets the state of various graphic elements in order to show a neutral state in between state changes.
+     */
     private void disableGraphic() {
         entranceHero.getStyleClass().clear();
 
@@ -1761,25 +1987,9 @@ public class GameController extends FXController {
         actionText.setText("");
     }
 
-    private void resetProfs() {
-        for(GridPane otherProf : otherDiningRoom) {
-            for(Color c: Color.values()) {
-                getProfFromOtherSchool(c, otherProf).setVisible(false);
-            }
-        }
-
-        for(Color c: Color.values()) {
-            getProfFromHeroSchool(c, professorsHero).setVisible(false);
-        }
-    }
-
-    private void resetIslands() {
-        for(int i = 0; i < 12; i++) {
-            islandMN.get(i).setVisible(false);
-            islandTowers.get(i).setVisible(false);
-        }
-    }
-
+    /**
+     * Disables the character cards when a Cloud state or SetParams state begins.
+     */
     private void disableCharCards() {
         if(!MatchInfo.getInstance().isExpertMode())
             return;

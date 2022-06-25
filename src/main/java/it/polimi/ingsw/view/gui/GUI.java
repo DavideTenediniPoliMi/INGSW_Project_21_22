@@ -9,7 +9,6 @@ import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.model.enumerations.TurnState;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.utils.JsonUtils;
-import it.polimi.ingsw.view.cli.viewStates.*;
 import it.polimi.ingsw.view.gui.controllers.FXController;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -24,6 +23,9 @@ import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Class representing the Graphic Interface and all of its features.
+ */
 public class GUI extends Application {
     private static FXController sceneController;
     private static Connection serverConnection;
@@ -40,22 +42,47 @@ public class GUI extends Application {
     private static boolean activatedCard;
     private static boolean waitingForPlayer;
 
+    /**
+     * Asks the engine to start this application.
+     *
+     * @param args the parameters taken from the command line execution
+     */
     public static void main(String[] args) {
         launch();
     }
 
+    /**
+     * Sets the corresponding flag.
+     *
+     * @param createdLobby flag indication whether a lobby has been created.
+     */
     public static void setCreatedLobby(boolean createdLobby) {
         GUI.createdLobby = createdLobby;
     }
 
+    /**
+     * Returns whether a lobby has been created by the user.
+     *
+     * @return true if a lobby was created, false otherwise.
+     */
     public static boolean didCreateLobby() {
         return GUI.createdLobby;
     }
 
+    /**
+     * Asks this application to process an interaction prompted by a server message.
+     *
+     * @param nextState the state you want this application to process next.
+     */
     public static void handleInteraction(GUIState nextState) {
         sceneController.handleInteraction(nextState);
     }
 
+    /**
+     * Initializes this application first scene.
+     *
+     * @param stage the main stage of the application.
+     */
     @Override
     public void start(Stage stage) {
         GUI.stage = stage;
@@ -74,6 +101,11 @@ public class GUI extends Application {
         });
     }
 
+    /**
+     * Loads and starts a new scene while binding the new controller.
+     *
+     * @param path the relative path of the file containing the FXML file of the specified scene.
+     */
     public static void loadScene(String path) {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(GUI.class.getResource(path)));
         Parent root;
@@ -93,12 +125,23 @@ public class GUI extends Application {
         stage.show();
     }
 
+    /**
+     * Sets the ServerConnection for this application.
+     *
+     * @param con the connection that this application will use for communicating.
+     */
     public static void setServerConnection(Connection con) {
         serverConnection = con;
         ExecutorService executor = Executors.newFixedThreadPool(1);
         executor.submit(serverConnection);
     }
 
+
+    /**
+     * Asks this application to show an error.
+     *
+     * @param error the error to be shown on screen.
+     */
     public static void showError(String error) {
         sceneController.showError(error);
         if(GameStatus.IN_GAME == MatchInfo.getInstance().getGameStatus() && GUI.getPlayerId() != -1) {
@@ -106,18 +149,37 @@ public class GUI extends Application {
         }
     }
 
+    /**
+     * Sets the name of the user that is using this application.
+     *
+     * @param name the user name.
+     */
     public static void setName(String name) {
         GUI.name = name;
     }
 
+    /**
+     * Returns the name of the user using this application.
+     *
+     * @return the user name.
+     */
     public static String getName() {
         return name;
     }
 
+    /**
+     * Asks this application to show (and therefor apply) the changes the server sent.
+     *
+     * @param jsonObject the message sent by the server containing the changed structures.
+     */
     public static void applyChanges(JsonObject jsonObject) {
         sceneController.applyChanges(jsonObject);
     }
 
+    /**
+     * Asks this application to save the user ID as seen from the server. Must be called only after having saved
+     * the name of the user and after having received either a Lobby or a Game packet.
+     */
     public static void bindPlayerId() {
         Optional<Player> result = Lobby.getLobby().getPlayers().stream()
                 .filter((player) -> (player.getName().equals(name)))
@@ -132,14 +194,29 @@ public class GUI extends Application {
         playerId = (result.isEmpty()) ? -1 : result.get().getID();
     }
 
+    /**
+     * Asks this application to show the alert in the scene.
+     */
     public static void showAlert() {
         sceneController.showAlert();
     }
 
+    /**
+     * Returns the ID of the user as seen from the Server.
+     *
+     * @return the user ID.
+     */
     public static int getPlayerId() {
         return playerId;
     }
 
+    /**
+     * Calculates the state this application should be in next based on past packets, internal states and
+     * the last packet received.
+     *
+     * @param jo the last packet received from the server.
+     * @return the state this application should be in next.
+     */
     public static GUIState nextState(JsonObject jo) {
         MatchInfo matchInfo = MatchInfo.getInstance();
 
@@ -257,6 +334,12 @@ public class GUI extends Application {
         }
     }
 
+    /**
+     * Returns the base <code>GUIState</code> for each <code>TurnState</code> the game can be found in.
+     *
+     * @param jo the last packet received from the server.
+     * @return the <code>GUIState</code> for the current game state.
+     */
     public static GUIState resetState(JsonObject jo) {
         switch (JsonUtils.getTurnState(jo)) {
             case PLANNING:
