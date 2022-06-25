@@ -296,6 +296,7 @@ public class GameController extends FXController {
     private StudentGroup selectedStudentsFromEntrance;
     private StudentGroup selectedStudentsFromDiningRoom;
 
+    //   INIT
     @FXML
     public void initialize() {
         Board board =  Game.getInstance().getBoard();
@@ -422,8 +423,6 @@ public class GameController extends FXController {
 
         initPlayers();
 
-        applyChangesClouds();
-
         islandMN.get(board.getMNPosition()).setVisible(true);
         numCoinsLeft.setText(String.valueOf(board.getNumCoinsLeft()));
 
@@ -443,6 +442,7 @@ public class GameController extends FXController {
         applyChangesSchools();
         applyChangesCharCards();
         applyChangesIslands();
+        applyChangesClouds();
         studentBag.setVisible(Game.getInstance().isStudentBagEmpty());
         applyChangesProfessors();
         numCoinsLeft.setText(String.valueOf(Game.getInstance().getBoard().getNumCoinsLeft()));
@@ -600,6 +600,7 @@ public class GameController extends FXController {
         }
     }
 
+    // APPLY CHANGES
     @Override
     public void applyChanges(JsonObject jsonObject) {
         if(jsonObject.has("schools")) {
@@ -636,165 +637,6 @@ public class GameController extends FXController {
         
         if(jsonObject.has("players")) {
             applyChangesPlayers();
-        }
-    }
-
-    private void applyChangesPlayers() {
-        int otherIndex = 0;
-        for(Player player: Game.getInstance().getPlayers()) {
-            if(player.getID() == GUI.getPlayerId()) {
-                applyChangesCards();
-
-                if(player.getSelectedCard() != null && !player.getSelectedCard().equals(Card.CARD_AFK)) {
-                    selectedCardHero.setVisible(true);
-                    selectedCardHero.setImage(player.getSelectedCard().getImage());
-                }
-
-                numCoinsHero.setText(String.valueOf(player.getNumCoins()));
-            } else {
-                otherUsernames.get(otherIndex).setDisable(!player.isConnected());
-                otherPlayers.get(otherIndex).setDisable(!player.isConnected());
-
-                if(player.getSelectedCard() != null) {
-                    otherAssistants.get(otherIndex).setVisible(true);
-                    otherAssistants.get(otherIndex).setImage(player.getSelectedCard().getImageHalf());
-                    if(player.getSelectedCard().equals(Card.CARD_AFK)){
-                        otherAssistants.get(otherIndex).setUserData("AFK");
-                    }
-                } else if("AFK".equals(otherAssistants.get(otherIndex).getUserData().toString())) {
-                    otherAssistants.get(otherIndex).setUserData("");
-                    otherAssistants.get(otherIndex).setVisible(false);
-                }
-                otherNumCoins.get(otherIndex).setText(String.valueOf(player.getNumCoins()));
-                otherIndex++;
-            }
-        }
-    }
-
-    private void applyChangesCards() {
-        Player hero = Game.getInstance().getPlayerByID(GUI.getPlayerId());
-
-        for(int i = 0; i < cards.size(); i++) {
-            ImageView card = cards.get(i);
-
-            if(Card.values()[i].isUsed() || !hero.getPlayableCards().contains(Card.values()[i])) {
-                card.setImage(Card.values()[i].getImageBW());
-            } else {
-                card.setImage(Card.values()[i].getImage());
-            }
-        }
-    }
-
-    private void applyChangesProfessors() {
-        ProfessorTracker profs = Game.getInstance().getBoard().getProfessorOwners();
-
-        resetProfs();
-
-        for(Color c : Color.values()) {
-            int ownerID = profs.getOwnerIDByColor(c);
-            if(ownerID == -1) continue;
-
-            if(ownerID == GUI.getPlayerId()) {
-                getProfFromHeroSchool(c, professorsHero).setVisible(true);
-            } else {
-                getProfFromOtherSchool(c, otherDiningRoom.get(getAdjustedOtherPlayerIndex(ownerID))).setVisible(true);
-            }
-        }
-    }
-
-    private int getAdjustedOtherPlayerIndex(int ownerID) {
-        Game game = Game.getInstance();
-        int targetId = game.getIndexOfPlayer(game.getPlayerByID(ownerID));
-        return (game.getIndexOfPlayer(game.getPlayerByID(GUI.getPlayerId())) < targetId) ? targetId - 1 : targetId;
-    }
-
-    private void resetProfs() {
-        for(GridPane otherProf : otherDiningRoom) {
-            for(Color c: Color.values()) {
-                getProfFromOtherSchool(c, otherProf).setVisible(false);
-            }
-        }
-
-        for(Color c: Color.values()) {
-            getProfFromHeroSchool(c, professorsHero).setVisible(false);
-        }
-    }
-
-    private void applyChangesIslands() {
-        resetIslands();
-
-        List<Boolean> bridgeList = Game.getInstance().getBoard().findBridges();
-
-        for(int i = 0; i < bridges.size() ; i ++){
-            bridges.get(i).setVisible(bridgeList.get(i));
-        }
-
-        for(int i = 0; i < 12; i++) {
-            Island island = Game.getInstance().getBoard().getIslandOfAbsoluteIndexForGraphics(i);
-
-            islandMN.get(i).setVisible(island.isMotherNatureOnIsland());
-            islandTowers.get(i).setVisible(island.getTeamColor() != null);
-
-            if(island.getTeamColor() != null) {
-                islandTowers.get(i).setImage(island.getTeamColor().getImage());
-            }
-
-            for(Color c : Color.values()) {
-                Label numStud = (Label) getNodeFromIsland(c, islandStudents.get(i));
-                numStud.setText(String.valueOf(island.getNumStudentsByColor(c)));
-            }
-        }
-    }
-
-    private void resetIslands() {
-        for(int i = 0; i < 12; i++) {
-            islandMN.get(i).setVisible(false);
-            islandTowers.get(i).setVisible(false);
-        }
-    }
-
-    private void applyChangesClouds() {
-        List<Cloud> cloudsList = Game.getInstance().getBoard().getClouds();
-
-        for(int i = 0; i < cloudsList.size(); i++) {
-            clouds.get(i).setDisable(!cloudsList.get(i).isAvailable());
-
-            for(Color c : Color.values()) {
-                Label numStud = (Label) getNodeFromCloud(c, cloudStudents.get(i));
-                numStud.setText(String.valueOf(cloudsList.get(i).getStudents().getByColor(c)));
-            }
-        }
-    }
-
-    private void applyChangesCharCards() {
-        List<CharacterCard> charCards = Game.getInstance().getCharacterCards();
-
-        for(int i = 0; i < charCards.size(); i++) {
-            charCardsCost.get(i).setText(String.valueOf(charCards.get(i).getCost()));
-
-            charCardPanes.get(i).setDisable(Game.getInstance().getActiveCharacterCard() != null
-                    && !Game.getInstance().getActiveCharacterCard().equals(charCards.get(i)));
-
-            if(charCards.get(i).getEffectType().equals(EffectType.STUDENT_GROUP)) {
-                int cardIndex = 0;
-                for(Color c : Color.values()) {
-                    int numStud = ((StudentGroupDecorator)charCards.get(i)).getStudentsByColor(c);
-                    for(int j = 0; j < numStud; j++) {
-                        BorderPane stud = (BorderPane) getNodeFromCard(cardIndex, charCardsStudents.get(i));
-                        stud.setUserData(c);
-                        ImageView image = (ImageView) stud.getCenter();
-                        image.setImage(c.getImage());
-                        cardIndex++;
-                    }
-                }
-            } else if(Game.getInstance().getActiveCharacterCard() == null) {
-                charCardsStudents.get(i).setVisible(false);
-                for(int j = 0 ; j < Color.NUM_COLORS; j++) {
-                    Node n = getNodeFromCard(j, charCardsStudents.get(i));
-                    n.getStyleClass().clear();
-                    n.getStyleClass().add("def");
-                }
-            }
         }
     }
 
@@ -849,6 +691,147 @@ public class GameController extends FXController {
                 otherIndex++;
             }
         }
+    }
+
+    private void applyChangesCharCards() {
+        List<CharacterCard> charCards = Game.getInstance().getCharacterCards();
+
+        for(int i = 0; i < charCards.size(); i++) {
+            charCardsCost.get(i).setText(String.valueOf(charCards.get(i).getCost()));
+
+            charCardPanes.get(i).setDisable(Game.getInstance().getActiveCharacterCard() != null
+                    && !Game.getInstance().getActiveCharacterCard().equals(charCards.get(i)));
+
+            if(charCards.get(i).getEffectType().equals(EffectType.STUDENT_GROUP)) {
+                int cardIndex = 0;
+                for(Color c : Color.values()) {
+                    int numStud = ((StudentGroupDecorator)charCards.get(i)).getStudentsByColor(c);
+                    for(int j = 0; j < numStud; j++) {
+                        BorderPane stud = (BorderPane) getNodeFromCard(cardIndex, charCardsStudents.get(i));
+                        stud.setUserData(c);
+                        ImageView image = (ImageView) stud.getCenter();
+                        image.setImage(c.getImage());
+                        cardIndex++;
+                    }
+                }
+            } else if(Game.getInstance().getActiveCharacterCard() == null) {
+                charCardsStudents.get(i).setVisible(false);
+                for(int j = 0 ; j < Color.NUM_COLORS; j++) {
+                    Node n = getNodeFromCard(j, charCardsStudents.get(i));
+                    n.getStyleClass().clear();
+                    n.getStyleClass().add("def");
+                }
+            }
+        }
+    }
+
+    private void applyChangesClouds() {
+        List<Cloud> cloudsList = Game.getInstance().getBoard().getClouds();
+
+        for(int i = 0; i < cloudsList.size(); i++) {
+            clouds.get(i).setDisable(!cloudsList.get(i).isAvailable());
+
+            for(Color c : Color.values()) {
+                Label numStud = (Label) getNodeFromCloud(c, cloudStudents.get(i));
+                numStud.setText(String.valueOf(cloudsList.get(i).getStudents().getByColor(c)));
+            }
+        }
+    }
+
+    private void applyChangesIslands() {
+        resetIslands();
+
+        List<Boolean> bridgeList = Game.getInstance().getBoard().findBridges();
+
+        for(int i = 0; i < bridges.size() ; i ++){
+            bridges.get(i).setVisible(bridgeList.get(i));
+        }
+
+        for(int i = 0; i < 12; i++) {
+            Island island = Game.getInstance().getBoard().getIslandOfAbsoluteIndexForGraphics(i);
+
+            islandMN.get(i).setVisible(island.isMotherNatureOnIsland());
+            islandTowers.get(i).setVisible(island.getTeamColor() != null);
+
+            if(island.getTeamColor() != null) {
+                islandTowers.get(i).setImage(island.getTeamColor().getImage());
+            }
+
+            for(Color c : Color.values()) {
+                Label numStud = (Label) getNodeFromIsland(c, islandStudents.get(i));
+                numStud.setText(String.valueOf(island.getNumStudentsByColor(c)));
+            }
+        }
+    }
+
+    private void applyChangesProfessors() {
+        ProfessorTracker profs = Game.getInstance().getBoard().getProfessorOwners();
+
+        resetProfs();
+
+        for(Color c : Color.values()) {
+            int ownerID = profs.getOwnerIDByColor(c);
+            if(ownerID == -1) continue;
+
+            if(ownerID == GUI.getPlayerId()) {
+                getProfFromHeroSchool(c, professorsHero).setVisible(true);
+            } else {
+                getProfFromOtherSchool(c, otherDiningRoom.get(getAdjustedOtherPlayerIndex(ownerID))).setVisible(true);
+            }
+        }
+    }
+
+    private void applyChangesCards() {
+        Player hero = Game.getInstance().getPlayerByID(GUI.getPlayerId());
+
+        for(int i = 0; i < cards.size(); i++) {
+            ImageView card = cards.get(i);
+
+            if(Card.values()[i].isUsed() || !hero.getPlayableCards().contains(Card.values()[i])) {
+                card.setImage(Card.values()[i].getImageBW());
+            } else {
+                card.setImage(Card.values()[i].getImage());
+            }
+        }
+    }
+
+    private void applyChangesPlayers() {
+        int otherIndex = 0;
+        for(Player player: Game.getInstance().getPlayers()) {
+            if(player.getID() == GUI.getPlayerId()) {
+                applyChangesCards();
+
+                if(player.getSelectedCard() != null && !player.getSelectedCard().equals(Card.CARD_AFK)) {
+                    selectedCardHero.setVisible(true);
+                    selectedCardHero.setImage(player.getSelectedCard().getImage());
+                }
+
+                numCoinsHero.setText(String.valueOf(player.getNumCoins()));
+            } else {
+                otherUsernames.get(otherIndex).setDisable(!player.isConnected());
+                otherPlayers.get(otherIndex).setDisable(!player.isConnected());
+
+                if(player.getSelectedCard() != null) {
+                    otherAssistants.get(otherIndex).setVisible(true);
+                    otherAssistants.get(otherIndex).setImage(player.getSelectedCard().getImageHalf());
+                    if(player.getSelectedCard().equals(Card.CARD_AFK)){
+                        otherAssistants.get(otherIndex).setUserData("AFK");
+                    }
+                } else if("AFK".equals(otherAssistants.get(otherIndex).getUserData().toString())) {
+                    otherAssistants.get(otherIndex).setUserData("");
+                    otherAssistants.get(otherIndex).setVisible(false);
+                }
+                otherNumCoins.get(otherIndex).setText(String.valueOf(player.getNumCoins()));
+                otherIndex++;
+            }
+        }
+    }
+
+    // GETTER FOR GRIDPANES
+    private int getAdjustedOtherPlayerIndex(int ownerID) {
+        Game game = Game.getInstance();
+        int targetId = game.getIndexOfPlayer(game.getPlayerByID(ownerID));
+        return (game.getIndexOfPlayer(game.getPlayerByID(GUI.getPlayerId())) < targetId) ? targetId - 1 : targetId;
     }
 
     private Node getProfFromHeroSchool(Color c, GridPane grid) {
@@ -1007,6 +990,7 @@ public class GameController extends FXController {
         return new ImageView();
     }
 
+    // HANDLE INTERACTIONS
     @Override
     public void handleInteraction(GUIState newState) {
         Game game = Game.getInstance();
@@ -1123,6 +1107,36 @@ public class GameController extends FXController {
         }
     }
 
+    private void prepCharCards() {
+        Game game = Game.getInstance();
+
+        if(!MatchInfo.getInstance().isExpertMode() || Game.getInstance().getActiveCharacterCard() != null)
+            return;
+
+        List<CharacterCard> charCardList = game.getCharacterCards();
+
+        for(int i = 0 ; i < charCardList.size() ; i++) {
+            if(game.getPlayerByID(GUI.getPlayerId()).getNumCoins() >= charCardList.get(i).getCost()) {
+                if(charCardList.get(i).getName().equals("EXCHANGE_STUDENTS")) {
+                    int studInEntrance = 0;
+                    School school = game.getBoard().getSchoolByPlayerID(GUI.getPlayerId());
+
+                    for(Color c : Color.values()) {
+                        studInEntrance += school.getNumStudentsInDiningRoomByColor(c);
+                    }
+
+                    if(studInEntrance == 0) {
+                        charCards.get(i).setOnMouseClicked(this::handleCharCardNoStudents);
+                        continue;
+                    }
+                }
+                charCards.get(i).setOnMouseClicked(this::handleCharCardSelect);
+            } else {
+                charCards.get(i).setOnMouseClicked(this::handleCharCardNoMoney);
+            }
+        }
+    }
+
     private void manageSetParams() {
         GridPane students = charCardsStudents.get(selectedCharCard);
         switch (Game.getInstance().getActiveCharacterCard().getName()) {
@@ -1185,6 +1199,71 @@ public class GameController extends FXController {
         }
     }
 
+    // EVENT LISTENERS
+    private void handleCardClick(MouseEvent event) {
+        ImageView card = (ImageView) event.getSource();
+        String id = card.getId();
+        String numText = id.substring(4);
+
+        int num;
+        try {
+            num = Integer.parseInt(numText);
+        } catch (NumberFormatException e) {
+            showError("Invalid choice! Try again!");
+            return;
+        }
+
+        disableGraphic();
+        actionText.setText("Waiting for a server response");
+
+        notify(
+                new RequestParameters()
+                        .setCommandType(CommandType.PLAY_CARD)
+                        .setIndex(num - 1)
+                        .serialize().toString()
+        );
+    }
+
+    private void handleEntranceSelect(MouseEvent mouseEvent) {
+        BorderPane stud = (BorderPane) mouseEvent.getSource();
+        selectedColor = (Color) stud.getUserData();
+
+        entranceHero.getStyleClass().clear();
+        entranceHero.getStyleClass().add("def");
+
+        for(BorderPane node : studentsEntranceHero) {
+            if(!stud.equals(node)) {
+                node.setOnMouseClicked(null);
+            } else {
+                node.setOnMouseClicked(this::handleEntranceDeselect);
+                node.getStyleClass().clear();
+                node.getStyleClass().add("target");
+            }
+        }
+
+        String optional = "";
+        if(Game.getInstance().getBoard().getSchoolByPlayerID(GUI.getPlayerId()).getNumStudentsInDiningRoomByColor(selectedColor) < 10) {
+            diningRoomHero.getStyleClass().clear();
+            diningRoomHero.getStyleClass().add("target");
+            diningRoomHero.setOnMouseClicked(this::handleDiningSelection);
+            optional += "or the Dining Room";
+        }
+
+        for(GridPane island : islandStudents) {
+            island.getStyleClass().clear();
+            island.getStyleClass().add("target");
+            island.setOnMouseClicked(this::handleIslandSelectionWhileMoveStudent);
+        }
+
+        actionText.setText("Select an Island " + optional + "!");
+    }
+
+    private void handleEntranceDeselect(MouseEvent mouseEvent) {
+        selectedColor = null;
+
+        handleInteraction(GUIState.MOVE_STUDENT);
+    }
+
     private void handleEntranceSelectWhileSettingParams(MouseEvent mouseEvent) {
         BorderPane target = (BorderPane) mouseEvent.getSource();
         Color c = (Color) target.getUserData();
@@ -1227,6 +1306,122 @@ public class GameController extends FXController {
 
         swapButton.setDisable(selectedStudentsFromCard.getTotalAmount() != selectedStudentsFromEntrance.getTotalAmount()
                 || selectedStudentsFromCard.getTotalAmount() == 0);
+    }
+
+    private void handleDiningSelection(MouseEvent mouseEvent) {
+        disableGraphic();
+        actionText.setText("Waiting for a server response");
+
+        notify(
+                new RequestParameters().setCommandType(CommandType.TRANSFER_STUDENT_TO_DINING_ROOM)
+                        .setColor(selectedColor).serialize().toString()
+        );
+    }
+
+    private void handleIslandSelectionWhileMoveMN(MouseEvent mouseEvent) {
+        GridPane island = (GridPane) mouseEvent.getSource();
+        Board board = Game.getInstance().getBoard();
+
+        int islandAbsoluteIndex = board.getOriginalIndexOf(Integer.parseInt(island.getUserData().toString()));
+        int islandIndex = board.getIndexOfMultiIslandContainingIslandOfIndex(islandAbsoluteIndex);
+
+        disableGraphic();
+        actionText.setText("Waiting for a server response");
+
+        notify(
+                new RequestParameters()
+                        .setCommandType(CommandType.MOVE_MN)
+                        .setIndex(islandIndex)
+                        .serialize().toString()
+        );
+    }
+
+    private void handleIslandSelectionWhileMoveStudent(MouseEvent mouseEvent) {
+        GridPane island = (GridPane) mouseEvent.getSource();
+
+        disableGraphic();
+        actionText.setText("Waiting for a server response");
+
+        notify(
+                new RequestParameters()
+                        .setCommandType(CommandType.TRANSFER_STUDENT_TO_ISLAND)
+                        .setIndex(Integer.parseInt(island.getUserData().toString()))
+                        .setColor(selectedColor)
+                        .serialize().toString()
+        );
+    }
+
+    private void handleIslandSelectionWhileSettingParams(MouseEvent mouseEvent) {
+        GridPane island = (GridPane) mouseEvent.getSource();
+        Board board = Game.getInstance().getBoard();
+        GridPane students = charCardsStudents.get(selectedCharCard);
+
+        int islandIndex = board.getOriginalIndexOf(Integer.parseInt(island.getUserData().toString()));
+
+        disableGraphic();
+        actionText.setText("Waiting for a server response");
+
+        notifyCardParameters(
+                new CardParameters().setFromOrigin(new StudentGroup(selectedColor,1))
+                        .setPlayerID(GUI.getPlayerId())
+                        .setIslandIndex(islandIndex)
+                        .setFromDestination(new StudentGroup()));  //not needed
+
+        for(int i = 0 ; i < 4; i++) {
+            getNodeFromCard(i, students).getStyleClass().clear();
+            getNodeFromCard(i, students).getStyleClass().add("def");
+        }
+
+        selectedColor = null;
+        notifyCardActivation();
+    }
+
+    private void handleCloudSelection(MouseEvent mouseEvent) {
+        GridPane cloud = (GridPane) mouseEvent.getSource();
+
+        disableGraphic();
+        actionText.setText("Waiting for a server response");
+
+        notify(
+                new RequestParameters()
+                        .setCommandType(CommandType.COLLECT_FROM_CLOUD)
+                        .setIndex(Integer.parseInt(cloud.getUserData().toString()))
+                        .serialize().toString()
+        );
+    }
+
+    private void handleCharCardSelect(MouseEvent mouseEvent) {
+        ImageView card = (ImageView) mouseEvent.getSource();
+
+        selectedCharCard = Integer.parseInt(card.getUserData().toString());
+        disableCharCards();
+
+        notify(
+                new RequestParameters()
+                        .setCommandType(CommandType.BUY_CHARACTER_CARD)
+                        .setIndex(selectedCharCard)
+                        .serialize().toString()
+        );
+
+        if(Game.getInstance().getCharacterCards().get(selectedCharCard).getName().equals("INFLUENCE_ADD_TWO")) {
+            CardParameters cardParameters = new CardParameters()
+                    .setBoostedTeam(Game.getInstance().getPlayerByID(GUI.getPlayerId()).getTeamColor())
+                    .setSelectedColor(Color.RED);   //not needed
+
+            notifyCardParameters(cardParameters);
+        }
+    }
+
+    private void handleCharCardNoStudents(MouseEvent mouseEvent) {
+        showError("Not enough Students in Dining Room!");
+    }
+
+    private void handleCharCardNoMoney(MouseEvent mouseEvent) {
+        showError("Not enough Coins!");
+    }
+
+    private void handleCharCardForbidden(MouseEvent mouseEvent) {
+        showError("Cannot buy a card at this stage!");
     }
 
     private void handleCardStudentSelection(MouseEvent mouseEvent) {
@@ -1346,31 +1541,40 @@ public class GameController extends FXController {
                 || selectedStudentsFromCard.getTotalAmount() == 0);
     }
 
-    private void handleIslandSelectionWhileSettingParams(MouseEvent mouseEvent) {
-        GridPane island = (GridPane) mouseEvent.getSource();
-        Board board = Game.getInstance().getBoard();
-        GridPane students = charCardsStudents.get(selectedCharCard);
+    public void handleSwapButton() {
+        charCardsStudents.get(selectedCharCard).getStyleClass().clear();
+        charCardsStudents.get(selectedCharCard).getStyleClass().add("def");
 
-        int islandIndex = board.getOriginalIndexOf(Integer.parseInt(island.getUserData().toString()));
-
-        disableGraphic();
-        actionText.setText("Waiting for a server response");
-
-        notifyCardParameters(
-                new CardParameters().setFromOrigin(new StudentGroup(selectedColor,1))
-                .setPlayerID(GUI.getPlayerId())
-                .setIslandIndex(islandIndex)
-                .setFromDestination(new StudentGroup()));  //not needed
-
-        for(int i = 0 ; i < 4; i++) {
-            getNodeFromCard(i, students).getStyleClass().clear();
-            getNodeFromCard(i, students).getStyleClass().add("def");
+        for(int i = 0 ; i < 6; i++) {
+            Node n = getNodeFromCard(i, charCardsStudents.get(selectedCharCard));
+            n.getStyleClass().clear();
+            n.getStyleClass().add("def");
+            n.setDisable(false);
+            n.setOnMouseClicked(null);
         }
 
-        selectedColor = null;
+        entranceHero.getStyleClass().clear();
+        entranceHero.getStyleClass().add("def");
+
+        for(BorderPane node : studentsEntranceHero) {
+            node.setDisable(false);
+            node.setOnMouseClicked(null);
+            node.getStyleClass().clear();
+            node.getStyleClass().add("def");
+        }
+
+        swapButton.setDisable(true);
+        swapButton.setVisible(false);
+
+        notifyCardParameters(new CardParameters().setFromOrigin(selectedStudentsFromCard)
+                .setPlayerID(GUI.getPlayerId())
+                .setFromDestination(selectedStudentsFromEntrance)
+                .setIslandIndex(0));     //not needed
+
         notifyCardActivation();
     }
 
+    // CARD UTILS
     private void notifyCardParameters(CardParameters cardParams) {
         notify(
                 new RequestParameters()
@@ -1389,187 +1593,7 @@ public class GameController extends FXController {
         );
     }
 
-    private void prepCharCards() {
-        Game game = Game.getInstance();
-
-        if(!MatchInfo.getInstance().isExpertMode() || Game.getInstance().getActiveCharacterCard() != null)
-            return;
-
-        List<CharacterCard> charCardList = game.getCharacterCards();
-
-        for(int i = 0 ; i < charCardList.size() ; i++) {
-            if(game.getPlayerByID(GUI.getPlayerId()).getNumCoins() >= charCardList.get(i).getCost()) {
-                if(charCardList.get(i).getName().equals("EXCHANGE_STUDENTS")) {
-                    int studInEntrance = 0;
-                    School school = game.getBoard().getSchoolByPlayerID(GUI.getPlayerId());
-
-                    for(Color c : Color.values()) {
-                        studInEntrance += school.getNumStudentsInDiningRoomByColor(c);
-                    }
-
-                    if(studInEntrance == 0) {
-                        charCards.get(i).setOnMouseClicked(this::handleCharCardNoStudents);
-                        continue;
-                    }
-                }
-                charCards.get(i).setOnMouseClicked(this::handleCharCardSelect);
-            } else {
-                charCards.get(i).setOnMouseClicked(this::handleCharCardNoMoney);
-            }
-        }
-    }
-
-    private void handleCharCardNoStudents(MouseEvent mouseEvent) {
-        showError("Not enough Students in Dining Room!");
-    }
-
-    private void handleCharCardNoMoney(MouseEvent mouseEvent) {
-        showError("Not enough Coins!");
-    }
-
-    private void handleCharCardSelect(MouseEvent mouseEvent) {
-        ImageView card = (ImageView) mouseEvent.getSource();
-
-        selectedCharCard = Integer.parseInt(card.getUserData().toString());
-        disableCharCards();
-
-        notify(
-                new RequestParameters()
-                        .setCommandType(CommandType.BUY_CHARACTER_CARD)
-                        .setIndex(selectedCharCard)
-                        .serialize().toString()
-        );
-
-        if(Game.getInstance().getCharacterCards().get(selectedCharCard).getName().equals("INFLUENCE_ADD_TWO")) {
-            CardParameters cardParameters = new CardParameters()
-                    .setBoostedTeam(Game.getInstance().getPlayerByID(GUI.getPlayerId()).getTeamColor())
-                    .setSelectedColor(Color.RED);   //not needed
-
-            notifyCardParameters(cardParameters);
-        }
-    }
-
-    private void handleCloudSelection(MouseEvent mouseEvent) {
-        GridPane cloud = (GridPane) mouseEvent.getSource();
-
-        disableGraphic();
-        actionText.setText("Waiting for a server response");
-
-        notify(
-                new RequestParameters()
-                        .setCommandType(CommandType.COLLECT_FROM_CLOUD)
-                        .setIndex(Integer.parseInt(cloud.getUserData().toString()))
-                        .serialize().toString()
-        );
-    }
-
-    private void handleIslandSelectionWhileMoveMN(MouseEvent mouseEvent) {
-        GridPane island = (GridPane) mouseEvent.getSource();
-        Board board = Game.getInstance().getBoard();
-
-        int islandAbsoluteIndex = board.getOriginalIndexOf(Integer.parseInt(island.getUserData().toString()));
-        int islandIndex = board.getIndexOfMultiIslandContainingIslandOfIndex(islandAbsoluteIndex);
-
-        disableGraphic();
-        actionText.setText("Waiting for a server response");
-
-        notify(
-                new RequestParameters()
-                        .setCommandType(CommandType.MOVE_MN)
-                        .setIndex(islandIndex)
-                        .serialize().toString()
-        );
-    }
-
-    private void handleEntranceSelect(MouseEvent mouseEvent) {
-        BorderPane stud = (BorderPane) mouseEvent.getSource();
-        selectedColor = (Color) stud.getUserData();
-
-        entranceHero.getStyleClass().clear();
-        entranceHero.getStyleClass().add("def");
-
-        for(BorderPane node : studentsEntranceHero) {
-            if(!stud.equals(node)) {
-                node.setOnMouseClicked(null);
-            } else {
-                node.setOnMouseClicked(this::handleEntranceDeselect);
-                node.getStyleClass().clear();
-                node.getStyleClass().add("target");
-            }
-        }
-
-        String optional = "";
-        if(Game.getInstance().getBoard().getSchoolByPlayerID(GUI.getPlayerId()).getNumStudentsInDiningRoomByColor(selectedColor) < 10) {
-            diningRoomHero.getStyleClass().clear();
-            diningRoomHero.getStyleClass().add("target");
-            diningRoomHero.setOnMouseClicked(this::handleDiningSelection);
-            optional += "or the Dining Room";
-        }
-
-        for(GridPane island : islandStudents) {
-            island.getStyleClass().clear();
-            island.getStyleClass().add("target");
-            island.setOnMouseClicked(this::handleIslandSelectionWhileMoveStudent);
-        }
-
-        actionText.setText("Select an Island " + optional + "!");
-    }
-
-    private void handleIslandSelectionWhileMoveStudent(MouseEvent mouseEvent) {
-        GridPane island = (GridPane) mouseEvent.getSource();
-
-        disableGraphic();
-        actionText.setText("Waiting for a server response");
-
-        notify(
-                new RequestParameters()
-                        .setCommandType(CommandType.TRANSFER_STUDENT_TO_ISLAND)
-                        .setIndex(Integer.parseInt(island.getUserData().toString()))
-                        .setColor(selectedColor)
-                        .serialize().toString()
-        );
-    }
-
-    private void handleDiningSelection(MouseEvent mouseEvent) {
-        disableGraphic();
-        actionText.setText("Waiting for a server response");
-
-        notify(
-                new RequestParameters().setCommandType(CommandType.TRANSFER_STUDENT_TO_DINING_ROOM)
-                        .setColor(selectedColor).serialize().toString()
-        );
-    }
-
-    private void handleEntranceDeselect(MouseEvent mouseEvent) {
-        selectedColor = null;
-
-        handleInteraction(GUIState.MOVE_STUDENT);
-    }
-
-    private void handleCardClick(MouseEvent event) {
-        ImageView card = (ImageView) event.getSource();
-        String id = card.getId();
-        String numText = id.substring(4);
-
-        int num;
-        try {
-            num = Integer.parseInt(numText);
-        } catch (NumberFormatException e) {
-            showError("Invalid choice! Try again!");
-            return;
-        }
-
-        disableGraphic();
-        actionText.setText("Waiting for a server response");
-
-        notify(
-                new RequestParameters()
-                        .setCommandType(CommandType.PLAY_CARD)
-                        .setIndex(num - 1)
-                        .serialize().toString()
-        );
-    }
-
+    // CLEAN UP METHODS
     private void disableGraphic() {
         entranceHero.getStyleClass().clear();
 
@@ -1606,6 +1630,25 @@ public class GameController extends FXController {
         actionText.setText("");
     }
 
+    private void resetProfs() {
+        for(GridPane otherProf : otherDiningRoom) {
+            for(Color c: Color.values()) {
+                getProfFromOtherSchool(c, otherProf).setVisible(false);
+            }
+        }
+
+        for(Color c: Color.values()) {
+            getProfFromHeroSchool(c, professorsHero).setVisible(false);
+        }
+    }
+
+    private void resetIslands() {
+        for(int i = 0; i < 12; i++) {
+            islandMN.get(i).setVisible(false);
+            islandTowers.get(i).setVisible(false);
+        }
+    }
+
     private void disableCharCards() {
         if(!MatchInfo.getInstance().isExpertMode())
             return;
@@ -1613,42 +1656,5 @@ public class GameController extends FXController {
         for (ImageView charCard : charCards) {
             charCard.setOnMouseClicked(this::handleCharCardForbidden);
         }
-    }
-
-    private void handleCharCardForbidden(MouseEvent mouseEvent) {
-        showError("Cannot buy a card at this stage!");
-    }
-
-    public void handleSwapButton() {
-        charCardsStudents.get(selectedCharCard).getStyleClass().clear();
-        charCardsStudents.get(selectedCharCard).getStyleClass().add("def");
-
-        for(int i = 0 ; i < 6; i++) {
-            Node n = getNodeFromCard(i, charCardsStudents.get(selectedCharCard));
-            n.getStyleClass().clear();
-            n.getStyleClass().add("def");
-            n.setDisable(false);
-            n.setOnMouseClicked(null);
-        }
-
-        entranceHero.getStyleClass().clear();
-        entranceHero.getStyleClass().add("def");
-
-        for(BorderPane node : studentsEntranceHero) {
-            node.setDisable(false);
-            node.setOnMouseClicked(null);
-            node.getStyleClass().clear();
-            node.getStyleClass().add("def");
-        }
-
-        swapButton.setDisable(true);
-        swapButton.setVisible(false);
-
-        notifyCardParameters(new CardParameters().setFromOrigin(selectedStudentsFromCard)
-                .setPlayerID(GUI.getPlayerId())
-                .setFromDestination(selectedStudentsFromEntrance)
-                .setIslandIndex(0));     //not needed
-
-        notifyCardActivation();
     }
 }
