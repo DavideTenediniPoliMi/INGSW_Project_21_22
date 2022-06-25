@@ -70,7 +70,7 @@
             <Image url="@../images/island1.png" />
          </ImageView>
          <AnchorPane layoutX="20.0" layoutY="25.0">
-            <GridPane fx:id="studentsIsland1" layoutX="8.0" layoutY="45.0" styleClass="def" style="-fx-border-width: 3px; -fx-border-radius: 10px;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
+            <GridPane fx:id="studentsIsland1" layoutX="8.0" layoutY="45.0" style="-fx-border-width: 3px; -fx-border-radius: 10px;" styleClass="def" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
@@ -184,7 +184,7 @@
             <Image url="@../images/island2.png" />
          </ImageView>
          <AnchorPane layoutX="20.0" layoutY="25.0">
-            <GridPane fx:id="studentsIsland2" layoutX="8.0" layoutY="45.0" styleClass="def" style="-fx-border-width: 3px; -fx-border-radius: 10px;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
+            <GridPane fx:id="studentsIsland2" layoutX="8.0" layoutY="45.0" style="-fx-border-width: 3px; -fx-border-radius: 10px;" styleClass="def" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
@@ -298,7 +298,7 @@
             <Image url="@../images/island3.png" />
          </ImageView>
          <AnchorPane layoutX="15.0" layoutY="25.0">
-            <GridPane fx:id="studentsIsland3" layoutX="8.0" layoutY="45.0" styleClass="def" style="-fx-border-width: 3px; -fx-border-radius: 10px;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
+            <GridPane fx:id="studentsIsland3" layoutX="8.0" layoutY="45.0" style="-fx-border-width: 3px; -fx-border-radius: 10px;" styleClass="def" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
@@ -412,7 +412,7 @@
             <Image url="@../images/island1.png" />
          </ImageView>
          <AnchorPane layoutX="20.0" layoutY="25.0">
-            <GridPane fx:id="studentsIsland4" layoutX="8.0" layoutY="45.0" styleClass="def" style="-fx-border-width: 3px; -fx-border-radius: 10px;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
+            <GridPane fx:id="studentsIsland4" layoutX="8.0" layoutY="45.0" style="-fx-border-width: 3px; -fx-border-radius: 10px;" styleClass="def" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
@@ -526,7 +526,7 @@
             <Image url="@../images/island3.png" />
          </ImageView>
          <AnchorPane layoutX="17.0" layoutY="25.0">
-            <GridPane fx:id="studentsIsland5" layoutX="8.0" layoutY="45.0" styleClass="def" style="-fx-border-width: 3px; -fx-border-radius: 10px;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
+            <GridPane fx:id="studentsIsland5" layoutX="8.0" layoutY="45.0" style="-fx-border-width: 3px; -fx-border-radius: 10px;" styleClass="def" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
@@ -640,7 +640,7 @@
             <Image url="@../images/island2.png" />
          </ImageView>
          <AnchorPane layoutX="17.0" layoutY="25.0">
-            <GridPane fx:id="studentsIsland6" layoutX="8.0" layoutY="45.0" styleClass="def" style="-fx-border-width: 3px; -fx-border-radius: 10px;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
+            <GridPane fx:id="studentsIsland6" layoutX="8.0" layoutY="45.0" style="-fx-border-width: 3px; -fx-border-radius: 10px;" styleClass="def" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
@@ -754,7 +754,7 @@
             <Image url="@../images/island1.png" />
          </ImageView>
          <AnchorPane layoutX="17.0" layoutY="25.0">
-            <GridPane fx:id="studentsIsland7" layoutX="8.0" layoutY="45.0" styleClass="def" style="-fx-border-width: 3px; -fx-border-radius: 10px;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
+            <GridPane fx:id="studentsIsland7" layoutX="8.0" layoutY="45.0" style="-fx-border-width: 3px; -fx-border-radius: 10px;" styleClass="def" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
@@ -868,7 +868,7 @@
             <Image url="@../images/island2.png" />
          </ImageView>
          <AnchorPane layoutX="20.0" layoutY="25.0">
-            <GridPane fx:id="studentsIsland8" layoutX="8.0" layoutY="45.0" styleClass="def" style="-fx-border-width: 3px; -fx-border-radius: 10px;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
+            <GridPane fx:id="studentsIsland8" layoutX="8.0" layoutY="45.0" style="-fx-border-width: 3px; -fx-border-radius: 10px;" styleClass="def" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
@@ -982,7 +982,7 @@
             <Image url="@../images/island3.png" />
          </ImageView>
          <AnchorPane layoutX="20.0" layoutY="25.0">
-            <GridPane fx:id="studentsIsland9" layoutX="8.0" layoutY="45.0" styleClass="def" style="-fx-border-width: 3px; -fx-border-radius: 10px;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
+            <GridPane fx:id="studentsIsland9" layoutX="8.0" layoutY="45.0" style="-fx-border-width: 3px; -fx-border-radius: 10px;" styleClass="def" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
@@ -1096,7 +1096,7 @@
             <Image url="@../images/island2.png" />
          </ImageView>
          <AnchorPane layoutX="20.0" layoutY="25.0">
-            <GridPane fx:id="studentsIsland10" layoutX="8.0" layoutY="45.0" styleClass="def" style="-fx-border-width: 3px; -fx-border-radius: 10px;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
+            <GridPane fx:id="studentsIsland10" layoutX="8.0" layoutY="45.0" style="-fx-border-width: 3px; -fx-border-radius: 10px;" styleClass="def" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
@@ -1210,7 +1210,7 @@
             <Image url="@../images/island3.png" />
          </ImageView>
          <AnchorPane layoutX="20.0" layoutY="25.0">
-            <GridPane fx:id="studentsIsland11" layoutX="8.0" layoutY="45.0" styleClass="def" style="-fx-border-width: 3px; -fx-border-radius: 10px;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
+            <GridPane fx:id="studentsIsland11" layoutX="8.0" layoutY="45.0" style="-fx-border-width: 3px; -fx-border-radius: 10px;" styleClass="def" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
@@ -1324,7 +1324,7 @@
             <Image url="@../images/island1.png" />
          </ImageView>
          <AnchorPane layoutX="20.0" layoutY="25.0">
-            <GridPane fx:id="studentsIsland12" layoutX="8.0" layoutY="45.0" styleClass="def" style="-fx-border-width: 3px; -fx-border-radius: 10px;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
+            <GridPane fx:id="studentsIsland12" layoutX="8.0" layoutY="45.0" style="-fx-border-width: 3px; -fx-border-radius: 10px;" styleClass="def" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="20.0" />
@@ -2350,7 +2350,7 @@
       <ImageView fitHeight="200.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../images/Plancia_DEF.png" />
       </ImageView>
-      <GridPane fx:id="entranceHero" layoutX="13.0" layoutY="20.0" prefHeight="156.0" prefWidth="53.0" styleClass="def"  style="-fx-border-width: 3px; -fx-border-radius: 10px;">
+      <GridPane fx:id="entranceHero" layoutX="13.0" layoutY="20.0" prefHeight="156.0" prefWidth="53.0" style="-fx-border-width: 3px; -fx-border-radius: 10px;" styleClass="def">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
@@ -2362,7 +2362,7 @@
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
          </rowConstraints>
-         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="0">
             <GridPane.margin>
                <Insets />
             </GridPane.margin>
@@ -2375,80 +2375,80 @@
                <DropShadow />
             </effect>
          </BorderPane>
-         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.rowIndex="1" GridPane.columnIndex="0">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_green.png"/>
+                  <Image url="@../images/student_green.png" />
                </ImageView>
             </center>
             <effect>
                <DropShadow />
             </effect>
          </BorderPane>
-         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_green.png"/>
+                  <Image url="@../images/student_green.png" />
                </ImageView>
             </center>
             <effect>
                <DropShadow />
             </effect>
          </BorderPane>
-         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.rowIndex="2" GridPane.columnIndex="0">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="2">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_green.png"/>
+                  <Image url="@../images/student_green.png" />
                </ImageView>
             </center>
             <effect>
                <DropShadow />
             </effect>
          </BorderPane>
-         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_green.png"/>
+                  <Image url="@../images/student_green.png" />
                </ImageView>
             </center>
             <effect>
                <DropShadow />
             </effect>
          </BorderPane>
-         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.rowIndex="3" GridPane.columnIndex="0">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="3">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_green.png"/>
+                  <Image url="@../images/student_green.png" />
                </ImageView>
             </center>
             <effect>
                <DropShadow />
             </effect>
          </BorderPane>
-         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_green.png"/>
+                  <Image url="@../images/student_green.png" />
                </ImageView>
             </center>
             <effect>
                <DropShadow />
             </effect>
          </BorderPane>
-         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.rowIndex="4" GridPane.columnIndex="0">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="4">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_green.png"/>
+                  <Image url="@../images/student_green.png" />
                </ImageView>
             </center>
             <effect>
                <DropShadow />
             </effect>
          </BorderPane>
-         <BorderPane visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="4">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_green.png"/>
+                  <Image url="@../images/student_green.png" />
                </ImageView>
             </center>
             <effect>
@@ -2456,473 +2456,697 @@
             </effect>
          </BorderPane>
       </GridPane>
-      <GridPane fx:id="diningRoomHero" layoutX="82.0" layoutY="20.0" prefHeight="162.0" prefWidth="225.0" styleClass="def" style="-fx-border-width: 3px; -fx-border-radius: 10px;" AnchorPane.leftAnchor="81.0">
+      <GridPane fx:id="diningRoomHero" layoutX="82.0" layoutY="20.0" prefHeight="162.0" prefWidth="225.0"
+                style="-fx-border-width: 3px; -fx-border-radius: 10px;" styleClass="def" AnchorPane.leftAnchor="81.0">
          <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="23.502349853515625" minWidth="-Infinity" prefWidth="21.167449951171875" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="22.0" minWidth="-Infinity" prefWidth="20.832550048828125" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="22.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="22.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="22.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="22.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="22.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="22.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="22.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="22.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="23.502349853515625" minWidth="-Infinity"
+                               prefWidth="21.167449951171875"/>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="22.0" minWidth="-Infinity"
+                               prefWidth="20.832550048828125"/>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
+                               prefWidth="22.0"/>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
+                               prefWidth="22.0"/>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
+                               prefWidth="22.0"/>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
+                               prefWidth="22.0"/>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
+                               prefWidth="22.0"/>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
+                               prefWidth="22.0"/>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
+                               prefWidth="22.0"/>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
+                               prefWidth="22.0"/>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" valignment="TOP"
+                            vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" valignment="TOP"
+                            vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" valignment="TOP"
+                            vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" valignment="TOP"
+                            vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" valignment="TOP"
+                            vgrow="SOMETIMES"/>
          </rowConstraints>
-         <ImageView fitHeight="20.0" fitWidth="20.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="0">
-            <GridPane.margin>
-               <Insets bottom="2.0" />
-            </GridPane.margin>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <Image url="@../images/student_green.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="0">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_green.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="0">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="2" GridPane.rowIndex="0">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_green.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="0">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="3" GridPane.rowIndex="0">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_green.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="0">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="4" GridPane.rowIndex="0">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_green.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="0">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="5" GridPane.rowIndex="0">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_green.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="6" GridPane.rowIndex="0">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="6" GridPane.rowIndex="0">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_green.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="7" GridPane.rowIndex="0">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="7" GridPane.rowIndex="0">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_green.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="8" GridPane.rowIndex="0">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="8" GridPane.rowIndex="0">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_green.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="9" GridPane.rowIndex="0">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="9" GridPane.rowIndex="0">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_green.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="14.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_red.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_red.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="32.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_red.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_red.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="54.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_red.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_red.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="76.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_red.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_red.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="98.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="1">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_red.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_red.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="120.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="1">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="5" GridPane.rowIndex="1">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_red.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_red.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="142.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="6" GridPane.rowIndex="1">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="6" GridPane.rowIndex="1">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_red.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_red.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="164.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="7" GridPane.rowIndex="1">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="7" GridPane.rowIndex="1">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_red.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_red.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="186.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="8" GridPane.rowIndex="1">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="8" GridPane.rowIndex="1">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_red.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_red.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="208.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="9" GridPane.rowIndex="1">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="9" GridPane.rowIndex="1">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_red.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_red.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="2">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_yellow.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_yellow.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_yellow.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_yellow.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_yellow.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_yellow.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_yellow.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_yellow.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="2">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="4" GridPane.rowIndex="2">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_yellow.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_yellow.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="2">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="5" GridPane.rowIndex="2">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_yellow.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_yellow.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="6" GridPane.rowIndex="2">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="6" GridPane.rowIndex="2">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_yellow.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_yellow.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="7" GridPane.rowIndex="2">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="7" GridPane.rowIndex="2">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_yellow.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_yellow.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="8" GridPane.rowIndex="2">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="8" GridPane.rowIndex="2">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_yellow.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_yellow.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="9" GridPane.rowIndex="2">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="9" GridPane.rowIndex="2">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_yellow.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="5.0" radius="2.0" width="5.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets bottom="2.0" left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_yellow.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="3">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="0" GridPane.rowIndex="3">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_pink.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets />
-            </GridPane.margin>
-            <Image url="@../images/student_pink.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_pink.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_pink.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_pink.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_pink.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="3">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="3" GridPane.rowIndex="3">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_pink.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_pink.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="3">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="4" GridPane.rowIndex="3">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_pink.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_pink.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="3">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="5" GridPane.rowIndex="3">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_pink.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_pink.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="6" GridPane.rowIndex="3">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="6" GridPane.rowIndex="3">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_pink.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_pink.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="7" GridPane.rowIndex="3">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="7" GridPane.rowIndex="3">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_pink.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_pink.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="8" GridPane.rowIndex="3">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="8" GridPane.rowIndex="3">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_pink.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_pink.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="9" GridPane.rowIndex="3">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="9" GridPane.rowIndex="3">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_pink.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_pink.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="4">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="0" GridPane.rowIndex="4">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_blue.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <Image url="@../images/student_blue.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="4">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_blue.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_blue.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="4">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_blue.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_blue.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="4">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="3" GridPane.rowIndex="4">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_blue.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_blue.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="4">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="4" GridPane.rowIndex="4">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_blue.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_blue.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="4">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="5" GridPane.rowIndex="4">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_blue.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_blue.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="6" GridPane.rowIndex="4">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="6" GridPane.rowIndex="4">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_blue.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_blue.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="7" GridPane.rowIndex="4">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="7" GridPane.rowIndex="4">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_blue.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_blue.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="8" GridPane.rowIndex="4">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="8" GridPane.rowIndex="4">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_blue.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_blue.png" />
-         </ImageView>
-         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="9" GridPane.rowIndex="4">
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="9" GridPane.rowIndex="4">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_blue.png"/>
+               </ImageView>
+            </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
-            <GridPane.margin>
-               <Insets left="2.0" />
-            </GridPane.margin>
-            <Image url="@../images/student_blue.png" />
-         </ImageView>
+         </BorderPane>
       </GridPane>
       <GridPane fx:id="professorsHero" layoutX="327.0" layoutY="20.0">
          <columnConstraints>
@@ -3039,7 +3263,7 @@
          </ImageView>
       </GridPane>
    </AnchorPane>
-   <AnchorPane layoutX="240.0" layoutY="521.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="650.0">
+   <AnchorPane layoutX="240.0" layoutY="521.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="1180.5" AnchorPane.topAnchor="650.0">
       <ImageView fx:id="cardBackHero" fitHeight="200.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">
          <viewport>
             <Rectangle2D />
@@ -3077,91 +3301,110 @@
          </effect>
       </Label>
    </AnchorPane>
-   <Button fx:id="swapButton" disable="true" visible="false" onMouseClicked="#handleSwapButton" layoutX="572.0" layoutY="673.0" mnemonicParsing="false" style="-fx-background-radius: 20px; -fx-background-color: #D6E3F8; -fx-border-color: blue; -fx-border-radius: 20px;" text="Swap!" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="20.0">
+   <Button fx:id="swapButton" disable="true" layoutX="572.0" layoutY="673.0" mnemonicParsing="false" onMouseClicked="#handleSwapButton" style="-fx-background-radius: 20px; -fx-background-color: #D6E3F8; -fx-border-color: blue; -fx-border-radius: 20px;" text="Swap!" visible="false" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="20.0">
       <font>
          <Font name="Arial" size="14.0" />
       </font>
    </Button>
-   <AnchorPane fx:id="charCardPane1" layoutX="1247.0" layoutY="20.0" styleClass="characterCard">
+   <AnchorPane fx:id="charCardPane1" layoutX="1247.0" layoutY="20.0" styleClass="characterCard" visible="false">
       <ImageView fx:id="characterCard1" fitHeight="150.0" pickOnBounds="true" preserveRatio="true">
          <viewport>
             <Rectangle2D />
          </viewport>
          <Image url="@../images/CarteTOT_front.jpg" />
       </ImageView>
-      <GridPane fx:id="charCardStudents1" layoutX="79.0" layoutY="70.0" visible="false" styleClass="def"
-                style="-fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-color: lightgrey; -fx-background-radius: 10px;"
-                AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="70.0">
+      <GridPane fx:id="charCardStudents1" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="83.0">
          <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="15.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="15.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="15.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="15.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="15.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="15.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
+                               prefWidth="20.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="55.0"/>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
+                               prefWidth="20.0"/>
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="15.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="22.0" valignment="CENTER"
+                            vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="22.0" valignment="CENTER"
+                            vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="22.0" valignment="CENTER"
+                            vgrow="SOMETIMES"/>
          </rowConstraints>
-         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.columnIndex="0">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="0" GridPane.rowIndex="0">
             <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_yellow.png" />
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
                </ImageView>
             </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
          </BorderPane>
-         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.columnIndex="1">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="2" GridPane.rowIndex="0">
             <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_yellow.png"/>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
                </ImageView>
             </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
          </BorderPane>
-         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.columnIndex="2">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="0" GridPane.rowIndex="1">
             <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_yellow.png"/>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
                </ImageView>
             </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
          </BorderPane>
-         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.columnIndex="3">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="2" GridPane.rowIndex="1">
             <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_yellow.png"/>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
                </ImageView>
             </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
          </BorderPane>
-         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.columnIndex="4" visible="false">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="0" GridPane.rowIndex="2">
             <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_yellow.png"/>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
                </ImageView>
             </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
          </BorderPane>
-         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.columnIndex="5" visible="
-">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="2" GridPane.rowIndex="2">
             <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_yellow.png"/>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
                </ImageView>
             </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0" />
+               <DropShadow/>
             </effect>
          </BorderPane>
       </GridPane>
@@ -3187,89 +3430,98 @@
          </viewport>
          <Image url="@../images/CarteTOT_front5.jpg" />
       </ImageView>
-      <GridPane fx:id="charCardStudents2" layoutX="89.0" layoutY="80.0" visible="false"
-                styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-color: lightgrey; -fx-background-radius: 10px;" AnchorPane.leftAnchor="5.0"
-                AnchorPane.topAnchor="70.0">
+      <GridPane fx:id="charCardStudents2" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="83.0">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
-                               prefWidth="15.0"/>
+                               prefWidth="20.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="55.0"/>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
-                               prefWidth="15.0"/>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0"
-                               prefWidth="15.0"/>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
-                               prefWidth="15.0"/>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0"
-                               prefWidth="15.0"/>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0"
-                               prefWidth="15.0"/>
+                               prefWidth="20.0"/>
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="15.0" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="22.0" valignment="CENTER"
+                            vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="22.0" valignment="CENTER"
+                            vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="22.0" valignment="CENTER"
+                            vgrow="SOMETIMES"/>
          </rowConstraints>
-         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.columnIndex="0">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="0" GridPane.rowIndex="0">
             <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true" >
-                  <Image url="@../images/student_yellow.png"/>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
                </ImageView>
             </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0"/>
+               <DropShadow/>
             </effect>
          </BorderPane>
-         <BorderPane styleClass="def"  style="-fx-border-width: 2px; -fx-border-radius: 10px;"
-                     GridPane.columnIndex="1">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="2" GridPane.rowIndex="0">
             <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_yellow.png"/>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
                </ImageView>
             </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0"/>
+               <DropShadow/>
             </effect>
          </BorderPane>
-         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;"
-                     GridPane.columnIndex="2">
-            <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0"/>
-            </effect>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="0" GridPane.rowIndex="1">
             <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_yellow.png"/>
-               </ImageView>
-            </center>
-         </BorderPane>
-         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;"
-                     GridPane.columnIndex="3">
-            <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_yellow.png"/>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
                </ImageView>
             </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0"/>
+               <DropShadow/>
             </effect>
          </BorderPane>
-         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" visible="false"
-                     GridPane.columnIndex="4">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="2" GridPane.rowIndex="1">
             <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_yellow.png"/>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
                </ImageView>
             </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0"/>
+               <DropShadow/>
             </effect>
          </BorderPane>
-         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" visible="false"
-                     GridPane.columnIndex="5">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="0" GridPane.rowIndex="2">
             <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_yellow.png"/>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
                </ImageView>
             </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0"/>
+               <DropShadow/>
+            </effect>
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
+               </ImageView>
+            </center>
+            <effect>
+               <DropShadow/>
             </effect>
          </BorderPane>
       </GridPane>
@@ -3295,88 +3547,98 @@
          </viewport>
          <Image url="@../images/CarteTOT_front10.jpg" />
       </ImageView>
-      <GridPane fx:id="charCardStudents3" styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-color: lightgrey; -fx-background-radius: 10px;" visible="false"
-                AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="70.0">
+      <GridPane fx:id="charCardStudents3" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="83.0">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
-                               prefWidth="15.0"/>
+                               prefWidth="20.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="55.0"/>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
-                               prefWidth="15.0"/>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0"
-                               prefWidth="15.0"/>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
-                               prefWidth="15.0"/>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0"
-                               prefWidth="15.0"/>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0"
-                               prefWidth="15.0"/>
+                               prefWidth="20.0"/>
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="15.0" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="22.0" valignment="CENTER"
+                            vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="22.0" valignment="CENTER"
+                            vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="22.0" valignment="CENTER"
+                            vgrow="SOMETIMES"/>
          </rowConstraints>
-         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" GridPane.columnIndex="0">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="0" GridPane.rowIndex="0">
             <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_yellow.png"/>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
                </ImageView>
             </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0"/>
+               <DropShadow/>
             </effect>
          </BorderPane>
-         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;"
-                     GridPane.columnIndex="1">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="2" GridPane.rowIndex="0">
             <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_yellow.png"/>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
                </ImageView>
             </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0"/>
+               <DropShadow/>
             </effect>
          </BorderPane>
-         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;"
-                     GridPane.columnIndex="2">
-            <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0"/>
-            </effect>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="0" GridPane.rowIndex="1">
             <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_yellow.png"/>
-               </ImageView>
-            </center>
-         </BorderPane>
-         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;"
-                     GridPane.columnIndex="3">
-            <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_yellow.png"/>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
                </ImageView>
             </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0"/>
+               <DropShadow/>
             </effect>
          </BorderPane>
-         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" visible="false"
-                     GridPane.columnIndex="4">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="2" GridPane.rowIndex="1">
             <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_yellow.png"/>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
                </ImageView>
             </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0"/>
+               <DropShadow/>
             </effect>
          </BorderPane>
-         <BorderPane styleClass="def" style="-fx-border-width: 2px; -fx-border-radius: 10px;" visible="false"
-                     GridPane.columnIndex="5">
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="0" GridPane.rowIndex="2">
             <center>
-               <ImageView fitHeight="12.5" fitWidth="12.5" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/student_yellow.png"/>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
                </ImageView>
             </center>
             <effect>
-               <DropShadow height="10.0" radius="4.5" width="10.0"/>
+               <DropShadow/>
+            </effect>
+         </BorderPane>
+         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <center>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
+                          BorderPane.alignment="CENTER">
+                  <Image url="@../images/student_green.png"/>
+               </ImageView>
+            </center>
+            <effect>
+               <DropShadow/>
             </effect>
          </BorderPane>
       </GridPane>
