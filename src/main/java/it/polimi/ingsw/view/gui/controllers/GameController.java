@@ -667,7 +667,7 @@ public class GameController extends FXController {
 
                 for(Color c : Color.values()) {
                     for (int j = 0; j < 10; j++) {
-                        ImageView stud = (ImageView) getNodeFromDiningHero(c, j, diningRoomHero);
+                        BorderPane stud = (BorderPane) getNodeFromDiningHero(c, j, diningRoomHero);
                         stud.setVisible(j < school.getNumStudentsInDiningRoomByColor(c));
                     }
                 }
@@ -983,8 +983,32 @@ public class GameController extends FXController {
 
     private Node getNodeFromCard(int i, GridPane grid) {
         for(Node n : grid.getChildren()) {
-            if(GridPane.getColumnIndex(n) == i)
-                return n;
+            switch (i) {
+                case 0 :
+                    if(GridPane.getRowIndex(n) == 0 && GridPane.getColumnIndex(n) == 0)
+                        return n;
+                    break;
+                case 1 :
+                    if(GridPane.getRowIndex(n) == 0 && GridPane.getColumnIndex(n) == 2)
+                        return n;
+                    break;
+                case 2 :
+                    if(GridPane.getRowIndex(n) == 1 && GridPane.getColumnIndex(n) == 0)
+                        return n;
+                    break;
+                case 3 :
+                    if(GridPane.getRowIndex(n) == 1 && GridPane.getColumnIndex(n) == 2)
+                        return n;
+                    break;
+                case 4 :
+                    if(GridPane.getRowIndex(n) == 2 && GridPane.getColumnIndex(n) == 0)
+                        return n;
+                    break;
+                case 5 :
+                    if(GridPane.getRowIndex(n) == 2 && GridPane.getColumnIndex(n) == 2)
+                        return n;
+                    break;
+            }
         }
 
         return new ImageView();

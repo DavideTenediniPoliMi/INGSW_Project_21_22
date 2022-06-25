@@ -3313,7 +3313,8 @@
          </viewport>
          <Image url="@../images/CarteTOT_front.jpg" />
       </ImageView>
-      <GridPane fx:id="charCardStudents1" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="83.0">
+      <GridPane fx:id="charCardStudents1" style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def"
+                AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="83.0" visible="false">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
                                prefWidth="20.0"/>
@@ -3330,7 +3331,7 @@
                             vgrow="SOMETIMES"/>
          </rowConstraints>
          <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def"
                      GridPane.columnIndex="0" GridPane.rowIndex="0">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
@@ -3343,7 +3344,7 @@
             </effect>
          </BorderPane>
          <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def"
                      GridPane.columnIndex="2" GridPane.rowIndex="0">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
@@ -3356,7 +3357,7 @@
             </effect>
          </BorderPane>
          <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def"
                      GridPane.columnIndex="0" GridPane.rowIndex="1">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
@@ -3369,7 +3370,7 @@
             </effect>
          </BorderPane>
          <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def"
                      GridPane.columnIndex="2" GridPane.rowIndex="1">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
@@ -3430,7 +3431,8 @@
          </viewport>
          <Image url="@../images/CarteTOT_front5.jpg" />
       </ImageView>
-      <GridPane fx:id="charCardStudents2" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="83.0">
+      <GridPane fx:id="charCardStudents2" style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def"
+                AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="83.0" visible="false">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
                                prefWidth="20.0"/>
@@ -3460,7 +3462,7 @@
             </effect>
          </BorderPane>
          <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def"
                      GridPane.columnIndex="2" GridPane.rowIndex="0">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
@@ -3473,7 +3475,7 @@
             </effect>
          </BorderPane>
          <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def"
                      GridPane.columnIndex="0" GridPane.rowIndex="1">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
@@ -3486,7 +3488,7 @@
             </effect>
          </BorderPane>
          <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def"
                      GridPane.columnIndex="2" GridPane.rowIndex="1">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
@@ -3547,7 +3549,8 @@
          </viewport>
          <Image url="@../images/CarteTOT_front10.jpg" />
       </ImageView>
-      <GridPane fx:id="charCardStudents3" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="83.0">
+      <GridPane fx:id="charCardStudents3" style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def"
+                AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="83.0" visible="false">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity"
                                prefWidth="20.0"/>
@@ -3564,7 +3567,7 @@
                             vgrow="SOMETIMES"/>
          </rowConstraints>
          <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def"
                      GridPane.columnIndex="0" GridPane.rowIndex="0">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
@@ -3577,7 +3580,7 @@
             </effect>
          </BorderPane>
          <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def"
                      GridPane.columnIndex="2" GridPane.rowIndex="0">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
@@ -3590,7 +3593,7 @@
             </effect>
          </BorderPane>
          <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def"
                      GridPane.columnIndex="0" GridPane.rowIndex="1">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
@@ -3603,7 +3606,7 @@
             </effect>
          </BorderPane>
          <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def" visible="false"
+                     style="-fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="def"
                      GridPane.columnIndex="2" GridPane.rowIndex="1">
             <center>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"
