@@ -42,6 +42,7 @@ public class GUI extends Application {
     private static boolean activatedCard;
     private static boolean waitingForPlayerRecon;
     private static boolean waitingForPlayerDC;
+    private static boolean unpausing;
 
     /**
      * Asks the engine to start this application.
@@ -225,13 +226,17 @@ public class GUI extends Application {
 
         if(!jo.has("matchInfo")) {
             if(JsonUtils.isNotCharCardJSON(jo, playerId)) {
-                if(waitingForPlayerRecon && jo.has("players")) {
-                    waitingForPlayerRecon = false;
-                    return (matchInfo.getCurrentPlayerID() != playerId) ? GUIState.WAIT_ACTION : resetState(jo);
-                }
                 if(waitingForPlayerDC && jo.has("players")) {
                     waitingForPlayerDC = false;
-                    return (matchInfo.getCurrentPlayerID() != playerId) ? GUIState.WAIT_ACTION : resetState(jo);
+                    return GUIState.DISCONNECTION;
+                }
+                if(waitingForPlayerRecon && jo.has("players")) {
+                    waitingForPlayerRecon = false;
+                    if(matchInfo.getCurrentPlayerID() == playerId && unpausing) {
+                        unpausing = false;
+                        return resetState(jo);
+                    }
+                    return GUIState.DISCONNECTION;
                 }
                 return GUIState.WAIT_RESPONSE;
             }
@@ -255,13 +260,15 @@ public class GUI extends Application {
         if(JsonUtils.isGameOver(jo))
             return GUIState.END_GAME;
 
-        if(JsonUtils.hasPlayerReconnected(jo)) {
-            waitingForPlayerRecon = true;
+        if(JsonUtils.hasPlayerDisconnected(jo)) {
+            waitingForPlayerDC = true;
             return GUIState.WAIT_RESPONSE;
         }
 
-        if(JsonUtils.hasPlayerDisconnected(jo)) {
+        if(JsonUtils.hasPlayerReconnected(jo)) {
             waitingForPlayerRecon = true;
+            if(matchInfo.isGamePaused()) //Game will unpause in this packet
+                unpausing = true;
             return GUIState.WAIT_RESPONSE;
         }
 

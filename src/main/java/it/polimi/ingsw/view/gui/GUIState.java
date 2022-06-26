@@ -5,6 +5,7 @@ package it.polimi.ingsw.view.gui;
  * graphic interface.
  */
 public enum GUIState {
+    DISCONNECTION,
     REPEAT_ACTION,
     WAIT_RESPONSE,
     WAIT_ACTION,
