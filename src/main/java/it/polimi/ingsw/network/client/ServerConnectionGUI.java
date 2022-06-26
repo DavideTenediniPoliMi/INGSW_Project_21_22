@@ -79,6 +79,7 @@ public class ServerConnectionGUI extends Connection {
             new ResponseParameters().deserialize(jsonObject);
 
             if(jsonObject.has("game")) {
+                GUI.bindPlayerId();
                 Platform.runLater(() -> GUI.loadScene("/scenes/gameScene.fxml"));
                 gameLoop();
                 return;
