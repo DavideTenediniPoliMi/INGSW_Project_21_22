@@ -30,7 +30,7 @@ public class CLI {
      private String activeCardName;
      private boolean activatedCard;
      private boolean waitingForPlayerRecon, waitingForPlayerDC;
-     protected boolean exiting, skipping;
+     protected boolean exiting, skipping, unpausing;
 
      public CLI(ViewState viewState) { this.viewState = viewState; }
 
@@ -116,8 +116,9 @@ public class CLI {
                     }
                     if(waitingForPlayerRecon && jo.has("players")) {
                          waitingForPlayerRecon = false;
-                         if(matchInfo.getCurrentPlayerID() == playerID && matchInfo.isGamePaused()) {
+                         if(matchInfo.getCurrentPlayerID() == playerID && unpausing) {
                               setCurrentViewState();
+                              unpausing = false;
                               return true;
                          }
                     }
@@ -152,6 +153,8 @@ public class CLI {
 
           if(JsonUtils.hasPlayerReconnected(jo)) {
                waitingForPlayerRecon = true;
+               if(matchInfo.isGamePaused()) //Game will unpause in this packet
+                    unpausing = true;
                return false;
           }
 
