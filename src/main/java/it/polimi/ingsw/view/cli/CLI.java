@@ -116,10 +116,10 @@ public class CLI {
                     }
                     if(waitingForPlayerRecon && jo.has("players")) {
                          waitingForPlayerRecon = false;
-                         /*if(matchInfo.getCurrentPlayerID() == playerID) {
+                         if(matchInfo.getCurrentPlayerID() == playerID && matchInfo.isGamePaused()) {
                               setCurrentViewState();
                               return true;
-                         }*/
+                         }
                     }
                     return false;
                }
