@@ -260,7 +260,7 @@ public class GUI extends Application {
             return GUIState.WAIT_RESPONSE;
         }
 
-        if(JsonUtils.hasPlayerReconnected(jo)) {
+        if(JsonUtils.hasPlayerDisconnected(jo)) {
             waitingForPlayerRecon = true;
             return GUIState.WAIT_RESPONSE;
         }
