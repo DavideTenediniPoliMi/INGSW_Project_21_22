@@ -78,6 +78,16 @@ public class JsonUtils {
      * @return true if a player has reconnected, false otherwise.
      */
     public static boolean hasPlayerReconnected(JsonObject jo) {
+        return MatchInfo.getInstance().getNumPlayersConnected() < jo.get("numPlayersConnected").getAsInt();
+    }
+
+    /**
+     * Checks whether the message indicates that a player disconnected to the game.
+     *
+     * @param jo the message received.
+     * @return true if a player has disconnected, false otherwise.
+     */
+    public static boolean hasPlayerDisconnected(JsonObject jo) {
         return MatchInfo.getInstance().getNumPlayersConnected() > jo.get("numPlayersConnected").getAsInt();
     }
 

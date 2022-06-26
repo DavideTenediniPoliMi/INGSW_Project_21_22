@@ -29,7 +29,7 @@ public class CLI {
      private boolean waitForActivatedCard;
      private String activeCardName;
      private boolean activatedCard;
-     private boolean waitingForPlayer;
+     private boolean waitingForPlayerRecon, waitingForPlayerDC;
      protected boolean exiting, skipping;
 
      public CLI(ViewState viewState) { this.viewState = viewState; }
@@ -111,12 +111,15 @@ public class CLI {
 
           if(!jo.has("matchInfo")) {
                if(JsonUtils.isNotCharCardJSON(jo, playerID)) {
-                    if(waitingForPlayer && jo.has("players")) {
-                         waitingForPlayer = false;
-                         if(matchInfo.getCurrentPlayerID() == playerID) {
+                    if(waitingForPlayerDC && jo.has("players")) {
+                         waitingForPlayerDC = false;
+                    }
+                    if(waitingForPlayerRecon && jo.has("players")) {
+                         waitingForPlayerRecon = false;
+                         /*if(matchInfo.getCurrentPlayerID() == playerID) {
                               setCurrentViewState();
                               return true;
-                         }
+                         }*/
                     }
                     return false;
                }
@@ -142,8 +145,13 @@ public class CLI {
                return true;
           }
 
+          if(JsonUtils.hasPlayerDisconnected(jo)) {
+               waitingForPlayerDC = true;
+               return false;
+          }
+
           if(JsonUtils.hasPlayerReconnected(jo)) {
-               waitingForPlayer = true;
+               waitingForPlayerRecon = true;
                return false;
           }
 

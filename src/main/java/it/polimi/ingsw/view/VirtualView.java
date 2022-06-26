@@ -19,7 +19,6 @@ import it.polimi.ingsw.network.observer.Observable;
 import it.polimi.ingsw.network.observer.Observer;
 import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
-import javafx.css.Match;
 
 /**
  * Class representing the VirtualView. It acts as a layer of virtualization between the server and the network where the
@@ -156,7 +155,7 @@ public class VirtualView extends Observable<String> implements Observer<Response
         String reconnectCommand = new RequestParameters().setCommandType(CommandType.RECONNECT).serialize().toString();
         handleRequest(reconnectCommand);
         notify(new ResponseParameters().setSendGame(true).serialize().toString());
-        Game.getInstance().notifyPlayerReconnected();
+        Game.getInstance().notifyPlayerStatusChange();
         /*
          * If the current round is in a different state compared to the last one skipped, then the info on this
          * VirtualView is outdated.
@@ -181,6 +180,7 @@ public class VirtualView extends Observable<String> implements Observer<Response
         clearObservers();
         String disconnectCommand = new RequestParameters().setCommandType(CommandType.DISCONNECT).serialize().toString();
         handleRequest(disconnectCommand);
+        Game.getInstance().notifyPlayerStatusChange();
 
         //This VirtualView will skip if the player reconnects DURING A ROUND
         skipping = true;
