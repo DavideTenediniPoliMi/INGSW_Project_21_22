@@ -1748,7 +1748,6 @@ public class GameController extends FXController {
         BorderPane target = (BorderPane) mouseEvent.getSource();
         GridPane students = charCardsStudents.get(selectedCharCard);
         Color c = (Color) target.getUserData();
-        System.out.println(c);
 
         switch (Game.getInstance().getActiveCharacterCard().getName()) {
             case "IGNORE_COLOR":

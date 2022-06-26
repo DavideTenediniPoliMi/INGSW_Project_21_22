@@ -2,7 +2,9 @@ package it.polimi.ingsw.network.client;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.enumerations.CommandType;
@@ -14,6 +16,8 @@ import javafx.application.Platform;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
+import java.util.Optional;
 
 public class ServerConnectionGUI extends Connection {
 
@@ -39,14 +43,14 @@ public class ServerConnectionGUI extends Connection {
     public void run() {
         JsonObject jsonObject = waitForValidMessage();
         new ResponseParameters().deserialize(jsonObject);
+        boolean attemptedCreation = false;
 
         if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.LOBBY)) {
             if (MatchInfo.getInstance().getSelectedNumPlayer() == 0) {
+                attemptedCreation = true;
                 Platform.runLater(() -> GUI.loadScene("/scenes/createLobbyScene.fxml"));
 
                 new ResponseParameters().deserialize(waitForValidMessage());
-                if (!GUI.didCreateLobby())
-                    Platform.runLater(GUI::showAlert);
             }
 
             sendMessage(
@@ -54,11 +58,24 @@ public class ServerConnectionGUI extends Connection {
                             .setCommandType(CommandType.JOIN)
                             .setName(GUI.getName()).serialize().toString());
 
-            new ResponseParameters().deserialize(waitForValidMessage());
+            do {
+                JsonObject received = JsonParser.parseString(receiveMessage()).getAsJsonObject();
+
+                if (received.has("error")) {
+                    Platform.runLater(() -> GUI.loadScene("/scenes/bindingScene.fxml"));
+                    Platform.runLater(() -> GUI.showError(received.get("error").getAsString()));
+                    run();
+                    return;
+                }
+
+                new ResponseParameters().deserialize(received);
+            } while(getPlayerByName(GUI.getName(), Lobby.getLobby().getPlayers()) == null);
 
             GUI.bindPlayerId();
 
             Platform.runLater(() -> GUI.loadScene("/scenes/lobbySelectionScene.fxml"));
+            if (!GUI.didCreateLobby() && attemptedCreation)
+                Platform.runLater(GUI::showAlert);
         } else {
             while(!jsonObject.has("game")) {
                 jsonObject = waitForValidMessage();
@@ -88,6 +105,14 @@ public class ServerConnectionGUI extends Connection {
                 Platform.runLater(() -> GUI.applyChanges(finalJsonObject));
             }
         }
+    }
+
+    public Player getPlayerByName(String name, List<Player> players) {
+        Optional<Player> result = players.stream()
+                .filter((player) -> (player.getName().equals(name)))
+                .findAny();
+
+        return result.orElse(null);
     }
 
     private void gameLoop() {

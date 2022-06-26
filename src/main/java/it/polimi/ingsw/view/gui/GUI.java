@@ -222,8 +222,6 @@ public class GUI extends Application {
     public static GUIState nextState(JsonObject jo) {
         MatchInfo matchInfo = MatchInfo.getInstance();
 
-        System.out.println(jo);
-
         if(!jo.has("matchInfo")) {
             if(JsonUtils.isNotCharCardJSON(jo, playerId)) {
                 if(waitingForPlayerDC && jo.has("players")) {
