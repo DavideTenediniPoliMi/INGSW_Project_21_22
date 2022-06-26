@@ -262,14 +262,14 @@ public class GUI extends Application {
 
         if(JsonUtils.hasPlayerDisconnected(jo)) {
             waitingForPlayerDC = true;
-            return GUIState.WAIT_RESPONSE;
+            return GUIState.DISCONNECTION;
         }
 
         if(JsonUtils.hasPlayerReconnected(jo)) {
             waitingForPlayerRecon = true;
             if(matchInfo.isGamePaused()) //Game will unpause in this packet
                 unpausing = true;
-            return GUIState.WAIT_RESPONSE;
+            return GUIState.DISCONNECTION;
         }
 
         if(JsonUtils.isGamePaused(jo))

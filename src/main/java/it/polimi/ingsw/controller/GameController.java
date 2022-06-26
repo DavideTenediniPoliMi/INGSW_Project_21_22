@@ -85,7 +85,8 @@ public class GameController {
             game.addPlayer(player);
             game.addSchool(player.getID());
             game.giveStudentsTo(player.getID(), matchInfo.getInitialNumStudents());
-            game.addTowersTo(player.getID(), matchInfo.getMaxTowers());
+            if(player.isTowerHolder())
+                game.addTowersTo(player.getID(), matchInfo.getMaxTowers());
         }
 
         game.placeMNAt(new Random().nextInt(game.getBoard().getNumIslands()));
