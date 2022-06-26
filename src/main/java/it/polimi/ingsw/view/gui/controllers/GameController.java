@@ -1136,6 +1136,10 @@ public class GameController extends FXController {
         Game game = Game.getInstance();
         MatchInfo matchInfo = MatchInfo.getInstance();
 
+        if(newState == GUIState.DISCONNECTION) {
+            return;
+        }
+
         if(!GUIState.REPEAT_ACTION.equals(newState)) {
             state = newState;
         }
