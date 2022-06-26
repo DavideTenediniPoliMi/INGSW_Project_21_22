@@ -40,7 +40,8 @@ public class GUI extends Application {
     private static boolean waitForActivatedCard;
     private static String activeCardName;
     private static boolean activatedCard;
-    private static boolean waitingForPlayer;
+    private static boolean waitingForPlayerRecon;
+    private static boolean waitingForPlayerDC;
 
     /**
      * Asks the engine to start this application.
@@ -224,12 +225,14 @@ public class GUI extends Application {
 
         if(!jo.has("matchInfo")) {
             if(JsonUtils.isNotCharCardJSON(jo, playerId)) {
-                if(waitingForPlayer && jo.has("players")) {
-                    waitingForPlayer = false;
-                    System.out.println("in here");
+                if(waitingForPlayerRecon && jo.has("players")) {
+                    waitingForPlayerRecon = false;
                     return (matchInfo.getCurrentPlayerID() != playerId) ? GUIState.WAIT_ACTION : resetState(jo);
                 }
-                System.out.println("here");
+                if(waitingForPlayerDC && jo.has("players")) {
+                    waitingForPlayerDC = false;
+                    return (matchInfo.getCurrentPlayerID() != playerId) ? GUIState.WAIT_ACTION : resetState(jo);
+                }
                 return GUIState.WAIT_RESPONSE;
             }
 
@@ -243,7 +246,6 @@ public class GUI extends Application {
                     boughtCard = true;
                 }
             }
-            System.out.println("this one");
 
             return GUIState.WAIT_RESPONSE;
         }
@@ -254,7 +256,12 @@ public class GUI extends Application {
             return GUIState.END_GAME;
 
         if(JsonUtils.hasPlayerReconnected(jo)) {
-            waitingForPlayer = true;
+            waitingForPlayerRecon = true;
+            return GUIState.WAIT_RESPONSE;
+        }
+
+        if(JsonUtils.hasPlayerReconnected(jo)) {
+            waitingForPlayerRecon = true;
             return GUIState.WAIT_RESPONSE;
         }
 
