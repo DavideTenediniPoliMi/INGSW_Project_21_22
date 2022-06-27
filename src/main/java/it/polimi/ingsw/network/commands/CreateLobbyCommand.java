@@ -4,6 +4,9 @@ import it.polimi.ingsw.controller.LobbyController;
 import it.polimi.ingsw.exceptions.EriantysException;
 import it.polimi.ingsw.exceptions.EriantysRuntimeException;
 
+/**
+ * Command class to request the creation of a new Lobby.
+ */
 public class CreateLobbyCommand implements Command {
     private final int selectedNumPlayer;
     private final boolean expertMode;

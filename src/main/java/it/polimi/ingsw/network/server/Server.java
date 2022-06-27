@@ -25,6 +25,9 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Class that handles the server lifecycle.
+ */
 public class Server {
     private static final String BACKUP_FILE = "BackupData.txt";
     private ServerSocket serverSocket;
@@ -37,6 +40,14 @@ public class Server {
         this();
         serverSocket = new ServerSocket(port);
     }
+
+    /**
+     * The constructor checks if a backup file exists. If it does than it loads the information on the server, otherwise
+     * creates a brand-new server.
+     *
+     * @throws PlayerAlreadyConnectedException when there are multiple VirtualView with the same name.
+     * @throws GameFullException when there are too many players connected to the game.
+     */
     private Server() throws PlayerAlreadyConnectedException, GameFullException {
         File file = new File(BACKUP_FILE);
 
@@ -57,6 +68,17 @@ public class Server {
         }
     }
 
+
+    /**
+     * Returns a Virtual View for the specified name. If a Virtual View for that player's name already exists than returns it,
+     * at the condition that it is not connected to any other socket. If there is not a Virtual View for that player,
+     * it creates one and adds it to the list of Virtual Views.
+     *
+     * @param name the name of the player.
+     * @return the VirtualView for the player.
+     * @throws PlayerAlreadyConnectedException when the name corresponds to a Virtual View used by another player at the same time.
+     * @throws GameFullException when a player tries to create a new Virtual View when the game is already full.
+     */
     public synchronized VirtualView getVVFor(String name) throws PlayerAlreadyConnectedException, GameFullException {
         MatchInfo matchInfo = MatchInfo.getInstance();
         if(matchInfo.getNumPlayersConnected() == matchInfo.getSelectedNumPlayer() && matchInfo.getSelectedNumPlayer() != 0) {
@@ -78,10 +100,18 @@ public class Server {
         return vv;
     }
 
+    /**
+     * Removes the Virtual View form the list of tracked VirtualViews on the server.
+     *
+     * @param virtualView the Virtual View to remove.
+     */
     public synchronized void removeVV(VirtualView virtualView) {
         virtualViews.remove(virtualView);
     }
 
+    /**
+     * Accepts incoming connections and creates a single ClientConnection for each of them.
+     */
     public void run(){
         System.out.println("Server: running");
         while(true){
@@ -98,6 +128,11 @@ public class Server {
         }
     }
 
+    /**
+     * Reads and parses the json objects from the file.
+     *
+     * @param file the file with the backed up data.
+     */
     private void readDataFromFile(File file) {
         MatchInfo matchInfo = MatchInfo.getInstance();
         String line;
@@ -115,6 +150,9 @@ public class Server {
         }
     }
 
+    /**
+     * Serializes the Game objects in JSON formats on the back-up file. If the game is in LOBBY status then discards everything.
+     */
     public void saveDataToFile() {
         Game game = Game.getInstance();
         MatchInfo matchInfo = MatchInfo.getInstance();
@@ -143,6 +181,9 @@ public class Server {
         }
     }
 
+    /**
+     * Reset all the game related structures.
+     */
     public void resetGame() {
         Lobby.resetLobby();
         Game.resetInstance();

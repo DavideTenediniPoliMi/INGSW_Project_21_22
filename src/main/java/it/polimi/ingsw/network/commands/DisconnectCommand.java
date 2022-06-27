@@ -6,6 +6,9 @@ import it.polimi.ingsw.exceptions.EriantysException;
 import it.polimi.ingsw.exceptions.EriantysRuntimeException;
 import it.polimi.ingsw.model.MatchInfo;
 
+/**
+ * Command class to signal the disconnection of a player.
+ */
 public class DisconnectCommand implements Command {
 
     private final int playerID;

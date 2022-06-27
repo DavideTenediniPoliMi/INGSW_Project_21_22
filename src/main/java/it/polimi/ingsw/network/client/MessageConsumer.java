@@ -6,6 +6,10 @@ import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
 import it.polimi.ingsw.view.cli.CLI;
 
+/**
+ * Class the implements the Consumer in the Producer-Consumer pattern. It ensures that the CLI is fed messages in the
+ * exact same order they arrived.
+ */
 public class MessageConsumer implements Runnable{
     private final MessageQueue<String> queue;
     private volatile boolean runFlag;
@@ -22,6 +26,11 @@ public class MessageConsumer implements Runnable{
         consume();
     }
 
+    /**
+     * Consumes messages in the queue and feeds them to the CLI. If it consumes all the messages in the queue it'll block
+     * and wait for a new messages to be added to the queue. The messages will be executed in the same order they appearded
+     * in the queue (FIFO).
+     */
     private void consume() {
         while (runFlag) {
             String message;
@@ -50,6 +59,9 @@ public class MessageConsumer implements Runnable{
         }
     }
 
+    /**
+     * Signals to the consumer to stop consuming messages.
+     */
     public void stop() {
         runFlag = false;
         queue.notifyAllForEmpty();

@@ -7,6 +7,9 @@ import it.polimi.ingsw.exceptions.EriantysRuntimeException;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.GameStatus;
 
+/**
+ * Command class to signal the reconnection of a player.
+ */
 public class ReconnectCommand implements Command {
 
     private final int playerID;

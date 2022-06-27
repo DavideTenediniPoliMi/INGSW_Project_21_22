@@ -17,6 +17,9 @@ import it.polimi.ingsw.view.cli.viewStates.*;
 import java.io.IOException;
 import java.net.Socket;
 
+/**
+ * Class representing the serverConnection on the Client while using the CLI.
+ */
 public class ServerConnectionCLI extends Connection {
     private final CLI view;
     private boolean inGame;
@@ -33,9 +36,12 @@ public class ServerConnectionCLI extends Connection {
         view = new CLI(new HandshakeViewState(viewState));
     }
 
+    /**
+     * Starts the CLI interaction for the handshake. Then waits a response from the server. If the response is an error
+     * it repeats the process otherwise it starts the lobby sequence.
+     */
     @Override
     public void run() {
-        // THIS FIRST INTERACTION IS THE HANDSHAKE (name)
         while(true) {
             view.handleHandshake();
 
@@ -55,17 +61,20 @@ public class ServerConnectionCLI extends Connection {
         lobbySequence();
     }
 
-    /** PER QUANDO IN LOBBY
-     * LOOP CHE CONTINUA A LEGGERE E FA LA DESERIALIZE SU UN THREAD SEPARATO
-     * ALTRO THREAD CONTINUA A FARE IL LOOP DELLA VIEW FINO A CHE NON SEI READY,
-     * A QUEL PUNTO STAMPI OGNI NOTIFY
-     *
-     * Check se la lobby esiste già o no, quando joini checka finchè non ti arriva un messaggio con il tuo nome tra i player
+    /**
+     * If the first message contains an IN_GAME status than handles the reconnection of the player and start the game
+     * sequence.
+     * If the first message does not contain a lobby than it prompts the user to create one, while listening for
+     * other people to create one in the meanwhile. If the first messages contains a valid lobby, or the user created one,
+     * then it attempts to join it. If it fails than it stops the application.
+     * Once the user joined the lobby it starts reading messages, and it prompts the user to selecting a CB and team.
+     * When the user is ready it listens and shows messages in the lobby until the game starts.
      */
     private void lobbySequence() {
         String lastResp = "";
 
         if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.IN_GAME)) { //Handle reconnection
+            // WAIT FOR A GAME MESSAGE TO ARRIVE
             while(connected) {
                 String received = receiveMessage();
                 if(received.equals("")) continue;
@@ -81,13 +90,12 @@ public class ServerConnectionCLI extends Connection {
                     return;
                 }
             }
-        } else if(MatchInfo.getInstance().getSelectedNumPlayer() == 0) {
+        } else if(MatchInfo.getInstance().getSelectedNumPlayer() == 0) { // NO LOBBY FOUND, CREATE A LOBBY
             executor.submit(this::waitForLobbyCreation);
 
             //Begin lobby creation sequence
             view.setViewState(new NoLobbyViewState(view.getViewState()));
             view.handleInteraction();
-
         }
 
         //Force connection to lobby
@@ -97,6 +105,7 @@ public class ServerConnectionCLI extends Connection {
             update(requestParameters.serialize().toString());
         }
 
+        // WAIT FOR A VALID RESPONSE TO THE JOIN COMMAND, OTHERWISE EXIT
         while(!joined && connected) {
             String received = receiveMessage();
             if(received.equals("")) continue;
@@ -113,6 +122,7 @@ public class ServerConnectionCLI extends Connection {
         view.setViewState(new SelectLobbyViewState(view.getViewState()));
         executor.submit(view::handleInteraction);
 
+        // READS MESSAGES, DESERIALIZES AND ASKS INTERACTION TO THE CLI UNTIL THE PLAYER IS READY.
         while(!ready && connected) {
             String received = receiveMessage();
             if(received.equals("")) continue;
@@ -146,6 +156,7 @@ public class ServerConnectionCLI extends Connection {
             view.displayState();
         }
 
+        // SHOWS NEW MESSAGES INCOMING UNTIL THE GAME STARTS
         while(!inGame && connected) {
             String received = receiveMessage();
             if(received.equals("")) continue;
@@ -168,25 +179,26 @@ public class ServerConnectionCLI extends Connection {
                 }
             });
         }
-            gameSequence(lastResp, false);
+
+        gameSequence(lastResp, false);
     }
 
-    /** PER QUANDO IN GAME
-     * LOOP CHE LEGGE, QUANDO LEGGE QUALCOSA FA LA DESERIALZE A MENO CHE NON SIA UN ERRORE
-     * NEXT_VIEW_STATE A MENO CHE NON SIA UN ERRORE
-     * SE NEXT_VIEW_STATE RITORNA TRUE VAI A FARE UN INTERAZIONE DELLA NUOVA VIEW
-     * ALTRIMENTI CONTINUI A LEGGERE
+    /**
+     * Keeps reading from the socket and deserializes the messages that it reads. If nextState returns true then asks
+     * the CLI to perform an interaction otherwise shows the changes to the user.
      */
     private void gameSequence(String lastResponse, boolean isReconnection) {
         if(!connected)
             return;
 
         JsonObject initJsonObject = JsonParser.parseString(lastResponse).getAsJsonObject();
+
         if(!joined)
             bindPlayerID(initJsonObject);
 
         new ResponseParameters().deserialize(initJsonObject);
 
+        // Waits for a matchInfo and a players message after the reconnection to align the message streams.
         if(isReconnection) {
             new ResponseParameters().deserialize(JsonParser.parseString(receiveMessage()).getAsJsonObject());
             new ResponseParameters().deserialize(JsonParser.parseString(receiveMessage()).getAsJsonObject());
@@ -194,9 +206,9 @@ public class ServerConnectionCLI extends Connection {
 
         view.resetTurnState(MatchInfo.getInstance().serialize());
 
-        if(MatchInfo.getInstance().getCurrentPlayerID() == view.getPlayerID()) {
+        if(MatchInfo.getInstance().getCurrentPlayerID() == view.getPlayerID()) { // this user's turn
             view.handleFirstInteraction();
-        } else {
+        } else { // somebody's else turn
             view.setViewState(new GameViewState(view.getViewState()));
             view.displayState();
         }
@@ -215,6 +227,12 @@ public class ServerConnectionCLI extends Connection {
         jsonConsumer.stop();
     }
 
+    /**
+     * Checks if the player using this client has been detected ready by the server.
+     *
+     * @param received the last message received.
+     * @return true is this player is ready, false otherwise.
+     */
     private boolean isThisPlayerReady(String received) {
         JsonObject jsonObject = (JsonObject) JsonParser.parseString(received);
         if(jsonObject.has("players")) {
@@ -229,6 +247,11 @@ public class ServerConnectionCLI extends Connection {
         return false;
     }
 
+    /**
+     * Binds the view with the ID assigned to the player using this client on the server.
+     *
+     * @param jsonObject the last message received.
+     */
     private void bindPlayerID(JsonObject jsonObject) {
         JsonObject gameObject;
 
@@ -250,6 +273,9 @@ public class ServerConnectionCLI extends Connection {
         }
     }
 
+    /**
+     * Async task that listens for messages that indicates the creation of another lobby while this user is creating one.
+     */
     private void waitForLobbyCreation() {
         while(connected) {
             String received;

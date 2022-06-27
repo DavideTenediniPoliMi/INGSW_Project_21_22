@@ -20,12 +20,20 @@ import java.net.Socket;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class representing the serverConnection on the Client while using the GUI.
+ */
 public class ServerConnectionGUI extends Connection {
 
     public ServerConnectionGUI(Socket socket) throws IOException {
         super(socket);
     }
 
+    /**
+     * Reads from the socket until it receives a non-error message. Error messages are properly displayed.
+     *
+     * @return the last valid message received.
+     */
     private JsonObject waitForValidMessage() {
         while(connected) {
             String received = receiveMessage();
@@ -42,14 +50,23 @@ public class ServerConnectionGUI extends Connection {
         return new JsonObject();
     }
 
+    /**
+     * If the first message contains an IN_GAME status than handles the reconnection of the player and start the game
+     * sequence.
+     * If the first message does not contain a lobby than it prompts the user to create one, while listening for
+     * other people to create one in the meanwhile. If the first messages contains a valid lobby, or the user created one,
+     * then it attempts to join it. If it fails than it restarts the application.
+     * Once the user joined the lobby it starts reading messages, and it prompts the user to selecting a CB and team.
+     * When the user is ready it listens and shows messages in the lobby until the game starts.
+     */
     @Override
     public void run() {
         JsonObject jsonObject = waitForValidMessage();
         new ResponseParameters().deserialize(jsonObject);
         boolean attemptedCreation = false;
 
-        if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.LOBBY)) {
-            if (MatchInfo.getInstance().getSelectedNumPlayer() == 0) {
+        if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.LOBBY)) { // THE GAME HAS NOT STARTED
+            if (MatchInfo.getInstance().getSelectedNumPlayer() == 0) { // THERE'S NO LOBBY YET
                 attemptedCreation = true;
                 Platform.runLater(() -> GUI.loadScene("/scenes/createLobbyScene.fxml"));
 
@@ -61,6 +78,7 @@ public class ServerConnectionGUI extends Connection {
                             .setCommandType(CommandType.JOIN)
                             .setName(GUI.getName()).serialize().toString());
 
+            // WAITS FOR A VALID JOIN RESPONSE OR GOES TO THE STARTING SCREEN
             do {
                 JsonObject received = JsonParser.parseString(receiveMessage()).getAsJsonObject();
 
@@ -77,9 +95,10 @@ public class ServerConnectionGUI extends Connection {
             GUI.bindPlayerId();
 
             Platform.runLater(() -> GUI.loadScene("/scenes/lobbySelectionScene.fxml"));
-            if (!GUI.didCreateLobby() && attemptedCreation)
+
+            if (!GUI.didCreateLobby() && attemptedCreation) //THE LOBBY CREATION WAS INTERRUPTED
                 Platform.runLater(GUI::showAlert);
-        } else {
+        } else { // RECONNECTION MID-GAME
             while(!jsonObject.has("game")) {
                 jsonObject = waitForValidMessage();
                 new ResponseParameters().deserialize(jsonObject);
@@ -87,12 +106,14 @@ public class ServerConnectionGUI extends Connection {
 
             GUI.bindPlayerId();
             Platform.runLater(() -> GUI.loadScene("/scenes/gameScene.fxml"));
+            // DISCARDS A MATCHINFO AND PLAYERS MESSAGE
             new ResponseParameters().deserialize(waitForValidMessage());
             new ResponseParameters().deserialize(waitForValidMessage());
             gameLoop();
             return;
         }
 
+        // LOBBY SELECTION LOOP
         while(connected) {
             jsonObject = waitForValidMessage();
 
@@ -110,6 +131,13 @@ public class ServerConnectionGUI extends Connection {
         }
     }
 
+    /**
+     * Returns a player with the specified name in the list of players. If none are found, returns null.
+     *
+     * @param name the name of the player
+     * @param players the list of players
+     * @return the target <code>Player</code>, or null.
+     */
     public Player getPlayerByName(String name, List<Player> players) {
         Optional<Player> result = players.stream()
                 .filter((player) -> (player.getName().equals(name)))
@@ -118,6 +146,9 @@ public class ServerConnectionGUI extends Connection {
         return result.orElse(null);
     }
 
+    /**
+     * Reads messages and deserializes them, then asks the GUI to show the changes and interaction if necessary.
+     */
     private void gameLoop() {
         JsonObject jsonObject;
 

@@ -5,6 +5,10 @@ import it.polimi.ingsw.exceptions.EriantysException;
 import it.polimi.ingsw.exceptions.EriantysRuntimeException;
 import it.polimi.ingsw.model.MatchInfo;
 
+/**
+ * Command class that signals to the controller that the current player is not connected, and that their action should
+ * be skipped.
+ */
 public class SkipTurnCommand implements Command {
     final int playerID;
     final GameController gameController;

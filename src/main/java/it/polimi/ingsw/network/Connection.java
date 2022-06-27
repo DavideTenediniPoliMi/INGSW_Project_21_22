@@ -8,8 +8,10 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.*;
 
+/**
+ * Class that represents a connection between Client and Server.
+ */
 public abstract class Connection implements Runnable, Observer<String> {
-    private final Socket socket;
     private final DataOutputStream out;
     private final DataInputStream in;
     protected final ExecutorService executor = Executors.newFixedThreadPool(16);
@@ -17,8 +19,6 @@ public abstract class Connection implements Runnable, Observer<String> {
     protected boolean connected;
 
     public Connection(Socket socket) throws IOException {
-        this.socket = socket;
-
         out = new DataOutputStream(socket.getOutputStream());
         in = new DataInputStream(socket.getInputStream());
 
@@ -33,6 +33,11 @@ public abstract class Connection implements Runnable, Observer<String> {
         connected = true;
     }
 
+    /**
+     * Sends the message on the socket.
+     *
+     * @param message the message to be sent.
+     */
     public synchronized void sendMessage(String message) {
         try {
             System.out.println("SENT : " + message);
@@ -48,6 +53,11 @@ public abstract class Connection implements Runnable, Observer<String> {
         }
     }
 
+    /**
+     * Keeps reading from the socket until it reads a non-ping message, then returns it.
+     *
+     * @return the message read.
+     */
     public String receiveMessage() {
         try {
             int length;
@@ -77,6 +87,9 @@ public abstract class Connection implements Runnable, Observer<String> {
         sendMessage(message);
     }
 
+    /**
+     * To be called when the connection fails. Stops the ping routine and applies any cleanup effects.
+     */
     public void disconnect() {
         System.out.println("Connection lost, stopping ping");
         pingTask.cancel(false);

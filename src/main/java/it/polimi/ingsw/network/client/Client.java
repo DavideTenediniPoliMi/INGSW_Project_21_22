@@ -6,6 +6,9 @@ import it.polimi.ingsw.view.cli.CLI;
 import it.polimi.ingsw.view.gui.GUI;
 import org.fusesource.jansi.AnsiConsole;
 
+/**
+ * Class that handles GUI and CLI lifecycle.
+ */
 public class Client {
     public Client() {
     }

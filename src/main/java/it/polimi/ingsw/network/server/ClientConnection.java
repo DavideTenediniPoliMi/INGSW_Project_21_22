@@ -15,6 +15,9 @@ import javafx.css.Match;
 import java.io.*;
 import java.net.Socket;
 
+/**
+ * Class representing the connection to the Client on the Server.
+ */
 public class ClientConnection extends Connection {
     private final Server server;
     private VirtualView virtualView;
@@ -26,6 +29,9 @@ public class ClientConnection extends Connection {
         this.server = server;
     }
 
+    /**
+     * After handling the handshake it keeps reading messages and dispatching them to the Virtual View.
+     */
     @Override
     public void run() {
         System.out.println("Waiting for handshake");
@@ -42,6 +48,9 @@ public class ClientConnection extends Connection {
         System.out.println("Disconnected");
     }
 
+    /**
+     * Keeps reading and handling messages until a valid handshake has been performed.
+     */
     private void waitForHandshake() {
         while(connected && !bound) {
             String received = receiveMessage();
@@ -52,6 +61,11 @@ public class ClientConnection extends Connection {
         }
     }
 
+    /**
+     * Attempts to bind a Virtual View to the name received.
+     *
+     * @param message the last message received
+     */
     public void handleHandshake(String message) {
         JsonObject jsonObject = JsonParser.parseString(message).getAsJsonObject();
 
@@ -93,6 +107,9 @@ public class ClientConnection extends Connection {
             resetGame();
     }
 
+    /**
+     * Resets the server after all payers have disconnected.
+     */
     public void resetGame() {
         GameStatus status = MatchInfo.getInstance().getGameStatus();
         if(status.equals(GameStatus.RESETTING) || status.equals(GameStatus.LOBBY)) //Game is resetting or has already been reset
