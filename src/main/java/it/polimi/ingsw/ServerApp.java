@@ -12,7 +12,7 @@ import java.io.IOException;
 public class ServerApp {
     private static final int DEFAULT_PORT = 12345;
 
-    public static void main(String[] args) throws IOException, InterruptedException, PlayerAlreadyConnectedException, GameFullException {
+    public static void main(String[] args) throws IOException, PlayerAlreadyConnectedException, GameFullException {
         Server server;
         int port = DEFAULT_PORT;
         for(int i = 0; i < args.length; i++) {
@@ -30,8 +30,8 @@ public class ServerApp {
                 }
             }
         }
-        //Runtime.getRuntime().addShutdownHook(new Thread ( () -> server.saveDataToFile()));
         server = new Server(port);
+        Runtime.getRuntime().addShutdownHook(new Thread (server::saveDataToFile));
         server.run();
     }
 }
