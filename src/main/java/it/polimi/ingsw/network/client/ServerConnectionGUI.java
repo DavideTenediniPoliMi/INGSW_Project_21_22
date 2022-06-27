@@ -36,8 +36,9 @@ public class ServerConnectionGUI extends Connection {
 
             String errorText = jsonObject.get("error").getAsString();
             Platform.runLater(() -> GUI.showError(errorText));
+            Platform.runLater(() -> GUI.handleInteraction(GUIState.REPEAT_ACTION));
         }
-        return null;
+        return new JsonObject();
     }
 
     @Override
@@ -128,7 +129,6 @@ public class ServerConnectionGUI extends Connection {
             JsonObject finalJsonObject = jsonObject;
             Platform.runLater(() -> GUI.applyChanges(finalJsonObject));
             Platform.runLater(() -> GUI.handleInteraction(nextState));
-
         }
     }
 
@@ -136,7 +136,7 @@ public class ServerConnectionGUI extends Connection {
     public void disconnect() {
         super.disconnect();
         Platform.runLater(() -> GUI.loadScene("/scenes/bindingScene.fxml"));
-        Platform.runLater(() -> GUI.showError("Disconnected"));
+        Platform.runLater(() -> GUI.showError("Disconnected from the server!"));
         run();
     }
 }
