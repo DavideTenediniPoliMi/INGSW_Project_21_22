@@ -444,8 +444,8 @@ public class GameController extends FXController {
             islandStudents.get(i).setUserData(i);
         }
 
-        for(int i = 0; i < cloudStudents.size(); i++) {
-            cloudStudents.get(i).setUserData(i);
+        for(int i = 0; i < clouds.size(); i++) {
+            clouds.get(i).setUserData(i);
         }
 
         applyChangesSchools();
@@ -1218,7 +1218,7 @@ public class GameController extends FXController {
                         clouds.get(i).getStyleClass().clear();
                         clouds.get(i).getStyleClass().add("cloud");
                         clouds.get(i).getStyleClass().add("target");
-                        cloudStudents.get(i).setOnMouseClicked(this::handleCloudSelection);
+                        clouds.get(i).setOnMouseClicked(this::handleCloudSelection);
                     }
                 }
                 break;
@@ -1672,7 +1672,7 @@ public class GameController extends FXController {
      * @param mouseEvent the event fired by the click of the cloud.
      */
     private void handleCloudSelection(MouseEvent mouseEvent) {
-        GridPane cloud = (GridPane) mouseEvent.getSource();
+        AnchorPane cloud = (AnchorPane) mouseEvent.getSource();
 
         disableGraphic();
         actionText.setText("Waiting for a server response");

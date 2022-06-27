@@ -2,6 +2,7 @@ package it.polimi.ingsw.network.client;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
@@ -137,6 +138,8 @@ public class ServerConnectionGUI extends Connection {
         super.disconnect();
         Platform.runLater(() -> GUI.loadScene("/scenes/bindingScene.fxml"));
         Platform.runLater(() -> GUI.showError("Disconnected from the server!"));
-        run();
+        MatchInfo.resetInstance();
+        Lobby.resetLobby();
+        Game.resetInstance();
     }
 }

@@ -65,6 +65,10 @@ public class VirtualView extends Observable<String> implements Observer<Response
         return connected;
     }
 
+    public void setJoined(boolean joined) {
+        this.joined = joined;
+    }
+
     /**
      * Handles any request coming from the clients, and it interfaces with the controller.
      *

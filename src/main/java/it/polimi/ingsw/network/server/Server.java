@@ -50,6 +50,8 @@ public class Server {
                 for(Player player : Game.getInstance().getPlayers()) {
                     VirtualView virtualView = getVVFor(player.getName());
                     virtualView.deserialize(player.getID());
+                    virtualView.disconnect();
+                    virtualView.setJoined(true);
                 }
             }
         }
@@ -114,7 +116,6 @@ public class Server {
     }
 
     public void saveDataToFile() {
-        Lobby lobby = Lobby.getLobby();
         Game game = Game.getInstance();
         MatchInfo matchInfo = MatchInfo.getInstance();
         if(matchInfo.isGameOver())
@@ -124,6 +125,12 @@ public class Server {
                 new File(BACKUP_FILE).createNewFile();
 
                 FileWriter fileWriter = new FileWriter(BACKUP_FILE);
+
+                matchInfo.setNumPlayersConnected(0);
+
+                for(Player p : game.getPlayers()) {
+                    game.disconnectPlayer(p.getID());
+                }
 
                 fileWriter.write(matchInfo.serialize().toString());
                 fileWriter.write("\n");
