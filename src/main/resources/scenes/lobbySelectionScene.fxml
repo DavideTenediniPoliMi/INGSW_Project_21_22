@@ -110,7 +110,7 @@
       </ImageView>
       <Label fx:id="usernameText3" alignment="CENTER" layoutX="20.0" layoutY="10.0" style="-fx-background-color: grey; -fx-background-radius: 10px;" text="tene" textFill="WHITE" textOverrun="CLIP" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <font>
-            <Font name="AppleMyungjo Regular" size="36.0" />
+            <Font name="Arial Hebrew" size="36.0" />
          </font>
          <effect>
             <Glow level="0.5" />
@@ -140,7 +140,7 @@
       </ImageView>
       <Label fx:id="usernameText4" alignment="CENTER" layoutX="18.0" layoutY="10.0" style="-fx-background-color: grey; -fx-background-radius: 10px;" text="fede" textFill="WHITE" textOverrun="CLIP" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <font>
-            <Font name="AppleMyungjo Regular" size="36.0" />
+            <Font name="Arial Hebrew" size="36.0" />
          </font>
          <effect>
             <Glow level="0.5" />
