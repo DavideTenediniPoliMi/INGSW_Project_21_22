@@ -30,8 +30,8 @@ public class ServerApp {
                 }
             }
         }
-        //Runtime.getRuntime().addShutdownHook(new Thread ( () -> server.saveDataToFile()));
         server = new Server(port);
+        //Runtime.getRuntime().addShutdownHook(new Thread ( () -> server.saveDataToFile()));
         server.run();
     }
 }

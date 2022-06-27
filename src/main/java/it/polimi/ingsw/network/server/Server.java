@@ -108,11 +108,8 @@ public class Server {
             matchInfo.deserialize(JsonParser.parseString(line).getAsJsonObject());
 
             line = fileReader.nextLine();
-            if (matchInfo.getGameStatus().equals(GameStatus.LOBBY))
-                Lobby.getLobby().deserialize(JsonParser.parseString(line).getAsJsonObject());
-            else
-                Game.getInstance().deserialize(JsonParser.parseString(line).getAsJsonObject());
 
+            Game.getInstance().deserialize(JsonParser.parseString(line).getAsJsonObject());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -125,18 +122,17 @@ public class Server {
         if(matchInfo.isGameOver())
             return;
         try {
-            new File(BACKUP_FILE).createNewFile();
+            if(matchInfo.getGameStatus().equals(GameStatus.IN_GAME)) {
+                new File(BACKUP_FILE).createNewFile();
 
-            FileWriter fileWriter = new FileWriter(BACKUP_FILE);
+                FileWriter fileWriter = new FileWriter(BACKUP_FILE);
 
-            fileWriter.write(matchInfo.serialize().toString());
-            fileWriter.write("\n");
-            if(matchInfo.getGameStatus().equals(GameStatus.LOBBY))
-                fileWriter.write(lobby.serialize().toString());
-            else if(matchInfo.getGameStatus().equals(GameStatus.IN_GAME))
+                fileWriter.write(matchInfo.serialize().toString());
+                fileWriter.write("\n");
                 fileWriter.write(game.serialize().toString());
 
-            fileWriter.close();
+                fileWriter.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
