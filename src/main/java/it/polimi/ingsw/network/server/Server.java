@@ -1,7 +1,5 @@
 package it.polimi.ingsw.network.server;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.controller.LobbyController;
@@ -39,7 +37,7 @@ public class Server {
         this();
         serverSocket = new ServerSocket(port);
     }
-    private Server() throws IOException, PlayerAlreadyConnectedException, GameFullException {
+    private Server() throws PlayerAlreadyConnectedException, GameFullException {
         File file = new File(BACKUP_FILE);
 
         if(file.exists()) {

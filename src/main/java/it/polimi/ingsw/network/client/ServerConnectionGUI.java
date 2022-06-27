@@ -26,7 +26,7 @@ public class ServerConnectionGUI extends Connection {
     }
 
     private JsonObject waitForValidMessage() {
-        while(true) {
+        while(connected) {
             String received = receiveMessage();
             if (received.equals("")) continue;
 
@@ -36,7 +36,9 @@ public class ServerConnectionGUI extends Connection {
 
             String errorText = jsonObject.get("error").getAsString();
             Platform.runLater(() -> GUI.showError(errorText));
+            Platform.runLater(() -> GUI.handleInteraction(GUIState.REPEAT_ACTION));
         }
+        return new JsonObject();
     }
 
     @Override
@@ -69,7 +71,7 @@ public class ServerConnectionGUI extends Connection {
                 }
 
                 new ResponseParameters().deserialize(received);
-            } while(getPlayerByName(GUI.getName(), Lobby.getLobby().getPlayers()) == null);
+            } while(connected && getPlayerByName(GUI.getName(), Lobby.getLobby().getPlayers()) == null);
 
             GUI.bindPlayerId();
 
@@ -90,7 +92,7 @@ public class ServerConnectionGUI extends Connection {
             return;
         }
 
-        while(true) {
+        while(connected) {
             jsonObject = waitForValidMessage();
 
             new ResponseParameters().deserialize(jsonObject);
@@ -118,7 +120,7 @@ public class ServerConnectionGUI extends Connection {
     private void gameLoop() {
         JsonObject jsonObject;
 
-        while(true) {
+        while(connected) {
             jsonObject = waitForValidMessage();
 
             GUIState nextState = GUI.nextState(jsonObject);
@@ -127,7 +129,14 @@ public class ServerConnectionGUI extends Connection {
             JsonObject finalJsonObject = jsonObject;
             Platform.runLater(() -> GUI.applyChanges(finalJsonObject));
             Platform.runLater(() -> GUI.handleInteraction(nextState));
-
         }
+    }
+
+    @Override
+    public void disconnect() {
+        super.disconnect();
+        Platform.runLater(() -> GUI.loadScene("/scenes/bindingScene.fxml"));
+        Platform.runLater(() -> GUI.showError("Disconnected from the server!"));
+        run();
     }
 }

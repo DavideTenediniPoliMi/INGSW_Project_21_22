@@ -52,7 +52,7 @@ public class ClientConnection extends Connection {
         }
     }
 
-    public void handleHandshake(String message) { // TODO Proper error messages
+    public void handleHandshake(String message) {
         JsonObject jsonObject = JsonParser.parseString(message).getAsJsonObject();
 
         if(!jsonObject.has("commandType") || !jsonObject.has("name")) {
@@ -70,8 +70,8 @@ public class ClientConnection extends Connection {
             virtualView.addObserver(this);
             //If VirtualView is new and game has already started send error
             if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.IN_GAME) && !virtualView.hasJoined()) {
-                sendMessage(new ResponseParameters().setError("Game has already started!").toString());
-                disconnect();
+                sendMessage(new ResponseParameters().setError("Game has already started!").serialize().toString());
+                server.removeVV(virtualView);
                 return;
             }
 
