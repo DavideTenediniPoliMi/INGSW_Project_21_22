@@ -457,7 +457,7 @@ public class GameController extends FXController {
         numCoinsLeft.setText(String.valueOf(Game.getInstance().getBoard().getNumCoinsLeft()));
         applyChangesCards();
         applyChangesPlayers();
-
+        applyChangesCurrentPlayer();
 
         handleInteraction((matchInfo.getCurrentPlayerID() == GUI.getPlayerId()) ? getCurrentState() : GUIState.WAIT_ACTION);
     }
@@ -658,6 +658,10 @@ public class GameController extends FXController {
         
         if(jsonObject.has("players")) {
             applyChangesPlayers();
+        }
+
+        if(jsonObject.has("matchInfo")) {
+            applyChangesCurrentPlayer();
         }
     }
 
@@ -877,6 +881,21 @@ public class GameController extends FXController {
                 otherNumCoins.get(otherIndex).setText(String.valueOf(player.getNumCoins()));
                 otherIndex++;
             }
+        }
+    }
+
+    /**
+     * Changes various elements of the graphic to match the changes after a message regarding Current Player changes.
+     */
+    private void applyChangesCurrentPlayer() {
+        for(Player p : Game.getInstance().getPlayers()) {
+            if(p.getID() == GUI.getPlayerId()) continue;
+
+            int otherIndex = getAdjustedOtherPlayerIndex(p.getID());
+            otherPlayers.get(otherIndex).getStyleClass().clear();
+            otherPlayers.get(otherIndex).getStyleClass().add(
+                    (MatchInfo.getInstance().getCurrentPlayerID() == p.getID()) ? "target" : "def"
+            );
         }
     }
 
@@ -1956,6 +1975,7 @@ public class GameController extends FXController {
      */
     private void disableGraphic() {
         entranceHero.getStyleClass().clear();
+        entranceHero.getStyleClass().add("def");
 
         for(ImageView card : cards) {
             card.setOnMouseClicked(null);
