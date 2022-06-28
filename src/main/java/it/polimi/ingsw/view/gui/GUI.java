@@ -223,19 +223,23 @@ public class GUI extends Application {
         MatchInfo matchInfo = MatchInfo.getInstance();
 
         if(!jo.has("matchInfo")) {
+            System.out.println("NOT MATCHINFO");
             if(JsonUtils.isNotCharCardJSON(jo, playerId)) {
-                if(waitingForPlayerDC && jo.has("players")) {
+                if(waitingForPlayerDC && jo.has("players") && !jo.has("cards")) {
                     waitingForPlayerDC = false;
+                    System.out.println("SAW DISCONNECT");
                     return GUIState.DISCONNECTION;
                 }
                 if(waitingForPlayerRecon && jo.has("players")) {
                     waitingForPlayerRecon = false;
+                    System.out.println("SAW RECONNECT");
                     if(unpausing) {
                         unpausing = false;
                         return (matchInfo.getCurrentPlayerID() == playerId ) ? getCurrentState() : GUIState.WAIT_ACTION;
                     }
                     return GUIState.DISCONNECTION;
                 }
+                System.out.println("went down");
                 return GUIState.WAIT_RESPONSE;
             }
 
@@ -249,7 +253,7 @@ public class GUI extends Application {
                     boughtCard = true;
                 }
             }
-
+            System.out.println("THIS CHAR CARDS");
             return GUIState.WAIT_RESPONSE;
         }
 
