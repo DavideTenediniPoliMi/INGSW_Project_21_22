@@ -40,7 +40,6 @@ public abstract class Connection implements Runnable, Observer<String> {
      */
     public synchronized void sendMessage(String message) {
         try {
-            System.out.println("SENT : " + message);
             out.writeInt(message.length());
 
             if(!message.equals("")) {
@@ -72,7 +71,6 @@ public abstract class Connection implements Runnable, Observer<String> {
                     message.append(in.readChar());
                 }
 
-                System.out.println("RECEIVED : " + message);
                 return message.toString();
             }
         } catch (IOException e){

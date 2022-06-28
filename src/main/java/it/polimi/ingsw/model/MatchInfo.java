@@ -385,6 +385,7 @@ public class MatchInfo extends Observable<ResponseParameters> implements Seriali
 
         JsonArray jsonWinners = jsonObject.get("winners").getAsJsonArray();
         for(JsonElement winner : jsonWinners) {
+            if(winner.isJsonNull()) continue;
             winners.add(TowerColor.valueOf(winner.getAsString()));
         }
 
