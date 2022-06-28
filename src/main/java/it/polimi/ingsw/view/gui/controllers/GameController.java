@@ -892,6 +892,8 @@ public class GameController extends FXController {
             if(p.getID() == GUI.getPlayerId()) continue;
 
             int otherIndex = getAdjustedOtherPlayerIndex(p.getID());
+            if(otherIndex < 0 || otherIndex >= otherPlayers.size()) continue;
+
             otherPlayers.get(otherIndex).getStyleClass().clear();
             otherPlayers.get(otherIndex).getStyleClass().add(
                     (MatchInfo.getInstance().getCurrentPlayerID() == p.getID()) ? "target" : "def"

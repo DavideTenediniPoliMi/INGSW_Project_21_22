@@ -230,9 +230,9 @@ public class GUI extends Application {
                 }
                 if(waitingForPlayerRecon && jo.has("players")) {
                     waitingForPlayerRecon = false;
-                    if(matchInfo.getCurrentPlayerID() == playerId && unpausing) {
+                    if(unpausing) {
                         unpausing = false;
-                        return resetState(jo);
+                        return (matchInfo.getCurrentPlayerID() == playerId ) ? getCurrentState() : GUIState.WAIT_ACTION;
                     }
                     return GUIState.DISCONNECTION;
                 }
@@ -354,6 +354,26 @@ public class GUI extends Application {
      */
     public static GUIState resetState(JsonObject jo) {
         switch (JsonUtils.getTurnState(jo)) {
+            case PLANNING:
+                return GUIState.PLANNING;
+            case STUDENTS:
+                return GUIState.MOVE_STUDENT;
+            case MOTHER_NATURE:
+                return GUIState.MOVE_MN;
+            case CLOUD:
+                return GUIState.CLOUD;
+            default:
+                return GUIState.WAIT_RESPONSE;
+        }
+    }
+
+    /**
+     * Returns the current GUIState corresponding to the current TurnState.
+     *
+     * @return the current GUIState.
+     */
+    private static GUIState getCurrentState() {
+        switch (MatchInfo.getInstance().getStateType()) {
             case PLANNING:
                 return GUIState.PLANNING;
             case STUDENTS:
