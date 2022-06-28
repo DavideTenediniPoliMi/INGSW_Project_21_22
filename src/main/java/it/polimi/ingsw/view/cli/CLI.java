@@ -106,7 +106,7 @@ public class CLI {
 
           if(jo.has("error")) {
                resetInteraction(jo.get("error").getAsString());
-               return true;
+               return !matchInfo.isGamePaused();
           }
 
           if(!jo.has("matchInfo")) {
@@ -116,10 +116,8 @@ public class CLI {
                     }
                     if(waitingForPlayerRecon && jo.has("players")) {
                          waitingForPlayerRecon = false;
-                         if(matchInfo.getCurrentPlayerID() == playerID && unpausing) {
-                              setCurrentViewState();
+                         if(unpausing) {
                               unpausing = false;
-                              return true;
                          }
                     }
                     return false;
