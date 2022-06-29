@@ -62,7 +62,7 @@ public class ServerConnectionGUI extends Connection {
     @Override
     public void run() {
         JsonObject jsonObject = waitForValidMessage();
-        new ResponseParameters().deserialize(jsonObject);
+        deserialize(jsonObject);
         boolean attemptedCreation = false;
 
         if(MatchInfo.getInstance().getGameStatus().equals(GameStatus.LOBBY)) { // THE GAME HAS NOT STARTED
@@ -70,7 +70,7 @@ public class ServerConnectionGUI extends Connection {
                 attemptedCreation = true;
                 Platform.runLater(() -> GUI.loadScene("/scenes/createLobbyScene.fxml"));
 
-                new ResponseParameters().deserialize(waitForValidMessage());
+                deserialize(waitForValidMessage());
             }
 
             sendMessage(
@@ -89,7 +89,7 @@ public class ServerConnectionGUI extends Connection {
                     return;
                 }
 
-                new ResponseParameters().deserialize(received);
+                deserialize(received);
             } while(connected && getPlayerByName(GUI.getName(), Lobby.getLobby().getPlayers()) == null);
 
             GUI.bindPlayerId();
@@ -101,14 +101,14 @@ public class ServerConnectionGUI extends Connection {
         } else { // RECONNECTION MID-GAME
             while(!jsonObject.has("game")) {
                 jsonObject = waitForValidMessage();
-                new ResponseParameters().deserialize(jsonObject);
+                deserialize(jsonObject);
             }
 
             GUI.bindPlayerId();
             Platform.runLater(() -> GUI.loadScene("/scenes/gameScene.fxml"));
             // DISCARDS A MATCHINFO AND PLAYERS MESSAGE
-            new ResponseParameters().deserialize(waitForValidMessage());
-            new ResponseParameters().deserialize(waitForValidMessage());
+            deserialize(waitForValidMessage());
+            deserialize(waitForValidMessage());
             gameLoop();
             return;
         }
@@ -117,7 +117,7 @@ public class ServerConnectionGUI extends Connection {
         while(connected) {
             jsonObject = waitForValidMessage();
 
-            new ResponseParameters().deserialize(jsonObject);
+            deserialize(jsonObject);
 
             if(jsonObject.has("game")) {
                 GUI.bindPlayerId();
@@ -156,11 +156,22 @@ public class ServerConnectionGUI extends Connection {
             jsonObject = waitForValidMessage();
 
             GUIState nextState = GUI.nextState(jsonObject);
-            new ResponseParameters().deserialize(jsonObject);
+            deserialize(jsonObject);
 
             JsonObject finalJsonObject = jsonObject;
             Platform.runLater(() -> GUI.applyChanges(finalJsonObject));
             Platform.runLater(() -> GUI.handleInteraction(nextState));
+        }
+    }
+
+    /**
+     * Deserializes the message received, applying the changes to the local model. The function is
+     * synchronized on the current scene controller.
+     * @param jsonObject the last message received.
+     */
+    public void deserialize(JsonObject jsonObject) {
+        synchronized (GUI.getController()) {
+            new ResponseParameters().deserialize(jsonObject);
         }
     }
 

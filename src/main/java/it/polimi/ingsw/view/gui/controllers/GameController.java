@@ -301,7 +301,7 @@ public class GameController extends FXController {
 
     //   INIT
     @FXML
-    public void initialize() {
+    public synchronized void initialize() {
         Board board =  Game.getInstance().getBoard();
         MatchInfo matchInfo = MatchInfo.getInstance();
 
@@ -623,7 +623,7 @@ public class GameController extends FXController {
 
     // APPLY CHANGES
     @Override
-    public void applyChanges(JsonObject jsonObject) {
+    public synchronized void applyChanges(JsonObject jsonObject) {
         if(jsonObject.has("schools")) {
             applyChangesSchools();
         }
@@ -1153,7 +1153,7 @@ public class GameController extends FXController {
 
     // HANDLE INTERACTIONS
     @Override
-    public void handleInteraction(GUIState newState) {
+    public synchronized void handleInteraction(GUIState newState) {
         Game game = Game.getInstance();
         MatchInfo matchInfo = MatchInfo.getInstance();
 
@@ -1417,7 +1417,7 @@ public class GameController extends FXController {
      *
      * @param mouseEvent the event fired by the click of the student.
      */
-    private void handleEntranceSelect(MouseEvent mouseEvent) {
+    private synchronized void handleEntranceSelect(MouseEvent mouseEvent) {
         BorderPane stud = (BorderPane) mouseEvent.getSource();
         selectedColor = (Color) stud.getUserData();
 
@@ -1468,7 +1468,7 @@ public class GameController extends FXController {
      *
      * @param mouseEvent the event fired by the click of the student.
      */
-    private void handleEntranceSelectWhileSettingParams(MouseEvent mouseEvent) {
+    private synchronized void handleEntranceSelectWhileSettingParams(MouseEvent mouseEvent) {
         BorderPane target = (BorderPane) mouseEvent.getSource();
         Color c = (Color) target.getUserData();
 
@@ -1506,7 +1506,7 @@ public class GameController extends FXController {
      *
      * @param mouseEvent the event fired by the click of the student.
      */
-    private void handleEntranceDeselectWhileSettingParams(MouseEvent mouseEvent) {
+    private synchronized void handleEntranceDeselectWhileSettingParams(MouseEvent mouseEvent) {
         BorderPane target = (BorderPane) mouseEvent.getSource();
         Color c = (Color) target.getUserData();
 
@@ -1619,7 +1619,7 @@ public class GameController extends FXController {
      *
      * @param mouseEvent the event fired by the click of the island.
      */
-    private void handleIslandSelectionWhileMoveMN(MouseEvent mouseEvent) {
+    private synchronized void handleIslandSelectionWhileMoveMN(MouseEvent mouseEvent) {
         GridPane island = (GridPane) mouseEvent.getSource();
         Board board = Game.getInstance().getBoard();
 
@@ -1642,7 +1642,7 @@ public class GameController extends FXController {
      *
      * @param mouseEvent the event fired by the click of the island.
      */
-    private void handleIslandSelectionWhileMoveStudent(MouseEvent mouseEvent) {
+    private synchronized void handleIslandSelectionWhileMoveStudent(MouseEvent mouseEvent) {
         GridPane island = (GridPane) mouseEvent.getSource();
 
         disableGraphic();
@@ -1663,7 +1663,7 @@ public class GameController extends FXController {
      *
      * @param mouseEvent the event fired by the click of the island.
      */
-    private void handleIslandSelectionWhileSettingParams(MouseEvent mouseEvent) {
+    private synchronized void handleIslandSelectionWhileSettingParams(MouseEvent mouseEvent) {
         GridPane island = (GridPane) mouseEvent.getSource();
         Board board = Game.getInstance().getBoard();
         GridPane students = charCardsStudents.get(selectedCharCard);
@@ -1712,7 +1712,7 @@ public class GameController extends FXController {
      *
      * @param mouseEvent the event fired by the click of the card.
      */
-    private void handleCharCardSelect(MouseEvent mouseEvent) {
+    private synchronized void handleCharCardSelect(MouseEvent mouseEvent) {
         ImageView card = (ImageView) mouseEvent.getSource();
 
         selectedCharCard = Integer.parseInt(card.getUserData().toString());
@@ -1766,7 +1766,7 @@ public class GameController extends FXController {
      *
      * @param mouseEvent the event fired by the click of the student.
      */
-    private void handleCardStudentSelection(MouseEvent mouseEvent) {
+    private synchronized void handleCardStudentSelection(MouseEvent mouseEvent) {
         BorderPane target = (BorderPane) mouseEvent.getSource();
         GridPane students = charCardsStudents.get(selectedCharCard);
         Color c = (Color) target.getUserData();
@@ -1866,7 +1866,7 @@ public class GameController extends FXController {
      *
      * @param mouseEvent the event fired by the click of the student.
      */
-    private void handleCardStudentDeselection(MouseEvent mouseEvent) {
+    private synchronized void handleCardStudentDeselection(MouseEvent mouseEvent) {
         BorderPane target = (BorderPane) mouseEvent.getSource();
         Color c = (Color) target.getUserData();
 
@@ -1911,7 +1911,7 @@ public class GameController extends FXController {
      * Handles the press of the Swap Button after having set the card parameters and activates the card bought.
      * This button is only used for SWAP POOL and EXCHANGE STUDENTS cards.
      */
-    public void handleSwapButton() {
+    public synchronized void handleSwapButton() {
         charCardsStudents.get(selectedCharCard).getStyleClass().clear();
         charCardsStudents.get(selectedCharCard).getStyleClass().add("def");
 

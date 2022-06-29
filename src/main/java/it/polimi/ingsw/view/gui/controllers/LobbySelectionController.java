@@ -101,7 +101,7 @@ public class LobbySelectionController extends FXController {
     private final List<CheckBox> readyCheckBoxes = new ArrayList<>();
 
     @FXML
-    public void initialize() {
+    public synchronized void initialize() {
         MatchInfo matchInfo = MatchInfo.getInstance();
 
         prepArrays();
@@ -173,7 +173,7 @@ public class LobbySelectionController extends FXController {
     }
 
     @Override
-    public void applyChanges(JsonObject jsonObject) {
+    public synchronized void applyChanges(JsonObject jsonObject) {
         Image defaultImage = new Image("/images/Personaggi_retro.jpg");
         Lobby lobby = Lobby.getLobby();
         MatchInfo matchInfo = MatchInfo.getInstance();
