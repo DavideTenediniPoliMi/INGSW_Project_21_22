@@ -357,6 +357,7 @@ public class GameController {
 
             timer = null;
             matchInfo.setGamePaused(false);
+            game.requestTurnSkip();
         } else {
             requestTimeout();
         }
