@@ -1651,7 +1651,8 @@ public class GameController extends FXController {
         notify(
                 new RequestParameters()
                         .setCommandType(CommandType.TRANSFER_STUDENT_TO_ISLAND)
-                        .setIndex(Integer.parseInt(island.getUserData().toString()))
+                        .setIndex(Game.getInstance().getBoard()
+                                .getOriginalIndexOf(Integer.parseInt(island.getUserData().toString())))
                         .setColor(selectedColor)
                         .serialize().toString()
         );
