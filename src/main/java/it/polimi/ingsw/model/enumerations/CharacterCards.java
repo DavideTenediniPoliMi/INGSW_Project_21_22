@@ -60,11 +60,18 @@ public enum CharacterCards {
      *
      * @return <code>CharacterCard</code> instance for this card.
      */
-    public CharacterCard instantiate() {
+    public CharacterCard instantiate(boolean... shouldDraw) {
+        boolean paramShouldDraw = true;
+        if(shouldDraw.length != 0) {
+            paramShouldDraw = shouldDraw[0];
+        }
         GenericCard gc = new GenericCard(this.name(), this.cost, this.effectType);
         ArrayList<Object> fullParams = new ArrayList<>();
         fullParams.add(gc);
         fullParams.addAll(Arrays.asList(parameters));
+        if(effectType.equals(EffectType.STUDENT_GROUP)) {
+            fullParams.add(paramShouldDraw);
+        }
 
         try {
             return (CharacterCard) cardClass.getConstructors()[0].newInstance(fullParams.toArray());

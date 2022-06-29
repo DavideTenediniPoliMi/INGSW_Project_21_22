@@ -28,9 +28,9 @@ public class StudentGroupDecoratorTest {
         game = Game.getInstance();
         board = game.getBoard();
 
-        c1 = new StudentGroupDecorator(new GenericCard("MOVE_TO_ISLAND", 3, EffectType.STUDENT_GROUP), true, false);
-        c2 = new StudentGroupDecorator(new GenericCard("MOVE_TO_DINING_ROOM", 3, EffectType.STUDENT_GROUP), false, true);
-        c3 = new StudentGroupDecorator(new GenericCard("POOL_SWAP", 3, EffectType.STUDENT_GROUP), false, false);
+        c1 = new StudentGroupDecorator(new GenericCard("MOVE_TO_ISLAND", 3, EffectType.STUDENT_GROUP), true, false, true);
+        c2 = new StudentGroupDecorator(new GenericCard("MOVE_TO_DINING_ROOM", 3, EffectType.STUDENT_GROUP), false, true, true);
+        c3 = new StudentGroupDecorator(new GenericCard("POOL_SWAP", 3, EffectType.STUDENT_GROUP), false, false, true);
 
 
         //toIsland

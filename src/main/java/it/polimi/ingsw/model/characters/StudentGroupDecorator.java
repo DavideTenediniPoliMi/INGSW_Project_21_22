@@ -24,7 +24,7 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
     private final int SWAP_CARD_STUDENTS = 6;
     private final int TRANSFER_CARD_STUDENTS = 4;
 
-    private final StudentGroup students;
+    private StudentGroup students = new StudentGroup();
     private StudentGroup fromCard = new StudentGroup();
     private StudentGroup fromEntrance = new StudentGroup();
     private int islandIndex, playerID;
@@ -38,16 +38,18 @@ public class StudentGroupDecorator extends CharacterCardDecorator {
      * @param isToIsland     the flag to indicate whether this card is a <code>MOVE_TO_ISLAND</code>
      * @param isToDiningRoom the flag to indicate whether this card is a <code>MOVE_TO_DINING_ROOM</code>
      */
-    public StudentGroupDecorator(GenericCard card, boolean isToIsland, boolean isToDiningRoom) {
+    public StudentGroupDecorator(GenericCard card, boolean isToIsland, boolean isToDiningRoom, boolean shouldDraw) {
         super(card);
 
         this.isToIsland = isToIsland;
         this.isToDiningRoom = isToDiningRoom;
 
-        if(!isToIsland && !isToDiningRoom) {
-            students = Game.getInstance().drawStudents(SWAP_CARD_STUDENTS);
-        } else {
-            students = Game.getInstance().drawStudents(TRANSFER_CARD_STUDENTS);
+        if(shouldDraw) {
+            if (!isToIsland && !isToDiningRoom) {
+                students = Game.getInstance().drawStudents(SWAP_CARD_STUDENTS);
+            } else {
+                students = Game.getInstance().drawStudents(TRANSFER_CARD_STUDENTS);
+            }
         }
     }
 

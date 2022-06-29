@@ -37,7 +37,7 @@ public class JsonUtils {
         JsonArray jsonArray = jo.get("characterCards").getAsJsonArray();
         for (JsonElement je : jsonArray) {
             String name = je.getAsJsonObject().get("name").getAsString();
-            CharacterCard c = CharacterCards.valueOf(name).instantiate();
+            CharacterCard c = CharacterCards.valueOf(name).instantiate(false);
             c.deserialize(je.getAsJsonObject());
 
             if(c.isActive())

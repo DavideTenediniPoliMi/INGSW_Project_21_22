@@ -406,7 +406,7 @@ public class ResponseParameters implements Serializable {
             JsonArray jsonArray = jsonObject.get("characterCards").getAsJsonArray();
             for (JsonElement je : jsonArray) {
                 String name = je.getAsJsonObject().get("name").getAsString();
-                CharacterCard c = CharacterCards.valueOf(name).instantiate();
+                CharacterCard c = CharacterCards.valueOf(name).instantiate(false);
                 c.deserialize(je.getAsJsonObject());
                 characterCards.add(c);
             }

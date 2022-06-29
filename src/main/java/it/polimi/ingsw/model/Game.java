@@ -689,7 +689,7 @@ public class Game extends Observable<ResponseParameters> implements Serializable
                 for (JsonElement jsonCard : jsonCards) {
                     JsonObject cardObject = jsonCard.getAsJsonObject().get("card").getAsJsonObject();
                     String name = cardObject.get("name").getAsString();
-                    CharacterCard c = CharacterCards.valueOf(name).instantiate();
+                    CharacterCard c = CharacterCards.valueOf(name).instantiate(false);
                     if(c != null) {
                         c.deserialize(jsonCard.getAsJsonObject());
                         characterCards.add(c);
