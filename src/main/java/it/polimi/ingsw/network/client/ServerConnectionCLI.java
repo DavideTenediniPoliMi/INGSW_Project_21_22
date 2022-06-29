@@ -11,6 +11,7 @@ import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
+import it.polimi.ingsw.utils.JsonUtils;
 import it.polimi.ingsw.view.cli.CLI;
 import it.polimi.ingsw.view.cli.viewStates.*;
 
@@ -133,7 +134,7 @@ public class ServerConnectionCLI extends Connection {
 
             executor.submit( () -> {
                 JsonObject jsonObject = JsonParser.parseString(received).getAsJsonObject();
-                synchronized (Lobby.getLobby()) {
+                synchronized (view) {
                     if (jsonObject.has("error")) {
                         view.resetInteraction(jsonObject.get("error").getAsString());
                         view.handleInteraction();
@@ -225,6 +226,8 @@ public class ServerConnectionCLI extends Connection {
             packetQueue.notifyAllForEmpty();
         }
         jsonConsumer.stop();
+        System.out.println("Exiting...");
+        System.exit(0);
     }
 
     /**
