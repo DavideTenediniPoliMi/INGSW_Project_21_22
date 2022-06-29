@@ -33,7 +33,7 @@ public class EndGameViewState extends GameViewState {
         }
 
         appendBuffer("\n");
-        appendBuffer("Press ENTER to go back to the starting screen!");
+        appendBuffer("Press ENTER to quit!");
     }
 
     @Override

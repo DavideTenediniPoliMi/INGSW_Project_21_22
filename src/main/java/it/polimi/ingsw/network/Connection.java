@@ -70,7 +70,7 @@ public abstract class Connection implements Runnable, Observer<String> {
                 for (int i = 0; i < length; i++) {
                     message.append(in.readChar());
                 }
-
+                //System.out.println("RECEIVED: " + message.toString());
                 return message.toString();
             }
         } catch (IOException e){
