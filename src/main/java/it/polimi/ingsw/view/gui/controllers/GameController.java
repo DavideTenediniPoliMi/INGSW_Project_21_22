@@ -1823,6 +1823,8 @@ public class GameController extends FXController {
                     getNodeFromCard(i, students).setOnMouseClicked(null);
                 }
 
+                target.setOnMouseClicked(this::handleCardStudentDeselection);
+
                 students.getStyleClass().clear();
                 students.getStyleClass().add("def");
 
@@ -1870,6 +1872,24 @@ public class GameController extends FXController {
         target.getStyleClass().clear();
         target.getStyleClass().add("def");
         target.setOnMouseClicked(this::handleCardStudentSelection);
+
+        if(Game.getInstance().getActiveCharacterCard().getName().equals("MOVE_TO_ISLAND")) {
+            selectedColor = null;
+
+            charCardsStudents.get(selectedCharCard).getStyleClass().clear();
+            charCardsStudents.get(selectedCharCard).getStyleClass().add("target");
+
+            for(int i = 0 ; i < 4; i++) {
+                getNodeFromCard(i, charCardsStudents.get(selectedCharCard)).setOnMouseClicked(this::handleCardStudentSelection);
+            }
+
+            for(GridPane stud : islandStudents) {
+                stud.setOnMouseClicked(null);
+                stud.getStyleClass().clear();
+                stud.getStyleClass().add("def");
+            }
+            return;
+        }
 
         selectedStudentsFromCard.removeByColor(c, 1);
 

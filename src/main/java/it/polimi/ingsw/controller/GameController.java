@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  * </ul>
  */
 public class GameController {
-    private final int TIME_OUT = 10; // Game timeout in minutes
+    private final int TIME_OUT = 1; // Game timeout in minutes
     private RoundStateController roundStateController;
     private final MatchInfo matchInfo;
     private final Game game;
