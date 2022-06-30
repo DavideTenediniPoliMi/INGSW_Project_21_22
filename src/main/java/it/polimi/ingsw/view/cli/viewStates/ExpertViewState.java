@@ -97,7 +97,11 @@ public class ExpertViewState extends GameViewState {
         }
 
         if(!isCardSelected) {
-            return ("Select the card to be bought: [0,1,2]");
+            return "Select the card to be bought: [0,1,2]";
+        }
+
+        if(numStudentsToSwap == 0 && "EXCHANGE_STUDENTS".equals(game.getCharacterCards().get(boughtCardIndex).getName())) {
+            return "How many students do you want to swap?";
         }
 
         if(!cardActivated) {
@@ -173,9 +177,6 @@ public class ExpertViewState extends GameViewState {
 
                 return stringBuilder.toString();
             case "EXCHANGE_STUDENTS":
-                if(numStudentsToSwap == 0 && !fromOriginSwapCompleted) {
-                    return "How many students do you want to swap?";
-                }
                 if(!fromOriginSwapCompleted) {
                     if(studentsSwapped < numStudentsToSwap) {
                         if(cardColorSelected == null) {
@@ -274,14 +275,8 @@ public class ExpertViewState extends GameViewState {
                 return error;
             }
 
-            int numStudentsInDining = 0;
-            for(Color c : Color.values()) {
-                numStudentsInDining += game.getBoard().getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(c);
-            }
-            if(numStudentsInDining < numStudentsToSwap) {
-                appendBuffer("Not enough students in dining room!");
-                cardBought = false;
-                isCardSelected = false;
+            if("EXCHANGE_STUDENTS".equals(game.getCharacterCards().get(boughtCardIndex).getName())) {
+                isCardSelected = true;
                 return "";
             }
 
@@ -308,6 +303,32 @@ public class ExpertViewState extends GameViewState {
             isCardSelected = true;
             return "";
         }
+
+        if(numStudentsToSwap == 0 && "EXCHANGE_STUDENTS".equals(game.getCharacterCards().get(boughtCardIndex).getName())) {
+            manageCLINumStudentsToSwap(input, validNumOfStudentsToExchange);
+
+            int numStudentsInDining = 0;
+            for(Color c : Color.values()) {
+                numStudentsInDining += game.getBoard().getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(c);
+            }
+            if(numStudentsInDining < numStudentsToSwap) {
+                appendBuffer("Not enough students in dining room!");
+                cardBought = false;
+                isCardSelected = false;
+                return "";
+            }
+
+            notify(
+                    new RequestParameters()
+                            .setCommandType(CommandType.BUY_CHARACTER_CARD)
+                            .setIndex(boughtCardIndex)
+                            .serialize().toString()
+            );
+
+            setInteractionComplete(true);
+            return "";
+        }
+
         if(!cardActivated) {
             try {
                 return manageCLICardActivationParameters(input);
@@ -376,7 +397,11 @@ public class ExpertViewState extends GameViewState {
                     if(studentsSwapped < numStudentsToSwap-1) {
                         return manageCLIFromCardSwap(input);
                     }
-                    manageCLIFromCardSwap(input);
+                    error = manageCLIFromCardSwap(input);
+                    if(!error.equals("")) {
+                        appendBuffer(error);
+                        return error;
+                    }
                     fromOriginSwapCompleted = true;
                     studentsSwapped = 0;
                     return "";
@@ -385,7 +410,11 @@ public class ExpertViewState extends GameViewState {
                     manageCLIFromEntranceSwap(input);
                     return "";
                 }
-                manageCLIFromEntranceSwap(input);
+                error = manageCLIFromEntranceSwap(input);
+                if(!error.equals("")) {
+                    appendBuffer(error);
+                    return error;
+                }
                 studentsSwapped = 0;
                 fromOriginSwapCompleted = false;
 
@@ -423,7 +452,11 @@ public class ExpertViewState extends GameViewState {
                     if(studentsSwapped < numStudentsToSwap-1) {
                         return manageCLIFromEntranceSwap(input);
                     }
-                    manageCLIFromEntranceSwap(input);
+                    error = manageCLIFromEntranceSwap(input);
+                    if(!error.equals("")) {
+                        appendBuffer(error);
+                        return error;
+                    }
                     fromOriginSwapCompleted = true;
                     colorSelected = null;
                     studentsSwapped = 0;
@@ -432,7 +465,11 @@ public class ExpertViewState extends GameViewState {
                 if(studentsSwapped < numStudentsToSwap-1) {
                     return manageCLIFromDiningSwap(input);
                 }
-                manageCLIFromDiningSwap(input);
+                error = manageCLIFromDiningSwap(input);
+                if(!error.equals("")) {
+                    appendBuffer(error);
+                    return error;
+                }
                 studentsSwapped = 0;
                 fromOriginSwapCompleted = false;
 
@@ -493,7 +530,7 @@ public class ExpertViewState extends GameViewState {
     private String manageCLIFromCardSwap(String input) {
         String error;
         if (cardColorSelected == null) {
-            error = manageCLICardStudentColor(input);
+            error = manageCLICardStudentColorSwap(input);
             if (!error.equals("")) {
                 appendBuffer(error);
                 return error;
@@ -516,7 +553,7 @@ public class ExpertViewState extends GameViewState {
     private String manageCLIFromEntranceSwap(String input) {
         String error;
         if (colorSelected == null) {
-            error = manageCLIEntranceStudentColor(input);
+            error = manageCLIEntranceStudentColorSwap(input);
             if(!error.equals("")) {
                 appendBuffer(error);
                 return error;
@@ -539,7 +576,7 @@ public class ExpertViewState extends GameViewState {
     private String manageCLIFromDiningSwap(String input) {
         String error;
         if (colorDiningSelected == null) {
-            error = manageCLIDiningStudentColor(input);
+            error = manageCLIDiningStudentColorSwap(input);
             if(!error.equals("")) {
                 appendBuffer(error);
                 return error;
@@ -587,6 +624,62 @@ public class ExpertViewState extends GameViewState {
                     break;
                 case "Y":
                     if(((StudentGroupDecorator) activeCard).getStudentsByColor(Color.YELLOW) > 0) {
+                        cardColorSelected = Color.YELLOW;
+                    }
+                    break;
+            }
+            if(cardColorSelected == null) {
+                error = "No such student of that color!";
+                appendBuffer(error);
+                return error;
+            }
+            return "";
+        }
+        error = "That was not a valid choice! Try again! - cardStudentColor";
+        appendBuffer(error);
+        return error;
+    }
+
+    /**
+     * Manages the input received by the user handling the students color selection for the card in a swap.
+     *
+     * @param input Input received from Input Stream
+     *
+     * @return <code>String</code> that is the result of the action
+     */
+    protected String manageCLICardStudentColorSwap(String input) {
+        String error;
+
+        if(validColors.contains(input.toUpperCase())) {
+            switch(input.toUpperCase()) {
+                case "B":
+                    if(((StudentGroupDecorator) activeCard).getStudentsByColor(Color.BLUE) -
+                            cardStudents.getByColor(Color.BLUE) > 0) {
+                        cardColorSelected = Color.BLUE;
+                    }
+                    break;
+                case "G":
+                    if(((StudentGroupDecorator) activeCard).getStudentsByColor(Color.GREEN) -
+                            cardStudents.getByColor(Color.GREEN) > 0) {
+                        cardColorSelected = Color.GREEN;
+                    }
+
+                    break;
+                case "P":
+                    if(((StudentGroupDecorator) activeCard).getStudentsByColor(Color.PINK) -
+                            cardStudents.getByColor(Color.PINK) > 0) {
+                        cardColorSelected = Color.PINK;
+                    }
+                    break;
+                case "R":
+                    if(((StudentGroupDecorator) activeCard).getStudentsByColor(Color.RED) -
+                            cardStudents.getByColor(Color.RED) > 0) {
+                        cardColorSelected = Color.RED;
+                    }
+                    break;
+                case "Y":
+                    if(((StudentGroupDecorator) activeCard).getStudentsByColor(Color.YELLOW) -
+                            cardStudents.getByColor(Color.YELLOW) > 0) {
                         cardColorSelected = Color.YELLOW;
                     }
                     break;
@@ -655,48 +748,107 @@ public class ExpertViewState extends GameViewState {
     }
 
     /**
-     * Manages the input received by the user handling the students color selection for the dining.
+     * Manages the input received by the user handling the students color selection for the entrance in a swap.
      *
      * @param input Input received from Input Stream
      *
      * @return <code>String</code> that is the result of the action
      */
-    private String manageCLIDiningStudentColor(String input) {
+    private String manageCLIEntranceStudentColorSwap(String input) {
         String error;
 
         if(validColors.contains(input.toUpperCase())) {
             Board board= game.getBoard();
             switch(input.toUpperCase()) {
                 case "B":
-                    if(board.getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(Color.BLUE) > 0) {
+                    if(board.getSchoolByPlayerID(playerID).getNumStudentsInEntranceByColor(Color.BLUE) -
+                            entranceStudents.getByColor(Color.BLUE) > 0) {
+                        colorSelected = Color.BLUE;
+                    }
+                    break;
+                case "G":
+                    if(board.getSchoolByPlayerID(playerID).getNumStudentsInEntranceByColor(Color.GREEN) -
+                            entranceStudents.getByColor(Color.GREEN) > 0) {
+                        colorSelected = Color.GREEN;
+                    }
+                    break;
+                case "P":
+                    if(board.getSchoolByPlayerID(playerID).getNumStudentsInEntranceByColor(Color.PINK) -
+                            entranceStudents.getByColor(Color.PINK) > 0) {
+                        colorSelected = Color.PINK;
+                    }
+                    break;
+                case "R":
+                    if(board.getSchoolByPlayerID(playerID).getNumStudentsInEntranceByColor(Color.RED) -
+                            entranceStudents.getByColor(Color.RED) > 0) {
+                        colorSelected = Color.RED;
+                    }
+                    break;
+                case "Y":
+                    if(board.getSchoolByPlayerID(playerID).getNumStudentsInEntranceByColor(Color.YELLOW) -
+                            entranceStudents.getByColor(Color.YELLOW) > 0) {
+                        colorSelected = Color.YELLOW;
+                    }
+                    break;
+            }
+            if(colorSelected == null) {
+                error = "No such student of that color!";
+                return error;
+            }
+            return "";
+        }
+        error = "That was not a valid choice! Try again! - entrance student color";
+        appendBuffer(error);
+        return error;
+    }
+
+    /**
+     * Manages the input received by the user handling the students color selection for the dining in a swap.
+     *
+     * @param input Input received from Input Stream
+     *
+     * @return <code>String</code> that is the result of the action
+     */
+    private String manageCLIDiningStudentColorSwap(String input) {
+        String error;
+
+        if(validColors.contains(input.toUpperCase())) {
+            Board board= game.getBoard();
+            switch(input.toUpperCase()) {
+                case "B":
+                    if(board.getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(Color.BLUE) -
+                            diningStudents.getByColor(Color.BLUE) > 0) {
                         colorDiningSelected = Color.BLUE;
                     }
                     break;
                 case "G":
-                    if(board.getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(Color.GREEN) > 0) {
+                    if(board.getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(Color.GREEN) -
+                            diningStudents.getByColor(Color.GREEN) > 0) {
                         colorDiningSelected = Color.GREEN;
                     }
 
                     break;
                 case "P":
-                    if(board.getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(Color.PINK) > 0) {
+                    if(board.getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(Color.PINK) -
+                            diningStudents.getByColor(Color.PINK) > 0) {
                         colorDiningSelected = Color.PINK;
                     }
                     break;
                 case "R":
-                    if(board.getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(Color.RED) > 0) {
+                    if(board.getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(Color.RED) -
+                            diningStudents.getByColor(Color.RED) > 0) {
                         colorDiningSelected = Color.RED;
                     }
                     break;
                 case "Y":
-                    if(board.getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(Color.YELLOW) > 0) {
+                    if(board.getSchoolByPlayerID(playerID).getNumStudentsInDiningRoomByColor(Color.YELLOW) -
+                            diningStudents.getByColor(Color.YELLOW) > 0) {
                         colorDiningSelected = Color.YELLOW;
                     }
                     break;
             }
             if(colorDiningSelected == null) {
                 error = "No such student of that color!";
-                appendBuffer(error);
                 return error;
             }
             return "";
