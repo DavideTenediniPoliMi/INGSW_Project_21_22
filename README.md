@@ -28,9 +28,9 @@
   </li>
   <li>Controller:
     <ul>
-      <li>Class: 72%</li>
-      <li>Method: 89%</li>
-      <li>Line: 94%</li>
+      <li>Class: 100%</li>
+      <li>Method: 96%</li>
+      <li>Line: 96%</li>
     </ul>
   </li>
 </ul>
