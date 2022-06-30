@@ -10,8 +10,8 @@ public interface Command {
     /**
      * Asks the controller to execute the requested command.
      *
-     * @throws EriantysException
-     * @throws EriantysRuntimeException
+     * @throws EriantysException generic error.
+     * @throws EriantysRuntimeException generic runtime error.
      */
     void execute() throws EriantysException, EriantysRuntimeException;
 }

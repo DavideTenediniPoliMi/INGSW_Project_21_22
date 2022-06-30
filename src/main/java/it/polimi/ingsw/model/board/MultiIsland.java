@@ -1,14 +1,9 @@
 package it.polimi.ingsw.model.board;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.model.helpers.StudentGroup;
-import it.polimi.ingsw.utils.Printable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

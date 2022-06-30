@@ -3,7 +3,7 @@ package it.polimi.ingsw.exceptions.game;
 import it.polimi.ingsw.exceptions.EriantysException;
 
 /**
- * Exception thrown when an action is requested but the Game in in pause.
+ * Exception thrown when an action is requested but the Game is in pause.
  */
 public class GamePausedException extends EriantysException {
     public GamePausedException() {

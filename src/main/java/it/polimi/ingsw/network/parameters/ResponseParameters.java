@@ -35,15 +35,6 @@ public class ResponseParameters implements Serializable {
     private String error;
 
     /**
-     * Gets the list of schools.
-     *
-     * @return the list of schools of this <code>ResponseParameters</code>.
-     */
-    public List<School> getSchools() {
-        return schools;
-    }
-
-    /**
      * Sets the specified list of schools and returns this instance.
      *
      * @param schools the list of schools of this message.
@@ -66,15 +57,6 @@ public class ResponseParameters implements Serializable {
     }
 
     /**
-     * Gets the list of Character cards.
-     *
-     * @return the list of Character cards of this <code>ResponseParameters</code>.
-     */
-    public List<CharacterCard> getCharacterCards() {
-        return characterCards;
-    }
-
-    /**
      * Sets the specified list of Character cards and returns this instance.
      *
      * @param characterCards the list of Character cards of this message.
@@ -83,15 +65,6 @@ public class ResponseParameters implements Serializable {
     public ResponseParameters setCharacterCards(List<CharacterCard> characterCards) {
         this.characterCards = characterCards;
         return this;
-    }
-
-    /**
-     * Gets the list of clouds.
-     *
-     * @return the list of clouds of this <code>ResponseParameters</code>.
-     */
-    public List<Cloud> getClouds() {
-        return clouds;
     }
 
     /**
@@ -126,15 +99,6 @@ public class ResponseParameters implements Serializable {
     }
 
     /**
-     * Gets the flag specifying if the <code>StudentBag</code> is empty.
-     *
-     * @return if the <code>StudentBag</code> is set as empty in this <code>ResponseParameters</code>.
-     */
-    public boolean isBagEmpty() {
-        return bagEmpty;
-    }
-
-    /**
      * Sets if the <code>StudentBag</code> is empty and returns this instance.
      *
      * @param bagEmpty the flag regarding the <code>StudentBag</code>.
@@ -143,15 +107,6 @@ public class ResponseParameters implements Serializable {
     public ResponseParameters setBagEmpty(boolean bagEmpty) {
         this.bagEmpty = bagEmpty;
         return this;
-    }
-
-    /**
-     * Gets the <code>ProfessorTracker</code>.
-     *
-     * @return the <code>ProfessorTracker</code> of this <code>ResponseParameters</code>.
-     */
-    public ProfessorTracker getProfessors() {
-        return professors;
     }
 
     /**
@@ -166,15 +121,6 @@ public class ResponseParameters implements Serializable {
     }
 
     /**
-     * Gets the amount of coins left in the <code>Board</code>.
-     *
-     * @return the amount of coins set in this <code>ResponseParameters</code>.
-     */
-    public int getCoinsLeft() {
-        return coinsLeft;
-    }
-
-    /**
      * Sets the specified amount of coins left in the <code>Board</code> and returns this instance.
      *
      * @param coinsLeft the amount of coins.
@@ -183,15 +129,6 @@ public class ResponseParameters implements Serializable {
     public ResponseParameters setCoinsLeft(int coinsLeft) {
         this.coinsLeft = coinsLeft;
         return this;
-    }
-
-    /**
-     * Gets the flag specifying if this message should send information about the assistant cards.
-     *
-     * @return whether this <code>ResponseParameters</code> should send information about the assistant cards.
-     */
-    public boolean shouldSendCards() {
-        return sendCards;
     }
 
     /**
@@ -206,15 +143,6 @@ public class ResponseParameters implements Serializable {
     }
 
     /**
-     * Gets the flag specifying if this message should send information about the Match.
-     *
-     * @return whether this <code>ResponseParameters</code> should send information about the Match.
-     */
-    public boolean shouldSendMatchInfo() {
-        return sendMatchInfo;
-    }
-
-    /**
      * Sets whether this message should send information about this Match and returns this instance.
      *
      * @param sendMatchInfo the flag specifying if the VirtualView should send info about this Match.
@@ -223,15 +151,6 @@ public class ResponseParameters implements Serializable {
     public ResponseParameters setSendMatchInfo(boolean sendMatchInfo) {
         this.sendMatchInfo = sendMatchInfo;
         return this;
-    }
-
-    /**
-     * Gets the flag specifying if this message should send information about the Game.
-     *
-     * @return whether this <code>ResponseParameters</code> should send information about the Game.
-     */
-    public boolean shouldSetGame() {
-        return sendGame;
     }
 
     /**
@@ -407,8 +326,10 @@ public class ResponseParameters implements Serializable {
             for (JsonElement je : jsonArray) {
                 String name = je.getAsJsonObject().get("name").getAsString();
                 CharacterCard c = CharacterCards.valueOf(name).instantiate(false);
-                c.deserialize(je.getAsJsonObject());
-                characterCards.add(c);
+                if (c != null) {
+                    c.deserialize(je.getAsJsonObject());
+                    characterCards.add(c);
+                }
             }
             game.setCharacterCards(characterCards);
         }

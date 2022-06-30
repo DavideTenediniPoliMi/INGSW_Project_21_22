@@ -106,7 +106,7 @@ public class ServerConnectionGUI extends Connection {
 
             GUI.bindPlayerId();
             Platform.runLater(() -> GUI.loadScene("/scenes/gameScene.fxml"));
-            // DISCARDS A MATCHINFO AND PLAYERS MESSAGE
+            // DISCARDS A MATCH_INFO AND PLAYERS MESSAGE
             deserialize(waitForValidMessage());
             deserialize(waitForValidMessage());
             gameLoop();

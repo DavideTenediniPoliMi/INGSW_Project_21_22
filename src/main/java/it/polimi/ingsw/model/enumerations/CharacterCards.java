@@ -30,7 +30,7 @@ public enum CharacterCards {
     EXCHANGE_STUDENTS(ExchangeStudentsDecorator.class, EffectType.EXCHANGE_STUDENTS, 1, "/images/CarteTOT_front9.jpg", new String[]{"EXCHANGE", "STUDENTS"}),
     RETURN_TO_BAG(ReturnToBagDecorator.class, EffectType.RETURN_TO_BAG, 3, "/images/CarteTOT_front11.jpg", new String[]{"RETURN", "TO BAG"});
 
-    private final Class cardClass;
+    private final Class<?> cardClass;
     private final EffectType effectType;
     private final int cost;
     private final String path;
@@ -46,7 +46,7 @@ public enum CharacterCards {
      * @param cost the cost to buy this Character card.
      * @param parameters the various parameters to instantiate this Character card.
      */
-    CharacterCards(Class cardClass, EffectType effectType, int cost, String path, String[] printableName, Object...parameters) {
+    CharacterCards(Class<?> cardClass, EffectType effectType, int cost, String path, String[] printableName, Object...parameters) {
         this.cardClass = cardClass;
         this.effectType = effectType;
         this.cost = cost;

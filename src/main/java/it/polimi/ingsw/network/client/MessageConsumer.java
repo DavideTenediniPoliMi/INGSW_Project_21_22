@@ -28,7 +28,7 @@ public class MessageConsumer implements Runnable{
 
     /**
      * Consumes messages in the queue and feeds them to the CLI. If it consumes all the messages in the queue it'll block
-     * and wait for a new messages to be added to the queue. The messages will be executed in the same order they appearded
+     * and wait for a new messages to be added to the queue. The messages will be executed in the same order they appeared
      * in the queue (FIFO).
      */
     private void consume() {

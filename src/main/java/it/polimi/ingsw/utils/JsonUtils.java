@@ -38,10 +38,12 @@ public class JsonUtils {
         for (JsonElement je : jsonArray) {
             String name = je.getAsJsonObject().get("name").getAsString();
             CharacterCard c = CharacterCards.valueOf(name).instantiate(false);
-            c.deserialize(je.getAsJsonObject());
-
-            if(c.isActive())
-                return c.getName();
+            if (c != null) {
+                c.deserialize(je.getAsJsonObject());
+                
+                if (c.isActive())
+                    return c.getName();
+            }
         }
         return "";
     }

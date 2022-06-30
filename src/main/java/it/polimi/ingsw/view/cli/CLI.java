@@ -276,28 +276,6 @@ public class CLI {
      }
 
      /**
-      * Sets the current <code>ViewState</code>.
-      */
-     private void setCurrentViewState() {
-          switch (MatchInfo.getInstance().getStateType()) {
-               case PLANNING:
-                    setViewState(new PlanningViewState(getViewState()));
-                    break;
-               case STUDENTS:
-                    setViewState(new StudentViewState(getViewState()));
-                    break;
-               case MOTHER_NATURE:
-                    setViewState(new MNViewState(getViewState()));
-                    break;
-               case CLOUD:
-                    setViewState(new CloudViewState(getViewState()));
-                    break;
-               default:
-                    setViewState(new GameViewState(getViewState()));
-          }
-     }
-
-     /**
       * Resets the interaction if an error during an action occurs.
       *
       * @param error <code>String</code> correspondent to the error

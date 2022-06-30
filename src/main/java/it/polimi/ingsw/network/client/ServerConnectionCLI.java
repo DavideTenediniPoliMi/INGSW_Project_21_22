@@ -11,7 +11,6 @@ import it.polimi.ingsw.network.Connection;
 import it.polimi.ingsw.network.enumerations.CommandType;
 import it.polimi.ingsw.network.parameters.RequestParameters;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
-import it.polimi.ingsw.utils.JsonUtils;
 import it.polimi.ingsw.view.cli.CLI;
 import it.polimi.ingsw.view.cli.viewStates.*;
 

@@ -380,7 +380,7 @@ public class LobbySelectionController extends FXController {
     // CLEAN UP METHODS
 
     /**
-     * Sets every wizard button to the disable state given as input.
+     * Sets every wizard button to the state given as input.
      *
      * @param disable whether the buttons should be disabled or not.
      */
@@ -391,7 +391,7 @@ public class LobbySelectionController extends FXController {
     }
 
     /**
-     * Sets every tower option to the disable state given as input.
+     * Sets every tower option to the state given as input.
      *
      * @param disable whether the options should be disabled or not.
      */

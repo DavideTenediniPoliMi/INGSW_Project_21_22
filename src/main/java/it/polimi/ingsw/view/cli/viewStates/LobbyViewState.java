@@ -8,6 +8,7 @@ import it.polimi.ingsw.view.cli.AnsiCodes;
 /**
  * Class that manages the lobby view
  */
+@SuppressWarnings({"StringConcatenationInsideStringBufferAppend"})
 public class LobbyViewState extends ViewState {
     MatchInfo matchInfo;
     Lobby lobby;

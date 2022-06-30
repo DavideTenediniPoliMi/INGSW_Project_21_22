@@ -1,7 +1,6 @@
 package it.polimi.ingsw.network.commands;
 
 import it.polimi.ingsw.controller.GameController;
-import it.polimi.ingsw.controller.LobbyController;
 import it.polimi.ingsw.exceptions.EriantysException;
 import it.polimi.ingsw.exceptions.EriantysRuntimeException;
 import it.polimi.ingsw.model.MatchInfo;
