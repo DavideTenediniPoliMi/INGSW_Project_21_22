@@ -35,7 +35,7 @@ public class CreateLobbyController extends FXController {
     @Override
     public void showAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("OOPPS!");
+        alert.setTitle("OOPS!");
         alert.setHeaderText("Somebody just created a lobby!");
         alert.setContentText("You automatically joined the new lobby!");
 

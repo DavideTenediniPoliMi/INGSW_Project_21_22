@@ -40,10 +40,10 @@ public class CommandFactory {
      */
     public Command createCommand(RequestParameters params) throws BadParametersException {
         /*
-         * General nullcheck before creating a new Command
+         * General null check before creating a new Command
          */
         if(params == null) {
-            throw new BadParametersException("RequestParamers is null");
+            throw new BadParametersException("RequestParams is null");
         }else if(lobbyController == null) {
             throw new BadParametersException("LobbyController is null");
         }else if(gameController == null) {
@@ -90,7 +90,7 @@ public class CommandFactory {
                     return new LobbySelectTeamCommand(playerID, team, lobbyController);
                 }
                 throw new BadParametersException("SELECT TEAM command - Given params:" +
-                        " (playerID: " + playerID + ", Team: " + team + ")");
+                        " (playerID: " + playerID + ", Team: null)");
 
             case SEL_CARDBACK:
                 /* Params needed:
@@ -101,8 +101,8 @@ public class CommandFactory {
                 if(cardBack != null) {
                     return new LobbySelectCBCommand(playerID, cardBack, lobbyController);
                 }
-                throw new BadParametersException("SELECT CARDBACK command - Given params:" +
-                        " (playerID: " + playerID + ", CardBack: " + cardBack + ")");
+                throw new BadParametersException("SELECT CARD_BACK command - Given params:" +
+                        " (playerID: " + playerID + ", CardBack: null)");
 
             case UNSEL_TOWERCOLOR:
                 /* Params needed:

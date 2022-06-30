@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.helpers.StudentGroup;
 
 /**
- * Subcontroller handling all actions related to checks for professors on student transfer events.
+ * Subcontroller handling all actions related to check for professors on student transfer events.
  */
 public class DiningRoomController {
 
@@ -28,7 +28,7 @@ public class DiningRoomController {
     }
 
     /**
-     * Checks whether a <code>Player</code> needs to receive a professor after transfering students in its dining room.
+     * Checks whether a <code>Player</code> needs to receive a professor after transferring students in its dining room.
      *
      * @param playerID the ID of the <code>Player</code>.
      * @param studentGroup the students part of a transfer.

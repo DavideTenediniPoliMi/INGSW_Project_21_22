@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import it.polimi.ingsw.model.board.School;
 import it.polimi.ingsw.model.enumerations.CardBack;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.network.observer.Observable;
@@ -245,7 +244,7 @@ public class Lobby extends Observable<ResponseParameters> implements Serializabl
         if(jsonObject.has("readyStatus")) {
             readyStatus = new HashMap<>();
             JsonObject temp = jsonObject.get("readyStatus").getAsJsonObject();
-            for(Map.Entry element : temp.entrySet()) {
+            for(Map.Entry<?,?> element : temp.entrySet()) {
                 readyStatus.put(Integer.valueOf((String) element.getKey()), Boolean.valueOf(element.getValue().toString()));
             }
         } else

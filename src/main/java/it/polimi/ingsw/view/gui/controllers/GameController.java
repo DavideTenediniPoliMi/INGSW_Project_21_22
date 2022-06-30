@@ -901,7 +901,7 @@ public class GameController extends FXController {
         }
     }
 
-    // GETTER FOR GRIDPANES
+    // GETTERS FOR GRID_PANES
 
     /**
      * Returns the position of the graphic elements regarding the player with the specified ID inside the various

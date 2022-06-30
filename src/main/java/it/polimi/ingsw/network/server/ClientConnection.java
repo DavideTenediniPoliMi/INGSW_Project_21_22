@@ -7,10 +7,8 @@ import it.polimi.ingsw.exceptions.lobby.PlayerAlreadyConnectedException;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.network.Connection;
-import it.polimi.ingsw.network.observer.Observer;
 import it.polimi.ingsw.network.parameters.ResponseParameters;
 import it.polimi.ingsw.view.VirtualView;
-import javafx.css.Match;
 
 import java.io.*;
 import java.net.Socket;

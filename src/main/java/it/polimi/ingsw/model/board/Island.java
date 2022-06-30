@@ -83,7 +83,7 @@ public abstract class Island implements Serializable, Printable<List<String>> {
      * Returns the amount of students on this <code>Island</code> of the specified <code>Color</code>
      *
      * @param c the <code>Color</code> of the students
-     * @return Amount of students of speficied <code>Color</code>
+     * @return Amount of students of specified <code>Color</code>
      */
     public int getNumStudentsByColor(Color c) {
         return students.getByColor(c);
@@ -123,7 +123,7 @@ public abstract class Island implements Serializable, Printable<List<String>> {
     public abstract Island getIslandOfRelativeIndex(int index);
 
     /**
-     * Marks the bridges to be shown on the this island.
+     * Marks the bridges to be shown on this island.
      *
      * @param bridges the booleans that indicates if a bridge should be shown
      * @param startingIndex the number of simple islands before this island
@@ -178,7 +178,7 @@ public abstract class Island implements Serializable, Printable<List<String>> {
         int offset = 12 - Game.getInstance().getBoard().getStartingZeroRealIndex();
         int index = (Game.getInstance().getIndexOfIsland(this) + offset ) % 12;
 
-        islandBuilder.append("│" + index + (index < 10 ? " " : "") + "          Team: ")
+        islandBuilder.append("│").append(index).append(index < 10 ? " " : "").append("          Team: ")
                     .append(getTeamColor() == null ? "   " : getTeamColor().print())
                     .append("│");
 

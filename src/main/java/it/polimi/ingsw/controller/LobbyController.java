@@ -11,8 +11,6 @@ import it.polimi.ingsw.model.enumerations.GameStatus;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.network.commands.Command;
 
-import java.util.List;
-
 /**
  * Class representing the controller for all pre-game (Lobby) actions. Handles:
  * <ul>
@@ -101,7 +99,7 @@ public class LobbyController {
      * Resets the CardBack for the specified Player
      *
      * @param playerID the ID of the Player
-     * @throws NoSuchPlayerException If there is Player with the specifided ID in this Lobby
+     * @throws NoSuchPlayerException If there is Player with the specified ID in this Lobby
      */
     public void resetCardBack(int playerID) throws NoSuchPlayerException {
         if(!lobby.hasJoined(playerID)) {
@@ -114,7 +112,7 @@ public class LobbyController {
     /**
      * Selects the specified <code>TowerColor</code> for the specified <code>Player</code>.
      *
-     * @param playerID the Id of the <code>Player</code>.
+     * @param playerID the ID of the <code>Player</code>.
      * @param towerColor the <code>TowerColor</code> selected.
      * @throws NoSuchPlayerException If there is no <code>Player</code> with the specified ID in this <code>Lobby</code>.
      * @throws TeamFullException If the team already has the maximum amount of members.
@@ -133,7 +131,7 @@ public class LobbyController {
      * Resets the TowerColor for the specified Player
      *
      * @param playerID the ID of the Player
-     * @throws NoSuchPlayerException If there is Player with the specifided ID in this Lobby
+     * @throws NoSuchPlayerException If there is Player with the specified ID in this Lobby
      */
     public void resetTeamColor(int playerID) throws NoSuchPlayerException {
         if(!lobby.hasJoined(playerID)) {

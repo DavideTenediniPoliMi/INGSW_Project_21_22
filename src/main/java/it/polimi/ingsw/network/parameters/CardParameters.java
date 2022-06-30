@@ -161,9 +161,8 @@ public class CardParameters implements Serializable {
     @Override
     public JsonObject serialize() {
         Gson gson = new Gson();
-        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
 
-        return jsonObject;
+        return gson.toJsonTree(this).getAsJsonObject();
     }
 
     @Override

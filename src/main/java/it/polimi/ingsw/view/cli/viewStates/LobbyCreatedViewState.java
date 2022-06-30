@@ -3,14 +3,10 @@ package it.polimi.ingsw.view.cli.viewStates;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.view.cli.AnsiCodes;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Class that manages the view of the lobby once it is created
  */
 public class LobbyCreatedViewState extends LobbyViewState {
-    private boolean printed;
     public LobbyCreatedViewState(ViewState oldViewState) {
         super(oldViewState);
     }

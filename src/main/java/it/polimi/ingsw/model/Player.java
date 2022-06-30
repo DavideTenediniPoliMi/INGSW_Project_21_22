@@ -47,7 +47,7 @@ public class Player implements Serializable {
     }
 
     /**
-     * Constructor to instantiate a new <code>Player</code>, only to be used inside Lobbys.
+     * Constructor to instantiate a new <code>Player</code>, only to be used inside Lobbies.
      *
      * @param ID the ID of this <code>Player</code>.
      * @param name the Nickname of this <code>Player</code>.

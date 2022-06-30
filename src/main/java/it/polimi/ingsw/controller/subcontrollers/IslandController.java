@@ -2,15 +2,11 @@ package it.polimi.ingsw.controller.subcontrollers;
 
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
-import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.board.Board;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.ProfessorTracker;
 import it.polimi.ingsw.model.enumerations.Color;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Subcontroller to handle all actions relative to:

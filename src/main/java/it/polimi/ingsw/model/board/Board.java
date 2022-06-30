@@ -764,7 +764,7 @@ public class Board implements Serializable, Printable<List<String>> {
      * Returns an array of <code>boolean</code> that are the graphic position of the bridges for island at the
      * specified index.
      *
-     * @param index Index of the <code>Island</code> that you want to calcute openings
+     * @param index Index of the <code>Island</code> that you want to calculate openings
      * @param bridges <code>List</code> of <code>boolean</code> that indicates whether there are bridges
      *
      * @return Array of <code>boolean</code> that are the graphic position of the bridges for island at the

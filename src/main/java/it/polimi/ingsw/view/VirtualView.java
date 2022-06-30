@@ -6,7 +6,6 @@ import it.polimi.ingsw.controller.LobbyController;
 import it.polimi.ingsw.exceptions.EriantysException;
 import it.polimi.ingsw.exceptions.EriantysRuntimeException;
 import it.polimi.ingsw.exceptions.lobby.DuplicateIDException;
-import it.polimi.ingsw.exceptions.lobby.GameFullException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Lobby;
 import it.polimi.ingsw.model.MatchInfo;
@@ -235,7 +234,7 @@ public class VirtualView extends Observable<String> implements Observer<Response
     /**
      * Rebuilds a working VirtualView for the ID after the server shut down.
      *
-     * @param playerID the ID of a player who was connected to the server before the shut down.
+     * @param playerID the ID of a player who was connected to the server before the shutdown.
      */
     public void deserialize(int playerID) {
         this.playerID = playerID;

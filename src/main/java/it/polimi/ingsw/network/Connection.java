@@ -15,7 +15,7 @@ public abstract class Connection implements Runnable, Observer<String> {
     private final DataOutputStream out;
     private final DataInputStream in;
     protected final ExecutorService executor = Executors.newFixedThreadPool(16);
-    private final ScheduledFuture pingTask;
+    private final ScheduledFuture<?> pingTask;
     protected boolean connected;
 
     public Connection(Socket socket) throws IOException {
@@ -70,7 +70,7 @@ public abstract class Connection implements Runnable, Observer<String> {
                 for (int i = 0; i < length; i++) {
                     message.append(in.readChar());
                 }
-                //System.out.println("RECEIVED: " + message.toString());
+
                 return message.toString();
             }
         } catch (IOException e){

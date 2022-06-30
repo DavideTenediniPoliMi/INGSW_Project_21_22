@@ -1,15 +1,12 @@
 package it.polimi.ingsw.controller.round;
 
 import it.polimi.ingsw.exceptions.board.CloudUnavailableException;
-import it.polimi.ingsw.exceptions.game.IllegalActionException;
 import it.polimi.ingsw.exceptions.game.NullPlayerException;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.MatchInfo;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.board.Cloud;
 import it.polimi.ingsw.model.enumerations.TurnState;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 

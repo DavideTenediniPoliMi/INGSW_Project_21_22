@@ -44,7 +44,7 @@ public class RequestParameters implements Serializable {
     }
 
     /**
-     * Gets the numeber of player selected of this message.
+     * Gets the number of player selected of this message.
      *
      * @return the number of players selected
      */
@@ -226,9 +226,8 @@ public class RequestParameters implements Serializable {
     @Override
     public JsonObject serialize() {
         Gson gson = new Gson();
-        JsonObject jsonObject = gson.toJsonTree(this).getAsJsonObject();
 
-        return jsonObject;
+        return gson.toJsonTree(this).getAsJsonObject();
     }
 
     @Override
