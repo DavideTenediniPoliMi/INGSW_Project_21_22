@@ -375,7 +375,6 @@ public class ExpertViewState extends GameViewState {
             case "MOVE_TO_DINING_ROOM":
                 error = manageCLICardStudentColor(input);
                 if(!error.equals("")) {
-                    appendBuffer(error);
                     return error;
                 }
 
@@ -399,7 +398,6 @@ public class ExpertViewState extends GameViewState {
                     }
                     error = manageCLIFromCardSwap(input);
                     if(!error.equals("")) {
-                        appendBuffer(error);
                         return error;
                     }
                     fromOriginSwapCompleted = true;
@@ -412,7 +410,6 @@ public class ExpertViewState extends GameViewState {
                 }
                 error = manageCLIFromEntranceSwap(input);
                 if(!error.equals("")) {
-                    appendBuffer(error);
                     return error;
                 }
                 studentsSwapped = 0;
@@ -432,7 +429,6 @@ public class ExpertViewState extends GameViewState {
             case "IGNORE_COLOR":
                 error = manageCLIStudentColor(input);
                 if(!error.equals("")) {
-                    appendBuffer(error);
                     return error;
                 }
 
@@ -454,7 +450,6 @@ public class ExpertViewState extends GameViewState {
                     }
                     error = manageCLIFromEntranceSwap(input);
                     if(!error.equals("")) {
-                        appendBuffer(error);
                         return error;
                     }
                     fromOriginSwapCompleted = true;
@@ -467,7 +462,6 @@ public class ExpertViewState extends GameViewState {
                 }
                 error = manageCLIFromDiningSwap(input);
                 if(!error.equals("")) {
-                    appendBuffer(error);
                     return error;
                 }
                 studentsSwapped = 0;
@@ -486,7 +480,6 @@ public class ExpertViewState extends GameViewState {
             case "RETURN_TO_BAG":
                 error = manageCLIStudentColor(input);
                 if(!error.equals("")) {
-                    appendBuffer(error);
                     return error;
                 }
                 cardParams.setSelectedColor(colorSelected);
@@ -793,6 +786,7 @@ public class ExpertViewState extends GameViewState {
             }
             if(colorSelected == null) {
                 error = "No such student of that color!";
+                appendBuffer(error);
                 return error;
             }
             return "";
@@ -849,6 +843,7 @@ public class ExpertViewState extends GameViewState {
             }
             if(colorDiningSelected == null) {
                 error = "No such student of that color!";
+                appendBuffer(error);
                 return error;
             }
             return "";
