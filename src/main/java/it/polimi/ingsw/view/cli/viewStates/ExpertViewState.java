@@ -525,7 +525,6 @@ public class ExpertViewState extends GameViewState {
         if (cardColorSelected == null) {
             error = manageCLICardStudentColorSwap(input);
             if (!error.equals("")) {
-                appendBuffer(error);
                 return error;
             }
             cardStudents.addByColor(cardColorSelected, 1);
@@ -548,7 +547,6 @@ public class ExpertViewState extends GameViewState {
         if (colorSelected == null) {
             error = manageCLIEntranceStudentColorSwap(input);
             if(!error.equals("")) {
-                appendBuffer(error);
                 return error;
             }
             entranceStudents.addByColor(colorSelected, 1);
@@ -571,7 +569,6 @@ public class ExpertViewState extends GameViewState {
         if (colorDiningSelected == null) {
             error = manageCLIDiningStudentColorSwap(input);
             if(!error.equals("")) {
-                appendBuffer(error);
                 return error;
             }
             diningStudents.addByColor(colorDiningSelected, 1);
