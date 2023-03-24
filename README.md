@@ -1,8 +1,8 @@
-# ing-sw-2022-tenedini-sprocati-toschi
+# Software Engineering Project 2021/2022 (Eriantys)
+## PoliMi (SWE 085923 Prof. G. Cugola)
+The project received the maximum score (30L).
 
-<h1><b>Game: Eriantys</b></h1>
-
-<h3>- Requirements implemented:</h3>
+## Requirements implemented
 <ul>
   <li>Complete Rules</li>
   <li>CLI</li>
@@ -17,7 +17,7 @@
   </li>
 </ul>
 
-<h3>- Test Coverage</h3>
+## Test Coverage
 <ul>
   <li>Model:
     <ul>
@@ -35,7 +35,7 @@
   </li>
 </ul>
 
-<h3>- How to run the game</h3>
+## How to run the game
 <ul>
   <li>Server
     <ol>
