@@ -1,5 +1,5 @@
 # Software Engineering Project 2021/2022 (Eriantys)
-## PoliMi (SWE 085923 Prof. G. Cugola)
+## PoliMi (ING SW 085923 Prof. G. Cugola)
 The project received the maximum score (30L).
 
 ## Requirements implemented
